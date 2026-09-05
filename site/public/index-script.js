@@ -73,17 +73,20 @@
 /* ─── Scroll Reveal (IntersectionObserver) ─── */
 (function initScrollReveal() {
   if (!('IntersectionObserver' in window)) {
+    // フォールバック：全要素を即座に表示
     document.querySelectorAll('.entry-card').forEach(function(el) {
       el.classList.add('is-visible');
     });
     return;
   }
 
+  // エントリーカードのフェードイン
   const cardObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         const el    = entry.target;
         const index = parseInt(el.dataset.index || '0', 10);
+        // インデックスに応じたディレイ（グリッド内の位置）
         const delay = (index % 2) * 80;
         setTimeout(function() {
           el.classList.add('is-visible');
@@ -97,6 +100,7 @@
     cardObserver.observe(el);
   });
 
+  // スキルバーのアニメーション
   const skillObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -169,11 +173,13 @@
 
   if (!overlay || !entryLinks.length) return;
 
+  // マウスがホバー中でエンターキーを押したときも対応
   entryLinks.forEach(function(link) {
     link.addEventListener('click', function(e) {
       const href = link.getAttribute('href');
       if (!href || href.startsWith('#') || href.startsWith('mailto')) return;
 
+      // 外叨遇移のためデフォルトを一旦武剈め、エフェクト後に遇移
       e.preventDefault();
 
       overlay.classList.add('is-turning');

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,16 +49,23 @@ def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
 
 
+def tracked_paths() -> list[Path]:
+    result = subprocess.run(
+        ["git", "ls-files", "-z"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    )
+    return [ROOT / item.decode("utf-8") for item in result.stdout.split(b"\0") if item]
+
+
 def main() -> None:
-    for path in sorted(ROOT.rglob("*")):
+    for path in tracked_paths():
         rel = path.relative_to(ROOT)
         parts = set(rel.parts)
 
         if any(part in FORBIDDEN_PARTS for part in parts):
-            fail(f"forbidden path component: {rel}")
-
-        if path.is_dir():
-            continue
+            fail(f"forbidden tracked path component: {rel}")
 
         if path.name in FORBIDDEN_EXACT or path.name.startswith(".env."):
             fail(f"forbidden public file: {rel}")

@@ -1,0 +1,26 @@
+name: Validate public repository
+
+on:
+  pull_request:
+    branches:
+      - main
+      - chatgpt/bootstrap-public-validation-20260905
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate public boundary
+        run: python tools/validate_public_repo.py

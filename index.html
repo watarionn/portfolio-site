@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Liz Hookah — システムエンジニアのポートフォリオ。めざせ万能人。">
+  <title>LizHookah_Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700;800&family=IM+Fell+English:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index-style.css">
+</head>
+<body>
+
+  <!-- 背景テクスチャ -->
+  <div class="paper-texture" aria-hidden="true"></div>
+
+  <!-- ノイズオーバーレイ -->
+  <canvas class="noise-canvas" id="noiseCanvas" aria-hidden="true"></canvas>
+
+  <!-- ページ上部の装飾帯 -->
+  <div class="top-band" aria-hidden="true">
+    <span class="band-text">ふ</span>
+    <span class="band-rule"></span>
+    <span class="band-text-en">FU</span>
+  </div>
+
+  <!-- ヘッダー（辞書の表紙風） -->
+  <header class="book-header" role="banner">
+    <div class="header-inner">
+      <div class="edition-label">第一版 / First Edition</div>
+      <h1 class="book-title">
+        <ruby class="title-ruby">
+          <rb>風花　理珠</rb>
+          <rt>ふうか　りず</rt>
+        </ruby>
+        <span class="title-en">Liz Hookah</span>
+        <span class="title-subtitle">個人大辞典</span>
+      </h1>
+      <div class="header-meta">
+        <span class="meta-item">Frontend Engineer</span>
+        <span class="meta-sep">｜</span>
+        <span class="meta-item">経験 4年</span>
+        <span class="meta-sep">｜</span>
+        <span class="meta-item">Osaka, Japan</span>
+      </div>
+      <p class="header-motto">
+        <em>めざせ万能人</em>
+        <span class="motto-trans">— Aim to be a Renaissance Person —</span>
+      </p>
+    </div>
+    <!-- 栞 -->
+    <a href="#works">
+      <div class="bookmark bookmark-red" aria-hidden="true">
+        <span class="bookmark-label">作品集</span>
+      </div>
+    </a>
+    <a href="#profile">
+      <div class="bookmark bookmark-blue" aria-hidden="true">
+        <span class="bookmark-label">略歴</span>
+      </div>
+    </a>
+  </header>
+
+  <!-- 目次バー（スティッキー） -->
+  <nav class="toc-bar" role="navigation" aria-label="目次">
+    <ul class="toc-list">
+      <li><a href="#works" class="toc-link">作品集</a></li>
+      <li><a href="#skills" class="toc-link">技術構成</a></li>
+      <li><a href="#profile" class="toc-link">略歴</a></li>
+      <li><a href="#contact" class="toc-link">連絡先</a></li>
+    </ul>
+    <div class="toc-page-indicator" aria-hidden="true">p. <span id="pageNum">1</span></div>
+  </nav>
+
+  <main role="main">
+
+    <!-- ===== 見出し語セクション: 作品集 ===== -->
+    <section class="dictionary-section" id="works" aria-labelledby="works-heading">
+
+      <!-- セクション見出し（辞書の大項目風） -->
+      <div class="section-header">
+        <div class="section-kana" aria-hidden="true">さ</div>
+        <h2 class="section-title" id="works-heading">
+          <span class="section-title-main">作品集</span>
+          <span class="section-title-en">Works</span>
+        </h2>
+        <div class="section-rule" aria-hidden="true"></div>
+      </div>
+
+      <!-- 辞書エントリー一覧 -->
+      <div class="entries-grid" role="list">
+
+        <!-- Entry 000: 用例採集 -->
+        <article class="entry-card entry-card--featured entry-card--pinned" role="listitem" data-index="0">
+          <a href="/YOREI/yorei.html" class="entry-link" aria-label="用例採集 — 辞書編纂者になりきって用例を採集するアプリを開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">000</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>用例採集</rb>
+                    <rt>ようれいさいしゅう</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos entry-pos--special" aria-label="品詞: 動詞">動</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  辞書編纂者になりきって用例を採集・保存するWebアプリ。見出し語・用例・出典を記録し、自分だけのオリジナル辞書を編める。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">Supabase</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">CSS</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 1: Aquarium -->
+        <article class="entry-card" role="listitem" data-index="1">
+          <a href="/AQUARIUM/aquarium.php" class="entry-link" aria-label="アクアリウム — インタラクティブ水族館ページを開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">001</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>水族館</rb>
+                    <rt>アクアリウム</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 名詞">名</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  用例カードとして魚篇の漢字を空間上に遊泳させる試み。裏返すと読みが書かれている。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">PHP</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">CSS</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 2: DBQ2 -->
+        <article class="entry-card" role="listitem" data-index="2">
+          <a href="/DQB2/dqb2.html" class="entry-link" aria-label="データベース — DQB2を開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">002</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>DQB2 レシピ集</rb>
+                    <rt>DQB2</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 動詞">動</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  ドラゴンクエストビルダーズ2で制作可能な家具などのレシピデータベース。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 3: Holoca -->
+        <article class="entry-card" role="listitem" data-index="3">
+          <a href="/HOLOCA/holoca.html" class="entry-link" aria-label="ホロカ デッキ — を開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">003</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>デッキレシピ作成</rb>
+                    <rt>ホロライブ</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 名詞">名</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  デジタルカードゲームのデッキ構築・管理システム。検索機能付き。カードの組み合わせによる戦略立案を視覚的インターフェースで実現した作品。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">CSS Grid</span>
+                  <span class="tag">Animation</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 4: Sphere -->
+        <article class="entry-card" role="listitem" data-index="4">
+          <a href="/SPHERE/sphere.html" class="entry-link" aria-label="スフィア — 3D球体ビジュアライザーを開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">004</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>天球儀</rb>
+                    <rt>スフィア</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 名詞">名</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  Three.jsを用いた三次元球体のインタラクティブ・ビジュアライゼーション。WebGLの描画能力を活かし、リアルタイムに回転・変形するオブジェクトを表現。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">Three.js</span>
+                  <span class="tag">WebGL</span>
+                  <span class="tag">GLSL</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 5: Prime Dot Art -->
+        <article class="entry-card" role="listitem" data-index="5">
+          <a href="/PRIME_DOT_ART/prime_dot_art.html" class="entry-link" aria-label="素数ドットアート — 素数視覚化アートを開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">005</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>素数点画</rb>
+                    <rt>プライムドットアート</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 名詞">名</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  数論における素数の分布を視覚的芸術として昇華させた作品。無限に広がる数の海に潜む規則性と美しさを点描で表現する。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">Canvas</span>
+                  <span class="tag">Algorithm</span>
+                  <span class="tag">数学</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 6: Madori -->
+        <article class="entry-card" role="listitem" data-index="6">
+          <a href="/MADORI/madori.html" class="entry-link" aria-label="間取り — 部屋レイアウトアプリを開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">006</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>間取図メーカー</rb>
+                    <rt>まどりず</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 名詞">名</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  住空間のレイアウトをブラウザ上で設計・可視化するインタラクティブ・ツール。ドラッグ操作による直感的な間取り作成機能を実装。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">SVG</span>
+                  <span class="tag">Drag&amp;Drop</span>
+                  <span class="tag">JavaScript</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 7: Actress Finder -->
+        <article class="entry-card" role="listitem" data-index="7">
+          <a href="/OTHER/actress_finder.html" class="entry-link" aria-label="女優ファインダー — 検索アプリを開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">007</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>人物索引</rb>
+                    <rt>アクトレスファインダー</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 動詞">動</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  条件絞り込み検索による人物データベース探索ツール。複合的な検索条件とフィルタリング機能により目的の人物を迅速に発見する。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">Search</span>
+                  <span class="tag">Filter</span>
+                  <span class="tag">JSON</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 8: Word_Generator -->
+        <article class="entry-card" role="listitem" data-index="8">
+          <a href="/WORD_GENERATOR/word_generator.html" class="entry-link" aria-label="単語ジェネレーターを開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">008</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>ボードゲーム単語集</rb>
+                    <rt>カタカナーシ・エイゴダーケ</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 名詞">名</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  人気のパーティーゲーム『カタカナーシ』と『エイゴダーケ』で使用できるお題を表示するアプリ。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 9: Maze_maker -->
+        <article class="entry-card" role="listitem" data-index="9">
+          <a href="/MAZE_MAKER/maze_maker.html" class="entry-link" aria-label="迷路メーカーを開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">009</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>迷路作成補助器</rb>
+                    <rt>メイズメーカー</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 名詞">名</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  壁・障害物・文字が設置できる迷路生成器。謎解きにどうぞ。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Entry 10: Anagram_maker -->
+        <article class="entry-card" role="listitem" data-index="10">
+          <a href="/ANAGRAM/anagram.html" class="entry-link" aria-label="アナグラム補助器を開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">010</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>アナグラム補助器</rb>
+                    <rt>アナグラムメーカー</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos" aria-label="品詞: 名詞">名</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  アナグラム生成のお手伝いをします。日本語と英語に対応。謎解きにどうぞ。
+                </p>
+                <div class="entry-tags" aria-label="使用技術">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+
+
+
+        <!-- Entry 090: キャラクター一覧 -->
+        <article class="entry-card entry-card--featured" role="listitem" data-index="90">
+          <a href="/CHARACTER/character-index.html" class="entry-link" aria-label="キャラクター一覧 — オリジナルキャラクターの一覧を開く">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">090</span>
+                <div class="entry-yomi">
+                  <ruby>
+                    <rb>登場人物</rb>
+                    <rt>とうじょうじんぶつ</rt>
+                  </ruby>
+                </div>
+                <span class="entry-pos entry-pos--special" aria-label="品詞: 固有名詞">固</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition">
+                  万能人の創造的側面を体現するオリジナルキャラクターたちの索引。各人物の世界観・設定・ビジュアルを統合した専用紹介ページへの入口。
+                </p>
+                <div class="entry-tags" aria-label="収録キャラクター">
+                  <span class="tag">朝霧澪</span>
+                  <span class="tag">有門春陽</span>
+                  <span class="tag">Original</span>
+                </div>
+              </div>
+              <div class="entry-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+        <article class="entry-card entry-card--secret" role="listitem" data-index="99">
+          <a href="/SECRET/secret.html" class="entry-link" aria-label="不明なエントリー">
+            <div class="entry-inner">
+              <header class="entry-header">
+                <span class="entry-num" aria-hidden="true">???</span>
+                <div class="entry-yomi">
+                  <span class="secret-yomi">■■■　■■</span>
+                </div>
+                <span class="entry-pos entry-pos--secret" aria-label="品詞: 不明">?</span>
+              </header>
+              <div class="entry-body">
+                <p class="entry-definition secret-def">
+                  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+                </p>
+                <div class="entry-tags" aria-label="不明">
+                  <span class="tag tag--secret">■■■</span>
+                  <span class="tag tag--secret">■■</span>
+                  <span class="tag tag--secret">■■■■</span>
+                </div>
+              </div>
+              <div class="entry-arrow secret-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </article>
+
+      </div><!-- /entries-grid -->
+    </section>
+
+    <!-- ===== 技術構成セクション ===== -->
+    <section class="dictionary-section skills-section" id="skills" aria-labelledby="skills-heading">
+      <div class="section-header">
+        <div class="section-kana" aria-hidden="true">ぎ</div>
+        <h2 class="section-title" id="skills-heading">
+          <span class="section-title-main">技術構成</span>
+          <span class="section-title-en">Tech Stack</span>
+        </h2>
+        <div class="section-rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="skills-layout">
+        <div class="skill-category" role="group" aria-labelledby="cat-frontend">
+          <h3 class="skill-cat-title" id="cat-frontend">
+            <span class="cat-bracket">【</span>Frontend<span class="cat-bracket">】</span>
+          </h3>
+          <ul class="skill-list" role="list">
+            <li class="skill-item" style="--bar-pct: 72%">
+              <span class="skill-name">BootStrap</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 中級">中</span>
+            </li>
+            <li class="skill-item" style="--bar-pct: 12%">
+              <span class="skill-name">React / Next.js</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 初級">初</span>
+            </li>
+            <li class="skill-item" style="--bar-pct: 18%">
+              <span class="skill-name">Vue / Nuxt.js</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 初級">初</span>
+            </li>
+            <li class="skill-item" style="--bar-pct: 20%">
+              <span class="skill-name">TypeScript</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 初級">初</span>
+            </li>
+            <li class="skill-item" style="--bar-pct: 15%">
+              <span class="skill-name">Three.js / WebGL</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 初級">初</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="skill-category" role="group" aria-labelledby="cat-other">
+          <h3 class="skill-cat-title" id="cat-other">
+            <span class="cat-bracket">【</span>Other<span class="cat-bracket">】</span>
+          </h3>
+          <ul class="skill-list" role="list">
+            <li class="skill-item" style="--bar-pct: 87%">
+              <span class="skill-name">正規表現 / Regular Expression</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 上級">上</span>
+            </li>
+            <li class="skill-item" style="--bar-pct: 70%">
+              <span class="skill-name">CSS / Animation</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 中級">中</span>
+            </li>
+            <li class="skill-item" style="--bar-pct: 65%">
+              <span class="skill-name">Node.js</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 中級">中</span>
+            </li>
+            <li class="skill-item" style="--bar-pct: 60%">
+              <span class="skill-name">PHP</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 中級">中</span>
+            </li>
+            <li class="skill-item" style="--bar-pct: 75%">
+              <span class="skill-name">SQL / MySQL</span>
+              <span class="skill-bar" role="presentation" aria-hidden="true"><span class="skill-fill"></span></span>
+              <span class="skill-level" aria-label="熟練度: 中級">中</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 略歴セクション ===== -->
+    <section class="dictionary-section" id="profile" aria-labelledby="profile-heading">
+      <div class="section-header">
+        <div class="section-kana" aria-hidden="true">り</div>
+        <h2 class="section-title" id="profile-heading">
+          <span class="section-title-main">略歴</span>
+          <span class="section-title-en">Profile</span>
+        </h2>
+        <div class="section-rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="profile-layout">
+        <div class="profile-entry">
+          <dl class="profile-dl">
+            <div class="profile-row">
+              <dt class="profile-dt">氏名</dt>
+              <dd class="profile-dd">風花　理珠　<span class="profile-en">Liz Hookah</span></dd>
+            </div>
+            <div class="profile-row">
+              <dt class="profile-dt">経験年数</dt>
+              <dd class="profile-dd">4年　<span class="profile-note">（システムエンジニア）</span></dd>
+            </div>
+            <div class="profile-row">
+              <dt class="profile-dt">在住</dt>
+              <dd class="profile-dd">大阪府</dd>
+            </div>
+            <div class="profile-row">
+              <dt class="profile-dt">信条</dt>
+              <dd class="profile-dd profile-dd--motto">
+                <em>めざせ万能人</em>
+                <p class="profile-motto-desc">
+                  単一分野の専門家に留まらず、設計・実装・デザイン・アルゴリズムを横断して探求し続ける開発者を志す。
+                </p>
+              </dd>
+            </div>
+            <div class="profile-row">
+              <dt class="profile-dt">詳細</dt>
+              <dd class="profile-dd"><a href="/D_PROFILE/d_profile.html" style="text-decoration: none;">更に深堀りしたプロフィールを覗く→</a></dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- 参照マーク風の装飾 -->
+        <aside class="profile-aside" aria-hidden="true">
+          <p class="see-also">→ 参照</p>
+          <ul class="see-also-list">
+            <li>Python</li>
+            <li>R</li>
+            <li>PHP</li>
+            <li>HTML</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== 連絡先セクション ===== -->
+    <section class="dictionary-section contact-section" id="contact" aria-labelledby="contact-heading">
+      <div class="section-header">
+        <div class="section-kana" aria-hidden="true">れ</div>
+        <h2 class="section-title" id="contact-heading">
+          <span class="section-title-main">連絡先</span>
+          <span class="section-title-en">Contact</span>
+        </h2>
+        <div class="section-rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="contact-body">
+        <p class="contact-desc">
+          ご連絡はメールにてお受けしております。<br>
+          お仕事のご相談・ご質問等、お気軽にどうぞ。
+        </p>
+        <a href="mailto:sakawatainfo@gmail.com" class="contact-link" aria-label="メールを送る: sakawatainfo@gmail.com">
+          <span class="contact-icon" aria-hidden="true">✉</span>
+          <span class="contact-email">sakawatainfo@gmail.com</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター（奥付風） -->
+  <footer class="book-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="colophon">
+        <p class="colophon-title">奥付</p>
+        <p class="colophon-line">著者　風花　理珠</p>
+        <p class="colophon-line">制作年　<span id="currentYear"></span></p>
+        <p class="colophon-line">無断複製・転載を禁ず</p>
+      </div>
+      <div class="footer-motto" aria-hidden="true">
+        <span class="footer-kana">め　ざ　せ　万　能　人</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ページめくり音エフェクト用オーバーレイ -->
+  <div class="page-turn-overlay" id="pageTurnOverlay" aria-hidden="true"></div>
+
+  <script src="index-script.js" defer></script>
+</body>
+</html>

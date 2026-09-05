@@ -1,0 +1,105 @@
+<section aria-labelledby="python-list-heading" class="sheet" data-section-number="01" data-title="Python List型メソッド" id="python-list">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">01</span>
+<div>
+<h2 id="python-list-heading">Python List型メソッド</h2>
+<p class="source">出典画像: <code>commands_list.jpeg</code></p>
+</div>
+<span class="count">11 項目</span>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Input</th><th>Method</th><th>Output</th></tr></thead>
+<tbody>
+<tr><td class="code">[10, 20, 30]</td><td class="code">.append(40)</td><td class="code">[10, 20, 30, 40]</td></tr><tr><td class="code">[10, 20, 30]</td><td class="code">.extend([40])</td><td class="code">[10, 20, 30, 40]</td></tr><tr><td class="code">[10, 20, 30]</td><td class="code">.insert(2, 40)</td><td class="code">[10, 20, 40, 30]</td></tr><tr><td class="code">[10, 20, 30, 20]</td><td class="code">.count(20)</td><td>2</td></tr><tr><td class="code">[10, 20, 30]</td><td class="code">.clear()</td><td class="code">[]</td></tr><tr><td class="code">[10, 20, 30, 40]</td><td class="code">.index(40)</td><td>3</td></tr><tr><td class="code">[10, 20, 30, 40]</td><td class="code">.remove(10)</td><td class="code">[20, 30, 40]</td></tr><tr><td class="code">[10, 20, 30, 40]</td><td class="code">.pop(2)</td><td class="code">[10, 20, 40]</td></tr><tr><td class="code">[30, 20, 10]</td><td class="code">.reverse()</td><td class="code">[10, 20, 30]</td></tr><tr><td class="code">[30, 10, 40, 20]</td><td class="code">.sort()</td><td class="code">[10, 20, 30, 40]</td></tr><tr><td class="code">[10, 20, 30]</td><td class="code">.copy()</td><td class="code">[10, 20, 30]</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section aria-labelledby="python-string-heading" class="sheet" data-section-number="02" data-title="Python String型メソッド" id="python-string">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">02</span>
+<div>
+<h2 id="python-string-heading">Python String型メソッド</h2>
+<p class="source">出典画像: <code>commands_string.jpeg</code></p>
+</div>
+<span class="count">13 項目</span>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Input</th><th>Method</th><th>Output</th></tr></thead>
+<tbody>
+<tr><td class="code">'hello WORLD'</td><td class="code">.capitalize()</td><td>Hello world</td></tr><tr><td class="code">'HELLO WORLD'</td><td class="code">.lower()</td><td>hello world</td></tr><tr><td class="code">'hello world'</td><td class="code">.upper()</td><td>HELLO WORLD</td></tr><tr><td class="code">'Python'</td><td class="code">.center(10, '*')</td><td>**Python**</td></tr><tr><td class="code">'HELLO WORLD'</td><td class="code">.count('L')</td><td>3</td></tr><tr><td class="code">'HELLO WORLD'</td><td class="code">.index('O')</td><td>4</td></tr><tr><td class="code">'HELLO WORLD'</td><td class="code">.find('OR')</td><td>7</td></tr><tr><td class="code">'31/01/2022'</td><td class="code">.replace('/', '-')</td><td>31-01-2022</td></tr><tr><td class="code">'31/01/2022'</td><td class="code">.split('/')</td><td class="code">['31', '01', '2022']</td></tr><tr><td class="code">'abc123'</td><td class="code">.isalnum()</td><td>True</td></tr><tr><td class="code">'12345'</td><td class="code">.isnumeric()</td><td>True</td></tr><tr><td class="code">'hello world'</td><td class="code">.islower()</td><td>True</td></tr><tr><td class="code">'HELLO WORLD'</td><td class="code">.isupper()</td><td>True</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section aria-labelledby="python-math-heading" class="sheet" data-section-number="03" data-title="Python mathモジュール" id="python-math">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">03</span>
+<div>
+<h2 id="python-math-heading">Python mathモジュール</h2>
+<p class="source">出典画像: <code>commands_math.jpeg</code></p>
+</div>
+<span class="count">11 項目</span>
+</div>
+<p class="section-note">画像内の補足: import math / 使い方: math.関数名</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>math.○</th><th>説明</th><th>入力例</th><th>出力例</th></tr></thead>
+<tbody>
+<tr><td class="code">.pi</td><td>円周率</td><td class="code">math.pi</td><td>3.14159265...</td></tr><tr><td class="code">.ceil(x)</td><td>切り上げして整数を返す</td><td class="code">math.ceil(5.1)</td><td>6</td></tr><tr><td class="code">.floor(x)</td><td>切り捨てして整数を返す</td><td class="code">math.floor(5.8)</td><td>5</td></tr><tr><td class="code">.sqrt(x)</td><td>ルート</td><td class="code">math.sqrt(4)</td><td>2.0</td></tr><tr><td class="code">.gcd(x, y)</td><td>xとyの最大公約数</td><td class="code">math.gcd(8,20)</td><td>4</td></tr><tr><td class="code">.sin(x)</td><td>xはラジアン表記</td><td class="code">math.sin(math.pi/2)</td><td>1.0</td></tr><tr><td class="code">.cos(x)</td><td>xはラジアン表記</td><td class="code">math.cos(math.pi)</td><td>-1.0</td></tr><tr><td class="code">.tan(x)</td><td>xはラジアン表記</td><td class="code">math.tan(math.pi/4)</td><td>0.99999999...</td></tr><tr><td class="code">.exp(x)</td><td>eのx乗</td><td class="code">math.exp(3)</td><td>20.0855369...</td></tr><tr><td class="code">.log10(x)</td><td>10を底とするxの対数</td><td class="code">math.log10(100)</td><td>2.0</td></tr><tr><td class="code">.log(x, y)</td><td>yを底とするxの対数</td><td class="code">math.log(100,10)</td><td>2.0</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section aria-labelledby="python-set-basic-heading" class="sheet" data-section-number="04" data-title="Python Set型メソッド" id="python-set-basic">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">04</span>
+<div>
+<h2 id="python-set-basic-heading">Python Set型メソッド</h2>
+<p class="source">出典画像: <code>commands_set2.jpeg</code></p>
+</div>
+<span class="count">11 項目</span>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Input</th><th>Method</th><th>Output</th></tr></thead>
+<tbody>
+<tr><td class="code">{5, 'Hello', 3.2}</td><td class="code">.add(2)</td><td class="code">{2, 'Hello', 3.2, 5}</td></tr><tr><td class="code">{5, 'Hello', 3.2}</td><td class="code">.discard(3.2)</td><td class="code">{'Hello', 5}</td></tr><tr><td class="code">{5, 'Hello', 3.2}</td><td class="code">.remove(3.2)</td><td class="code">{'Hello', 5}</td></tr><tr><td class="code">{5, 'Hello', 3.2}</td><td class="code">.pop()</td><td class="code">{3.2, 5}</td></tr><tr><td class="code">{5, 2, 8}</td><td class="code">.intersection({5, 1})</td><td class="code">{5}</td></tr><tr><td class="code">{5, 2, 8}</td><td class="code">.difference({5, 1})</td><td class="code">{8, 2}</td></tr><tr><td class="code">{1, -2}</td><td class="code">.issubset({-2, 1, 3})</td><td>True</td></tr><tr><td class="code">{-2, 1, 3}</td><td class="code">.issuperset({1, -2})</td><td>True</td></tr><tr><td class="code">{-2, 1, 3}</td><td class="code">.isdisjoint({4, 6})</td><td>True</td></tr><tr><td class="code">{1, 2, 3}</td><td class="code">.union({3, 1})</td><td class="code">{1, 2, 3}</td></tr><tr><td class="code">{1, 2, 3}</td><td class="code">.update({'a', 'b'})</td><td class="code">{1, 2, 3, 'b', 'a'}</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section aria-labelledby="python-set-detail-heading" class="sheet" data-section-number="05" data-title="Python SET型でよく使うメソッド" id="python-set-detail">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">05</span>
+<div>
+<h2 id="python-set-detail-heading">Python SET型でよく使うメソッド</h2>
+<p class="source">出典画像: <code>commands_set.jpeg</code></p>
+</div>
+<span class="count">11 項目</span>
+</div>
+<p class="section-note">画像内の前提: s1={1,2,3}, s2={3,4}</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>メソッド</th><th>処理内容</th><th>例</th><th>出力</th></tr></thead>
+<tbody>
+<tr><td class="code">add()</td><td>要素を追加</td><td class="code">s1.add(10)</td><td class="code">s1 = {1,2,3,10}</td></tr><tr><td class="code">clear()</td><td>全ての要素を削除</td><td class="code">s1.clear()</td><td class="code">s1 = set()</td></tr><tr><td class="code">remove()</td><td>特定の要素を削除</td><td class="code">s1.remove(2)</td><td class="code">s1 = {1,3}</td></tr><tr><td class="code">pop()</td><td>どれか1つ要素を削除し、その要素を返す</td><td class="code">t = s1.pop()</td><td class="code">s1 = {1,3}（一例） / t = 2（一例）</td></tr><tr><td class="code">union()</td><td class="code">和集合。例: s2={3,4} の時</td><td class="code">s3 = s1.union(s2)</td><td class="code">s3 = {1,2,3,4}</td></tr><tr><td class="code">issuperset()</td><td class="code">s1がs2の超集合の時 (s1 ≥ s2) True</td><td class="code">s3 = s1.issuperset(s2)</td><td>s3 = False</td></tr><tr><td class="code">issubset()</td><td class="code">s1がs2の部分集合の時 (s1 ≤ s2) True</td><td class="code">s3 = s1.issubset(s2)</td><td>s3 = False</td></tr><tr><td class="code">intersection()</td><td>同一要素を返す</td><td class="code">s3 = s1.intersection(s2)</td><td class="code">s3 = {3}</td></tr><tr><td class="code">difference()</td><td>差集合 s1-s2</td><td class="code">s3 = s1.difference(s2)</td><td class="code">s3 = {1,2}</td></tr><tr><td class="code">isdisjoint()</td><td>集合が他の集合と互いに素か</td><td class="code">s3 = s1.isdisjoint(s2)</td><td>s3 = False</td></tr><tr><td class="code">copy()</td><td>set型をコピーする</td><td class="code">s2 = s1.copy()</td><td class="code">s2 = {1,2,3}</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section aria-labelledby="python-dict-heading" class="sheet" data-section-number="06" data-title="Python 辞書型でよく使うメソッド" id="python-dict">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">06</span>
+<div>
+<h2 id="python-dict-heading">Python 辞書型でよく使うメソッド</h2>
+<p class="source">出典画像: <code>commands_dictionary.jpeg</code></p>
+</div>
+<span class="count">12 項目</span>
+</div>
+<p class="section-note">画像内の前提: d1={'a':1, 'b':2, 'c':3}</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>メソッド</th><th>処理内容</th><th>例</th><th>出力</th></tr></thead>
+<tbody>
+<tr><td class="code">copy()</td><td>辞書をコピー（別オブジェクト）</td><td class="code">d2=d1.copy()</td><td class="code">d2 = {'a':1, 'b':2, 'c':3}</td></tr><tr><td class="code">clear()</td><td>全ての要素を削除</td><td class="code">d1.clear()</td><td class="code">d1 = {}</td></tr><tr><td class="code">fromkeys()</td><td>keyだけをコピー</td><td class="code">d2=dict.fromkeys(d1, 値)</td><td class="code">d2 = {'a':値, 'b':値, 'c':値}</td></tr><tr><td class="code">keys()</td><td>各要素のkeyを取得</td><td class="code">d2=list(d1.keys())</td><td class="code">d2 = ['a', 'b', 'c']</td></tr><tr><td class="code">values()</td><td>各要素の値を取得</td><td class="code">d2=list(d1.values())</td><td class="code">d2 = [1, 2, 3]</td></tr><tr><td class="code">items()</td><td>各要素のkeyと値を取得</td><td class="code">d2=list(d1.items())</td><td class="code">d2 = [('a', 1), ('b', 2), ('c', 3)]</td></tr><tr><td class="code">pop()</td><td>keyを指定して要素を削除し、値を返す</td><td class="code">d2=d1.pop('b')</td><td class="code">d1 = {'a':1, 'c':3} / d2 = 2</td></tr><tr><td class="code">popitem()</td><td>ランダムに要素を削除、keyと値を返す</td><td class="code">k1, d2=d1.popitem()</td><td class="code">k1 = b（一例） / d1 = {'a':1, 'c':3}（一例） / d2 = 2（一例）</td></tr><tr><td class="code">del()</td><td>keyを指定して要素を削除</td><td class="code">del d1['a'], d1['c']</td><td class="code">d1 = {'b':2}</td></tr><tr><td class="code">setdefault()</td><td>要素を追加。元の要素は変えられない</td><td class="code">d1.setdefault('d',4) / d1.setdefault('a',4)</td><td class="code">d1 = {'a':1, 'b':2, 'c':3, 'd':4} / d1 = {'a':1, 'b':2, 'c':3}</td></tr><tr><td class="code">get()</td><td>keyを指定して値を取得。keyがないとNone</td><td class="code">d2=d1.get('b') / d3=d1.get('g')</td><td>d2 = 2 / d3 = None</td></tr><tr><td class="code">update()</td><td>別の辞書を使って要素を更新</td><td class="code">d2={'a':5, 'd':4}; d1.update(d2)</td><td class="code">d1 = {'a':5, 'b':2, 'c':3, 'd':4}</td></tr>
+</tbody>
+</table>
+</div>
+</section>

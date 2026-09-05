@@ -1,0 +1,52 @@
+<section aria-labelledby="selenium-heading" class="sheet" data-section-number="07" data-title="Selenium 主要メソッド" id="selenium">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">07</span>
+<div>
+<h2 id="selenium-heading">Selenium 主要メソッド</h2>
+<p class="source">出典画像: <code>commands_selenium.jpeg</code></p>
+</div>
+<span class="count">15 項目</span>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>メソッド</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td class="code">get('URL')</td><td>ブラウザを起動、ページを遷移</td></tr><tr><td class="code">close()</td><td>ウィンドウを閉じる</td></tr><tr><td class="code">title</td><td>ページのタイトルを取得</td></tr><tr><td class="code">send_keys('文字列')</td><td>テキストボックスに文字列を入力</td></tr><tr><td class="code">text</td><td>テキストを取得</td></tr><tr><td class="code">select_by_index('index')</td><td>ドロップダウンリストをindexで選択</td></tr><tr><td class="code">click()</td><td>クリックする</td></tr><tr><td class="code">find_element(By.ID, 'id')</td><td>id属性で要素を検索</td></tr><tr><td class="code">find_element(By.NAME, 'name')</td><td>name属性で要素を検索</td></tr><tr><td class="code">find_element(By.CLASS_NAME, 'class_name')</td><td>class属性で要素を検索</td></tr><tr><td class="code">find_element(By.TAG_NAME, 'tag_name')</td><td>タグ名で要素を検索</td></tr><tr><td class="code">find_element(By.XPATH, 'xpath')</td><td>xpathで要素を検索</td></tr><tr><td class="code">find_element(By.CSS_SELECTOR, 'css_selector')</td><td>cssセレクタで要素を検索</td></tr><tr><td class="code">find_element(By.LINK_TEXT, 'link_text')</td><td>リンクテキストで要素を検索</td></tr><tr><td class="code">find_element(By.PARTIAL_LINK_TEXT, 'partial_link_text')</td><td>リンクテキストの部分一致で要素を検索</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section aria-labelledby="pip-heading" class="sheet" data-section-number="08" data-title="よく使う pip コマンド" id="pip">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">08</span>
+<div>
+<h2 id="pip-heading">よく使う pip コマンド</h2>
+<p class="source">出典画像: <code>commands_pip.png</code></p>
+</div>
+<span class="count">15 項目</span>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>コマンド</th><th>処理内容</th></tr></thead>
+<tbody>
+<tr><td class="code">pip install ライブラリ名</td><td>ライブラリをインストール</td></tr><tr><td class="code">pip uninstall ライブラリ名</td><td>ライブラリをアンインストール</td></tr><tr><td class="code">python -m pip install --upgrade pip</td><td>pipを最新版にアップグレード</td></tr><tr><td class="code">pip install -U ライブラリ名</td><td>ライブラリのアップグレード</td></tr><tr><td class="code">pip install -update ライブラリ名</td><td>↑と同じ。どちらでもOK</td></tr><tr><td class="code">pip install ライブラリ名==バージョン</td><td>バージョンを指定してインストール</td></tr><tr><td class="code">pip list</td><td>インストール済みライブラリ一覧</td></tr><tr><td class="code">pip freeze</td><td>↑と同じ。表示形式が異なる。</td></tr><tr><td class="code">pip list --outdate</td><td>最新版になっていないもののみ表示</td></tr><tr><td class="code">pip -V</td><td>pipのバージョン情報を表示</td></tr><tr><td class="code">pip check</td><td>インストール済ライブラリ依存関係確認</td></tr><tr><td class="code">pip show ライブラリ名</td><td>ライブラリの詳細情報</td></tr><tr><td class="code">pip download ライブラリ名</td><td>最新ファイルをDL（インストールなし）</td></tr><tr><td class="code">pip help</td><td>pip主要コマンドとオプション一覧</td></tr><tr><td class="code">pip コマンド -h</td><td>コマンドの内容とオプションを表示</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section aria-labelledby="js-async-heading" class="sheet" data-section-number="09" data-title="Asynchronous JavaScript cheatsheet" id="js-async">
+<div class="sheet-head"><span aria-hidden="true" class="sheet-number">09</span>
+<div>
+<h2 id="js-async-heading">Asynchronous JavaScript cheatsheet</h2>
+<p class="source">出典画像: <code>JS_CheatSheet.jpeg</code></p>
+</div>
+<span class="count">11 項目</span>
+</div>
+<p class="section-note">この画像は元々表形式ではないため、「項目 / 要点 / コード」の表に整理しています。</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>項目</th><th>要点</th><th>コード / 例</th></tr></thead>
+<tbody>
+<tr><td class="code">Promiseの状態</td><td>pending のPromiseは fulfilled（value）または rejected（error）になり、どちらも settled（outcome）となる。</td><td>pending → value / error → outcome</td></tr><tr><td class="code">Promise.all()</td><td>Promise配列を、結果の配列を返す1つのPromiseにまとめる。1つでもrejectされると、そのerrorが渡される。</td><td class="code">Promise.all([value1, value2, value3]) → [value1, value2, value3]</td></tr><tr><td class="code">Promise.race()</td><td>最初にsettledになったPromiseの結果を通す。</td><td class="code">Promise.race([...]) → 最初の value / error</td></tr><tr><td class="code">async / await</td><td>async関数は常にPromiseを返す。awaitはPromiseのfulfilledを待ち、その値を返す。Promise以外の値もawait可能。awaitはasync関数内でのみ使用できる。</td><td class="code">async function() { try { let value = await outcome } catch (error) { ... } }</td></tr><tr><td class="code">promise.then(onFulfilled, onRejected)</td><td>fulfilled時はonFulfilled、rejected時はonRejectedを呼ぶ。handlerが値を返せば次のfulfilled値、throwすれば次のerrorになる。onRejected未指定ならerrorは通過する。</td><td class="code">value.then(value =&gt; nextValue) / error.then(..., error =&gt; value)</td></tr><tr><td class="code">promise.catch(onRejected)</td><td>onFulfilledを省略したthenと同様。fulfilled値はそのまま通過する。</td><td class="code">error.catch(onRejected) ⇔ error.then(..., onRejected)</td></tr><tr><td class="code">promise.finally(onFinally)</td><td>outcomeが得られた時に引数なしでonFinallyを呼び、入力Promiseの結果をそのまま通す。</td><td class="code">outcome.finally(() =&gt; ...) → outcome</td></tr><tr><td class="code">new Promise()</td><td class="code">new Promiseに渡した関数は同期的に実行され、resolve(value)またはreject(error)で結果を決める。</td><td class="code">new Promise((resolve, reject) =&gt; { ... resolve(value) ... reject(error) ... })</td></tr><tr><td class="code">Promise.resolve() / reject()</td><td>値からfulfilled / rejected Promiseを作成する。fulfilled Promiseをresolveすると1つに畳み込まれる。</td><td class="code">Promise.resolve(value) → value / Promise.reject(error) → error</td></tr><tr><td class="code">delayの例</td><td>rejectや返す値が不要なPromiseも作れる。</td><td class="code">function delay(milliseconds) { return new Promise(resolve =&gt; setTimeout(resolve, milliseconds)) }</td></tr><tr><td class="code">非同期実行タイミング</td><td>then / catch / finally は、すでに結果があるPromiseでも少なくとも次のtickまで実行されない。awaitも結果が既にある場合や非Promise値でも少なくとも次のtickまで待つ。</td><td>next tick</td></tr>
+</tbody>
+</table>
+</div>
+</section>

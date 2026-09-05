@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>単語ジェネレーター｜カタカナーシ・エイゴダーケ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="word_generator.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="header-subtitle">ボードゲーム</p>
+      <h1 class="header-title">単語ジェネレーター</h1>
+    </div>
+  <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホームへ戻る</a>
+  </header>
+
+  <main class="main-container">
+
+    <!-- タブ -->
+    <nav class="tab-nav" role="tablist" aria-label="ゲーム選択">
+      <button class="tab-btn active" role="tab" aria-selected="true"  aria-controls="panel-kata" id="tab-kata" data-tab="kata">
+        <span class="tab-game-name">カタカナーシ</span>
+        <span class="tab-rule">カタカナ禁止</span>
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-eigo" id="tab-eigo" data-tab="eigo">
+        <span class="tab-game-name">エイゴダーケ</span>
+        <span class="tab-rule">英語のみ</span>
+      </button>
+    </nav>
+
+    <!-- ━━━ カタカナーシ パネル ━━━ -->
+    <section class="panel active" id="panel-kata" role="tabpanel" aria-labelledby="tab-kata">
+
+      <!-- ジャンルフィルター -->
+      <div class="filter-section">
+        <p class="filter-label">ジャンル絞り込み</p>
+        <div class="genre-grid" id="kata-genre-grid">
+          <!-- JS で生成 -->
+        </div>
+      </div>
+
+      <!-- カード -->
+      <div class="card-area">
+        <div class="word-card" id="kata-card" aria-live="polite">
+          <div class="card-front">
+            <p class="card-genre" id="kata-genre-label">－</p>
+            <p class="card-word" id="kata-word">ボタンを押して<br>単語を引く</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 操作 -->
+      <div class="action-area">
+        <button class="draw-btn" id="kata-draw-btn" aria-label="カタカナーシの単語を引く">
+          <span class="draw-btn-icon">⊘</span>
+          <span class="draw-btn-text">単語を引く</span>
+        </button>
+        <p class="remain-count" id="kata-remain">残り <strong id="kata-remain-num">–</strong> 語</p>
+      </div>
+
+      <!-- ルール説明 -->
+      <aside class="rule-box">
+        <h2 class="rule-box-title">遊び方</h2>
+        <p class="rule-box-body">
+          お題の単語を、<strong>カタカナを一切使わずに</strong>説明して仲間に当ててもらおう。
+          「テレビ」→「四角い箱に映像が映って……」のように、日本語・ひらがな・漢字で言い換えるのがポイント。
+        </p>
+      </aside>
+    </section>
+
+    <!-- ━━━ エイゴダーケ パネル ━━━ -->
+    <section class="panel" id="panel-eigo" role="tabpanel" aria-labelledby="tab-eigo">
+
+      <!-- カード -->
+      <div class="card-area">
+        <div class="word-card eigo" id="eigo-card" aria-live="polite">
+          <div class="card-front">
+            <p class="card-word eigo-word" id="eigo-word">ボタンを押して<br>単語を引く</p>
+          </div>
+          <!-- NGワードエリア（引いた後に表示） -->
+          <div class="ng-area hidden" id="ng-area">
+            <p class="ng-label">
+              <span class="ng-badge">NG</span>使用禁止ワード
+            </p>
+            <ul class="ng-list" id="ng-list" aria-label="NGワード一覧">
+              <!-- JS で生成 -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 操作 -->
+      <div class="action-area">
+        <button class="draw-btn eigo" id="eigo-draw-btn" aria-label="エイゴダーケの単語を引く">
+          <span class="draw-btn-icon">⊘</span>
+          <span class="draw-btn-text">単語を引く</span>
+        </button>
+        <p class="remain-count" id="eigo-remain">残り <strong id="eigo-remain-num">–</strong> 語</p>
+      </div>
+
+      <!-- ルール説明 -->
+      <aside class="rule-box eigo">
+        <h2 class="rule-box-title">遊び方</h2>
+        <p class="rule-box-body">
+          お題の単語を、<strong>英語だけを使って</strong>説明して仲間に当ててもらおう。
+          各単語には<strong>NGワード</strong>が設定されており、表示されている英単語は使用禁止。
+          直訳や簡単すぎる言い換えを避けて説明しよう。
+        </p>
+      </aside>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <p>© 2025 単語ジェネレーター</p>
+  </footer>
+
+  <script src="words_data.js" defer></script>
+  <script src="word_generator.js" defer></script>
+</body>
+</html>

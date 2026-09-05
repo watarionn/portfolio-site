@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PixelForge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <header id="header">
+    <span class="app-title">PIXEL<span class="accent">FORGE</span></span>
+    <span id="canvas-size-label">32 × 32</span>
+    <div class="header-right">
+      <button id="btn-new"         class="hdr-btn">✦ NEW</button>
+      <button id="btn-import"      class="hdr-btn import-btn">⇥ IMPORT</button>
+      <button id="btn-export-json" class="hdr-btn json-btn">{ } JSON</button>
+      <button id="btn-export-gif"  class="hdr-btn gif-btn">▶ GIF</button>
+      <button id="btn-export"      class="hdr-btn accent-btn">↓ PNG</button>
+    </div>
+  </header>
+
+  <div id="main-layout">
+
+    <!-- ══ 左パネル ══ -->
+    <aside id="left-panel">
+
+      <!-- モバイル用タブバー（PCでは非表示） -->
+      <nav class="mob-tab-bar" id="left-tab-bar" aria-label="左パネルタブ">
+        <button class="mob-tab active" data-panel="left" data-tab="ltool">
+          <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+          <span>TOOL</span>
+        </button>
+        <button class="mob-tab" data-panel="left" data-tab="lflip">
+          <svg viewBox="0 0 24 24"><path d="M15 21h2v-2h-2v2zm4-12h2V7h-2v2zM3 5v14c0 1.1.9 2 2 2h4v-2H5V5h4V3H5c-1.1 0-2 .9-2 2zm16-2v2h2c0-1.1-.9-2-2-2zm-8 20h2V1h-2v22zm8-6h2v-2h-2v2zM15 5h2V3h-2v2zm4 8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2z"/></svg>
+          <span>FLIP</span>
+        </button>
+        <button class="mob-tab" data-panel="left" data-tab="lsym">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <span>SYM</span>
+        </button>
+        <button class="mob-tab" data-panel="left" data-tab="lsize">
+          <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+          <span>SIZE</span>
+        </button>
+      </nav>
+
+      <!-- ltool -->
+      <div class="mob-tab-content" id="ltool">
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-tool">TOOL <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-tool">
+            <div class="tool-grid">
+              <button class="tool-btn active" data-tool="pen"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg><span>PEN</span></button>
+              <button class="tool-btn" data-tool="eraser"><svg viewBox="0 0 24 24"><path d="M16.24 3.56l4.24 4.24c.78.78.78 2.05 0 2.83L8.47 22.41c-.78.78-2.05.78-2.83 0l-4.24-4.24c-.78-.78-.78-2.05 0-2.83L13.41 3.56c.79-.78 2.05-.78 2.83 0zM4.83 15.42l4.24 4.24 8.48-8.48-4.24-4.24-8.48 8.48z"/></svg><span>ERASE</span></button>
+              <button class="tool-btn" data-tool="fill"><svg viewBox="0 0 24 24"><path d="M16.56 8.94L7.62 0 6.21 1.41l2.38 2.38-5.15 5.15a1.49 1.49 0 0 0 0 2.12l5.5 5.5c.29.29.68.44 1.06.44s.77-.15 1.06-.44l5.5-5.5c.59-.58.59-1.53 0-2.12zM5.21 10L10 5.21 14.79 10H5.21zM19 11.5s-2 2.17-2 3.5c0 1.1.9 2 2 2s2-.9 2-2c0-1.33-2-3.5-2-3.5z"/></svg><span>FILL</span></button>
+              <button class="tool-btn" data-tool="eyedropper"><svg viewBox="0 0 24 24"><path d="M20.71 5.63l-2.34-2.34a1 1 0 0 0-1.41 0l-3.12 3.12-1.41-1.42-1.42 1.42 1.41 1.41-6.6 6.6A2 2 0 0 0 5 16v3h3a2 2 0 0 0 1.42-.59l6.6-6.6 1.41 1.42 1.42-1.42-1.42-1.41 3.12-3.12a1 1 0 0 0 .16-1.65z"/></svg><span>PICK</span></button>
+              <button class="tool-btn" data-tool="line"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3l5 5-1.41 1.41L13 9.83V18h-2V9.83l-2.59 2.58L7 11l5-5z"/></svg><span>LINE</span></button>
+              <button class="tool-btn" data-tool="rect"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg><span>RECT</span></button>
+              <button class="tool-btn" data-tool="select"><svg viewBox="0 0 24 24"><path d="M3 5H1v16c0 1.1.9 2 2 2h16v-2H3V5zm18-4H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 16H7V3h14v14z"/></svg><span>SELECT</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-section" id="tool-option-panel">
+          <div class="section-label collapsible" data-target="sec-toolopt" id="tool-option-label">FILL OPTION <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-toolopt">
+            <div id="fill-options">
+              <div class="option-label">輪郭参照</div>
+              <div class="toggle-row">
+                <button class="toggle-btn active" id="fill-ref-active" data-ref="active">現レイヤー</button>
+                <button class="toggle-btn"        id="fill-ref-all"    data-ref="all">全レイヤー</button>
+              </div>
+              <div class="option-hint">全レイヤー：輪郭を別レイヤーから参照</div>
+            </div>
+            <div id="select-options" class="hidden">
+              <div class="option-label">選択参照</div>
+              <div class="toggle-row">
+                <button class="toggle-btn active" id="sel-ref-active" data-ref="active">現レイヤー</button>
+                <button class="toggle-btn"        id="sel-ref-all"    data-ref="all">全レイヤー</button>
+              </div>
+              <div class="option-hint">選択・移動は現レイヤーに作用</div>
+              <div id="sel-action-row">
+                <button class="sel-act-btn" id="btn-sel-copy">⧉</button>
+                <button class="sel-act-btn" id="btn-sel-cut">✂</button>
+                <button class="sel-act-btn" id="btn-sel-paste">📋</button>
+                <button class="sel-act-btn" id="btn-sel-delete">🗑</button>
+                <button class="sel-act-btn" id="btn-sel-clear">✕</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ltool -->
+
+      <!-- lflip -->
+      <div class="mob-tab-content" id="lflip">
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-flip">FLIP / TRANSFORM <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-flip">
+            <div class="tool-grid">
+              <button class="tool-btn" id="btn-flip-h"><svg viewBox="0 0 24 24"><path d="M15 21h2v-2h-2v2zm4-12h2V7h-2v2zM3 5v14c0 1.1.9 2 2 2h4v-2H5V5h4V3H5c-1.1 0-2 .9-2 2zm16-2v2h2c0-1.1-.9-2-2-2zm-8 20h2V1h-2v22zm8-6h2v-2h-2v2zM15 5h2V3h-2v2zm4 8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2z"/></svg><span>FLIP H</span></button>
+              <button class="tool-btn" id="btn-flip-v"><svg viewBox="0 0 24 24"><path d="M3 15v2h2v-2H3zm0-4h2V9H3v2zm2 8H3c0 1.1.9 2 2 2v-2zm12 2v-2h2c0 1.1-.9 2-2 2zm2-16h-2V3c1.1 0 2 .9 2 2zm-2 4h2V7h-2v2zM1 11h22v2H1v-2zm16-8H7v2h10V3zm0 16H7v2h10v-2zm2-8h2v-2h-2v2z"/></svg><span>FLIP V</span></button>
+              <button class="tool-btn" id="btn-rot-cw"><svg viewBox="0 0 24 24"><path d="M15.55 5.55L11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42l1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"/></svg><span>ROT →</span></button>
+              <button class="tool-btn" id="btn-rot-ccw"><svg viewBox="0 0 24 24"><path d="M8.45 5.55L13 1v3.07C16.94 4.56 20 7.92 20 12s-3.06 7.44-7 7.93v-2.02c2.84-.48 5-2.94 5-5.91s-2.16-5.43-5-5.91V10L8.45 5.55zM4.07 11c.17-1.39.72-2.73 1.62-3.89L7.11 8.53c-.54.75-.88 1.6-1.02 2.47H4.07zM11 17.9v2.02c-1.39-.17-2.74-.71-3.9-1.61l1.44-1.44c.75.54 1.59.89 2.46 1.03zm-3.89-2.42L5.69 16.89c-.9-1.16-1.45-2.5-1.62-3.89h2.02c-.14.87-.48 1.72-1.02 2.48z"/></svg><span>ROT ←</span></button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /lflip -->
+
+      <!-- lsym -->
+      <div class="mob-tab-content" id="lsym">
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-sym">SYMMETRY <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-sym">
+            <div class="sym-grid">
+              <button class="sym-btn active" data-sym="none">✕</button>
+              <button class="sym-btn" data-sym="x">↔</button>
+              <button class="sym-btn" data-sym="y">↕</button>
+              <button class="sym-btn" data-sym="xy">⊞</button>
+              <button class="sym-btn" data-sym="radial4">✢</button>
+              <button class="sym-btn" data-sym="radial8">✳</button>
+            </div>
+            <div id="sym-preview"><canvas id="sym-canvas" width="60" height="60"></canvas></div>
+          </div>
+        </div>
+      </div><!-- /lsym -->
+
+      <!-- lsize -->
+      <div class="mob-tab-content" id="lsize">
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-size">SIZE <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-size">
+            <input type="range" id="brush-size" min="1" max="8" value="1">
+            <div class="range-label"><span>1</span><span id="brush-size-val">1</span><span>8</span></div>
+          </div>
+        </div>
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-opacity">OPACITY <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-opacity">
+            <input type="range" id="brush-opacity" min="10" max="100" value="100" step="10">
+            <div class="range-label"><span>10%</span><span id="brush-opacity-val">100%</span></div>
+          </div>
+        </div>
+      </div><!-- /lsize -->
+
+    </aside><!-- /left-panel -->
+
+    <!-- ══ キャンバスエリア ══ -->
+    <main id="canvas-area">
+      <div id="canvas-container">
+        <canvas id="checker-canvas"></canvas>
+        <div id="layer-canvases"></div>
+        <canvas id="preview-canvas"></canvas>
+        <canvas id="grid-canvas"></canvas>
+        <canvas id="sym-axis-canvas"></canvas>
+        <canvas id="select-canvas"></canvas>
+      </div>
+      <div id="anim-player">
+        <button id="anim-prev"  class="anim-btn">◀</button>
+        <button id="anim-play"  class="anim-btn play-btn">▶</button>
+        <button id="anim-next"  class="anim-btn">▶|</button>
+        <div class="anim-sep"></div>
+        <label class="anim-label">FPS</label>
+        <input type="number" id="anim-fps" value="4" min="1" max="60" step="1">
+        <div class="anim-sep"></div>
+        <button id="anim-mode-loop"   class="anim-mode-btn active">↺ LOOP</button>
+        <button id="anim-mode-bounce" class="anim-mode-btn">⇄ BOUNCE</button>
+        <div class="anim-sep"></div>
+        <span id="anim-frame-label" class="anim-label">F 1 / 1</span>
+      </div>
+      <div id="zoom-controls">
+        <button id="btn-zoom-out" class="zoom-btn">−</button>
+        <span id="zoom-label">×8</span>
+        <button id="btn-zoom-in"  class="zoom-btn">＋</button>
+        <button id="btn-zoom-fit" class="zoom-btn">⊡</button>
+        <div class="zoom-sep"></div>
+        <button id="btn-grid-toggle" class="zoom-btn grid-toggle-btn active">
+          <svg viewBox="0 0 24 24" width="14" height="14"><path d="M20 2H4C2.9 2 2 2.9 2 4v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 17H4v-7h7v7zm0-9H4V4h7v6zm9 9h-7v-7h7v7zm0-9h-7V4h7v6z" fill="currentColor"/></svg>
+        </button>
+      </div>
+      <div id="cursor-info"></div>
+    </main>
+
+    <!-- ══ 右パネル ══ -->
+    <aside id="right-panel">
+
+      <!-- モバイル用タブバー -->
+      <nav class="mob-tab-bar" id="right-tab-bar" aria-label="右パネルタブ">
+        <button class="mob-tab active" data-panel="right" data-tab="rcolor">
+          <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+          <span>COLOR</span>
+        </button>
+        <button class="mob-tab" data-panel="right" data-tab="rpal">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm2 5h12v2H6zm3 5h6v2H9z"/></svg>
+          <span>PAL</span>
+        </button>
+        <button class="mob-tab" data-panel="right" data-tab="rframe">
+          <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+          <span>FRAME</span>
+        </button>
+        <button class="mob-tab" data-panel="right" data-tab="rlayer">
+          <svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16z"/></svg>
+          <span>LAYER</span>
+        </button>
+        <button class="mob-tab" data-panel="right" data-tab="rcanvas">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+          <span>CANVAS</span>
+        </button>
+      </nav>
+
+      <!-- rcolor -->
+      <div class="mob-tab-content" id="rcolor">
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-color">COLOR <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-color">
+            <div id="color-preview-row">
+              <div id="color-fg-box"></div>
+              <div id="color-bg-box"></div>
+              <button id="btn-swap-colors">⇄</button>
+            </div>
+            <input type="color" id="color-picker" value="#2d2d2d">
+            <div id="hex-row"><span>#</span><input type="text" id="hex-input" value="2d2d2d" maxlength="6"></div>
+            <div class="rgb-sliders">
+              <div class="slider-row"><label>R</label><input type="range" id="sl-r" min="0" max="255" value="45"><span id="val-r">45</span></div>
+              <div class="slider-row"><label>G</label><input type="range" id="sl-g" min="0" max="255" value="45"><span id="val-g">45</span></div>
+              <div class="slider-row"><label>B</label><input type="range" id="sl-b" min="0" max="255" value="45"><span id="val-b">45</span></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /rcolor -->
+
+      <!-- rpal -->
+      <div class="mob-tab-content" id="rpal">
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-palette">PALETTE <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-palette">
+            <div id="palette-grid"></div>
+            <div class="palette-actions">
+              <button id="btn-add-color" class="small-btn">＋</button>
+              <button id="btn-clear-palette" class="small-btn danger-btn">✕</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /rpal -->
+
+      <!-- rframe -->
+      <div class="mob-tab-content" id="rframe">
+        <div class="panel-section" id="frame-panel-section">
+          <div class="section-label collapsible" data-target="sec-frames">FRAMES <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-frames">
+            <div id="frame-list"></div>
+            <div class="layer-actions">
+              <button id="btn-add-frame"  class="small-btn">＋</button>
+              <button id="btn-dup-frame"  class="small-btn">⧉</button>
+              <button id="btn-del-frame"  class="small-btn danger-btn">✕</button>
+            </div>
+            <div class="layer-actions">
+              <button id="btn-frame-left"  class="small-btn">←</button>
+              <button id="btn-frame-right" class="small-btn">→</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-history">HISTORY <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-history">
+            <div class="history-btns">
+              <button id="btn-undo" class="hbtn">↩ UNDO</button>
+              <button id="btn-redo" class="hbtn">↪ REDO</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /rframe -->
+
+      <!-- rlayer -->
+      <div class="mob-tab-content" id="rlayer">
+        <div class="panel-section" id="layer-panel-section">
+          <div class="section-label collapsible" data-target="sec-layers">LAYERS <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-layers">
+            <div id="layer-list"></div>
+            <div class="layer-actions">
+              <button id="btn-add-layer"  class="small-btn">＋</button>
+              <button id="btn-dup-layer"  class="small-btn">⧉</button>
+              <button id="btn-del-layer"  class="small-btn danger-btn">✕</button>
+            </div>
+            <div class="layer-actions">
+              <button id="btn-layer-up"    class="small-btn">↑</button>
+              <button id="btn-layer-down"  class="small-btn">↓</button>
+              <button id="btn-merge-layer" class="small-btn">⊕</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /rlayer -->
+
+      <!-- rcanvas -->
+      <div class="mob-tab-content" id="rcanvas">
+        <div class="panel-section">
+          <div class="section-label collapsible" data-target="sec-canvas">CANVAS <span class="collapse-icon">▾</span></div>
+          <div class="section-body" id="sec-canvas">
+            <div class="canvas-size-row">
+              <input type="number" id="input-w" value="32" min="4" max="128">
+              <span>×</span>
+              <input type="number" id="input-h" value="32" min="4" max="128">
+            </div>
+            <button id="btn-resize"       class="small-btn full-btn">RESIZE</button>
+            <button id="btn-clear-canvas" class="small-btn full-btn danger-btn">CLEAR</button>
+          </div>
+        </div>
+      </div><!-- /rcanvas -->
+
+    </aside><!-- /right-panel -->
+  </div>
+</div>
+
+<!-- NEW -->
+<div id="modal-overlay" class="hidden">
+  <div id="modal">
+    <div class="modal-title">NEW CANVAS</div>
+    <div class="modal-row"><label>Width</label><input type="number" id="modal-w" value="32" min="4" max="128"><span>px</span></div>
+    <div class="modal-row"><label>Height</label><input type="number" id="modal-h" value="32" min="4" max="128"><span>px</span></div>
+    <div class="modal-actions">
+      <button id="modal-cancel" class="small-btn">CANCEL</button>
+      <button id="modal-ok"     class="small-btn accent-btn">CREATE</button>
+    </div>
+  </div>
+</div>
+
+<!-- GIF -->
+<div id="gif-modal-overlay" class="hidden">
+  <div id="gif-modal">
+    <div class="modal-title">▶ GIF EXPORT</div>
+    <div class="modal-row"><label>FPS</label><input type="number" id="gif-fps" value="4" min="1" max="30"><span></span></div>
+    <div class="modal-row"><label>スケール</label>
+      <select id="gif-scale" class="small-select" style="flex:1">
+        <option value="1">×1</option><option value="4" selected>×4</option>
+        <option value="8">×8</option><option value="16">×16</option>
+      </select>
+    </div>
+    <div class="modal-row"><label>背景</label>
+      <select id="gif-bg" class="small-select" style="flex:1">
+        <option value="white" selected>白</option>
+        <option value="transparent">透明</option>
+      </select>
+    </div>
+    <div class="modal-row"><label>モード</label>
+      <select id="gif-mode" class="small-select" style="flex:1">
+        <option value="loop">ループ</option><option value="bounce">往復</option>
+      </select>
+    </div>
+    <div id="gif-progress-wrap" class="hidden">
+      <div id="gif-progress-bar"><div id="gif-progress-fill"></div></div>
+      <div id="gif-progress-label">生成中...</div>
+    </div>
+    <div class="modal-actions">
+      <button id="gif-cancel" class="small-btn">CANCEL</button>
+      <button id="gif-ok"     class="small-btn gif-btn">EXPORT GIF</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT -->
+<div id="import-overlay" class="hidden">
+  <div id="import-modal">
+    <div class="modal-title">⇥ IMPORT</div>
+    <div class="itab-bar">
+      <button class="itab active" data-tab="json">JSON</button>
+      <button class="itab" data-tab="paste">数値表</button>
+      <button class="itab" data-tab="preset">プリセット</button>
+      <button class="itab" data-tab="mapping">色設定</button>
+    </div>
+    <div class="itab-content active" id="itab-json">
+      <div class="itab-note">JSONファイルをドロップまたは選択してください</div>
+      <div id="json-drop-zone">
+        <div id="json-drop-label">ここにJSONをドロップ</div>
+        <label class="small-btn json-file-label">📂 ファイルを選択<input type="file" id="json-file-input" accept=".json"></label>
+      </div>
+      <div id="json-preview-info" class="itab-note" style="min-height:20px;margin-top:4px"></div>
+      <div class="import-row">
+        <label>読込方法</label>
+        <select id="json-layer-mode" class="small-select">
+          <option value="all">全データを置換</option>
+          <option value="frame">現フレームに追加</option>
+        </select>
+      </div>
+    </div>
+    <div class="itab-content" id="itab-paste">
+      <div class="itab-note">タブ区切り / スペース区切りの数値表を貼り付けてください</div>
+      <textarea id="import-textarea" placeholder="0 0 1 1 0&#10;0 1 0 0 1&#10;..."></textarea>
+      <div class="import-row">
+        <label>プリセット名</label>
+        <input type="text" id="preset-name-input" placeholder="名前を入力" maxlength="20">
+        <button id="btn-save-preset" class="small-btn">💾</button>
+      </div>
+      <div class="import-row">
+        <label>読込先</label>
+        <select id="paste-layer-mode" class="small-select">
+          <option value="active">現在のレイヤー</option>
+          <option value="new">新規レイヤー</option>
+        </select>
+      </div>
+    </div>
+    <div class="itab-content" id="itab-preset">
+      <div class="itab-note">保存済みプリセット（右クリックで削除）</div>
+      <div id="preset-list"></div>
+    </div>
+    <div class="itab-content" id="itab-mapping">
+      <div class="itab-note">数値と色の対応（0 = 透明・固定）</div>
+      <div id="mapping-list"></div>
+      <button id="btn-add-mapping" class="small-btn" style="margin-top:8px;width:100%">＋ 追加</button>
+    </div>
+    <div class="import-footer">
+      <div id="import-preview-info" class="itab-note"></div>
+      <div class="import-footer-btns">
+        <button id="import-cancel" class="small-btn">CANCEL</button>
+        <button id="import-ok"     class="small-btn accent-btn">IMPORT →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>素数点描 — 風花理珠</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="prime_dot_art.css">
+</head>
+<body>
+
+<!-- 横罫線テクスチャ -->
+<div class="paper-lines" aria-hidden="true"></div>
+
+<!-- ヘッダー -->
+<header role="banner">
+  <div class="header-center">
+    <h1>素数点描</h1>
+    <p class="header-sub">Prime Dot Art — 素数の軌跡を描く</p>
+  </div>
+  <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホーム</a>
+  <div aria-hidden="true"></div>
+</header>
+
+<main role="main">
+  <div class="layout">
+
+    <!-- コントロールパネル -->
+    <aside class="panel" role="complementary" aria-label="描画設定">
+
+      <!-- 描画設定 -->
+      <section class="panel-section">
+        <h2 class="sec-title">描画設定</h2>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="nrange">
+            ステップ数
+            <strong id="nval" class="ctrl-val">5,000</strong>
+          </label>
+          <input type="range" id="nrange" min="100" max="100000000" step="100" value="5000" aria-label="ステップ数">
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="srange">
+            ドットサイズ
+            <strong id="sval" class="ctrl-val">3</strong><span class="ctrl-unit">px</span>
+          </label>
+          <input type="range" id="srange" min="1" max="10" step="1" value="3" aria-label="ドットサイズ">
+        </div>
+      </section>
+
+      <!-- 基本条件 -->
+      <section class="panel-section">
+        <h2 class="sec-title">基本条件</h2>
+        <div class="rules-header" aria-hidden="true">
+          <span class="rh-cond">条件</span>
+          <span class="rh-color">色</span>
+          <span class="rh-dir">方向</span>
+        </div>
+
+        <div class="rule-row">
+          <span class="rule-label">合成数</span>
+          <input type="color" id="c0" value="#c0a870" aria-label="合成数の色">
+          <select id="d0" aria-label="合成数の方向">
+            <option value="straight">まっすぐ</option>
+            <option value="right">右</option>
+            <option value="left">左</option>
+            <option value="back">Uターン</option>
+          </select>
+        </div>
+        <div class="rule-row">
+          <span class="rule-label">奇数番目の素数</span>
+          <input type="color" id="c1" value="#1a120a" aria-label="奇数番目素数の色">
+          <select id="d1" aria-label="奇数番目素数の方向">
+            <option value="right" selected>右</option>
+            <option value="straight">まっすぐ</option>
+            <option value="left">左</option>
+            <option value="back">Uターン</option>
+          </select>
+        </div>
+        <div class="rule-row">
+          <span class="rule-label">偶数番目の素数</span>
+          <input type="color" id="c2" value="#3a2c18" aria-label="偶数番目素数の色">
+          <select id="d2" aria-label="偶数番目素数の方向">
+            <option value="left" selected>左</option>
+            <option value="straight">まっすぐ</option>
+            <option value="right">右</option>
+            <option value="back">Uターン</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- オプション条件 -->
+      <section class="panel-section">
+        <h2 class="sec-title">オプション条件
+          <span class="sec-note">優先度：上が低・下が高</span>
+        </h2>
+        <div class="rules-header" aria-hidden="true">
+          <span class="rh-check"></span>
+          <span class="rh-cond">条件</span>
+          <span class="rh-color">色</span>
+          <span class="rh-dir">方向</span>
+        </div>
+
+        <div class="opt-row" id="row3">
+          <input type="checkbox" id="on3" aria-label="素数番目の素数を有効にする">
+          <span class="rule-label">素数番目の素数</span>
+          <input type="color" id="c3" value="#c0392b" aria-label="素数番目素数の色">
+          <select id="d3" aria-label="素数番目素数の方向">
+            <option value="right" selected>右</option>
+            <option value="straight">まっすぐ</option>
+            <option value="left">左</option>
+            <option value="back">Uターン</option>
+          </select>
+        </div>
+        <div class="opt-row" id="row4">
+          <input type="checkbox" id="on4" aria-label="4k+1型素数を有効にする">
+          <span class="rule-label">4k+1 型素数</span>
+          <input type="color" id="c4" value="#1a4a7a" aria-label="4k+1型素数の色">
+          <select id="d4" aria-label="4k+1型素数の方向">
+            <option value="right" selected>右</option>
+            <option value="straight">まっすぐ</option>
+            <option value="left">左</option>
+            <option value="back">Uターン</option>
+          </select>
+        </div>
+        <div class="opt-row" id="row5">
+          <input type="checkbox" id="on5" aria-label="4k+3型素数を有効にする">
+          <span class="rule-label">4k+3 型素数</span>
+          <input type="color" id="c5" value="#2e7d50" aria-label="4k+3型素数の色">
+          <select id="d5" aria-label="4k+3型素数の方向">
+            <option value="left" selected>左</option>
+            <option value="straight">まっすぐ</option>
+            <option value="right">右</option>
+            <option value="back">Uターン</option>
+          </select>
+        </div>
+        <div class="opt-row" id="row6">
+          <input type="checkbox" id="on6" aria-label="各桁の合計が素数を有効にする">
+          <span class="rule-label">各桁の合計が素数</span>
+          <input type="color" id="c6" value="#880088" aria-label="桁合計素数の色">
+          <select id="d6" aria-label="桁合計素数の方向">
+            <option value="straight" selected>まっすぐ</option>
+            <option value="right">右</option>
+            <option value="left">左</option>
+            <option value="back">Uターン</option>
+          </select>
+        </div>
+        <div class="opt-row" id="row7">
+          <input type="checkbox" id="on7" aria-label="素数の2乗を有効にする">
+          <span class="rule-label">素数の 2 乗</span>
+          <input type="color" id="c7" value="#9a7a32" aria-label="素数の2乗の色">
+          <select id="d7" aria-label="素数の2乗の方向">
+            <option value="back" selected>Uターン</option>
+            <option value="straight">まっすぐ</option>
+            <option value="right">右</option>
+            <option value="left">左</option>
+          </select>
+        </div>
+        <div class="opt-row" id="row8">
+          <input type="checkbox" id="on8" aria-label="双子素数を有効にする">
+          <span class="rule-label">双子素数</span>
+          <input type="color" id="c8" value="#c05020" aria-label="双子素数の色">
+          <select id="d8" aria-label="双子素数の方向">
+            <option value="straight" selected>まっすぐ</option>
+            <option value="right">右</option>
+            <option value="left">左</option>
+            <option value="back">Uターン</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- アクション -->
+      <div class="action-row">
+        <button id="runBtn" class="btn btn-primary">描画</button>
+        <button id="resetBtn" class="btn btn-secondary">リセット</button>
+      </div>
+
+      <!-- 進捗・統計 -->
+      <div id="prog" class="prog" aria-live="polite" role="status"></div>
+      <div id="info" class="info" aria-live="polite"></div>
+
+    </aside>
+
+    <!-- キャンバス -->
+    <div class="canvas-wrap">
+      <canvas id="c" aria-label="素数点描キャンバス"></canvas>
+    </div>
+
+  </div>
+</main>
+
+<script src="prime_dot_art.js" defer></script>
+</body>
+</html>

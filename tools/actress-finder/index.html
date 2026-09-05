@@ -29,6 +29,7 @@
     overflow-x: hidden;
   }
 
+  /* Background decoration */
   body::before {
     content: '';
     position: fixed;
@@ -52,54 +53,313 @@
     z-index: 0;
   }
 
-  .container { max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; position: relative; z-index: 1; }
-  header { text-align: center; margin-bottom: 56px; animation: fadeDown 0.8s ease both; }
-  .logo-line { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 300; letter-spacing: 0.12em; background: linear-gradient(135deg, var(--accent) 0%, #e8d5b0 50%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2; }
-  .subtitle { margin-top: 10px; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.3em; text-transform: uppercase; }
-  .divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 20px auto 0; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; animation: fadeUp 0.8s ease 0.2s both; }
-  .card-label { font-size: 0.72rem; color: var(--accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-  .card-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .tag-input-wrap { min-height: 80px; border: 1px solid var(--border); border-radius: 10px; padding: 12px; cursor: text; display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; transition: border-color 0.2s; background: rgba(255,255,255,0.02); }
-  .tag-input-wrap:focus-within { border-color: var(--accent); }
-  .tag { display: inline-flex; align-items: center; gap: 6px; background: var(--tag-bg); border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px 5px 14px; font-size: 0.82rem; color: var(--text); animation: popIn 0.2s ease both; }
-  .tag .remove { cursor: pointer; color: var(--muted); font-size: 1rem; line-height: 1; transition: color 0.15s; background: none; border: none; padding: 0; }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .logo-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    background: linear-gradient(135deg, var(--accent) 0%, #e8d5b0 50%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 20px auto 0;
+  }
+
+  /* Input card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .card-label {
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Tag input area */
+  .tag-input-wrap {
+    min-height: 80px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    cursor: text;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+    background: rgba(255,255,255,0.02);
+  }
+  .tag-input-wrap:focus-within {
+    border-color: var(--accent);
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px 5px 14px;
+    font-size: 0.82rem;
+    color: var(--text);
+    animation: popIn 0.2s ease both;
+  }
+  .tag .remove {
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1;
+    transition: color 0.15s;
+    background: none; border: none;
+    padding: 0;
+  }
   .tag .remove:hover { color: #e07070; }
-  #tag-input { border: none; background: transparent; color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; font-size: 0.88rem; outline: none; min-width: 160px; flex: 1; padding: 5px 4px; }
+
+  #tag-input {
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 0.88rem;
+    outline: none;
+    min-width: 160px;
+    flex: 1;
+    padding: 5px 4px;
+  }
   #tag-input::placeholder { color: var(--muted); font-size: 0.82rem; }
-  .hint { margin-top: 8px; font-size: 0.72rem; color: var(--muted); }
-  .options-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
-  .opt-btn { flex: 1; min-width: 120px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--muted); font-family: 'Noto Sans JP', sans-serif; font-size: 0.78rem; cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em; }
-  .opt-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200, 169, 110, 0.06); }
-  .opt-btn:hover:not(.active) { border-color: #444; color: var(--text); }
-  .submit-btn { width: 100%; margin-top: 28px; padding: 15px; background: linear-gradient(135deg, rgba(200,169,110,0.15), rgba(155,110,160,0.15)); border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; letter-spacing: 0.2em; cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden; }
-  .submit-btn:hover:not(:disabled) { background: linear-gradient(135deg, rgba(200,169,110,0.25), rgba(155,110,160,0.25)); box-shadow: 0 0 24px rgba(200,169,110,0.15); transform: translateY(-1px); }
+
+  .hint {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  /* Options */
+  .options-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .opt-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .opt-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(200, 169, 110, 0.06);
+  }
+  .opt-btn:hover:not(.active) {
+    border-color: #444;
+    color: var(--text);
+  }
+
+  /* Submit */
+  .submit-btn {
+    width: 100%;
+    margin-top: 28px;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(200,169,110,0.15), rgba(155,110,160,0.15));
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    color: var(--accent);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .submit-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, rgba(200,169,110,0.25), rgba(155,110,160,0.25));
+    box-shadow: 0 0 24px rgba(200,169,110,0.15);
+    transform: translateY(-1px);
+  }
   .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-  .loading { text-align: center; padding: 48px 0; animation: fadeUp 0.4s ease both; }
-  .loading-orbs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-  .orb { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); animation: pulse 1.4s ease-in-out infinite; }
+
+  /* Loading */
+  .loading {
+    text-align: center;
+    padding: 48px 0;
+    animation: fadeUp 0.4s ease both;
+  }
+  .loading-orbs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .orb {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 1.4s ease-in-out infinite;
+  }
   .orb:nth-child(2) { animation-delay: 0.2s; background: var(--accent2); }
   .orb:nth-child(3) { animation-delay: 0.4s; }
   .loading-text { color: var(--muted); font-size: 0.82rem; letter-spacing: 0.15em; }
-  .results-section { animation: fadeUp 0.6s ease both; }
-  .results-header { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--muted); letter-spacing: 0.2em; margin-bottom: 20px; text-align: center; }
-  .actress-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; margin-bottom: 14px; transition: border-color 0.2s, transform 0.2s; animation: fadeUp 0.5s ease both; cursor: default; }
-  .actress-card:hover { border-color: rgba(200,169,110,0.4); transform: translateX(4px); }
-  .actress-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 6px; }
-  .actress-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-  .a-tag { font-size: 0.7rem; padding: 3px 10px; border-radius: 12px; border: 1px solid; letter-spacing: 0.08em; }
+
+  /* Results */
+  .results-section {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .results-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .actress-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s, transform 0.2s;
+    animation: fadeUp 0.5s ease both;
+    cursor: default;
+  }
+  .actress-card:hover {
+    border-color: rgba(200,169,110,0.4);
+    transform: translateX(4px);
+  }
+
+  .actress-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .actress-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .a-tag {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid;
+    letter-spacing: 0.08em;
+  }
   .a-tag.feature { border-color: rgba(200,169,110,0.4); color: var(--accent); background: rgba(200,169,110,0.06); }
-  .actress-desc { font-size: 0.83rem; color: #9a9aaa; line-height: 1.75; }
-  .similarity-bar-wrap { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+  .a-tag.genre { border-color: rgba(155,110,160,0.4); color: var(--accent2); background: rgba(155,110,160,0.06); }
+
+  .actress-desc {
+    font-size: 0.83rem;
+    color: #9a9aaa;
+    line-height: 1.75;
+  }
+
+  .similarity-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+  }
   .sim-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; min-width: 70px; }
-  .sim-bar { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .sim-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+  .sim-bar {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .sim-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
   .sim-pct { font-size: 0.75rem; color: var(--accent); min-width: 36px; text-align: right; }
-  .error-box { background: rgba(200, 80, 80, 0.08); border: 1px solid rgba(200, 80, 80, 0.3); border-radius: 10px; padding: 18px 22px; color: #d08080; font-size: 0.84rem; line-height: 1.7; animation: fadeUp 0.4s ease both; }
+
+  /* Error */
+  .error-box {
+    background: rgba(200, 80, 80, 0.08);
+    border: 1px solid rgba(200, 80, 80, 0.3);
+    border-radius: 10px;
+    padding: 18px 22px;
+    color: #d08080;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  /* Animations */
   @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes popIn { from { opacity:0; transform:scale(0.8); } to { opacity:1; transform:scale(1); } }
-  @keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.8);} 50%{opacity:1;transform:scale(1.2);} }
+  @keyframes fadeUp   { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes popIn    { from { opacity:0; transform:scale(0.8); } to { opacity:1; transform:scale(1); } }
+  @keyframes pulse    { 0%,100%{opacity:0.3;transform:scale(0.8);} 50%{opacity:1;transform:scale(1.2);} }
 </style>
 </head>
 <body>
@@ -125,15 +385,21 @@
       <button class="opt-btn" data-val="バランス重視">バランス重視</button>
     </div>
 
-    <button class="submit-btn" id="search-btn" onclick="doSearch()">✦ 類似女優を探す ✦</button>
+    <button class="submit-btn" id="search-btn" onclick="doSearch()">
+      ✦ 類似女優を探す ✦
+    </button>
   </div>
+
   <div id="output"></div>
 </div>
+
 <script>
   const tags = [];
   const tagInput = document.getElementById('tag-input');
   const tagWrap  = document.getElementById('tag-wrap');
   let activeOpt  = '見た目・顔立ち';
+
+  // Focus options
   document.querySelectorAll('#focus-opts .opt-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('#focus-opts .opt-btn').forEach(b => b.classList.remove('active'));
@@ -141,6 +407,8 @@
       activeOpt = btn.dataset.val;
     });
   });
+
+  // Tag input
   tagInput.addEventListener('keydown', e => {
     if (['Enter', '、', ','].includes(e.key) || e.key === ',') {
       e.preventDefault();
@@ -151,8 +419,11 @@
   });
   tagInput.addEventListener('input', e => {
     const v = tagInput.value;
-    if (v.endsWith('、') || v.endsWith(',') || v.endsWith('，')) addTag(v.slice(0, -1).trim());
+    if (v.endsWith('、') || v.endsWith(',') || v.endsWith('，')) {
+      addTag(v.slice(0, -1).trim());
+    }
   });
+
   function addTag(name) {
     if (!name || tags.includes(name)) { tagInput.value = ''; return; }
     tags.push(name);
@@ -162,7 +433,12 @@
     tagWrap.insertBefore(span, tagInput);
     tagInput.value = '';
   }
-  function removeTag(i) { tags.splice(i, 1); renderTags(); }
+
+  function removeTag(i) {
+    tags.splice(i, 1);
+    renderTags();
+  }
+
   function renderTags() {
     document.querySelectorAll('.tag').forEach(el => el.remove());
     tags.forEach((name, i) => {
@@ -172,40 +448,97 @@
       tagWrap.insertBefore(span, tagInput);
     });
   }
-  function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
   async function doSearch() {
     const names = tags.concat(tagInput.value.trim() ? [tagInput.value.trim()] : []);
-    if (names.length === 0) { alert('女優名を1人以上入力してください。'); return; }
+    if (names.length === 0) {
+      alert('女優名を1人以上入力してください。');
+      return;
+    }
+
     const btn = document.getElementById('search-btn');
     const out = document.getElementById('output');
     btn.disabled = true;
-    out.innerHTML = `<div class="loading"><div class="loading-orbs"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div><div class="loading-text">AIが類似女優を分析中…</div></div>`;
-    const prompt = `あなたはAV・セクシー女優に詳しいアドバイザーです。\nユーザーが好きな女優リスト: ${names.join('、')}\n重視ポイント: ${activeOpt}\n\n上記の好みを分析し、まだ知られていない可能性が高い類似女優を5〜7名提案してください。\n必ずJSON形式のみで返してください（他の文字は一切不要）:\n{\n  "analysis": "好みの傾向を1〜2文で簡潔に",\n  "suggestions": [\n    {\n      "name": "女優名（本名または芸名）",\n      "similarity": 85,\n      "tags": ["タグ1","タグ2","タグ3"],\n      "reason": "なぜ似ているか・どんな魅力があるか2〜3文"\n    }\n  ]\n}\nsimilarityは0-100の整数。tagsは見た目・雰囲気を表す3〜5個の短いキーワード。`;
+
+    out.innerHTML = `
+      <div class="loading">
+        <div class="loading-orbs"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+        <div class="loading-text">AIが類似女優を分析中…</div>
+      </div>`;
+
+    const prompt = `あなたはAV・セクシー女優に詳しいアドバイザーです。
+ユーザーが好きな女優リスト: ${names.join('、')}
+重視ポイント: ${activeOpt}
+
+上記の好みを分析し、まだ知られていない可能性が高い類似女優を5〜7名提案してください。
+必ずJSON形式のみで返してください（他の文字は一切不要）:
+{
+  "analysis": "好みの傾向を1〜2文で簡潔に",
+  "suggestions": [
+    {
+      "name": "女優名（本名または芸名）",
+      "similarity": 85,
+      "tags": ["タグ1","タグ2","タグ3"],
+      "reason": "なぜ似ているか・どんな魅力があるか2〜3文"
+    }
+  ]
+}
+similarityは0-100の整数。tagsは見た目・雰囲気を表す3〜5個の短いキーワード。`;
+
     try {
       const resp = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4096, system: 'You are a helpful assistant. You MUST respond with valid JSON only. No explanations, no preamble, no markdown, no code fences. Only raw JSON.', messages: [{ role: 'user', content: prompt }] })
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 4096,
+          system: 'You are a helpful assistant. You MUST respond with valid JSON only. No explanations, no preamble, no markdown, no code fences. Only raw JSON.',
+          messages: [{ role: 'user', content: prompt }]
+        })
       });
+
       const data = await resp.json();
       const raw = data.content?.map(b => b.text || '').join('');
       const jsonStr = raw.replace(/```json|```/g, '').trim();
       const result = JSON.parse(jsonStr);
+
       renderResults(result, names);
     } catch (err) {
       out.innerHTML = `<div class="error-box">⚠ エラーが発生しました。時間をおいて再試行してください。<br><small>${err.message}</small></div>`;
-    } finally { btn.disabled = false; }
+    } finally {
+      btn.disabled = false;
+    }
   }
+
   function renderResults(result, inputNames) {
     const out = document.getElementById('output');
     let html = `<div class="results-section">`;
     html += `<div class="results-header">— ${result.analysis} —</div>`;
+
     result.suggestions.forEach((s, i) => {
       const delay = i * 0.08;
-      html += `<div class="actress-card" style="animation-delay:${delay}s"><div class="actress-name">${escHtml(s.name)}</div><div class="actress-tags">${(s.tags||[]).map(t => `<span class="a-tag feature">${escHtml(t)}</span>`).join('')}</div><div class="actress-desc">${escHtml(s.reason)}</div><div class="similarity-bar-wrap"><span class="sim-label">類似度</span><div class="sim-bar"><div class="sim-fill" id="bar-${i}" style="width:0%"></div></div><span class="sim-pct">${s.similarity}%</span></div></div>`;
+      html += `
+        <div class="actress-card" style="animation-delay:${delay}s">
+          <div class="actress-name">${escHtml(s.name)}</div>
+          <div class="actress-tags">
+            ${(s.tags||[]).map(t => `<span class="a-tag feature">${escHtml(t)}</span>`).join('')}
+          </div>
+          <div class="actress-desc">${escHtml(s.reason)}</div>
+          <div class="similarity-bar-wrap">
+            <span class="sim-label">類似度</span>
+            <div class="sim-bar"><div class="sim-fill" id="bar-${i}" style="width:0%"></div></div>
+            <span class="sim-pct">${s.similarity}%</span>
+          </div>
+        </div>`;
     });
     html += `</div>`;
     out.innerHTML = html;
+
+    // Animate bars after render
     setTimeout(() => {
       result.suggestions.forEach((s, i) => {
         const el = document.getElementById(`bar-${i}`);

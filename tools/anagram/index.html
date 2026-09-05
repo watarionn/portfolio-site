@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アナグラム生成補助 — 吉見渉</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="anagram.css">
+</head>
+<body>
+
+  <div class="paper-lines" aria-hidden="true"></div>
+
+  <header role="banner">
+    <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホーム</a>
+    <div class="header-center">
+      <h1>アナグラム生成補助</h1>
+      <p class="header-sub">Anagram Composer</p>
+    </div>
+    <div aria-hidden="true"></div>
+  </header>
+
+  <main role="main">
+
+    <!-- ① 入力ゾーン -->
+    <section class="tool-section" aria-labelledby="input-heading">
+      <div class="section-label" id="input-heading">
+        <span class="label-num">壱</span>
+        <span class="label-text">元の文字列を入力</span>
+      </div>
+      <div class="input-row">
+        <input
+          type="text"
+          id="sourceInput"
+          class="main-input"
+          placeholder="例：アナグラム / anagram"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          aria-label="アナグラム元の文字列"
+        >
+        <button class="btn btn-primary" id="parseBtn" aria-label="文字を分割する">
+          分割する
+        </button>
+        <button class="btn btn-ghost" id="resetBtn" aria-label="全てリセット">
+          リセット
+        </button>
+      </div>
+    </section>
+
+    <!-- ② タイルゾーン -->
+    <section class="tool-section tile-section" aria-labelledby="tile-heading">
+      <div class="section-label" id="tile-heading">
+        <span class="label-num">弐</span>
+        <span class="label-text">文字タイル</span>
+        <span class="label-hint">タイルをクリックして選択・複数選択でまとめ可能</span>
+      </div>
+
+      <div class="tile-actions" id="tileActions" aria-hidden="true">
+        <button class="btn btn-chunk" id="chunkBtn" disabled aria-label="選択文字をまとめる">
+          まとめる
+        </button>
+        <span class="selection-count" id="selCount"></span>
+      </div>
+
+      <div class="tile-area" id="tileArea" role="group" aria-label="文字タイル一覧">
+        <p class="tile-empty" id="tileEmpty">上の入力欄に文字を入力してください</p>
+      </div>
+
+      <div class="tile-legend" aria-label="凡例">
+        <div class="legend-item"><div class="legend-swatch swatch-unused"></div>未使用</div>
+        <div class="legend-item"><div class="legend-swatch swatch-used"></div>使用済</div>
+        <div class="legend-item"><div class="legend-swatch swatch-selected"></div>選択中</div>
+        <div class="legend-item"><div class="legend-swatch swatch-chunk"></div>チャンク</div>
+      </div>
+    </section>
+
+    <!-- ③ チャンク一覧 -->
+    <section class="tool-section" aria-labelledby="chunk-heading" id="chunkSection">
+      <div class="section-label" id="chunk-heading">
+        <span class="label-num">参</span>
+        <span class="label-text">チャンク一覧</span>
+        <span class="label-hint">複数文字をひとまとまりとして扱う</span>
+      </div>
+      <div class="chunk-list" id="chunkList">
+        <p class="tile-empty" id="chunkEmpty">まだチャンクがありません</p>
+      </div>
+    </section>
+
+    <!-- ④ アナグラム後入力 -->
+    <section class="tool-section" aria-labelledby="output-heading">
+      <div class="section-label" id="output-heading">
+        <span class="label-num">四</span>
+        <span class="label-text">アナグラム後の文字列</span>
+        <span class="label-hint">手打ち入力 または タイルをクリックして追加</span>
+      </div>
+
+      <div class="output-area">
+        <!-- 組み立て中のプレビュー（タイルをクリックした場合） -->
+        <div class="built-tiles" id="builtTiles" aria-label="クリックで追加した文字" aria-live="polite"></div>
+
+        <div class="input-row">
+          <input
+            type="text"
+            id="resultInput"
+            class="main-input result-input"
+            placeholder="アナグラム後の文字列を入力（手打ち or タイルをクリック）"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            aria-label="アナグラム後の文字列"
+            aria-describedby="remaining-status"
+          >
+          <button class="btn btn-ghost" id="clearResultBtn" aria-label="アナグラム欄をクリア">
+            クリア
+          </button>
+        </div>
+
+        <!-- 残り文字ステータス -->
+        <div class="status-bar" id="statusBar" aria-live="polite" role="status">
+          <div class="status-remaining" id="remainingStatus">
+            <span id="remaining-status"></span>
+          </div>
+          <div class="status-check" id="statusCheck"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <p class="footer-text">アナグラム生成補助 — 吉見渉</p>
+  </footer>
+
+  <script src="anagram.js" defer></script>
+</body>
+</html>

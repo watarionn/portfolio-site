@@ -29,7 +29,7 @@ const extra=['CHECK_ROW','CHECK_STATUS','CHECK_CODES','CHECK_MESSAGE','POSTAL_ST
 const FW='０１２３４５６７８９',AS='0123456789';
 function norm(v){let s=String(v??'').trim().replace(/[\s　]/g,'');for(let i=0;i<10;i++)s=s.split(FW[i]).join(AS[i]);return s.replace(/[－―−‐‑]/g,'-')}
 function postal(v){return norm(v).replace(/-/g,'')}
-function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]))}
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open('JLCC_MASTER_DB',1);r.onupgradeneeded=()=>r.result.createObjectStore('files');r.onsuccess=()=>{db=r.result;res(db)};r.onerror=()=>rej(r.error)})}
 function putFiles(items){return new Promise((res,rej)=>{const tx=db.transaction('files','readwrite'),st=tx.objectStore('files');for(const [k,v] of items)st.put(v,k);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
 function getFile(k){return new Promise((res,rej)=>{const r=db.transaction('files').objectStore('files').get(k);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}

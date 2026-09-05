@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>間取り図ジェネレーター</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="madori.css">
+</head>
+<body>
+
+  <!-- タブバー -->
+  <div id="tabs" role="tablist">
+    <a href="/" class="home-tab-btn" aria-label="ホームへ戻る">← ホーム</a>
+    <div class="tab active" id="tab2d" role="tab" aria-selected="true"  aria-controls="view2d">間取り図</div>
+    <div class="tab"        id="tab3d" role="tab" aria-selected="false" aria-controls="view3d">3D ビュー</div>
+  </div>
+
+  <!-- ===== 2D ビュー ===== -->
+  <div id="view2d" role="tabpanel">
+
+    <!-- サイドバー（PC: 左固定 / スマホ: 下ドロワー） -->
+    <aside id="sidebar" aria-label="コントロールパネル">
+
+      <!-- スマホ用ドロワーハンドル -->
+      <div id="drawer-handle" aria-hidden="true">
+        <span class="handle-bar"></span>
+      </div>
+
+      <div id="sidebar-inner">
+        <!-- 部屋 -->
+        <section class="sb-section">
+          <div class="sb-title">部屋を追加</div>
+          <div id="room-list"></div>
+          <button class="toggle-add" id="toggle-room-form">＋ 新しい部屋の種類</button>
+          <div id="room-form" class="add-form" hidden>
+            <label>名前<input type="text" id="r-name" placeholder="例: ウォークイン"></label>
+            <div class="add-form-row">
+              <label>幅<input type="number" id="r-w" value="120" min="20"></label>
+              <label>奥行<input type="number" id="r-h" value="100" min="20"></label>
+            </div>
+            <label class="color-label">色
+              <input type="color" id="r-color" value="#e8d4ff">
+            </label>
+            <button id="add-room-btn" class="form-submit">追加</button>
+          </div>
+        </section>
+
+        <!-- 家具 -->
+        <section class="sb-section">
+          <div class="sb-title">家具を追加</div>
+          <div id="furn-list"></div>
+          <button class="toggle-add" id="toggle-furn-form">＋ 新しい家具の種類</button>
+          <div id="furn-form" class="add-form" hidden>
+            <label>名前<input type="text" id="f-name" placeholder="例: ピアノ"></label>
+            <div class="add-form-row">
+              <label>幅<input type="number" id="f-w" value="80" min="10"></label>
+              <label>奥行<input type="number" id="f-h" value="60" min="10"></label>
+            </div>
+            <label>3D高さ<input type="number" id="f-3h" value="40" min="5"></label>
+            <label class="color-label">色
+              <input type="color" id="f-color" value="#a06030">
+            </label>
+            <button id="add-furn-btn" class="form-submit">追加</button>
+          </div>
+        </section>
+
+        <!-- 選択中 -->
+        <section class="sb-section">
+          <div class="sb-title">選択中</div>
+          <div id="sel-info">なし</div>
+          <button class="del-btn" id="delete-btn">削除</button>
+        </section>
+
+        <!-- グリッド -->
+        <section class="sb-section">
+          <div class="sb-title">グリッド</div>
+          <label class="check-label">
+            <input type="checkbox" id="snap-check" checked>
+            スナップ
+          </label>
+        </section>
+
+        <!-- 保存 -->
+        <section class="sb-section">
+          <div class="sb-title">保存・出力</div>
+          <button class="save-btn green" id="save-png-btn">PNG として保存</button>
+          <button class="save-btn" id="save-json-btn">データを保存 (.json)</button>
+          <button class="save-btn" id="load-json-btn">データを読み込む</button>
+          <input type="file" id="file-input" accept=".json" hidden>
+        </section>
+      </div>
+    </aside>
+
+    <!-- キャンバス領域 -->
+    <div id="canvas-wrap">
+      <div id="toolbar2d">
+        <button class="tool-btn active" id="btn-select">選択</button>
+        <button class="tool-btn"        id="btn-wall">壁を描く</button>
+        <button class="tool-btn"        id="btn-erase">壁を消す</button>
+      </div>
+      <button id="go3d-btn">3D →</button>
+      <!-- スマホ用パネル開閉ボタン -->
+      <button id="panel-toggle-btn" aria-label="パネルを開く">＋ 追加</button>
+      <canvas id="c2d" aria-label="間取り図キャンバス"></canvas>
+      <div id="info2d" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- ===== 3D ビュー ===== -->
+  <div id="view3d" role="tabpanel" hidden>
+    <canvas id="c3d"></canvas>
+    <div id="ui3d">
+      <div id="controls3d">
+        <div class="ctrl-title">表示設定</div>
+        <div class="ctrl-row">
+          <label>壁の高さ</label>
+          <input type="range" id="wallH" min="60" max="200" value="120">
+          <span class="val" id="wallH-v">120</span>
+        </div>
+        <div class="ctrl-row">
+          <label>カメラ距離</label>
+          <input type="range" id="camD" min="100" max="800" value="400">
+          <span class="val" id="camD-v">400</span>
+        </div>
+        <div class="ctrl-row">
+          <label>仰角</label>
+          <input type="range" id="camEl" min="5" max="89" value="40">
+          <span class="val" id="camEl-v">40°</span>
+        </div>
+        <div class="ctrl-row">
+          <label>床を表示</label>
+          <input type="checkbox" id="showFloor" checked>
+        </div>
+        <div class="ctrl-row">
+          <label>天井を表示</label>
+          <input type="checkbox" id="showCeil">
+        </div>
+        <div class="ctrl-title" style="margin-top:0.5rem">照明</div>
+        <div class="ctrl-row">
+          <label>明るさ</label>
+          <input type="range" id="ambient" min="0" max="100" value="55">
+          <span class="val" id="ambient-v">55</span>
+        </div>
+      </div>
+      <div id="btns3d">
+        <button class="btn3d primary" id="save3d-btn">PNG保存</button>
+        <button class="btn3d" id="toggle-view-btn">俯瞰/透視</button>
+        <button class="btn3d" id="reset-cam-btn">視点リセット</button>
+        <button class="btn3d" id="back2d-btn">← 間取り図へ</button>
+      </div>
+    </div>
+    <div id="info3d">ドラッグ: 回転　｜　ピンチ/ホイール: ズーム</div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="madori.js" defer></script>
+</body>
+</html>

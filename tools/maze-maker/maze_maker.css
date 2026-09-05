@@ -1,0 +1,431 @@
+/* =============================================
+   迷路メーカー — maze-maker.css
+   国語辞典世界観
+   ============================================= */
+
+:root {
+  --clr-paper:      #f0e8cc;
+  --clr-paper-dk:   #e4d8b0;
+  --clr-paper-deep: #d8cb98;
+  --clr-ink:        #1a120a;
+  --clr-ink-mid:    #3a2c18;
+  --clr-ink-light:  #6b5538;
+  --clr-vermilion:  #c0392b;
+  --clr-cobalt:     #1a4a7a;
+  --clr-cobalt-lt:  rgba(26,74,122,0.1);
+  --clr-gold:       #9a7a32;
+  --clr-rule:       #c0a870;
+  --clr-rule-lt:    #d8c898;
+  --clr-muted:      #a08060;
+  --clr-secret:     #4a1030;
+
+  /* セルサイズ：スマホでも押しやすいようclampで調整 */
+  --cell: clamp(28px, 5vw, 36px);
+
+  --font-m: 'Shippori Mincho', 'Noto Serif JP', 'Yu Mincho', serif;
+  --font-e: 'Libre Baskerville', Georgia, serif;
+  --ease-book: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+
+body {
+  font-family: var(--font-m);
+  background: var(--clr-paper-dk);
+  color: var(--clr-ink);
+  min-height: 100svh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── ヘッダー ─── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--clr-ink);
+  border-bottom: 3px solid var(--clr-vermilion);
+  padding: clamp(0.55rem,1.5vw,0.85rem) clamp(1rem,4vw,2rem);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.28);
+}
+
+.header-center { text-align: center; }
+
+.header-center h1 {
+  font-size: clamp(0.88rem,2.2vw,1.1rem);
+  font-weight: 700;
+  color: var(--clr-paper);
+  letter-spacing: 0.2em;
+  line-height: 1.3;
+}
+.header-center h1 rt {
+  font-size: 0.5em;
+  color: rgba(240,232,204,0.6);
+  letter-spacing: 0.1em;
+}
+
+.header-sub {
+  font-family: var(--font-e);
+  font-style: italic;
+  font-size: clamp(0.52rem,1vw,0.62rem);
+  color: var(--clr-rule);
+  letter-spacing: 0.1em;
+  margin-top: 0.1rem;
+}
+
+.home-btn {
+  font-size: clamp(0.6rem,1.1vw,0.7rem);
+  color: var(--clr-rule);
+  text-decoration: none;
+  border: 1px solid var(--clr-rule);
+  border-radius: 2rem;
+  padding: 0.28em 0.75em;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.06em;
+}
+.home-btn:hover { background: var(--clr-rule); color: var(--clr-ink); }
+
+/* ─── メイン ─── */
+main {
+  flex: 1;
+  padding: clamp(1rem,3vw,2rem) clamp(0.75rem,3vw,1.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+/* ─── パネル ─── */
+.panel {
+  background: var(--clr-paper);
+  border: 1px solid var(--clr-rule);
+  padding: clamp(0.75rem,2vw,1rem) clamp(0.85rem,2.5vw,1.2rem);
+  width: 100%;
+  max-width: 44rem;
+}
+
+.panel-title {
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  color: var(--clr-gold);
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+}
+
+/* ─── サイズ入力 ─── */
+.size-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.size-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: clamp(0.78rem,1.5vw,0.88rem);
+  color: var(--clr-ink-mid);
+}
+.size-group input {
+  width: 3.5rem;
+  padding: 0.3rem 0.5rem;
+  font-family: var(--font-m);
+  font-size: 0.9rem;
+  background: var(--clr-paper-dk);
+  border: 1.5px solid var(--clr-rule);
+  color: var(--clr-ink);
+  text-align: center;
+  outline: none;
+  border-radius: 2px;
+}
+.size-group input:focus {
+  border-color: var(--clr-cobalt);
+  box-shadow: 0 0 0 2px var(--clr-cobalt-lt);
+}
+
+.btn-map {
+  padding: 0.45rem 1.2rem;
+  background: var(--clr-ink-mid);
+  color: var(--clr-paper);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-m);
+  font-size: clamp(0.72rem,1.4vw,0.82rem);
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: background 0.15s;
+  min-height: 2.2rem;
+}
+.btn-map:hover { background: var(--clr-ink); }
+
+/* ─── モードトグル ─── */
+.mode-toggle {
+  display: flex;
+  border: 1.5px solid var(--clr-rule);
+  overflow: hidden;
+  width: fit-content;
+  border-radius: 2px;
+}
+.mode-btn {
+  padding: 0.38rem 1rem;
+  font-family: var(--font-m);
+  font-size: clamp(0.7rem,1.3vw,0.8rem);
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  background: var(--clr-paper-dk);
+  color: var(--clr-ink-mid);
+  transition: background 0.15s, color 0.15s;
+  min-height: 2.2rem;
+}
+.mode-btn.active {
+  background: var(--clr-ink-mid);
+  color: var(--clr-paper);
+}
+
+/* ─── ツール ─── */
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.38rem 0.8rem;
+  font-family: var(--font-m);
+  font-size: clamp(0.7rem,1.3vw,0.8rem);
+  border: 1.5px solid var(--clr-rule);
+  background: var(--clr-paper-dk);
+  color: var(--clr-ink-mid);
+  cursor: pointer;
+  transition: all 0.12s;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  min-height: 2.2rem;
+}
+.tool-btn:hover { border-color: var(--clr-ink-light); color: var(--clr-ink); }
+.tool-btn.active {
+  background: var(--clr-secret);
+  color: var(--clr-paper);
+  border-color: var(--clr-secret);
+}
+.tool-icon { font-size: 1rem; line-height: 1; }
+
+/* テキスト入力付きツール */
+.tool-input-group {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid var(--clr-rule);
+  overflow: hidden;
+  transition: border-color 0.12s;
+  border-radius: 2px;
+}
+.tool-input-group:has(.tool-btn.active) { border-color: var(--clr-secret); }
+
+.tool-input-group .tool-btn {
+  border: none;
+  border-right: 1.5px solid var(--clr-rule);
+  border-radius: 0;
+}
+.tool-input-group:has(.tool-btn.active) .tool-btn {
+  background: var(--clr-secret);
+  color: var(--clr-paper);
+  border-right-color: var(--clr-secret);
+}
+
+.tool-char-input {
+  width: clamp(2.2rem,6vw,2.8rem);
+  padding: 0.38rem 0.25rem;
+  font-family: var(--font-m);
+  font-size: clamp(0.9rem,1.8vw,1rem);
+  background: var(--clr-paper-dk);
+  border: none;
+  color: var(--clr-ink);
+  text-align: center;
+  outline: none;
+}
+
+/* ─── グリッドラッパー ─── */
+#grid-wrap {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem;
+  background: var(--clr-paper);
+  border: 1px solid var(--clr-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* スクロール用コンテナ */
+#grid-scroll {
+  width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  justify-content: center;
+  /* スクロールバーを辞書風に */
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-rule) var(--clr-paper-dk);
+}
+#grid-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+#grid-scroll::-webkit-scrollbar-track { background: var(--clr-paper-dk); }
+#grid-scroll::-webkit-scrollbar-thumb { background: var(--clr-rule); border-radius: 3px; }
+
+/* スクロールコントロール（スマホ専用） */
+#scroll-controls {
+  display: none; /* PCでは非表示、スマホで表示 */
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.scroll-btn {
+  width: 2.6rem;
+  height: 2.6rem;
+  background: var(--clr-paper-dk);
+  border: 1.5px solid var(--clr-rule);
+  border-radius: 2px;
+  font-size: 0.75rem;
+  color: var(--clr-ink-mid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+  /* タップしやすいサイズ */
+  touch-action: manipulation;
+}
+.scroll-btn:hover   { background: var(--clr-cobalt-lt); color: var(--clr-cobalt); }
+.scroll-btn:active  { background: var(--clr-cobalt); color: var(--clr-paper); }
+
+#maze-grid {
+  border-collapse: collapse;
+  display: block;
+  width: fit-content;
+  border: 2px solid var(--clr-ink);
+  box-shadow: 3px 3px 0 var(--clr-ink-mid);
+  /* タッチはセル操作に使う（スクロールはgrid-scroll側で行う） */
+  touch-action: none;
+}
+
+#maze-grid td {
+  width:  var(--cell);
+  height: var(--cell);
+  min-width: var(--cell);
+  text-align: center;
+  vertical-align: middle;
+  font-size: clamp(0.62rem,1.5vw,0.8rem);
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.08s;
+  border: 1px solid rgba(0,0,0,0.08);
+  /* タップしやすくする */
+  -webkit-tap-highlight-color: transparent;
+}
+#maze-grid td:hover { filter: brightness(0.88); }
+
+/* セル色 */
+td.wall       { background: var(--clr-ink);     color: var(--clr-paper-dk); font-size: clamp(0.55rem,1.2vw,0.7rem); }
+td.path       { background: var(--clr-paper);   color: transparent; }
+td.cell-start { background: var(--clr-cobalt);  color: var(--clr-paper); font-size: clamp(0.45rem,1vw,0.58rem); }
+td.cell-goal  { background: var(--clr-gold);    color: var(--clr-paper); font-size: clamp(0.48rem,1vw,0.6rem); }
+td.obstacle   { background: var(--clr-paper);   color: var(--clr-vermilion); }
+td.collect    { background: var(--clr-paper);   color: var(--clr-secret); }
+
+/* 削除モード */
+body.delete-mode #maze-grid td:not(.wall):hover { background: rgba(192,57,43,0.1) !important; }
+body.delete-mode #maze-grid td.wall:hover { filter: brightness(1.3); }
+body.place-mode  #maze-grid td { cursor: cell; }
+body.delete-mode #maze-grid td { cursor: no-drop; }
+
+/* ─── エクスポート ─── */
+.export-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.btn-export {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 1rem;
+  font-family: var(--font-m);
+  font-size: clamp(0.7rem,1.3vw,0.8rem);
+  letter-spacing: 0.08em;
+  border: 1.5px solid var(--clr-rule);
+  border-radius: 2px;
+  background: var(--clr-paper-dk);
+  color: var(--clr-ink-mid);
+  cursor: pointer;
+  transition: all 0.12s;
+  min-height: 2.2rem;
+}
+.btn-export:hover {
+  background: var(--clr-gold);
+  color: var(--clr-paper);
+  border-color: var(--clr-gold);
+}
+
+/* ─── 非表示 ─── */
+.hidden { display: none !important; }
+
+/* ─── フッター ─── */
+footer {
+  text-align: center;
+  padding: 1.25rem;
+  border-top: 1px solid var(--clr-rule-lt);
+  margin-top: auto;
+}
+.footer-text {
+  font-family: var(--font-e);
+  font-style: italic;
+  font-size: clamp(0.58rem,1vw,0.68rem);
+  color: var(--clr-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ─── レスポンシブ ─── */
+@media (max-width: 480px) {
+  header {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    text-align: center;
+  }
+  .home-btn { justify-self: start; }
+
+  .size-row { gap: 0.5rem; }
+  .tools    { gap: 0.35rem; }
+
+  /* スマホでスクロールコントロールを表示 */
+  #scroll-controls {
+    display: flex;
+  }
+}
+
+/* ─── Focus ─── */
+:focus-visible { outline: 2px solid var(--clr-cobalt); outline-offset: 2px; }
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

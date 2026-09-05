@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>迷路メーカー — 風花理珠</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;700&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="maze_maker.css">
+</head>
+<body class="place-mode">
+
+  <!-- ヘッダー -->
+  <header role="banner">
+    <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホーム</a>
+    <div class="header-center">
+      <h1>
+        <ruby><rb>迷路</rb><rt>めいろ</rt></ruby>メーカー
+      </h1>
+      <p class="header-sub">Maze Maker</p>
+    </div>
+    <div aria-hidden="true"></div>
+  </header>
+
+  <main role="main">
+
+    <!-- サイズ入力 -->
+    <div class="panel">
+      <div class="panel-title">グリッドサイズ</div>
+      <div class="size-row">
+        <div class="size-group">
+          <label for="inp-rows">縦</label>
+          <input type="number" id="inp-rows" value="10" min="3" max="40">
+          <span>マス</span>
+        </div>
+        <div class="size-group">
+          <label for="inp-cols">横</label>
+          <input type="number" id="inp-cols" value="19" min="3" max="60">
+          <span>マス</span>
+        </div>
+        <button class="btn-map" id="btn-generate">白地図を作る</button>
+      </div>
+    </div>
+
+    <!-- ツールパネル -->
+    <div class="panel hidden" id="tool-panel">
+      <div class="panel-title">ツール</div>
+
+      <div class="mode-toggle" role="group" aria-label="操作モード">
+        <button class="mode-btn active" id="btn-place">設置モード</button>
+        <button class="mode-btn"        id="btn-delete">削除モード</button>
+      </div>
+
+      <div class="tools" id="tool-list" role="group" aria-label="設置ツール">
+        <button class="tool-btn active" data-tool="wall">
+          <span class="tool-icon" aria-hidden="true">■</span>壁
+        </button>
+        <button class="tool-btn" data-tool="start">
+          <span class="tool-icon" aria-hidden="true">🚩</span>スタート
+        </button>
+        <button class="tool-btn" data-tool="goal">
+          <span class="tool-icon" aria-hidden="true">🏁</span>ゴール
+        </button>
+
+        <div class="tool-input-group">
+          <button class="tool-btn" data-tool="obstacle">
+            <span class="tool-icon" aria-hidden="true">⚠️</span>障害物
+          </button>
+          <input class="tool-char-input" id="obstacle-char" value="鬼" maxlength="2" aria-label="障害物の文字">
+        </div>
+
+        <div class="tool-input-group">
+          <button class="tool-btn" data-tool="collect">
+            <span class="tool-icon" aria-hidden="true">✨</span>収集物
+          </button>
+          <input class="tool-char-input" id="collect-char" value="そ" maxlength="2" aria-label="収集物の文字">
+        </div>
+      </div>
+    </div>
+
+    <!-- グリッド -->
+    <div id="grid-wrap" class="hidden" role="region" aria-label="迷路グリッド">
+      <!-- スクロールコントロール（スマホ用） -->
+      <div id="scroll-controls" aria-label="スクロール操作" aria-hidden="true">
+        <button class="scroll-btn" id="scroll-left"  aria-label="左へスクロール">◀</button>
+        <button class="scroll-btn" id="scroll-up"    aria-label="上へスクロール">▲</button>
+        <button class="scroll-btn" id="scroll-down"  aria-label="下へスクロール">▼</button>
+        <button class="scroll-btn" id="scroll-right" aria-label="右へスクロール">▶</button>
+      </div>
+      <div id="grid-scroll">
+        <table id="maze-grid"><tbody id="maze-body"></tbody></table>
+      </div>
+    </div>
+
+    <!-- エクスポート -->
+    <div class="panel hidden" id="export-panel">
+      <div class="panel-title">エクスポート</div>
+      <div class="export-row">
+        <button class="btn-export" id="btn-png">
+          <span aria-hidden="true">🖼</span> PNG
+        </button>
+        <button class="btn-export" id="btn-jpg">
+          <span aria-hidden="true">🖼</span> JPEG
+        </button>
+        <button class="btn-export" id="btn-html">
+          <span aria-hidden="true">📄</span> HTML（&lt;div&gt;のみ）
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <footer role="contentinfo">
+    <p class="footer-text">迷路メーカー — 風花理珠</p>
+  </footer>
+
+  <script src="maze_maker.js" defer></script>
+</body>
+</html>

@@ -2,7 +2,9 @@ name: Validate public repository
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - chatgpt/bootstrap-public-validation-20260905
   workflow_dispatch:
 
 permissions:

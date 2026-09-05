@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>DQB2 部屋レシピ図鑑</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dqb2.css">
+</head>
+<body>
+
+  <!-- 横罫線テクスチャ -->
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <!-- ヘッダー -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="title-block">
+        <span class="title-badge">DQB2</span>
+        <h1>部屋レシピ図鑑</h1>
+      </div>
+      <p class="subtitle">全 <span id="total-count">0</span> 種類</p>
+    </div>
+  </header>
+
+  <!-- 検索・フィルタ -->
+  <div class="controls" role="search">
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input
+        type="text"
+        id="search"
+        placeholder="部屋名・アイテムで検索…"
+        autocomplete="off"
+        aria-label="部屋を検索"
+      >
+      <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">✕</button>
+    </div>
+    <div class="filter-scroll" role="group" aria-label="カテゴリで絞り込み">
+      <button class="filter-btn active" data-filter="all">すべて</button>
+      <button class="filter-btn" data-filter="寝る">🛏 寝室</button>
+      <button class="filter-btn" data-filter="お風呂">🛁 風呂</button>
+      <button class="filter-btn" data-filter="調理">🍳 調理</button>
+      <button class="filter-btn" data-filter="着替え">👗 着替え</button>
+      <button class="filter-btn" data-filter="個室">🚪 個室</button>
+      <button class="filter-btn" data-filter="バー">🍺 バー</button>
+      <button class="filter-btn" data-filter="トイレ">🚽 トイレ</button>
+      <button class="filter-btn" data-filter="作る">⚒ 製作</button>
+      <button class="filter-btn" data-filter="商人">🛒 商店</button>
+      <button class="filter-btn" data-filter="庭園">🌸 庭園</button>
+      <button class="filter-btn" data-filter="効果なし">🏠 その他</button>
+    </div>
+  </div>
+
+  <!-- カードグリッド -->
+  <main id="main" role="main">
+    <div id="room-grid" class="room-grid" role="list" aria-label="部屋一覧"></div>
+    <div id="empty-state" class="empty-state hidden" role="status" aria-live="polite">
+      <span aria-hidden="true">🔎</span>
+      <p>見つかりませんでした</p>
+    </div>
+  </main>
+
+  <!-- モーダル -->
+  <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+    <div id="modal" class="modal">
+      <button id="modal-close" class="modal-close" aria-label="閉じる">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="dqb2.js"></script>
+</body>
+</html>

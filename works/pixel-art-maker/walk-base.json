@@ -1,0 +1,116 @@
+{
+  "_type": "pixelforge-project",
+  "_version": 2,
+  "width": 32,
+  "height": 32,
+  "palette": [
+    "#2d2d2d",
+    "#f0c040",
+    "#e05a20",
+    "#4a8fc0",
+    "#5ab05a",
+    "#c04a4a",
+    "#a070c0",
+    "#50c8c8",
+    "#f0a080",
+    "#ffffff"
+  ],
+  "mappings": [
+    {
+      "num": 0,
+      "color": null,
+      "label": "透明"
+    },
+    {
+      "num": 1,
+      "color": "#1a1a1a",
+      "label": "黒"
+    },
+    {
+      "num": 2,
+      "color": "#e03030",
+      "label": "赤"
+    },
+    {
+      "num": 3,
+      "color": "#30a030",
+      "label": "緑"
+    },
+    {
+      "num": 4,
+      "color": "#3060e0",
+      "label": "青"
+    },
+    {
+      "num": 5,
+      "color": "#e0c030",
+      "label": "黄"
+    },
+    {
+      "num": 6,
+      "color": "#e07030",
+      "label": "オレンジ"
+    },
+    {
+      "num": 7,
+      "color": "#c030c0",
+      "label": "紫"
+    },
+    {
+      "num": 8,
+      "color": "#30c0c0",
+      "label": "シアン"
+    },
+    {
+      "num": 9,
+      "color": "#ffffff",
+      "label": "白"
+    }
+  ],
+  "frames": [
+    {
+      "name": "F1 右足前",
+      "layers": [
+        {
+          "name": "Layer 1",
+          "visible": true,
+          "opacity": 1,
+          "dataURL": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABdElEQVR4AeyWwW3EQAhFs2nBN/fg/gtxD24j0Yv0V4jAAuNIuWwkNAx8+G+8l3x+/PPfG2DpC+z7/hXFyq85ApDpdV2PKNSfgLQBWC7TzEB9tJnG11sALGS5H87uaJnJ+rbeArADf52XALyEF02NmWG2misBqgV3+2OA7FVZvQIcAWDiPy01wtcrY/VHABqSmYy50+OkRt6NJQBMMCNkRE355CwBMFlZzgyzFUwJUC24228B8BJeJDPuynXaGlp7lyY6WwAMaiHLuUehnrSRxtfaAAxqMUZRWA15J0YAmALxKtB0jKVpA7AYYw1mJxq0Wd/XWwAsZLEf9nd01NAq5/4qWgDbtj13HMfx8+/Ys+ASGQOB1rV/XVsATLGM5ed5PrhnYWEzja23ADAleJUdjnJ0wBLkkcbWWgB2oJNjTHS0twD4SQiMODtfCK2NJQCMrCG5XTrJlwAmBpX2FoBezhchKrOovwyAoSJa3K0tA3QNKt03AAAA//+BX0L4AAAABklEQVQDAHLi9EGsOVIIAAAAAElFTkSuQmCC"
+        }
+      ]
+    },
+    {
+      "name": "F2 棒立ち",
+      "layers": [
+        {
+          "name": "Layer 1",
+          "visible": true,
+          "opacity": 1,
+          "dataURL": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABZ0lEQVR4AdSRXWrEQAyD2x4jd8j9b5S3nGHLVxCYwa7lSaHsghn/yJKc/fr45997GjiO45XFzsccfQGJXtf1mYXmEyO2AcglWgloDrbCrH3LAISQr8tVDZadah77loG48Nd5a4BLuGgqzA673V5roCN4Oh8bqK6q+p3BkQFE1k9Lj1j7nbDmIwNakpiEqZnx0iN3Y8sAIogREqKnfPK2BhDZIWeH3c5Ma6AjeDq3DHAJF0mMWrne2AMba2Gy1zLAogghp85CM2EzzNqzDbAoYoSyiBhyJ0YGEMXEbwHGERbGNgAxwlqsXjBgq/natwxACPG6XNVg2anmsd8agAjCuOTk7LDbYVsDkQDC8zxfsRdzZmBir8tbA7oEYvKOEAxYgrzDtwYggIggdwIs4WAtAw7RLub9DNz3/XMs/3EMmpqRu/HoC/A/E65YhtsywOUrWdZbMVk9NsDFChGq5lXPfccGXGLhuvcbAAD//1XnjZAAAAAGSURBVAMAhn/+QaoZENEAAAAASUVORK5CYII="
+        }
+      ]
+    },
+    {
+      "name": "F3 左足前",
+      "layers": [
+        {
+          "name": "Layer 1",
+          "visible": true,
+          "opacity": 1,
+          "dataURL": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABaklEQVR4AeyRyw3DMAxD266QW3bI/oNkh6zR4h0ICIZlfVKglxYgpMgUSbuvx49//wCtF9j3/T1D598sBZDpdV3PGXReCZIOgLhMPQOdw/U44zwVAEHEx2XvGy473rmdpwLYhW/3YQBuwo2qxuywG+2FASKBu+etAN7NvPkqZDkAJnpeeonTa65ZppYCyARhzAAzQM+8ilIAiWOoHmNgZzrL1DBAV5xA7EYhwgCRwN3zVABuwo1kxrd6VTuDa7/FmdVUABYliDjfM+hM3BlnnKUDsChhjGawHPoMSgEwJcQKcDLG4qQDIIyxFr0KB653Ps5TARBEmGV66gpwMzw0wgDHcbwRhLwS5QwuPLBtGyVEGMAqRKLneT7HIHZ/1ocBEOVmgH4mYme8Fjxg514fBmARMUD/baQCWFNuyDMzowL6LsoBZCRjBaLqrFLbASomK24rALcFCOsl6DtoBZARIQTNqvVWgIxZxPkAAAD///kQQVYAAAAGSURBVAMAIwD0QXXuPgEAAAAASUVORK5CYII="
+        }
+      ]
+    },
+    {
+      "name": "F4 棒立ち",
+      "layers": [
+        {
+          "name": "Layer 1",
+          "visible": true,
+          "opacity": 1,
+          "dataURL": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABZ0lEQVR4AdSRXWrEQAyD2x4jd8j9b5S3nGHLVxCYwa7lSaHsghn/yJKc/fr45997GjiO45XFzsccfQGJXtf1mYXmEyO2AcglWgloDrbCrH3LAISQr8tVDZadah77loG48Nd5a4BLuGgqzA673V5roCN4Oh8bqK6q+p3BkQFE1k9Lj1j7nbDmIwNakpiEqZnx0iN3Y8sAIogREqKnfPK2BhDZIWeH3c5Ma6AjeDq3DHAJF0mMWrne2AMba2Gy1zLAogghp85CM2EzzNqzDbAoYoSyiBhyJ0YGEMXEbwHGERbGNgAxwlqsXjBgq/natwxACPG6XNVg2anmsd8agAjCuOTk7LDbYVsDkQDC8zxfsRdzZmBir8tbA7oEYvKOEAxYgrzDtwYggIggdwIs4WAtAw7RLub9DNz3/XMs/3EMmpqRu/HoC/A/E65YhtsywOUrWdZbMVk9NsDFChGq5lXPfccGXGLhuvcbAAD//1XnjZAAAAAGSURBVAMAhn/+QaoZENEAAAAASUVORK5CYII="
+        }
+      ]
+    }
+  ]
+}

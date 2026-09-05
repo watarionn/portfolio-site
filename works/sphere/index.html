@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>球体設計図 — 風花理珠</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sphere.css">
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header role="banner">
+  <div class="header-center">
+    <h1>球体設計図ジェネレーター</h1>
+    <p class="header-sub">Minecraft / サンドボックスゲーム用　設計図集</p>
+  </div>
+  <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホームへ戻る</a>
+  <!-- グリッド右端の空セル（レイアウト調整用） -->
+  <div aria-hidden="true"></div>
+</header>
+
+<main role="main">
+
+  <!-- コントロールカード -->
+  <div class="controls-card" role="region" aria-label="設計パラメータ">
+
+    <div class="ctrl-row">
+
+      <!-- 一辺の長さ -->
+      <div class="ctrl-group">
+        <label class="ctrl-label" for="size-input">一辺の長さ（マス）</label>
+        <div class="input-row">
+          <button class="stepper" onclick="stepSize(-2)" aria-label="2減らす">－</button>
+          <input
+            type="number"
+            id="size-input"
+            min="3" max="51" value="13" step="2"
+            aria-label="一辺の長さ"
+          >
+          <button class="stepper" onclick="stepSize(2)" aria-label="2増やす">＋</button>
+          <button class="apply-btn" onclick="rebuild()">更新</button>
+        </div>
+        <div class="hint">奇数推奨（偶数入力時は自動補正）</div>
+      </div>
+
+      <!-- 中身 -->
+      <div class="ctrl-group">
+        <span class="ctrl-label" id="hollow-label">中身</span>
+        <div class="toggle-row" role="group" aria-labelledby="hollow-label">
+          <button class="toggle-btn active" id="btn-solid"  onclick="setHollow(false)" aria-pressed="true">中実</button>
+          <button class="toggle-btn"        id="btn-hollow" onclick="setHollow(true)"  aria-pressed="false">空洞</button>
+        </div>
+      </div>
+
+      <!-- セルサイズ -->
+      <div class="ctrl-group cell-size-group">
+        <label class="ctrl-label" for="cell-size">セルサイズ</label>
+        <div class="slider-row">
+          <input
+            type="range"
+            id="cell-size"
+            min="6" max="30" value="18" step="1"
+            aria-label="セルサイズ"
+          >
+          <span id="cell-size-val" aria-live="polite">18px</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 情報バー -->
+    <div class="info-bar" role="status" aria-live="polite">
+      <div class="info-chip">半径 <strong id="info-r">—</strong> マス</div>
+      <div class="info-chip">総ブロック数 <strong id="info-total">—</strong></div>
+      <div class="info-chip">全 <strong id="info-layers">—</strong> 段</div>
+    </div>
+
+  </div>
+
+  <!-- ビューカード -->
+  <div class="view-card" role="region" aria-label="設計図ビュー">
+
+    <!-- ビュータブ -->
+    <div class="view-tabs" role="tablist" aria-label="表示モード">
+      <button class="view-tab active" id="tab-2d" role="tab" aria-selected="true"  aria-controls="view-2d" onclick="switchView('2d')">2D 断面図</button>
+      <button class="view-tab"        id="tab-3d" role="tab" aria-selected="false" aria-controls="view-3d" onclick="switchView('3d')">3D プレビュー</button>
+    </div>
+
+    <!-- 2D VIEW -->
+    <div id="view-2d" role="tabpanel" aria-labelledby="tab-2d">
+
+      <div class="sub-tabs" role="group" aria-label="断面方向">
+        <button class="sub-tab active" id="stab-top"  onclick="setSliceAxis('top')">真上（水平断面）</button>
+        <button class="sub-tab"        id="stab-side" onclick="setSliceAxis('side')">真横（垂直断面）</button>
+      </div>
+
+      <div class="layer-nav" role="group" aria-label="断面ナビゲーション">
+        <button class="nav-btn" id="btn-prev" onclick="changeLayer(-1)" aria-label="前の段へ">◀</button>
+        <div class="layer-label" id="layer-label" aria-live="polite">—</div>
+        <button class="nav-btn" id="btn-next" onclick="changeLayer(1)"  aria-label="次の段へ">▶</button>
+        <div class="block-count" id="block-count" aria-live="polite"></div>
+      </div>
+
+      <div class="grid-wrap">
+        <div class="grid-outer" id="grid" role="img" aria-label="球体断面図"></div>
+      </div>
+
+      <div class="legend" aria-label="凡例">
+        <div class="legend-item"><div class="lb lb-filled" aria-hidden="true"></div>ブロックあり（中実）</div>
+        <div class="legend-item"><div class="lb lb-shell"  aria-hidden="true"></div>外壁ブロック（空洞）</div>
+      </div>
+
+    </div>
+
+    <!-- 3D VIEW -->
+    <div id="view-3d" role="tabpanel" aria-labelledby="tab-3d" style="display:none">
+      <canvas
+        id="canvas-3d"
+        aria-label="球体3Dプレビュー。ドラッグで回転、スクロールでズーム"
+      ></canvas>
+      <p class="canvas-hint">ドラッグで回転　／　スクロール・ピンチでズーム</p>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="sphere.js"></script>
+</body>
+</html>

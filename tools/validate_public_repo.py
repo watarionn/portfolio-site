@@ -21,6 +21,35 @@ FORBIDDEN_PARTS = {
     "operator",
 }
 
+FORBIDDEN_PREFIXES = (
+    "characters/",
+    "apps/yorei/",
+    "apps/aquarium/",
+    "holoca/",
+    "holoscope/",
+    "shisha/",
+    "secret/",
+)
+
+REQUIRED_STAGE1_FILES = {
+    "index.html",
+    "index-style.css",
+    "index-script.js",
+    "profile/index.html",
+    "tools/anagram/index.html",
+    "tools/actress-finder/index.html",
+    "tools/cheatsheet/index.html",
+    "tools/location-csv-checker/index.html",
+    "tools/maze-maker/index.html",
+    "tools/pixel-art-maker/index.html",
+    "tools/word-generator/index.html",
+    "works/dqb2/index.html",
+    "works/formula-stratum-world/index.html",
+    "works/madori/index.html",
+    "works/prime-dot-art/index.html",
+    "works/sphere/index.html",
+}
+
 TEXT_SUFFIXES = {
     ".html",
     ".htm",
@@ -60,7 +89,18 @@ def tracked_paths() -> list[Path]:
 
 
 def main() -> None:
-    for path in tracked_paths():
+    tracked = tracked_paths()
+    tracked_rel = {path.relative_to(ROOT).as_posix() for path in tracked}
+
+    missing = sorted(REQUIRED_STAGE1_FILES - tracked_rel)
+    if missing:
+        fail("missing required Stage 1 files: " + ", ".join(missing))
+
+    for rel_text in sorted(tracked_rel):
+        if rel_text.startswith(FORBIDDEN_PREFIXES):
+            fail(f"deferred/private surface is not allowed in Stage 1: {rel_text}")
+
+    for path in tracked:
         rel = path.relative_to(ROOT)
         parts = set(rel.parts)
 
@@ -85,7 +125,8 @@ def main() -> None:
             if pattern.search(text):
                 fail(f"high-confidence secret-like content detected: {rel}")
 
-    print("Public repository boundary validation passed.")
+    print(f"Public repository boundary validation passed ({len(tracked)} tracked files).")
+    print("Stage 1 required surfaces are present and deferred surfaces are absent.")
 
 
 if __name__ == "__main__":

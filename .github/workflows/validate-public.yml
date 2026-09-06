@@ -24,3 +24,14 @@ jobs:
 
       - name: Validate public boundary
         run: python tools/validate_public_repo.py
+
+      - name: Generate exact SHA-256 inventory
+        run: python tools/write_public_inventory.py
+
+      - name: Upload audit inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-inventory
+          path: public-inventory.json
+          if-no-files-found: error
+          retention-days: 30

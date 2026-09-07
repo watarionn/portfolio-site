@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My用例 — 用例収集</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="plaza.css">
+  <link rel="stylesheet" href="my.css">
+</head>
+<body data-page="my-cards">
+
+  <main role="main">
+    <div class="page-header">
+      <h1 class="page-title">My用例</h1>
+      <span class="page-title-en">My Examples</span>
+    </div>
+
+    <div id="authRequired" class="msg msg--info" hidden>
+      <a href="auth.html" style="color:var(--clr-cobalt)">ログイン</a>すると自分の用例カードを管理できます。
+    </div>
+
+    <div id="searchArea" hidden>
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <input type="search" id="searchInput" class="form-control" placeholder="見出し語・用例で検索…">
+          <button class="btn btn--primary btn--sm" id="searchBtn">検索</button>
+        </div>
+        <select id="visibilityFilter" class="form-control filter-select">
+          <option value="">すべて</option>
+          <option value="public">公開のみ</option>
+          <option value="private">非公開のみ</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="cardsContainer">
+      <div class="loading">読み込み中</div>
+    </div>
+    <div id="pagination" class="pagination"></div>
+  </main>
+
+  <!-- カード詳細モーダル -->
+  <div class="modal-overlay" id="cardModal" hidden aria-modal="true" role="dialog">
+    <div class="modal modal--card">
+      <button class="modal-close" id="cardModalClose" aria-label="閉じる">×</button>
+      <div id="cardModalContent"></div>
+      <div id="cardModalActions" class="card-modal-actions"></div>
+    </div>
+  </div>
+
+  <a href="yorei.html" class="fab-create">＋ 用例を採取する</a>
+  <footer class="site-footer">用例収集 — Corpus Collector</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.115.0/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="nav.js"></script>
+  <script src="card-render.js"></script>
+  <script src="my-cards.js"></script>
+</body>
+</html>

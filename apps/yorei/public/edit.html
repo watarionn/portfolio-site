@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用例カードを編集 — 用例収集</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="yorei.css">
+</head>
+<body data-page="index">
+
+  <main role="main">
+    <div class="page-header">
+      <h1 class="page-title">用例カードを編集する</h1>
+      <a href="my-cards.html" class="btn btn--ghost btn--sm" style="margin-left:auto">← My用例へ戻る</a>
+    </div>
+    <div id="page-msg"></div>
+    <div class="create-layout">
+      <section class="form-section">
+        <div id="form-msg"></div>
+        <form id="cardForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="headword">見出し語 <span class="form-required">（必須）</span></label>
+            <input type="text" id="headword" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="role">役割</label>
+            <input type="text" id="role" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="meaning">意味</label>
+            <textarea id="meaning" class="form-control" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="example">用例 <span class="form-required">（必須）</span></label>
+            <textarea id="example" class="form-control" rows="5" required></textarea>
+          </div>
+          <div class="section-divider"><span class="section-divider-text">出典</span></div>
+          <div class="source-grid">
+            <div class="form-group"><label class="form-label" for="src-title">書籍名・媒体名</label><input type="text" id="src-title" class="form-control"></div>
+            <div class="form-group"><label class="form-label" for="src-author">著者名</label><input type="text" id="src-author" class="form-control"></div>
+            <div class="form-group"><label class="form-label" for="src-year">発行年・号数</label><input type="text" id="src-year" class="form-control"></div>
+            <div class="form-group"><label class="form-label" for="src-page">ページ数</label><input type="text" id="src-page" class="form-control"></div>
+            <div class="form-group"><label class="form-label" for="src-genre">ジャンル</label><input type="text" id="src-genre" class="form-control"></div>
+            <div class="form-group"><label class="form-label" for="src-medium">発行媒体</label>
+              <select id="src-medium" class="form-control">
+                <option value="">（未選択）</option>
+                <option value="書籍">書籍</option><option value="新聞">新聞</option>
+                <option value="雑誌">雑誌</option><option value="ウェブ">ウェブ</option>
+                <option value="SNS">SNS</option><option value="テレビ・ラジオ">テレビ・ラジオ</option>
+                <option value="会話">会話</option><option value="その他">その他</option>
+              </select>
+            </div>
+            <div class="form-group form-group--full"><label class="form-label" for="src-isbn">ISBN</label><input type="text" id="src-isbn" class="form-control"></div>
+          </div>
+          <div class="section-divider"><span class="section-divider-text">採取情報</span></div>
+          <div class="source-grid">
+            <div class="form-group"><label class="form-label" for="collected-at">採取日</label><input type="date" id="collected-at" class="form-control"></div>
+            <div class="form-group"><label class="form-label" for="collector-name">採取者</label><input type="text" id="collector-name" class="form-control"></div>
+          </div>
+          <div class="section-divider"><span class="section-divider-text">公開設定</span></div>
+          <div class="form-group">
+            <div class="toggle-wrap">
+              <label class="toggle"><input type="checkbox" id="is-public" checked><span class="toggle-track"></span></label>
+              <span class="toggle-label" id="public-label">公開</span>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary" id="submitBtn">更新する</button>
+            <a href="my-cards.html" class="btn btn--ghost">キャンセル</a>
+          </div>
+        </form>
+      </section>
+      <aside class="preview-section">
+        <div class="preview-label">プレビュー</div>
+        <div id="previewCard" class="card preview-card">
+          <div class="preview-placeholder"><div class="empty-icon">📋</div><p class="empty-text">プレビュー</p></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">用例収集 — Corpus Collector</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.115.0/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="nav.js"></script>
+  <script src="edit.js"></script>
+</body>
+</html>

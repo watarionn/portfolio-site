@@ -24,7 +24,6 @@ FORBIDDEN_PARTS = {
 FORBIDDEN_PREFIXES = (
     "characters/",
     "apps/yorei/schema/",
-    "apps/aquarium/",
     "holoca/",
     "holoscope/",
     "shisha/",
@@ -33,6 +32,8 @@ FORBIDDEN_PREFIXES = (
 
 YOREI_ROOT = "apps/yorei/"
 YOREI_PUBLIC_ROOT = "apps/yorei/public/"
+AQUARIUM_ROOT = "apps/aquarium/"
+AQUARIUM_PUBLIC_ROOT = "apps/aquarium/public/"
 
 REQUIRED_STAGE1_FILES = {
     "index.html",
@@ -78,6 +79,13 @@ REQUIRED_STAGE2_YOREI_FILES = {
     "apps/yorei/public/yorei.css",
     "apps/yorei/public/yorei.html",
     "apps/yorei/public/yorei.js",
+}
+
+REQUIRED_STAGE3_AQUARIUM_FILES = {
+    "apps/aquarium/public/aquarium.css",
+    "apps/aquarium/public/aquarium.js",
+    "apps/aquarium/public/aquarium.php",
+    "apps/aquarium/public/index.php",
 }
 
 TEXT_SUFFIXES = {
@@ -130,15 +138,34 @@ def main() -> None:
     if missing_yorei:
         fail("missing required Stage 2 YOREI files: " + ", ".join(missing_yorei))
 
+    missing_aquarium = sorted(REQUIRED_STAGE3_AQUARIUM_FILES - tracked_rel)
+    if missing_aquarium:
+        fail("missing required Stage 3 AQUARIUM files: " + ", ".join(missing_aquarium))
+
     for rel_text in sorted(tracked_rel):
         if rel_text.startswith(FORBIDDEN_PREFIXES):
-            fail(f"deferred/private surface is not allowed in Stage 2: {rel_text}")
+            fail(f"deferred/private surface is not allowed in Stage 3: {rel_text}")
 
         if rel_text.startswith(YOREI_ROOT):
             if not rel_text.startswith(YOREI_PUBLIC_ROOT):
                 fail(f"non-public YOREI surface is not allowed: {rel_text}")
             if rel_text not in REQUIRED_STAGE2_YOREI_FILES:
                 fail(f"unreviewed YOREI public file is not allowed: {rel_text}")
+
+        if rel_text.startswith(AQUARIUM_ROOT):
+            if not rel_text.startswith(AQUARIUM_PUBLIC_ROOT):
+                fail(f"non-public AQUARIUM surface is not allowed: {rel_text}")
+            if rel_text not in REQUIRED_STAGE3_AQUARIUM_FILES:
+                fail(f"unreviewed AQUARIUM public file is not allowed: {rel_text}")
+
+    aquarium_php = ROOT / "apps/aquarium/public/aquarium.php"
+    aquarium_index = ROOT / "apps/aquarium/public/index.php"
+    if aquarium_php.read_bytes() != aquarium_index.read_bytes():
+        fail("AQUARIUM index.php must remain byte-identical to aquarium.php")
+
+    aquarium_text = aquarium_php.read_text(encoding="utf-8")
+    if "require_once __DIR__ . '/../../config.php';" not in aquarium_text:
+        fail("AQUARIUM source must preserve the reviewed private config.php dependency")
 
     for path in tracked:
         rel = path.relative_to(ROOT)
@@ -166,7 +193,7 @@ def main() -> None:
                 fail(f"high-confidence secret-like content detected: {rel}")
 
     print(f"Public repository boundary validation passed ({len(tracked)} tracked files).")
-    print("Stage 2 required surfaces are present; YOREI is limited to the reviewed public slice; deferred/private surfaces are absent.")
+    print("Stage 3 required surfaces are present; YOREI and AQUARIUM are limited to their reviewed public slices; deferred/private surfaces are absent.")
 
 
 if __name__ == "__main__":

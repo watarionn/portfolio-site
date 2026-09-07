@@ -1,0 +1,190 @@
+/* =============================================
+   広場ページ共通 / 詳細モーダル — plaza.css
+   ============================================= */
+
+/* ─── 検索バー ─── */
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+  align-items: stretch;
+}
+.search-input-wrap {
+  display: flex;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 0;
+}
+.search-input-wrap .form-control { flex: 1; min-width: 0; }
+.filter-wrap {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+.filter-select {
+  width: auto;
+  min-width: 7rem;
+  font-size: clamp(0.65rem,1.2vw,0.75rem);
+  padding: 0.38rem 0.6rem;
+}
+
+/* ─── カードクリック可 ─── */
+.card--clickable {
+  cursor: pointer;
+}
+.card--clickable:hover {
+  border-left-color: var(--clr-vermilion);
+}
+
+/* ─── 辞書カード ─── */
+.dict-card {
+  background: var(--clr-paper);
+  border: 1px solid var(--clr-rule);
+  border-left: 4px solid var(--clr-gold);
+  padding: clamp(0.85rem,2.5vw,1.25rem) clamp(1rem,3vw,1.5rem);
+  cursor: pointer;
+  transition: border-left-color 0.18s, box-shadow 0.18s;
+}
+.dict-card:hover {
+  border-left-color: var(--clr-vermilion);
+  box-shadow: 2px 2px 0 var(--clr-rule-lt);
+}
+.dict-card-name {
+  font-size: clamp(1rem,2.2vw,1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--clr-ink);
+  margin-bottom: 0.35rem;
+}
+.dict-card-desc {
+  font-size: clamp(0.7rem,1.3vw,0.8rem);
+  color: var(--clr-ink-light);
+  letter-spacing: 0.04em;
+  line-height: 1.8;
+  margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
+}
+.dict-card-meta {
+  font-size: clamp(0.58rem,1vw,0.65rem);
+  color: var(--clr-muted);
+  font-family: var(--font-e);
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+
+/* ─── 詳細モーダル ─── */
+.modal--card { max-width: 42rem; }
+
+.detail-role {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--clr-paper);
+  background: var(--clr-cobalt);
+  padding: 0.08em 0.45em;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.85rem;
+}
+
+.detail-section {
+  margin-bottom: 1rem;
+}
+.detail-label {
+  font-size: clamp(0.58rem,1vw,0.65rem);
+  color: var(--clr-gold);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+.detail-meaning {
+  font-size: clamp(0.75rem,1.4vw,0.85rem);
+  color: var(--clr-ink-mid);
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--clr-rule-lt);
+  overflow-wrap: anywhere;
+}
+.detail-example {
+  font-size: clamp(0.82rem,1.6vw,0.95rem);
+  color: var(--clr-ink-mid);
+  line-height: 2.1;
+  letter-spacing: 0.05em;
+  overflow-wrap: anywhere;
+}
+.detail-example em { font-style: normal; font-weight: 700; color: var(--clr-ink); border-bottom: 1.5px solid var(--clr-vermilion); }
+
+.detail-source {
+  display: grid;
+  grid-template-columns: 6em 1fr;
+  gap: 0.25rem 0.75rem;
+  font-size: clamp(0.65rem,1.2vw,0.75rem);
+}
+.detail-source dt { color: var(--clr-muted); letter-spacing: 0.04em; }
+.detail-source dd { color: var(--clr-ink-mid); overflow-wrap: anywhere; }
+
+.detail-meta {
+  font-size: clamp(0.62rem,1.1vw,0.72rem);
+  color: var(--clr-muted);
+  font-family: var(--font-e);
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+.detail-visibility {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 0.1em 0.45em;
+  border-radius: 2px;
+  border: 1px solid var(--clr-rule);
+  color: var(--clr-muted);
+  letter-spacing: 0.1em;
+}
+
+/* 詳細モーダルのアクションボタン */
+.card-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--clr-rule-lt);
+}
+
+/* ─── 辞書詳細ページ ─── */
+.dict-header {
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--clr-rule-lt);
+}
+.dict-name {
+  font-size: clamp(1.1rem,2.8vw,1.4rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--clr-ink);
+}
+.dict-desc {
+  font-size: clamp(0.75rem,1.4vw,0.85rem);
+  color: var(--clr-ink-light);
+  line-height: 1.9;
+  margin-top: 0.35rem;
+  overflow-wrap: anywhere;
+}
+.dict-meta {
+  font-size: clamp(0.6rem,1.1vw,0.7rem);
+  color: var(--clr-muted);
+  font-family: var(--font-e);
+  font-style: italic;
+  margin-top: 0.35rem;
+  letter-spacing: 0.06em;
+}
+
+/* ─── レスポンシブ ─── */
+@media (max-width: 540px) {
+  .search-bar { flex-direction: column; }
+  .filter-wrap { flex-wrap: wrap; }
+  .filter-select { min-width: 0; flex: 1; }
+  .detail-source { grid-template-columns: 1fr; }
+  .detail-source dt { color: var(--clr-gold); font-size: 0.6rem; margin-top: 0.35rem; }
+}

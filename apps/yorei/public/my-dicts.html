@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My辞書 — 用例収集</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="plaza.css">
+  <link rel="stylesheet" href="my.css">
+</head>
+<body data-page="my-dicts">
+
+  <main role="main">
+    <div class="page-header">
+      <h1 class="page-title">My辞書</h1>
+      <span class="page-title-en">My Dictionaries</span>
+      <button class="btn btn--gold btn--sm" id="createDictBtn" style="margin-left:auto">＋ 新しい辞書を作る</button>
+    </div>
+
+    <div id="authRequired" class="msg msg--info" hidden>
+      <a href="auth.html" style="color:var(--clr-cobalt)">ログイン</a>するとMy辞書を使えます。
+    </div>
+
+    <div id="dictsContainer">
+      <div class="loading">読み込み中</div>
+    </div>
+  </main>
+
+  <!-- 辞書作成・編集モーダル -->
+  <div class="modal-overlay" id="dictFormModal" hidden aria-modal="true" role="dialog">
+    <div class="modal">
+      <button class="modal-close" id="dictFormClose" aria-label="閉じる">×</button>
+      <h2 class="modal-title" id="dictFormTitle">辞書を作る</h2>
+      <div id="dictFormMsg"></div>
+      <form id="dictForm" novalidate>
+        <input type="hidden" id="editingDictId">
+        <div class="form-group">
+          <label class="form-label" for="dictName">辞書の名前 <span class="form-required">（必須）</span></label>
+          <input type="text" id="dictName" class="form-control" required placeholder="例：日常語彙集、ネット用語辞典">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="dictDesc">説明</label>
+          <textarea id="dictDesc" class="form-control" rows="2" placeholder="この辞書のテーマや収録方針など（任意）"></textarea>
+        </div>
+        <div class="form-group">
+          <div class="toggle-wrap">
+            <label class="toggle">
+              <input type="checkbox" id="dictPublic" checked>
+              <span class="toggle-track"></span>
+            </label>
+            <span class="toggle-label" id="dictPublicLabel">公開（辞書広場に表示されます）</span>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" id="dictFormSubmit">作成する</button>
+          <button type="button" class="btn btn--ghost" id="dictFormCancel">キャンセル</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 辞書詳細モーダル -->
+  <div class="modal-overlay" id="dictDetailModal" hidden aria-modal="true" role="dialog">
+    <div class="modal modal--card">
+      <button class="modal-close" id="dictDetailClose" aria-label="閉じる">×</button>
+      <div id="dictDetailHeader"></div>
+      <div id="dictDetailActions" class="card-modal-actions"></div>
+      <div id="dictDetailCards" class="cards-grid" style="margin-top:1rem;"></div>
+    </div>
+  </div>
+
+  <a href="yorei.html" class="fab-create">＋ 用例を採取する</a>
+  <footer class="site-footer">用例収集 — Corpus Collector</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.115.0/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="nav.js"></script>
+  <script src="card-render.js"></script>
+  <script src="my-dicts.js"></script>
+</body>
+</html>

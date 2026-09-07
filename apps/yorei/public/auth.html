@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログイン・登録 — 用例収集</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="auth-page.css">
+</head>
+<body data-page="auth">
+
+  <main role="main">
+    <div class="auth-wrap">
+
+      <div class="auth-header">
+        <h1 class="auth-title">用例収集</h1>
+        <p class="auth-sub">Corpus Collector</p>
+      </div>
+
+      <!-- タブ -->
+      <div class="auth-tabs" role="tablist">
+        <button class="auth-tab active" id="tab-login" role="tab" aria-selected="true">ログイン</button>
+        <button class="auth-tab"        id="tab-signup" role="tab" aria-selected="false">新規登録</button>
+      </div>
+
+      <div id="auth-msg"></div>
+
+      <!-- ログインフォーム -->
+      <form id="loginForm" class="auth-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="login-email">メールアドレス</label>
+          <input type="email" id="login-email" class="form-control" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-pass">パスワード</label>
+          <input type="password" id="login-pass" class="form-control" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn--primary auth-submit">ログイン</button>
+      </form>
+
+      <!-- 新規登録フォーム -->
+      <form id="signupForm" class="auth-form" hidden novalidate>
+        <div class="form-group">
+          <label class="form-label" for="signup-name">
+            採取者名（表示名）
+            <span class="form-required">（必須）</span>
+          </label>
+          <input type="text" id="signup-name" class="form-control" required placeholder="例：言語好き太郎" autocomplete="nickname">
+          <span class="form-hint">用例カードに表示される名前です</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="signup-email">メールアドレス</label>
+          <input type="email" id="signup-email" class="form-control" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="signup-pass">パスワード</label>
+          <input type="password" id="signup-pass" class="form-control" required
+            placeholder="8文字以上" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn--primary auth-submit">登録する</button>
+      </form>
+
+      <div class="auth-footer-link">
+        <a href="yorei.html" class="auth-back">← 用例採取ページへ戻る</a>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.115.0/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="auth-page.js"></script>
+</body>
+</html>

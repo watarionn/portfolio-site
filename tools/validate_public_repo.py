@@ -28,7 +28,6 @@ FORBIDDEN_PREFIXES = (
     "holoscope/",
     "shisha/",
     "secret/",
-    "services/holoscope/",
     "services/shisha/",
     "apps/secret-room/",
 )
@@ -39,6 +38,10 @@ AQUARIUM_ROOT = "apps/aquarium/"
 AQUARIUM_PUBLIC_ROOT = "apps/aquarium/public/"
 HOLOCA_ROOT = "services/holoca/"
 HOLOCA_PUBLIC_ROOT = "services/holoca/public/"
+HOLOSCOPE_ROOT = "services/holoscope/"
+HOLOSCOPE_PUBLIC_ROOT = "services/holoscope/public/"
+EXPECTED_STAGE5_HOLOSCOPE_TREE = "ba9a9051a28382917e87dda6c309c902bd11ea4d"
+EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT = 86
 
 REQUIRED_STAGE1_FILES = {
     "index.html",
@@ -158,6 +161,17 @@ def git_blob_sha(path: Path) -> str:
     return result.stdout.strip()
 
 
+def git_tree_sha(rel_path: str) -> str:
+    result = subprocess.run(
+        ["git", "rev-parse", f"HEAD:{rel_path}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip()
+
+
 def main() -> None:
     tracked = tracked_paths()
     tracked_rel = {path.relative_to(ROOT).as_posix() for path in tracked}
@@ -178,9 +192,16 @@ def main() -> None:
     if missing_holoca:
         fail("missing required Stage 4 HOLOCA files: " + ", ".join(missing_holoca))
 
+    holoscope_files = sorted(rel for rel in tracked_rel if rel.startswith(HOLOSCOPE_PUBLIC_ROOT))
+    if len(holoscope_files) != EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT:
+        fail(
+            "Stage 5 HoloScope public shell file-count mismatch: "
+            f"expected {EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT}, got {len(holoscope_files)}"
+        )
+
     for rel_text in sorted(tracked_rel):
         if rel_text.startswith(FORBIDDEN_PREFIXES):
-            fail(f"deferred/private surface is not allowed in Stage 4: {rel_text}")
+            fail(f"deferred/private surface is not allowed in Stage 5: {rel_text}")
 
         if rel_text.startswith(YOREI_ROOT):
             if not rel_text.startswith(YOREI_PUBLIC_ROOT):
@@ -199,6 +220,17 @@ def main() -> None:
                 fail(f"non-public HOLOCA surface is not allowed: {rel_text}")
             if rel_text not in REQUIRED_STAGE4_HOLOCA_FILES:
                 fail(f"unreviewed HOLOCA public file is not allowed: {rel_text}")
+
+        if rel_text.startswith(HOLOSCOPE_ROOT):
+            if not rel_text.startswith(HOLOSCOPE_PUBLIC_ROOT):
+                fail(f"non-public HoloScope surface is not allowed: {rel_text}")
+
+    actual_holoscope_tree = git_tree_sha("services/holoscope/public")
+    if actual_holoscope_tree != EXPECTED_STAGE5_HOLOSCOPE_TREE:
+        fail(
+            "Stage 5 HoloScope locked-source tree mismatch: "
+            f"expected {EXPECTED_STAGE5_HOLOSCOPE_TREE}, got {actual_holoscope_tree}"
+        )
 
     aquarium_php = ROOT / "apps/aquarium/public/aquarium.php"
     aquarium_index = ROOT / "apps/aquarium/public/index.php"
@@ -267,8 +299,8 @@ def main() -> None:
 
     print(f"Public repository boundary validation passed ({len(tracked)} tracked files).")
     print(
-        "Stage 4 required surfaces are present; YOREI, AQUARIUM, and HOLOCA are limited "
-        "to their reviewed public slices; deferred/private surfaces are absent."
+        "Stage 5 required surfaces are present; YOREI, AQUARIUM, HOLOCA, and the locked "
+        "HoloScope public shell are limited to reviewed public slices; deferred/private surfaces are absent."
     )
 
 

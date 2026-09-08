@@ -1,0 +1,19 @@
+Options -Indexes
+DirectoryIndex index.php
+
+RewriteEngine On
+
+# Internal application resources must never be served directly.
+RewriteRule ^(?:app|data|templates|tests|releases)(?:/|$) - [F,L,NC]
+
+# Existing public assets may be served directly.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# All other requests are handled by the front controller.
+RewriteRule ^ index.php [QSA,L]
+
+<FilesMatch "^(?:\.env|composer\.(?:json|lock)|phpunit\.xml|.*\.(?:sqlite|db|log|bak))$">
+    Require all denied
+</FilesMatch>

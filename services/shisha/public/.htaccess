@@ -1,0 +1,13 @@
+Options -Indexes
+DirectoryIndex index.php
+
+<FilesMatch "^(config\.php|.*\.tsv|.*\.log)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "geolocation=(self)"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

@@ -28,7 +28,6 @@ FORBIDDEN_PREFIXES = (
     "holoscope/",
     "shisha/",
     "secret/",
-    "services/shisha/",
     "apps/secret-room/",
 )
 
@@ -42,6 +41,10 @@ HOLOSCOPE_ROOT = "services/holoscope/"
 HOLOSCOPE_PUBLIC_ROOT = "services/holoscope/public/"
 EXPECTED_STAGE5_HOLOSCOPE_TREE = "ba9a9051a28382917e87dda6c309c902bd11ea4d"
 EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT = 86
+SHISHA_ROOT = "services/shisha/"
+SHISHA_PUBLIC_ROOT = "services/shisha/public/"
+EXPECTED_STAGE6_SHISHA_TREE = "2b4f36d8c4aeee08c384517e05dda952e3b7724f"
+EXPECTED_STAGE6_SHISHA_FILE_COUNT = 9
 
 REQUIRED_STAGE1_FILES = {
     "index.html",
@@ -110,6 +113,30 @@ EXPECTED_STAGE4_HOLOCA_BLOBS = {
     "services/holoca/public/holoca.html": "a1781c59567445e6840f4725ab3ea628484144fc",
     "services/holoca/public/holoca.js": "4679d51361f53eb9525bc6587b44f8176945e730",
     "services/holoca/public/index.html": "a1781c59567445e6840f4725ab3ea628484144fc",
+}
+
+REQUIRED_STAGE6_SHISHA_FILES = {
+    "services/shisha/public/.htaccess",
+    "services/shisha/public/api/facets.php",
+    "services/shisha/public/api/shops.php",
+    "services/shisha/public/api/stations.php",
+    "services/shisha/public/assets/app.css",
+    "services/shisha/public/assets/app.js",
+    "services/shisha/public/config.example.php",
+    "services/shisha/public/includes/bootstrap.php",
+    "services/shisha/public/index.php",
+}
+
+EXPECTED_STAGE6_SHISHA_BLOBS = {
+    "services/shisha/public/.htaccess": "6408a95cff1909367a920ad45d4619aafc102641",
+    "services/shisha/public/api/facets.php": "f44c9653fa0ea444af0063f8798dc18dbde65fe3",
+    "services/shisha/public/api/shops.php": "75a58f0ccd33b1f2a38cae1391c8098391d9a5f0",
+    "services/shisha/public/api/stations.php": "a8b44997cdcf948d3a2c9f53eff7589ec8ca3199",
+    "services/shisha/public/assets/app.css": "61b9bf0eb89486038fb4f021cf3db33cfe4a510e",
+    "services/shisha/public/assets/app.js": "155c1fe2d3d79dae11a6c324ff9010ae587e32c0",
+    "services/shisha/public/config.example.php": "a45bee891e8ea336b414ab415ddf27b22b4faef8",
+    "services/shisha/public/includes/bootstrap.php": "3b2355a4b0f6f3c2a919a0edf42387d6780008d5",
+    "services/shisha/public/index.php": "cc4f960a17f3f6bf6aeed0d82ffe3bcaa3eb6527",
 }
 
 TEXT_SUFFIXES = {
@@ -192,6 +219,10 @@ def main() -> None:
     if missing_holoca:
         fail("missing required Stage 4 HOLOCA files: " + ", ".join(missing_holoca))
 
+    missing_shisha = sorted(REQUIRED_STAGE6_SHISHA_FILES - tracked_rel)
+    if missing_shisha:
+        fail("missing required Stage 6 SHISHA files: " + ", ".join(missing_shisha))
+
     holoscope_files = sorted(rel for rel in tracked_rel if rel.startswith(HOLOSCOPE_PUBLIC_ROOT))
     if len(holoscope_files) != EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT:
         fail(
@@ -225,12 +256,40 @@ def main() -> None:
             if not rel_text.startswith(HOLOSCOPE_PUBLIC_ROOT):
                 fail(f"non-public HoloScope surface is not allowed: {rel_text}")
 
+        if rel_text.startswith(SHISHA_ROOT):
+            if not rel_text.startswith(SHISHA_PUBLIC_ROOT):
+                fail(f"non-public SHISHA surface is not allowed: {rel_text}")
+            if rel_text not in REQUIRED_STAGE6_SHISHA_FILES:
+                fail(f"unreviewed SHISHA public file is not allowed: {rel_text}")
+
     actual_holoscope_tree = git_tree_sha("services/holoscope/public")
     if actual_holoscope_tree != EXPECTED_STAGE5_HOLOSCOPE_TREE:
         fail(
             "Stage 5 HoloScope locked-source tree mismatch: "
             f"expected {EXPECTED_STAGE5_HOLOSCOPE_TREE}, got {actual_holoscope_tree}"
         )
+
+    shisha_files = sorted(rel for rel in tracked_rel if rel.startswith(SHISHA_PUBLIC_ROOT))
+    if len(shisha_files) != EXPECTED_STAGE6_SHISHA_FILE_COUNT:
+        fail(
+            "Stage 6 SHISHA public viewer file-count mismatch: "
+            f"expected {EXPECTED_STAGE6_SHISHA_FILE_COUNT}, got {len(shisha_files)}"
+        )
+
+    actual_shisha_tree = git_tree_sha("services/shisha/public")
+    if actual_shisha_tree != EXPECTED_STAGE6_SHISHA_TREE:
+        fail(
+            "Stage 6 SHISHA locked-source tree mismatch: "
+            f"expected {EXPECTED_STAGE6_SHISHA_TREE}, got {actual_shisha_tree}"
+        )
+
+    for rel_text, expected_sha in sorted(EXPECTED_STAGE6_SHISHA_BLOBS.items()):
+        actual_sha = git_blob_sha(ROOT / rel_text)
+        if actual_sha != expected_sha:
+            fail(
+                f"SHISHA locked-source blob mismatch: {rel_text}: "
+                f"expected {expected_sha}, got {actual_sha}"
+            )
 
     aquarium_php = ROOT / "apps/aquarium/public/aquarium.php"
     aquarium_index = ROOT / "apps/aquarium/public/index.php"
@@ -299,8 +358,8 @@ def main() -> None:
 
     print(f"Public repository boundary validation passed ({len(tracked)} tracked files).")
     print(
-        "Stage 5 required surfaces are present; YOREI, AQUARIUM, HOLOCA, and the locked "
-        "HoloScope public shell are limited to reviewed public slices; deferred/private surfaces are absent."
+        "Stage 6 required surfaces are present; YOREI, AQUARIUM, HOLOCA, HoloScope, and the locked "
+        "SHISHA viewer source are limited to reviewed public slices; deferred/private surfaces are absent."
     )
 
 

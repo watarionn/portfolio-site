@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ホロカ デッキレシピ作成</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="holoca.css">
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header role="banner">
+  <div class="header-title">ホロカ デッキレシピ作成</div>
+  <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホームへ戻る</a>
+</header>
+
+<main role="main">
+
+  <!-- タブ -->
+  <div class="main-tabs" role="tablist" aria-label="機能タブ">
+    <button class="tab-btn active" role="tab" aria-selected="true"  aria-controls="tab-deck"   onclick="switchTab('deck')">デッキレシピ編集</button>
+    <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-search" onclick="switchTab('search')">カード検索</button>
+  </div>
+
+  <!-- ===== TAB: DECK ===== -->
+  <div class="tab-panel active" id="tab-deck" role="tabpanel">
+
+    <!-- 推しホロメン -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">推しホロメン<span class="badge badge-oshi">1枚</span></div>
+        <div class="count-label">合計：<span id="oshi-count" class="count-ok">0</span> / 1</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th class="row-num">#</th>
+            <th class="col-qty">枚数</th>
+            <th class="col-no">カード番号</th>
+            <th class="col-name">カード名</th>
+            <th class="col-type">カードタイプ</th>
+            <th class="col-hp">HP</th>
+            <th class="col-bloom">Bloom</th>
+            <th class="col-tag">タグ</th>
+            <th class="col-text">能力テキスト</th>
+            <th class="col-rar">レアリティ</th>
+            <th class="col-del"></th>
+          </tr></thead>
+          <tbody id="oshi-body"></tbody>
+        </table>
+      </div>
+      <button class="add-row-btn" onclick="addRow('oshi')">＋ カードを追加</button>
+    </div>
+
+    <!-- メインデッキ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">メインデッキレシピ<span class="badge badge-main">50枚</span></div>
+        <div class="count-label">合計：<span id="main-count" class="count-ok">0</span> / 50</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th class="row-num">#</th>
+            <th class="col-qty">枚数</th>
+            <th class="col-no">カード番号</th>
+            <th class="col-name">カード名</th>
+            <th class="col-type">カードタイプ</th>
+            <th class="col-hp">HP</th>
+            <th class="col-bloom">Bloom</th>
+            <th class="col-tag">タグ</th>
+            <th class="col-text">能力テキスト</th>
+            <th class="col-rar">レアリティ</th>
+            <th class="col-del"></th>
+          </tr></thead>
+          <tbody id="main-body"></tbody>
+        </table>
+      </div>
+      <button class="add-row-btn" onclick="addRow('main')">＋ カードを追加</button>
+    </div>
+
+    <!-- エールデッキ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">エールデッキレシピ<span class="badge badge-yell">20枚</span></div>
+        <div class="count-label">合計：<span id="yell-count" class="count-ok">0</span> / 20</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th class="row-num">#</th>
+            <th class="col-qty">枚数</th>
+            <th class="col-no">カード番号</th>
+            <th class="col-name">カード名</th>
+            <th class="col-type">カードタイプ</th>
+            <th class="col-hp">HP</th>
+            <th class="col-bloom">Bloom</th>
+            <th class="col-tag">タグ</th>
+            <th class="col-text">能力テキスト</th>
+            <th class="col-rar">レアリティ</th>
+            <th class="col-del"></th>
+          </tr></thead>
+          <tbody id="yell-body"></tbody>
+        </table>
+      </div>
+      <button class="add-row-btn" onclick="addRow('yell')">＋ カードを追加</button>
+    </div>
+
+    <!-- アクション -->
+    <div class="action-area">
+      <button class="btn btn-save"  onclick="saveDeck()">💾 保存する</button>
+      <button class="btn btn-dl"    onclick="openDlModal()">📥 ダウンロード</button>
+      <button class="btn btn-share" onclick="openShareModal()">🔗 SNSでシェア</button>
+      <button class="btn btn-draw"  onclick="drawHand()">🃏 シャッフル＆7枚ドロー</button>
+    </div>
+
+    <div class="draw-result" id="draw-result" aria-live="polite">
+      <div class="draw-title">🎴 ドロー結果（メインデッキから最初の7枚）</div>
+      <div class="draw-cards" id="draw-cards"></div>
+    </div>
+  </div>
+
+  <!-- ===== TAB: SEARCH ===== -->
+  <div class="tab-panel" id="tab-search" role="tabpanel">
+    <div class="search-panel">
+      <div class="search-panel-header">
+        <h2>カード検索</h2>
+        <span style="font-size:clamp(0.55rem,1vw,0.68rem);color:var(--clr-muted);margin-left:auto;letter-spacing:0.06em">hololive公式カードリストから検索</span>
+      </div>
+
+      <div class="search-grid">
+
+        <div class="form-group">
+          <label class="form-label" for="s-name">カード名で検索</label>
+          <input type="text" id="s-name" class="search-input" placeholder="例：角巻わため、宝鐘マリン">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="s-type">カードタイプで絞り込み</label>
+          <select id="s-type" class="search-select">
+            <option value="">すべて</option>
+            <option>推しホロメン</option><option>ホロメン</option><option>Buzzホロメン</option>
+            <option>サポート・アイテム・LIMITED</option><option>サポート・アイテム</option>
+            <option>サポート・イベント</option><option>サポート・イベント・LIMITED</option>
+            <option>サポート・ツール</option><option>サポート・マスコット</option>
+            <option>サポート・ファン</option><option>サポート・スタッフ・LIMITED</option>
+            <option>エール</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="s-bloom">Bloomレベルで絞り込み</label>
+          <select id="s-bloom" class="search-select">
+            <option value="">すべて</option>
+            <option>Debut</option><option>1st</option><option>2nd</option><option>Spot</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="s-rarity">レアリティで絞り込み</label>
+          <select id="s-rarity" class="search-select">
+            <option value="">すべて</option>
+            <option>C</option><option>HR</option><option>OC</option><option>OSR</option>
+            <option>OUR</option><option>P</option><option>R</option><option>RR</option>
+            <option>S</option><option>SEC</option><option>SR</option><option>SY</option>
+            <option>U</option><option>UR</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="s-exp">収録商品で絞り込み</label>
+          <select id="s-exp" class="search-select">
+            <option value="">すべて</option>
+            <option value="hBP07">ブースターパック「ディーヴァフィーバー」</option>
+            <option value="hSD12">スタートデッキ 推し Advent</option>
+            <option value="hSD13">スタートデッキ 推し Justice</option>
+            <option value="hBP06">ブースターパック「アヤカシヴァーミリオン」</option>
+            <option value="hSD10">スタートデッキ FLOW GLOW 推し 輪堂千速</option>
+            <option value="hSD11">スタートデッキ FLOW GLOW 推し 虎金妃笑虎</option>
+            <option value="hBP05">ブースターパック「エンチャントレガリア」</option>
+            <option value="hSD08">スタートデッキ 白 天音かなた</option>
+            <option value="hSD09">スタートデッキ 赤 宝鐘マリン</option>
+            <option value="hBP04">ブースターパック「キュリアスユニバース」</option>
+            <option value="hBP03">ブースターパック「エリートスパーク」</option>
+            <option value="hSD05">スタートデッキ 赤 百鬼あやめ</option>
+            <option value="hSD06">スタートデッキ 青 猫又おかゆ</option>
+            <option value="hSD07">スタートデッキ 紫 癒月ちょこ</option>
+            <option value="hSD04">スタートデッキ 白 轟はじめ</option>
+            <option value="hSD03">スタートデッキ 緑 風真いろは</option>
+            <option value="hSD02">スタートデッキ 黄 不知火フレア</option>
+            <option value="hBP02">ブースターパック「クインテットスペクトラム」</option>
+            <option value="hYS01">スタートエールセット</option>
+            <option value="hBP01">ブースターパック「ブルーミングレディアンス」</option>
+            <option value="hSD01">スタートデッキ「ときのそら＆AZKi」</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="s-tag">タグで絞り込み</label>
+          <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap">
+            <input type="text" id="s-tag" class="search-input" placeholder="例：#ホロライブ" style="flex:1;min-width:7.5rem">
+            <div class="match-toggle" role="group" aria-label="タグ一致方法">
+              <button id="toggle-partial" class="active" onclick="setTagMatch('partial')">部分一致</button>
+              <button id="toggle-exact"   onclick="setTagMatch('exact')">完全一致</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="s-text">能力テキストからキーワード検索</label>
+          <input type="text" id="s-text" class="search-input" placeholder="例：ドロー、ホロパワー">
+        </div>
+
+        <div class="form-group search-full">
+          <label class="form-label">特定の能力を持つカードを絞り込み（複数選択可）</label>
+          <div class="ability-chips" role="group" aria-label="能力フィルター">
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="サーチ"       onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">サーチ</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="ドロー"       onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">ドロー</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="回復"         onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">回復</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="エール加速"   onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">エール加速</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="ダメージ増加" onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">ダメージ増加</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="妨害・耐性"   onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">妨害・耐性</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="search-btn-row">
+        <button class="btn-search" id="search-btn" onclick="performSearch()">🔍 この条件で検索する</button>
+        <button class="btn-reset"  onclick="resetSearch()">✕ 条件をリセット</button>
+      </div>
+
+      <div class="search-results" id="search-results">
+        <div class="empty-state">
+          <div class="emoji">🌸</div>
+          <div>検索条件を入力して「検索する」を押してください</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- DOWNLOAD MODAL -->
+<div class="modal-overlay" id="dl-modal" role="dialog" aria-modal="true" aria-label="ダウンロード形式を選択">
+  <div class="modal">
+    <h3>📥 ダウンロード形式を選択</h3>
+    <div class="modal-btns">
+      <button class="modal-btn" onclick="downloadCSV()">📊 表形式でダウンロード（CSV）</button>
+      <button class="modal-btn" onclick="downloadImage()">🖼️ 画像形式でダウンロード（PNG）</button>
+    </div>
+    <button class="modal-close" onclick="closeDlModal()">✕ キャンセル</button>
+  </div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="modal-overlay" id="share-modal" role="dialog" aria-modal="true" aria-label="SNSでシェア">
+  <div class="modal">
+    <h3>🔗 SNSでシェア</h3>
+    <div class="sns-btns">
+      <button class="sns-btn sns-x" onclick="shareX()">𝕏 X（Twitter）でシェア</button>
+    </div>
+    <div style="margin:0.6rem 0;font-size:clamp(0.6rem,1.1vw,0.7rem);color:var(--clr-muted);text-align:center;letter-spacing:0.06em">または、テキストをコピーしてシェア</div>
+    <button class="modal-btn" onclick="copyShareText()" style="justify-content:center">📋 テキストをコピー</button>
+    <button class="modal-close" onclick="closeShareModal()">✕ キャンセル</button>
+  </div>
+</div>
+
+<!-- CARD DETAIL MODAL -->
+<div class="modal-overlay" id="card-modal" onclick="if(event.target===this)closeCardModal()" role="dialog" aria-modal="true" aria-labelledby="cm-name">
+  <div class="modal card-modal-inner" style="max-width:32.5rem;width:94%;max-height:90dvh;overflow-y:auto;padding:0">
+
+    <div class="card-modal-header">
+      <div>
+        <div class="card-modal-name" id="cm-name"></div>
+        <div class="card-modal-no"   id="cm-no"></div>
+      </div>
+      <button onclick="closeCardModal()" style="background:none;border:none;cursor:pointer;font-size:1rem;color:var(--clr-muted);line-height:1;padding:0.2rem" aria-label="閉じる">✕</button>
+    </div>
+
+    <div class="card-modal-body">
+      <div class="card-modal-img-wrap">
+        <img id="cm-img" src="" alt="" style="width:100%;height:auto;border-radius:4px;display:block" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="card-modal-info">
+        <div class="cm-row"><span class="cm-lbl">タイプ</span>    <span id="cm-type"   class="mini-badge mb-type"></span></div>
+        <div class="cm-row"><span class="cm-lbl">レアリティ</span><span id="cm-rarity" class="mini-badge mb-rarity"></span></div>
+        <div class="cm-row cm-bloom"  id="cm-bloom-row"><span class="cm-lbl">Bloom</span><span id="cm-bloom" class="mini-badge mb-bloom"></span></div>
+        <div class="cm-row cm-hp"     id="cm-hp-row">   <span class="cm-lbl">HP</span>   <span id="cm-hp"    style="font-weight:700;font-size:clamp(0.72rem,1.3vw,0.85rem)"></span></div>
+        <div class="cm-row cm-life"   id="cm-life-row"> <span class="cm-lbl">LIFE</span> <span id="cm-life"  style="font-weight:700;font-size:clamp(0.72rem,1.3vw,0.85rem)"></span></div>
+        <div class="cm-row"><span class="cm-lbl">収録</span>      <span id="cm-exp"    style="font-size:clamp(0.58rem,1vw,0.68rem);color:var(--clr-muted)"></span></div>
+        <div class="cm-row" id="cm-ill-row"><span class="cm-lbl">イラスト</span><span id="cm-ill" style="font-size:clamp(0.58rem,1vw,0.68rem);color:var(--clr-muted)"></span></div>
+      </div>
+    </div>
+
+    <div class="card-modal-tags" id="cm-tags"></div>
+
+    <div class="card-modal-text-wrap" id="cm-text-wrap">
+      <div class="cm-section-label">〔能力テキスト〕</div>
+      <div class="card-modal-text" id="cm-text"></div>
+    </div>
+
+    <div class="card-modal-footer">
+      <div class="cm-section-label" style="margin-bottom:0.5rem">デッキレシピに追加する</div>
+      <div style="display:flex;gap:0.45rem;flex-wrap:wrap">
+        <button id="cm-btn-oshi" class="add-to-deck-btn add-to-oshi" style="flex:1;padding:0.55rem 0.5rem" onclick="addFromModalCard('oshi')">⭐ 推しホロメン</button>
+        <button id="cm-btn-main" class="add-to-deck-btn add-to-main" style="flex:1;padding:0.55rem 0.5rem" onclick="addFromModalCard('main')">🌟 メインデッキ</button>
+        <button id="cm-btn-yell" class="add-to-deck-btn add-to-yell" style="flex:1;padding:0.55rem 0.5rem" onclick="addFromModalCard('yell')">💛 エールデッキ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="holoca.js"></script>
+</body>
+</html>

@@ -28,12 +28,17 @@ FORBIDDEN_PREFIXES = (
     "holoscope/",
     "shisha/",
     "secret/",
+    "services/holoscope/",
+    "services/shisha/",
+    "apps/secret-room/",
 )
 
 YOREI_ROOT = "apps/yorei/"
 YOREI_PUBLIC_ROOT = "apps/yorei/public/"
 AQUARIUM_ROOT = "apps/aquarium/"
 AQUARIUM_PUBLIC_ROOT = "apps/aquarium/public/"
+HOLOCA_ROOT = "services/holoca/"
+HOLOCA_PUBLIC_ROOT = "services/holoca/public/"
 
 REQUIRED_STAGE1_FILES = {
     "index.html",
@@ -88,6 +93,22 @@ REQUIRED_STAGE3_AQUARIUM_FILES = {
     "apps/aquarium/public/index.php",
 }
 
+REQUIRED_STAGE4_HOLOCA_FILES = {
+    "services/holoca/public/card_search_api.php",
+    "services/holoca/public/holoca.css",
+    "services/holoca/public/holoca.html",
+    "services/holoca/public/holoca.js",
+    "services/holoca/public/index.html",
+}
+
+EXPECTED_STAGE4_HOLOCA_BLOBS = {
+    "services/holoca/public/card_search_api.php": "67ec6d3b666e5bda63471f594a0960bb733ac01a",
+    "services/holoca/public/holoca.css": "bd62c0d8f94920c00378bee17a71750c940e1907",
+    "services/holoca/public/holoca.html": "a1781c59567445e6840f4725ab3ea628484144fc",
+    "services/holoca/public/holoca.js": "4679d51361f53eb9525bc6587b44f8176945e730",
+    "services/holoca/public/index.html": "a1781c59567445e6840f4725ab3ea628484144fc",
+}
+
 TEXT_SUFFIXES = {
     ".html",
     ".htm",
@@ -126,6 +147,17 @@ def tracked_paths() -> list[Path]:
     return [ROOT / item.decode("utf-8") for item in result.stdout.split(b"\0") if item]
 
 
+def git_blob_sha(path: Path) -> str:
+    result = subprocess.run(
+        ["git", "hash-object", path.relative_to(ROOT).as_posix()],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip()
+
+
 def main() -> None:
     tracked = tracked_paths()
     tracked_rel = {path.relative_to(ROOT).as_posix() for path in tracked}
@@ -142,9 +174,13 @@ def main() -> None:
     if missing_aquarium:
         fail("missing required Stage 3 AQUARIUM files: " + ", ".join(missing_aquarium))
 
+    missing_holoca = sorted(REQUIRED_STAGE4_HOLOCA_FILES - tracked_rel)
+    if missing_holoca:
+        fail("missing required Stage 4 HOLOCA files: " + ", ".join(missing_holoca))
+
     for rel_text in sorted(tracked_rel):
         if rel_text.startswith(FORBIDDEN_PREFIXES):
-            fail(f"deferred/private surface is not allowed in Stage 3: {rel_text}")
+            fail(f"deferred/private surface is not allowed in Stage 4: {rel_text}")
 
         if rel_text.startswith(YOREI_ROOT):
             if not rel_text.startswith(YOREI_PUBLIC_ROOT):
@@ -158,6 +194,12 @@ def main() -> None:
             if rel_text not in REQUIRED_STAGE3_AQUARIUM_FILES:
                 fail(f"unreviewed AQUARIUM public file is not allowed: {rel_text}")
 
+        if rel_text.startswith(HOLOCA_ROOT):
+            if not rel_text.startswith(HOLOCA_PUBLIC_ROOT):
+                fail(f"non-public HOLOCA surface is not allowed: {rel_text}")
+            if rel_text not in REQUIRED_STAGE4_HOLOCA_FILES:
+                fail(f"unreviewed HOLOCA public file is not allowed: {rel_text}")
+
     aquarium_php = ROOT / "apps/aquarium/public/aquarium.php"
     aquarium_index = ROOT / "apps/aquarium/public/index.php"
     if aquarium_php.read_bytes() != aquarium_index.read_bytes():
@@ -166,6 +208,37 @@ def main() -> None:
     aquarium_text = aquarium_php.read_text(encoding="utf-8")
     if "require_once __DIR__ . '/../../config.php';" not in aquarium_text:
         fail("AQUARIUM source must preserve the reviewed private config.php dependency")
+
+    holoca_html = ROOT / "services/holoca/public/holoca.html"
+    holoca_index = ROOT / "services/holoca/public/index.html"
+    if holoca_html.read_bytes() != holoca_index.read_bytes():
+        fail("HOLOCA index.html must remain byte-identical to holoca.html")
+
+    for rel_text, expected_sha in sorted(EXPECTED_STAGE4_HOLOCA_BLOBS.items()):
+        actual_sha = git_blob_sha(ROOT / rel_text)
+        if actual_sha != expected_sha:
+            fail(
+                f"HOLOCA locked-source blob mismatch: {rel_text}: "
+                f"expected {expected_sha}, got {actual_sha}"
+            )
+
+    holoca_api = (ROOT / "services/holoca/public/card_search_api.php").read_text(encoding="utf-8")
+    required_api_literals = (
+        "$configPath = __DIR__ . '/../config.php';",
+        "if (!is_file($configPath))",
+        "respond_service_error(503);",
+        "'error' => '検索サービスは現在利用できません。',",
+        "error_log('HOLOCA card search failed: '",
+    )
+    for literal in required_api_literals:
+        if literal not in holoca_api:
+            fail(f"HOLOCA hardened API contract missing: {literal}")
+
+    holoca_js = (ROOT / "services/holoca/public/holoca.js").read_text(encoding="utf-8")
+    if "data-card-index" not in holoca_js or "bindSearchResultActions" not in holoca_js:
+        fail("HOLOCA search-result event binding hardening is missing")
+    if "const cardJson" in holoca_js or "addFromSearch('${cardJson}'" in holoca_js:
+        fail("HOLOCA must not embed serialized card JSON in inline event handlers")
 
     for path in tracked:
         rel = path.relative_to(ROOT)
@@ -193,7 +266,10 @@ def main() -> None:
                 fail(f"high-confidence secret-like content detected: {rel}")
 
     print(f"Public repository boundary validation passed ({len(tracked)} tracked files).")
-    print("Stage 3 required surfaces are present; YOREI and AQUARIUM are limited to their reviewed public slices; deferred/private surfaces are absent.")
+    print(
+        "Stage 4 required surfaces are present; YOREI, AQUARIUM, and HOLOCA are limited "
+        "to their reviewed public slices; deferred/private surfaces are absent."
+    )
 
 
 if __name__ == "__main__":

@@ -28,7 +28,6 @@ FORBIDDEN_PREFIXES = (
     "holoscope/",
     "shisha/",
     "secret/",
-    "apps/secret-room/",
 )
 
 YOREI_ROOT = "apps/yorei/"
@@ -45,6 +44,10 @@ SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
 EXPECTED_STAGE6_SHISHA_TREE = "2b4f36d8c4aeee08c384517e05dda952e3b7724f"
 EXPECTED_STAGE6_SHISHA_FILE_COUNT = 9
+SECRET_ROOM_ROOT = "apps/secret-room/"
+SECRET_ROOM_PUBLIC_ROOT = "apps/secret-room/public/"
+EXPECTED_STAGE7_SECRET_TREE = "c778ee30cac4737b1a4dcf0aec65241ece41ea20"
+EXPECTED_STAGE7_SECRET_FILE_COUNT = 7
 
 REQUIRED_STAGE1_FILES = {
     "index.html",
@@ -139,6 +142,26 @@ EXPECTED_STAGE6_SHISHA_BLOBS = {
     "services/shisha/public/index.php": "cc4f960a17f3f6bf6aeed0d82ffe3bcaa3eb6527",
 }
 
+REQUIRED_STAGE7_SECRET_FILES = {
+    "apps/secret-room/public/Hamigaki.png",
+    "apps/secret-room/public/Kusarigama.png",
+    "apps/secret-room/public/check.php",
+    "apps/secret-room/public/index.html",
+    "apps/secret-room/public/secret-effects.js",
+    "apps/secret-room/public/secret.css",
+    "apps/secret-room/public/secret.js",
+}
+
+EXPECTED_STAGE7_SECRET_BLOBS = {
+    "apps/secret-room/public/Hamigaki.png": "646a28d3c35c8c51ae397d06c7dc03e6a87fcf33",
+    "apps/secret-room/public/Kusarigama.png": "97e294dc4306b0da6bf26bfd906c3717350d9002",
+    "apps/secret-room/public/check.php": "b37fff8c8e5793cd2b2b896527b5d9d44734de8d",
+    "apps/secret-room/public/index.html": "432dcbcbde133db2c8d602f8df7b34af85e29c51",
+    "apps/secret-room/public/secret-effects.js": "4810f9ecbdd1704ed3764272756c2ef6d2dcee75",
+    "apps/secret-room/public/secret.css": "957e37f1926f8828c2c7bcaaa15beed7fac6a1eb",
+    "apps/secret-room/public/secret.js": "99be18f8e3f2ef85b2066e6deab853e039d37f15",
+}
+
 TEXT_SUFFIXES = {
     ".html",
     ".htm",
@@ -223,6 +246,10 @@ def main() -> None:
     if missing_shisha:
         fail("missing required Stage 6 SHISHA files: " + ", ".join(missing_shisha))
 
+    missing_secret = sorted(REQUIRED_STAGE7_SECRET_FILES - tracked_rel)
+    if missing_secret:
+        fail("missing required Stage 7 SECRET files: " + ", ".join(missing_secret))
+
     holoscope_files = sorted(rel for rel in tracked_rel if rel.startswith(HOLOSCOPE_PUBLIC_ROOT))
     if len(holoscope_files) != EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT:
         fail(
@@ -262,6 +289,12 @@ def main() -> None:
             if rel_text not in REQUIRED_STAGE6_SHISHA_FILES:
                 fail(f"unreviewed SHISHA public file is not allowed: {rel_text}")
 
+        if rel_text.startswith(SECRET_ROOM_ROOT):
+            if not rel_text.startswith(SECRET_ROOM_PUBLIC_ROOT):
+                fail(f"non-public SECRET surface is not allowed: {rel_text}")
+            if rel_text not in REQUIRED_STAGE7_SECRET_FILES:
+                fail(f"unreviewed SECRET public file is not allowed: {rel_text}")
+
     actual_holoscope_tree = git_tree_sha("services/holoscope/public")
     if actual_holoscope_tree != EXPECTED_STAGE5_HOLOSCOPE_TREE:
         fail(
@@ -288,6 +321,28 @@ def main() -> None:
         if actual_sha != expected_sha:
             fail(
                 f"SHISHA locked-source blob mismatch: {rel_text}: "
+                f"expected {expected_sha}, got {actual_sha}"
+            )
+
+    secret_files = sorted(rel for rel in tracked_rel if rel.startswith(SECRET_ROOM_PUBLIC_ROOT))
+    if len(secret_files) != EXPECTED_STAGE7_SECRET_FILE_COUNT:
+        fail(
+            "Stage 7 SECRET public entrance file-count mismatch: "
+            f"expected {EXPECTED_STAGE7_SECRET_FILE_COUNT}, got {len(secret_files)}"
+        )
+
+    actual_secret_tree = git_tree_sha("apps/secret-room/public")
+    if actual_secret_tree != EXPECTED_STAGE7_SECRET_TREE:
+        fail(
+            "Stage 7 SECRET locked-source tree mismatch: "
+            f"expected {EXPECTED_STAGE7_SECRET_TREE}, got {actual_secret_tree}"
+        )
+
+    for rel_text, expected_sha in sorted(EXPECTED_STAGE7_SECRET_BLOBS.items()):
+        actual_sha = git_blob_sha(ROOT / rel_text)
+        if actual_sha != expected_sha:
+            fail(
+                f"SECRET locked-source blob mismatch: {rel_text}: "
                 f"expected {expected_sha}, got {actual_sha}"
             )
 
@@ -358,8 +413,8 @@ def main() -> None:
 
     print(f"Public repository boundary validation passed ({len(tracked)} tracked files).")
     print(
-        "Stage 6 required surfaces are present; YOREI, AQUARIUM, HOLOCA, HoloScope, and the locked "
-        "SHISHA viewer source are limited to reviewed public slices; deferred/private surfaces are absent."
+        "Stage 7 required surfaces are present; YOREI, AQUARIUM, HOLOCA, HoloScope, SHISHA, and the locked "
+        "SECRET entrance source are limited to reviewed public slices; protected/private surfaces are absent."
     )
 
 

@@ -2,9 +2,9 @@
 
 This repository is a clean public portfolio export from the private production source repository.
 
-## Stage 6 scope
+## Stage 7 scope
 
-Stage 6 retains the reviewed Stage 1 portfolio shell, profile, static tools, and static works, the Stage 2 browser-only YOREI client under `apps/yorei/public/**`, the Stage 3 AQUARIUM source slice under `apps/aquarium/public/**`, the Stage 4 HOLOCA source slice under `services/holoca/public/**`, and the Stage 5 HoloScope public application shell under `services/holoscope/public/**`. Stage 6 adds only the separately hardened and re-audited SHISHA viewer source under `services/shisha/public/**`.
+Stage 7 retains the reviewed Stage 1 portfolio shell, profile, static tools, and static works, the Stage 2 browser-only YOREI client under `apps/yorei/public/**`, the Stage 3 AQUARIUM source slice under `apps/aquarium/public/**`, the Stage 4 HOLOCA source slice under `services/holoca/public/**`, the Stage 5 HoloScope public application shell under `services/holoscope/public/**`, and the Stage 6 SHISHA viewer source under `services/shisha/public/**`. Stage 7 adds only the separately hardened and re-audited SECRET entrance source under `apps/secret-room/public/**`.
 
 The HoloScope addition is locked as an exact 86-file Git tree with tree SHA `ba9a9051a28382917e87dda6c309c902bd11ea4d`, sourced from the private Stage 5 allowlist revision `e856e990ea31140cb46df225b7ac01e7a469a7c3` and source-lock merge `3cc31a7292456a953d94673fcb6d60d75d9f9e8e`. The public repository validator requires that exact subtree and rejects any additional file under `services/holoscope/` outside `services/holoscope/public/**`.
 
@@ -13,6 +13,10 @@ HoloScope is published here as shell/source display only. Its private release ov
 SHISHA is published here as viewer-source display only. The exact approved subtree is the nine-file Git tree `2b4f36d8c4aeee08c384517e05dda952e3b7724f`, locked from private allowlist merge revision `2640a7a292aaf0eb8396ae4b2312624ed9cb9d7e` and private source-lock merge `2ad649697dd44e8f46092df83e62c530671ca741`. The public validator requires this exact tree and exact Git blob identities.
 
 The SHISHA public viewer intentionally omits private bootstrap shop data and mutable runtime state, so this repository is not expected to provide a populated or production-equivalent standalone SHISHA runtime. `services/shisha/operator/**`, `services/shisha/bootstrap-data/**`, `services/shisha/public/var/**`, real `services/shisha/public/config.php`, production `public_html/SHISHA/**`, operator credentials, and SHISHA deploy/install/update workflows must remain private. Publication of the viewer source does not deploy or cut over production SHISHA.
+
+The SECRET entrance is published here as source display only. The exact approved subtree is the seven-file Git tree `c778ee30cac4737b1a4dcf0aec65241ece41ea20`, sourced from private allowlist merge revision `70e82cdb34b8435c3841fc233c676aca61c70bb7` and private source-lock merge `709fa957261cfdeba0f1e3b860549dd537011d32`. The public validator requires this exact tree and exact Git blob identities.
+
+The post-unlock room, private gate implementation, real answer configuration, production `public_html/SECRET/**`, credentials, runtime/server state, deployment/cutover material, and private Git history remain private. The public `check.php` is intentionally a thin front controller and fails closed when the private gate is absent, so this repository does not claim a working standalone unlock flow or production-equivalent SECRET runtime.
 
 YOREI's public client uses browser-side Supabase configuration by design. Database schema and policies, service-role credentials, production deployment configuration, operator workflows, mutable runtime state, private notes, and private Git history remain outside this repository. The production authorization boundary remains the live Supabase Row Level Security configuration reviewed separately before the Stage 2 import.
 
@@ -32,7 +36,7 @@ The reviewed HOLOCA source also keeps runtime/database exception details in serv
 
 Publication of HOLOCA source does not repair or deploy the currently separate production HOLOCA runtime. Production restoration remains a private deployment/server task and requires its own authorization.
 
-Characters are intentionally excluded from this public portfolio export. SECRET remains deferred until it receives a separate public-export review.
+Characters are intentionally excluded from this public portfolio export.
 
 The Stage 2 YOREI slice was imported from the reviewed private source revision `5b2ac7e4e5b9f60b6d8e91d3ec6e43552cad9342` without carrying private repository history.
 
@@ -43,6 +47,8 @@ The Stage 4 HOLOCA slice was imported from the locked private source revision `f
 The Stage 5 HoloScope shell is clean-imported from the locked private source tree described above without carrying private repository history or release/runtime material.
 
 The Stage 6 SHISHA viewer is clean-imported from the exact locked nine-file private source tree described above without carrying private repository history, bootstrap data, operator source, runtime state, credentials, production files, or maintenance workflows.
+
+The Stage 7 SECRET entrance is clean-imported from the exact locked seven-file private source tree described above without carrying the protected room, private gate implementation, answer configuration, production files, runtime/server state, credentials, deployment material, or private repository history.
 
 ## License
 

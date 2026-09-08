@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>秘密の部屋 — 入口</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="secret.css">
+</head>
+<body>
+  <div class="paper-lines" aria-hidden="true"></div>
+  <!-- 開発者ツールヒント：このページに隠された言葉を全て集めると、ある言葉が浮かび上がる -->
+  <div class="float-words" aria-hidden="true" id="floatWords">
+    <span class="fw fw-1">Ti Amo</span>
+    <span class="fw fw-2">Fly Away</span>
+    <span class="fw fw-3">HERO</span>
+    <span class="fw fw-4">Everything</span>
+    <span class="fw fw-5">道</span>
+    <span class="fw fw-6">real world</span>
+    <span class="fw fw-7">HEART of GOLD</span>
+    <span class="fw fw-8">EXIT</span>
+    <span class="fw fw-9">THE NEXT DOOR</span>
+    <span class="fw fw-10">Someday</span>
+    <span class="fw fw-11">FIREWORKS</span>
+    <span class="fw fw-12">ふたつの唇</span>
+  </div>
+
+  <header class="secret-header" role="banner">
+    <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホーム</a>
+    <div class="header-center">
+      <p class="header-label">限定公開</p>
+      <h1><ruby><rb>秘密の部屋</rb><rt>ひみつのへや</rt></ruby></h1>
+      <p class="header-sub">入室には鍵が必要です</p>
+    </div>
+    <div aria-hidden="true"></div>
+  </header>
+
+  <main role="main">
+
+    <div class="door-deco" aria-hidden="true">
+      <div class="door-frame">
+        <div class="door-inner">
+          <div class="door-keyhole">&#9670;</div>
+        </div>
+      </div>
+      <p class="door-caption">この先に何があるのか——</p>
+    </div>
+
+    <section class="hints-section" aria-labelledby="hints-heading">
+      <div class="section-divider">
+        <span class="divider-text" id="hints-heading">鍵　の　カ　ケ　ラ</span>
+      </div>
+
+      <!-- 壱 -->
+      <div class="hint-block hint-block--plain" id="hint1">
+        <div class="hint-label"><span class="hint-num">紙片 壱</span></div>
+        <div class="hint-body">
+          <p class="hint-text">誰の何が浮かんでいるか。</p>
+          <p class="hint-note">○○○○○の○○</p>
+          <!-- 水槽アニメーション -->
+          <div class="aquarium-wrap" aria-hidden="true">
+            <canvas id="aquarium-canvas" class="aquarium-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- 弐：墨消し -->
+      <div class="hint-block" id="hint2">
+        <div class="hint-label">
+          <span class="hint-num">紙片 弐</span>
+          <span class="hint-tag">■■■■</span>
+        </div>
+        <div class="hint-body">
+          <p class="censored-text">
+            私が通っていた高校は六甲アイ<mark class="ink-blot">ラ</mark>ンドという人工島にあります。<br>
+            服装は上は自由、下は指定という変わった制度で、<br>
+            自分で授業の構成を決められる単位制の公立高校でした。<br>
+            中学、高校は吹奏楽部でユー<mark class="ink-blot">フ</mark>ォニアムとトロンボーンとホルンを経験しました。<br>
+            高校の途中からコ<mark class="ink-blot">ン</mark>ピューター部に転部し、部長を務めました。<br>
+            VisualBasicで作った脱出ゲームが私の最初の制作物です。<br>
+            放課後はミ<mark class="ink-blot">ス</mark>タードーナツでお喋りしたりウィンドウショッピングしたり、カラオケに行ったりバイトしたりするのが私の日常でした。
+          </p>
+        </div>
+      </div>
+
+      <!-- 参：アナグラム -->
+      <div class="hint-block" id="hint3">
+        <div class="hint-label">
+          <span class="hint-num">紙片 参</span>
+          <span class="hint-tag">アナグラム</span>
+        </div>
+        <div class="hint-body">
+          <p class="hint-text">これは誰のことだろうか。<br>Hell Shocks more</p>
+        </div>
+      </div>
+
+      <!-- 四：ドット絵 -->
+      <div class="hint-block" id="hint4">
+        <div class="hint-label">
+          <span class="hint-num">紙片 四</span>
+          <span class="hint-tag">隠された文字</span>
+        </div>
+        <div class="hint-body">
+          <p class="hint-text">これは何？</p>
+          <p class="hint-note">↓ 全部で63文字だ。9×7=63だ。</p>
+          <p class="hint-dot-art">■■■■■■■■■■■■■宝■■■■■■■■宝■■■■■宝■■宝■■宝■■宝■■宝■■宝■■宝宝宝宝宝宝宝■■■■■■■■■■</p>
+        </div>
+      </div>
+
+      <!-- 五：一枚謎SVG -->
+      <div class="hint-block hint-block--puzzle" id="hint5">
+        <div class="hint-label">
+          <span class="hint-num">紙片 五</span>
+          <span class="hint-tag">一枚謎</span>
+        </div>
+        <div class="hint-body">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 390"
+               class="hint-svg" font-family="'Shippori Mincho','Noto Serif JP','Yu Mincho',serif"
+               aria-label="一枚謎パズル">
+            <rect width="600" height="390" fill="#f0e8cc" rx="2"/>
+            <polygon points="294,5 316,5 316,32 327,32 305,57 283,32 294,32" fill="#c0392b"/>
+            <polygon points="212,81 252,81 252,70 270,92 252,114 252,103 212,103" fill="#4a4a4a"/>
+            <text x="206" y="92" font-size="15" fill="#3a2c18" letter-spacing="1.5" text-anchor="end" dominant-baseline="middle">数独ともいう</text>
+            <rect x="270" y="57"  width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="340" y="57"  width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="410" y="57"  width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="480" y="57"  width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <polygon points="212,156 252,156 252,145 270,167 252,189 252,178 212,178" fill="#4a4a4a"/>
+            <text x="206" y="167" font-size="15" fill="#3a2c18" letter-spacing="1.5" text-anchor="end" dominant-baseline="middle">666とか777とか</text>
+            <rect x="270" y="132" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="340" y="132" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="410" y="132" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="130" y="207" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="200" y="207" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="270" y="207" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="340" y="207" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <polygon points="468,231 428,231 428,220 410,242 428,264 428,253 468,253" fill="#4a4a4a"/>
+            <text x="474" y="233" font-size="14" fill="#3a2c18" letter-spacing="1">英国紳士、</text>
+            <text x="474" y="250" font-size="14" fill="#3a2c18" letter-spacing="1">教授、</text>
+            <text x="474" y="267" font-size="14" fill="#3a2c18" letter-spacing="1">大泉洋</text>
+            <rect x="60"  y="282" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="130" y="282" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="200" y="282" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <rect x="270" y="282" width="70" height="70" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <polygon points="398,306 358,306 358,295 340,317 358,339 358,328 398,328" fill="#4a4a4a"/>
+            <text x="404" y="317" font-size="15" fill="#3a2c18" letter-spacing="1.5" dominant-baseline="middle">頭上に💡</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 六：辞書の定義 -->
+      <div class="hint-block" id="hint6">
+        <div class="hint-label">
+          <span class="hint-num">紙片 六</span>
+          <span class="hint-tag">デジタル大辞泉</span>
+        </div>
+        <div class="hint-body">
+          <p class="hint-text">ABC = ?</p>
+          <div class="hidden-text-area">
+            <div class="hidden-reveal" id="hiddenReveal1" role="button" tabindex="0" aria-label="クリックで隠し文字を表示">
+              AB = <span class="hidden-char">［名］(スル)問いに対して答えること。また、その答え。返事。「—に窮する」「手紙で—する」</span>
+            </div>
+            <div class="hidden-reveal" id="hiddenReveal2" role="button" tabindex="0" aria-label="クリックで隠し文字を表示">
+              AC = <span class="hidden-char">［名］(スル)時の流れとともに移り変わること。「歌もまた時代につれて—する」</span>
+            </div>
+            <div class="hidden-reveal" id="hiddenReveal3" role="button" tabindex="0" aria-label="クリックで隠し文字を表示">
+              BC = <span class="hidden-char">［名］(スル)選挙によって選び出されること。「市会議員に—する」</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 七：なにかなに -->
+      <div class="hint-block" id="hint7">
+        <div class="hint-label">
+          <span class="hint-num">紙片 七</span>
+          <span class="hint-tag">なにかなに</span>
+        </div>
+        <div class="hint-body">
+          <p class="hint-text">
+            それぞれの？には同じ文字が入る。<br>
+            一文字のひらがなをいれると単語になる。<br>
+            別の二文字のひらがなを入れるとまた別の単語になる。<br>
+            何か何が入りそうだろう？
+          </p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 490"
+               class="hint-svg hint-svg--narrow" font-family="'Shippori Mincho','Noto Serif JP','Yu Mincho',serif"
+               aria-label="穴埋め謎問題">
+            <rect width="300" height="490" fill="#f0e8cc" rx="2"/>
+            <text x="60" y="70"  font-size="32" fill="#1a120a">ふ</text>
+            <rect x="96"  y="44"  width="54" height="26" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <text x="123" y="57"  font-size="22" fill="#4a1030" text-anchor="middle" dominant-baseline="middle">？</text>
+            <text x="60" y="126" font-size="32" fill="#1a120a">じ</text>
+            <rect x="96"  y="100" width="54" height="26" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <text x="123" y="113" font-size="22" fill="#4a1030" text-anchor="middle" dominant-baseline="middle">？</text>
+            <text x="60" y="182" font-size="32" fill="#1a120a">ひ</text>
+            <rect x="96"  y="156" width="54" height="26" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <text x="123" y="169" font-size="22" fill="#4a1030" text-anchor="middle" dominant-baseline="middle">？</text>
+            <text x="154" y="182" font-size="32" fill="#1a120a">く</text>
+            <text x="60" y="238" font-size="32" fill="#1a120a">どう</text>
+            <rect x="128" y="212" width="54" height="26" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <text x="155" y="225" font-size="22" fill="#4a1030" text-anchor="middle" dominant-baseline="middle">？</text>
+            <rect x="60"  y="268" width="54" height="26" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <text x="87"  y="281" font-size="22" fill="#4a1030" text-anchor="middle" dominant-baseline="middle">？</text>
+            <text x="118" y="294" font-size="32" fill="#1a120a">せん</text>
+            <text x="60" y="350" font-size="32" fill="#1a120a">さか</text>
+            <rect x="128" y="324" width="54" height="26" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <text x="155" y="337" font-size="22" fill="#4a1030" text-anchor="middle" dominant-baseline="middle">？</text>
+            <text x="60" y="406" font-size="32" fill="#1a120a">つば</text>
+            <rect x="128" y="380" width="54" height="26" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <text x="155" y="393" font-size="22" fill="#4a1030" text-anchor="middle" dominant-baseline="middle">？</text>
+            <text x="60" y="462" font-size="32" fill="#1a120a">わか</text>
+            <rect x="128" y="436" width="54" height="26" fill="white" stroke="#9a8060" stroke-width="1.5"/>
+            <text x="155" y="449" font-size="22" fill="#4a1030" text-anchor="middle" dominant-baseline="middle">？</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 八：矢印変換 -->
+      <div class="hint-block hint-block--puzzle" id="hint8">
+        <div class="hint-label">
+          <span class="hint-num">紙片 八</span>
+          <span class="hint-tag">謎の変換</span>
+        </div>
+        <div class="hint-body">
+          <div class="puzzle-rows">
+            <div class="puzzle-row">
+              <span class="puzzle-row-left">わめき</span>
+              <span class="puzzle-arrow">→→</span>
+              <span class="puzzle-result">るきあ</span>
+            </div>
+            <div class="puzzle-row">
+              <span class="puzzle-row-left">ろなうぬ</span>
+              <span class="puzzle-arrow">→</span>
+              <span class="puzzle-result">いねむり</span>
+            </div>
+            <div class="puzzle-row">
+              <span class="puzzle-row-left">むわり</span>
+              <span class="puzzle-arrow">→→</span>
+              <span class="puzzle-result">なると</span>
+            </div>
+            <div class="puzzle-row">
+              <span class="puzzle-row-left">きんため</span>
+              <span class="puzzle-arrow">→→</span>
+              <span class="puzzle-answer">？</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 九：数字と漢字 -->
+      <div class="hint-block hint-block--puzzle" id="hint9">
+        <div class="hint-label">
+          <span class="hint-num">紙片 九</span>
+          <span class="hint-tag">数字と漢字</span>
+        </div>
+        <div class="hint-body">
+          <p class="hint-text">●には同じひらがなが入る。</p>
+          <div class="puzzle-rows">
+            <div class="nazo3-row">
+              <span>[</span><span class="nazo3-bracket"><span>１</span><span class="nazo3-maru">●</span><span>谷</span></span><span>]</span>
+              <span class="nazo3-arrow">→</span><span class="nazo3-hint">源氏と平氏</span>
+            </div>
+            <div class="nazo3-row">
+              <span>[</span><span class="nazo3-bracket"><span>２</span><span class="nazo3-maru">●</span><span>足</span></span><span>]</span>
+              <span class="nazo3-arrow">→</span><span class="nazo3-hint">優柔不断</span>
+            </div>
+            <div class="nazo3-row">
+              <span>[</span><span class="nazo3-bracket"><span>３</span><span class="nazo3-maru">●</span><span>宮</span></span><span>]</span>
+              <span class="nazo3-arrow">→</span><span class="nazo3-hint">庭みたいなもん</span>
+            </div>
+            <div class="nazo3-row">
+              <span>[</span><span class="nazo3-bracket"><span>４</span><span class="nazo3-maru">●</span><span>び</span></span><span>]</span>
+              <span class="nazo3-arrow">→</span><span class="nazo3-hint">かっこいい</span>
+            </div>
+            <div class="nazo3-row">
+              <span>[</span><span class="nazo3-bracket"><span>1000</span><span class="nazo3-maru">●</span><span>う</span></span><span>]</span>
+              <span class="nazo3-arrow">=</span><span class="nazo3-ans">？</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 十：答え＋迷路＋画像 -->
+      <div class="hint-block" id="hint10">
+        <div class="hint-label">
+          <span class="hint-num">紙片 十</span>
+          <span class="hint-tag">答えは○○</span>
+        </div>
+        <div class="hint-body">
+          こたえは　「ゆきくさりはみ」（ヒントは下の3つ）<br><br>
+          <div class="maze-scroll-wrap">
+            <p class="hint-text">「ス」から「ゴ」まで最短ルートで行ってみよう。</p>
+            <p class="hint-text">鬼のマスを人が通ると食べられてしまう。</p>
+            <div class="mz-wrap">
+              <table>
+                <tr><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-start">ス</td><td class="mz-path"></td><td class="mz-col">あ</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-col">か</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-obs">ゆ</td><td class="mz-path"></td><td class="mz-obs">鬼</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-obs">き</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-col">な</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-col">こ</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-col">草</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-obs">蛇</td><td class="mz-obs">が</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-col">う</td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-obs">と</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-obs">け</td><td class="mz-path"></td><td class="mz-obs">鬼</td><td class="mz-col">り</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-col">の</td><td class="mz-wall">■</td><td class="mz-obs">鬼</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-obs">る</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-col">き</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-obs">鬼</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-col">た</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-obs">鬼</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-obs">と</td><td class="mz-col">草</td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-obs">な</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-obs">鬼</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-col">え</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-col">え</td><td class="mz-path"></td><td class="mz-obs">に</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-col">ひ</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-obs">鬼</td><td class="mz-col">か</td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-col">め</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-obs">に</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-obs">鬼</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-obs">な</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-col">て</td><td class="mz-col">草</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-col">ら</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-obs">る</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-obs">？</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-col">つ</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-obs">鬼</td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-path"></td><td class="mz-wall">■</td><td class="mz-col">草</td><td class="mz-col">む</td><td class="mz-col">ら</td><td class="mz-wall">■</td></tr>
+                <tr><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-wall">■</td><td class="mz-goal">ゴ</td><td class="mz-wall">■</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="puzzle-img-wrap">
+            <p class="hint-text">これは何だろう。</p>
+            <img src="Kusarigama.png" alt="一枚謎：鎖鎌" class="puzzle-img">
+            <p class="hint-text">何をしているのだろう。</p>
+            <img src="Hamigaki.png"   alt="一枚謎：歯磨き" class="puzzle-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- 終：最終問題 -->
+      <div class="hint-block hint-block--puzzle" id="hint11">
+        <div class="hint-label">
+          <span class="hint-num">紙片 終端</span>
+          <span class="hint-tag">最後の手がかり</span>
+        </div>
+        <div class="hint-body">
+            <p class="hint-text">全てはかなに――</p>
+  <div class="shogi-wrap">
+
+    <!-- 将棋盤 -->
+    <div class="board-wrapper">
+      <!-- 列番号（左から：1〜10…） -->
+      <div class="col-numbers">
+        <div class="corner-spacer"></div>
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+        <div class="col-fade">…</div>
+      </div>
+
+      <div class="board-row-wrap">
+        <!-- 行番号（上から：1〜5…） -->
+        <div class="row-numbers">
+          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+          <div class="row-fade">︙</div>
+        </div>
+
+        <!-- 盤面 -->
+        <div class="board">
+          <!-- row 1 -->
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell piece sente">飛</div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell piece gote">桂</div>
+          <div class="cell edge-right"></div>
+
+          <!-- row 2 -->
+          <div class="cell piece gote">歩</div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell piece oni">鬼</div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell edge-right"></div>
+
+          <!-- row 3 -->
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell piece gote">銀</div>
+          <div class="cell piece sente">金</div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell piece sente">王</div>
+          <div class="cell"></div>
+          <div class="cell edge-right"></div>
+
+          <!-- row 4 -->
+          <div class="cell"></div>
+          <div class="cell piece sente">歩</div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell piece sente">香</div>
+          <div class="cell piece gote">玉</div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell edge-right"></div>
+
+          <!-- row 5 -->
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell piece gote">角</div>
+          <div class="cell edge-right"></div>
+
+          <!-- row 6 (edge bottom) -->
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-bottom"></div>
+          <div class="cell edge-corner"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 棋譜 -->
+    <div class="kifu-wrapper">
+      <div class="kifu-title">棋譜</div>
+      <ol class="kifu-list">
+        <li class="sente-move">▲歩</li>
+        <li class="gote-move">△銀</li>
+        <li class="sente-move">▲飛</li>
+        <li class="gote-move">△角</li>
+        <li class="sente-move">▲金</li>
+        <li class="gote-move">△桂</li>
+        <li class="sente-move">▲香</li>
+        <li class="gote-move">△歩</li>
+        <li class="sente-move">▲王</li>
+        <li class="gote-move">△玉</li>
+      </ol>
+      <div class="oni-note">鬼（２，６）</div>
+    </div>
+
+  </div>
+
+        </div>
+      </div>
+
+
+    </section>
+
+    <!-- 答え入力 -->
+    <section class="answer-section" aria-labelledby="answer-heading">
+      <div class="section-divider">
+        <span class="divider-text" id="answer-heading">解　錠</span>
+      </div>
+      <div class="answer-block">
+        <p class="answer-desc">
+          この先にあるのは何という部屋か。<br>下の錠前に鍵を差し込め。
+        </p>
+        <div class="answer-form" role="form" aria-label="答え入力">
+          <div class="input-wrap">
+            <label for="answerInput" class="input-label">答え（ひらがな）</label>
+            <div class="input-row">
+              <input type="text" id="answerInput" class="answer-input"
+                placeholder="こたえをにゅうりょく"
+                autocomplete="off" autocorrect="off" spellcheck="false"
+                aria-describedby="answerHint">
+              <button class="submit-btn" id="submitBtn" aria-label="答えを送る">
+                <span class="submit-icon">&#9670;</span>
+                <span>解錠</span>
+              </button>
+            </div>
+            <p class="input-hint" id="answerHint">※ ひらがなで入力してください</p>
+          </div>
+          <div class="result" id="result" aria-live="polite" role="status">
+            <div class="result-inner" id="resultInner"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="secret-footer" role="contentinfo">
+    <p class="footer-text">— この頁は、選ばれし者のみに開かれる —</p>
+  </footer>
+
+  <script src="secret.js" defer></script>
+</body>
+</html>

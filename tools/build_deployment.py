@@ -6,9 +6,11 @@ import hashlib
 import json
 import shutil
 from pathlib import Path, PurePosixPath
+from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "config/deployment-map.json"
+SEO_CONFIG_PATH = ROOT / "config/seo.json"
 DENIED_EXACT = {".env", "config.php", "user.ini", "admin.local.php", "config.local.php"}
 DENIED_PARTS = {".git", "runtime", "operator"}
 
@@ -51,6 +53,43 @@ def load_retired_paths(config: dict) -> tuple[PurePosixPath, ...]:
         seen.add(text)
         retired.append(path)
     return tuple(retired)
+
+
+def load_seo_config(retired: tuple[PurePosixPath, ...]) -> tuple[str, tuple[str, ...]]:
+    try:
+        data = json.loads(SEO_CONFIG_PATH.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError) as exc:
+        raise BuildError(f"cannot load {SEO_CONFIG_PATH.relative_to(ROOT)}: {exc}") from exc
+    if data.get("schemaVersion") != 1:
+        raise BuildError("SEO config schemaVersion must be 1")
+
+    origin = data.get("origin")
+    if not isinstance(origin, str) or not origin.startswith("https://"):
+        raise BuildError("SEO origin must be an https:// URL")
+    origin = origin.rstrip("/")
+    if "/" in origin.removeprefix("https://"):
+        raise BuildError("SEO origin must not include a path")
+
+    raw_routes = data.get("sitemapRoutes")
+    if not isinstance(raw_routes, list) or not raw_routes:
+        raise BuildError("SEO sitemapRoutes must be a non-empty array")
+
+    routes: list[str] = []
+    seen: set[str] = set()
+    retired_prefixes = tuple(f"/{path.as_posix()}/" for path in retired)
+    retired_exact = {f"/{path.as_posix()}" for path in retired}
+    for index, route in enumerate(raw_routes):
+        if not isinstance(route, str) or not route.startswith("/"):
+            raise BuildError(f"sitemapRoutes[{index}] must be an absolute site path")
+        if "?" in route or "#" in route or "://" in route or "\\" in route:
+            raise BuildError(f"sitemapRoutes[{index}] is unsafe: {route}")
+        if route in retired_exact or route.startswith(retired_prefixes):
+            raise BuildError(f"retired production path must not appear in sitemap: {route}")
+        if route in seen:
+            raise BuildError(f"duplicate sitemap route: {route}")
+        seen.add(route)
+        routes.append(route)
+    return origin, tuple(routes)
 
 
 def ensure_source_allowed(source: Path) -> None:
@@ -110,6 +149,29 @@ def copy_file(
     }
 
 
+def emit_generated_text(
+    destination: Path,
+    build_root: Path,
+    emitted: dict[str, dict],
+    owner: str,
+    source: str,
+    text: str,
+) -> None:
+    rel = ensure_destination_allowed(build_root, destination)
+    if rel in emitted:
+        raise BuildError(f"generated artifact collision at {rel}: {emitted[rel]['owner']} vs {owner}")
+    content = text.encode("utf-8")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(content)
+    emitted[rel] = {
+        "path": rel,
+        "owner": owner,
+        "source": source,
+        "sha256": hashlib.sha256(content).hexdigest(),
+        "size": len(content),
+    }
+
+
 def copy_tree(
     source_root: Path,
     destination_root: Path,
@@ -134,6 +196,39 @@ def copy_tree(
         )
 
 
+def render_robots(origin: str) -> str:
+    return (
+        "# Generated from config/seo.json. Do not edit the artifact directly.\n"
+        "User-agent: *\n"
+        "Allow: /\n"
+        f"Sitemap: {origin}/sitemap.xml\n"
+    )
+
+
+def render_sitemap(origin: str, routes: tuple[str, ...]) -> str:
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for route in routes:
+        lines.append(f"  <url><loc>{escape(origin + route)}</loc></url>")
+    lines.append("</urlset>")
+    return "\n".join(lines) + "\n"
+
+
+def ensure_sitemap_routes_exist(build_root: Path, routes: tuple[str, ...]) -> None:
+    for route in routes:
+        if route == "/":
+            candidates = (build_root / "index.html", build_root / "index.php")
+        elif route.endswith("/"):
+            directory = build_root / route.lstrip("/")
+            candidates = (directory / "index.html", directory / "index.php")
+        else:
+            candidates = (build_root / route.lstrip("/"),)
+        if not any(candidate.is_file() for candidate in candidates):
+            raise BuildError(f"sitemap route does not resolve inside deployment artifact: {route}")
+
+
 def ensure_retired_paths_absent(
     retired: tuple[PurePosixPath, ...],
     emitted: dict[str, dict],
@@ -155,6 +250,7 @@ def ensure_retired_paths_absent(
 def build() -> dict:
     config = load_config()
     retired = load_retired_paths(config)
+    seo_origin, sitemap_routes = load_seo_config(retired)
     build_rel = safe_rel(config.get("buildRoot"), "buildRoot")
     build_root = ROOT / build_rel
     expected = ROOT / "build/public_html"
@@ -209,6 +305,24 @@ def build() -> dict:
         dest_rel = safe_rel(alias.get("destination"), f"aliases[{index}].destination")
         copy_file(ROOT / source_rel, build_root / dest_rel, build_root, emitted, "legacy-alias")
 
+    ensure_sitemap_routes_exist(build_root, sitemap_routes)
+    emit_generated_text(
+        build_root / "robots.txt",
+        build_root,
+        emitted,
+        "seo-generated",
+        "config/seo.json",
+        render_robots(seo_origin),
+    )
+    emit_generated_text(
+        build_root / "sitemap.xml",
+        build_root,
+        emitted,
+        "seo-generated",
+        "config/seo.json",
+        render_sitemap(seo_origin, sitemap_routes),
+    )
+
     if not (build_root / "index.html").is_file():
         raise BuildError("portfolio root index.html was not emitted")
 
@@ -219,6 +333,11 @@ def build() -> dict:
         "source": "watarionn/portfolio-site",
         "buildRoot": build_rel.as_posix(),
         "retiredRemotePaths": [path.as_posix() for path in retired],
+        "seo": {
+            "origin": seo_origin,
+            "sitemapRoutes": list(sitemap_routes),
+            "generatedRootFiles": ["robots.txt", "sitemap.xml"],
+        },
         "entries": entry_summaries,
         "files": [emitted[path] for path in sorted(emitted)],
     }

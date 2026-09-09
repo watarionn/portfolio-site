@@ -8,7 +8,8 @@
     {"source": "404.html", "destination": "404.html"},
     {"source": "404.css", "destination": "404.css"},
     {"source": "404.js", "destination": "404.js"},
-    {"source": "ops/webserver/root.htaccess", "destination": ".htaccess"}
+    {"source": "ops/webserver/root.htaccess", "destination": ".htaccess"},
+    {"source": "site/public/root-verification/googlea778a59c57bff7a2.html", "destination": "googlea778a59c57bff7a2.html"}
   ],
   "entries": [
     {"id": "profile", "sourceRoot": "profile", "productionRoot": "D_PROFILE"},

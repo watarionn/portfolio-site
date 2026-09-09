@@ -74,3 +74,30 @@ Implemented after Slice A exact-head CI run #65 completed successfully.
 - 100-step prime-square test reports exactly 100 steps, 25 prime steps, and 4 prime-square matches.
 - Desktop and mobile visual captures confirm the generated result remains the primary workspace surface.
 - JavaScript syntax, public repository boundary, and production artifact build pass after Slice B changes.
+
+## Slice C — technical and accessibility cleanup
+
+Implemented after Slice B exact-head CI run #66 completed successfully.
+
+### Runtime state cleanup
+- Canvas rendering now exposes `aria-busy` while either trajectory pass is running.
+- PNG export is unavailable until a complete render exists and is disabled while a render is in progress.
+- `画面クリア` resets the stored fit scale and marks the output as empty.
+- Window resize only regenerates the artwork when a completed render still exists, so clearing the Canvas no longer causes an unexpected redraw on the next resize.
+- Synchronous setup failures are caught and surfaced through the existing status region instead of leaving the workspace in a busy state.
+
+### Safer result rendering
+- Statistics and per-rule counts no longer use HTML strings.
+- Result nodes are assembled with `createElement`, `textContent`, and `replaceChildren`.
+- PNG export appends and removes its temporary anchor explicitly and still revokes the Object URL after dispatch.
+- The mobile settings button label is rebuilt without assigning HTML strings.
+
+### Regression contract
+- Added `tools/check_prime_dot_art_contract.py`.
+- The contract locks Canvas-before-settings DOM order, four presets, PNG/fit controls, exact step boundaries, the prime-square override, Object URL cleanup, busy-state handling, resize-after-clear behavior, and the absence of the old prime-index Map / HTML-string result rendering.
+- It also runs small reference simulations for the 5,000-step branch and grid spans and the 100-step prime-square case.
+- Public validation now runs this contract alongside the existing MADORI contract before building the deployment artifact.
+
+## Closure gate
+
+Before Ready for review, require the latest PR head to pass the new Prime Dot Art contract, public boundary validation, production artifact build, JavaScript syntax check, PHP 8.4 syntax check, and exact inventory generation.

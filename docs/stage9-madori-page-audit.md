@@ -276,3 +276,27 @@ Regression verification:
 - 390px viewport remains free of horizontal overflow
 
 Slice C remains separate for technical and accessibility cleanup, including the secondary DirectionalLight initialization defect identified during the audit.
+
+## Slice C implementation status
+
+Implemented on the same Stage 9 MADORI branch:
+
+- fixed the secondary Three.js DirectionalLight so the configured light instance is the one added to the scene
+- revoke the temporary Blob URL after JSON export
+- validate loaded JSON structure before mutating editor state
+- keep the current layout intact when invalid JSON is rejected
+- add polite live status announcements for save, load, reset, clear, and PNG export actions
+- synchronize `aria-pressed` for 2D tools and mobile control groups
+- synchronize `aria-expanded` for the mobile drawer and custom-type forms
+- make the mobile drawer handle keyboard-operable
+- connect 3D control labels with their form inputs and label the 3D canvas
+- add `tools/check_madori_contract.py` and run it from the normal public validation workflow
+
+Runtime regression verification:
+
+- JSON Blob URL creation/revocation: 1 / 1, same URL
+- valid JSON restores editor state; invalid JSON is rejected without replacing the last valid state
+- demo reset still returns 6 rooms / 4 furniture / 0 walls
+- ArrowRight and ArrowLeft still switch 2D / 3D with focus transfer
+- directional lights render at `(300, 400, 200)` and `(-200, 200, -200)`
+- mobile accessibility state remains synchronized with the visible drawer/form/tool state

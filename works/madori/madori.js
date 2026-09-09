@@ -65,6 +65,12 @@ const GRID = 20;
 const c2d  = document.getElementById('c2d');
 const ctx  = c2d.getContext('2d');
 const wrap = document.getElementById('canvas-wrap');
+const editorStatus = document.getElementById('editor-status');
+
+function announceStatus(message) {
+  editorStatus.textContent = '';
+  window.requestAnimationFrame(function() { editorStatus.textContent = message; });
+}
 
 /* =============================================
    ユーティリティ
@@ -505,8 +511,11 @@ c2d.addEventListener('wheel', function(e) {
 function setTool(t) {
   tool = t;
   selected = null;
-  document.querySelectorAll('.tool-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.getElementById('btn-' + t).classList.add('active');
+  document.querySelectorAll('.tool-btn').forEach(function(b) {
+    const active = b.id === 'btn-' + t;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
   draw2d();
 }
 
@@ -514,12 +523,12 @@ document.getElementById('btn-select').addEventListener('click', function() { set
 document.getElementById('btn-wall').addEventListener('click',   function() { setTool('wall'); });
 document.getElementById('btn-erase').addEventListener('click',  function() { setTool('erase'); });
 
-document.getElementById('fit-view-btn').addEventListener('click', fitView);
+document.getElementById('fit-view-btn').addEventListener('click', function() { fitView(); announceStatus('図面全体を表示しました。'); });
 document.getElementById('reset-demo-btn').addEventListener('click', function() {
-  if (window.confirm('現在の編集内容を破棄して、最初のデモ配置へ戻しますか？')) restoreDemo();
+  if (window.confirm('現在の編集内容を破棄して、最初のデモ配置へ戻しますか？')) { restoreDemo(); announceStatus('デモ配置へ戻しました。'); }
 });
 document.getElementById('clear-layout-btn').addEventListener('click', function() {
-  if (window.confirm('現在の部屋・家具・壁をすべて消して、空の図面にしますか？')) clearLayout();
+  if (window.confirm('現在の部屋・家具・壁をすべて消して、空の図面にしますか？')) { clearLayout(); announceStatus('図面を空にしました。'); }
 });
 
 const workspaceGuide = document.getElementById('workspace-guide');
@@ -595,9 +604,12 @@ function renderSidebar() {
 
 /* 追加フォームのトグル */
 function initFormToggle(toggleId, formId) {
-  document.getElementById(toggleId).addEventListener('click', function() {
-    const form = document.getElementById(formId);
+  const toggle = document.getElementById(toggleId);
+  const form = document.getElementById(formId);
+  toggle.setAttribute('aria-expanded', form.hidden ? 'false' : 'true');
+  toggle.addEventListener('click', function() {
     form.hidden = !form.hidden;
+    toggle.setAttribute('aria-expanded', form.hidden ? 'false' : 'true');
   });
 }
 initFormToggle('toggle-room-form', 'room-form');
@@ -629,6 +641,7 @@ document.getElementById('add-furn-btn').addEventListener('click', function() {
   });
   document.getElementById('f-name').value = '';
   document.getElementById('furn-form').hidden = true;
+  document.getElementById('toggle-furn-form').setAttribute('aria-expanded', 'false');
   renderSidebar();
 });
 
@@ -647,23 +660,23 @@ function setPanelGroup(group) {
   drawerNavButtons.forEach(function(btn) {
     const active = btn.dataset.panelTarget === group;
     btn.classList.toggle('is-active', active);
-    btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
   });
 }
 drawerNavButtons.forEach(function(btn) {
   btn.addEventListener('click', function() { setPanelGroup(btn.dataset.panelTarget); });
 });
 
-function openDrawer() {
-  sidebar.classList.add('is-open');
-  panelToggleBtn.classList.add('panel-open');
-  panelToggleBtn.textContent = '× 閉じる';
+function setDrawerExpanded(expanded) {
+  sidebar.classList.toggle('is-open', expanded);
+  panelToggleBtn.classList.toggle('panel-open', expanded);
+  panelToggleBtn.textContent = expanded ? '× 閉じる' : '＋ 追加';
+  panelToggleBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  panelToggleBtn.setAttribute('aria-label', expanded ? 'コントロールパネルを閉じる' : 'コントロールパネルを開く');
+  drawerHandle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
 }
-function closeDrawer() {
-  sidebar.classList.remove('is-open');
-  panelToggleBtn.classList.remove('panel-open');
-  panelToggleBtn.textContent = '＋ 追加';
-}
+function openDrawer() { setDrawerExpanded(true); }
+function closeDrawer() { setDrawerExpanded(false); }
 function toggleDrawer() {
   sidebar.classList.contains('is-open') ? closeDrawer() : openDrawer();
 }
@@ -724,16 +737,44 @@ document.getElementById('save-png-btn').addEventListener('click', function() {
   const tmp = selected; selected = null; draw2d();
   const a = document.createElement('a'); a.download = 'madori.png'; a.href = c2d.toDataURL(); a.click();
   selected = tmp; draw2d();
+  announceStatus('2D図面をPNGとして保存しました。');
 });
 
 document.getElementById('save-json-btn').addEventListener('click', function() {
-  const a = document.createElement('a'); a.download = 'madori.json';
-  a.href = URL.createObjectURL(new Blob(
+  const blob = new Blob(
     [JSON.stringify({rooms, furniture, walls, roomTypes, furnTypes}, null, 2)],
     {type: 'application/json'}
-  ));
+  );
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.download = 'madori.json';
+  a.href = url;
   a.click();
+  window.setTimeout(function() { URL.revokeObjectURL(url); }, 0);
+  announceStatus('編集データをJSONとして保存しました。');
 });
+
+function isFiniteNumber(v) { return typeof v === 'number' && Number.isFinite(v); }
+function isBoxItem(o, type) {
+  return o && o.type === type && typeof o.name === 'string' && typeof o.color === 'string' &&
+    ['x','y','w','h'].every(function(k) { return isFiniteNumber(o[k]); });
+}
+function isWallItem(o) {
+  return o && o.type === 'wall' && ['x1','y1','x2','y2'].every(function(k) { return isFiniteNumber(o[k]); });
+}
+function isTypeDefinition(o, furnitureType) {
+  if (!o || typeof o.name !== 'string' || typeof o.color !== 'string' || !isFiniteNumber(o.w) || !isFiniteNumber(o.h)) return false;
+  return !furnitureType || o.h3 == null || isFiniteNumber(o.h3);
+}
+function validateLoadedData(d) {
+  if (!d || typeof d !== 'object' || Array.isArray(d)) return false;
+  if (!Array.isArray(d.rooms) || !d.rooms.every(function(o) { return isBoxItem(o, 'room'); })) return false;
+  if (!Array.isArray(d.furniture) || !d.furniture.every(function(o) { return isBoxItem(o, 'furniture'); })) return false;
+  if (!Array.isArray(d.walls) || !d.walls.every(isWallItem)) return false;
+  if (d.roomTypes != null && (!Array.isArray(d.roomTypes) || !d.roomTypes.every(function(o) { return isTypeDefinition(o, false); }))) return false;
+  if (d.furnTypes != null && (!Array.isArray(d.furnTypes) || !d.furnTypes.every(function(o) { return isTypeDefinition(o, true); }))) return false;
+  return true;
+}
 
 document.getElementById('load-json-btn').addEventListener('click', function() {
   document.getElementById('file-input').click();
@@ -745,11 +786,21 @@ document.getElementById('file-input').addEventListener('change', function(e) {
   r.onload = function(ev) {
     try {
       const d = JSON.parse(ev.target.result);
-      rooms = d.rooms || []; furniture = d.furniture || []; walls = d.walls || [];
-      if (d.roomTypes) roomTypes = d.roomTypes;
-      if (d.furnTypes) furnTypes = d.furnTypes;
-      selected = null; renderSidebar(); draw2d();
-    } catch(err) { alert('読み込み失敗'); }
+      if (!validateLoadedData(d)) throw new Error('invalid layout data');
+      rooms = cloneItems(d.rooms);
+      furniture = cloneItems(d.furniture);
+      walls = cloneItems(d.walls);
+      roomTypes = d.roomTypes ? cloneItems(d.roomTypes) : cloneItems(DEFAULT_ROOM_TYPES);
+      furnTypes = d.furnTypes ? cloneItems(d.furnTypes) : cloneItems(DEFAULT_FURN_TYPES);
+      selected = null;
+      renderSidebar();
+      setTool('select');
+      fitView();
+      announceStatus('編集データを読み込みました。');
+    } catch(err) {
+      alert('読み込み失敗: MADORIのJSONデータを確認してください。');
+      announceStatus('編集データを読み込めませんでした。');
+    }
   };
   r.readAsText(f); e.target.value = '';
 });
@@ -777,7 +828,9 @@ function init3D() {
   const dl = new THREE.DirectionalLight(0xfff5e0, 0.9);
   dl.position.set(300, 400, 200); dl.castShadow = true;
   dl.shadow.mapSize.set(2048, 2048); scene3.add(dl);
-  scene3.add(new THREE.DirectionalLight(0xffe8c0, 0.3).position.set(-200, 200, -200) && new THREE.DirectionalLight(0xffe8c0, 0.3));
+  const fillLight = new THREE.DirectionalLight(0xffe8c0, 0.3);
+  fillLight.position.set(-200, 200, -200);
+  scene3.add(fillLight);
   sceneGroup3 = new THREE.Group(); scene3.add(sceneGroup3);
   resize3D();
   init3DControls(c3);
@@ -951,6 +1004,7 @@ document.getElementById('save3d-btn').addEventListener('click', function() {
   render3d();
   const a = document.createElement('a'); a.download = 'madori_3d.png';
   a.href = document.getElementById('c3d').toDataURL(); a.click();
+  announceStatus('3DビューをPNGとして保存しました。');
 });
 document.getElementById('toggle-view-btn').addEventListener('click', function() {
   camPhi = camPhi > 45 ? 40 : 89;

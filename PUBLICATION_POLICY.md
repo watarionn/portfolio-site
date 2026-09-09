@@ -8,7 +8,9 @@ The private repository is no longer the canonical source for ordinary public web
 
 Publishable source is maintained here in a clean developer-facing layout. `config/deployment-map.json` maps that layout to the existing production URL layout, and `tools/build_deployment.py` creates the generated `build/public_html` artifact used by the production workflow.
 
-A merge to `main` affecting deployable paths is intended to run validation and then deploy the generated artifact over certificate-verified FTPS. Deployment is deliberately non-destructive: remote-only files are not deleted, and known server-only configuration names are excluded defensively.
+A merge to `main` affecting deployable paths is intended to run validation and then deploy the generated artifact over certificate-verified FTPS. Deployment is deliberately non-destructive for ordinary remote-only files. Known server-only configuration names are excluded defensively, and no general remote-delete mirror mode is enabled.
+
+The sole current deletion exception is an explicitly reviewed retirement list in `config/deployment-map.json`. Paths listed in `retiredRemotePaths` are intentionally removed from production after the public artifact is uploaded. This mechanism exists for deliberate surface retirement, not general synchronization.
 
 The deployment workflow requires repository Actions secrets for FTPS and the production site URL. Secret values must never be committed to this repository.
 
@@ -25,7 +27,15 @@ The current public repository contains:
 - the SHISHA public viewer under `services/shisha/public/**`
 - the SECRET entrance source under `apps/secret-room/public/**`
 
-Production-only public surfaces that have not yet been imported into this repository remain migration gaps. In particular, the existing CHARACTER surface and legacy 404 assets are not yet owned by this repository. The Stage 8 deployment process therefore does not delete remote-only files while those surfaces are reviewed and migrated separately.
+Legacy 404 assets remain a production-only migration gap and are not yet owned by this repository. Ordinary non-destructive deployment leaves them untouched until separately reviewed.
+
+## CHARACTER retirement
+
+The CHARACTER surface is intentionally excluded from the public repository and retired from the public website.
+
+The portfolio shell must not link to `/CHARACTER/` or expose the former character index as a public work. The private repository remains the preservation and development location for the non-public character material.
+
+`CHARACTER` is listed in `retiredRemotePaths`. On the first production deployment after this retirement change is merged, the deployment workflow removes that remote directory explicitly and then verifies that `/CHARACTER/character-index.html` no longer returns a public success response. Future deployments continue to enforce the retirement while leaving unrelated remote-only files untouched.
 
 ## HoloScope locked public shell
 

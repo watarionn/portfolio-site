@@ -7,7 +7,8 @@
     {"source": "index-script.js", "destination": "index-script.js"},
     {"source": "404.html", "destination": "404.html"},
     {"source": "404.css", "destination": "404.css"},
-    {"source": "404.js", "destination": "404.js"}
+    {"source": "404.js", "destination": "404.js"},
+    {"source": "ops/webserver/root.htaccess", "destination": ".htaccess"}
   ],
   "entries": [
     {"id": "profile", "sourceRoot": "profile", "productionRoot": "D_PROFILE"},

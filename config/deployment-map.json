@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "buildRoot": "build/public_html",
+  "siteFiles": [
+    {"source": "index.html", "destination": "index.html"},
+    {"source": "index-style.css", "destination": "index-style.css"},
+    {"source": "index-script.js", "destination": "index-script.js"}
+  ],
+  "entries": [
+    {"id": "profile", "sourceRoot": "profile", "productionRoot": "D_PROFILE"},
+    {"id": "yorei", "sourceRoot": "apps/yorei/public", "productionRoot": "YOREI"},
+    {"id": "aquarium", "sourceRoot": "apps/aquarium/public", "productionRoot": "AQUARIUM"},
+    {"id": "secret-room", "sourceRoot": "apps/secret-room/public", "productionRoot": "SECRET"},
+    {"id": "holoca", "sourceRoot": "services/holoca/public", "productionRoot": "HOLOCA"},
+    {"id": "holoscope", "sourceRoot": "services/holoscope/public", "productionRoot": "holoscope"},
+    {"id": "shisha", "sourceRoot": "services/shisha/public", "productionRoot": "SHISHA"},
+    {"id": "anagram", "sourceRoot": "tools/anagram", "productionRoot": "ANAGRAM"},
+    {"id": "actress-finder", "sourceRoot": "tools/actress-finder", "productionRoot": "OTHER"},
+    {"id": "cheatsheet", "sourceRoot": "tools/cheatsheet", "productionRoot": "CHEATSHEET"},
+    {"id": "location-csv-checker", "sourceRoot": "tools/location-csv-checker", "productionRoot": "LOCATION_CSV_CHECKER"},
+    {"id": "maze-maker", "sourceRoot": "tools/maze-maker", "productionRoot": "MAZE_MAKER"},
+    {"id": "pixel-art-maker", "sourceRoot": "tools/pixel-art-maker", "productionRoot": "PIXEL-ART_MAKER"},
+    {"id": "word-generator", "sourceRoot": "tools/word-generator", "productionRoot": "WORD_GENERATOR"},
+    {"id": "dqb2", "sourceRoot": "works/dqb2", "productionRoot": "DQB2"},
+    {"id": "formula-stratum-world", "sourceRoot": "works/formula-stratum-world", "productionRoot": "FormulaStratumWorld"},
+    {"id": "madori", "sourceRoot": "works/madori", "productionRoot": "MADORI"},
+    {"id": "prime-dot-art", "sourceRoot": "works/prime-dot-art", "productionRoot": "PRIME_DOT_ART"},
+    {"id": "sphere", "sourceRoot": "works/sphere", "productionRoot": "SPHERE"}
+  ],
+  "aliases": [
+    {"source": "profile/index.html", "destination": "D_PROFILE/d_profile.html"},
+    {"source": "apps/secret-room/public/index.html", "destination": "SECRET/secret.html"},
+    {"source": "tools/anagram/index.html", "destination": "ANAGRAM/anagram.html"},
+    {"source": "tools/actress-finder/index.html", "destination": "OTHER/actress_finder.html"},
+    {"source": "tools/maze-maker/index.html", "destination": "MAZE_MAKER/maze_maker.html"},
+    {"source": "tools/word-generator/index.html", "destination": "WORD_GENERATOR/word_generator.html"},
+    {"source": "works/dqb2/index.html", "destination": "DQB2/dqb2.html"},
+    {"source": "works/madori/index.html", "destination": "MADORI/madori.html"},
+    {"source": "works/prime-dot-art/index.html", "destination": "PRIME_DOT_ART/prime_dot_art.html"},
+    {"source": "works/sphere/index.html", "destination": "SPHERE/sphere.html"}
+  ]
+}

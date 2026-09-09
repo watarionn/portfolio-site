@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — 見出し語が見つかりません</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="404.css">
+</head>
+<body>
+
+  <!-- 横罫線テクスチャ -->
+  <div class="paper-lines" aria-hidden="true"></div>
+
+  <!-- ノイズ -->
+  <canvas class="noise-canvas" id="noiseCanvas" aria-hidden="true"></canvas>
+
+  <!-- 右端の装飾帯 -->
+  <div class="side-band" aria-hidden="true">
+    <span class="band-text">よ</span>
+    <span class="band-rule"></span>
+    <span class="band-text-en">YO</span>
+  </div>
+
+  <main role="main" class="page-main">
+
+    <!-- 辞書のヘッダー風ラベル -->
+    <div class="edition-label" aria-hidden="true">
+      <span>第一版 / First Edition</span>
+      <span class="edition-line"></span>
+    </div>
+
+    <!-- 404 エントリー本体 -->
+    <article class="entry" aria-labelledby="entry-heading">
+
+      <!-- セクション仮名 -->
+      <div class="section-kana" aria-hidden="true">よ</div>
+
+      <div class="entry-main">
+
+        <!-- 見出し語 -->
+        <header class="entry-header">
+          <span class="entry-num" aria-hidden="true">404</span>
+          <div class="entry-yomi" id="entry-heading">
+            <ruby>
+              <rb>頁不在</rb>
+              <rt>ページふざい</rt>
+            </ruby>
+          </div>
+          <span class="entry-pos" aria-label="品詞：名詞">名</span>
+        </header>
+
+        <!-- 朱線 -->
+        <div class="entry-rule" aria-hidden="true"></div>
+
+        <!-- 語義 -->
+        <div class="entry-body">
+
+          <div class="definition-block">
+            <span class="def-num" aria-hidden="true">❶</span>
+            <p class="definition">
+              要求されたページまたはファイルが、このサーバー上に存在しないこと。
+              URLの誤記、リンク切れ、またはページの移動・削除によって生じる状態。
+            </p>
+          </div>
+
+          <div class="definition-block">
+            <span class="def-num" aria-hidden="true">❷</span>
+            <p class="definition">
+              転じて、探し求めるものがいずこにも見当たらぬ、
+              虚ろな時間の総称。
+            </p>
+          </div>
+
+          <!-- 用例 -->
+          <div class="example-block">
+            <span class="example-label" aria-hidden="true">〔用例〕</span>
+            <p class="example-text">
+              「この頁は、<em>辞典</em>には収録されていない。」
+            </p>
+          </div>
+
+          <!-- 参照 -->
+          <div class="see-also-block" aria-label="関連項目">
+            <span class="see-also-label" aria-hidden="true">→ 参照</span>
+            <span class="see-also-item">200（正常応答）</span>
+            <span class="see-also-sep" aria-hidden="true">／</span>
+            <span class="see-also-item">301（恒久移動）</span>
+            <span class="see-also-sep" aria-hidden="true">／</span>
+            <span class="see-also-item">500（内部障害）</span>
+          </div>
+        </div>
+
+        <!-- 区切り罫線 -->
+        <div class="entry-foot-rule" aria-hidden="true"></div>
+
+        <!-- 案内文 -->
+        <div class="nav-block">
+          <p class="nav-text">
+            お探しのページは見つかりませんでした。<br>
+            URLをご確認いただくか、以下よりお戻りください。
+          </p>
+          <div class="nav-links">
+            <a href="/" class="nav-btn nav-btn--primary">
+              <span class="nav-btn-icon" aria-hidden="true">←</span>
+              <span>表　紙　へ　戻　る</span>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /entry-main -->
+
+    </article>
+
+    <!-- ページ番号 -->
+    <div class="page-num" aria-hidden="true">p. 404</div>
+
+  </main>
+
+  <script src="404.js" defer></script>
+</body>
+</html>

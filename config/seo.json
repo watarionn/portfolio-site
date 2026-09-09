@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "origin": "https://cf278796.cloudfree.jp",
+  "sitemapRoutes": [
+    "/",
+    "/D_PROFILE/d_profile.html",
+    "/YOREI/yorei.html",
+    "/AQUARIUM/aquarium.php",
+    "/DQB2/dqb2.html",
+    "/HOLOCA/holoca.html",
+    "/SPHERE/sphere.html",
+    "/PRIME_DOT_ART/prime_dot_art.html",
+    "/MADORI/madori.html",
+    "/OTHER/actress_finder.html",
+    "/WORD_GENERATOR/word_generator.html",
+    "/MAZE_MAKER/maze_maker.html",
+    "/ANAGRAM/anagram.html"
+  ]
+}

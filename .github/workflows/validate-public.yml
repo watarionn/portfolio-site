@@ -22,16 +22,43 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Validate public boundary
         run: python tools/validate_public_repo.py
+
+      - name: Build production artifact
+        run: python tools/build_deployment.py
+
+      - name: JavaScript syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+          find build/public_html -type f \( -name '*.js' -o -name '*.mjs' \) -print0 \
+            | xargs -0 -r -n 1 node --check
+
+      - name: PHP 8.4 syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE/build/public_html:/work" \
+            -w /work \
+            php:8.4-cli \
+            sh -c "find . -type f -name '*.php' -print0 | xargs -0 -r -n 1 php -l"
 
       - name: Generate exact SHA-256 inventory
         run: python tools/write_public_inventory.py
 
-      - name: Upload audit inventory
+      - name: Upload audit inventories
         uses: actions/upload-artifact@v4
         with:
           name: public-inventory
-          path: public-inventory.json
+          path: |
+            public-inventory.json
+            build/deployment-manifest.json
           if-no-files-found: error
           retention-days: 30

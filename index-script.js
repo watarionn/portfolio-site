@@ -8,8 +8,7 @@
 /* ─── Works: 技術早見表 ─── */
 (function addCheatSheetEntry() {
   const grid = document.querySelector('#works .entries-grid');
-  if (!grid || grid.querySelector(a[href="/CHEATShEET/"]))
-    return;
+  if (!grid || grid.querySelector('a[href="/CHEATSHEET/"]')) return;
 
   const article = document.createElement('article');
   article.className = 'entry-card entry-card--featured';
@@ -26,7 +25,7 @@
           <span class="entry-pos" aria-label="品詞: 名詞">名</span>
         </header>
         <div class="entry-body">
-          <p class="entry-definition">Python・JavaScript㻥改規表現など、28セクション326項目を横断検索できる技術チートシート。</p>
+          <p class="entry-definition">Python・JavaScript・正規表現など、28セクション326項目を横断検索できる技術チートシート。</p>
           <div class="entry-tags" aria-label="使用技術">
             <span class="tag">HTML</span>
             <span class="tag">CSS</span>
@@ -37,8 +36,7 @@
       </div>
     </a>`;
 
-  const characterEntry = grid.querySelector('.entry-card[data-index="90"]');
-  grid.insertBefore(article, characterEntry || null);
+  grid.appendChild(article);
 })();
 
 /* ─── Noise Canvas ─── */
@@ -179,7 +177,7 @@
       const href = link.getAttribute('href');
       if (!href || href.startsWith('#') || href.startsWith('mailto')) return;
 
-      // 外叨遇移のためデフォルトを一旦武剈め、エフェクト後に遇移
+      // 外部遷移のためデフォルトを一旦止め、エフェクト後に遷移
       e.preventDefault();
 
       overlay.classList.add('is-turning');

@@ -45,6 +45,7 @@
     {"source": "works/sphere/index.html", "destination": "SPHERE/sphere.html"}
   ],
   "retiredRemotePaths": [
-    "CHARACTER"
+    "CHARACTER",
+    "public_html"
   ]
 }

@@ -8,6 +8,9 @@ on:
       - "index.html"
       - "index-style.css"
       - "index-script.js"
+      - "404.html"
+      - "404.css"
+      - "404.js"
       - "profile/**"
       - "works/**"
       - "tools/**"
@@ -270,6 +273,43 @@ jobs:
             rm -f "$body"
             echo "Verified: $url (HTTP $code)"
           done
+
+      - name: Verify root 404 response
+        shell: bash
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          set -euo pipefail
+          url="${SITE_URL%/}/__portfolio_missing_page_probe_404__"
+          body="$(mktemp)"
+          code="$(
+            curl \
+              --silent \
+              --show-error \
+              --max-time 30 \
+              --output "$body" \
+              --write-out "%{http_code}" \
+              "$url"
+          )"
+
+          if [ "$code" != "404" ]; then
+            echo "Missing-page probe returned HTTP $code instead of 404: $url"
+            rm -f "$body"
+            exit 1
+          fi
+          if [ ! -s "$body" ]; then
+            echo "Root 404 response was empty: $url"
+            rm -f "$body"
+            exit 1
+          fi
+          if ! grep -Fq "頁不在" "$body"; then
+            echo "Root 404 response did not contain the reviewed portfolio 404 page: $url"
+            rm -f "$body"
+            exit 1
+          fi
+
+          rm -f "$body"
+          echo "Verified root 404 page: $url (HTTP $code)"
 
       - name: Verify CHARACTER retirement
         shell: bash

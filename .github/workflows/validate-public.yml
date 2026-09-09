@@ -36,6 +36,9 @@ jobs:
       - name: Validate Prime Dot Art interaction contract
         run: python tools/check_prime_dot_art_contract.py
 
+      - name: Validate Prime Dot Art runtime contract
+        run: node tools/check_prime_dot_art_runtime.mjs
+
       - name: Build production artifact
         run: python tools/build_deployment.py
 

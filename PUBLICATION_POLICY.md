@@ -20,6 +20,9 @@ The current public repository contains:
 
 - the portfolio shell and profile
 - the reviewed root 404 page assets: `404.html`, `404.css`, and `404.js`
+- generated root `robots.txt` and `sitemap.xml` metadata sourced from `config/seo.json`
+- the reviewed Google site-verification root file under `site/public/root-verification/**`
+- non-secret root web-server configuration under `ops/webserver/**`
 - reviewed static tools and static works
 - the YOREI browser client under `apps/yorei/public/**`
 - the AQUARIUM public source under `apps/aquarium/public/**`
@@ -28,15 +31,21 @@ The current public repository contains:
 - the SHISHA public viewer under `services/shisha/public/**`
 - the SECRET entrance source under `apps/secret-room/public/**`
 
-The legacy root 404 migration gap is closed by the reviewed root assets above. Separate remote-only root metadata and verification files, including search-engine metadata or ownership-verification artifacts, remain outside this 404 migration step and require their own inventory decision before they are treated as public-repository source.
+Legacy root metadata ownership is recorded in `docs/stage8-root-metadata-audit.md`. Remote-only legacy or unrelated root files are not automatically adopted or deleted merely because reviewed SEO and verification assets move into this repository.
+
+## Root metadata and SEO
+
+`config/seo.json` is the reviewed source for the production origin and sitemap route list. `tools/build_deployment.py` generates `robots.txt` and `sitemap.xml` into the deployment artifact and rejects duplicate, unsafe, retired, or non-resolving sitemap routes.
+
+The Google ownership-verification file is public by design and is preserved byte-for-byte as a root deployment asset. SEO migration must not silently widen the sitemap to unrelated or private surfaces. Changes to the route list are reviewed source changes.
 
 ## Root 404 boundary
 
 The root portfolio 404 presentation is public source and is deployed from this repository as `404.html`, `404.css`, and `404.js`.
 
-The server-level mechanism that maps missing URLs to the custom 404 page is server configuration, not browser-facing source. It remains private/server-resident under the project rule that server-only configuration does not move into the public repository merely because the rendered error page is public.
+The root `.htaccess` is non-secret operational configuration and may be generated or deployed from public source. On the current hosting platform, however, deploying `ErrorDocument 404 /404.html` is not sufficient by itself for missing static URLs. The hosting provider's server-panel `Error Page Settings` for HTTP 404 must also be enabled and pointed at the installed custom error page.
 
-Production deployment verifies both sides of this boundary: an intentionally missing URL must return HTTP 404 and its response body must contain the reviewed portfolio 404 marker `頁不在`. This catches both missing public assets and broken server-side error routing without publishing the server configuration itself.
+The server-panel account state itself is host-resident operational state and is not represented by a committed credential or secret. Production deployment therefore verifies the effective behavior: an intentionally missing URL must return HTTP 404 and its response body must contain the reviewed portfolio 404 marker `頁不在`.
 
 ## CHARACTER retirement
 
@@ -106,7 +115,7 @@ The production authorization boundary remains the live Supabase Row Level Securi
 
 `tools/validate_public_repo.py` is the public/private boundary gate. It rejects known private filenames and path classes, high-confidence secret-like content, symlinks, unreviewed files inside locked application slices, and tree/blob drift where exact source identity is required.
 
-`tools/write_public_inventory.py` generates a deterministic tracked-file SHA-256 inventory for review. `tools/build_deployment.py` separately generates the production artifact and deployment manifest.
+`tools/write_public_inventory.py` generates a deterministic tracked-file SHA-256 inventory for review. `tools/build_deployment.py` separately generates the production artifact and deployment manifest, including reviewed generated root metadata.
 
 Generated build artifacts are not tracked in Git.
 
@@ -116,14 +125,14 @@ The following categories never become public merely because this repository is t
 
 - passwords, tokens, private keys, FTPS credentials, and other secrets
 - `config.php`, `user.ini`, `admin.local.php`, and equivalent local configuration
-- server-only routing and error-document configuration
+- hosting control-panel account state and secret or host-specific configuration
 - protected/private content
 - private database data or privileged database administration material
 - mutable runtime state
 - operator-only workflows and tools
 - private Git history or notes that are not intended for publication
 
-These belong in GitHub Actions Secrets, the production server, or a private repository/storage location according to their role.
+These belong in GitHub Actions Secrets, the production server, the hosting control panel, or a private repository/storage location according to their role.
 
 ## License
 

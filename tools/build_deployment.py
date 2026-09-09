@@ -36,6 +36,23 @@ def load_config() -> dict:
     return data
 
 
+def load_retired_paths(config: dict) -> tuple[PurePosixPath, ...]:
+    raw = config.get("retiredRemotePaths", [])
+    if not isinstance(raw, list):
+        raise BuildError("retiredRemotePaths must be an array")
+
+    retired: list[PurePosixPath] = []
+    seen: set[str] = set()
+    for index, value in enumerate(raw):
+        path = safe_rel(value, f"retiredRemotePaths[{index}]")
+        text = path.as_posix()
+        if text in seen:
+            raise BuildError(f"duplicate retired remote path: {text}")
+        seen.add(text)
+        retired.append(path)
+    return tuple(retired)
+
+
 def ensure_source_allowed(source: Path) -> None:
     try:
         rel = source.relative_to(ROOT)
@@ -117,8 +134,27 @@ def copy_tree(
         )
 
 
+def ensure_retired_paths_absent(
+    retired: tuple[PurePosixPath, ...],
+    emitted: dict[str, dict],
+) -> None:
+    homepage = (ROOT / "index.html").read_text(encoding="utf-8")
+
+    for path in retired:
+        text = path.as_posix()
+        prefix = text + "/"
+        for emitted_path in emitted:
+            if emitted_path == text or emitted_path.startswith(prefix):
+                raise BuildError(f"retired path is still emitted by production artifact: {text}")
+
+        public_href_prefix = f"/{text}/"
+        if public_href_prefix in homepage:
+            raise BuildError(f"homepage still links to retired production surface: {public_href_prefix}")
+
+
 def build() -> dict:
     config = load_config()
+    retired = load_retired_paths(config)
     build_rel = safe_rel(config.get("buildRoot"), "buildRoot")
     build_root = ROOT / build_rel
     expected = ROOT / "build/public_html"
@@ -176,10 +212,13 @@ def build() -> dict:
     if not (build_root / "index.html").is_file():
         raise BuildError("portfolio root index.html was not emitted")
 
+    ensure_retired_paths_absent(retired, emitted)
+
     payload = {
         "schemaVersion": 1,
         "source": "watarionn/portfolio-site",
         "buildRoot": build_rel.as_posix(),
+        "retiredRemotePaths": [path.as_posix() for path in retired],
         "entries": entry_summaries,
         "files": [emitted[path] for path in sorted(emitted)],
     }
@@ -201,7 +240,8 @@ def main() -> int:
         return 1
     print(
         "production artifact build passed: "
-        f"{len(payload['entries'])} mapped entries, {len(payload['files'])} files"
+        f"{len(payload['entries'])} mapped entries, {len(payload['files'])} files, "
+        f"{len(payload['retiredRemotePaths'])} retired remote paths"
     )
     return 0
 

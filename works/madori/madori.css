@@ -907,3 +907,126 @@ body {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }
+
+/* =============================================
+   Stage 9 Slice B — editor usability
+   ============================================= */
+.tab {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--font-m);
+}
+
+.drawer-nav { display: none; }
+
+#canvas-actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 5.6rem;
+  z-index: 11;
+  display: flex;
+  gap: 0.25rem;
+}
+.canvas-action {
+  min-height: 2rem;
+  padding: 0.38rem 0.58rem;
+  border: 1px solid var(--clr-rule);
+  border-radius: 2px;
+  background: rgba(240,232,204,0.94);
+  color: var(--clr-ink-mid);
+  font: 600 0.62rem/1 var(--font-m);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+.canvas-action:hover { background: var(--clr-paper-deep); }
+.canvas-action--danger { color: var(--clr-vermilion); }
+
+#workspace-guide {
+  position: absolute;
+  right: 1rem;
+  bottom: 2.3rem;
+  z-index: 14;
+  width: min(17rem, calc(100% - 2rem));
+  padding: 0.9rem 2.2rem 0.9rem 1rem;
+  border: 1px solid var(--clr-rule);
+  background: rgba(250,245,224,0.96);
+  box-shadow: 0 0.7rem 2rem rgba(26,18,10,0.12);
+  color: var(--clr-ink-mid);
+}
+#workspace-guide[hidden] { display: none; }
+#dismiss-guide-btn {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.45rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 0;
+  background: transparent;
+  color: var(--clr-muted);
+  font: 1rem/1 var(--font-m);
+  cursor: pointer;
+}
+.workspace-guide__eyebrow {
+  margin: 0 0 0.35rem;
+  color: var(--clr-vermilion);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+#workspace-guide p { margin: 0; font-size: 0.72rem; line-height: 1.7; }
+#workspace-guide ol {
+  margin: 0.55rem 0 0 1.15rem;
+  color: var(--clr-ink-light);
+  font-size: 0.64rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+  .drawer-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    padding: 0 0.6rem 0.45rem;
+    background: var(--clr-paper-dk);
+  }
+  .drawer-nav__btn {
+    min-height: 2.35rem;
+    border: 1px solid var(--clr-rule-lt);
+    background: var(--clr-paper);
+    color: var(--clr-ink-light);
+    font: 600 0.7rem/1 var(--font-m);
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  .drawer-nav__btn.is-active {
+    border-color: var(--clr-cobalt);
+    background: var(--clr-cobalt);
+    color: var(--clr-paper);
+  }
+  #sidebar .sb-section[data-panel-group] { display: none; }
+  #sidebar[data-active-group="add"] .sb-section[data-panel-group="add"],
+  #sidebar[data-active-group="edit"] .sb-section[data-panel-group="edit"],
+  #sidebar[data-active-group="data"] .sb-section[data-panel-group="data"] { display: block; }
+
+  #canvas-actions {
+    top: calc(var(--tab-h) + 3px + 3.35rem);
+    right: 0.5rem;
+    flex-direction: column;
+  }
+  .canvas-action {
+    min-height: 1.85rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.58rem;
+    background: rgba(240,232,204,0.96);
+  }
+  #workspace-guide {
+    right: auto;
+    left: 0.65rem;
+    bottom: calc(var(--drawer-peek) + 4.3rem);
+    width: min(16rem, calc(100% - 5.4rem));
+    padding: 0.75rem 1.9rem 0.75rem 0.8rem;
+  }
+  #workspace-guide p { font-size: 0.66rem; }
+  #workspace-guide ol { font-size: 0.59rem; }
+}

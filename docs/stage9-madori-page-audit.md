@@ -252,3 +252,27 @@ Verification completed against the branch implementation:
 - Three.js canvas initializes at non-zero size on mobile
 
 Slice B remains intentionally separate so editor usability changes can be reviewed independently from the portfolio framing.
+
+## Slice B implementation status
+
+Implemented on the same Stage 9 MADORI branch:
+
+- first-run three-step workspace guide with dismiss persistence
+- `全体表示` automatic fit-to-content control
+- destructive `デモに戻す` and `空にする` actions with confirmation
+- deterministic demo restoration for room/furniture templates and seeded layout
+- mobile control grouping into `追加 / 編集 / 保存`
+- keyboard-correct 2D / 3D tab buttons with Arrow, Home, and End handling
+- responsive placement for the new utility controls and guide
+
+Regression verification:
+
+- seeded state restores to 6 rooms and 4 furniture items
+- clear layout produces 0 rooms, 0 furniture items, and 0 walls
+- fit view recalculates pan/zoom from current content bounds
+- ArrowRight switches focus and view from 2D to 3D; ArrowLeft returns to 2D
+- Three.js still initializes at non-zero canvas size
+- mobile control grouping hides inactive groups correctly
+- 390px viewport remains free of horizontal overflow
+
+Slice C remains separate for technical and accessibility cleanup, including the secondary DirectionalLight initialization defect identified during the audit.

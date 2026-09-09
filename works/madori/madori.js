@@ -29,6 +29,24 @@ let furnTypes = [
   {name:'TV台',     w:100,h:30, h3:25, color:'#556677'},
 ];
 
+const DEFAULT_ROOM_TYPES = roomTypes.map(function(item) { return {...item}; });
+const DEFAULT_FURN_TYPES = furnTypes.map(function(item) { return {...item}; });
+const DEFAULT_ROOMS = [
+  {type:'room',name:'リビング',   x:80,  y:60,  w:200,h:160,color:'#d4eaff'},
+  {type:'room',name:'キッチン',   x:280, y:60,  w:140,h:100,color:'#d4ffd4'},
+  {type:'room',name:'寝室',       x:80,  y:220, w:160,h:140,color:'#ffd4d4'},
+  {type:'room',name:'バスルーム', x:280, y:160, w:100,h:100,color:'#e0d4ff'},
+  {type:'room',name:'トイレ',     x:380, y:160, w:60, h:100,color:'#fff0d4'},
+  {type:'room',name:'玄関',       x:240, y:220, w:100,h:80, color:'#f0f0d4'},
+];
+const DEFAULT_FURNITURE = [
+  {type:'furniture',name:'ソファ',   x:120,y:140,w:100,h:45, color:'#8B6914',h3:35},
+  {type:'furniture',name:'テーブル', x:150,y:90, w:60, h:50, color:'#8B4513',h3:38},
+  {type:'furniture',name:'ベッド',   x:100,y:260,w:120,h:80, color:'#6b4e8a',h3:40},
+  {type:'furniture',name:'TV台',     x:80, y:62, w:100,h:28, color:'#556677',h3:25},
+];
+function cloneItems(items) { return items.map(function(item) { return {...item}; }); }
+
 /* ─── 2D状態 ─── */
 let rooms = [], furniture = [], walls = [];
 let selected = null;
@@ -53,6 +71,59 @@ const wrap = document.getElementById('canvas-wrap');
    ============================================= */
 function snap(v) {
   return snapEnabled ? Math.round(v / GRID) * GRID : v;
+}
+
+function getLayoutBounds() {
+  const boxes = rooms.concat(furniture).map(function(item) {
+    return {minX:item.x, minY:item.y, maxX:item.x + item.w, maxY:item.y + item.h};
+  });
+  walls.forEach(function(w) {
+    boxes.push({minX:Math.min(w.x1,w.x2), minY:Math.min(w.y1,w.y2), maxX:Math.max(w.x1,w.x2), maxY:Math.max(w.y1,w.y2)});
+  });
+  if (!boxes.length) return null;
+  return {
+    minX: Math.min.apply(null, boxes.map(function(b) { return b.minX; })),
+    minY: Math.min.apply(null, boxes.map(function(b) { return b.minY; })),
+    maxX: Math.max.apply(null, boxes.map(function(b) { return b.maxX; })),
+    maxY: Math.max.apply(null, boxes.map(function(b) { return b.maxY; })),
+  };
+}
+
+function fitView() {
+  const bounds = getLayoutBounds();
+  if (!bounds || !c2d.width || !c2d.height) {
+    viewX = 0; viewY = 0; viewScale = 1; draw2d(); return;
+  }
+  const pad = isSmartphone() ? 34 : 64;
+  const bw = Math.max(GRID, bounds.maxX - bounds.minX);
+  const bh = Math.max(GRID, bounds.maxY - bounds.minY);
+  const sx = Math.max(0.3, (c2d.width - pad * 2) / bw);
+  const sy = Math.max(0.3, (c2d.height - pad * 2) / bh);
+  viewScale = Math.max(0.3, Math.min(2.2, sx, sy));
+  viewX = (c2d.width - bw * viewScale) / 2 - bounds.minX * viewScale;
+  viewY = (c2d.height - bh * viewScale) / 2 - bounds.minY * viewScale;
+  draw2d();
+}
+
+function restoreDemo() {
+  roomTypes = cloneItems(DEFAULT_ROOM_TYPES);
+  furnTypes = cloneItems(DEFAULT_FURN_TYPES);
+  rooms = cloneItems(DEFAULT_ROOMS);
+  furniture = cloneItems(DEFAULT_FURNITURE);
+  walls = [];
+  selected = null;
+  snapEnabled = true;
+  document.getElementById('snap-check').checked = true;
+  renderSidebar();
+  setTool('select');
+  fitView();
+}
+
+function clearLayout() {
+  rooms = []; furniture = []; walls = []; selected = null;
+  setTool('select');
+  viewX = 0; viewY = 0; viewScale = 1;
+  draw2d();
 }
 
 /* スクリーン座標 → キャンバス座標 */
@@ -443,6 +514,24 @@ document.getElementById('btn-select').addEventListener('click', function() { set
 document.getElementById('btn-wall').addEventListener('click',   function() { setTool('wall'); });
 document.getElementById('btn-erase').addEventListener('click',  function() { setTool('erase'); });
 
+document.getElementById('fit-view-btn').addEventListener('click', fitView);
+document.getElementById('reset-demo-btn').addEventListener('click', function() {
+  if (window.confirm('現在の編集内容を破棄して、最初のデモ配置へ戻しますか？')) restoreDemo();
+});
+document.getElementById('clear-layout-btn').addEventListener('click', function() {
+  if (window.confirm('現在の部屋・家具・壁をすべて消して、空の図面にしますか？')) clearLayout();
+});
+
+const workspaceGuide = document.getElementById('workspace-guide');
+const dismissGuideBtn = document.getElementById('dismiss-guide-btn');
+try {
+  if (localStorage.getItem('madori-guide-dismissed') === '1') workspaceGuide.hidden = true;
+} catch (err) { /* localStorage が使えない環境では毎回表示する */ }
+dismissGuideBtn.addEventListener('click', function() {
+  workspaceGuide.hidden = true;
+  try { localStorage.setItem('madori-guide-dismissed', '1'); } catch (err) { /* ignore */ }
+});
+
 /* =============================================
    オブジェクト追加・削除
    ============================================= */
@@ -552,6 +641,19 @@ const panelToggleBtn= document.getElementById('panel-toggle-btn');
 
 function isSmartphone() { return window.innerWidth <= 768; }
 
+const drawerNavButtons = Array.from(document.querySelectorAll('.drawer-nav__btn'));
+function setPanelGroup(group) {
+  sidebar.dataset.activeGroup = group;
+  drawerNavButtons.forEach(function(btn) {
+    const active = btn.dataset.panelTarget === group;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+}
+drawerNavButtons.forEach(function(btn) {
+  btn.addEventListener('click', function() { setPanelGroup(btn.dataset.panelTarget); });
+});
+
 function openDrawer() {
   sidebar.classList.add('is-open');
   panelToggleBtn.classList.add('panel-open');
@@ -582,29 +684,38 @@ document.addEventListener('pointerdown', function(e) {
 /* =============================================
    タブ切替
    ============================================= */
-function switchTab(t) {
+function switchTab(t, moveFocus) {
   const v2 = document.getElementById('view2d');
   const v3 = document.getElementById('view3d');
   const t2 = document.getElementById('tab2d');
   const t3 = document.getElementById('tab3d');
+  const show2d = t === '2d';
 
-  if (t === '2d') {
-    v2.hidden = false; v3.hidden = true;
-    t2.classList.add('active'); t3.classList.remove('active');
-    t2.setAttribute('aria-selected', 'true'); t3.setAttribute('aria-selected', 'false');
-    resize2D();
-  } else {
-    v2.hidden = true; v3.hidden = false;
-    t3.classList.add('active'); t2.classList.remove('active');
-    t3.setAttribute('aria-selected', 'true'); t2.setAttribute('aria-selected', 'false');
-    init3D(); rebuild(); render3d();
-  }
+  v2.hidden = !show2d; v3.hidden = show2d;
+  t2.classList.toggle('active', show2d); t3.classList.toggle('active', !show2d);
+  t2.setAttribute('aria-selected', show2d ? 'true' : 'false');
+  t3.setAttribute('aria-selected', show2d ? 'false' : 'true');
+  t2.tabIndex = show2d ? 0 : -1;
+  t3.tabIndex = show2d ? -1 : 0;
+
+  if (show2d) resize2D();
+  else { init3D(); rebuild(); render3d(); }
+  if (moveFocus) (show2d ? t2 : t3).focus();
 }
 
 document.getElementById('tab2d').addEventListener('click', function() { switchTab('2d'); });
 document.getElementById('tab3d').addEventListener('click', function() { switchTab('3d'); });
 document.getElementById('go3d-btn').addEventListener('click', function() { switchTab('3d'); });
 document.getElementById('back2d-btn').addEventListener('click', function() { switchTab('2d'); });
+document.getElementById('tabs').addEventListener('keydown', function(e) {
+  if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+  const on2d = document.activeElement === document.getElementById('tab2d');
+  if (!on2d && document.activeElement !== document.getElementById('tab3d')) return;
+  e.preventDefault();
+  if (e.key === 'Home') switchTab('2d', true);
+  else if (e.key === 'End') switchTab('3d', true);
+  else switchTab(on2d ? '3d' : '2d', true);
+});
 
 /* =============================================
    保存・読み込み
@@ -856,20 +967,8 @@ document.getElementById('reset-cam-btn').addEventListener('click', function() {
 /* =============================================
    初期化
    ============================================= */
-rooms = [
-  {type:'room',name:'リビング',   x:80,  y:60,  w:200,h:160,color:'#d4eaff'},
-  {type:'room',name:'キッチン',   x:280, y:60,  w:140,h:100,color:'#d4ffd4'},
-  {type:'room',name:'寝室',       x:80,  y:220, w:160,h:140,color:'#ffd4d4'},
-  {type:'room',name:'バスルーム', x:280, y:160, w:100,h:100,color:'#e0d4ff'},
-  {type:'room',name:'トイレ',     x:380, y:160, w:60, h:100,color:'#fff0d4'},
-  {type:'room',name:'玄関',       x:240, y:220, w:100,h:80, color:'#f0f0d4'},
-];
-furniture = [
-  {type:'furniture',name:'ソファ',   x:120,y:140,w:100,h:45, color:'#8B6914',h3:35},
-  {type:'furniture',name:'テーブル', x:150,y:90, w:60, h:50, color:'#8B4513',h3:38},
-  {type:'furniture',name:'ベッド',   x:100,y:260,w:120,h:80, color:'#6b4e8a',h3:40},
-  {type:'furniture',name:'TV台',     x:80, y:62, w:100,h:28, color:'#556677',h3:25},
-];
+rooms = cloneItems(DEFAULT_ROOMS);
+furniture = cloneItems(DEFAULT_FURNITURE);
 
 /* info2d の更新 */
 function updateInfo() {
@@ -892,5 +991,6 @@ updateInfo();
 requestAnimationFrame(function() {
   requestAnimationFrame(function() {
     resize2D();
+    fitView();
   });
 });

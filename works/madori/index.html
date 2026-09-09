@@ -3,13 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>間取り図ジェネレーター</title>
+  <meta name="description" content="2Dで間取りを編集し、同じデータから3Dビューまで生成できるブラウザ上の間取図メーカー。">
+  <title>間取図メーカー | 風花 理珠 / Liz Hookah</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="madori.css">
 </head>
 <body>
+  <a class="skip-link" href="#workspace">エディタへ移動</a>
+
+  <header class="project-hero">
+    <div class="project-shell project-hero__topline">
+      <a class="project-back" href="/">← 個人大辞典へ戻る</a>
+      <p>ENTRY 008 / CREATIVE TOOL</p>
+    </div>
+    <div class="project-shell project-hero__grid">
+      <div class="project-hero__copy">
+        <p class="project-kicker">Floor plan editor / 2D + 3D</p>
+        <h1>間取図<br>メーカー</h1>
+        <p class="project-lead">部屋や家具を配置し、壁を描き、同じ編集データをそのまま3D空間へ。ブラウザだけで間取りの検討から書き出しまで試せる編集ツールです。</p>
+        <a class="project-cta" href="#workspace">実際に触ってみる <span aria-hidden="true">↓</span></a>
+      </div>
+      <dl class="project-facts">
+        <div><dt>ROLE</dt><dd>Planning / UI / Implementation</dd></div>
+        <div><dt>CORE</dt><dd>Canvas 2D / Three.js 3D</dd></div>
+        <div><dt>DATA</dt><dd>JSON save &amp; restore</dd></div>
+        <div><dt>OUTPUT</dt><dd>PNG / Responsive Web</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <main>
+    <section class="project-intro project-shell" aria-labelledby="intro-title">
+      <p class="section-index">01 / OVERVIEW</p>
+      <div class="project-intro__copy">
+        <h2 id="intro-title">図面を描く操作と、<br>立体で確かめる体験をひとつに。</h2>
+        <p>2Dキャンバス上の部屋・家具・壁を共通の状態として保持し、その状態から3Dシーンを再構成します。編集結果を別ツールへ移すのではなく、同じページの中で視点を切り替えて確認できることを核にしました。</p>
+      </div>
+    </section>
+
+    <section class="workspace-section" id="workspace" aria-labelledby="workspace-title">
+      <div class="project-shell workspace-heading">
+        <div><p class="section-index">02 / LIVE WORKSPACE</p><h2 id="workspace-title">間取りを編集する</h2></div>
+        <p>部屋を動かす、壁を描く、3Dへ切り替える。下の画面はデモ画像ではなく、そのまま操作できます。</p>
+      </div>
+      <div class="workspace-shell">
+        <div class="editor-app">
 
   <!-- タブバー -->
   <div id="tabs" role="tablist">
@@ -154,6 +194,60 @@
     </div>
     <div id="info3d">ドラッグ: 回転　｜　ピンチ/ホイール: ズーム</div>
   </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study project-shell" aria-labelledby="features-title">
+      <header class="case-study__heading">
+        <p class="section-index">03 / FEATURES</p>
+        <h2 id="features-title">ひとつの状態を、<br>複数の見え方へ。</h2>
+      </header>
+      <div class="feature-ledger">
+        <article><span>01</span><h3>2D編集</h3><p>部屋と家具の追加・移動・8方向リサイズ、壁の描画と削除、グリッドスナップに対応。</p></article>
+        <article><span>02</span><h3>3D確認</h3><p>2Dで配置した状態からThree.jsのシーンを生成。回転・ズーム・俯瞰切替で空間を確認できます。</p></article>
+        <article><span>03</span><h3>保存と復元</h3><p>編集状態とカスタム部屋・家具タイプをJSONへ保存。後から読み込んで作業を再開できます。</p></article>
+        <article><span>04</span><h3>画像出力</h3><p>2D図面と3Dビューの双方をPNGとして書き出し、検討結果をそのまま持ち出せます。</p></article>
+      </div>
+    </section>
+
+    <section class="case-study case-study--dark" aria-labelledby="architecture-title">
+      <div class="project-shell architecture-grid">
+        <div>
+          <p class="section-index">04 / ARCHITECTURE</p>
+          <h2 id="architecture-title">編集データを中心に<br>2Dと3Dをつなぐ。</h2>
+        </div>
+        <div class="architecture-flow" aria-label="データフロー">
+          <div><strong>EDIT</strong><span>rooms / furniture / walls</span></div>
+          <i aria-hidden="true">→</i>
+          <div><strong>STATE</strong><span>shared JavaScript objects</span></div>
+          <i aria-hidden="true">→</i>
+          <div><strong>VIEW</strong><span>Canvas 2D / Three.js 3D</span></div>
+        </div>
+        <p class="architecture-note">見た目を二重管理せず、編集状態を単一の情報源として扱います。2Dで変更した位置・大きさ・色は、3Dへ切り替えたときにその場で再構成されます。</p>
+      </div>
+    </section>
+
+    <section class="case-study project-shell howto" aria-labelledby="howto-title">
+      <header class="case-study__heading">
+        <p class="section-index">05 / HOW TO USE</p>
+        <h2 id="howto-title">まずは3手で。</h2>
+      </header>
+      <ol class="howto-list">
+        <li><span>1</span><div><strong>部屋や家具を追加</strong><p>左パネル、スマートフォンでは「＋ 追加」から配置します。</p></div></li>
+        <li><span>2</span><div><strong>動かして形を整える</strong><p>ドラッグで移動。選択中のハンドルでサイズを変更し、必要なら壁も描きます。</p></div></li>
+        <li><span>3</span><div><strong>3Dで空間を確認</strong><p>3Dビューへ切り替え、回転・ズーム・俯瞰表示でレイアウトを確かめます。</p></div></li>
+      </ol>
+    </section>
+
+    <nav class="project-next" aria-label="関連作品">
+      <div class="project-shell project-next__grid">
+        <a href="/PRIME_DOT_ART/prime_dot_art.html"><small>RELATED / ALGORITHM</small><strong>素数点画</strong><span>↗</span></a>
+        <a href="/SPHERE/sphere.html"><small>RELATED / 3D</small><strong>天球儀</strong><span>↗</span></a>
+        <a href="/"><small>INDEX</small><strong>作品索引へ戻る</strong><span>↗</span></a>
+      </div>
+    </nav>
+  </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="madori.js" defer></script>

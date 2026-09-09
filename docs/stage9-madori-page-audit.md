@@ -229,3 +229,26 @@ Not required for the first redesign:
 Proceed with Slice A first.
 
 The editor implementation is already strong enough to feature. The first redesign should therefore avoid changing its underlying interaction model and instead create a portfolio-quality shell around the working application. After that foundation is visually verified on desktop and mobile, Slice B can improve the editor itself.
+
+## Slice A implementation status
+
+Implemented on the Stage 9 MADORI branch:
+
+- editorial project hero and project metadata
+- scrollable overview before the live editor
+- live workspace framed as the central artifact
+- feature ledger covering 2D, 3D, save/restore, and PNG output
+- architecture section documenting the shared state model
+- three-step usage guide and related-work navigation
+- responsive framing that keeps the existing mobile editor drawer inside the workspace rather than attaching it to the whole page
+- reduced-motion handling for the new page-level transitions
+
+Verification completed against the branch implementation:
+
+- desktop visual review at 1440px
+- mobile viewport review at 390px with no horizontal overflow
+- existing room-add flow still updates selection state
+- 2D -> 3D -> 2D switching still works
+- Three.js canvas initializes at non-zero size on mobile
+
+Slice B remains intentionally separate so editor usability changes can be reviewed independently from the portfolio framing.

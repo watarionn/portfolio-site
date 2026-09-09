@@ -19,6 +19,7 @@ The deployment workflow requires repository Actions secrets for FTPS and the pro
 The current public repository contains:
 
 - the portfolio shell and profile
+- the reviewed root 404 page assets: `404.html`, `404.css`, and `404.js`
 - reviewed static tools and static works
 - the YOREI browser client under `apps/yorei/public/**`
 - the AQUARIUM public source under `apps/aquarium/public/**`
@@ -27,7 +28,15 @@ The current public repository contains:
 - the SHISHA public viewer under `services/shisha/public/**`
 - the SECRET entrance source under `apps/secret-room/public/**`
 
-Legacy 404 assets remain a production-only migration gap and are not yet owned by this repository. Ordinary non-destructive deployment leaves them untouched until separately reviewed.
+The legacy root 404 migration gap is closed by the reviewed root assets above. Separate remote-only root metadata and verification files, including search-engine metadata or ownership-verification artifacts, remain outside this 404 migration step and require their own inventory decision before they are treated as public-repository source.
+
+## Root 404 boundary
+
+The root portfolio 404 presentation is public source and is deployed from this repository as `404.html`, `404.css`, and `404.js`.
+
+The server-level mechanism that maps missing URLs to the custom 404 page is server configuration, not browser-facing source. It remains private/server-resident under the project rule that server-only configuration does not move into the public repository merely because the rendered error page is public.
+
+Production deployment verifies both sides of this boundary: an intentionally missing URL must return HTTP 404 and its response body must contain the reviewed portfolio 404 marker `頁不在`. This catches both missing public assets and broken server-side error routing without publishing the server configuration itself.
 
 ## CHARACTER retirement
 
@@ -35,7 +44,7 @@ The CHARACTER surface is intentionally excluded from the public repository and r
 
 The portfolio shell must not link to `/CHARACTER/` or expose the former character index as a public work. The private repository remains the preservation and development location for the non-public character material.
 
-`CHARACTER` is listed in `retiredRemotePaths`. On the first production deployment after this retirement change is merged, the deployment workflow removes that remote directory explicitly and then verifies that `/CHARACTER/character-index.html` no longer returns a public success response. Future deployments continue to enforce the retirement while leaving unrelated remote-only files untouched.
+`CHARACTER` is listed in `retiredRemotePaths`. On production deployment, the deployment workflow removes that remote directory explicitly and then verifies that `/CHARACTER/character-index.html` no longer returns a public success response. Future deployments continue to enforce the retirement while leaving unrelated remote-only files untouched.
 
 ## HoloScope locked public shell
 
@@ -107,6 +116,7 @@ The following categories never become public merely because this repository is t
 
 - passwords, tokens, private keys, FTPS credentials, and other secrets
 - `config.php`, `user.ini`, `admin.local.php`, and equivalent local configuration
+- server-only routing and error-document configuration
 - protected/private content
 - private database data or privileged database administration material
 - mutable runtime state

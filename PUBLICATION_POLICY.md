@@ -1,28 +1,65 @@
-# Publication policy
+# Publication and production policy
 
-This repository is a clean public portfolio export from the private production source repository.
+This repository is the canonical source of truth for production website code and assets that are safe to publish.
 
-## Stage 7 scope
+The private repository is no longer the canonical source for ordinary public website code. It is reserved for material that should not be publicly visible, such as credentials, protected content, server-only configuration, mutable runtime state, private operational tooling, and other non-public source or data.
 
-Stage 7 retains the reviewed Stage 1 portfolio shell, profile, static tools, and static works, the Stage 2 browser-only YOREI client under `apps/yorei/public/**`, the Stage 3 AQUARIUM source slice under `apps/aquarium/public/**`, the Stage 4 HOLOCA source slice under `services/holoca/public/**`, the Stage 5 HoloScope public application shell under `services/holoscope/public/**`, and the Stage 6 SHISHA viewer source under `services/shisha/public/**`. Stage 7 adds only the separately hardened and re-audited SECRET entrance source under `apps/secret-room/public/**`.
+## Stage 8 production-authority model
 
-The HoloScope addition is locked as an exact 86-file Git tree with tree SHA `ba9a9051a28382917e87dda6c309c902bd11ea4d`, sourced from the private Stage 5 allowlist revision `e856e990ea31140cb46df225b7ac01e7a469a7c3` and source-lock merge `3cc31a7292456a953d94673fcb6d60d75d9f9e8e`. The public repository validator requires that exact subtree and rejects any additional file under `services/holoscope/` outside `services/holoscope/public/**`.
+Publishable source is maintained here in a clean developer-facing layout. `config/deployment-map.json` maps that layout to the existing production URL layout, and `tools/build_deployment.py` creates the generated `build/public_html` artifact used by the production workflow.
 
-HoloScope is published here as shell/source display only. Its private release overlay, legacy material, tests, root-level runtime tree, production `public_html` tree, local admin configuration, mutable operations state, release activation state, credentials, and deployment material are intentionally excluded. In particular, `services/holoscope/release/**`, `services/holoscope/legacy/**`, `services/holoscope/tests/**`, root `holoscope/**`, `public_html/holoscope/**`, and `admin.local.php` must not be added to this repository. Publication of the shell does not activate or deploy a HoloScope release.
+A merge to `main` affecting deployable paths is intended to run validation and then deploy the generated artifact over certificate-verified FTPS. Deployment is deliberately non-destructive: remote-only files are not deleted, and known server-only configuration names are excluded defensively.
 
-SHISHA is published here as viewer-source display only. The exact approved subtree is the nine-file Git tree `2b4f36d8c4aeee08c384517e05dda952e3b7724f`, locked from private allowlist merge revision `2640a7a292aaf0eb8396ae4b2312624ed9cb9d7e` and private source-lock merge `2ad649697dd44e8f46092df83e62c530671ca741`. The public validator requires this exact tree and exact Git blob identities.
+The deployment workflow requires repository Actions secrets for FTPS and the production site URL. Secret values must never be committed to this repository.
 
-The SHISHA public viewer intentionally omits private bootstrap shop data and mutable runtime state, so this repository is not expected to provide a populated or production-equivalent standalone SHISHA runtime. `services/shisha/operator/**`, `services/shisha/bootstrap-data/**`, `services/shisha/public/var/**`, real `services/shisha/public/config.php`, production `public_html/SHISHA/**`, operator credentials, and SHISHA deploy/install/update workflows must remain private. Publication of the viewer source does not deploy or cut over production SHISHA.
+## Current reviewed public scope
 
-The SECRET entrance is published here as source display only. The exact approved subtree is the seven-file Git tree `c778ee30cac4737b1a4dcf0aec65241ece41ea20`, sourced from private allowlist merge revision `70e82cdb34b8435c3841fc233c676aca61c70bb7` and private source-lock merge `709fa957261cfdeba0f1e3b860549dd537011d32`. The public validator requires this exact tree and exact Git blob identities.
+The current public repository contains:
 
-The post-unlock room, private gate implementation, real answer configuration, production `public_html/SECRET/**`, credentials, runtime/server state, deployment/cutover material, and private Git history remain private. The public `check.php` is intentionally a thin front controller and fails closed when the private gate is absent, so this repository does not claim a working standalone unlock flow or production-equivalent SECRET runtime.
+- the portfolio shell and profile
+- reviewed static tools and static works
+- the YOREI browser client under `apps/yorei/public/**`
+- the AQUARIUM public source under `apps/aquarium/public/**`
+- the HOLOCA public source under `services/holoca/public/**`
+- the HoloScope public application shell under `services/holoscope/public/**`
+- the SHISHA public viewer under `services/shisha/public/**`
+- the SECRET entrance source under `apps/secret-room/public/**`
 
-YOREI's public client uses browser-side Supabase configuration by design. Database schema and policies, service-role credentials, production deployment configuration, operator workflows, mutable runtime state, private notes, and private Git history remain outside this repository. The production authorization boundary remains the live Supabase Row Level Security configuration reviewed separately before the Stage 2 import.
+Production-only public surfaces that have not yet been imported into this repository remain migration gaps. In particular, the existing CHARACTER surface and legacy 404 assets are not yet owned by this repository. The Stage 8 deployment process therefore does not delete remote-only files while those surfaces are reviewed and migrated separately.
 
-AQUARIUM is published here as source display only. Its PHP source intentionally preserves a dependency on the private server-side `config.php`, but that configuration file, database credentials, database contents, server configuration, runtime state, and operational material are not included in this repository. This public repository is not expected to provide a working AQUARIUM runtime by itself.
+## HoloScope locked public shell
 
-HOLOCA is published as an exact five-file reviewed public source slice:
+The reviewed HoloScope public shell remains locked as an exact 86-file Git tree with tree SHA `ba9a9051a28382917e87dda6c309c902bd11ea4d`, sourced from the private Stage 5 allowlist revision `e856e990ea31140cb46df225b7ac01e7a469a7c3` and source-lock merge `3cc31a7292456a953d94673fcb6d60d75d9f9e8e`.
+
+The validator requires that exact subtree and rejects non-public HoloScope siblings. Private release overlays, legacy material, tests, production runtime data, local admin configuration, mutable operations state, credentials, and private deployment material remain outside this public source tree.
+
+Server-only HoloScope material such as `admin.local.php` must remain private or server-resident and must not be committed here.
+
+## SHISHA locked public viewer
+
+The SHISHA public viewer remains the exact nine-file Git tree `2b4f36d8c4aeee08c384517e05dda952e3b7724f`, locked from private allowlist merge revision `2640a7a292aaf0eb8396ae4b2312624ed9cb9d7e` and private source-lock merge `2ad649697dd44e8f46092df83e62c530671ca741`.
+
+The viewer source intentionally omits private bootstrap shop data and mutable runtime state. The following material must not be committed here:
+
+- `services/shisha/operator/**`
+- `services/shisha/bootstrap-data/**`
+- `services/shisha/public/var/**`
+- real `services/shisha/public/config.php`
+- credentials
+- runtime state
+- operator-only install/update material
+
+The server-resident SHISHA configuration and runtime data may remain in production while the public viewer source is deployed non-destructively.
+
+## SECRET locked entrance
+
+The SECRET entrance remains the exact seven-file Git tree `c778ee30cac4737b1a4dcf0aec65241ece41ea20`, sourced from private allowlist merge revision `70e82cdb34b8435c3841fc233c676aca61c70bb7` and private source-lock merge `709fa957261cfdeba0f1e3b860549dd537011d32`.
+
+The protected room, private gate implementation, real answer configuration, credentials, runtime/server state, and other non-public material remain outside this repository. The public `check.php` is intentionally a thin front controller and fails closed when the private gate is absent.
+
+## HOLOCA reviewed public slice
+
+HOLOCA remains a reviewed five-file public slice:
 
 - `services/holoca/public/card_search_api.php`
 - `services/holoca/public/holoca.css`
@@ -30,30 +67,44 @@ HOLOCA is published as an exact five-file reviewed public source slice:
 - `services/holoca/public/holoca.js`
 - `services/holoca/public/index.html`
 
-The HOLOCA browser UI is public source, but the search API depends on protected private server configuration at `../config.php`. That configuration, database credentials, database contents, server/runtime state, and private deployment material are intentionally absent here. Without the protected configuration, the reviewed API fails closed with a generic service-unavailable JSON response rather than exposing runtime details.
+The browser UI is public source, while the search API depends on protected server configuration at `../config.php`. Database credentials, database contents, runtime state, operator endpoints, and maintenance tooling remain private/server-only.
 
-The reviewed HOLOCA source also keeps runtime/database exception details in server-side logging and binds database-backed search-result actions through in-memory numeric indexes and DOM event listeners instead of embedding card JSON in executable inline event handlers. Maintenance/operator endpoints such as `ability_repair.php` and `scraper_runner.php` are not part of the public slice and must not be added to this repository.
+The reviewed API must fail closed with a generic service-unavailable response when protected configuration is absent. Runtime/database exception details remain server-side, and search-result actions are bound without embedding serialized card JSON in executable inline handlers.
 
-Publication of HOLOCA source does not repair or deploy the currently separate production HOLOCA runtime. Production restoration remains a private deployment/server task and requires its own authorization.
+## AQUARIUM boundary
 
-Characters are intentionally excluded from this public portfolio export.
+AQUARIUM public source intentionally preserves its dependency on private server-side `config.php`. That configuration, database credentials, database contents, server configuration, and mutable runtime state must not be committed here.
 
-The Stage 2 YOREI slice was imported from the reviewed private source revision `5b2ac7e4e5b9f60b6d8e91d3ec6e43552cad9342` without carrying private repository history.
+The generated production artifact may update the reviewed public AQUARIUM files while the server-only configuration remains remote-only.
 
-The Stage 3 AQUARIUM slice was imported from the locked private source revision `04ffbde969f4586b537b0f40bb86f10c96d5db74` without carrying private repository history.
+## YOREI boundary
 
-The Stage 4 HOLOCA slice was imported from the locked private source revision `fffe94e9604286fd317e75b6ae6f466bfd05fffa` without carrying private repository history.
+YOREI's public client uses browser-side Supabase configuration by design. Database schema and policies, service-role credentials, operator workflows, private notes, and mutable runtime state remain outside this repository.
 
-The Stage 5 HoloScope shell is clean-imported from the locked private source tree described above without carrying private repository history or release/runtime material.
+The production authorization boundary remains the live Supabase Row Level Security and function policy configuration rather than secrecy of the browser anon configuration.
 
-The Stage 6 SHISHA viewer is clean-imported from the exact locked nine-file private source tree described above without carrying private repository history, bootstrap data, operator source, runtime state, credentials, production files, or maintenance workflows.
+## Public repository validation
 
-The Stage 7 SECRET entrance is clean-imported from the exact locked seven-file private source tree described above without carrying the protected room, private gate implementation, answer configuration, production files, runtime/server state, credentials, deployment material, or private repository history.
+`tools/validate_public_repo.py` is the public/private boundary gate. It rejects known private filenames and path classes, high-confidence secret-like content, symlinks, unreviewed files inside locked application slices, and tree/blob drift where exact source identity is required.
+
+`tools/write_public_inventory.py` generates a deterministic tracked-file SHA-256 inventory for review. `tools/build_deployment.py` separately generates the production artifact and deployment manifest.
+
+Generated build artifacts are not tracked in Git.
+
+## Private and server-only material
+
+The following categories never become public merely because this repository is the production authority for public code:
+
+- passwords, tokens, private keys, FTPS credentials, and other secrets
+- `config.php`, `user.ini`, `admin.local.php`, and equivalent local configuration
+- protected/private content
+- private database data or privileged database administration material
+- mutable runtime state
+- operator-only workflows and tools
+- private Git history or notes that are not intended for publication
+
+These belong in GitHub Actions Secrets, the production server, or a private repository/storage location according to their role.
 
 ## License
 
 No open-source license is granted by this repository at this time. Unless a file explicitly states otherwise, copyright and other rights remain reserved by the repository owner. Publication on GitHub permits viewing and forking only to the extent provided by GitHub's Terms of Service; it does not grant a general license to copy, modify, redistribute, or reuse the contents.
-
-## Production boundary
-
-This public repository is not the production authority. Production deployment, server credentials, protected runtime configuration, mutable state, database schema/policy administration, release activation, and maintenance/operator workflows remain private and must not be added here.

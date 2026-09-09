@@ -144,8 +144,9 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
+          import json
           import os
-          from pathlib import Path
+          from pathlib import Path, PurePosixPath
 
           def clean(name: str) -> str:
               value = os.environ[name].strip()
@@ -167,38 +168,54 @@ jobs:
           remote_path = clean("FTP_PATH") or "/"
           if not remote_path.startswith("/"):
               remote_path = "/" + remote_path
+          remote_path = remote_path.rstrip("/") or "/"
 
-          script = "\n".join(
-              [
-                  "set cmd:fail-exit yes",
-                  "set net:timeout 30",
-                  "set net:max-retries 2",
-                  "set net:reconnect-interval-base 5",
-                  "set ftp:passive-mode yes",
-                  "set ftp:ssl-force yes",
-                  "set ftp:ssl-protect-data yes",
-                  "set ftp:ssl-auth TLS",
-                  "set ssl:verify-certificate yes",
-                  f"open -u {quote(user)},{quote(password)} {quote('ftp://' + host)}",
-                  (
-                      "mirror --reverse --continue --parallel=4 --verbose=1 "
-                      "--no-perms --no-umask "
-                      "--exclude='(^|/)config\\.php$' "
-                      "--exclude='(^|/)user\\.ini$' "
-                      "--exclude='(^|/)admin\\.local\\.php$' "
-                      f"{quote('build/public_html')} {quote(remote_path)}"
-                  ),
-                  "bye",
-                  "",
-              ]
-          )
+          mapping = json.loads(Path("config/deployment-map.json").read_text(encoding="utf-8"))
+          retired = mapping.get("retiredRemotePaths", [])
+          if not isinstance(retired, list):
+              raise SystemExit("retiredRemotePaths must be an array")
+
+          retirement_commands = []
+          for index, value in enumerate(retired):
+              if not isinstance(value, str) or not value:
+                  raise SystemExit(f"retiredRemotePaths[{index}] must be a non-empty string")
+              path = PurePosixPath(value)
+              if path.is_absolute() or "." in path.parts or ".." in path.parts:
+                  raise SystemExit(f"unsafe retired remote path: {value}")
+              relative = path.as_posix()
+              target = f"/{relative}" if remote_path == "/" else f"{remote_path}/{relative}"
+              retirement_commands.append(f"rm -r -f {quote(target)}")
+
+          commands = [
+              "set cmd:fail-exit yes",
+              "set net:timeout 30",
+              "set net:max-retries 2",
+              "set net:reconnect-interval-base 5",
+              "set ftp:passive-mode yes",
+              "set ftp:ssl-force yes",
+              "set ftp:ssl-protect-data yes",
+              "set ftp:ssl-auth TLS",
+              "set ssl:verify-certificate yes",
+              f"open -u {quote(user)},{quote(password)} {quote('ftp://' + host)}",
+              (
+                  "mirror --reverse --continue --parallel=4 --verbose=1 "
+                  "--no-perms --no-umask "
+                  "--exclude='(^|/)config\\.php$' "
+                  "--exclude='(^|/)user\\.ini$' "
+                  "--exclude='(^|/)admin\\.local\\.php$' "
+                  f"{quote('build/public_html')} {quote(remote_path)}"
+              ),
+          ]
+          commands.extend(retirement_commands)
+          commands.extend(["bye", ""])
+          script = "\n".join(commands)
 
           target = Path(os.environ["RUNNER_TEMP"]) / "deploy.lftp"
           target.write_text(script, encoding="utf-8")
           target.chmod(0o600)
           PY
 
-      - name: Deploy without deleting server-only files
+      - name: Deploy public artifact and retire explicitly approved paths
         shell: bash
         run: |
           set -euo pipefail
@@ -253,3 +270,32 @@ jobs:
             rm -f "$body"
             echo "Verified: $url (HTTP $code)"
           done
+
+      - name: Verify CHARACTER retirement
+        shell: bash
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          set -euo pipefail
+          url="${SITE_URL%/}/CHARACTER/character-index.html"
+          code="$(
+            curl \
+              --silent \
+              --show-error \
+              --retry 3 \
+              --retry-delay 2 \
+              --max-time 30 \
+              --output /dev/null \
+              --write-out "%{http_code}" \
+              "$url"
+          )"
+
+          case "$code" in
+            403|404|410)
+              echo "Verified CHARACTER retirement: $url (HTTP $code)"
+              ;;
+            *)
+              echo "CHARACTER remains publicly reachable: $url (HTTP $code)"
+              exit 1
+              ;;
+          esac

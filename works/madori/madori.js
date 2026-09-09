@@ -29,6 +29,24 @@ let furnTypes = [
   {name:'TV台',     w:100,h:30, h3:25, color:'#556677'},
 ];
 
+const DEFAULT_ROOM_TYPES = roomTypes.map(function(item) { return {...item}; });
+const DEFAULT_FURN_TYPES = furnTypes.map(function(item) { return {...item}; });
+const DEFAULT_ROOMS = [
+  {type:'room',name:'リビング',   x:80,  y:60,  w:200,h:160,color:'#d4eaff'},
+  {type:'room',name:'キッチン',   x:280, y:60,  w:140,h:100,color:'#d4ffd4'},
+  {type:'room',name:'寝室',       x:80,  y:220, w:160,h:140,color:'#ffd4d4'},
+  {type:'room',name:'バスルーム', x:280, y:160, w:100,h:100,color:'#e0d4ff'},
+  {type:'room',name:'トイレ',     x:380, y:160, w:60, h:100,color:'#fff0d4'},
+  {type:'room',name:'玄関',       x:240, y:220, w:100,h:80, color:'#f0f0d4'},
+];
+const DEFAULT_FURNITURE = [
+  {type:'furniture',name:'ソファ',   x:120,y:140,w:100,h:45, color:'#8B6914',h3:35},
+  {type:'furniture',name:'テーブル', x:150,y:90, w:60, h:50, color:'#8B4513',h3:38},
+  {type:'furniture',name:'ベッド',   x:100,y:260,w:120,h:80, color:'#6b4e8a',h3:40},
+  {type:'furniture',name:'TV台',     x:80, y:62, w:100,h:28, color:'#556677',h3:25},
+];
+function cloneItems(items) { return items.map(function(item) { return {...item}; }); }
+
 /* ─── 2D状態 ─── */
 let rooms = [], furniture = [], walls = [];
 let selected = null;
@@ -47,12 +65,71 @@ const GRID = 20;
 const c2d  = document.getElementById('c2d');
 const ctx  = c2d.getContext('2d');
 const wrap = document.getElementById('canvas-wrap');
+const editorStatus = document.getElementById('editor-status');
+
+function announceStatus(message) {
+  editorStatus.textContent = '';
+  window.requestAnimationFrame(function() { editorStatus.textContent = message; });
+}
 
 /* =============================================
    ユーティリティ
    ============================================= */
 function snap(v) {
   return snapEnabled ? Math.round(v / GRID) * GRID : v;
+}
+
+function getLayoutBounds() {
+  const boxes = rooms.concat(furniture).map(function(item) {
+    return {minX:item.x, minY:item.y, maxX:item.x + item.w, maxY:item.y + item.h};
+  });
+  walls.forEach(function(w) {
+    boxes.push({minX:Math.min(w.x1,w.x2), minY:Math.min(w.y1,w.y2), maxX:Math.max(w.x1,w.x2), maxY:Math.max(w.y1,w.y2)});
+  });
+  if (!boxes.length) return null;
+  return {
+    minX: Math.min.apply(null, boxes.map(function(b) { return b.minX; })),
+    minY: Math.min.apply(null, boxes.map(function(b) { return b.minY; })),
+    maxX: Math.max.apply(null, boxes.map(function(b) { return b.maxX; })),
+    maxY: Math.max.apply(null, boxes.map(function(b) { return b.maxY; })),
+  };
+}
+
+function fitView() {
+  const bounds = getLayoutBounds();
+  if (!bounds || !c2d.width || !c2d.height) {
+    viewX = 0; viewY = 0; viewScale = 1; draw2d(); return;
+  }
+  const pad = isSmartphone() ? 34 : 64;
+  const bw = Math.max(GRID, bounds.maxX - bounds.minX);
+  const bh = Math.max(GRID, bounds.maxY - bounds.minY);
+  const sx = Math.max(0.3, (c2d.width - pad * 2) / bw);
+  const sy = Math.max(0.3, (c2d.height - pad * 2) / bh);
+  viewScale = Math.max(0.3, Math.min(2.2, sx, sy));
+  viewX = (c2d.width - bw * viewScale) / 2 - bounds.minX * viewScale;
+  viewY = (c2d.height - bh * viewScale) / 2 - bounds.minY * viewScale;
+  draw2d();
+}
+
+function restoreDemo() {
+  roomTypes = cloneItems(DEFAULT_ROOM_TYPES);
+  furnTypes = cloneItems(DEFAULT_FURN_TYPES);
+  rooms = cloneItems(DEFAULT_ROOMS);
+  furniture = cloneItems(DEFAULT_FURNITURE);
+  walls = [];
+  selected = null;
+  snapEnabled = true;
+  document.getElementById('snap-check').checked = true;
+  renderSidebar();
+  setTool('select');
+  fitView();
+}
+
+function clearLayout() {
+  rooms = []; furniture = []; walls = []; selected = null;
+  setTool('select');
+  viewX = 0; viewY = 0; viewScale = 1;
+  draw2d();
 }
 
 /* スクリーン座標 → キャンバス座標 */
@@ -434,14 +511,35 @@ c2d.addEventListener('wheel', function(e) {
 function setTool(t) {
   tool = t;
   selected = null;
-  document.querySelectorAll('.tool-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.getElementById('btn-' + t).classList.add('active');
+  document.querySelectorAll('.tool-btn').forEach(function(b) {
+    const active = b.id === 'btn-' + t;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
   draw2d();
 }
 
 document.getElementById('btn-select').addEventListener('click', function() { setTool('select'); });
 document.getElementById('btn-wall').addEventListener('click',   function() { setTool('wall'); });
 document.getElementById('btn-erase').addEventListener('click',  function() { setTool('erase'); });
+
+document.getElementById('fit-view-btn').addEventListener('click', function() { fitView(); announceStatus('図面全体を表示しました。'); });
+document.getElementById('reset-demo-btn').addEventListener('click', function() {
+  if (window.confirm('現在の編集内容を破棄して、最初のデモ配置へ戻しますか？')) { restoreDemo(); announceStatus('デモ配置へ戻しました。'); }
+});
+document.getElementById('clear-layout-btn').addEventListener('click', function() {
+  if (window.confirm('現在の部屋・家具・壁をすべて消して、空の図面にしますか？')) { clearLayout(); announceStatus('図面を空にしました。'); }
+});
+
+const workspaceGuide = document.getElementById('workspace-guide');
+const dismissGuideBtn = document.getElementById('dismiss-guide-btn');
+try {
+  if (localStorage.getItem('madori-guide-dismissed') === '1') workspaceGuide.hidden = true;
+} catch (err) { /* localStorage が使えない環境では毎回表示する */ }
+dismissGuideBtn.addEventListener('click', function() {
+  workspaceGuide.hidden = true;
+  try { localStorage.setItem('madori-guide-dismissed', '1'); } catch (err) { /* ignore */ }
+});
 
 /* =============================================
    オブジェクト追加・削除
@@ -506,9 +604,12 @@ function renderSidebar() {
 
 /* 追加フォームのトグル */
 function initFormToggle(toggleId, formId) {
-  document.getElementById(toggleId).addEventListener('click', function() {
-    const form = document.getElementById(formId);
+  const toggle = document.getElementById(toggleId);
+  const form = document.getElementById(formId);
+  toggle.setAttribute('aria-expanded', form.hidden ? 'false' : 'true');
+  toggle.addEventListener('click', function() {
     form.hidden = !form.hidden;
+    toggle.setAttribute('aria-expanded', form.hidden ? 'false' : 'true');
   });
 }
 initFormToggle('toggle-room-form', 'room-form');
@@ -540,6 +641,7 @@ document.getElementById('add-furn-btn').addEventListener('click', function() {
   });
   document.getElementById('f-name').value = '';
   document.getElementById('furn-form').hidden = true;
+  document.getElementById('toggle-furn-form').setAttribute('aria-expanded', 'false');
   renderSidebar();
 });
 
@@ -552,16 +654,29 @@ const panelToggleBtn= document.getElementById('panel-toggle-btn');
 
 function isSmartphone() { return window.innerWidth <= 768; }
 
-function openDrawer() {
-  sidebar.classList.add('is-open');
-  panelToggleBtn.classList.add('panel-open');
-  panelToggleBtn.textContent = '× 閉じる';
+const drawerNavButtons = Array.from(document.querySelectorAll('.drawer-nav__btn'));
+function setPanelGroup(group) {
+  sidebar.dataset.activeGroup = group;
+  drawerNavButtons.forEach(function(btn) {
+    const active = btn.dataset.panelTarget === group;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
 }
-function closeDrawer() {
-  sidebar.classList.remove('is-open');
-  panelToggleBtn.classList.remove('panel-open');
-  panelToggleBtn.textContent = '＋ 追加';
+drawerNavButtons.forEach(function(btn) {
+  btn.addEventListener('click', function() { setPanelGroup(btn.dataset.panelTarget); });
+});
+
+function setDrawerExpanded(expanded) {
+  sidebar.classList.toggle('is-open', expanded);
+  panelToggleBtn.classList.toggle('panel-open', expanded);
+  panelToggleBtn.textContent = expanded ? '× 閉じる' : '＋ 追加';
+  panelToggleBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  panelToggleBtn.setAttribute('aria-label', expanded ? 'コントロールパネルを閉じる' : 'コントロールパネルを開く');
+  drawerHandle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
 }
+function openDrawer() { setDrawerExpanded(true); }
+function closeDrawer() { setDrawerExpanded(false); }
 function toggleDrawer() {
   sidebar.classList.contains('is-open') ? closeDrawer() : openDrawer();
 }
@@ -582,29 +697,38 @@ document.addEventListener('pointerdown', function(e) {
 /* =============================================
    タブ切替
    ============================================= */
-function switchTab(t) {
+function switchTab(t, moveFocus) {
   const v2 = document.getElementById('view2d');
   const v3 = document.getElementById('view3d');
   const t2 = document.getElementById('tab2d');
   const t3 = document.getElementById('tab3d');
+  const show2d = t === '2d';
 
-  if (t === '2d') {
-    v2.hidden = false; v3.hidden = true;
-    t2.classList.add('active'); t3.classList.remove('active');
-    t2.setAttribute('aria-selected', 'true'); t3.setAttribute('aria-selected', 'false');
-    resize2D();
-  } else {
-    v2.hidden = true; v3.hidden = false;
-    t3.classList.add('active'); t2.classList.remove('active');
-    t3.setAttribute('aria-selected', 'true'); t2.setAttribute('aria-selected', 'false');
-    init3D(); rebuild(); render3d();
-  }
+  v2.hidden = !show2d; v3.hidden = show2d;
+  t2.classList.toggle('active', show2d); t3.classList.toggle('active', !show2d);
+  t2.setAttribute('aria-selected', show2d ? 'true' : 'false');
+  t3.setAttribute('aria-selected', show2d ? 'false' : 'true');
+  t2.tabIndex = show2d ? 0 : -1;
+  t3.tabIndex = show2d ? -1 : 0;
+
+  if (show2d) resize2D();
+  else { init3D(); rebuild(); render3d(); }
+  if (moveFocus) (show2d ? t2 : t3).focus();
 }
 
 document.getElementById('tab2d').addEventListener('click', function() { switchTab('2d'); });
 document.getElementById('tab3d').addEventListener('click', function() { switchTab('3d'); });
 document.getElementById('go3d-btn').addEventListener('click', function() { switchTab('3d'); });
 document.getElementById('back2d-btn').addEventListener('click', function() { switchTab('2d'); });
+document.getElementById('tabs').addEventListener('keydown', function(e) {
+  if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+  const on2d = document.activeElement === document.getElementById('tab2d');
+  if (!on2d && document.activeElement !== document.getElementById('tab3d')) return;
+  e.preventDefault();
+  if (e.key === 'Home') switchTab('2d', true);
+  else if (e.key === 'End') switchTab('3d', true);
+  else switchTab(on2d ? '3d' : '2d', true);
+});
 
 /* =============================================
    保存・読み込み
@@ -613,16 +737,44 @@ document.getElementById('save-png-btn').addEventListener('click', function() {
   const tmp = selected; selected = null; draw2d();
   const a = document.createElement('a'); a.download = 'madori.png'; a.href = c2d.toDataURL(); a.click();
   selected = tmp; draw2d();
+  announceStatus('2D図面をPNGとして保存しました。');
 });
 
 document.getElementById('save-json-btn').addEventListener('click', function() {
-  const a = document.createElement('a'); a.download = 'madori.json';
-  a.href = URL.createObjectURL(new Blob(
+  const blob = new Blob(
     [JSON.stringify({rooms, furniture, walls, roomTypes, furnTypes}, null, 2)],
     {type: 'application/json'}
-  ));
+  );
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.download = 'madori.json';
+  a.href = url;
   a.click();
+  window.setTimeout(function() { URL.revokeObjectURL(url); }, 0);
+  announceStatus('編集データをJSONとして保存しました。');
 });
+
+function isFiniteNumber(v) { return typeof v === 'number' && Number.isFinite(v); }
+function isBoxItem(o, type) {
+  return o && o.type === type && typeof o.name === 'string' && typeof o.color === 'string' &&
+    ['x','y','w','h'].every(function(k) { return isFiniteNumber(o[k]); });
+}
+function isWallItem(o) {
+  return o && o.type === 'wall' && ['x1','y1','x2','y2'].every(function(k) { return isFiniteNumber(o[k]); });
+}
+function isTypeDefinition(o, furnitureType) {
+  if (!o || typeof o.name !== 'string' || typeof o.color !== 'string' || !isFiniteNumber(o.w) || !isFiniteNumber(o.h)) return false;
+  return !furnitureType || o.h3 == null || isFiniteNumber(o.h3);
+}
+function validateLoadedData(d) {
+  if (!d || typeof d !== 'object' || Array.isArray(d)) return false;
+  if (!Array.isArray(d.rooms) || !d.rooms.every(function(o) { return isBoxItem(o, 'room'); })) return false;
+  if (!Array.isArray(d.furniture) || !d.furniture.every(function(o) { return isBoxItem(o, 'furniture'); })) return false;
+  if (!Array.isArray(d.walls) || !d.walls.every(isWallItem)) return false;
+  if (d.roomTypes != null && (!Array.isArray(d.roomTypes) || !d.roomTypes.every(function(o) { return isTypeDefinition(o, false); }))) return false;
+  if (d.furnTypes != null && (!Array.isArray(d.furnTypes) || !d.furnTypes.every(function(o) { return isTypeDefinition(o, true); }))) return false;
+  return true;
+}
 
 document.getElementById('load-json-btn').addEventListener('click', function() {
   document.getElementById('file-input').click();
@@ -634,11 +786,21 @@ document.getElementById('file-input').addEventListener('change', function(e) {
   r.onload = function(ev) {
     try {
       const d = JSON.parse(ev.target.result);
-      rooms = d.rooms || []; furniture = d.furniture || []; walls = d.walls || [];
-      if (d.roomTypes) roomTypes = d.roomTypes;
-      if (d.furnTypes) furnTypes = d.furnTypes;
-      selected = null; renderSidebar(); draw2d();
-    } catch(err) { alert('読み込み失敗'); }
+      if (!validateLoadedData(d)) throw new Error('invalid layout data');
+      rooms = cloneItems(d.rooms);
+      furniture = cloneItems(d.furniture);
+      walls = cloneItems(d.walls);
+      roomTypes = d.roomTypes ? cloneItems(d.roomTypes) : cloneItems(DEFAULT_ROOM_TYPES);
+      furnTypes = d.furnTypes ? cloneItems(d.furnTypes) : cloneItems(DEFAULT_FURN_TYPES);
+      selected = null;
+      renderSidebar();
+      setTool('select');
+      fitView();
+      announceStatus('編集データを読み込みました。');
+    } catch(err) {
+      alert('読み込み失敗: MADORIのJSONデータを確認してください。');
+      announceStatus('編集データを読み込めませんでした。');
+    }
   };
   r.readAsText(f); e.target.value = '';
 });
@@ -666,7 +828,9 @@ function init3D() {
   const dl = new THREE.DirectionalLight(0xfff5e0, 0.9);
   dl.position.set(300, 400, 200); dl.castShadow = true;
   dl.shadow.mapSize.set(2048, 2048); scene3.add(dl);
-  scene3.add(new THREE.DirectionalLight(0xffe8c0, 0.3).position.set(-200, 200, -200) && new THREE.DirectionalLight(0xffe8c0, 0.3));
+  const fillLight = new THREE.DirectionalLight(0xffe8c0, 0.3);
+  fillLight.position.set(-200, 200, -200);
+  scene3.add(fillLight);
   sceneGroup3 = new THREE.Group(); scene3.add(sceneGroup3);
   resize3D();
   init3DControls(c3);
@@ -840,6 +1004,7 @@ document.getElementById('save3d-btn').addEventListener('click', function() {
   render3d();
   const a = document.createElement('a'); a.download = 'madori_3d.png';
   a.href = document.getElementById('c3d').toDataURL(); a.click();
+  announceStatus('3DビューをPNGとして保存しました。');
 });
 document.getElementById('toggle-view-btn').addEventListener('click', function() {
   camPhi = camPhi > 45 ? 40 : 89;
@@ -856,20 +1021,8 @@ document.getElementById('reset-cam-btn').addEventListener('click', function() {
 /* =============================================
    初期化
    ============================================= */
-rooms = [
-  {type:'room',name:'リビング',   x:80,  y:60,  w:200,h:160,color:'#d4eaff'},
-  {type:'room',name:'キッチン',   x:280, y:60,  w:140,h:100,color:'#d4ffd4'},
-  {type:'room',name:'寝室',       x:80,  y:220, w:160,h:140,color:'#ffd4d4'},
-  {type:'room',name:'バスルーム', x:280, y:160, w:100,h:100,color:'#e0d4ff'},
-  {type:'room',name:'トイレ',     x:380, y:160, w:60, h:100,color:'#fff0d4'},
-  {type:'room',name:'玄関',       x:240, y:220, w:100,h:80, color:'#f0f0d4'},
-];
-furniture = [
-  {type:'furniture',name:'ソファ',   x:120,y:140,w:100,h:45, color:'#8B6914',h3:35},
-  {type:'furniture',name:'テーブル', x:150,y:90, w:60, h:50, color:'#8B4513',h3:38},
-  {type:'furniture',name:'ベッド',   x:100,y:260,w:120,h:80, color:'#6b4e8a',h3:40},
-  {type:'furniture',name:'TV台',     x:80, y:62, w:100,h:28, color:'#556677',h3:25},
-];
+rooms = cloneItems(DEFAULT_ROOMS);
+furniture = cloneItems(DEFAULT_FURNITURE);
 
 /* info2d の更新 */
 function updateInfo() {
@@ -892,5 +1045,6 @@ updateInfo();
 requestAnimationFrame(function() {
   requestAnimationFrame(function() {
     resize2D();
+    fitView();
   });
 });

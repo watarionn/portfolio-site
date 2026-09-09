@@ -30,6 +30,9 @@ jobs:
       - name: Validate public boundary
         run: python tools/validate_public_repo.py
 
+      - name: Validate MADORI interaction contract
+        run: python tools/check_madori_contract.py
+
       - name: Build production artifact
         run: python tools/build_deployment.py
 

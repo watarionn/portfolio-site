@@ -1,0 +1,255 @@
+name: Validate and deploy production from public repository
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "index-style.css"
+      - "index-script.js"
+      - "profile/**"
+      - "works/**"
+      - "tools/**"
+      - "apps/**"
+      - "services/**"
+      - "config/deployment-map.json"
+      - ".github/workflows/deploy-production.yml"
+      - ".github/workflows/validate-public.yml"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch, tag, or commit SHA to deploy"
+        required: true
+        default: "main"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      resolved_sha: ${{ steps.resolve.outputs.sha }}
+
+    steps:
+      - name: Checkout deployment target
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.sha }}
+
+      - name: Resolve immutable deployment commit
+        id: resolve
+        shell: bash
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate public boundary
+        run: python tools/validate_public_repo.py
+
+      - name: Build production artifact
+        run: python tools/build_deployment.py
+
+      - name: JavaScript syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+          find build/public_html -type f \( -name '*.js' -o -name '*.mjs' \) -print0 \
+            | xargs -0 -r -n 1 node --check
+
+      - name: PHP 8.4 syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE/build/public_html:/work" \
+            -w /work \
+            php:8.4-cli \
+            sh -c "find . -type f -name '*.php' -print0 | xargs -0 -r -n 1 php -l"
+
+      - name: Upload deployment manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-manifest
+          path: build/deployment-manifest.json
+          if-no-files-found: error
+          retention-days: 30
+
+  deploy:
+    needs: validate
+    if: needs.validate.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout validated deployment commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.validate.outputs.resolved_sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild validated production artifact
+        run: python tools/build_deployment.py
+
+      - name: Validate required repository secrets
+        shell: bash
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          set -euo pipefail
+          for name in FTP_HOST FTP_USER FTP_PASSWORD FTP_PATH SITE_URL; do
+            if [ -z "${!name:-}" ]; then
+              echo "Missing repository secret: ${name}"
+              exit 1
+            fi
+          done
+
+      - name: Install FTPS client
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends lftp
+
+      - name: Create protected FTPS deployment script
+        shell: bash
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          def clean(name: str) -> str:
+              value = os.environ[name].strip()
+              if "\n" in value or "\r" in value:
+                  raise SystemExit(f"{name} must be a single line")
+              return value
+
+          def quote(value: str) -> str:
+              return '"' + value.replace('\\', '\\\\').replace('"', '\\"') + '"'
+
+          host = clean("FTP_HOST")
+          for prefix in ("ftp://", "ftps://"):
+              if host.lower().startswith(prefix):
+                  host = host[len(prefix):]
+                  break
+          host = host.rstrip("/")
+          user = clean("FTP_USER")
+          password = clean("FTP_PASSWORD")
+          remote_path = clean("FTP_PATH") or "/"
+          if not remote_path.startswith("/"):
+              remote_path = "/" + remote_path
+
+          script = "\n".join(
+              [
+                  "set cmd:fail-exit yes",
+                  "set net:timeout 30",
+                  "set net:max-retries 2",
+                  "set net:reconnect-interval-base 5",
+                  "set ftp:passive-mode yes",
+                  "set ftp:ssl-force yes",
+                  "set ftp:ssl-protect-data yes",
+                  "set ftp:ssl-auth TLS",
+                  "set ssl:verify-certificate yes",
+                  f"open -u {quote(user)},{quote(password)} {quote('ftp://' + host)}",
+                  (
+                      "mirror --reverse --continue --parallel=4 --verbose=1 "
+                      "--no-perms --no-umask "
+                      "--exclude='(^|/)config\\.php$' "
+                      "--exclude='(^|/)user\\.ini$' "
+                      "--exclude='(^|/)admin\\.local\\.php$' "
+                      f"{quote('build/public_html')} {quote(remote_path)}"
+                  ),
+                  "bye",
+                  "",
+              ]
+          )
+
+          target = Path(os.environ["RUNNER_TEMP"]) / "deploy.lftp"
+          target.write_text(script, encoding="utf-8")
+          target.chmod(0o600)
+          PY
+
+      - name: Deploy without deleting server-only files
+        shell: bash
+        run: |
+          set -euo pipefail
+          lftp -f "$RUNNER_TEMP/deploy.lftp"
+
+      - name: Remove temporary credentials
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/deploy.lftp"
+
+      - name: Verify published pages
+        shell: bash
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          set -euo pipefail
+          base_url="${SITE_URL%/}"
+          paths=("/" "/holoscope/" "/SHISHA/")
+
+          for path in "${paths[@]}"; do
+            url="${base_url}${path}"
+            body="$(mktemp)"
+            code="$(
+              curl \
+                --location \
+                --silent \
+                --show-error \
+                --retry 5 \
+                --retry-delay 3 \
+                --max-time 60 \
+                --output "$body" \
+                --write-out "%{http_code}" \
+                "$url"
+            )"
+
+            if [ "$code" != "200" ]; then
+              echo "Published page returned HTTP $code: $url"
+              rm -f "$body"
+              exit 1
+            fi
+            if [ ! -s "$body" ]; then
+              echo "Published page returned an empty response: $url"
+              rm -f "$body"
+              exit 1
+            fi
+            if grep -Eqi "Fatal error|Parse error|Uncaught (Error|Exception)" "$body"; then
+              echo "Published page contains an application failure signature: $url"
+              rm -f "$body"
+              exit 1
+            fi
+
+            rm -f "$body"
+            echo "Verified: $url (HTTP $code)"
+          done

@@ -45,3 +45,32 @@ The engine is unchanged; only the initial selected direction for even-indexed pr
 ## Next slice
 
 Editor/gallery usability: preset switching, PNG export, canvas fit/centering, clearer statistics, and mobile settings disclosure.
+
+
+## Slice B — gallery / editor usability
+
+Implemented after Slice A exact-head CI run #65 completed successfully.
+
+### Interaction changes
+- Added four one-click trajectory presets: branch, grid, 4k±1, and twin-prime emphasis.
+- Added `全体表示` to recompute the current trajectory bounds and center the complete walk.
+- Added PNG export with temporary Blob URL cleanup after download dispatch.
+- Added a result-side statistics strip for steps, prime count, logical span, and active rule count.
+- On mobile, drawing settings are collapsed behind an explicit `描画ルールを開く` control.
+- Canvas remains before settings in DOM and visual reading order.
+
+### Rendering changes
+- Drawing now uses a two-pass streaming walk: first measure logical bounds, then paint into a centered fit transform.
+- The path is not retained as a giant point array, so fitting does not add trajectory-sized memory growth.
+- Prime ordinal counting is streamed instead of materializing a prime-index Map.
+- The configured step count now means exactly that many rendered steps; the previous inclusive-loop +1 mismatch is removed.
+- The `素数の2乗` override is evaluated for composite prime squares, fixing the previously unreachable option.
+### Runtime verification
+- Initial 5,000-step branch preset: 669 prime steps, span `203 × 135`.
+- Grid preset: span `129 × 327`.
+- 4k±1 preset enables both matching optional rows and reports five active rules.
+- Mobile settings disclosure synchronizes `hidden` and `aria-expanded` in both directions.
+- PNG export test observed one Object URL creation and one revocation of the same URL.
+- 100-step prime-square test reports exactly 100 steps, 25 prime steps, and 4 prime-square matches.
+- Desktop and mobile visual captures confirm the generated result remains the primary workspace surface.
+- JavaScript syntax, public repository boundary, and production artifact build pass after Slice B changes.

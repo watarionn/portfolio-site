@@ -45,17 +45,32 @@
   <section class="workspace-section" aria-labelledby="workspace-title">
     <div class="project-shell workspace-heading">
       <div><p class="section-index">01 / GENERATIVE CANVAS</p><h2 id="workspace-title">まず、結果を見る。</h2></div>
-      <div><p>初期ルールで5,000ステップを自動描画しています。<br>軌跡を眺めてから、右のルールを書き換えて<br>別の形を探せます。</p><a class="text-link" href="#settings">描画ルールを編集 ↓</a></div>
+      <div><p>初期ルールで5,000ステップを自動描画しています。<br>軌跡を眺めてから、描画ルールを書き換えて<br>別の形を探せます。</p><a class="text-link" href="#settings">描画ルールを編集 ↓</a></div>
     </div>
     <div class="layout project-shell">
 
     <!-- キャンバス -->
     <div class="canvas-wrap">
+      <div class="canvas-toolbar">
+        <div class="preset-group" role="group" aria-label="軌跡プリセット">
+          <span class="toolbar-label">PRESET</span>
+          <button type="button" data-preset="branch" aria-pressed="true">枝状</button>
+          <button type="button" data-preset="grid" aria-pressed="false">格子</button>
+          <button type="button" data-preset="mod4" aria-pressed="false">4k±1</button>
+          <button type="button" data-preset="twins" aria-pressed="false">双子素数</button>
+        </div>
+        <div class="canvas-actions">
+          <button type="button" id="fitBtn">全体表示</button>
+          <button type="button" id="savePngBtn">PNG保存</button>
+        </div>
+      </div>
       <div class="canvas-frame">
         <canvas id="c" aria-label="素数点画キャンバス"></canvas>
       </div>
       <div class="canvas-caption" aria-hidden="true"><span>PRIME DOT ART</span><span>RULE-BASED WALK / LIVE CANVAS</span></div>
+      <div id="stats" class="stats-strip" aria-live="polite" aria-label="描画統計"></div>
     </div>
+    <button type="button" id="settingsToggle" class="settings-toggle" aria-controls="settings" aria-expanded="false">描画ルールを開く <span aria-hidden="true">↓</span></button>
     <!-- コントロールパネル -->
     <aside class="panel" id="settings" role="complementary" aria-label="描画設定">
 
@@ -201,8 +216,8 @@
 
       <!-- アクション -->
       <div class="action-row">
-        <button id="runBtn" class="btn btn-primary">描画</button>
-        <button id="resetBtn" class="btn btn-secondary">リセット</button>
+        <button type="button" id="runBtn" class="btn btn-primary">描画</button>
+        <button type="button" id="resetBtn" class="btn btn-secondary">画面クリア</button>
       </div>
 
       <!-- 進捗・統計 -->

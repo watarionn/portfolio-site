@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>素数点描 — 風花理珠</title>
+<title>素数点画 — 風花理珠</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -17,18 +17,47 @@
 <!-- ヘッダー -->
 <header role="banner">
   <div class="header-center">
-    <h1>素数点描</h1>
-    <p class="header-sub">Prime Dot Art — 素数の軌跡を描く</p>
+    <h1>素数点画</h1>
+    <p class="header-sub">Prime Dot Art — 数の規則を、歩く軌跡へ</p>
   </div>
   <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホーム</a>
   <div aria-hidden="true"></div>
 </header>
 
-<main role="main">
-  <div class="layout">
+<section class="project-hero" aria-labelledby="project-title">
+  <div class="project-shell project-hero__grid">
+    <div>
+      <p class="section-index">PROJECT 02 / ALGORITHM + CANVAS</p>
+      <h2 id="project-title">素数の性質を、<br>一歩ずつ図形へ<br>変える。</h2>
+    </div>
+    <div class="project-hero__copy">
+      <p>整数を順番に判定し、その性質ごとに進行方向と色を切り替える。単純な規則の積み重ねから、予想しにくい軌跡が立ち上がるCanvas実験です。</p>
+      <dl class="project-meta">
+        <div><dt>ROLE</dt><dd>Concept / Implementation</dd></div>
+        <div><dt>CORE</dt><dd>Canvas / Sieve / Rule system</dd></div>
+        <div><dt>STATUS</dt><dd>Interactive experiment</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
 
+<main role="main">
+  <section class="workspace-section" aria-labelledby="workspace-title">
+    <div class="project-shell workspace-heading">
+      <div><p class="section-index">01 / GENERATIVE CANVAS</p><h2 id="workspace-title">まず、結果を見る。</h2></div>
+      <div><p>初期ルールで5,000ステップを自動描画しています。<br>軌跡を眺めてから、右のルールを書き換えて<br>別の形を探せます。</p><a class="text-link" href="#settings">描画ルールを編集 ↓</a></div>
+    </div>
+    <div class="layout project-shell">
+
+    <!-- キャンバス -->
+    <div class="canvas-wrap">
+      <div class="canvas-frame">
+        <canvas id="c" aria-label="素数点画キャンバス"></canvas>
+      </div>
+      <div class="canvas-caption" aria-hidden="true"><span>PRIME DOT ART</span><span>RULE-BASED WALK / LIVE CANVAS</span></div>
+    </div>
     <!-- コントロールパネル -->
-    <aside class="panel" role="complementary" aria-label="描画設定">
+    <aside class="panel" id="settings" role="complementary" aria-label="描画設定">
 
       <!-- 描画設定 -->
       <section class="panel-section">
@@ -82,10 +111,10 @@
           <span class="rule-label">偶数番目の素数</span>
           <input type="color" id="c2" value="#3a2c18" aria-label="偶数番目素数の色">
           <select id="d2" aria-label="偶数番目素数の方向">
-            <option value="left" selected>左</option>
+            <option value="left">左</option>
             <option value="straight">まっすぐ</option>
             <option value="right">右</option>
-            <option value="back">Uターン</option>
+            <option value="back" selected>Uターン</option>
           </select>
         </div>
       </section>
@@ -182,12 +211,52 @@
 
     </aside>
 
-    <!-- キャンバス -->
-    <div class="canvas-wrap">
-      <canvas id="c" aria-label="素数点描キャンバス"></canvas>
-    </div>
 
-  </div>
+
+
+    </div>
+  </section>
+
+  <section class="case-study project-shell" aria-labelledby="concept-title">
+    <header class="case-study__heading">
+      <p class="section-index">02 / CONCEPT</p>
+      <h2 id="concept-title">数を分類する。<br>方向へ翻訳する。</h2>
+    </header>
+    <div class="case-study__copy">
+      <p>描画の核は、数の性質を見つけることではなく、その性質を「右へ曲がる」「左へ曲がる」「直進する」「Uターンする」という身体的なルールへ変換することです。</p>
+      <p>合成数、奇数番目・偶数番目の素数を基本条件にし、双子素数や4k±1型などを上書き条件として重ねられます。</p>
+    </div>
+  </section>
+
+  <section class="case-study case-study--dark" aria-labelledby="logic-title">
+    <div class="project-shell logic-grid">
+      <div><p class="section-index">03 / LOGIC</p><h2 id="logic-title">判定から1ドットまで。</h2></div>
+      <ol class="logic-flow">
+        <li><span>01</span><strong>SIEVE</strong><p>エラトステネスの篩で描画範囲の素数をまとめて判定。</p></li>
+        <li><span>02</span><strong>CLASSIFY</strong><p>素数順序、剰余、桁和、双子素数などの条件を評価。</p></li>
+        <li><span>03</span><strong>TURN</strong><p>最も優先度の高い条件から進行方向と色を決定。</p></li>
+        <li><span>04</span><strong>DRAW</strong><p>Canvas上を1ステップ進み、結果を点として積み重ねる。</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="case-study project-shell" aria-labelledby="explore-title">
+    <header class="case-study__heading"><p class="section-index">04 / EXPLORE</p><h2 id="explore-title">同じ整数列から、<br>違う風景を探す。</h2></header>
+    <div class="feature-ledger">
+      <article><span>01</span><h3>ルールを変える</h3><p>条件ごとに4方向を割り当て、曲がり方そのものを組み替えます。</p></article>
+      <article><span>02</span><h3>条件を重ねる</h3><p>オプション条件を有効化すると、基本規則へ別の数学的分類を重ねられます。</p></article>
+      <article><span>03</span><h3>密度を変える</h3><p>ステップ数とドットサイズで、局所的な形から長い軌跡まで観察できます。</p></article>
+    </div>
+  </section>
+
+  <nav class="project-next" aria-label="関連作品">
+    <div class="project-shell project-next__grid">
+      <a href="/MADORI/madori.html"><small>RELATED / TOOL</small><strong>間取図メーカー</strong><span>↗</span></a>
+      <a href="/SPHERE/sphere.html"><small>RELATED / VISUAL</small><strong>天球儀</strong><span>↗</span></a>
+      <a href="/"><small>INDEX</small><strong>作品索引へ戻る</strong><span>↗</span></a>
+    </div>
+  </nav>
+
 </main>
 
 <script src="prime_dot_art.js" defer></script>

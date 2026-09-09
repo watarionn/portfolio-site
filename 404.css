@@ -37,9 +37,11 @@ body {
   justify-content: center;
   position: relative;
   padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 5vw, 2rem);
+  /* 右端の側帯分だけ右に余白 */
   padding-right: calc(clamp(1rem, 5vw, 2rem) + clamp(2.2rem, 4.5vw, 3.5rem));
 }
 
+/* ─── 横罫線テクスチャ ─── */
 .paper-lines {
   position: fixed;
   inset: 0;
@@ -54,6 +56,7 @@ body {
   );
 }
 
+/* ─── ノイズキャンバス ─── */
 .noise-canvas {
   position: fixed;
   inset: 0;
@@ -63,6 +66,7 @@ body {
   mix-blend-mode: multiply;
 }
 
+/* ─── 右端の装飾帯 ─── */
 .side-band {
   position: fixed;
   top: 0; right: 0;
@@ -98,6 +102,7 @@ body {
   letter-spacing: 0.3em;
 }
 
+/* ─── メイン ─── */
 .page-main {
   position: relative;
   z-index: 5;
@@ -108,6 +113,7 @@ body {
   gap: 0;
 }
 
+/* ─── 版ラベル ─── */
 .edition-label {
   font-family: var(--font-e);
   font-size: clamp(0.58rem, 1vw, 0.7rem);
@@ -128,6 +134,7 @@ body {
   background: linear-gradient(to right, var(--clr-gold), transparent);
 }
 
+/* ─── エントリー全体 ─── */
 .entry {
   display: flex;
   gap: clamp(0.75rem, 3vw, 1.75rem);
@@ -136,6 +143,7 @@ body {
   animation: fadeUp 0.75s var(--ease-book) 0.25s forwards;
 }
 
+/* セクション仮名 */
 .section-kana {
   font-size: clamp(5rem, 16vw, 10rem);
   font-weight: 800;
@@ -145,6 +153,7 @@ body {
   user-select: none;
   flex-shrink: 0;
   padding-top: 0.1em;
+  /* 薄く 404 を透かす */
   position: relative;
 }
 .section-kana::after {
@@ -161,6 +170,7 @@ body {
   opacity: 0.55;
 }
 
+/* ─── エントリー本文 ─── */
 .entry-main {
   flex: 1;
   min-width: 0;
@@ -168,6 +178,7 @@ body {
   padding-left: clamp(0.85rem, 2.5vw, 1.5rem);
 }
 
+/* ─── 見出し行 ─── */
 .entry-header {
   display: flex;
   align-items: baseline;
@@ -211,12 +222,14 @@ body {
   align-self: center;
 }
 
+/* ─── 朱線 ─── */
 .entry-rule {
   height: 2px;
   background: linear-gradient(to right, var(--clr-vermilion), transparent);
   margin: 0.5rem 0 1rem;
 }
 
+/* ─── 語義 ─── */
 .entry-body {
   display: flex;
   flex-direction: column;
@@ -244,6 +257,7 @@ body {
   overflow-wrap: anywhere;
 }
 
+/* ─── 用例 ─── */
 .example-block {
   display: flex;
   gap: 0.6rem;
@@ -275,6 +289,7 @@ body {
   color: var(--clr-ink);
 }
 
+/* ─── 参照 ─── */
 .see-also-block {
   display: flex;
   align-items: baseline;
@@ -302,12 +317,14 @@ body {
   font-size: 0.6rem;
 }
 
+/* ─── 下部罫線 ─── */
 .entry-foot-rule {
   height: 1px;
   background: var(--clr-rule-lt);
   margin: clamp(1rem, 3vw, 1.75rem) 0;
 }
 
+/* ─── 案内 ─── */
 .nav-block {
   display: flex;
   flex-direction: column;
@@ -368,6 +385,7 @@ body {
 .nav-btn:hover .nav-btn-icon { transform: translateX(-3px); }
 .nav-btn span:last-child { position: relative; z-index: 1; }
 
+/* ─── ページ番号 ─── */
 .page-num {
   font-family: var(--font-e);
   font-size: clamp(0.6rem, 1vw, 0.72rem);
@@ -379,17 +397,20 @@ body {
   animation: fadeUp 0.7s var(--ease-book) 0.5s forwards;
 }
 
+/* ─── アニメーション ─── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(0.8rem); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ─── レスポンシブ ─── */
 @media (max-width: 480px) {
   body { padding-right: clamp(1rem, 5vw, 2rem); }
   .side-band { display: none; }
   .section-kana { font-size: clamp(4rem, 20vw, 6rem); }
 }
 
+/* ─── Reduced Motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -398,4 +419,5 @@ body {
   .edition-label, .entry, .page-num { opacity: 1; }
 }
 
+/* ─── Focus ─── */
 :focus-visible { outline: 2px solid var(--clr-cobalt); outline-offset: 3px; }

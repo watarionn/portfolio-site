@@ -1,226 +1,456 @@
 'use strict';
 
-/* ─── 要素参照 ─── */
-const canvas  = document.getElementById('c');
-const ctx     = canvas.getContext('2d');
-const nrange  = document.getElementById('nrange');
-const srange  = document.getElementById('srange');
-const nval    = document.getElementById('nval');
-const sval    = document.getElementById('sval');
-const infoEl  = document.getElementById('info');
-const progEl  = document.getElementById('prog');
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const canvasWrap = document.querySelector('.canvas-wrap');
+const nrange = document.getElementById('nrange');
+const srange = document.getElementById('srange');
+const nval = document.getElementById('nval');
+const sval = document.getElementById('sval');
+const infoEl = document.getElementById('info');
+const progEl = document.getElementById('prog');
+const statsEl = document.getElementById('stats');
+const settingsPanel = document.getElementById('settings');
+const settingsToggle = document.getElementById('settingsToggle');
+const runBtn = document.getElementById('runBtn');
+const resetBtn = document.getElementById('resetBtn');
+const fitBtn = document.getElementById('fitBtn');
+const savePngBtn = document.getElementById('savePngBtn');
+const presetButtons = Array.from(document.querySelectorAll('[data-preset]'));
+const mobileQuery = window.matchMedia('(max-width: 860px)');
 
-/* ─── スライダー表示更新 ─── */
+if (!ctx) throw new Error('2D Canvas context is unavailable.');
+
+const LABELS = [
+  '合成数', '奇数番目素数', '偶数番目素数',
+  '素数番目素数', '4k+1素数', '4k+3素数',
+  '桁合計素数', '素数の2乗', '双子素数',
+];
+
+const PRESETS = {
+  branch: { turns: { 0: 'straight', 1: 'right', 2: 'back' }, enabled: [] },
+  grid: { turns: { 0: 'straight', 1: 'right', 2: 'right' }, enabled: [] },
+  mod4: { turns: { 0: 'straight', 1: 'right', 2: 'back', 4: 'right', 5: 'left' }, enabled: [4, 5] },
+  twins: { turns: { 0: 'straight', 1: 'right', 2: 'back', 8: 'right' }, enabled: [8] },
+};
+
+let animId = null;
+let renderToken = 0;
+let resizeTimer = null;
+let isRendering = false;
+let hasRenderedOutput = false;
+
 nrange.addEventListener('input', function () {
-  nval.textContent = parseInt(this.value).toLocaleString('ja-JP');
+  nval.textContent = parseInt(this.value, 10).toLocaleString('ja-JP');
 });
+
 srange.addEventListener('input', function () {
   sval.textContent = this.value;
 });
 
-/* ─── オプション行のアクティブトグル ─── */
 for (let i = 3; i <= 8; i++) {
-  const cb  = document.getElementById('on' + i);
+  const checkbox = document.getElementById('on' + i);
   const row = document.getElementById('row' + i);
-  cb.addEventListener('change', function () {
+  checkbox.addEventListener('change', function () {
     row.classList.toggle('active', this.checked);
+    clearPresetState();
   });
 }
 
-/* ─── 素数篩（Sieve of Eratosthenes） ─── */
+for (let i = 0; i <= 8; i++) {
+  const select = document.getElementById('d' + i);
+  if (select) select.addEventListener('change', clearPresetState);
+}
+
 function sieve(max) {
-  const a = new Uint8Array(max + 1).fill(1);
-  a[0] = a[1] = 0;
+  const values = new Uint8Array(max + 1).fill(1);
+  values[0] = values[1] = 0;
   for (let i = 2; i * i <= max; i++) {
-    if (a[i]) {
-      for (let j = i * i; j <= max; j += i) a[j] = 0;
-    }
+    if (!values[i]) continue;
+    for (let j = i * i; j <= max; j += i) values[j] = 0;
   }
-  return a;
+  return values;
 }
 
-/* ─── 桁の合計 ─── */
 function digitSum(n) {
-  let s = 0;
-  while (n > 0) { s += n % 10; n = Math.floor(n / 10); }
-  return s;
+  let sum = 0;
+  while (n > 0) {
+    sum += n % 10;
+    n = Math.floor(n / 10);
+  }
+  return sum;
 }
 
-/* ─── 方向を回転 ─── */
 function applyTurn(dir, turn) {
-  if (turn === 'right')  return (dir + 1) % 4;
-  if (turn === 'left')   return (dir + 3) % 4;
-  if (turn === 'back')   return (dir + 2) % 4;
-  return dir; // straight
+  if (turn === 'right') return (dir + 1) % 4;
+  if (turn === 'left') return (dir + 3) % 4;
+  if (turn === 'back') return (dir + 2) % 4;
+  return dir;
 }
 
-/* ─── アニメーションID ─── */
-let animId = null;
+function classifyNumber(n, isPrime, primeOrdinal, opts) {
+  let ruleIdx = 0;
 
-/* ─── 描画 ─── */
-function draw() {
-  // 実行中のアニメーションを停止
-  if (animId !== null) {
-    cancelAnimationFrame(animId);
-    animId = null;
+  if (isPrime[n]) {
+    ruleIdx = primeOrdinal % 2 === 1 ? 1 : 2;
+    if (opts[0] && isPrime[primeOrdinal]) ruleIdx = 3;
+    if (opts[1] && n % 4 === 1) ruleIdx = 4;
+    if (opts[2] && n % 4 === 3) ruleIdx = 5;
+    if (opts[3] && isPrime[digitSum(n)]) ruleIdx = 6;
   }
 
-  const N       = parseInt(nrange.value);
-  const dotSize = parseInt(srange.value);
-
-  // 色・方向の読み込み
-  const colors = Array.from({ length: 9 }, (_, i) => {
-    const el = document.getElementById('c' + i);
-    return el ? el.value : '#000000';
-  });
-  const turns = Array.from({ length: 9 }, (_, i) => {
-    const el = document.getElementById('d' + i);
-    return el ? el.value : 'straight';
-  });
-  const opts = Array.from({ length: 6 }, (_, i) => {
-    const el = document.getElementById('on' + (i + 3));
-    return el ? el.checked : false;
-  });
-
-  // 素数計算
-  const isPrime    = sieve(N + 2);
-  const primes     = [];
-  for (let i = 2; i <= N; i++) {
-    if (isPrime[i]) primes.push(i);
-  }
-  const primeIndex = new Map();
-  primes.forEach((p, i) => primeIndex.set(p, i + 1));
-
-  // 素数の2乗セット
-  const primeSqSet = new Set();
-  for (const p of primes) {
-    if (p * p <= N) primeSqSet.add(p * p);
+  if (opts[4]) {
+    const root = Math.floor(Math.sqrt(n));
+    if (root > 1 && root * root === n && isPrime[root]) ruleIdx = 7;
   }
 
-  // キャンバスサイズ
-  const W = canvas.parentElement.clientWidth || 600;
-  canvas.width  = W;
-  canvas.height = Math.floor(W * 0.8);
+  if (opts[5] && isPrime[n] && (isPrime[n + 2] || (n > 1 && isPrime[n - 2]))) {
+    ruleIdx = 8;
+  }
 
-  // 背景：古紙色
+  return ruleIdx;
+}
+
+function getConfig() {
+  return {
+    N: parseInt(nrange.value, 10),
+    dotSize: parseInt(srange.value, 10),
+    colors: Array.from({ length: 9 }, (_, i) => document.getElementById('c' + i)?.value || '#000000'),
+    turns: Array.from({ length: 9 }, (_, i) => document.getElementById('d' + i)?.value || 'straight'),
+    opts: Array.from({ length: 6 }, (_, i) => document.getElementById('on' + (i + 3))?.checked || false),
+  };
+}
+
+function resizeCanvas() {
+  const width = Math.max(280, Math.floor(canvas.parentElement.clientWidth || 600));
+  canvas.width = width;
+  canvas.height = Math.floor(width * 0.8);
+}
+
+function paintBackground() {
   ctx.fillStyle = '#f0e8cc';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // 薄い方眼（設計図風）
   ctx.strokeStyle = 'rgba(192,168,112,0.2)';
-  ctx.lineWidth   = 0.5;
-  const GRID = 40;
-  for (let gx = 0; gx < canvas.width; gx += GRID) {
-    ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, canvas.height); ctx.stroke();
-  }
-  for (let gy = 0; gy < canvas.height; gy += GRID) {
-    ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(canvas.width, gy); ctx.stroke();
-  }
+  ctx.lineWidth = 0.5;
 
-  // 初期位置・方向
-  let x   = Math.floor(canvas.width  / 2);
-  let y   = Math.floor(canvas.height / 2);
-  let dir = 0;
-  const dx = [0,  1, 0, -1];
-  const dy = [-1, 0, 1,  0];
+  const grid = 40;
+  for (let x = 0; x < canvas.width; x += grid) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, canvas.height);
+    ctx.stroke();
+  }
+  for (let y = 0; y < canvas.height; y += grid) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(canvas.width, y);
+    ctx.stroke();
+  }
+}
 
+function setRenderBusy(busy) {
+  isRendering = busy;
+  canvasWrap.setAttribute('aria-busy', busy ? 'true' : 'false');
+  fitBtn.disabled = busy;
+  savePngBtn.disabled = busy || !hasRenderedOutput;
+}
+
+function clearResults() {
+  statsEl.replaceChildren();
+  infoEl.replaceChildren();
+}
+
+function computeBounds(config, isPrime, token, done) {
+  const dx = [0, 1, 0, -1];
+  const dy = [-1, 0, 1, 0];
   const counts = new Array(9).fill(0);
-
-  const CHUNK = 5000;
+  let x = 0;
+  let y = 0;
+  let dir = 0;
   let n = 0;
+  let primeOrdinal = 0;
+  let primeCount = 0;
+  let minX = 0;
+  let maxX = 0;
+  let minY = 0;
+  let maxY = 0;
+  const chunkSize = 10000;
 
-  progEl.style.display = 'block';
-  infoEl.textContent   = '';
-
-  function step() {
-    const end = Math.min(n + CHUNK, N + 1);
+  function chunk() {
+    if (token !== renderToken) return;
+    const end = Math.min(n + chunkSize, config.N);
 
     for (; n < end; n++) {
-      let ruleIdx;
-
-      if (!isPrime[n]) {
-        // 合成数（0 以下も含む）
-        ruleIdx = 0;
-      } else {
-        const idx = primeIndex.get(n);
-        // 基本：奇数番目 / 偶数番目
-        ruleIdx = (idx % 2 === 1) ? 1 : 2;
-
-        // オプション（優先度：低→高の順で上書き）
-        if (opts[0] && isPrime[idx])                                    ruleIdx = 3; // 素数番目
-        if (opts[1] && n % 4 === 1)                                     ruleIdx = 4; // 4k+1
-        if (opts[2] && n % 4 === 3)                                     ruleIdx = 5; // 4k+3
-        if (opts[3] && isPrime[digitSum(n)])                            ruleIdx = 6; // 桁合計
-        if (opts[4] && primeSqSet.has(n))                               ruleIdx = 7; // 素数の2乗
-        if (opts[5] && (isPrime[n + 2] || (n > 1 && isPrime[n - 2])))  ruleIdx = 8; // 双子素数
+      if (isPrime[n]) {
+        primeOrdinal++;
+        primeCount++;
       }
-
-      dir = applyTurn(dir, turns[ruleIdx]);
+      const ruleIdx = classifyNumber(n, isPrime, primeOrdinal, config.opts);
+      dir = applyTurn(dir, config.turns[ruleIdx]);
       counts[ruleIdx]++;
-
-      // 範囲内のみ描画
-      if (x >= 0 && x < canvas.width && y >= 0 && y < canvas.height) {
-        ctx.fillStyle = colors[ruleIdx];
-        ctx.fillRect(x - dotSize / 2, y - dotSize / 2, dotSize, dotSize);
-      }
-
-      x += dx[dir] * dotSize;
-      y += dy[dir] * dotSize;
+      minX = Math.min(minX, x);
+      maxX = Math.max(maxX, x);
+      minY = Math.min(minY, y);
+      maxY = Math.max(maxY, y);
+      x += dx[dir];
+      y += dy[dir];
     }
 
-    const pct = Math.round(n / (N + 1) * 100);
-    progEl.textContent = `描画中… ${pct}%`;
-
-    if (n <= N) {
-      animId = requestAnimationFrame(step);
+    progEl.textContent = `軌跡計算中… ${Math.round(n / config.N * 100)}%`;
+    if (n < config.N) {
+      animId = requestAnimationFrame(chunk);
     } else {
-      animId = null;
-      progEl.style.display = 'none';
-
-      // 統計情報の表示
-      const labels = [
-        '合成数', '奇数番目素数', '偶数番目素数',
-        '素数番目素数', '4k+1素数', '4k+3素数',
-        '桁合計素数', '素数の2乗', '双子素数',
-      ];
-      infoEl.innerHTML = counts
-        .map((c, i) => c > 0 ? `<span>${labels[i]}：${c.toLocaleString('ja-JP')}</span>` : '')
-        .filter(Boolean)
-        .join('　|　');
+      done({ minX, maxX, minY, maxY, counts, primeCount });
     }
   }
 
-  animId = requestAnimationFrame(step);
+  animId = requestAnimationFrame(chunk);
 }
 
-/* ─── リセット ─── */
-function reset() {
-  if (animId !== null) {
-    cancelAnimationFrame(animId);
-    animId = null;
+function paintWalk(config, isPrime, bounds, token) {
+  const dx = [0, 1, 0, -1];
+  const dy = [-1, 0, 1, 0];
+  const margin = Math.max(18, Math.min(canvas.width, canvas.height) * 0.07);
+  const spanX = Math.max(1, bounds.maxX - bounds.minX);
+  const spanY = Math.max(1, bounds.maxY - bounds.minY);
+  const scale = Math.max(0.05, Math.min(
+    (canvas.width - margin * 2) / spanX,
+    (canvas.height - margin * 2) / spanY,
+    8
+  ));
+  const originX = (canvas.width - spanX * scale) / 2 - bounds.minX * scale;
+  const originY = (canvas.height - spanY * scale) / 2 - bounds.minY * scale;
+  const markSize = Math.max(1, Math.min(config.dotSize, Math.max(1, scale * 1.15)));
+  let x = 0;
+  let y = 0;
+  let dir = 0;
+  let n = 0;
+  let primeOrdinal = 0;
+  const chunkSize = 10000;
+
+  paintBackground();
+
+  function chunk() {
+    if (token !== renderToken) return;
+    const end = Math.min(n + chunkSize, config.N);
+
+    for (; n < end; n++) {
+      if (isPrime[n]) primeOrdinal++;
+      const ruleIdx = classifyNumber(n, isPrime, primeOrdinal, config.opts);
+      dir = applyTurn(dir, config.turns[ruleIdx]);
+      ctx.fillStyle = config.colors[ruleIdx];
+      ctx.fillRect(
+        originX + x * scale - markSize / 2,
+        originY + y * scale - markSize / 2,
+        markSize,
+        markSize
+      );
+      x += dx[dir];
+      y += dy[dir];
+    }
+
+    progEl.textContent = `描画中… ${Math.round(n / config.N * 100)}%`;
+    if (n < config.N) {
+      animId = requestAnimationFrame(chunk);
+    } else {
+      finishRender(config, bounds, scale);
+    }
   }
-  // 背景色でクリア
-  ctx.fillStyle = '#f0e8cc';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  infoEl.textContent   = '';
-  progEl.style.display = 'none';
+
+  animId = requestAnimationFrame(chunk);
 }
 
-/* ─── イベント ─── */
-document.getElementById('runBtn').addEventListener('click', draw);
-document.getElementById('resetBtn').addEventListener('click', reset);
+function renderStats(config, bounds) {
+  const spanX = bounds.maxX - bounds.minX + 1;
+  const spanY = bounds.maxY - bounds.minY + 1;
+  const activeRules = 3 + config.opts.filter(Boolean).length;
+  const values = [
+    ['STEPS', config.N.toLocaleString('ja-JP')],
+    ['PRIME', bounds.primeCount.toLocaleString('ja-JP')],
+    ['SPAN', `${spanX} × ${spanY}`],
+    ['RULES', activeRules.toString()],
+  ];
 
-/* ─── リサイズ対応 ─── */
-let resizeTimer = null;
+  const fragment = document.createDocumentFragment();
+  values.forEach(([label, value]) => {
+    const item = document.createElement('div');
+    const key = document.createElement('span');
+    const strong = document.createElement('strong');
+    key.textContent = label;
+    strong.textContent = value;
+    item.append(key, strong);
+    fragment.append(item);
+  });
+  statsEl.replaceChildren(fragment);
+}
+
+function renderRuleCounts(counts) {
+  const fragment = document.createDocumentFragment();
+  counts.forEach((count, index) => {
+    if (count <= 0) return;
+    const item = document.createElement('span');
+    item.textContent = `${LABELS[index]}：${count.toLocaleString('ja-JP')}`;
+    fragment.append(item);
+  });
+  infoEl.replaceChildren(fragment);
+}
+
+function finishRender(config, bounds, scale) {
+  animId = null;
+  progEl.style.display = 'none';
+  renderStats(config, bounds);
+  renderRuleCounts(bounds.counts);
+  canvas.dataset.fitScale = scale.toFixed(3);
+  hasRenderedOutput = true;
+  setRenderBusy(false);
+}
+
+function handleRenderFailure(error) {
+  animId = null;
+  hasRenderedOutput = false;
+  setRenderBusy(false);
+  clearResults();
+  progEl.style.display = 'block';
+  progEl.textContent = '描画できませんでした。ステップ数を減らして再度お試しください。';
+  console.error(error);
+}
+
+function draw() {
+  if (animId !== null) cancelAnimationFrame(animId);
+  const token = ++renderToken;
+  const config = getConfig();
+
+  hasRenderedOutput = false;
+  setRenderBusy(true);
+  resizeCanvas();
+  paintBackground();
+  progEl.style.display = 'block';
+  progEl.textContent = '素数表を準備中…';
+  clearResults();
+
+  try {
+    const isPrime = sieve(config.N + 2);
+    computeBounds(config, isPrime, token, bounds => {
+      if (token !== renderToken) return;
+      paintWalk(config, isPrime, bounds, token);
+    });
+  } catch (error) {
+    if (token === renderToken) handleRenderFailure(error);
+  }
+}
+
+function reset() {
+  renderToken++;
+  if (animId !== null) cancelAnimationFrame(animId);
+  animId = null;
+  hasRenderedOutput = false;
+  delete canvas.dataset.fitScale;
+  resizeCanvas();
+  paintBackground();
+  progEl.style.display = 'none';
+  progEl.textContent = '';
+  clearResults();
+  setRenderBusy(false);
+}
+
+function clearPresetState() {
+  presetButtons.forEach(button => button.setAttribute('aria-pressed', 'false'));
+}
+
+function applyPreset(name) {
+  const preset = PRESETS[name];
+  if (!preset) return;
+
+  Object.entries(preset.turns).forEach(([index, value]) => {
+    const select = document.getElementById('d' + index);
+    if (select) select.value = value;
+  });
+
+  for (let i = 3; i <= 8; i++) {
+    const checked = preset.enabled.includes(i);
+    const input = document.getElementById('on' + i);
+    input.checked = checked;
+    document.getElementById('row' + i).classList.toggle('active', checked);
+  }
+
+  presetButtons.forEach(button => {
+    button.setAttribute('aria-pressed', button.dataset.preset === name ? 'true' : 'false');
+  });
+  draw();
+}
+
+function savePng() {
+  if (!hasRenderedOutput || isRendering) return;
+  savePngBtn.disabled = true;
+
+  canvas.toBlob(blob => {
+    if (!blob) {
+      savePngBtn.disabled = false;
+      return;
+    }
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `prime-dot-art-${Date.now()}.png`;
+    document.body.append(link);
+    link.click();
+    link.remove();
+
+    window.setTimeout(() => {
+      URL.revokeObjectURL(url);
+      if (!isRendering && hasRenderedOutput) savePngBtn.disabled = false;
+    }, 0);
+  }, 'image/png');
+}
+
+function setSettingsToggleLabel(expanded) {
+  const arrow = settingsToggle.querySelector('span');
+  settingsToggle.replaceChildren(
+    document.createTextNode(expanded ? '描画ルールを閉じる ' : '描画ルールを開く '),
+    arrow
+  );
+  arrow.textContent = expanded ? '↑' : '↓';
+}
+
+function setSettingsExpanded(expanded) {
+  settingsToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  setSettingsToggleLabel(expanded);
+  settingsPanel.hidden = mobileQuery.matches ? !expanded : false;
+}
+
+function syncSettingsDisclosure() {
+  const expanded = settingsToggle.getAttribute('aria-expanded') === 'true';
+  settingsPanel.hidden = mobileQuery.matches ? !expanded : false;
+}
+
+presetButtons.forEach(button => {
+  button.addEventListener('click', () => applyPreset(button.dataset.preset));
+});
+
+runBtn.addEventListener('click', draw);
+resetBtn.addEventListener('click', reset);
+fitBtn.addEventListener('click', draw);
+savePngBtn.addEventListener('click', savePng);
+settingsToggle.addEventListener('click', () => {
+  setSettingsExpanded(settingsToggle.getAttribute('aria-expanded') !== 'true');
+});
+
+document.querySelector('.text-link').addEventListener('click', () => {
+  if (mobileQuery.matches) setSettingsExpanded(true);
+});
+
+mobileQuery.addEventListener('change', syncSettingsDisclosure);
+
 window.addEventListener('resize', function () {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function () {
-    if (animId === null) {
-      // 描画中でなければキャンバスだけリサイズ＆再描画
-      draw();
-    }
+    if (!isRendering && hasRenderedOutput) draw();
   }, 250);
 });
 
-/* ─── 初回描画 ─── */
+savePngBtn.disabled = true;
+canvasWrap.setAttribute('aria-busy', 'false');
+syncSettingsDisclosure();
+presetButtons[0]?.setAttribute('aria-pressed', 'true');
 draw();

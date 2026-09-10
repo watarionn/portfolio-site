@@ -355,6 +355,18 @@ def main() -> None:
     if "require_once __DIR__ . '/../../config.php';" not in aquarium_text:
         fail("AQUARIUM source must preserve the reviewed private config.php dependency")
 
+    aquarium_js = (ROOT / "apps/aquarium/public/aquarium.js").read_text(encoding="utf-8")
+    aquarium_css = (ROOT / "apps/aquarium/public/aquarium.css").read_text(encoding="utf-8")
+    for marker in ('AQUARIUM', 'id="fish-search"', 'id="visible-count"', 'id="random-fish"', 'class="fish-card-trigger"'):
+        if marker not in aquarium_text:
+            fail(f"AQUARIUM Stage 9 presentation marker missing: {marker}")
+    for marker in ("function normalizeText(", "function applyFilter(", "function setScope(", "history.replaceState", "event.key === '/'"):
+        if marker not in aquarium_js:
+            fail(f"AQUARIUM Stage 9 interaction marker missing: {marker}")
+    for marker in ("Stage 9 portfolio framing / Aquarium Field Index", ".explorer", ".scope-switch", ".fish-card-trigger"):
+        if marker not in aquarium_css:
+            fail(f"AQUARIUM Stage 9 responsive marker missing: {marker}")
+
     holoca_html = ROOT / "services/holoca/public/holoca.html"
     holoca_index = ROOT / "services/holoca/public/index.html"
     if holoca_html.read_bytes() != holoca_index.read_bytes():

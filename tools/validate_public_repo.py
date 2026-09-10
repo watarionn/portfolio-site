@@ -452,6 +452,21 @@ def main() -> None:
         if marker not in maze_css:
             fail(f"Maze Maker Stage 9 responsive marker missing: {marker}")
 
+    anagram_html = (ROOT / "tools/anagram/index.html").read_text(encoding="utf-8")
+    anagram_js = (ROOT / "tools/anagram/anagram.js").read_text(encoding="utf-8")
+    anagram_css = (ROOT / "tools/anagram/anagram.css").read_text(encoding="utf-8")
+    for marker in ('Letter Workbench', 'id="composeModeBtn"', 'id="chunkModeBtn"', 'id="copyResultBtn"'):
+        if marker not in anagram_html:
+            fail(f"Anagram Stage 9 presentation marker missing: {marker}")
+    for marker in ("new Intl.Segmenter", "function evaluateUsage()", "let chunkSelected = new Set()", "tileArea.replaceChildren()"):
+        if marker not in anagram_js:
+            fail(f"Anagram Stage 9 interaction marker missing: {marker}")
+    if any(marker in anagram_js for marker in ("tileArea.innerHTML", "chunkList.innerHTML", "builtTiles.innerHTML")):
+        fail("Anagram must not use HTML-string UI clearing")
+    for marker in ("Stage 9 portfolio framing / Letter Workbench", ".letter-illustration", ".tile.state-built"):
+        if marker not in anagram_css:
+            fail(f"Anagram Stage 9 responsive marker missing: {marker}")
+
     for path in tracked:
         rel = path.relative_to(ROOT)
         parts = set(rel.parts)

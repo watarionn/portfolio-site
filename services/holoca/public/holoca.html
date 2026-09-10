@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ホロカ デッキレシピ作成</title>
+<title>HOLOCA Deck Lab | ホロカ デッキレシピ作成</title>
+<meta name="description" content="hololive OFFICIAL CARD GAMEのカードを検索し、推し・メイン・エールの3領域でデッキレシピを組み、保存・出力・7枚ドローまで試せる個人制作ツールです。">
+<meta name="theme-color" content="#1a120a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -12,21 +14,42 @@
 <body>
 
 <!-- ヘッダー -->
-<header role="banner">
-  <div class="header-title">ホロカ デッキレシピ作成</div>
-  <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホームへ戻る</a>
+<header role="banner" class="site-header">
+  <a href="/" class="home-btn" aria-label="ポートフォリオへ戻る">← PORTFOLIO</a>
+  <div class="header-title"><strong>HOLOCA</strong><span>Deck Lab</span></div>
+  <div class="header-note" aria-hidden="true">SEARCH / BUILD / DRAW</div>
 </header>
 
 <main role="main">
+  <section class="project-intro" aria-labelledby="project-title">
+    <p class="project-kicker">PROJECT 05 / CARD SEARCH + DECK BUILDING</p>
+    <div class="project-intro-grid">
+      <div><p class="project-kana" aria-hidden="true">ほろか でっき らぼ</p><h1 id="project-title">探して、組んで、<br>7枚を試す。</h1></div>
+      <div class="project-copy"><p>カード情報を検索し、その場で推し・メイン・エールへ振り分けてデッキを組み立てるブラウザツールです。完成したレシピは端末へ保存でき、CSVと画像で持ち出せます。</p><p>検索と編集を往復しながら、構築の途中経過まで一つの画面で確認できることを重視しました。</p></div>
+    </div>
+    <dl class="project-meta">
+      <div><dt>ROLE</dt><dd>Concept / UI / Implementation</dd></div>
+      <div><dt>CORE</dt><dd>PHP / MySQL / JavaScript</dd></div>
+      <div><dt>OUTPUT</dt><dd>Local save / CSV / PNG</dd></div>
+    </dl>
+    <div class="deck-summary" aria-label="現在のデッキ枚数">
+      <div><span>OSHI</span><strong id="summary-oshi">0 / 1</strong><small>推しホロメン</small></div>
+      <div><span>MAIN</span><strong id="summary-main">0 / 50</strong><small>メインデッキ</small></div>
+      <div><span>YELL</span><strong id="summary-yell">0 / 20</strong><small>エールデッキ</small></div>
+      <div class="deck-health"><span>STATUS</span><strong id="deck-health" aria-live="polite">BUILDING</strong><small>構築ステータス</small></div>
+    </div>
+    <p class="project-disclaimer">非公式の個人制作ツールです。hololive OFFICIAL CARD GAME の公式サービスではありません。</p>
+  </section>
+  <div class="workspace-heading"><div><p>LIVE WORKSPACE</p><h2>デッキ構築ワークスペース</h2></div><p>検索から追加、枚数調整、保存、試し引きまで。</p></div>
 
   <!-- タブ -->
   <div class="main-tabs" role="tablist" aria-label="機能タブ">
-    <button class="tab-btn active" role="tab" aria-selected="true"  aria-controls="tab-deck"   onclick="switchTab('deck')">デッキレシピ編集</button>
-    <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-search" onclick="switchTab('search')">カード検索</button>
+    <button id="tab-btn-deck" class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-deck" data-tab="deck">デッキレシピ編集</button>
+    <button id="tab-btn-search" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-search" data-tab="search" tabindex="-1">カード検索</button>
   </div>
 
   <!-- ===== TAB: DECK ===== -->
-  <div class="tab-panel active" id="tab-deck" role="tabpanel">
+  <div class="tab-panel active" id="tab-deck" role="tabpanel" aria-labelledby="tab-btn-deck">
 
     <!-- 推しホロメン -->
     <div class="section">
@@ -52,7 +75,7 @@
           <tbody id="oshi-body"></tbody>
         </table>
       </div>
-      <button class="add-row-btn" onclick="addRow('oshi')">＋ カードを追加</button>
+      <button class="add-row-btn" data-add-deck="oshi">＋ カードを追加</button>
     </div>
 
     <!-- メインデッキ -->
@@ -79,7 +102,7 @@
           <tbody id="main-body"></tbody>
         </table>
       </div>
-      <button class="add-row-btn" onclick="addRow('main')">＋ カードを追加</button>
+      <button class="add-row-btn" data-add-deck="main">＋ カードを追加</button>
     </div>
 
     <!-- エールデッキ -->
@@ -106,15 +129,15 @@
           <tbody id="yell-body"></tbody>
         </table>
       </div>
-      <button class="add-row-btn" onclick="addRow('yell')">＋ カードを追加</button>
+      <button class="add-row-btn" data-add-deck="yell">＋ カードを追加</button>
     </div>
 
     <!-- アクション -->
     <div class="action-area">
-      <button class="btn btn-save"  onclick="saveDeck()">💾 保存する</button>
-      <button class="btn btn-dl"    onclick="openDlModal()">📥 ダウンロード</button>
-      <button class="btn btn-share" onclick="openShareModal()">🔗 SNSでシェア</button>
-      <button class="btn btn-draw"  onclick="drawHand()">🃏 シャッフル＆7枚ドロー</button>
+      <button class="btn btn-save" id="save-deck-btn">💾 保存する</button>
+      <button class="btn btn-dl" id="download-deck-btn">📥 ダウンロード</button>
+      <button class="btn btn-share" id="share-deck-btn">🔗 SNSでシェア</button>
+      <button class="btn btn-draw" id="draw-hand-btn">🃏 シャッフル＆7枚ドロー</button>
     </div>
 
     <div class="draw-result" id="draw-result" aria-live="polite">
@@ -124,11 +147,11 @@
   </div>
 
   <!-- ===== TAB: SEARCH ===== -->
-  <div class="tab-panel" id="tab-search" role="tabpanel">
+  <div class="tab-panel" id="tab-search" role="tabpanel" aria-labelledby="tab-btn-search">
     <div class="search-panel">
       <div class="search-panel-header">
         <h2>カード検索</h2>
-        <span style="font-size:clamp(0.55rem,1vw,0.68rem);color:var(--clr-muted);margin-left:auto;letter-spacing:0.06em">hololive公式カードリストから検索</span>
+        <span class="search-source">カードカタログから検索</span>
       </div>
 
       <div class="search-grid">
@@ -203,8 +226,8 @@
           <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap">
             <input type="text" id="s-tag" class="search-input" placeholder="例：#ホロライブ" style="flex:1;min-width:7.5rem">
             <div class="match-toggle" role="group" aria-label="タグ一致方法">
-              <button id="toggle-partial" class="active" onclick="setTagMatch('partial')">部分一致</button>
-              <button id="toggle-exact"   onclick="setTagMatch('exact')">完全一致</button>
+              <button id="toggle-partial" class="active" data-tag-match="partial" aria-pressed="true">部分一致</button>
+              <button id="toggle-exact" data-tag-match="exact" aria-pressed="false">完全一致</button>
             </div>
           </div>
         </div>
@@ -217,20 +240,20 @@
         <div class="form-group search-full">
           <label class="form-label">特定の能力を持つカードを絞り込み（複数選択可）</label>
           <div class="ability-chips" role="group" aria-label="能力フィルター">
-            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="サーチ"       onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">サーチ</span>
-            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="ドロー"       onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">ドロー</span>
-            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="回復"         onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">回復</span>
-            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="エール加速"   onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">エール加速</span>
-            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="ダメージ増加" onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">ダメージ増加</span>
-            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="妨害・耐性"   onclick="toggleAbility(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleAbility(this)">妨害・耐性</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="サーチ">サーチ</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="ドロー">ドロー</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="回復">回復</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="エール加速">エール加速</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="ダメージ増加">ダメージ増加</span>
+            <span class="ability-chip" role="checkbox" aria-checked="false" tabindex="0" data-ability="妨害・耐性">妨害・耐性</span>
           </div>
         </div>
 
       </div>
 
       <div class="search-btn-row">
-        <button class="btn-search" id="search-btn" onclick="performSearch()">🔍 この条件で検索する</button>
-        <button class="btn-reset"  onclick="resetSearch()">✕ 条件をリセット</button>
+        <button class="btn-search" id="search-btn">🔍 この条件で検索する</button>
+        <button class="btn-reset" id="reset-search-btn">✕ 条件をリセット</button>
       </div>
 
       <div class="search-results" id="search-results">
@@ -246,32 +269,32 @@
 </main>
 
 <!-- DOWNLOAD MODAL -->
-<div class="modal-overlay" id="dl-modal" role="dialog" aria-modal="true" aria-label="ダウンロード形式を選択">
+<div class="modal-overlay" id="dl-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="ダウンロード形式を選択">
   <div class="modal">
     <h3>📥 ダウンロード形式を選択</h3>
     <div class="modal-btns">
-      <button class="modal-btn" onclick="downloadCSV()">📊 表形式でダウンロード（CSV）</button>
-      <button class="modal-btn" onclick="downloadImage()">🖼️ 画像形式でダウンロード（PNG）</button>
+      <button class="modal-btn" id="download-csv-btn">📊 表形式でダウンロード（CSV）</button>
+      <button class="modal-btn" id="download-png-btn">🖼️ 画像形式でダウンロード（PNG）</button>
     </div>
-    <button class="modal-close" onclick="closeDlModal()">✕ キャンセル</button>
+    <button class="modal-close" id="close-dl-btn">✕ キャンセル</button>
   </div>
 </div>
 
 <!-- SHARE MODAL -->
-<div class="modal-overlay" id="share-modal" role="dialog" aria-modal="true" aria-label="SNSでシェア">
+<div class="modal-overlay" id="share-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="SNSでシェア">
   <div class="modal">
     <h3>🔗 SNSでシェア</h3>
     <div class="sns-btns">
-      <button class="sns-btn sns-x" onclick="shareX()">𝕏 X（Twitter）でシェア</button>
+      <button class="sns-btn sns-x" id="share-x-btn">𝕏 X（Twitter）でシェア</button>
     </div>
     <div style="margin:0.6rem 0;font-size:clamp(0.6rem,1.1vw,0.7rem);color:var(--clr-muted);text-align:center;letter-spacing:0.06em">または、テキストをコピーしてシェア</div>
-    <button class="modal-btn" onclick="copyShareText()" style="justify-content:center">📋 テキストをコピー</button>
-    <button class="modal-close" onclick="closeShareModal()">✕ キャンセル</button>
+    <button class="modal-btn modal-btn-center" id="copy-share-btn">📋 テキストをコピー</button>
+    <button class="modal-close" id="close-share-btn">✕ キャンセル</button>
   </div>
 </div>
 
 <!-- CARD DETAIL MODAL -->
-<div class="modal-overlay" id="card-modal" onclick="if(event.target===this)closeCardModal()" role="dialog" aria-modal="true" aria-labelledby="cm-name">
+<div class="modal-overlay" id="card-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cm-name">
   <div class="modal card-modal-inner" style="max-width:32.5rem;width:94%;max-height:90dvh;overflow-y:auto;padding:0">
 
     <div class="card-modal-header">
@@ -279,12 +302,12 @@
         <div class="card-modal-name" id="cm-name"></div>
         <div class="card-modal-no"   id="cm-no"></div>
       </div>
-      <button onclick="closeCardModal()" style="background:none;border:none;cursor:pointer;font-size:1rem;color:var(--clr-muted);line-height:1;padding:0.2rem" aria-label="閉じる">✕</button>
+      <button id="close-card-btn" class="card-modal-close" aria-label="カード詳細を閉じる">✕</button>
     </div>
 
     <div class="card-modal-body">
       <div class="card-modal-img-wrap">
-        <img id="cm-img" src="" alt="" style="width:100%;height:auto;border-radius:4px;display:block" onerror="this.parentElement.style.display='none'">
+        <img id="cm-img" src="" alt="" style="width:100%;height:auto;border-radius:4px;display:block">
       </div>
       <div class="card-modal-info">
         <div class="cm-row"><span class="cm-lbl">タイプ</span>    <span id="cm-type"   class="mini-badge mb-type"></span></div>
@@ -307,9 +330,9 @@
     <div class="card-modal-footer">
       <div class="cm-section-label" style="margin-bottom:0.5rem">デッキレシピに追加する</div>
       <div style="display:flex;gap:0.45rem;flex-wrap:wrap">
-        <button id="cm-btn-oshi" class="add-to-deck-btn add-to-oshi" style="flex:1;padding:0.55rem 0.5rem" onclick="addFromModalCard('oshi')">⭐ 推しホロメン</button>
-        <button id="cm-btn-main" class="add-to-deck-btn add-to-main" style="flex:1;padding:0.55rem 0.5rem" onclick="addFromModalCard('main')">🌟 メインデッキ</button>
-        <button id="cm-btn-yell" class="add-to-deck-btn add-to-yell" style="flex:1;padding:0.55rem 0.5rem" onclick="addFromModalCard('yell')">💛 エールデッキ</button>
+        <button id="cm-btn-oshi" class="add-to-deck-btn add-to-oshi" data-modal-deck="oshi" style="flex:1;padding:0.55rem 0.5rem">⭐ 推しホロメン</button>
+        <button id="cm-btn-main" class="add-to-deck-btn add-to-main" data-modal-deck="main" style="flex:1;padding:0.55rem 0.5rem">🌟 メインデッキ</button>
+        <button id="cm-btn-yell" class="add-to-deck-btn add-to-yell" data-modal-deck="yell" style="flex:1;padding:0.55rem 0.5rem">💛 エールデッキ</button>
       </div>
     </div>
   </div>

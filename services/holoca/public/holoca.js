@@ -15,9 +15,19 @@ const PAGE_SIZE=12;
 
 // ===== TAB =====
 function switchTab(tab){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&tab==='deck')||(i===1&&tab==='search')));
-  document.getElementById('tab-deck').classList.toggle('active',tab==='deck');
-  document.getElementById('tab-search').classList.toggle('active',tab==='search');
+  const activeTab=tab==='search'?'search':'deck';
+  document.querySelectorAll('.tab-btn[data-tab]').forEach(button=>{
+    const active=button.dataset.tab===activeTab;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-selected',String(active));
+    button.tabIndex=active?0:-1;
+  });
+  ['deck','search'].forEach(name=>{
+    const panel=document.getElementById(`tab-${name}`);
+    const active=name===activeTab;
+    panel.classList.toggle('active',active);
+    panel.hidden=!active;
+  });
 }
 
 // ===== ROW MGMT =====
@@ -33,31 +43,24 @@ function renderTable(deck){
     const tr=document.createElement('tr');
     tr.id=`row-${deck}-${row.id}`;
     tr.innerHTML=`
-      <td class="row-num">${idx+1}</td>
-      <td><input type="number" min="1" max="4" value="${row.qty}" oninput="updateField('${deck}',${row.id},'qty',this.value)" style="width:40px"></td>
-      <td>
-        <input type="text" placeholder="hSD01-001" value="${esc(row.no)}" oninput="updateField('${deck}',${row.id},'no',this.value)" onblur="validateCardNo(this,'${deck}',${row.id})">
-        <div class="val-msg" id="no-msg-${deck}-${row.id}">形式: hSD01-001</div>
-      </td>
-      <td><input type="text" placeholder="カード名" value="${esc(row.name)}" oninput="updateField('${deck}',${row.id},'name',this.value)"></td>
-      <td>${mkSel('type',deck,row.id,CARD_TYPES,row.type)}</td>
-      <td><input type="number" min="0" max="999" value="${row.hp}" placeholder="—" oninput="updateField('${deck}',${row.id},'hp',this.value)" style="width:40px"></td>
-      <td>${mkSel('bloom',deck,row.id,BLOOM_LEVELS,row.bloom,'—')}</td>
-      <td>
-        <input type="text" placeholder="#タグ Enter" value="${esc(row.tagInput)}" oninput="updateField('${deck}',${row.id},'tagInput',this.value)" onkeydown="addTag(event,'${deck}',${row.id})">
-        <div class="tag-display" id="tags-${deck}-${row.id}">${row.tags.map(t=>tpill(t,deck,row.id)).join('')}</div>
-      </td>
-      <td><textarea placeholder="能力テキスト" oninput="updateField('${deck}',${row.id},'text',this.value)">${esc(row.text)}</textarea></td>
-      <td>${mkSel('rarity',deck,row.id,RARITIES,row.rarity)}</td>
-      <td><button class="del-btn" onclick="deleteRow('${deck}',${row.id})">✕</button></td>
-    `;
+      <td class="row-num" data-label="CARD">${idx+1}</td>
+      <td data-label="枚数"><input type="number" min="1" max="4" value="${row.qty}" data-deck="${deck}" data-row-id="${row.id}" data-field="qty"></td>
+      <td data-label="カード番号"><input type="text" placeholder="hSD01-001" value="${esc(row.no)}" data-deck="${deck}" data-row-id="${row.id}" data-field="no" data-card-number><div class="val-msg" id="no-msg-${deck}-${row.id}">形式: hSD01-001</div></td>
+      <td data-label="カード名"><input type="text" placeholder="カード名" value="${esc(row.name)}" data-deck="${deck}" data-row-id="${row.id}" data-field="name"></td>
+      <td data-label="カードタイプ">${mkSel('type',deck,row.id,CARD_TYPES,row.type)}</td>
+      <td data-label="HP"><input type="number" min="0" max="999" value="${row.hp}" placeholder="—" data-deck="${deck}" data-row-id="${row.id}" data-field="hp"></td>
+      <td data-label="Bloom">${mkSel('bloom',deck,row.id,BLOOM_LEVELS,row.bloom,'—')}</td>
+      <td data-label="タグ"><input type="text" placeholder="#タグ Enter" value="${esc(row.tagInput)}" data-deck="${deck}" data-row-id="${row.id}" data-field="tagInput" data-tag-input><div class="tag-display" id="tags-${deck}-${row.id}">${row.tags.map(t=>tpill(t,deck,row.id)).join('')}</div></td>
+      <td data-label="能力テキスト"><textarea placeholder="能力テキスト" data-deck="${deck}" data-row-id="${row.id}" data-field="text">${esc(row.text)}</textarea></td>
+      <td data-label="レアリティ">${mkSel('rarity',deck,row.id,RARITIES,row.rarity)}</td>
+      <td data-label="削除"><button type="button" class="del-btn" data-delete-deck="${deck}" data-row-id="${row.id}" aria-label="${idx+1}行目を削除">✕</button></td>`;
     tbody.appendChild(tr);
   });
 }
 function mkSel(f,deck,id,opts,val,empty=''){
-  return`<select onchange="updateField('${deck}',${id},'${f}',this.value)">${empty?`<option value="">${empty}</option>`:''}${opts.map(o=>`<option${o===val?' selected':''}>${o}</option>`).join('')}</select>`;
+  return `<select data-deck="${deck}" data-row-id="${id}" data-field="${f}">${empty?`<option value="">${empty}</option>`:''}${opts.map(o=>`<option${o===val?' selected':''}>${o}</option>`).join('')}</select>`;
 }
-function tpill(t,deck,id){return`<span class="tag-pill">${esc(t)}<span class="del-tag" onclick="rmTag('${deck}',${id},${JSON.stringify(t)})">✕</span></span>`;}
+function tpill(t,deck,id){return `<span class="tag-pill">${esc(t)}<button type="button" class="del-tag" data-remove-tag data-deck="${deck}" data-row-id="${id}" data-tag="${esc(t)}" aria-label="${esc(t)}を削除">✕</button></span>`;}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 // ===== FIELD UPDATE =====
@@ -72,17 +75,15 @@ function validateCardNo(input,deck,id){
   if(val&&!CARD_NO_RE.test(val)){input.classList.add('error');msg.classList.add('show');}
   else{input.classList.remove('error');msg.classList.remove('show');updateField(deck,id,'no',val);}
 }
-function addTag(e,deck,id){
-  if(e.key!=='Enter')return;e.preventDefault();
+function addTagValue(input,deck,id){
   const row=rows[deck].find(r=>r.id===id);if(!row)return;
-  let tag=row.tagInput.trim();if(!tag)return;
+  let tag=input.value.trim();if(!tag)return;
   if(!tag.startsWith('#'))tag='#'+tag;
   if(!row.tags.includes(tag))row.tags.push(tag);
-  row.tagInput='';
+  row.tagInput='';input.value='';
   const disp=document.getElementById(`tags-${deck}-${row.id}`);
   if(disp)disp.innerHTML=row.tags.map(t=>tpill(t,deck,row.id)).join('');
-  const inp=document.querySelector(`#row-${deck}-${row.id} .tag-display`).previousElementSibling;
-  if(inp){inp.value='';inp.focus();}
+  input.focus();
 }
 function rmTag(deck,id,tag){
   const row=rows[deck].find(r=>r.id===id);if(!row)return;
@@ -90,11 +91,19 @@ function rmTag(deck,id,tag){
   const disp=document.getElementById(`tags-${deck}-${id}`);
   if(disp)disp.innerHTML=row.tags.map(t=>tpill(t,deck,id)).join('');
 }
+function deckTotal(deck){return rows[deck].reduce((sum,row)=>sum+(parseInt(row.qty)||0),0);}
+function updateDeckHealth(){
+  const ready=Object.entries(DECK_LIMITS).every(([deck,limit])=>deckTotal(deck)===limit);
+  const el=document.getElementById('deck-health');if(!el)return;
+  el.textContent=ready?'READY':'BUILDING';el.dataset.state=ready?'ready':'building';
+}
 function updateCount(deck){
-  const total=rows[deck].reduce((s,r)=>s+(parseInt(r.qty)||0),0);
+  const total=deckTotal(deck),limit=DECK_LIMITS[deck];
   const el=document.getElementById(deck+'-count');
-  el.textContent=total;
-  el.className=total===DECK_LIMITS[deck]?'count-ok':(total>DECK_LIMITS[deck]?'count-ng':'');
+  el.textContent=total;el.className=total===limit?'count-ok':(total>limit?'count-ng':'');
+  const summary=document.getElementById(`summary-${deck}`);
+  if(summary){summary.textContent=`${total} / ${limit}`;summary.dataset.state=total===limit?'ready':(total>limit?'over':'building');}
+  updateDeckHealth();
 }
 
 // ===== SAVE/LOAD =====
@@ -123,22 +132,59 @@ function showToast(msg){
 }
 
 // ===== DOWNLOAD =====
-function openDlModal(){document.getElementById('dl-modal').classList.add('show');}
-function closeDlModal(){document.getElementById('dl-modal').classList.remove('show');}
+function openDlModal(){openModal('dl-modal');}
+function closeDlModal(){closeModal('dl-modal');}
+function csvCell(value){return `"${String(value??'').replace(/"/g,'""')}"`;}
 function downloadCSV(){
-  const h=['デッキ','投入枚数','カード番号','カード名','カードタイプ','HP','Bloomレベル','タグ','能力テキスト','レアリティ'];
-  const lines=[h.join(',')];
-  [['oshi','推しホロメン'],['main','メインデッキ'],['yell','エールデッキ']].forEach(([d,l])=>{
-    rows[d].forEach(r=>lines.push([l,r.qty,r.no,r.name,r.type,r.hp,r.bloom,r.tags.join(' '),`"${(r.text||'').replace(/"/g,'""')}"`,r.rarity].join(',')));
+  const header=['デッキ','投入枚数','カード番号','カード名','カードタイプ','HP','Bloomレベル','タグ','能力テキスト','レアリティ'];
+  const lines=[header.map(csvCell).join(',')];
+  [['oshi','推しホロメン'],['main','メインデッキ'],['yell','エールデッキ']].forEach(([deck,label])=>{
+    rows[deck].forEach(row=>lines.push([label,row.qty,row.no,row.name,row.type,row.hp,row.bloom,row.tags.join(' '),row.text,row.rarity].map(csvCell).join(',')));
   });
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+lines.join('\n')],{type:'text/csv;charset=utf-8;'}));a.download='holoca_deck.csv';a.click();
-  closeDlModal();showToast('📊 CSVをダウンロードしました！');
+  const url=URL.createObjectURL(new Blob(['\uFEFF'+lines.join('\n')],{type:'text/csv;charset=utf-8;'}));
+  const a=document.createElement('a');a.href=url;a.download='holoca_deck.csv';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),0);closeDlModal();showToast('CSVをダウンロードしました');
 }
-function downloadImage(){closeDlModal();showToast('🖼️ 画像ダウンロードは準備中です');}
+function canvasLines(ctx,text,maxWidth){
+  const chars=[...String(text||'')],lines=[];let line='';
+  chars.forEach(char=>{const next=line+char;if(line&&ctx.measureText(next).width>maxWidth){lines.push(line);line=char;}else line=next;});
+  if(line)lines.push(line);return lines.length?lines:['—'];
+}
+function downloadImage(){
+  const width=1400,margin=72,sectionGap=34,rowH=46;
+  const groups=[['推しホロメン','oshi'],['メインデッキ','main'],['エールデッキ','yell']];
+  const rowCount=groups.reduce((sum,[,deck])=>sum+Math.max(1,rows[deck].length),0);
+  const height=330+groups.length*88+rowCount*rowH;
+  const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+  const ctx=canvas.getContext('2d');ctx.fillStyle='#f2ead0';ctx.fillRect(0,0,width,height);
+  ctx.fillStyle='#1a120a';ctx.font='700 54px serif';ctx.fillText('HOLOCA DECK RECIPE',margin,92);
+  ctx.font='24px serif';ctx.fillStyle='#6b5538';ctx.fillText(`OSHI ${deckTotal('oshi')}/1   MAIN ${deckTotal('main')}/50   YELL ${deckTotal('yell')}/20`,margin,138);
+  let y=205;
+  groups.forEach(([label,deck])=>{
+    ctx.fillStyle='#1a120a';ctx.fillRect(margin,y,width-margin*2,2);y+=36;
+    ctx.font='700 28px serif';ctx.fillStyle='#1a120a';ctx.fillText(label,margin,y);
+    ctx.font='18px serif';ctx.fillStyle='#9a7a32';ctx.fillText(`${deckTotal(deck)} / ${DECK_LIMITS[deck]} 枚`,width-margin-150,y);y+=28;
+    const items=rows[deck].length?rows[deck]:[{qty:0,no:'',name:'カード未登録',type:''}];
+    items.forEach(row=>{
+      ctx.fillStyle='rgba(192,168,112,.28)';ctx.fillRect(margin,y+rowH-1,width-margin*2,1);
+      ctx.font='20px serif';ctx.fillStyle='#3a2c18';
+      ctx.fillText(`${row.qty||0} ×`,margin+8,y+30);ctx.fillStyle='#6b5538';ctx.fillText(row.no||'—',margin+78,y+30);
+      ctx.fillStyle='#1a120a';const name=canvasLines(ctx,row.name||'名称未設定',570)[0];ctx.fillText(name,margin+280,y+30);
+      ctx.fillStyle='#6b5538';ctx.fillText(row.type||'—',margin+900,y+30);y+=rowH;
+    });
+    y+=sectionGap;
+  });
+  ctx.font='16px serif';ctx.fillStyle='#a08060';ctx.fillText('Personal portfolio tool / not an official hololive service',margin,height-42);
+  canvas.toBlob(blob=>{
+    if(!blob){showToast('画像の生成に失敗しました');return;}
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='holoca_deck.png';a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),0);closeDlModal();showToast('PNGをダウンロードしました');
+  },'image/png');
+}
 
 // ===== SHARE =====
-function openShareModal(){document.getElementById('share-modal').classList.add('show');}
-function closeShareModal(){document.getElementById('share-modal').classList.remove('show');}
+function openShareModal(){openModal('share-modal');}
+function closeShareModal(){closeModal('share-modal');}
 function buildShareText(){
   const oshi=rows.oshi[0];
   let t='【ホロカデッキレシピ】\n';
@@ -148,7 +194,7 @@ function buildShareText(){
   t+='#ホロカ #ホロライブカードゲーム';
   return t;
 }
-function shareX(){window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(buildShareText())}`,'_blank');closeShareModal();}
+function shareX(){window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(buildShareText())}`,'_blank','noopener,noreferrer');closeShareModal();}
 function copyShareText(){navigator.clipboard.writeText(buildShareText()).then(()=>{closeShareModal();showToast('📋 テキストをコピーしました！');});}
 
 // ===== DRAW (メインデッキのみ) =====
@@ -175,18 +221,21 @@ const SEARCH_API = 'card_search_api.php';
 
 function setTagMatch(mode){
   tagMatchMode=mode;
-  document.getElementById('toggle-partial').classList.toggle('active',mode==='partial');
-  document.getElementById('toggle-exact').classList.toggle('active',mode==='exact');
+  ['partial','exact'].forEach(name=>{
+    const button=document.getElementById(`toggle-${name}`),active=name===mode;
+    button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
+  });
 }
 function toggleAbility(el){
   const ab=el.dataset.ability;
   if(activeAbilities.has(ab)){activeAbilities.delete(ab);el.classList.remove('active');}
   else{activeAbilities.add(ab);el.classList.add('active');}
+  el.setAttribute('aria-checked',String(activeAbilities.has(ab)));
 }
 function resetSearch(){
   ['s-name','s-type','s-bloom','s-rarity','s-exp','s-tag','s-text'].forEach(id=>{document.getElementById(id).value='';});
   activeAbilities.clear();
-  document.querySelectorAll('.ability-chip').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.ability-chip').forEach(c=>{c.classList.remove('active');c.setAttribute('aria-checked','false');});
   setTagMatch('partial');
   searchResults=[];
   currentPage=1;
@@ -245,31 +294,33 @@ async function performSearch(page=1){
     console.error(e);
     document.getElementById('search-results').innerHTML=
       `<div class="empty-state"><div class="emoji">😿</div>
-       <div>検索エラーが発生しました。<br><code>card_search_api.php</code> が同じフォルダにあるか確認してください。</div>
-       <div style="margin-top:6px;font-size:0.68rem;color:var(--error)">${esc(e.message)}</div></div>`;
+       <div>検索サービスに接続できませんでした。時間をおいてもう一度お試しください。</div>
+       <div class="search-error-detail">${esc(e.message)}</div></div>`;
   }finally{
     btn.disabled=false;
-    btn.innerHTML='🔍 この条件で検索する';
+    btn.textContent='🔍 この条件で検索する';
   }
 }
 
 function bindSearchResultActions(container){
   container.querySelectorAll('.card-item[data-card-index]').forEach(cardEl=>{
-    cardEl.addEventListener('click',()=>openCardModal(Number(cardEl.dataset.cardIndex)));
+    const open=()=>openCardModal(Number(cardEl.dataset.cardIndex));
+    cardEl.addEventListener('click',open);
+    cardEl.addEventListener('keydown',event=>{
+      if(event.target!==cardEl||!['Enter',' '].includes(event.key))return;
+      event.preventDefault();open();
+    });
   });
-  container.querySelectorAll('.card-item-footer').forEach(footer=>{
-    footer.addEventListener('click',event=>event.stopPropagation());
-  });
+  container.querySelectorAll('.card-item-footer').forEach(footer=>footer.addEventListener('click',event=>event.stopPropagation()));
   container.querySelectorAll('.add-to-deck-btn[data-card-index][data-deck]').forEach(button=>{
     button.addEventListener('click',event=>{
       event.stopPropagation();
-      const index=Number(button.dataset.cardIndex);
-      const card=searchResults[index];
-      const deck=button.dataset.deck;
-      if(!card||!['oshi','main','yell'].includes(deck))return;
-      addFromSearch(card,deck);
+      const card=searchResults[Number(button.dataset.cardIndex)],deck=button.dataset.deck;
+      if(!card||!['oshi','main','yell'].includes(deck))return;addFromSearch(card,deck);
     });
   });
+  container.querySelectorAll('.page-btn[data-page]').forEach(button=>button.addEventListener('click',()=>goPage(Number(button.dataset.page))));
+  container.querySelectorAll('img.card-thumb').forEach(img=>img.addEventListener('error',()=>{img.hidden=true;}));
 }
 
 function renderSearchResults(total, totalPages){
@@ -285,7 +336,7 @@ function renderSearchResults(total, totalPages){
     // 色名タグを除外（#xxx / #xxxxxx 形式のCSSカラーコード）
     const cleanTags=(card.tags||[]).filter(t=>!/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(t));
     const tags=cleanTags.map(t=>`<span class="card-tag-pill">${esc(t)}</span>`).join('');
-    const img=card.imageUrl?`<img src="${esc(card.imageUrl)}" alt="" style="width:56px;height:auto;border-radius:6px;flex-shrink:0" onerror="this.style.display='none'">` :'';
+    const img=card.imageUrl?`<img class="card-thumb" src="${esc(card.imageUrl)}" alt="" loading="lazy">` :'';
     const expShort=(card.expansionName||'').replace('ブースターパック','BP').replace('スタートデッキ','SD').replace(/「|」/g,'');
 
     // デッキ種別ごとの追加可否
@@ -296,7 +347,7 @@ function renderSearchResults(total, totalPages){
     const disOshi = canOshi?'':' disabled title="推しホロメンのみ追加できます"';
     const disMain = canMain?'':' disabled title="エール・推しホロメンはメインデッキに追加できません"';
     const disYell = canYell?'':' disabled title="エールのみ追加できます"';
-    html+=`<div class="card-item" style="animation:cardReveal 0.33s ease ${i*0.03}s both" data-card-index="${i}">
+    html+=`<div class="card-item" style="animation:cardReveal 0.33s ease ${i*0.03}s both" data-card-index="${i}" role="button" tabindex="0" aria-label="${esc(card.name||'カード詳細')}の詳細を見る">
       <div class="card-item-header">
         <div style="flex:1">
           <div class="card-item-name">${esc(card.name||'—')}</div>
@@ -326,14 +377,14 @@ function renderSearchResults(total, totalPages){
   // サーバーサイドページネーション
   if(totalPages>1){
     html+='<div class="pagination">';
-    html+=`<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage<=1?'disabled':''}>‹</button>`;
+    html+=`<button class="page-btn" data-page="${currentPage-1}" ${currentPage<=1?'disabled':''} aria-label="前のページ">‹</button>`;
     for(let p=1;p<=totalPages;p++){
       if(p===1||p===totalPages||Math.abs(p-currentPage)<=2)
-        html+=`<button class="page-btn${p===currentPage?' active':''}" onclick="goPage(${p})">${p}</button>`;
+        html+=`<button class="page-btn${p===currentPage?' active':''}" data-page="${p}"${p===currentPage?' aria-current="page"':''}>${p}</button>`;
       else if((p===2&&currentPage>4)||(p===totalPages-1&&currentPage<totalPages-3))
         html+=`<span style="padding:0 3px;color:var(--text-sub);line-height:34px">…</span>`;
     }
-    html+=`<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage>=totalPages?'disabled':''}>›</button>`;
+    html+=`<button class="page-btn" data-page="${currentPage+1}" ${currentPage>=totalPages?'disabled':''} aria-label="次のページ">›</button>`;
     html+='</div>';
   }
   el.innerHTML=html;
@@ -439,12 +490,10 @@ function openCardModal(idx) {
   btnMain.disabled = !canMain; btnMain.title = canMain ? '' : 'エール・推しホロメンはメインデッキに追加できません';
   btnYell.disabled = !canYell; btnYell.title = canYell ? '' : 'エールのみ追加できます';
 
-  document.getElementById('card-modal').classList.add('show');
+  openModal('card-modal');
 }
 
-function closeCardModal() {
-  document.getElementById('card-modal').classList.remove('show');
-}
+function closeCardModal(){closeModal('card-modal');}
 
 function addFromModalCard(deck) {
   if (!modalCard) return;
@@ -452,8 +501,73 @@ function addFromModalCard(deck) {
   addFromSearch({...modalCard, tags: cleanTags}, deck);
   closeCardModal();
 }
-document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('show');}));
+let lastFocusedElement=null;
+function openModal(id){
+  const modal=document.getElementById(id);if(!modal)return;
+  lastFocusedElement=document.activeElement;modal.classList.add('show');modal.setAttribute('aria-hidden','false');
+  requestAnimationFrame(()=>modal.querySelector('button:not(:disabled), input, select, textarea, [tabindex="0"]')?.focus());
+}
+function closeModal(id){
+  const modal=document.getElementById(id);if(!modal)return;
+  modal.classList.remove('show');modal.setAttribute('aria-hidden','true');
+  if(lastFocusedElement instanceof HTMLElement)lastFocusedElement.focus();
+}
+function bindStaticActions(){
+  const tabs=[...document.querySelectorAll('.tab-btn[data-tab]')];
+  tabs.forEach((button,index)=>{
+    button.addEventListener('click',()=>switchTab(button.dataset.tab));
+    button.addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight'].includes(event.key))return;event.preventDefault();
+      const step=event.key==='ArrowRight'?1:-1,next=tabs[(index+step+tabs.length)%tabs.length];switchTab(next.dataset.tab);next.focus();
+    });
+  });
+  document.querySelectorAll('[data-add-deck]').forEach(button=>button.addEventListener('click',()=>addRow(button.dataset.addDeck)));
+  document.getElementById('save-deck-btn').addEventListener('click',saveDeck);
+  document.getElementById('download-deck-btn').addEventListener('click',openDlModal);
+  document.getElementById('share-deck-btn').addEventListener('click',openShareModal);
+  document.getElementById('draw-hand-btn').addEventListener('click',drawHand);
+  document.getElementById('search-btn').addEventListener('click',()=>performSearch());
+  document.getElementById('reset-search-btn').addEventListener('click',resetSearch);
+  document.querySelectorAll('[data-tag-match]').forEach(button=>button.addEventListener('click',()=>setTagMatch(button.dataset.tagMatch)));
+  document.querySelectorAll('.ability-chip').forEach(chip=>{
+    const activate=()=>toggleAbility(chip);chip.addEventListener('click',activate);
+    chip.addEventListener('keydown',event=>{if(['Enter',' '].includes(event.key)){event.preventDefault();activate();}});
+  });
+  document.querySelectorAll('.search-input,.search-select').forEach(input=>input.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();performSearch();}}));
+  document.getElementById('download-csv-btn').addEventListener('click',downloadCSV);
+  document.getElementById('download-png-btn').addEventListener('click',downloadImage);
+  document.getElementById('close-dl-btn').addEventListener('click',closeDlModal);
+  document.getElementById('share-x-btn').addEventListener('click',shareX);
+  document.getElementById('copy-share-btn').addEventListener('click',copyShareText);
+  document.getElementById('close-share-btn').addEventListener('click',closeShareModal);
+  document.getElementById('close-card-btn').addEventListener('click',closeCardModal);
+  document.querySelectorAll('[data-modal-deck]').forEach(button=>button.addEventListener('click',()=>addFromModalCard(button.dataset.modalDeck)));
+  document.getElementById('cm-img').addEventListener('error',event=>{event.currentTarget.parentElement.style.display='none';});
+  document.querySelectorAll('.modal-overlay').forEach(overlay=>overlay.addEventListener('click',event=>{if(event.target===overlay)closeModal(overlay.id);}));
+  document.addEventListener('click',event=>{
+    const del=event.target.closest('[data-delete-deck]');if(del){deleteRow(del.dataset.deleteDeck,Number(del.dataset.rowId));return;}
+    const tag=event.target.closest('[data-remove-tag]');if(tag)rmTag(tag.dataset.deck,Number(tag.dataset.rowId),tag.dataset.tag);
+  });
+  document.addEventListener('input',event=>{
+    const el=event.target.closest('[data-deck][data-row-id][data-field]');if(!el||el.tagName==='SELECT')return;
+    updateField(el.dataset.deck,Number(el.dataset.rowId),el.dataset.field,el.value);
+  });
+  document.addEventListener('change',event=>{
+    const el=event.target.closest('select[data-deck][data-row-id][data-field]');if(!el)return;
+    updateField(el.dataset.deck,Number(el.dataset.rowId),el.dataset.field,el.value);
+  });
+  document.addEventListener('focusout',event=>{
+    const el=event.target.closest('[data-card-number]');if(el)validateCardNo(el,el.dataset.deck,Number(el.dataset.rowId));
+  });
+  document.addEventListener('keydown',event=>{
+    const tagInput=event.target.closest('[data-tag-input]');
+    if(tagInput&&event.key==='Enter'){event.preventDefault();addTagValue(tagInput,tagInput.dataset.deck,Number(tagInput.dataset.rowId));return;}
+    if(event.key==='Escape'){const modal=document.querySelector('.modal-overlay.show');if(modal)closeModal(modal.id);}
+  });
+}
 
 // ===== INIT =====
+bindStaticActions();
 loadDeck();
-['oshi','main','yell'].forEach(d=>{if(!rows[d].length)addRow(d);});
+['oshi','main','yell'].forEach(deck=>{renderTable(deck);updateCount(deck);});
+switchTab('deck');

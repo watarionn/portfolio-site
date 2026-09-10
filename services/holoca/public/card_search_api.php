@@ -29,7 +29,7 @@ function respond_service_error(int $status = 500): void {
 // ============================================================
 // Protected runtime configuration
 // ============================================================
-$configPath = __DIR__ . '/../config.php';
+$configPath = __DIR__ . '/../../config.php';
 if (!is_file($configPath)) {
     error_log('HOLOCA card search unavailable: protected config is missing.');
     respond_service_error(503);

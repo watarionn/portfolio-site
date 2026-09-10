@@ -111,11 +111,11 @@ REQUIRED_STAGE4_HOLOCA_FILES = {
 }
 
 EXPECTED_STAGE4_HOLOCA_BLOBS = {
-    "services/holoca/public/card_search_api.php": "67ec6d3b666e5bda63471f594a0960bb733ac01a",
-    "services/holoca/public/holoca.css": "bd62c0d8f94920c00378bee17a71750c940e1907",
-    "services/holoca/public/holoca.html": "a1781c59567445e6840f4725ab3ea628484144fc",
-    "services/holoca/public/holoca.js": "4679d51361f53eb9525bc6587b44f8176945e730",
-    "services/holoca/public/index.html": "a1781c59567445e6840f4725ab3ea628484144fc",
+    "services/holoca/public/card_search_api.php": "e04571430243982b03e62d0b8ca45e00e1f93267",
+    "services/holoca/public/holoca.css": "0020d0bf35b18ea9946f7c90ec7db4a0df604002",
+    "services/holoca/public/holoca.html": "67f68842b8f3b9915b8f387a7743132e94119b54",
+    "services/holoca/public/holoca.js": "0ca68949ebbea99ff676bf764f8d9a8e73c1a575",
+    "services/holoca/public/index.html": "67f68842b8f3b9915b8f387a7743132e94119b54",
 }
 
 REQUIRED_STAGE6_SHISHA_FILES = {
@@ -370,7 +370,7 @@ def main() -> None:
 
     holoca_api = (ROOT / "services/holoca/public/card_search_api.php").read_text(encoding="utf-8")
     required_api_literals = (
-        "$configPath = __DIR__ . '/../config.php';",
+        "$configPath = __DIR__ . '/../../config.php';",
         "if (!is_file($configPath))",
         "respond_service_error(503);",
         "'error' => '検索サービスは現在利用できません。',",
@@ -385,6 +385,29 @@ def main() -> None:
         fail("HOLOCA search-result event binding hardening is missing")
     if "const cardJson" in holoca_js or "addFromSearch('${cardJson}'" in holoca_js:
         fail("HOLOCA must not embed serialized card JSON in inline event handlers")
+
+    holoca_html_text = holoca_html.read_text(encoding="utf-8")
+    holoca_css = (ROOT / "services/holoca/public/holoca.css").read_text(encoding="utf-8")
+    for marker in (
+        'class="project-intro"', 'id="summary-oshi"', 'id="summary-main"',
+        'id="summary-yell"', 'id="deck-health"', 'data-tab="deck"',
+        'data-tab="search"', 'aria-hidden="true"',
+    ):
+        if marker not in holoca_html_text:
+            fail(f"HOLOCA Stage 9 presentation marker missing: {marker}")
+    for attribute in ("onclick=", "oninput=", "onchange=", "onkeydown=", "onblur=", "onerror="):
+        if attribute in holoca_html_text or attribute in holoca_js:
+            fail(f"HOLOCA inline event handler remains: {attribute}")
+    for marker in (
+        "function bindStaticActions()", "function updateDeckHealth()", "function downloadImage()",
+        "canvas.toBlob", "aria-current=\"page\"",
+        "modal.setAttribute('aria-hidden','false')", "modal.setAttribute('aria-hidden','true')",
+    ):
+        if marker not in holoca_js:
+            fail(f"HOLOCA Stage 9 interaction marker missing: {marker}")
+    for marker in ("Stage 9 portfolio framing / HOLOCA Deck Lab", "tbody td::before", ".project-intro-grid"):
+        if marker not in holoca_css:
+            fail(f"HOLOCA Stage 9 responsive marker missing: {marker}")
 
     for path in tracked:
         rel = path.relative_to(ROOT)

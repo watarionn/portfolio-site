@@ -1,233 +1,387 @@
 'use strict';
 
 /* =============================================
-   迷路メーカー — maze-maker.js
+   Stage 9 / Maze Draft Board
    ============================================= */
-
-/* ─── 状態 ─── */
 let rows = 10, cols = 19;
 let grid = [];
 let currentMode = 'place';
 let currentTool = 'wall';
-let isDragging  = false;
+let isDragging = false;
+let activeCell = { r: 0, c: 0 };
+let undoStack = [];
+let redoStack = [];
+let actionSnapshotTaken = false;
+const MAX_HISTORY = 80;
 
-/* ─── DOM参照 ─── */
-const inpRows     = document.getElementById('inp-rows');
-const inpCols     = document.getElementById('inp-cols');
-const btnGen      = document.getElementById('btn-generate');
-const toolPanel   = document.getElementById('tool-panel');
-const gridWrap    = document.getElementById('grid-wrap');
-const mazeBody    = document.getElementById('maze-body');
-const btnPlace    = document.getElementById('btn-place');
-const btnDelete   = document.getElementById('btn-delete');
-const toolBtns    = document.querySelectorAll('.tool-btn[data-tool]');
-const obstChar    = document.getElementById('obstacle-char');
+const inpRows = document.getElementById('inp-rows');
+const inpCols = document.getElementById('inp-cols');
+const btnGen = document.getElementById('btn-generate');
+const toolPanel = document.getElementById('tool-panel');
+const gridWrap = document.getElementById('grid-wrap');
+const mazeBody = document.getElementById('maze-body');
+const btnPlace = document.getElementById('btn-place');
+const btnDelete = document.getElementById('btn-delete');
+const toolBtns = document.querySelectorAll('.tool-btn[data-tool]');
+const obstChar = document.getElementById('obstacle-char');
 const collectChar = document.getElementById('collect-char');
 const exportPanel = document.getElementById('export-panel');
+const btnUndo = document.getElementById('btn-undo');
+const btnRedo = document.getElementById('btn-redo');
+const btnClear = document.getElementById('btn-clear');
+const statusLive = document.getElementById('status-live');
+const gridSizeStat = document.getElementById('grid-size-stat');
+const wallCount = document.getElementById('wall-count');
+const markCount = document.getElementById('mark-count');
 
-/* =============================================
-   グリッド生成
-   ============================================= */
-btnGen.addEventListener('click', function() {
-  rows = Math.max(3, Math.min(40, parseInt(inpRows.value) || 10));
-  cols = Math.max(3, Math.min(60, parseInt(inpCols.value) || 19));
+function announce(message) {
+  statusLive.textContent = message;
+}
+
+function cloneGrid(source = grid) {
+  return source.map(row => row.map(cell => ({ type: cell.type, char: cell.char })));
+}
+
+function snapshotState() {
+  return { rows, cols, grid: cloneGrid() };
+}
+
+function pushSnapshot() {
+  if (!grid.length) return;
+  undoStack.push(snapshotState());
+  if (undoStack.length > MAX_HISTORY) undoStack.shift();
+  redoStack = [];
+  updateHistoryButtons();
+}
+
+function beginAction() {
+  actionSnapshotTaken = false;
+}
+
+function ensureSnapshot() {
+  if (actionSnapshotTaken) return;
+  pushSnapshot();
+  actionSnapshotTaken = true;
+}
+
+function updateHistoryButtons() {
+  btnUndo.disabled = undoStack.length === 0;
+  btnRedo.disabled = redoStack.length === 0;
+}
+
+function restoreSnapshot(snapshot) {
+  rows = snapshot.rows;
+  cols = snapshot.cols;
+  grid = cloneGrid(snapshot.grid);
   inpRows.value = rows;
   inpCols.value = cols;
-  initGrid();
+  activeCell = { r: 0, c: 0 };
+  revealWorkbench();
   renderGrid();
+}
+
+function undo() {
+  if (!undoStack.length) return;
+  redoStack.push(snapshotState());
+  const previous = undoStack.pop();
+  restoreSnapshot(previous);
+  updateHistoryButtons();
+  announce('1操作戻しました。');
+}
+
+function redo() {
+  if (!redoStack.length) return;
+  undoStack.push(snapshotState());
+  const next = redoStack.pop();
+  restoreSnapshot(next);
+  updateHistoryButtons();
+  announce('操作をやり直しました。');
+}
+
+function revealWorkbench() {
   toolPanel.classList.remove('hidden');
   gridWrap.classList.remove('hidden');
   exportPanel.classList.remove('hidden');
-});
+}
 
 function initGrid() {
   grid = [];
   for (let r = 0; r < rows; r++) {
-    grid[r] = [];
+    const row = [];
     for (let c = 0; c < cols; c++) {
-      const isEdge = r === 0 || r === rows - 1 || c === 0 || c === cols - 1;
-      grid[r][c] = isEdge
-        ? {type: 'wall', char: '■'}
-        : {type: 'path', char: ''};
+      const edge = r === 0 || r === rows - 1 || c === 0 || c === cols - 1;
+      row.push(edge ? { type: 'wall', char: '■' } : { type: 'path', char: '' });
     }
+    grid.push(row);
   }
 }
 
-/* =============================================
-   グリッド描画
-   ============================================= */
-function renderGrid() {
-  mazeBody.innerHTML = '';
+function updateStats() {
+  let walls = 0;
+  let marks = 0;
+  grid.flat().forEach(cell => {
+    if (cell.type === 'wall') walls += 1;
+    if (!['wall', 'path'].includes(cell.type)) marks += 1;
+  });
+  gridSizeStat.textContent = `${rows}×${cols}`;
+  wallCount.textContent = String(walls);
+  markCount.textContent = String(marks);
+}
 
+function generateNewGrid() {
+  const nextRows = Math.max(3, Math.min(40, parseInt(inpRows.value, 10) || 10));
+  const nextCols = Math.max(3, Math.min(60, parseInt(inpCols.value, 10) || 19));
+  if (grid.length) pushSnapshot();
+  rows = nextRows;
+  cols = nextCols;
+  inpRows.value = rows;
+  inpCols.value = cols;
+  activeCell = { r: 0, c: 0 };
+  initGrid();
+  revealWorkbench();
+  renderGrid();
+  announce(`${rows}×${cols} の新しい下書きを作りました。`);
+}
+
+btnGen.addEventListener('click', generateNewGrid);
+document.querySelectorAll('.preset-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const [r, c] = button.dataset.size.split('x').map(Number);
+    inpRows.value = r;
+    inpCols.value = c;
+    announce(`${r}×${c} を選択しました。「新しい下書きを作る」で反映します。`);
+  });
+});
+
+function cellLabel(r, c, cell) {
+  const names = { wall: '壁', path: '通路', start: 'スタート', goal: 'ゴール', obstacle: `障害物 ${cell.char}`, collect: `収集物 ${cell.char}` };
+  return `${r + 1}行 ${c + 1}列、${names[cell.type] || cell.type}`;
+}
+
+function focusCell(r, c) {
+  const nextR = Math.max(0, Math.min(rows - 1, r));
+  const nextC = Math.max(0, Math.min(cols - 1, c));
+  activeCell = { r: nextR, c: nextC };
+  mazeBody.querySelectorAll('td').forEach(cell => { cell.tabIndex = -1; });
+  const target = mazeBody.rows[nextR]?.cells[nextC];
+  if (target) {
+    target.tabIndex = 0;
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+}
+
+function renderGrid() {
+  mazeBody.replaceChildren();
+  const fragment = document.createDocumentFragment();
   for (let r = 0; r < rows; r++) {
     const tr = document.createElement('tr');
     for (let c = 0; c < cols; c++) {
       const td = document.createElement('td');
+      td.dataset.r = String(r);
+      td.dataset.c = String(c);
+      td.tabIndex = r === activeCell.r && c === activeCell.c ? 0 : -1;
+      td.setAttribute('aria-label', cellLabel(r, c, grid[r][c]));
       applyCellStyle(td, grid[r][c]);
-      td.dataset.r = r;
-      td.dataset.c = c;
-
-      /* ── PC: マウスイベント ── */
-      td.addEventListener('mousedown', function(e) {
-        isDragging = true;
-        handleCell(r, c);
-        e.preventDefault();
-      });
-      td.addEventListener('mouseenter', function() {
-        if (isDragging) handleCell(r, c);
-      });
-
-      /* ── スマホ: タッチイベント ── */
-      td.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-        handleCell(r, c);
-      }, {passive: false});
-
-      td.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-        const t = e.touches[0];
-        const el = document.elementFromPoint(t.clientX, t.clientY);
-        if (el && el.tagName === 'TD' && el.dataset.r !== undefined) {
-          handleCell(parseInt(el.dataset.r), parseInt(el.dataset.c));
-        }
-      }, {passive: false});
-
+      bindCellEvents(td, r, c);
       tr.appendChild(td);
     }
-    mazeBody.appendChild(tr);
+    fragment.appendChild(tr);
   }
+  mazeBody.appendChild(fragment);
+  updateStats();
 }
 
-/* マウスアップはwindow全体で受け取る */
-window.addEventListener('mouseup', function() { isDragging = false; });
+function bindCellEvents(td, r, c) {
+  td.addEventListener('focus', () => { activeCell = { r, c }; });
+  td.addEventListener('mousedown', event => {
+    beginAction();
+    isDragging = true;
+    activeCell = { r, c };
+    handleCell(r, c);
+    event.preventDefault();
+  });
+  td.addEventListener('mouseenter', () => {
+    if (isDragging) handleCell(r, c);
+  });
+  td.addEventListener('touchstart', event => {
+    beginAction();
+    activeCell = { r, c };
+    handleCell(r, c);
+    event.preventDefault();
+  }, { passive: false });
+  td.addEventListener('touchmove', event => {
+    event.preventDefault();
+    const touch = event.touches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (target?.tagName === 'TD' && target.dataset.r !== undefined) {
+      handleCell(Number(target.dataset.r), Number(target.dataset.c));
+    }
+  }, { passive: false });
+  td.addEventListener('keydown', event => {
+    const moves = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] };
+    if (moves[event.key]) {
+      event.preventDefault();
+      const [dr, dc] = moves[event.key];
+      focusCell(r + dr, c + dc);
+      return;
+    }
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      beginAction();
+      handleCell(r, c, true);
+      return;
+    }
+    if (event.key === 'Delete' || event.key === 'Backspace') {
+      event.preventDefault();
+      beginAction();
+      deleteCell(r, c);
+    }
+  });
+}
+
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  actionSnapshotTaken = false;
+});
+window.addEventListener('touchend', () => { actionSnapshotTaken = false; }, { passive: true });
 
 function applyCellStyle(td, cell) {
   td.className = '';
   td.textContent = '';
-  td.style.fontSize = '';
-
   switch (cell.type) {
-    case 'wall':
-      td.classList.add('wall');
-      td.textContent = '■';
-      break;
-    case 'path':
-      td.classList.add('path');
-      break;
-    case 'start':
-      td.classList.add('cell-start');
-      td.textContent = 'スタート';
-      break;
-    case 'goal':
-      td.classList.add('cell-goal');
-      td.textContent = 'ゴール';
-      break;
-    case 'obstacle':
-      td.classList.add('obstacle');
-      td.textContent = cell.char;
-      break;
-    case 'collect':
-      td.classList.add('collect');
-      td.textContent = cell.char;
-      break;
+    case 'wall': td.classList.add('wall'); td.textContent = '■'; break;
+    case 'path': td.classList.add('path'); break;
+    case 'start': td.classList.add('cell-start'); td.textContent = 'S'; break;
+    case 'goal': td.classList.add('cell-goal'); td.textContent = 'G'; break;
+    case 'obstacle': td.classList.add('obstacle'); td.textContent = cell.char; break;
+    case 'collect': td.classList.add('collect'); td.textContent = cell.char; break;
   }
 }
 
 function updateCell(r, c) {
-  const td = mazeBody.rows[r] && mazeBody.rows[r].cells[c];
+  const td = mazeBody.rows[r]?.cells[c];
   if (!td) return;
   applyCellStyle(td, grid[r][c]);
+  td.setAttribute('aria-label', cellLabel(r, c, grid[r][c]));
+  updateStats();
 }
 
-/* =============================================
-   セル操作
-   ============================================= */
-function handleCell(r, c) {
+function sameCell(a, b) {
+  return a.type === b.type && a.char === b.char;
+}
+
+function deleteCell(r, c) {
+  const edge = r === 0 || r === rows - 1 || c === 0 || c === cols - 1;
+  if (edge || grid[r][c].type === 'path') return;
+  ensureSnapshot();
+  grid[r][c] = { type: 'path', char: '' };
+  updateCell(r, c);
+}
+
+function handleCell(r, c, restoreFocus = false) {
   if (currentMode === 'delete') {
-    const isEdge = r === 0 || r === rows - 1 || c === 0 || c === cols - 1;
-    if (isEdge) return;
-    grid[r][c] = {type: 'path', char: ''};
+    deleteCell(r, c);
+    return;
+  }
+
+  let next = null;
+  if (currentTool === 'wall') next = { type: 'wall', char: '■' };
+  if (currentTool === 'obstacle') next = { type: 'obstacle', char: obstChar.value || '?' };
+  if (currentTool === 'collect') next = { type: 'collect', char: collectChar.value || '?' };
+
+  if (next) {
+    if (sameCell(grid[r][c], next)) return;
+    ensureSnapshot();
+    grid[r][c] = next;
     updateCell(r, c);
     return;
   }
 
-  switch (currentTool) {
-    case 'wall':
-      grid[r][c] = {type: 'wall', char: '■'};
-      break;
-    case 'start':
-      clearType('start');
-      grid[r][c] = {type: 'start', char: ''};
-      renderGrid(); return;
-    case 'goal':
-      clearType('goal');
-      grid[r][c] = {type: 'goal', char: ''};
-      renderGrid(); return;
-    case 'obstacle':
-      grid[r][c] = {type: 'obstacle', char: obstChar.value || '?'};
-      break;
-    case 'collect':
-      grid[r][c] = {type: 'collect', char: collectChar.value || '?'};
-      break;
+  if (currentTool === 'start' || currentTool === 'goal') {
+    if (grid[r][c].type === currentTool) return;
+    ensureSnapshot();
+    clearType(currentTool);
+    grid[r][c] = { type: currentTool, char: '' };
+    activeCell = { r, c };
+    renderGrid();
+    if (restoreFocus) requestAnimationFrame(() => focusCell(r, c));
   }
-  updateCell(r, c);
 }
 
 function clearType(type) {
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      if (grid[r][c].type === type) {
-        grid[r][c] = {type: 'path', char: ''};
-      }
-    }
-  }
+  grid.forEach(row => row.forEach(cell => {
+    if (cell.type === type) Object.assign(cell, { type: 'path', char: '' });
+  }));
 }
 
-/* =============================================
-   モード切替
-   ============================================= */
-btnPlace.addEventListener('click', function() {
-  currentMode = 'place';
-  btnPlace.classList.add('active');
-  btnDelete.classList.remove('active');
-  const tl = document.getElementById('tool-list');
-  tl.style.opacity = '1';
-  tl.style.pointerEvents = '';
-  document.body.classList.remove('delete-mode');
-  document.body.classList.add('place-mode');
-});
+function setMode(mode) {
+  currentMode = mode;
+  const deleting = mode === 'delete';
+  btnPlace.classList.toggle('active', !deleting);
+  btnDelete.classList.toggle('active', deleting);
+  btnPlace.setAttribute('aria-pressed', String(!deleting));
+  btnDelete.setAttribute('aria-pressed', String(deleting));
+  document.body.classList.toggle('place-mode', !deleting);
+  document.body.classList.toggle('delete-mode', deleting);
+  announce(deleting ? '削除モードに切り替えました。' : '設置モードに切り替えました。');
+}
 
-btnDelete.addEventListener('click', function() {
-  currentMode = 'delete';
-  btnDelete.classList.add('active');
-  btnPlace.classList.remove('active');
-  const tl = document.getElementById('tool-list');
-  tl.style.opacity = '0.4';
-  tl.style.pointerEvents = 'none';
-  document.body.classList.remove('place-mode');
-  document.body.classList.add('delete-mode');
-});
+btnPlace.addEventListener('click', () => setMode('place'));
+btnDelete.addEventListener('click', () => setMode('delete'));
 
-/* ─── ツール選択 ─── */
-toolBtns.forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    toolBtns.forEach(function(b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-    currentTool = btn.dataset.tool;
+toolBtns.forEach(button => {
+  button.addEventListener('click', () => {
+    toolBtns.forEach(item => {
+      const selected = item === button;
+      item.classList.toggle('active', selected);
+      item.setAttribute('aria-pressed', String(selected));
+    });
+    currentTool = button.dataset.tool;
+    if (currentMode === 'delete') setMode('place');
+    announce(`${button.textContent.trim()}ツールを選択しました。`);
   });
 });
+
+btnUndo.addEventListener('click', undo);
+btnRedo.addEventListener('click', redo);
+btnClear.addEventListener('click', () => {
+  if (!grid.length) return;
+  pushSnapshot();
+  initGrid();
+  activeCell = { r: 0, c: 0 };
+  renderGrid();
+  announce('盤面を初期状態へ戻しました。Undoで復元できます。');
+});
+
+document.addEventListener('keydown', event => {
+  const target = event.target;
+  if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) return;
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'z') {
+    event.preventDefault();
+    if (event.shiftKey) redo(); else undo();
+  }
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'y') {
+    event.preventDefault();
+    redo();
+  }
+});
+
+function escapeHtmlText(value) {
+  return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
 
 /* =============================================
    エクスポート
    ============================================= */
 const COLOR = {
-  wall:    '#1a120a',
-  paper:   '#f0e8cc',
-  cobalt:  '#1a4a7a',
-  gold:    '#9a7a32',
-  red:     '#c0392b',
-  secret:  '#4a1030',
-  ink_mid: '#3a2c18',
+  wall:    '#17212b',
+  paper:   '#fffdf8',
+  cobalt:  '#2d7291',
+  gold:    '#d8b957',
+  red:     '#d96b38',
+  secret:  '#52745c',
+  ink_mid: '#17212b',
 };
 
 function drawToCanvas() {
@@ -259,7 +413,7 @@ function drawToCanvas() {
       ctx.strokeRect(x, y, CELL, CELL);
 
       let fg = null, label = '';
-      if (cell.type === 'wall')     { fg = '#e4d8b0'; label = '■'; }
+      if (cell.type === 'wall')     { fg = '#f4f0e7'; label = '■'; }
       if (cell.type === 'start')    { fg = COLOR.paper; label = 'ス'; ctx.font = 'bold ' + (CELL*0.45) + "px 'Yu Mincho',serif"; }
       if (cell.type === 'goal')     { fg = COLOR.paper; label = 'ゴ'; ctx.font = 'bold ' + (CELL*0.45) + "px 'Yu Mincho',serif"; }
       if (cell.type === 'obstacle') { fg = COLOR.red;    label = cell.char; }
@@ -319,7 +473,7 @@ document.getElementById('btn-html').addEventListener('click', function() {
       const cell = grid[r][c];
       const info = typeInfo[cell.type];
       const txt  = info.txt !== null ? info.txt : (cell.char || '');
-      tds += '<td class="' + info.cls + '">' + txt + '</td>';
+      tds += '<td class="' + info.cls + '">' + escapeHtmlText(txt) + '</td>';
     }
     rows_html += '<tr>' + tds + '</tr>\n';
   }
@@ -344,10 +498,7 @@ document.getElementById('btn-html').addEventListener('click', function() {
   const btn = document.getElementById('btn-html');
 
   navigator.clipboard.writeText(div).then(function() {
-    btn.textContent = '✅ コピーしました';
-    setTimeout(function() {
-      btn.innerHTML = '📄 HTML（&lt;div&gt;のみ）';
-    }, 2000);
+    announce('HTMLコードをクリップボードへコピーしました。');
   }).catch(function() {
     const ta = document.createElement('textarea');
     ta.value = div;
@@ -357,6 +508,15 @@ document.getElementById('btn-html').addEventListener('click', function() {
     alert('クリップボードAPIが使えません。上のテキストを手動でコピーしてください。');
   });
 });
+
+
+
+/* 初期表示から編集できる状態にする */
+initGrid();
+revealWorkbench();
+renderGrid();
+updateHistoryButtons();
+announce('10×19 の下書きを用意しました。');
 
 /* =============================================
    スクロールコントロール（スマホ用）

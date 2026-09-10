@@ -437,6 +437,21 @@ def main() -> None:
         if marker not in dqb2_css:
             fail(f"DQB2 Stage 9 responsive marker missing: {marker}")
 
+    maze_html = (ROOT / "tools/maze-maker/index.html").read_text(encoding="utf-8")
+    maze_js = (ROOT / "tools/maze-maker/maze_maker.js").read_text(encoding="utf-8")
+    maze_css = (ROOT / "tools/maze-maker/maze_maker.css").read_text(encoding="utf-8")
+    for marker in ('Maze Draft Board', 'id="btn-undo"', 'id="grid-size-stat"', 'role="grid"'):
+        if marker not in maze_html:
+            fail(f"Maze Maker Stage 9 presentation marker missing: {marker}")
+    for marker in ("function undo()", "function redo()", "mazeBody.replaceChildren()", "function escapeHtmlText"):
+        if marker not in maze_js:
+            fail(f"Maze Maker Stage 9 interaction marker missing: {marker}")
+    if "mazeBody.innerHTML" in maze_js or "btn.innerHTML" in maze_js:
+        fail("Maze Maker must not use HTML-string UI rendering")
+    for marker in ("Stage 9 portfolio framing / Maze Draft Board", ".route-illustration", ".maze-stats"):
+        if marker not in maze_css:
+            fail(f"Maze Maker Stage 9 responsive marker missing: {marker}")
+
     for path in tracked:
         rel = path.relative_to(ROOT)
         parts = set(rel.parts)

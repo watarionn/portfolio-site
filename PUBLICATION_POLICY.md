@@ -95,7 +95,7 @@ HOLOCA remains a reviewed five-file public slice:
 - `services/holoca/public/holoca.js`
 - `services/holoca/public/index.html`
 
-The browser UI is public source, while the search API depends on protected server configuration at `../config.php`. Database credentials, database contents, runtime state, operator endpoints, and maintenance tooling remain private/server-only.
+The browser UI is public source, while the search API depends on protected server configuration at `../../config.php` outside the deployed HOLOCA directory. Database credentials, database contents, runtime state, operator endpoints, and maintenance tooling remain private/server-only.
 
 The reviewed API must fail closed with a generic service-unavailable response when protected configuration is absent. Runtime/database exception details remain server-side, and search-result actions are bound without embedding serialized card JSON in executable inline handlers.
 

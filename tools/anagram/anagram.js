@@ -1,96 +1,162 @@
 'use strict';
 
-/* =============================================
-   アナグラム生成補助 — anagram.js
-   ============================================= */
+let tiles = [];
+let nextId = 0;
+let builtList = [];
+let chunkSelected = new Set();
+let tileMode = 'compose';
+let dragSrcId = null;
+let dragMoved = false;
+let touchSrcId = null;
+let touchClone = null;
 
-/* ─── 状態 ─── */
-let tiles      = [];
-let nextId     = 0;
-let builtList  = [];
+const segmenter = typeof Intl.Segmenter === 'function'
+  ? new Intl.Segmenter('ja', { granularity: 'grapheme' })
+  : null;
 
-/* ─── ドラッグ状態 ─── */
-let dragSrcId   = null;  // PC ドラッグ中のタイルID
-let dragMoved   = false; // クリックとドラッグを区別するフラグ
-let touchSrcId  = null;  // タッチドラッグ中のタイルID
-let touchClone  = null;  // タッチ用クローン要素
-
-/* ─── DOM参照 ─── */
-const sourceInput    = document.getElementById('sourceInput');
-const parseBtn       = document.getElementById('parseBtn');
-const resetBtn       = document.getElementById('resetBtn');
-const tileArea       = document.getElementById('tileArea');
-const tileEmpty      = document.getElementById('tileEmpty');
-const chunkBtn       = document.getElementById('chunkBtn');
-const selCount       = document.getElementById('selCount');
-const chunkList      = document.getElementById('chunkList');
-const chunkEmpty     = document.getElementById('chunkEmpty');
-const builtTiles     = document.getElementById('builtTiles');
-const resultInput    = document.getElementById('resultInput');
+const sourceInput = document.getElementById('sourceInput');
+const parseBtn = document.getElementById('parseBtn');
+const resetBtn = document.getElementById('resetBtn');
+const sourceCount = document.getElementById('sourceCount');
+const uniqueCount = document.getElementById('uniqueCount');
+const chunkCount = document.getElementById('chunkCount');
+const remainingCount = document.getElementById('remainingCount');
+const composeModeBtn = document.getElementById('composeModeBtn');
+const chunkModeBtn = document.getElementById('chunkModeBtn');
+const tileArea = document.getElementById('tileArea');
+const tileEmpty = document.getElementById('tileEmpty');
+const chunkBtn = document.getElementById('chunkBtn');
+const shuffleBtn = document.getElementById('shuffleBtn');
+const selCount = document.getElementById('selCount');
+const chunkList = document.getElementById('chunkList');
+const chunkEmpty = document.getElementById('chunkEmpty');
+const builtTiles = document.getElementById('builtTiles');
+const resultInput = document.getElementById('resultInput');
 const clearResultBtn = document.getElementById('clearResultBtn');
-const statusCheck    = document.getElementById('statusCheck');
-const remainStatus   = document.getElementById('remaining-status');
+const copyResultBtn = document.getElementById('copyResultBtn');
+const compositionText = document.getElementById('compositionText');
+const statusCheck = document.getElementById('statusCheck');
+const remainStatus = document.getElementById('remaining-status');
 
-/* =============================================
-   分割・リセット
-   ============================================= */
-parseBtn.addEventListener('click', parse);
-sourceInput.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') parse();
-});
-
-function parse() {
-  const raw = sourceInput.value;
-  if (!raw.trim()) return;
-  tiles     = [...raw].map(function(ch) {
-    return { id: nextId++, chars: [ch], isChunk: false, state: 'unused' };
-  });
-  builtList         = [];
-  resultInput.value = '';
-  renderTiles();
-  renderChunks();
-  syncUsed();
-  updateStatus();
+function segmentText(value) {
+  if (!value) return [];
+  if (!segmenter) return Array.from(value);
+  return Array.from(segmenter.segment(value), part => part.segment);
 }
 
-resetBtn.addEventListener('click', function() {
-  tiles = []; builtList = [];
-  resultInput.value = ''; sourceInput.value = '';
-  tileArea.innerHTML = '';
-  tileArea.appendChild(tileEmpty);
-  tileEmpty.style.display = '';
-  chunkList.innerHTML = '';
-  chunkList.appendChild(chunkEmpty);
-  chunkEmpty.style.display = '';
-  builtTiles.innerHTML = '';
-  updateStatus();
-});
+function getTile(id) {
+  return tiles.find(tile => tile.id === id) || null;
+}
 
-/* =============================================
-   タイル描画
-   ============================================= */
+function getBuiltIds() {
+  return new Set(builtList.map(item => item.tileId));
+}
+
+function getBuiltText() {
+  return builtList.map(item => item.label).join('');
+}
+
+function getCompositionText() {
+  return getBuiltText() + resultInput.value;
+}
+function findSequence(arr, sub) {
+  if (!sub.length) return -1;
+  for (let i = 0; i <= arr.length - sub.length; i += 1) {
+    let ok = true;
+    for (let j = 0; j < sub.length; j += 1) {
+      if (arr[i + j] !== sub[j]) {
+        ok = false;
+        break;
+      }
+    }
+    if (ok) return i;
+  }
+  return -1;
+}
+
+function matchTyped(typedChars, candidates) {
+  const usedIds = new Set();
+  const remaining = typedChars.slice();
+  const sorted = candidates.slice().sort((a, b) => b.chars.length - a.chars.length);
+
+  sorted.forEach(tile => {
+    const pos = findSequence(remaining, tile.chars);
+    if (pos === -1) return;
+    remaining.splice(pos, tile.chars.length);
+    usedIds.add(tile.id);
+  });
+
+  return { usedIds, excess: remaining };
+}
+
+function evaluateUsage() {
+  const builtIds = getBuiltIds();
+  const typed = segmentText(resultInput.value);
+  const candidates = tiles.filter(tile => !builtIds.has(tile.id));
+  const matched = matchTyped(typed, candidates);
+
+  chunkSelected.forEach(id => {
+    if (matched.usedIds.has(id) || builtIds.has(id)) chunkSelected.delete(id);
+  });
+  tiles.forEach(tile => {
+    if (builtIds.has(tile.id)) tile.state = 'built';
+    else if (matched.usedIds.has(tile.id)) tile.state = 'used';
+    else if (chunkSelected.has(tile.id)) tile.state = 'selected';
+    else tile.state = 'unused';
+  });
+
+  return { builtIds, typed, usedIds: matched.usedIds, excess: matched.excess };
+}
+
+function tileLabel(tile) {
+  const text = tile.chars.join('');
+  if (tile.state === 'built') return text + '（構成中。押すと戻す）';
+  if (tile.state === 'used') return text + '（手入力で使用済み）';
+  if (tile.state === 'selected') return text + '（チャンク候補）';
+  return text + (tileMode === 'chunk' ? '（チャンク候補へ追加）' : '（結果へ追加）');
+}
+
+function updateModeButtons() {
+  const composing = tileMode === 'compose';
+  composeModeBtn.classList.toggle('active', composing);
+  chunkModeBtn.classList.toggle('active', !composing);
+  composeModeBtn.setAttribute('aria-pressed', String(composing));
+  chunkModeBtn.setAttribute('aria-pressed', String(!composing));
+}
+
+function setTileMode(mode) {
+  tileMode = mode;
+  if (mode === 'compose') chunkSelected.clear();
+  updateModeButtons();
+  reconcile();
+}
+
+function updateChunkControls() {
+  chunkBtn.disabled = chunkSelected.size < 2;
+  shuffleBtn.disabled = tiles.length < 2;
+  selCount.textContent = chunkSelected.size ? chunkSelected.size + 'タイル選択中' : '';
+}
 function renderTiles() {
-  tileArea.innerHTML = '';
+  tileArea.replaceChildren();
   if (!tiles.length) {
     tileArea.appendChild(tileEmpty);
     tileEmpty.style.display = '';
+    updateChunkControls();
     return;
   }
   tileEmpty.style.display = 'none';
-  tiles.forEach(function(tile) {
-    tileArea.appendChild(makeTileEl(tile));
-  });
-  updateChunkBtn();
+  tiles.forEach(tile => tileArea.appendChild(makeTileElement(tile)));
+  updateChunkControls();
 }
 
-function makeTileEl(tile) {
+function makeTileElement(tile) {
   const el = document.createElement('div');
-  el.className  = 'tile' + (tile.isChunk ? ' is-chunk' : '') + ' state-' + tile.state;
-  el.dataset.id = tile.id;
+  el.className = 'tile' + (tile.isChunk ? ' is-chunk' : '') + ' state-' + tile.state;
+  el.dataset.id = String(tile.id);
   el.setAttribute('role', 'button');
   el.setAttribute('tabindex', tile.state === 'used' ? '-1' : '0');
   el.setAttribute('aria-label', tileLabel(tile));
-  el.setAttribute('aria-pressed', tile.state === 'selected' ? 'true' : 'false');
+  el.setAttribute('aria-pressed', String(tile.state === 'selected' || tile.state === 'built'));
   el.setAttribute('draggable', 'true');
 
   const label = document.createElement('span');
@@ -99,418 +165,366 @@ function makeTileEl(tile) {
 
   if (tile.isChunk) {
     const del = document.createElement('button');
-    del.className   = 'tile-del';
-    del.textContent = '✕';
+    del.className = 'tile-del';
+    del.type = 'button';
+    del.textContent = '×';
     del.setAttribute('aria-label', tile.chars.join('') + 'のチャンクを解除');
-    del.addEventListener('click', function(e) {
-      e.stopPropagation();
+    del.addEventListener('click', event => {
+      event.stopPropagation();
       breakChunk(tile.id);
     });
     el.appendChild(del);
   }
-
-  /* ── PC クリック（タッチ操作後は発火させない） ── */
-  el.addEventListener('click', function(e) {
-    // タッチ操作由来の click は無視（touchend 側で処理済み）
-    if (e.sourceCapabilities && !e.sourceCapabilities.firesTouchEvents) {
-      if (dragMoved) return;
-      handleTileClick(tile.id);
-    } else if (!e.sourceCapabilities) {
-      // sourceCapabilities 非対応ブラウザ：dragMoved で判断
-      if (dragMoved) return;
-      handleTileClick(tile.id);
-    }
-    // タッチ由来（firesTouchEvents === true）は何もしない
+  el.addEventListener('click', event => {
+    if (event.sourceCapabilities?.firesTouchEvents) return;
+    if (dragMoved) return;
+    handleTileAction(tile.id);
   });
-  el.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleTileClick(tile.id);
+  el.addEventListener('keydown', event => {
+    if (event.altKey && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
+      event.preventDefault();
+      moveTileBy(tile.id, event.key === 'ArrowLeft' ? -1 : 1);
+      return;
+    }
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleTileAction(tile.id);
     }
   });
 
-  /* ── PC ドラッグ ── */
-  el.addEventListener('dragstart', function(e) {
+  el.addEventListener('dragstart', event => {
     dragSrcId = tile.id;
     dragMoved = false;
-    e.dataTransfer.effectAllowed = 'move';
-    requestAnimationFrame(function() { el.classList.add('is-dragging'); });
+    event.dataTransfer.effectAllowed = 'move';
+    requestAnimationFrame(() => el.classList.add('is-dragging'));
   });
-
-  el.addEventListener('drag', function() {
-    dragMoved = true; // 少しでも動いたらクリック扱いしない
-  });
-
-  el.addEventListener('dragend', function() {
+  el.addEventListener('drag', () => { dragMoved = true; });
+  el.addEventListener('dragend', () => {
     el.classList.remove('is-dragging');
     clearDragOver();
     dragSrcId = null;
-    // dragMoved は click イベント後にリセット
-    setTimeout(function() { dragMoved = false; }, 0);
+    setTimeout(() => { dragMoved = false; }, 0);
   });
-
-  el.addEventListener('dragover', function(e) {
+  el.addEventListener('dragover', event => {
     if (dragSrcId === null || dragSrcId === tile.id) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
     clearDragOver();
     el.classList.add('drag-over');
   });
-
-  el.addEventListener('dragleave', function() {
-    el.classList.remove('drag-over');
-  });
-
-  el.addEventListener('drop', function(e) {
-    e.preventDefault();
+  el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
+  el.addEventListener('drop', event => {
+    event.preventDefault();
     el.classList.remove('drag-over');
     if (dragSrcId === null || dragSrcId === tile.id) return;
     moveTileBefore(dragSrcId, tile.id);
   });
 
-  /* ── タッチドラッグ ── */
-  el.addEventListener('touchstart', function(e) {
-    if (e.target.closest('.tile-del')) return;
+  el.addEventListener('touchstart', event => {
+    if (event.target.closest('.tile-del')) return;
+    const touch = event.touches[0];
     touchSrcId = tile.id;
-    dragMoved  = false;
-
-    // touchstart では座標だけ記録し、クローンはまだ作らない
-    const touch = e.touches[0];
+    dragMoved = false;
     el._touchStartX = touch.clientX;
     el._touchStartY = touch.clientY;
   }, { passive: false });
 
-  el.addEventListener('touchmove', function(e) {
+  el.addEventListener('touchmove', event => {
     if (touchSrcId !== tile.id) return;
-    const touch = e.touches[0];
+    const touch = event.touches[0];
     const dx = touch.clientX - el._touchStartX;
     const dy = touch.clientY - el._touchStartY;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    // 10px 以上動いた時点で初めてドラッグ開始
-    if (!dragMoved && dist < 10) return;
-
-    e.preventDefault();
+    if (!dragMoved && Math.hypot(dx, dy) < 10) return;
+    event.preventDefault();
 
     if (!dragMoved) {
-      // ドラッグ開始：クローン生成
       dragMoved = true;
       const rect = el.getBoundingClientRect();
       touchClone = el.cloneNode(true);
-      touchClone.style.cssText = [
-        'position:fixed',
-        'z-index:9999',
-        'pointer-events:none',
-        'opacity:0.85',
-        'width:'  + rect.width  + 'px',
-        'height:' + rect.height + 'px',
-        'left:'   + (touch.clientX - rect.width  / 2) + 'px',
-        'top:'    + (touch.clientY - rect.height / 2) + 'px',
-        'transform:scale(1.1)',
-        'box-shadow:0 6px 20px rgba(0,0,0,0.22)',
-        'transition:none',
-      ].join(';');
+      Object.assign(touchClone.style, {
+        position: 'fixed', zIndex: '9999', pointerEvents: 'none', opacity: '.85',
+        width: rect.width + 'px', height: rect.height + 'px', transition: 'none'
+      });
       document.body.appendChild(touchClone);
       el.classList.add('is-dragging');
     }
-
-    // クローンを指に追従
-    touchClone.style.left = (touch.clientX - touchClone.offsetWidth  / 2) + 'px';
-    touchClone.style.top  = (touch.clientY - touchClone.offsetHeight / 2) + 'px';
-
-    // 指の下のタイルをハイライト
+    touchClone.style.left = touch.clientX - touchClone.offsetWidth / 2 + 'px';
+    touchClone.style.top = touch.clientY - touchClone.offsetHeight / 2 + 'px';
     touchClone.style.display = 'none';
     const under = document.elementFromPoint(touch.clientX, touch.clientY);
     touchClone.style.display = '';
     clearDragOver();
-    const targetEl = under && under.closest('.tile[data-id]');
-    if (targetEl && parseInt(targetEl.dataset.id) !== touchSrcId) {
-      targetEl.classList.add('drag-over');
-    }
+    const target = under?.closest('.tile[data-id]');
+    if (target && Number(target.dataset.id) !== touchSrcId) target.classList.add('drag-over');
   }, { passive: false });
 
-  el.addEventListener('touchend', function(e) {
+  el.addEventListener('touchend', event => {
     el.classList.remove('is-dragging');
     clearDragOver();
-
     if (!dragMoved) {
-      // タップ：直接選択処理を呼ぶ
-      // タッチ後の遅延 click イベントを抑制する
-      e.preventDefault();
-      handleTileClick(tile.id);
+      event.preventDefault();
+      handleTileAction(tile.id);
       touchSrcId = null;
       return;
     }
-
-    // クローンを片付ける
     if (touchClone) {
-      document.body.removeChild(touchClone);
+      touchClone.remove();
       touchClone = null;
     }
-
-    const touch    = e.changedTouches[0];
-    const under    = document.elementFromPoint(touch.clientX, touch.clientY);
-    const targetEl = under && under.closest('.tile[data-id]');
-    if (targetEl && parseInt(targetEl.dataset.id) !== touchSrcId) {
-      moveTileBefore(touchSrcId, parseInt(targetEl.dataset.id));
+    const touch = event.changedTouches[0];
+    const under = document.elementFromPoint(touch.clientX, touch.clientY);
+    const target = under?.closest('.tile[data-id]');
+    if (target && Number(target.dataset.id) !== touchSrcId) {
+      moveTileBefore(touchSrcId, Number(target.dataset.id));
     }
     touchSrcId = null;
-    dragMoved  = false;
+    dragMoved = false;
   });
 
   return el;
 }
 
 function clearDragOver() {
-  tileArea.querySelectorAll('.tile.drag-over').forEach(function(t) {
-    t.classList.remove('drag-over');
-  });
+  tileArea.querySelectorAll('.tile.drag-over').forEach(tile => tile.classList.remove('drag-over'));
 }
-
-/* ─── タイルを dstId の直前に移動 ─── */
 function moveTileBefore(srcId, dstId) {
-  const si = tiles.findIndex(function(t) { return t.id === srcId; });
-  const di = tiles.findIndex(function(t) { return t.id === dstId; });
-  if (si === -1 || di === -1) return;
-  const moved = tiles.splice(si, 1)[0];
-  // splice 後にインデックスがずれるので再取得
-  const newDi = tiles.findIndex(function(t) { return t.id === dstId; });
-  tiles.splice(newDi, 0, moved);
-  renderTiles();
-  syncUsed();
-  updateStatus();
+  const sourceIndex = tiles.findIndex(tile => tile.id === srcId);
+  if (sourceIndex === -1) return;
+  const moved = tiles.splice(sourceIndex, 1)[0];
+  const targetIndex = tiles.findIndex(tile => tile.id === dstId);
+  if (targetIndex === -1) {
+    tiles.push(moved);
+  } else {
+    tiles.splice(targetIndex, 0, moved);
+  }
+  reconcile();
+  requestAnimationFrame(() => tileArea.querySelector('[data-id="' + srcId + '"]')?.focus());
 }
 
-function tileLabel(tile) {
-  const s = tile.chars.join('');
-  if (tile.state === 'used')     return s + '（使用済）';
-  if (tile.state === 'selected') return s + '（選択中）';
-  return s;
+function moveTileBy(id, delta) {
+  const index = tiles.findIndex(tile => tile.id === id);
+  const next = index + delta;
+  if (index === -1 || next < 0 || next >= tiles.length) return;
+  const moved = tiles.splice(index, 1)[0];
+  tiles.splice(next, 0, moved);
+  reconcile();
+  requestAnimationFrame(() => tileArea.querySelector('[data-id="' + id + '"]')?.focus());
 }
 
-/* =============================================
-   タイルクリック
-   ============================================= */
-function handleTileClick(id) {
-  const tile = tiles.find(function(t) { return t.id === id; });
+function handleTileAction(id) {
+  const tile = getTile(id);
   if (!tile || tile.state === 'used') return;
-  tile.state = tile.state === 'selected' ? 'unused' : 'selected';
-  updateChunkBtn();
-  renderTiles();
-  syncBuilt();
-}
 
-function updateChunkBtn() {
-  const sel = tiles.filter(function(t) { return t.state === 'selected'; });
-  chunkBtn.disabled    = sel.length < 2;
-  selCount.textContent = sel.length > 0 ? sel.length + '文字選択中' : '';
-}
+  if (tileMode === 'chunk') {
+    if (tile.state === 'built') return;
+    if (chunkSelected.has(id)) chunkSelected.delete(id);
+    else chunkSelected.add(id);
+    reconcile();
+    return;
+  }
 
-/* =============================================
-   チャンク
-   ============================================= */
-chunkBtn.addEventListener('click', function() {
-  const selected = tiles.filter(function(t) { return t.state === 'selected'; });
-  if (selected.length < 2) return;
-  const indices   = selected.map(function(t) { return tiles.indexOf(t); }).sort(function(a,b){return a-b;});
-  const chunkChars= indices.reduce(function(acc, i) { return acc.concat(tiles[i].chars); }, []);
-  const firstIdx  = indices[0];
-  const newTile   = { id: nextId++, chars: chunkChars, isChunk: true, state: 'unused' };
-  const newTiles  = tiles.filter(function(t) { return t.state !== 'selected'; });
-  newTiles.splice(firstIdx, 0, newTile);
-  tiles = newTiles;
-  renderTiles(); renderChunks(); syncUsed(); updateStatus();
-});
+  chunkSelected.delete(id);
+  const builtIndex = builtList.findIndex(item => item.tileId === id);
+  if (builtIndex >= 0) builtList.splice(builtIndex, 1);
+  else builtList.push({ tileId: id, label: tile.chars.join('') });
+  reconcile();
+}
+function createChunk() {
+  const selectedTiles = tiles.filter(tile => chunkSelected.has(tile.id));
+  if (selectedTiles.length < 2) return;
+  const firstIndex = Math.min(...selectedTiles.map(tile => tiles.indexOf(tile)));
+  const chars = selectedTiles.flatMap(tile => tile.chars);
+  const selectedIds = new Set(selectedTiles.map(tile => tile.id));
+  tiles = tiles.filter(tile => !selectedIds.has(tile.id));
+  tiles.splice(firstIndex, 0, { id: nextId++, chars, isChunk: true, state: 'unused' });
+  chunkSelected.clear();
+  reconcile();
+}
 
 function breakChunk(id) {
-  const idx = tiles.findIndex(function(t) { return t.id === id; });
-  if (idx === -1) return;
-  const expanded = tiles[idx].chars.map(function(ch) {
-    return { id: nextId++, chars: [ch], isChunk: false, state: 'unused' };
-  });
-  tiles.splice(idx, 1, ...expanded);
-  builtList = builtList.filter(function(b) { return b.tileId !== id; });
-  renderTiles(); renderChunks(); renderBuilt(); syncUsed(); updateStatus();
+  const index = tiles.findIndex(tile => tile.id === id);
+  if (index === -1 || !tiles[index].isChunk) return;
+  builtList = builtList.filter(item => item.tileId !== id);
+  chunkSelected.delete(id);
+  const expanded = tiles[index].chars.map(char => ({
+    id: nextId++, chars: [char], isChunk: false, state: 'unused'
+  }));
+  tiles.splice(index, 1, ...expanded);
+  reconcile();
+}
+
+function shuffleTiles() {
+  for (let i = tiles.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+  }
+  reconcile();
 }
 
 function renderChunks() {
-  chunkList.innerHTML = '';
-  const chunks = tiles.filter(function(t) { return t.isChunk; });
+  chunkList.replaceChildren();
+  const chunks = tiles.filter(tile => tile.isChunk);
   if (!chunks.length) {
     chunkList.appendChild(chunkEmpty);
     chunkEmpty.style.display = '';
     return;
   }
   chunkEmpty.style.display = 'none';
-  chunks.forEach(function(tile) {
+  chunks.forEach(tile => {
     const badge = document.createElement('span');
-    badge.className  = 'chunk-badge';
+    badge.className = 'chunk-badge';
     badge.textContent = tile.chars.join('');
     const del = document.createElement('button');
-    del.className   = 'chunk-badge-del';
-    del.textContent = '✕';
+    del.className = 'chunk-badge-del';
+    del.type = 'button';
+    del.textContent = '×';
     del.setAttribute('aria-label', tile.chars.join('') + 'のチャンクを解除');
-    del.addEventListener('click', function() { breakChunk(tile.id); });
+    del.addEventListener('click', () => breakChunk(tile.id));
     badge.appendChild(del);
     chunkList.appendChild(badge);
   });
 }
 
-/* =============================================
-   ビルドリスト
-   ============================================= */
-function syncBuilt() {
-  const selectedIds = tiles
-    .filter(function(t) { return t.state === 'selected'; })
-    .map(function(t) { return t.id; });
-  selectedIds.forEach(function(id) {
-    if (!builtList.find(function(b) { return b.tileId === id; })) {
-      const tile = tiles.find(function(t) { return t.id === id; });
-      if (tile) builtList.push({ tileId: id, label: tile.chars.join('') });
-    }
-  });
-  builtList = builtList.filter(function(b) { return selectedIds.indexOf(b.tileId) !== -1; });
-  renderBuilt(); syncUsed(); updateStatus();
-}
-
 function renderBuilt() {
-  builtTiles.innerHTML = '';
-  builtList.forEach(function(b, i) {
-    const el  = document.createElement('span');
-    el.className  = 'built-tile';
-    el.textContent = b.label;
+  builtTiles.replaceChildren();
+  builtList.forEach((item, index) => {
+    const tile = getTile(item.tileId);
+    if (!tile) return;
+    const el = document.createElement('span');
+    el.className = 'built-tile';
+    el.append(document.createTextNode(item.label));
     const del = document.createElement('button');
-    del.className   = 'built-tile-del';
-    del.textContent = '✕';
-    del.setAttribute('aria-label', b.label + 'を削除');
-    del.addEventListener('click', function() {
-      const tile = tiles.find(function(t) { return t.id === b.tileId; });
-      if (tile) tile.state = 'unused';
-      builtList.splice(i, 1);
-      renderBuilt(); renderTiles(); syncUsed(); updateStatus();
+    del.className = 'built-tile-del';
+    del.type = 'button';
+    del.textContent = '×';
+    del.setAttribute('aria-label', item.label + 'を構成から外す');
+    del.addEventListener('click', () => {
+      builtList.splice(index, 1);
+      reconcile();
     });
     el.appendChild(del);
     builtTiles.appendChild(el);
   });
 }
+function updateMetrics(evaluation) {
+  const allChars = tiles.flatMap(tile => tile.chars);
+  const remainingTiles = tiles.filter(tile => tile.state === 'unused' || tile.state === 'selected');
+  const remain = remainingTiles.reduce((sum, tile) => sum + tile.chars.length, 0);
+  sourceCount.textContent = String(allChars.length);
+  uniqueCount.textContent = String(new Set(allChars).size);
+  chunkCount.textContent = String(tiles.filter(tile => tile.isChunk).length);
+  remainingCount.textContent = String(remain);
 
-/* =============================================
-   マッチング
-   ============================================= */
-resultInput.addEventListener('input', function() {
-  syncUsed();
-  updateStatus();
-});
+  const composed = getCompositionText();
+  compositionText.textContent = composed || '—';
+  copyResultBtn.disabled = !composed;
 
-function syncUsed() {
-  const typed    = [...resultInput.value];
-  const builtIds = new Set(builtList.map(function(b) { return b.tileId; }));
-  const usedIdx  = matchTyped(typed, tiles);
-
-  tiles.forEach(function(tile, i) {
-    if      (builtIds.has(tile.id))         tile.state = 'selected';
-    else if (usedIdx.has(i))                tile.state = 'used';
-    else if (tile.state !== 'selected')     tile.state = 'unused';
-  });
-
-  tiles.forEach(function(tile) {
-    const el = tileArea.querySelector('[data-id="' + tile.id + '"]');
-    if (!el) return;
-    el.className = 'tile' + (tile.isChunk ? ' is-chunk' : '') + ' state-' + tile.state;
-    el.setAttribute('tabindex', tile.state === 'used' ? '-1' : '0');
-    el.setAttribute('aria-label', tileLabel(tile));
-    el.setAttribute('aria-pressed', tile.state === 'selected' ? 'true' : 'false');
-  });
-}
-
-/* 最長一致優先の貪欲マッチング。余剰文字を remaining に残して返す */
-function matchTyped(typedChars, tilesArr) {
-  const usedTileIdx = new Set();
-  const remaining   = typedChars.slice();
-  const sorted = tilesArr
-    .map(function(t, i) { return { tile: t, idx: i }; })
-    .sort(function(a, b) { return b.tile.chars.length - a.tile.chars.length; });
-
-  sorted.forEach(function(item) {
-    if (usedTileIdx.has(item.idx)) return;
-    const word = item.tile.chars.join('');
-    const pos  = findSubsequence(remaining, [...word]);
-    if (pos !== -1) {
-      remaining.splice(pos, word.length);
-      usedTileIdx.add(item.idx);
-    }
-  });
-
-  // remaining に残った文字が余剰文字（タイルに存在しない）
-  usedTileIdx._excess = remaining;
-  return usedTileIdx;
-}
-
-function findSubsequence(arr, sub) {
-  if (sub.length === 0) return -1;
-  for (let i = 0; i <= arr.length - sub.length; i++) {
-    let ok = true;
-    for (let j = 0; j < sub.length; j++) {
-      if (arr[i + j] !== sub[j]) { ok = false; break; }
-    }
-    if (ok) return i;
-  }
-  return -1;
-}
-
-/* =============================================
-   ステータスバー
-   ============================================= */
-function updateStatus() {
   if (!tiles.length) {
     remainStatus.textContent = '';
-    statusCheck.textContent  = '';
-    statusCheck.className    = 'status-check';
+    statusCheck.textContent = '';
+    statusCheck.className = 'status-check';
     return;
   }
 
-  const typed   = [...resultInput.value];
-  const matched = matchTyped(typed, tiles);
-  const excess  = matched._excess || []; // タイルにない余剰文字
-
-  // ① エラー：タイルに存在しない文字が入力されている
-  if (excess.length > 0) {
-    const excessStr = excess.join('');
-    remainStatus.textContent = '「' + excessStr + '」は元の文字列にありません';
-    statusCheck.textContent  = '入力エラー ✕';
-    statusCheck.className    = 'status-check error';
+  if (evaluation.excess.length) {
+    remainStatus.textContent = '「' + evaluation.excess.join('') + '」は残りタイルにありません';
+    statusCheck.textContent = 'INPUT ERROR';
+    statusCheck.className = 'status-check error';
     return;
   }
 
-  const unusedTiles = tiles.filter(function(t) { return t.state === 'unused'; });
-  const totalChars  = tiles.reduce(function(s, t) { return s + t.chars.length; }, 0);
-  const usedChars   = tiles
-    .filter(function(t) { return t.state === 'used' || t.state === 'selected'; })
-    .reduce(function(s, t) { return s + t.chars.length; }, 0);
-  const remaining   = totalChars - usedChars;
-
-  // ② 完成
-  if (remaining === 0) {
-    remainStatus.textContent = '全文字使用済み ✔';
-    statusCheck.textContent  = '完成！';
-    statusCheck.className    = 'status-check ok';
+  if (remain === 0) {
+    remainStatus.textContent = '全文字を一度ずつ使用しています';
+    statusCheck.textContent = 'COMPLETE ✓';
+    statusCheck.className = 'status-check ok';
     return;
   }
 
-  // ③ 未完成
-  const unusedStr = unusedTiles.map(function(t) { return t.chars.join(''); }).join('・');
-  remainStatus.textContent = '未使用: ' + unusedStr + '（' + remaining + '文字）';
-  statusCheck.textContent  = '未完成';
-  statusCheck.className    = 'status-check pending';
+  const unusedText = remainingTiles.map(tile => tile.chars.join('')).join('・');
+  remainStatus.textContent = '未使用: ' + unusedText + '（' + remain + '文字）';
+  statusCheck.textContent = 'IN PROGRESS';
+  statusCheck.className = 'status-check pending';
+}
+function reconcile() {
+  const evaluation = evaluateUsage();
+  renderTiles();
+  renderChunks();
+  renderBuilt();
+  updateMetrics(evaluation);
+  updateModeButtons();
 }
 
-/* ─── クリアボタン ─── */
-clearResultBtn.addEventListener('click', function() {
-  resultInput.value = '';
+function parseSource() {
+  const raw = sourceInput.value;
+  if (!raw.trim()) return;
+  nextId = 0;
   builtList = [];
-  renderBuilt();
-  tiles.forEach(function(t) { if (t.state === 'selected') t.state = 'unused'; });
-  renderTiles();
-  syncUsed();
-  updateStatus();
+  chunkSelected.clear();
+  resultInput.value = '';
+  tiles = segmentText(raw).map(char => ({
+    id: nextId++, chars: [char], isChunk: false, state: 'unused'
+  }));
+  tileMode = 'compose';
+  reconcile();
+}
+
+function resetAll() {
+  tiles = [];
+  nextId = 0;
+  builtList = [];
+  chunkSelected.clear();
+  tileMode = 'compose';
+  sourceInput.value = '';
+  resultInput.value = '';
+  reconcile();
+  sourceInput.focus();
+}
+
+async function copyText(value) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+  const helper = document.createElement('textarea');
+  helper.value = value;
+  helper.setAttribute('readonly', '');
+  helper.style.position = 'fixed';
+  helper.style.opacity = '0';
+  document.body.appendChild(helper);
+  helper.select();
+  document.execCommand('copy');
+  helper.remove();
+}
+parseBtn.addEventListener('click', parseSource);
+resetBtn.addEventListener('click', resetAll);
+sourceInput.addEventListener('keydown', event => {
+  if (event.key === 'Enter') parseSource();
 });
+composeModeBtn.addEventListener('click', () => setTileMode('compose'));
+chunkModeBtn.addEventListener('click', () => setTileMode('chunk'));
+chunkBtn.addEventListener('click', createChunk);
+shuffleBtn.addEventListener('click', shuffleTiles);
+resultInput.addEventListener('input', reconcile);
+clearResultBtn.addEventListener('click', () => {
+  builtList = [];
+  chunkSelected.clear();
+  resultInput.value = '';
+  reconcile();
+  resultInput.focus();
+});
+copyResultBtn.addEventListener('click', async () => {
+  const text = getCompositionText();
+  if (!text) return;
+  try {
+    await copyText(text);
+    const original = copyResultBtn.textContent;
+    copyResultBtn.textContent = 'コピー済み';
+    setTimeout(() => { copyResultBtn.textContent = original; }, 1200);
+  } catch {
+    copyResultBtn.textContent = 'コピー失敗';
+    setTimeout(() => { copyResultBtn.textContent = '結果をコピー'; }, 1200);
+  }
+});
+
+updateModeButtons();
+reconcile();

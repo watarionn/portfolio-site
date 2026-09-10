@@ -3,123 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>単語ジェネレーター｜カタカナーシ・エイゴダーケ</title>
+  <meta name="description" content="ボードゲームのお題を、カテゴリ・山札・ラウンドタイマー付きで素早く引けるブラウザツール。">
+  <title>ボードゲーム単語集 | Word Draw Table</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="word_generator.css">
 </head>
 <body>
-
-  <!-- ヘッダー -->
   <header class="site-header">
-    <div class="header-inner">
-      <p class="header-subtitle">ボードゲーム</p>
-      <h1 class="header-title">単語ジェネレーター</h1>
-    </div>
-  <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホームへ戻る</a>
+    <a href="/" class="home-btn">← PORTFOLIO</a>
+    <div class="site-brand"><b>010</b><span>WORD DRAW TABLE</span></div>
   </header>
 
-  <main class="main-container">
-
-    <!-- タブ -->
-    <nav class="tab-nav" role="tablist" aria-label="ゲーム選択">
-      <button class="tab-btn active" role="tab" aria-selected="true"  aria-controls="panel-kata" id="tab-kata" data-tab="kata">
-        <span class="tab-game-name">カタカナーシ</span>
-        <span class="tab-rule">カタカナ禁止</span>
-      </button>
-      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-eigo" id="tab-eigo" data-tab="eigo">
-        <span class="tab-game-name">エイゴダーケ</span>
-        <span class="tab-rule">英語のみ</span>
-      </button>
-    </nav>
-
-    <!-- ━━━ カタカナーシ パネル ━━━ -->
-    <section class="panel active" id="panel-kata" role="tabpanel" aria-labelledby="tab-kata">
-
-      <!-- ジャンルフィルター -->
-      <div class="filter-section">
-        <p class="filter-label">ジャンル絞り込み</p>
-        <div class="genre-grid" id="kata-genre-grid">
-          <!-- JS で生成 -->
+  <main class="page-shell">
+    <section class="project-intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <p class="eyebrow">BOARD GAME WORD COLLECTION / CLIENT-SIDE TOOL</p>
+        <h1 id="page-title">お題を引いて、<br><span>そのまま遊ぶ。</span></h1>
+        <p class="lead">説明系ボードゲームで使う単語を、山札として扱えるように整理したブラウザ補助器。カテゴリを絞り、カードを引き、ラウンド時間まで一つの卓上UIで管理します。</p>
+        <div class="intro-meta" aria-label="実装要素">
+          <span>744 DATA ROWS</span><span>11 GENRES</span><span>RANDOM DECK</span><span>ROUND TIMER</span>
         </div>
       </div>
-
-      <!-- カード -->
-      <div class="card-area">
-        <div class="word-card" id="kata-card" aria-live="polite">
-          <div class="card-front">
-            <p class="card-genre" id="kata-genre-label">－</p>
-            <p class="card-word" id="kata-word">ボタンを押して<br>単語を引く</p>
-          </div>
-        </div>
+      <div class="deck-illustration" aria-hidden="true">
+        <div class="deck-stack deck-stack-a"><span>?</span></div>
+        <div class="deck-stack deck-stack-b"><span>A</span></div>
+        <div class="table-line"></div>
+        <p>DRAW / EXPLAIN / GUESS</p>
       </div>
-
-      <!-- 操作 -->
-      <div class="action-area">
-        <button class="draw-btn" id="kata-draw-btn" aria-label="カタカナーシの単語を引く">
-          <span class="draw-btn-icon">⊘</span>
-          <span class="draw-btn-text">単語を引く</span>
-        </button>
-        <p class="remain-count" id="kata-remain">残り <strong id="kata-remain-num">–</strong> 語</p>
-      </div>
-
-      <!-- ルール説明 -->
-      <aside class="rule-box">
-        <h2 class="rule-box-title">遊び方</h2>
-        <p class="rule-box-body">
-          お題の単語を、<strong>カタカナを一切使わずに</strong>説明して仲間に当ててもらおう。
-          「テレビ」→「四角い箱に映像が映って……」のように、日本語・ひらがな・漢字で言い換えるのがポイント。
-        </p>
-      </aside>
     </section>
 
-    <!-- ━━━ エイゴダーケ パネル ━━━ -->
-    <section class="panel" id="panel-eigo" role="tabpanel" aria-labelledby="tab-eigo">
-
-      <!-- カード -->
-      <div class="card-area">
-        <div class="word-card eigo" id="eigo-card" aria-live="polite">
-          <div class="card-front">
-            <p class="card-word eigo-word" id="eigo-word">ボタンを押して<br>単語を引く</p>
-          </div>
-          <!-- NGワードエリア（引いた後に表示） -->
-          <div class="ng-area hidden" id="ng-area">
-            <p class="ng-label">
-              <span class="ng-badge">NG</span>使用禁止ワード
-            </p>
-            <ul class="ng-list" id="ng-list" aria-label="NGワード一覧">
-              <!-- JS で生成 -->
-            </ul>
-          </div>
+    <section class="tool-stage" aria-labelledby="tool-title">
+      <div class="stage-heading">
+        <div><p class="eyebrow">LIVE TOOL</p><h2 id="tool-title">WORD DRAW TABLE</h2></div>
+        <div class="dataset-metrics" aria-label="データセット概要">
+          <span><small>KATA</small><b id="metric-kata">651</b></span>
+          <span><small>EIGO</small><b id="metric-eigo">93</b></span>
+          <span><small>GENRES</small><b id="metric-genres">11</b></span>
+          <span><small>NG WORDS</small><b id="metric-ng">279</b></span>
         </div>
       </div>
 
-      <!-- 操作 -->
-      <div class="action-area">
-        <button class="draw-btn eigo" id="eigo-draw-btn" aria-label="エイゴダーケの単語を引く">
-          <span class="draw-btn-icon">⊘</span>
-          <span class="draw-btn-text">単語を引く</span>
-        </button>
-        <p class="remain-count" id="eigo-remain">残り <strong id="eigo-remain-num">–</strong> 語</p>
+      <div class="tabletop">
+        <nav class="mode-tabs" role="tablist" aria-label="お題モード">
+          <button class="mode-tab active" id="tab-kata" role="tab" aria-selected="true" aria-controls="panel-kata" tabindex="0" data-tab="kata">
+            <span>01</span><b>カタカナ禁止</b><small>日本語で言い換える</small>
+          </button>
+          <button class="mode-tab" id="tab-eigo" role="tab" aria-selected="false" aria-controls="panel-eigo" tabindex="-1" data-tab="eigo">
+            <span>02</span><b>英語だけ</b><small>NGワードを避ける</small>
+          </button>
+        </nav>
+
+        <aside class="round-timer" aria-labelledby="timer-title">
+          <div class="timer-head"><span id="timer-title">ROUND TIMER</span><b id="timer-display" aria-live="polite">60</b></div>
+          <div class="timer-presets" role="group" aria-label="制限時間">
+            <button type="button" data-seconds="30">30</button>
+            <button type="button" class="selected" data-seconds="60">60</button>
+            <button type="button" data-seconds="90">90</button>
+          </div>
+          <div class="timer-actions">
+            <button type="button" id="timer-toggle" class="primary-small">START</button>
+            <button type="button" id="timer-reset">RESET</button>
+          </div>
+        </aside>
+
+        <div class="play-area">
+          <section class="game-panel active" id="panel-kata" role="tabpanel" aria-labelledby="tab-kata">
+            <div class="filter-panel">
+              <div class="panel-label"><span>FILTER</span><b>ジャンルを選ぶ</b></div>
+              <div class="genre-grid" id="kata-genre-grid" aria-label="カタカナ禁止ジャンル"></div>
+            </div>
+            <div class="draw-layout">
+              <article class="word-card kata-card" id="kata-card" aria-live="polite" aria-atomic="true">
+                <div class="card-kicker"><span>KATA / PROMPT</span><b id="kata-draw-index">000</b></div>
+                <p class="card-genre" id="kata-genre-label">READY</p>
+                <p class="card-word" id="kata-word">単語を引く</p>
+                <div class="card-rule">カタカナを使わず説明する</div>
+              </article>
+              <div class="deck-controls">
+                <button class="draw-btn" id="kata-draw-btn" type="button"><span>DRAW</span><b>単語を引く</b></button>
+                <button class="secondary-btn" id="kata-reset-deck" type="button">山札を作り直す</button>
+                <div class="deck-progress">
+                  <div><span>DECK</span><strong><b id="kata-remain-num">0</b> / <b id="kata-total-num">0</b></strong></div>
+                  <progress id="kata-progress" value="0" max="1">0%</progress>
+                </div>
+              </div>
+            </div>
+            <aside class="rule-note"><b>PLAY NOTE</b><p>表示されたお題を、カタカナを一切使わずに説明します。ジャンルを複数選ぶと、その組み合わせだけで新しい山札を作ります。</p></aside>
+          </section>
+
+          <section class="game-panel" id="panel-eigo" role="tabpanel" aria-labelledby="tab-eigo" hidden>
+            <div class="draw-layout eigo-layout">
+              <article class="word-card eigo-card" id="eigo-card" aria-live="polite" aria-atomic="true">
+                <div class="card-kicker"><span>EIGO / PROMPT</span><b id="eigo-draw-index">000</b></div>
+                <p class="card-genre">ENGLISH ONLY</p>
+                <p class="card-word" id="eigo-word">DRAW A WORD</p>
+                <div class="ng-area" id="ng-area" hidden>
+                  <p class="ng-label">DO NOT SAY</p>
+                  <ul class="ng-list" id="ng-list" aria-label="使用禁止ワード"></ul>
+                </div>
+              </article>
+              <div class="deck-controls">
+                <button class="draw-btn eigo" id="eigo-draw-btn" type="button"><span>DRAW</span><b>単語を引く</b></button>
+                <button class="secondary-btn" id="eigo-reset-deck" type="button">山札を作り直す</button>
+                <div class="deck-progress">
+                  <div><span>DECK</span><strong><b id="eigo-remain-num">0</b> / <b id="eigo-total-num">0</b></strong></div>
+                  <progress id="eigo-progress" value="0" max="1">0%</progress>
+                </div>
+              </div>
+            </div>
+            <aside class="rule-note eigo-note"><b>PLAY NOTE</b><p>お題を英語だけで説明します。カードに表示された3つのNGワードは使用禁止です。</p></aside>
+          </section>
+        </div>
+
+        <aside class="history-panel" aria-labelledby="history-title">
+          <div class="panel-label"><span>RECENT</span><b id="history-title">直近のお題</b></div>
+          <ol id="draw-history" class="history-list">
+            <li class="history-empty">まだカードを引いていません</li>
+          </ol>
+          <p class="keyboard-hint">SHORTCUT: <kbd>D</kbd> DRAW / <kbd>T</kbd> TIMER</p>
+        </aside>
       </div>
-
-      <!-- ルール説明 -->
-      <aside class="rule-box eigo">
-        <h2 class="rule-box-title">遊び方</h2>
-        <p class="rule-box-body">
-          お題の単語を、<strong>英語だけを使って</strong>説明して仲間に当ててもらおう。
-          各単語には<strong>NGワード</strong>が設定されており、表示されている英単語は使用禁止。
-          直訳や簡単すぎる言い換えを避けて説明しよう。
-        </p>
-      </aside>
     </section>
-
   </main>
 
-  <!-- フッター -->
   <footer class="site-footer">
-    <p>© 2025 単語ジェネレーター</p>
+    <span>WORD DRAW TABLE</span><span>ボードゲーム単語集 / client-side random deck</span>
   </footer>
 
   <script src="words_data.js" defer></script>

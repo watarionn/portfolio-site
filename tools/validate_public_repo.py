@@ -467,6 +467,21 @@ def main() -> None:
         if marker not in anagram_css:
             fail(f"Anagram Stage 9 responsive marker missing: {marker}")
 
+    word_html = (ROOT / "tools/word-generator/index.html").read_text(encoding="utf-8")
+    word_js = (ROOT / "tools/word-generator/word_generator.js").read_text(encoding="utf-8")
+    word_css = (ROOT / "tools/word-generator/word_generator.css").read_text(encoding="utf-8")
+    for marker in ("WORD DRAW TABLE", 'id="timer-display"', 'id="draw-history"', 'data-seconds="90"'):
+        if marker not in word_html:
+            fail(f"Word Generator Stage 9 presentation marker missing: {marker}")
+    for marker in ("function addHistory(", "kataGenreGrid.replaceChildren()", "ngList.replaceChildren()", "function toggleTimer()", "event.key.toLowerCase() === 'd'"):
+        if marker not in word_js:
+            fail(f"Word Generator Stage 9 interaction marker missing: {marker}")
+    if "ngList.innerHTML" in word_js:
+        fail("Word Generator must not use HTML-string NG-word clearing")
+    for marker in ("Stage 9 portfolio framing / Word Draw Table", ".round-timer", ".history-panel"):
+        if marker not in word_css:
+            fail(f"Word Generator Stage 9 responsive marker missing: {marker}")
+
     for path in tracked:
         rel = path.relative_to(ROOT)
         parts = set(rel.parts)

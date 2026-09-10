@@ -2,119 +2,124 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>迷路メーカー — 風花理珠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="マス目に壁・スタート・ゴール・記号を置き、迷路の下書きを作って画像やHTMLへ書き出せるブラウザツール。">
+  <title>迷路作成補助器 | Maze Draft Board</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;700&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="maze_maker.css">
 </head>
 <body class="place-mode">
-
-  <!-- ヘッダー -->
-  <header role="banner">
-    <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホーム</a>
-    <div class="header-center">
-      <h1>
-        <ruby><rb>迷路</rb><rt>めいろ</rt></ruby>メーカー
-      </h1>
-      <p class="header-sub">Maze Maker</p>
+  <header class="site-header">
+    <a href="/" class="home-btn" aria-label="ポートフォリオへ戻る">← PORTFOLIO</a>
+    <div class="site-brand" aria-label="Maze Draft Board">
+      <b>MAZE</b><span>DRAFT BOARD / 迷路作成補助器</span>
     </div>
-    <div aria-hidden="true"></div>
   </header>
 
-  <main role="main">
-
-    <!-- サイズ入力 -->
-    <div class="panel">
-      <div class="panel-title">グリッドサイズ</div>
-      <div class="size-row">
-        <div class="size-group">
-          <label for="inp-rows">縦</label>
-          <input type="number" id="inp-rows" value="10" min="3" max="40">
-          <span>マス</span>
-        </div>
-        <div class="size-group">
-          <label for="inp-cols">横</label>
-          <input type="number" id="inp-cols" value="19" min="3" max="60">
-          <span>マス</span>
-        </div>
-        <button class="btn-map" id="btn-generate">白地図を作る</button>
-      </div>
-    </div>
-
-    <!-- ツールパネル -->
-    <div class="panel hidden" id="tool-panel">
-      <div class="panel-title">ツール</div>
-
-      <div class="mode-toggle" role="group" aria-label="操作モード">
-        <button class="mode-btn active" id="btn-place">設置モード</button>
-        <button class="mode-btn"        id="btn-delete">削除モード</button>
-      </div>
-
-      <div class="tools" id="tool-list" role="group" aria-label="設置ツール">
-        <button class="tool-btn active" data-tool="wall">
-          <span class="tool-icon" aria-hidden="true">■</span>壁
-        </button>
-        <button class="tool-btn" data-tool="start">
-          <span class="tool-icon" aria-hidden="true">🚩</span>スタート
-        </button>
-        <button class="tool-btn" data-tool="goal">
-          <span class="tool-icon" aria-hidden="true">🏁</span>ゴール
-        </button>
-
-        <div class="tool-input-group">
-          <button class="tool-btn" data-tool="obstacle">
-            <span class="tool-icon" aria-hidden="true">⚠️</span>障害物
-          </button>
-          <input class="tool-char-input" id="obstacle-char" value="鬼" maxlength="2" aria-label="障害物の文字">
-        </div>
-
-        <div class="tool-input-group">
-          <button class="tool-btn" data-tool="collect">
-            <span class="tool-icon" aria-hidden="true">✨</span>収集物
-          </button>
-          <input class="tool-char-input" id="collect-char" value="そ" maxlength="2" aria-label="収集物の文字">
+  <main class="page-shell">
+    <section class="project-intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <p class="eyebrow">DRAW / TEST / EXPORT</p>
+        <h1 id="page-title">迷路を、<br><span>マス目の上で</span><br><span>考える。</span></h1>
+        <p class="lead">紙に線を引く感覚で、壁や目印を置いて迷路を下書きするための小さな設計台です。完成した案は画像やHTMLとして持ち出せます。</p>
+        <div class="intro-meta" aria-label="このツールの特徴">
+          <span>LOCAL EDITING</span><span>UNDO / REDO</span><span>3 EXPORTS</span>
         </div>
       </div>
-    </div>
-
-    <!-- グリッド -->
-    <div id="grid-wrap" class="hidden" role="region" aria-label="迷路グリッド">
-      <!-- スクロールコントロール（スマホ用） -->
-      <div id="scroll-controls" aria-label="スクロール操作" aria-hidden="true">
-        <button class="scroll-btn" id="scroll-left"  aria-label="左へスクロール">◀</button>
-        <button class="scroll-btn" id="scroll-up"    aria-label="上へスクロール">▲</button>
-        <button class="scroll-btn" id="scroll-down"  aria-label="下へスクロール">▼</button>
-        <button class="scroll-btn" id="scroll-right" aria-label="右へスクロール">▶</button>
+      <div class="route-illustration" aria-hidden="true">
+        <div class="route-grid">
+          <i class="wall r1"></i><i class="wall r2"></i><i class="wall r3"></i><i class="wall r4"></i>
+          <i class="route-line"></i><i class="point start-point">S</i><i class="point goal-point">G</i>
+        </div>
+        <p>PLAN<br>YOUR<br>ROUTE</p>
       </div>
-      <div id="grid-scroll">
-        <table id="maze-grid"><tbody id="maze-body"></tbody></table>
-      </div>
-    </div>
+    </section>
 
-    <!-- エクスポート -->
-    <div class="panel hidden" id="export-panel">
-      <div class="panel-title">エクスポート</div>
-      <div class="export-row">
-        <button class="btn-export" id="btn-png">
-          <span aria-hidden="true">🖼</span> PNG
-        </button>
-        <button class="btn-export" id="btn-jpg">
-          <span aria-hidden="true">🖼</span> JPEG
-        </button>
-        <button class="btn-export" id="btn-html">
-          <span aria-hidden="true">📄</span> HTML（&lt;div&gt;のみ）
-        </button>
+    <section class="workbench" aria-labelledby="tool-title">
+      <div class="workbench-heading">
+        <div><p class="eyebrow">LIVE TOOL</p><h2 id="tool-title">迷路の下書きを作る</h2></div>
+        <p>サイズを決め、セルを塗って構成を試します。</p>
       </div>
-    </div>
 
+      <div class="panel setup-panel">
+        <div class="panel-head"><span>01</span><div><b>GRID SIZE</b><small>下書きの大きさ</small></div></div>
+        <div class="size-row">
+          <label class="size-group" for="inp-rows"><span>ROWS / 縦</span><input type="number" id="inp-rows" value="10" min="3" max="40"><small>3–40</small></label>
+          <label class="size-group" for="inp-cols"><span>COLS / 横</span><input type="number" id="inp-cols" value="19" min="3" max="60"><small>3–60</small></label>
+          <div class="preset-group" aria-label="サイズプリセット">
+            <button type="button" class="preset-btn" data-size="10x19">10 × 19</button>
+            <button type="button" class="preset-btn" data-size="15x25">15 × 25</button>
+            <button type="button" class="preset-btn" data-size="20x31">20 × 31</button>
+          </div>
+          <button class="btn-map" id="btn-generate" type="button">新しい下書きを作る</button>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="tool-panel">
+        <div class="panel-head"><span>02</span><div><b>DRAW TOOLS</b><small>セルに置く要素</small></div></div>
+        <div class="edit-toolbar">
+          <div class="mode-toggle" role="group" aria-label="操作モード">
+            <button class="mode-btn active" id="btn-place" type="button" aria-pressed="true">設置</button>
+            <button class="mode-btn" id="btn-delete" type="button" aria-pressed="false">削除</button>
+          </div>
+          <div class="history-actions" role="group" aria-label="編集履歴">
+            <button class="history-btn" id="btn-undo" type="button" disabled aria-label="ひとつ前に戻す">↶ Undo</button>
+            <button class="history-btn" id="btn-redo" type="button" disabled aria-label="やり直す">↷ Redo</button>
+            <button class="history-btn history-btn--danger" id="btn-clear" type="button">盤面を初期化</button>
+          </div>
+        </div>
+
+        <div class="tools" id="tool-list" role="group" aria-label="設置ツール">
+          <button class="tool-btn active" data-tool="wall" type="button" aria-pressed="true"><span class="swatch swatch-wall" aria-hidden="true"></span>壁</button>
+          <button class="tool-btn" data-tool="start" type="button" aria-pressed="false"><span class="swatch swatch-start" aria-hidden="true">S</span>スタート</button>
+          <button class="tool-btn" data-tool="goal" type="button" aria-pressed="false"><span class="swatch swatch-goal" aria-hidden="true">G</span>ゴール</button>
+          <div class="tool-input-group">
+            <button class="tool-btn" data-tool="obstacle" type="button" aria-pressed="false"><span class="swatch swatch-obstacle" aria-hidden="true">!</span>障害物</button>
+            <input class="tool-char-input" id="obstacle-char" value="鬼" maxlength="2" aria-label="障害物に表示する文字">
+          </div>
+          <div class="tool-input-group">
+            <button class="tool-btn" data-tool="collect" type="button" aria-pressed="false"><span class="swatch swatch-collect" aria-hidden="true">+</span>収集物</button>
+            <input class="tool-char-input" id="collect-char" value="そ" maxlength="2" aria-label="収集物に表示する文字">
+          </div>
+        </div>
+      </div>
+
+      <div id="grid-wrap" class="hidden" role="region" aria-labelledby="board-title">
+        <div class="board-head">
+          <div><p class="eyebrow">03 / DRAFT BOARD</p><h3 id="board-title">編集グリッド</h3></div>
+          <div class="maze-stats" aria-label="迷路の状態">
+            <span><small>GRID</small><b id="grid-size-stat">10×19</b></span>
+            <span><small>WALLS</small><b id="wall-count">0</b></span>
+            <span><small>MARKS</small><b id="mark-count">0</b></span>
+          </div>
+        </div>
+        <p class="board-hint">ドラッグで連続編集。キーボードでは矢印キーで移動し、Enter / Spaceで現在のツールを適用できます。</p>
+        <div id="scroll-controls" aria-label="グリッドをスクロール">
+          <button class="scroll-btn" id="scroll-left" type="button" aria-label="左へスクロール">←</button>
+          <button class="scroll-btn" id="scroll-up" type="button" aria-label="上へスクロール">↑</button>
+          <button class="scroll-btn" id="scroll-down" type="button" aria-label="下へスクロール">↓</button>
+          <button class="scroll-btn" id="scroll-right" type="button" aria-label="右へスクロール">→</button>
+        </div>
+        <div id="grid-scroll" tabindex="-1">
+          <table id="maze-grid" role="grid" aria-label="迷路編集グリッド"><tbody id="maze-body"></tbody></table>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="export-panel">
+        <div class="panel-head"><span>04</span><div><b>EXPORT</b><small>下書きを持ち出す</small></div></div>
+        <div class="export-row">
+          <button class="btn-export" id="btn-png" type="button"><span>PNG</span><small>透過なし画像</small></button>
+          <button class="btn-export" id="btn-jpg" type="button"><span>JPEG</span><small>白背景画像</small></button>
+          <button class="btn-export" id="btn-html" type="button"><span>HTML</span><small>埋め込み用コード</small></button>
+        </div>
+      </div>
+      <p id="status-live" class="status-live" role="status" aria-live="polite"></p>
+    </section>
   </main>
 
-  <footer role="contentinfo">
-    <p class="footer-text">迷路メーカー — 風花理珠</p>
-  </footer>
-
+  <footer><span>MAZE DRAFT BOARD</span><p>迷路作成補助器 / client-side grid editor</p></footer>
   <script src="maze_maker.js" defer></script>
 </body>
 </html>

@@ -3,131 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>球体設計図 — 風花理珠</title>
+<title>天球儀 — 球体設計図ジェネレーター | 風花理珠</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="sphere.css">
 </head>
 <body>
 
-<!-- ヘッダー -->
+<div class="paper-lines" aria-hidden="true"></div>
+
 <header role="banner">
   <div class="header-center">
-    <h1>球体設計図ジェネレーター</h1>
-    <p class="header-sub">Minecraft / サンドボックスゲーム用　設計図集</p>
+    <h1>天球儀</h1>
+    <p class="header-sub">Voxel Sphere Blueprint — block by block</p>
   </div>
-  <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホームへ戻る</a>
-  <!-- グリッド右端の空セル（レイアウト調整用） -->
+  <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホーム</a>
   <div aria-hidden="true"></div>
 </header>
 
+<section class="project-hero" aria-labelledby="project-title">
+  <div class="project-shell project-hero__grid">
+    <div>
+      <p class="section-index">PROJECT 03 / VOXEL + CANVAS</p>
+      <h2 id="project-title">球体を、<br>積める設計図に<br>変える。</h2>
+    </div>
+    <div class="project-hero__copy">
+      <p>サンドボックスゲームで球体を組むとき、立体そのものより必要なのは「各段でどこにブロックを置くか」です。直径からボクセル球を計算し、断面図と立体プレビューへ翻訳します。</p>
+      <dl class="project-meta">
+        <div><dt>ROLE</dt><dd>Concept / UI / Implementation</dd></div>
+        <div><dt>CORE</dt><dd>Voxel math / Canvas projection</dd></div>
+        <div><dt>OUTPUT</dt><dd>Layer blueprint / 3D preview</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
 <main role="main">
+  <section class="workspace-section" aria-labelledby="workspace-title">
+    <div class="project-shell workspace-heading">
+      <div>
+        <p class="section-index">01 / BLUEPRINT ENGINE</p>
+        <h2 id="workspace-title">直径を決める。<br>断面で積む。<br>立体で確かめる。</h2>
+      </div>
+      <div>
+        <p>奇数サイズの立方グリッドへ球体を量子化し、建築に使える一段ごとの配置へ分解します。まず中央断面を見て、必要なら3Dで全体像を確認してください。</p>
+        <a class="text-link" href="#logic">計算の考え方を見る ↓</a>
+      </div>
+    </div>
 
-  <!-- コントロールカード -->
-  <div class="controls-card" role="region" aria-label="設計パラメータ">
-
-    <div class="ctrl-row">
-
-      <!-- 一辺の長さ -->
-      <div class="ctrl-group">
-        <label class="ctrl-label" for="size-input">一辺の長さ（マス）</label>
-        <div class="input-row">
-          <button class="stepper" onclick="stepSize(-2)" aria-label="2減らす">－</button>
-          <input
-            type="number"
-            id="size-input"
-            min="3" max="51" value="13" step="2"
-            aria-label="一辺の長さ"
-          >
-          <button class="stepper" onclick="stepSize(2)" aria-label="2増やす">＋</button>
-          <button class="apply-btn" onclick="rebuild()">更新</button>
+    <div class="project-shell workbench">
+      <section class="controls-card" aria-labelledby="controls-title">
+        <div class="controls-heading">
+          <div>
+            <p class="section-index">PARAMETERS</p>
+            <h3 id="controls-title">設計条件</h3>
+          </div>
+          <div class="size-presets" role="group" aria-label="サイズプリセット">
+            <span>PRESET</span>
+            <button type="button" data-size="9" aria-pressed="false">09</button>
+            <button type="button" data-size="13" aria-pressed="true">13</button>
+            <button type="button" data-size="21" aria-pressed="false">21</button>
+          </div>
         </div>
-        <div class="hint">奇数推奨（偶数入力時は自動補正）</div>
-      </div>
 
-      <!-- 中身 -->
-      <div class="ctrl-group">
-        <span class="ctrl-label" id="hollow-label">中身</span>
-        <div class="toggle-row" role="group" aria-labelledby="hollow-label">
-          <button class="toggle-btn active" id="btn-solid"  onclick="setHollow(false)" aria-pressed="true">中実</button>
-          <button class="toggle-btn"        id="btn-hollow" onclick="setHollow(true)"  aria-pressed="false">空洞</button>
+        <div class="ctrl-row">
+          <div class="ctrl-group">
+            <label class="ctrl-label" for="size-input">一辺の長さ（マス）</label>
+            <div class="input-row">
+              <button type="button" class="stepper" id="size-minus" aria-label="2減らす">−</button>
+              <input type="number" id="size-input" min="3" max="51" value="13" step="2" inputmode="numeric" aria-describedby="size-hint">
+              <button type="button" class="stepper" id="size-plus" aria-label="2増やす">＋</button>
+              <button type="button" class="apply-btn" id="apply-size">更新</button>
+            </div>
+            <div class="hint" id="size-hint">3〜51マス。偶数は次の奇数へ自動補正します。</div>
+          </div>
+
+          <div class="ctrl-group">
+            <span class="ctrl-label" id="hollow-label">構造</span>
+            <div class="toggle-row" role="group" aria-labelledby="hollow-label">
+              <button type="button" class="toggle-btn active" id="btn-solid" aria-pressed="true">中実</button>
+              <button type="button" class="toggle-btn" id="btn-hollow" aria-pressed="false">空洞</button>
+            </div>
+          </div>
+
+          <div class="ctrl-group cell-size-group">
+            <label class="ctrl-label" for="cell-size">断面セル</label>
+            <div class="slider-row">
+              <input type="range" id="cell-size" min="6" max="30" value="18" step="1">
+              <span id="cell-size-val" aria-live="polite">18px</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- セルサイズ -->
-      <div class="ctrl-group cell-size-group">
-        <label class="ctrl-label" for="cell-size">セルサイズ</label>
-        <div class="slider-row">
-          <input
-            type="range"
-            id="cell-size"
-            min="6" max="30" value="18" step="1"
-            aria-label="セルサイズ"
-          >
-          <span id="cell-size-val" aria-live="polite">18px</span>
+        <div class="info-bar" role="status" aria-live="polite">
+          <div class="info-chip"><span>RADIUS</span><strong id="info-r">—</strong><small>マス</small></div>
+          <div class="info-chip"><span>BLOCKS</span><strong id="info-total">—</strong></div>
+          <div class="info-chip"><span>LAYERS</span><strong id="info-layers">—</strong></div>
+          <div class="info-chip"><span>SURFACE</span><strong id="info-surface">—</strong></div>
         </div>
-      </div>
+      </section>
 
+      <section class="view-card" aria-labelledby="viewer-title">
+        <div class="view-card__heading">
+          <div>
+            <p class="section-index">LIVE BLUEPRINT</p>
+            <h3 id="viewer-title">設計図ビュー</h3>
+          </div>
+          <div class="view-tabs" role="tablist" aria-label="表示モード">
+            <button type="button" class="view-tab active" id="tab-2d" role="tab" aria-selected="true" aria-controls="view-2d" tabindex="0">2D 断面図</button>
+            <button type="button" class="view-tab" id="tab-3d" role="tab" aria-selected="false" aria-controls="view-3d" tabindex="-1">3D プレビュー</button>
+          </div>
+        </div>
+
+        <div id="view-2d" role="tabpanel" aria-labelledby="tab-2d">
+          <div class="slice-toolbar">
+            <div class="sub-tabs" role="group" aria-label="断面方向">
+              <button type="button" class="sub-tab active" id="stab-top" aria-pressed="true">水平断面</button>
+              <button type="button" class="sub-tab" id="stab-side" aria-pressed="false">垂直断面</button>
+            </div>
+            <button type="button" class="center-btn" id="center-layer">中央断面へ</button>
+          </div>
+
+          <div class="layer-nav" aria-label="断面ナビゲーション">
+            <button type="button" class="nav-btn" id="btn-prev" aria-label="前の段へ">←</button>
+            <div class="layer-readout">
+              <div class="layer-label" id="layer-label" aria-live="polite">—</div>
+              <label class="visually-hidden" for="layer-range">表示する断面</label>
+              <input type="range" id="layer-range" min="0" max="12" value="6" step="1">
+            </div>
+            <button type="button" class="nav-btn" id="btn-next" aria-label="次の段へ">→</button>
+            <div class="block-count" id="block-count" aria-live="polite"></div>
+          </div>
+
+          <div class="grid-wrap">
+            <div class="grid-outer" id="grid" role="img" aria-label="球体の水平断面図"></div>
+          </div>
+
+          <div class="legend" aria-label="凡例">
+            <div class="legend-item"><span class="lb lb-filled" aria-hidden="true"></span>中実ブロック</div>
+            <div class="legend-item"><span class="lb lb-shell" aria-hidden="true"></span>空洞時の外壁</div>
+          </div>
+        </div>
+
+        <div id="view-3d" role="tabpanel" aria-labelledby="tab-3d" hidden>
+          <div class="canvas-shell">
+            <canvas id="canvas-3d" tabindex="0" aria-label="球体3Dプレビュー。ドラッグで回転、スクロールまたはプラス・マイナスキーでズーム、矢印キーで回転できます"></canvas>
+            <button type="button" id="reset-view" class="reset-view">視点を戻す</button>
+          </div>
+          <p class="canvas-hint">DRAG / ROTATE　SCROLL / ZOOM　ARROW KEYS / ROTATE</p>
+        </div>
+      </section>
     </div>
+  </section>
 
-    <!-- 情報バー -->
-    <div class="info-bar" role="status" aria-live="polite">
-      <div class="info-chip">半径 <strong id="info-r">—</strong> マス</div>
-      <div class="info-chip">総ブロック数 <strong id="info-total">—</strong></div>
-      <div class="info-chip">全 <strong id="info-layers">—</strong> 段</div>
+  <section class="case-study project-shell" id="logic" aria-labelledby="logic-title">
+    <header class="case-study__heading">
+      <p class="section-index">02 / LOGIC</p>
+      <h2 id="logic-title">距離を測る。<br>マスを残す。<br>断面へ切る。</h2>
+    </header>
+    <div class="case-study__copy">
+      <p>立方グリッドの中心から各マスまでの距離を求め、半径の内側に入るマスだけを球体として採用します。空洞モードでは、さらに内側の球を差し引いて外殻だけを残します。</p>
+      <p>計算結果は同じボクセル集合から2D断面と3Dプレビューを作るため、見せ方を切り替えても設計データそのものは変わりません。</p>
     </div>
+  </section>
 
-  </div>
-
-  <!-- ビューカード -->
-  <div class="view-card" role="region" aria-label="設計図ビュー">
-
-    <!-- ビュータブ -->
-    <div class="view-tabs" role="tablist" aria-label="表示モード">
-      <button class="view-tab active" id="tab-2d" role="tab" aria-selected="true"  aria-controls="view-2d" onclick="switchView('2d')">2D 断面図</button>
-      <button class="view-tab"        id="tab-3d" role="tab" aria-selected="false" aria-controls="view-3d" onclick="switchView('3d')">3D プレビュー</button>
+  <section class="case-study case-study--dark" aria-labelledby="flow-title">
+    <div class="project-shell logic-grid">
+      <div>
+        <p class="section-index">03 / BUILD FLOW</p>
+        <h2 id="flow-title">球体から、<br>建築手順まで。</h2>
+      </div>
+      <ol class="logic-flow">
+        <li><span>01</span><strong>SIZE</strong><p>直径に相当する奇数グリッドを決め、中心座標と半径を確定。</p></li>
+        <li><span>02</span><strong>VOXELIZE</strong><p>中心からの距離で各マスを判定し、球体をブロック集合へ変換。</p></li>
+        <li><span>03</span><strong>SLICE</strong><p>高さまたは奥行きで切り出し、1段ずつ追える平面設計図を生成。</p></li>
+        <li><span>04</span><strong>PREVIEW</strong><p>外周面だけをCanvasへ投影し、軽量な3D確認ビューとして描画。</p></li>
+      </ol>
     </div>
+  </section>
 
-    <!-- 2D VIEW -->
-    <div id="view-2d" role="tabpanel" aria-labelledby="tab-2d">
-
-      <div class="sub-tabs" role="group" aria-label="断面方向">
-        <button class="sub-tab active" id="stab-top"  onclick="setSliceAxis('top')">真上（水平断面）</button>
-        <button class="sub-tab"        id="stab-side" onclick="setSliceAxis('side')">真横（垂直断面）</button>
-      </div>
-
-      <div class="layer-nav" role="group" aria-label="断面ナビゲーション">
-        <button class="nav-btn" id="btn-prev" onclick="changeLayer(-1)" aria-label="前の段へ">◀</button>
-        <div class="layer-label" id="layer-label" aria-live="polite">—</div>
-        <button class="nav-btn" id="btn-next" onclick="changeLayer(1)"  aria-label="次の段へ">▶</button>
-        <div class="block-count" id="block-count" aria-live="polite"></div>
-      </div>
-
-      <div class="grid-wrap">
-        <div class="grid-outer" id="grid" role="img" aria-label="球体断面図"></div>
-      </div>
-
-      <div class="legend" aria-label="凡例">
-        <div class="legend-item"><div class="lb lb-filled" aria-hidden="true"></div>ブロックあり（中実）</div>
-        <div class="legend-item"><div class="lb lb-shell"  aria-hidden="true"></div>外壁ブロック（空洞）</div>
-      </div>
-
+  <section class="case-study project-shell" aria-labelledby="detail-title">
+    <header class="case-study__heading">
+      <p class="section-index">04 / DETAILS</p>
+      <h2 id="detail-title">建てるときに、<br>迷う場所を減らす。</h2>
+    </header>
+    <div class="feature-ledger">
+      <article><span>01</span><h3>中央から始める</h3><p>再計算時は中央断面へ戻り、球体の最大径を最初に確認できます。</p></article>
+      <article><span>02</span><h3>断面を直接移動</h3><p>前後ボタンだけでなくレイヤースライダーを使い、離れた段へすぐ移動できます。</p></article>
+      <article><span>03</span><h3>3Dは外周だけ描く</h3><p>中実球でも内部ブロックを描画対象から外し、見た目を保ちながらCanvas負荷を抑えます。</p></article>
     </div>
+  </section>
 
-    <!-- 3D VIEW -->
-    <div id="view-3d" role="tabpanel" aria-labelledby="tab-3d" style="display:none">
-      <canvas
-        id="canvas-3d"
-        aria-label="球体3Dプレビュー。ドラッグで回転、スクロールでズーム"
-      ></canvas>
-      <p class="canvas-hint">ドラッグで回転　／　スクロール・ピンチでズーム</p>
+  <nav class="project-next" aria-label="関連作品">
+    <div class="project-shell project-next__grid">
+      <a href="/PRIME_DOT_ART/prime_dot_art.html"><small>RELATED / ALGORITHM</small><strong>素数点画</strong><span>↗</span></a>
+      <a href="/MADORI/madori.html"><small>RELATED / TOOL</small><strong>間取図メーカー</strong><span>↗</span></a>
+      <a href="/"><small>INDEX</small><strong>作品索引へ戻る</strong><span>↗</span></a>
     </div>
-
-  </div>
-
+  </nav>
 </main>
 
-<script src="sphere.js"></script>
+<script src="sphere.js" defer></script>
 </body>
 </html>

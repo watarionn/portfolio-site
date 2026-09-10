@@ -3,74 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>DQB2 部屋レシピ図鑑</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta name="description" content="DQB2の部屋レシピを、部屋名・材料・効果から素早く探せるファンメイド検索ツール。">
+  <title>DQB2 部屋レシピ Field Guide</title>
   <link rel="stylesheet" href="dqb2.css">
 </head>
 <body>
+  <div class="page-grid" aria-hidden="true"></div>
 
-  <!-- 横罫線テクスチャ -->
-  <div class="bg-pattern" aria-hidden="true"></div>
-
-  <!-- ヘッダー -->
-  <header class="site-header" role="banner">
-    <div class="header-inner">
-      <div class="title-block">
-        <span class="title-badge">DQB2</span>
-        <h1>部屋レシピ図鑑</h1>
-      </div>
-      <p class="subtitle">全 <span id="total-count">0</span> 種類</p>
+  <header class="site-header">
+    <a class="portfolio-link" href="/">← PORTFOLIO</a>
+    <div class="brand-lockup">
+      <span class="title-badge">DQB2</span>
+      <span class="brand-label">ROOM RECIPE FIELD GUIDE</span>
     </div>
   </header>
 
-  <!-- 検索・フィルタ -->
-  <div class="controls" role="search">
-    <div class="search-wrap">
-      <span class="search-icon" aria-hidden="true">🔍</span>
-      <input
-        type="text"
-        id="search"
-        placeholder="部屋名・アイテムで検索…"
-        autocomplete="off"
-        aria-label="部屋を検索"
-      >
-      <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">✕</button>
-    </div>
-    <div class="filter-scroll" role="group" aria-label="カテゴリで絞り込み">
-      <button class="filter-btn active" data-filter="all">すべて</button>
-      <button class="filter-btn" data-filter="寝る">🛏 寝室</button>
-      <button class="filter-btn" data-filter="お風呂">🛁 風呂</button>
-      <button class="filter-btn" data-filter="調理">🍳 調理</button>
-      <button class="filter-btn" data-filter="着替え">👗 着替え</button>
-      <button class="filter-btn" data-filter="個室">🚪 個室</button>
-      <button class="filter-btn" data-filter="バー">🍺 バー</button>
-      <button class="filter-btn" data-filter="トイレ">🚽 トイレ</button>
-      <button class="filter-btn" data-filter="作る">⚒ 製作</button>
-      <button class="filter-btn" data-filter="商人">🛒 商店</button>
-      <button class="filter-btn" data-filter="庭園">🌸 庭園</button>
-      <button class="filter-btn" data-filter="効果なし">🏠 その他</button>
-    </div>
-  </div>
+  <main>
+    <section class="project-intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <p class="eyebrow">BUILD / SEARCH / DISCOVER</p>
+        <h1 id="page-title">部屋づくりを、<br><span>検索できる設計図</span>に。</h1>
+        <p class="lead">部屋名、必要な材料、完成後の効果。散らばりがちなレシピ情報を、建築前にすぐ引けるフィールドガイドとして整理しました。</p>
+        <div class="intro-meta" aria-label="このツールの特徴">
+          <span>STATIC DATASET</span><span>CLIENT-SIDE SEARCH</span><span><b id="intro-room-count">0</b> RECIPES</span>
+        </div>
+      </div>
+      <div class="block-illustration" aria-hidden="true">
+        <span class="block b1"></span><span class="block b2"></span><span class="block b3"></span>
+        <span class="block b4"></span><span class="block b5"></span><span class="block b6"></span>
+        <p>FIELD<br>GUIDE</p>
+      </div>
+    </section>
 
-  <!-- カードグリッド -->
-  <main id="main" role="main">
-    <div id="room-grid" class="room-grid" role="list" aria-label="部屋一覧"></div>
-    <div id="empty-state" class="empty-state hidden" role="status" aria-live="polite">
-      <span aria-hidden="true">🔎</span>
-      <p>見つかりませんでした</p>
-    </div>
+    <section class="tool-shell" aria-labelledby="tool-title">
+      <div class="tool-heading">
+        <div>
+          <p class="section-kicker">LIVE TOOL</p>
+          <h2 id="tool-title">部屋レシピを探す</h2>
+        </div>
+        <dl class="tool-stats" aria-label="データセット概要">
+          <div><dt>ROOMS</dt><dd id="total-count">0</dd></div>
+          <div><dt>MATERIALS</dt><dd id="material-count">0</dd></div>
+          <div><dt>VISIBLE</dt><dd id="visible-count">0</dd></div>
+        </dl>
+      </div>
+
+      <div class="controls" role="search">
+        <div class="search-row">
+          <label class="search-box" for="search">
+            <span class="search-mark" aria-hidden="true">⌕</span>
+            <input type="search" id="search" placeholder="例：ベッド、温泉、調理…" autocomplete="off">
+            <button id="clear-btn" class="clear-btn" type="button" aria-label="検索語を消去">CLEAR</button>
+          </label>
+          <button id="reset-btn" class="reset-btn" type="button">RESET</button>
+        </div>
+
+        <div class="scope-row" role="group" aria-label="検索対象">
+          <span class="control-label">SEARCH IN</span>
+          <button class="scope-btn active" type="button" data-scope="all" aria-pressed="true">すべて</button>
+          <button class="scope-btn" type="button" data-scope="name" aria-pressed="false">部屋名</button>
+          <button class="scope-btn" type="button" data-scope="items" aria-pressed="false">材料</button>
+          <button class="scope-btn" type="button" data-scope="effect" aria-pressed="false">効果</button>
+        </div>
+
+        <div class="filter-row">
+          <span class="control-label">CATEGORY</span>
+          <div class="filter-scroll" role="group" aria-label="カテゴリで絞り込み">
+            <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">すべて</button>
+            <button class="filter-btn" type="button" data-filter="寝る" aria-pressed="false">寝室</button>
+            <button class="filter-btn" type="button" data-filter="お風呂" aria-pressed="false">風呂・水場</button>
+            <button class="filter-btn" type="button" data-filter="調理" aria-pressed="false">調理</button>
+            <button class="filter-btn" type="button" data-filter="着替え" aria-pressed="false">着替え</button>
+            <button class="filter-btn" type="button" data-filter="個室" aria-pressed="false">個室</button>
+            <button class="filter-btn" type="button" data-filter="バー" aria-pressed="false">飲食・バー</button>
+            <button class="filter-btn" type="button" data-filter="トイレ" aria-pressed="false">トイレ</button>
+            <button class="filter-btn" type="button" data-filter="作る" aria-pressed="false">製作</button>
+            <button class="filter-btn" type="button" data-filter="商人" aria-pressed="false">商店</button>
+            <button class="filter-btn" type="button" data-filter="庭園" aria-pressed="false">庭園・公園</button>
+            <button class="filter-btn" type="button" data-filter="効果なし" aria-pressed="false">効果なし</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-bar" aria-live="polite">
+        <p><strong id="result-count">0</strong> recipes <span id="result-context">すべての部屋</span></p>
+        <p class="result-hint">カードを選ぶと必要材料と効果を確認できます。</p>
+      </div>
+
+      <ul id="room-grid" class="room-grid" aria-label="部屋レシピ一覧"></ul>
+      <div id="empty-state" class="empty-state hidden" role="status">
+        <span aria-hidden="true">□</span>
+        <h3>該当するレシピがありません</h3>
+        <p>検索語かカテゴリを変えてみてください。</p>
+      </div>
+    </section>
+
+    <section class="project-note" aria-labelledby="note-title">
+      <p class="section-kicker">DESIGN NOTE</p>
+      <h2 id="note-title">一覧を読むより、建てる直前に引けること。</h2>
+      <p>検索はブラウザ内だけで完結します。部屋名だけでなく材料や効果から逆引きでき、レシピを開けば必要数まで一画面で確認できます。</p>
+      <p class="disclaimer">非公式の個人制作データ整理ツールです。ゲーム本編および各名称の権利は各権利者に帰属します。</p>
+    </section>
   </main>
 
-  <!-- モーダル -->
-  <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
-    <div id="modal" class="modal">
-      <button id="modal-close" class="modal-close" aria-label="閉じる">✕</button>
+  <div id="modal-overlay" class="modal-overlay hidden" role="presentation">
+    <section id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title-text" tabindex="-1">
+      <div class="modal-topbar">
+        <span>RECIPE DETAIL</span>
+        <button id="modal-close" class="modal-close" type="button" aria-label="詳細を閉じる">CLOSE</button>
+      </div>
       <div id="modal-content"></div>
-    </div>
+    </section>
   </div>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="dqb2.js"></script>
 </body>
 </html>

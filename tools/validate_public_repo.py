@@ -422,6 +422,21 @@ def main() -> None:
         if marker not in holoca_css:
             fail(f"HOLOCA Stage 9 responsive marker missing: {marker}")
 
+    dqb2_html = (ROOT / "works/dqb2/index.html").read_text(encoding="utf-8")
+    dqb2_js = (ROOT / "works/dqb2/dqb2.js").read_text(encoding="utf-8")
+    dqb2_css = (ROOT / "works/dqb2/dqb2.css").read_text(encoding="utf-8")
+    for marker in ('class="project-intro"', 'id="material-count"', 'data-scope="items"', 'id="result-count"'):
+        if marker not in dqb2_html:
+            fail(f"DQB2 Stage 9 presentation marker missing: {marker}")
+    for marker in ("function getUniqueMaterialCount()", "function trapModalFocus(event)", "grid.replaceChildren()"):
+        if marker not in dqb2_js:
+            fail(f"DQB2 Stage 9 interaction marker missing: {marker}")
+    if "innerHTML" in dqb2_js:
+        fail("DQB2 must not use HTML-string rendering")
+    for marker in (".block-illustration", ".room-grid", "@media (max-width: 560px)"):
+        if marker not in dqb2_css:
+            fail(f"DQB2 Stage 9 responsive marker missing: {marker}")
+
     for path in tracked:
         rel = path.relative_to(ROOT)
         parts = set(rel.parts)

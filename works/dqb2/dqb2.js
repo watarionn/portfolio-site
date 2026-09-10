@@ -197,222 +197,348 @@ const ROOMS = [
   ["リゾートスパ","ミュージックホール×1｜あったか温泉×1","地図上に温泉のアイコンが表示される。付近のBGMがカジノ風に変わる"],
 ];
 
-/* ─── メタ情報（emoji・アクセントカラー） ─── */
+/* ─── Stage 9: Builder's Field Guide interaction layer ─── */
 function getRoomMeta(name, effect) {
-  if (effect.includes("ベッドで寝") || name.includes("寝") || name.includes("ベッド") || name.includes("布団")) return { emoji: "🛏️", accent: "#1a4a7a" };
-  if (effect.includes("お風呂") || effect.includes("シャワー") || name.includes("風呂") || name.includes("湯") || name.includes("バス") || name.includes("温泉") || name.includes("プール") || effect.includes("泳")) return { emoji: "🛁", accent: "#1a6a8a" };
-  if (effect.includes("調理") || effect.includes("キノコ料理") || effect.includes("調理ができる") || effect.includes("炊き出し")) return { emoji: "🍳", accent: "#9a7a32" };
-  if (effect.includes("着替え") || effect.includes("水着") || effect.includes("バスタオル") || effect.includes("バニースーツ")) return { emoji: "👗", accent: "#8a3a6a" };
-  if (effect.includes("個室") || effect.includes("住人の部屋")) return { emoji: "🚪", accent: "#5a3a8a" };
-  if (effect.includes("バーテンダー") || effect.includes("飲み物")) return { emoji: "🍺", accent: "#7a4a1a" };
-  if (effect.includes("用をたし")) return { emoji: "🚽", accent: "#4a6a3a" };
-  if (effect.includes("アイテムづくり") || effect.includes("アイテムを作") || effect.includes("錬成") || effect.includes("染料") || effect.includes("飲み物づくり")) return { emoji: "⚒️", accent: "#6a5a2a" };
-  if (effect.includes("売って")) return { emoji: "🛒", accent: "#c0392b" };
-  if (effect.includes("兵士が体") || effect.includes("きたえ") || effect.includes("作戦")) return { emoji: "⚔️", accent: "#8a2a2a" };
-  if (effect.includes("装備")) return { emoji: "🗡️", accent: "#8a2a2a" };
-  if (effect.includes("収納箱に入れ")) return { emoji: "📦", accent: "#6a4a1a" };
-  if (effect.includes("シスター")) return { emoji: "⛪", accent: "#8a7a4a" };
-  if (effect.includes("歌") || effect.includes("ダンス") || effect.includes("ピアノ")) return { emoji: "🎵", accent: "#4a2a8a" };
-  if (effect.includes("王さまだけ")) return { emoji: "👑", accent: "#9a7a32" };
-  if (effect.includes("地図上")) return { emoji: "🗺️", accent: "#2e7d50" };
-  if (effect.includes("トロッコ")) return { emoji: "🚃", accent: "#3a4a5a" };
-  if (effect.includes("花火")) return { emoji: "🎆", accent: "#c0392b" };
-  if (effect.includes("ポーカー")) return { emoji: "🃏", accent: "#3a4a5a" };
-  if (effect.includes("幸福度")) return { emoji: "🐄", accent: "#2e7d50" };
-  if (effect.includes("バフバフ")) return { emoji: "💕", accent: "#8a3a6a" };
-  if (effect.includes("手当")) return { emoji: "🏥", accent: "#2e7d50" };
-  if (name.includes("庭園") || name.includes("ガーデン") || name.includes("牧場") || name.includes("公園")) return { emoji: "🌸", accent: "#3a6a3a" };
-  return { emoji: "🏠", accent: "#6b5538" };
+  if (effect.includes("ベッドで寝") || name.includes("寝") || name.includes("ベッド") || name.includes("布団")) return { category: "SLEEP", accent: "#2f6f91" };
+  if (effect.includes("お風呂") || effect.includes("シャワー") || name.includes("風呂") || name.includes("湯") || name.includes("バス") || name.includes("温泉") || name.includes("プール") || effect.includes("泳")) return { category: "BATH / WATER", accent: "#3f88a6" };
+  if (effect.includes("調理") || effect.includes("キノコ料理") || effect.includes("調理ができる") || effect.includes("炊き出し")) return { category: "COOK", accent: "#b58a37" };
+  if (effect.includes("着替え") || effect.includes("水着") || effect.includes("バスタオル") || effect.includes("バニースーツ")) return { category: "DRESS", accent: "#9b5f7e" };
+  if (effect.includes("個室") || effect.includes("住人の部屋")) return { category: "PRIVATE", accent: "#71659c" };
+  if (effect.includes("バーテンダー") || effect.includes("飲み物")) return { category: "FOOD / BAR", accent: "#9d6337" };
+  if (effect.includes("用をたし")) return { category: "TOILET", accent: "#5f7a52" };
+  if (effect.includes("アイテムづくり") || effect.includes("アイテムを作") || effect.includes("錬成") || effect.includes("染料") || effect.includes("飲み物づくり") || effect.includes("収納箱に入れ") || effect.includes("装備")) return { category: "CRAFT", accent: "#7d703e" };
+  if (effect.includes("売って")) return { category: "SHOP", accent: "#d96a3a" };
+  if (name.includes("庭園") || name.includes("ガーデン") || name.includes("牧場") || name.includes("公園") || name.includes("広場")) return { category: "GARDEN", accent: "#50735b" };
+  if (effect === "効果なし" || effect === "効果無し") return { category: "OTHER", accent: "#8a8172" };
+  return { category: "SPECIAL", accent: "#184861" };
 }
 
-/* ─── アイテム文字列のパース ─── */
 function parseItems(itemStr) {
-  return itemStr.split("｜").map(function(s) {
-    const m = s.match(/^(.+?)×(\d+)$/) || s.match(/^(.+?)×(\d+)/);
-    if (m) return { name: m[1].trim(), count: parseInt(m[2]) };
-    return { name: s.trim(), count: null };
-  }).filter(function(i) { return i.name; });
+  return itemStr.split("｜").map(function(part) {
+    const match = part.match(/^(.+?)×(\d+)$/) || part.match(/^(.+?)×(\d+)/);
+    if (match) return { name: match[1].trim(), count: Number.parseInt(match[2], 10) };
+    return { name: part.trim(), count: null };
+  }).filter(function(item) { return item.name; });
 }
 
-/* ─── フィルタ判定 ─── */
 function matchesFilter(room, filter) {
-  const [name, items, effect] = room;
-  if (filter === "all")   return true;
-  if (filter === "寝る")  return effect.includes("ベッドで寝");
-  if (filter === "お風呂") return effect.includes("お風呂") || effect.includes("シャワー") || effect.includes("泳");
-  if (filter === "調理")  return effect.includes("調理") || effect.includes("キノコ料理") || effect.includes("調理ができる") || effect.includes("炊き出し");
+  const [name, , effect] = room;
+  if (filter === "all") return true;
+  if (filter === "寝る") return effect.includes("ベッドで寝");
+  if (filter === "お風呂") return effect.includes("お風呂") || effect.includes("シャワー") || effect.includes("泳") || name.includes("風呂") || name.includes("湯") || name.includes("プール");
+  if (filter === "調理") return effect.includes("調理") || effect.includes("キノコ料理") || effect.includes("炊き出し");
   if (filter === "着替え") return effect.includes("着替え") || effect.includes("水着") || effect.includes("バスタオル") || effect.includes("バニースーツ");
-  if (filter === "個室")  return effect.includes("住人の部屋");
-  if (filter === "バー")  return effect.includes("バーテンダー") || effect.includes("飲み物");
+  if (filter === "個室") return effect.includes("住人の部屋") || effect.includes("個室");
+  if (filter === "バー") return effect.includes("バーテンダー") || effect.includes("飲み物");
   if (filter === "トイレ") return effect.includes("用をたし");
-  if (filter === "作る")  return effect.includes("アイテムづくり") || effect.includes("アイテムを作") || effect.includes("錬成") || effect.includes("染料") || effect.includes("飲み物づくり") || effect.includes("収納箱に入れ") || effect.includes("装備");
-  if (filter === "商人")  return effect.includes("売って");
-  if (filter === "庭園")  return name.includes("庭園") || name.includes("ガーデン") || name.includes("牧場") || name.includes("公園") || name.includes("広場");
+  if (filter === "作る") return effect.includes("アイテムづくり") || effect.includes("アイテムを作") || effect.includes("錬成") || effect.includes("染料") || effect.includes("飲み物づくり") || effect.includes("収納箱に入れ") || effect.includes("装備");
+  if (filter === "商人") return effect.includes("売って");
+  if (filter === "庭園") return name.includes("庭園") || name.includes("ガーデン") || name.includes("牧場") || name.includes("公園") || name.includes("広場");
   if (filter === "効果なし") return effect === "効果なし" || effect === "効果無し";
   return true;
 }
 
-/* ─── State ─── */
+function normalizeText(value) {
+  return String(value || "").normalize("NFKC").toLowerCase().trim();
+}
+
 let currentFilter = "all";
+let currentScope = "all";
 let currentSearch = "";
 let filtered = [...ROOMS];
+let lastTrigger = null;
+let toastTimer = null;
 
 function getFiltered() {
+  const query = normalizeText(currentSearch);
   return ROOMS.filter(function(room) {
+    if (!matchesFilter(room, currentFilter)) return false;
+    if (!query) return true;
     const [name, items, effect] = room;
-    const matchF = matchesFilter(room, currentFilter);
-    const q = currentSearch.toLowerCase();
-    const matchS = !q
-      || name.toLowerCase().includes(q)
-      || items.toLowerCase().includes(q)
-      || effect.toLowerCase().includes(q);
-    return matchF && matchS;
+    const fields = currentScope === "name" ? [name]
+      : currentScope === "items" ? [items]
+      : currentScope === "effect" ? [effect]
+      : [name, items, effect];
+    return fields.some(function(value) { return normalizeText(value).includes(query); });
   });
 }
 
-/* ─── カード描画（辞書風） ─── */
+function getUniqueMaterialCount() {
+  const names = new Set();
+  ROOMS.forEach(function(room) {
+    parseItems(room[1]).forEach(function(item) { names.add(normalizeText(item.name)); });
+  });
+  return names.size;
+}
+
+function createTextElement(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  node.textContent = text;
+  return node;
+}
+
+function updateResultSummary() {
+  document.getElementById("visible-count").textContent = filtered.length;
+  document.getElementById("result-count").textContent = filtered.length;
+  const active = document.querySelector(`.filter-btn[data-filter="${CSS.escape(currentFilter)}"]`);
+  const scope = document.querySelector(`.scope-btn[data-scope="${CSS.escape(currentScope)}"]`);
+  const parts = [active ? active.textContent : "すべて"];
+  if (currentSearch) parts.push(`「${currentSearch}」 / ${scope ? scope.textContent : "すべて"}`);
+  document.getElementById("result-context").textContent = parts.join(" · ");
+}
+
 function renderGrid() {
   filtered = getFiltered();
-  const grid  = document.getElementById("room-grid");
+  const grid = document.getElementById("room-grid");
   const empty = document.getElementById("empty-state");
+  const fragment = document.createDocumentFragment();
+  grid.replaceChildren();
 
-  if (filtered.length === 0) {
-    grid.innerHTML = "";
-    empty.classList.remove("hidden");
-    return;
-  }
-
-  empty.classList.add("hidden");
-
-  grid.innerHTML = filtered.map(function(room, i) {
+  filtered.forEach(function(room) {
     const [name, items, effect] = room;
-    const meta      = getRoomMeta(name, effect);
+    const originalIndex = ROOMS.indexOf(room) + 1;
+    const meta = getRoomMeta(name, effect);
     const itemCount = parseItems(items).length;
     const hasEffect = effect !== "効果なし" && effect !== "効果無し";
-    const delay     = Math.min(i * 0.025, 0.4);
+    const li = document.createElement("li");
+    li.className = "room-entry";
 
-    return `<div
-      class="room-card"
-      role="listitem"
-      tabindex="0"
-      data-index="${i}"
-      style="--card-accent:${meta.accent}; animation-delay:${delay}s"
-      aria-label="${name} — クリックで詳細を表示"
-    >
-      <span class="card-item-count">${itemCount}点</span>
-      <span class="card-pos-badge">${meta.emoji}</span>
-      <div class="card-name">${name}</div>
-      <div class="card-effect ${hasEffect ? 'has-effect' : 'no-effect'}">${effect}</div>
-    </div>`;
-  }).join("");
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "room-card";
+    card.style.setProperty("--card-accent", meta.accent);
+    card.setAttribute("aria-label", `${name}。必要材料${itemCount}種類。詳細を開く`);
 
-  /* イベント */
-  grid.querySelectorAll(".room-card").forEach(function(card) {
-    card.addEventListener("click", function() {
-      openModal(parseInt(card.dataset.index));
-    });
-    card.addEventListener("keydown", function(e) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        openModal(parseInt(card.dataset.index));
-      }
-    });
+    const top = document.createElement("div");
+    top.className = "card-topline";
+    top.append(createTextElement("span", "card-index", `#${String(originalIndex).padStart(3, "0")}`));
+    top.append(createTextElement("span", "card-item-count", `${itemCount} MATERIALS`));
+    card.append(top);
+    card.append(createTextElement("span", "card-category", meta.category));
+    card.append(createTextElement("h3", "card-name", name));
+    card.append(createTextElement("p", `card-effect ${hasEffect ? "" : "no-effect"}`.trim(), effect));
+    card.addEventListener("click", function() { openModal(room, card); });
+    li.append(card);
+    fragment.append(li);
   });
+
+  grid.append(fragment);
+  empty.classList.toggle("hidden", filtered.length !== 0);
+  updateResultSummary();
+  syncUrlState();
 }
 
-/* ─── モーダル（辞書風） ─── */
-function openModal(index) {
-  const room = filtered[index];
-  const [name, itemStr, effect] = room;
-  const meta      = getRoomMeta(name, effect);
-  const items     = parseItems(itemStr);
-  const hasEffect = effect !== "効果なし" && effect !== "効果無し";
+function syncUrlState() {
+  const params = new URLSearchParams();
+  if (currentSearch) params.set("q", currentSearch);
+  if (currentFilter !== "all") params.set("cat", currentFilter);
+  if (currentScope !== "all") params.set("scope", currentScope);
+  const query = params.toString();
+  const next = `${location.pathname}${query ? `?${query}` : ""}${location.hash}`;
+  history.replaceState(null, "", next);
+}
 
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  window.clearTimeout(toastTimer);
+  toastTimer = window.setTimeout(function() { toast.classList.remove("show"); }, 1800);
+}
+
+async function copyRecipe(room) {
+  const [name, itemStr, effect] = room;
+  const lines = [name, "", ...parseItems(itemStr).map(function(item) {
+    return `・${item.name}${item.count ? ` ×${item.count}` : ""}`;
+  }), "", `効果：${effect}`];
+  const text = lines.join("\n");
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast("RECIPE COPIED");
+  } catch (_) {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.append(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+    showToast("RECIPE COPIED");
+  }
+}
+
+function openModal(room, trigger) {
+  lastTrigger = trigger || document.activeElement;
+  const [name, itemStr, effect] = room;
+  const items = parseItems(itemStr);
+  const meta = getRoomMeta(name, effect);
+  const hasEffect = effect !== "効果なし" && effect !== "効果無し";
   const content = document.getElementById("modal-content");
-  content.innerHTML = `
-    <div class="modal-header">
-      <span class="modal-emoji" aria-hidden="true">${meta.emoji}</span>
-      <div>
-        <span class="modal-pos">名</span>
-        <div class="modal-title" id="modal-title-text">${name}</div>
-        <span class="modal-effect-badge ${hasEffect ? 'active' : 'inactive'}">${effect}</span>
-      </div>
-    </div>
-    <div class="section-label">必要アイテム<span></span></div>
-    <ul class="items-list" aria-label="必要アイテム一覧">
-      ${items.map(function(item, i) {
-        const n   = item.count;
-        const cls = !n ? '' : n === 1 ? 'x1' : n <= 3 ? 'x2' : n <= 6 ? 'x4' : 'big';
-        return `<li class="item-row" style="animation-delay:${i * 0.04}s">
-          <span class="item-name">${item.name}</span>
-          ${item.count ? `<span class="item-count ${cls}" aria-label="${item.count}個">×${item.count}</span>` : ''}
-        </li>`;
-      }).join("")}
-    </ul>
-  `;
+  content.replaceChildren();
+
+  const header = document.createElement("div");
+  header.className = "modal-header";
+  const marker = createTextElement("span", "modal-marker", meta.category.split(" ")[0]);
+  marker.style.setProperty("--modal-accent", meta.accent);
+  const copy = document.createElement("div");
+  const title = createTextElement("h2", "modal-title", name);
+  title.id = "modal-title-text";
+  copy.append(title);
+  copy.append(createTextElement("p", `modal-effect ${hasEffect ? "" : "no-effect"}`.trim(), effect));
+  header.append(marker, copy);
+  content.append(header);
+
+  const actions = document.createElement("div");
+  actions.className = "recipe-actions";
+  const copyButton = createTextElement("button", "copy-btn", "COPY RECIPE");
+  copyButton.type = "button";
+  copyButton.addEventListener("click", function() { copyRecipe(room); });
+  actions.append(copyButton);
+  content.append(actions);
+
+  const section = document.createElement("section");
+  section.className = "recipe-section";
+  section.append(createTextElement("h3", "", `MATERIAL LIST · ${items.length}`));
+  const list = document.createElement("ol");
+  list.className = "items-list";
+  items.forEach(function(item, index) {
+    const li = document.createElement("li");
+    li.className = "item-row";
+    li.append(createTextElement("span", "item-order", String(index + 1).padStart(2, "0")));
+    li.append(createTextElement("span", "item-name", item.name));
+    li.append(createTextElement("span", "item-count", item.count ? `×${item.count}` : "—"));
+    list.append(li);
+  });
+  section.append(list);
+  content.append(section);
 
   const overlay = document.getElementById("modal-overlay");
+  const modal = document.getElementById("modal");
   overlay.classList.remove("hidden");
-  document.getElementById("modal").scrollTop = 0;
-  /* フォーカス管理 */
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  modal.scrollTop = 0;
   document.getElementById("modal-close").focus();
 }
 
 function closeModal() {
-  document.getElementById("modal-overlay").classList.add("hidden");
+  const overlay = document.getElementById("modal-overlay");
+  const modal = document.getElementById("modal");
+  if (overlay.classList.contains("hidden")) return;
+  overlay.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+  if (lastTrigger && typeof lastTrigger.focus === "function") lastTrigger.focus();
 }
 
-/* ─── 初期化 ─── */
+function trapModalFocus(event) {
+  if (event.key !== "Tab") return;
+  const modal = document.getElementById("modal");
+  if (modal.getAttribute("aria-hidden") === "true") return;
+  const focusable = [...modal.querySelectorAll("button, [href], input, [tabindex]:not([tabindex='-1'])")]
+    .filter(function(node) { return !node.disabled && node.offsetParent !== null; });
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+function setPressedState(selector, attribute, value) {
+  document.querySelectorAll(selector).forEach(function(button) {
+    const active = button.dataset[attribute] === value;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function resetSearchState() {
+  currentFilter = "all";
+  currentScope = "all";
+  currentSearch = "";
+  const input = document.getElementById("search");
+  input.value = "";
+  document.getElementById("clear-btn").classList.remove("visible");
+  setPressedState(".filter-btn", "filter", currentFilter);
+  setPressedState(".scope-btn", "scope", currentScope);
+  renderGrid();
+  input.focus();
+}
+
+function loadStateFromUrl() {
+  const params = new URLSearchParams(location.search);
+  const filters = [...document.querySelectorAll(".filter-btn")].map(function(button) { return button.dataset.filter; });
+  const scopes = [...document.querySelectorAll(".scope-btn")].map(function(button) { return button.dataset.scope; });
+  currentSearch = params.get("q") || "";
+  currentFilter = filters.includes(params.get("cat")) ? params.get("cat") : "all";
+  currentScope = scopes.includes(params.get("scope")) ? params.get("scope") : "all";
+  document.getElementById("search").value = currentSearch;
+  document.getElementById("clear-btn").classList.toggle("visible", Boolean(currentSearch));
+  setPressedState(".filter-btn", "filter", currentFilter);
+  setPressedState(".scope-btn", "scope", currentScope);
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("total-count").textContent = ROOMS.length;
+  document.getElementById("intro-room-count").textContent = ROOMS.length;
+  document.getElementById("material-count").textContent = getUniqueMaterialCount();
+  loadStateFromUrl();
   renderGrid();
 
-  /* 検索 */
-  const searchEl = document.getElementById("search");
-  const clearBtn = document.getElementById("clear-btn");
-
-  searchEl.addEventListener("input", function() {
-    currentSearch = searchEl.value;
-    clearBtn.classList.toggle("visible", currentSearch.length > 0);
+  const search = document.getElementById("search");
+  search.addEventListener("input", function() {
+    currentSearch = search.value;
+    document.getElementById("clear-btn").classList.toggle("visible", Boolean(currentSearch));
     renderGrid();
   });
-
-  clearBtn.addEventListener("click", function() {
-    searchEl.value = "";
-    currentSearch  = "";
-    clearBtn.classList.remove("visible");
+  document.getElementById("clear-btn").addEventListener("click", function() {
+    currentSearch = "";
+    search.value = "";
+    document.getElementById("clear-btn").classList.remove("visible");
     renderGrid();
-    searchEl.focus();
+    search.focus();
   });
+  document.getElementById("reset-btn").addEventListener("click", resetSearchState);
 
-  /* フィルタ */
-  document.querySelectorAll(".filter-btn").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      document.querySelectorAll(".filter-btn").forEach(function(b) {
-        b.classList.remove("active");
-      });
-      btn.classList.add("active");
-      currentFilter = btn.dataset.filter;
+  document.querySelectorAll(".scope-btn").forEach(function(button) {
+    button.addEventListener("click", function() {
+      currentScope = button.dataset.scope;
+      setPressedState(".scope-btn", "scope", currentScope);
+      renderGrid();
+    });
+  });
+  document.querySelectorAll(".filter-btn").forEach(function(button) {
+    button.addEventListener("click", function() {
+      currentFilter = button.dataset.filter;
+      setPressedState(".filter-btn", "filter", currentFilter);
       renderGrid();
     });
   });
 
-  /* モーダルを閉じる */
+  const overlay = document.getElementById("modal-overlay");
+  const modal = document.getElementById("modal");
   document.getElementById("modal-close").addEventListener("click", closeModal);
-  document.getElementById("modal-overlay").addEventListener("click", function(e) {
-    if (e.target === e.currentTarget) closeModal();
+  overlay.addEventListener("click", function(event) {
+    if (event.target === overlay) closeModal();
   });
-  document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") closeModal();
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") closeModal();
+    trapModalFocus(event);
   });
 
-  /* スワイプで閉じる */
   let startY = 0;
-  const modal = document.getElementById("modal");
-  modal.addEventListener("touchstart", function(e) {
-    startY = e.touches[0].clientY;
+  modal.addEventListener("touchstart", function(event) {
+    startY = event.touches[0].clientY;
   }, { passive: true });
-  modal.addEventListener("touchend", function(e) {
-    if (e.changedTouches[0].clientY - startY > 80 && modal.scrollTop === 0) closeModal();
+  modal.addEventListener("touchend", function(event) {
+    const moved = event.changedTouches[0].clientY - startY;
+    if (moved > 90 && modal.scrollTop === 0) closeModal();
   }, { passive: true });
 });

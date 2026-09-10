@@ -111,7 +111,7 @@ REQUIRED_STAGE4_HOLOCA_FILES = {
 }
 
 EXPECTED_STAGE4_HOLOCA_BLOBS = {
-    "services/holoca/public/card_search_api.php": "f1b1406c0a8fa7ef458e4f40a1d2d75cab8dba83",
+    "services/holoca/public/card_search_api.php": "ac4194259e1bfdec98f25ba8a4c904fbd073cb2e",
     "services/holoca/public/holoca.css": "0020d0bf35b18ea9946f7c90ec7db4a0df604002",
     "services/holoca/public/holoca.html": "67f68842b8f3b9915b8f387a7743132e94119b54",
     "services/holoca/public/holoca.js": "0ca68949ebbea99ff676bf764f8d9a8e73c1a575",
@@ -373,6 +373,11 @@ def main() -> None:
         "$configPath = __DIR__ . '/../../config.php';",
         "$charset = defined('DB_CHARSET')",
         "? (string) DB_CHARSET : 'utf8mb4'",
+        "ce.official_id = c.official_id",
+        "t.official_id = c.official_id",
+        "a.official_id = c.official_id",
+        "ce2.official_id = c.official_id",
+        "ab.official_id = c.official_id",
         "if (!is_file($configPath))",
         "respond_service_error(503);",
         "'error' => '検索サービスは現在利用できません。',",
@@ -381,6 +386,12 @@ def main() -> None:
     for literal in required_api_literals:
         if literal not in holoca_api:
             fail(f"HOLOCA hardened API contract missing: {literal}")
+    for stale_join in (
+        "ce.card_no = c.card_no", "t.card_no = c.card_no", "a.card_no = c.card_no",
+        "ce2.card_no = c.card_no", "ab.card_no = c.card_no",
+    ):
+        if stale_join in holoca_api:
+            fail(f"HOLOCA stale card_no join remains: {stale_join}")
 
     holoca_js = (ROOT / "services/holoca/public/holoca.js").read_text(encoding="utf-8")
     if "data-card-index" not in holoca_js or "bindSearchResultActions" not in holoca_js:

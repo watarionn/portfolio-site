@@ -114,7 +114,7 @@ try {
     if ($expansion !== '') {
         $where[] = 'EXISTS (
             SELECT 1 FROM card_expansions ce
-            WHERE ce.card_no = c.card_no AND ce.expansion_code = :expansion
+            WHERE ce.official_id = c.official_id AND ce.expansion_code = :expansion
         )';
         $params[':expansion'] = $expansion;
     }
@@ -125,7 +125,7 @@ try {
         $tagOp   = $tagMode === 'exact' ? '=' : 'LIKE';
         $where[] = 'EXISTS (
             SELECT 1 FROM card_tags t
-            WHERE t.card_no = c.card_no AND t.tag ' . $tagOp . ' :tag
+            WHERE t.official_id = c.official_id AND t.tag ' . $tagOp . ' :tag
         )';
         $params[':tag'] = $tagVal;
     }
@@ -155,7 +155,7 @@ try {
 
             $subConds = [];
             $keyAb    = ':ab_type_' . $i;
-            $subConds[] = 'EXISTS (SELECT 1 FROM card_abilities a WHERE a.card_no = c.card_no AND a.ability_type = ' . $keyAb . ')';
+            $subConds[] = 'EXISTS (SELECT 1 FROM card_abilities a WHERE a.official_id = c.official_id AND a.ability_type = ' . $keyAb . ')';
             $params[$keyAb] = $engKey;
 
             foreach ($textKws as $j => $kw) {
@@ -198,7 +198,7 @@ try {
                 SELECT e.code
                 FROM card_expansions ce2
                 JOIN expansions e ON ce2.expansion_code = e.code
-                WHERE ce2.card_no = c.card_no
+                WHERE ce2.official_id = c.official_id
                 ORDER BY e.sort_order DESC
                 LIMIT 1
             ) AS expansion_code,
@@ -206,13 +206,13 @@ try {
                 SELECT e.name
                 FROM card_expansions ce2
                 JOIN expansions e ON ce2.expansion_code = e.code
-                WHERE ce2.card_no = c.card_no
+                WHERE ce2.official_id = c.official_id
                 ORDER BY e.sort_order DESC
                 LIMIT 1
             ) AS expansion_name
         FROM cards c
-        LEFT JOIN card_tags      t  ON t.card_no  = c.card_no
-        LEFT JOIN card_abilities ab ON ab.card_no = c.card_no
+        LEFT JOIN card_tags      t  ON t.official_id  = c.official_id
+        LEFT JOIN card_abilities ab ON ab.official_id = c.official_id
         WHERE {$whereSQL}
         GROUP BY c.card_no
         ORDER BY c.card_no ASC

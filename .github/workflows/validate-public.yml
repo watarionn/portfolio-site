@@ -33,6 +33,9 @@ jobs:
       - name: Validate MADORI interaction contract
         run: python tools/check_madori_contract.py
 
+      - name: Validate Sphere interaction contract
+        run: python tools/check_sphere_contract.py
+
       - name: Validate Prime Dot Art interaction contract
         run: python tools/check_prime_dot_art_contract.py
 

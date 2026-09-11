@@ -494,6 +494,21 @@ def main() -> None:
         if marker not in word_css:
             fail(f"Word Generator Stage 9 responsive marker missing: {marker}")
 
+    actress_html = (ROOT / "tools/actress-finder/index.html").read_text(encoding="utf-8")
+    actress_js = (ROOT / "tools/actress-finder/actress_finder.js").read_text(encoding="utf-8")
+    actress_css = (ROOT / "tools/actress-finder/actress_finder.css").read_text(encoding="utf-8")
+    for marker in ("ACTRESS INDEX / RECOMMENDATION BRIEF", 'id="build-brief"', 'id="result-json"'):
+        if marker not in actress_html:
+            fail(f"Actress Finder Stage 9 presentation marker missing: {marker}")
+    for marker in ("function buildPrompt()", "function parseSuggestions(value)", "resultList.replaceChildren", "new URLSearchParams"):
+        if marker not in actress_js:
+            fail(f"Actress Finder Stage 9 interaction marker missing: {marker}")
+    for forbidden in ("innerHTML", "api.anthropic.com", "fetch("):
+        if forbidden.lower() in actress_js.lower() or forbidden.lower() in actress_html.lower():
+            fail(f"Actress Finder unsafe/external marker remains: {forbidden}")
+    for marker in ("Stage 9 portfolio framing / Actress Index Recommendation Brief", ".result-row", ".focus-options"):
+        if marker not in actress_css:
+            fail(f"Actress Finder Stage 9 responsive marker missing: {marker}")
     for path in tracked:
         rel = path.relative_to(ROOT)
         parts = set(rel.parts)

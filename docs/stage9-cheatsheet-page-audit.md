@@ -83,3 +83,23 @@ Before Ready for review, validate the exact latest branch head locally without m
 ## Cost safety
 
 All Stage 9 commits should use `[skip ci]`. Hosted GitHub Actions must not be invoked; local validation on the authorized workstation is the validation authority for this pass.
+
+## Stage 9 implementation checkpoint
+
+Implementation commit: `f330e786dde9cca21793d8a571b8c360cd9d30ff`.
+
+The CHEATSHEET public slice remains exactly 9 files. Its re-reviewed tree is `9af9ecef421fcbf7329a9a9c1e23d8a1bae30d9a`.
+
+Changed public files:
+
+- `index.html`: adds the six-fragment reference model, five broad scope controls, search shortcut hint, and clear control.
+- `cheatsheet.css`: integrates the Stage 9 framing, scope controls, search status, responsive scope scrolling, and filtered-index state into the existing reference-book design.
+- `cheatsheet.js`: combines scope + text filtering, keeps index links synchronized, restores `q` / `scope` URL state, and adds `/` focus plus Escape reset.
+- `sections/01.html`: corrects `dict.popitem()` to the documented Python 3.7+ LIFO behavior.
+- `sections/03.html`: replaces obsolete PyScript alpha URLs and `<py-script>` syntax with the current versioned `core.css` / `core.js` and `type="py"` form.
+
+The corpus remains exactly 28 sections and 326 table entries. The index typo `ブラウゞ上` is corrected to `ブラウザ上`.
+
+Local browser QA passed at 390 px and 1440 px with no page-level horizontal overflow. The Python scope shows 12 sections / 127 entries; searching `append` narrows it to one entry, writes `?scope=python&q=append`, survives reload, resets with Escape, and `/` focuses the search field.
+
+The current PyScript `core.js` and `core.css` URLs returned HTTP 200 during validation. Hosted GitHub Actions were not used.

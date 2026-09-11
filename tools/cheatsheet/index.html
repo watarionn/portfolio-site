@@ -15,14 +15,40 @@
 <span class="stat"><strong>1</strong> 横断検索</span>
 </div>
 </div>
-</header><div class="utility-bar">
+</header>
+<section class="reference-brief" aria-labelledby="referenceBriefTitle">
+<div class="reference-brief-inner">
+<div class="reference-brief-copy">
+<p class="reference-kicker">REFERENCE MODEL</p>
+<h2 id="referenceBriefTitle">6つの資料断片を、ひとつの検索索引へ。</h2>
+<p>分割したHTMLをブラウザで並列読み込みし、28セクション・326項目をその場で検索できる技術資料庫です。</p>
+</div>
+<ol class="reference-flow" aria-label="技術早見表の構成">
+<li><strong>01 LOAD</strong><span>6 fragments</span></li>
+<li><strong>02 INDEX</strong><span>28 sections</span></li>
+<li><strong>03 FILTER</strong><span>326 entries</span></li>
+</ol>
+</div>
+</section>
+<section class="scope-panel" aria-label="資料分野">
+<div class="scope-inner">
+<span class="scope-label">分野</span>
+<button class="scope-chip" type="button" data-scope="all" aria-pressed="true">すべて</button>
+<button class="scope-chip" type="button" data-scope="python" aria-pressed="false">Python基礎</button>
+<button class="scope-chip" type="button" data-scope="web" aria-pressed="false">Web・JS</button>
+<button class="scope-chip" type="button" data-scope="automation" aria-pressed="false">GUI・自動化</button>
+<button class="scope-chip" type="button" data-scope="vision" aria-pressed="false">画像・AI</button>
+<button class="scope-chip" type="button" data-scope="text" aria-pressed="false">テキスト・文書</button>
+</div>
+</section>
+<div class="utility-bar">
 <div class="utility-inner">
 <a aria-label="ポートフォリオの作品集へ戻る" class="back-link" href="/">← 個人大辞典へ戻る</a>
 <label class="search-box" for="search">
-<span class="search-label">全文検索</span>
-<input autocomplete="off" class="search" id="search" disabled placeholder="メソッド・コマンド・説明を検索…" type="search"/>
+<span class="search-label">全文検索 <kbd>/</kbd></span>
+<input autocomplete="off" class="search" id="search" disabled aria-keyshortcuts="/" placeholder="メソッド・コマンド・説明を検索…" type="search"/>
 </label>
-<div aria-live="polite" class="result" id="result">全 326 項目</div>
+<div class="search-status"><div aria-live="polite" class="result" id="result">全 326 項目 / 28 セクション</div><button class="clear-search" id="clearSearch" type="button" disabled>条件解除</button></div>
 </div>
 </div><div class="layout"><nav aria-label="技術早見表の索引" class="index-nav"><p class="index-title">索引 / INDEX</p>
 <a href="#python-list"><span>Python List型メソッド</span><small>11項目</small></a>
@@ -34,7 +60,7 @@
 <a href="#selenium"><span>Selenium 主要メソッド</span><small>15項目</small></a>
 <a href="#pip"><span>よく使う pip コマンド</span><small>15項目</small></a>
 <a href="#js-async"><span>Asynchronous JavaScript cheatsheet</span><small>11項目</small></a>
-<a href="#pyimg-emotion"><span>Pythonで感情認識：Face Emotion Recognizer (FER)</span><small>8項目</small></a><a href="#pyimg-tkinter-parts"><span>Python GUI：tkinter / ttk の機能パーツ</span><small>8項目</small></a><a href="#pyimg-pysimplegui"><span>PySimpleGUIで簡単にGUIアプリ作成</span><small>10項目</small></a><a href="#pyimg-maskrcnn"><span>Mask R-CNN：物体検出 &amp; セグメンテーション</span><small>8項目</small></a><a href="#pyimg-pyautogui"><span>PyAutoGUIでPC操作を自動化</span><small>8項目</small></a><a href="#pyimg-pyscript"><span>PyScript：ブラウゞ上でPythonを実行</span><small>5項目</small></a><a href="#pyimg-feature-matching"><span>画像内の同じモノを探す：特徴量マッチング</span><small>7項目</small></a><a href="#pyimg-regex"><span>正規表現チートシート</span><small>89項目</small></a><a href="#pyimg-eq-is"><span>Python「==」と「is」の違い</span><small>4項目</small></a><a href="#pyimg-ytdlp"><span>yt-dlp：動画サイトからDownload</span><small>9項目</small></a><a href="#pyimg-nuitka"><span>NuitkaでPythonコードをEXE化</span><small>6項目</small></a><a href="#pyimg-pyinstaller"><span>PyInstallerでPythonをEXE化</span><small>4項目</small></a><a href="#pyimg-pathlib"><span>pathlibでパスを取得</span><small>6項目</small></a><a href="#pyimg-icrawler"><span>icrawler：ネット画像の自動収集</span><small>6項目</small></a><a href="#pyimg-naming"><span>Python 命名規則（PEP 8）</span><small>11項目</small></a><a href="#pyimg-pdf"><span>PythonでPDFからデータ抽出</span><small>9項目</small></a><a href="#pyimg-print-csv"><span>print()でCSV / TXT出力</span><small>5項目</small></a><a href="#pyimg-ocr"><span>画像内の文字認識（OCR）</span><small>6項目</small></a><a href="#pyimg-fstring"><span>f文字列：文字列に変数を組み込む</span><small>7項目</small></a></nav><main class="cheatsheet-main">
+<a href="#pyimg-emotion"><span>Pythonで感情認識：Face Emotion Recognizer (FER)</span><small>8項目</small></a><a href="#pyimg-tkinter-parts"><span>Python GUI：tkinter / ttk の機能パーツ</span><small>8項目</small></a><a href="#pyimg-pysimplegui"><span>PySimpleGUIで簡単にGUIアプリ作成</span><small>10項目</small></a><a href="#pyimg-maskrcnn"><span>Mask R-CNN：物体検出 &amp; セグメンテーション</span><small>8項目</small></a><a href="#pyimg-pyautogui"><span>PyAutoGUIでPC操作を自動化</span><small>8項目</small></a><a href="#pyimg-pyscript"><span>PyScript：ブラウザ上でPythonを実行</span><small>5項目</small></a><a href="#pyimg-feature-matching"><span>画像内の同じモノを探す：特徴量マッチング</span><small>7項目</small></a><a href="#pyimg-regex"><span>正規表現チートシート</span><small>89項目</small></a><a href="#pyimg-eq-is"><span>Python「==」と「is」の違い</span><small>4項目</small></a><a href="#pyimg-ytdlp"><span>yt-dlp：動画サイトからDownload</span><small>9項目</small></a><a href="#pyimg-nuitka"><span>NuitkaでPythonコードをEXE化</span><small>6項目</small></a><a href="#pyimg-pyinstaller"><span>PyInstallerでPythonをEXE化</span><small>4項目</small></a><a href="#pyimg-pathlib"><span>pathlibでパスを取得</span><small>6項目</small></a><a href="#pyimg-icrawler"><span>icrawler：ネット画像の自動収集</span><small>6項目</small></a><a href="#pyimg-naming"><span>Python 命名規則（PEP 8）</span><small>11項目</small></a><a href="#pyimg-pdf"><span>PythonでPDFからデータ抽出</span><small>9項目</small></a><a href="#pyimg-print-csv"><span>print()でCSV / TXT出力</span><small>5項目</small></a><a href="#pyimg-ocr"><span>画像内の文字認識（OCR）</span><small>6項目</small></a><a href="#pyimg-fstring"><span>f文字列：文字列に変数を組み込む</span><small>7項目</small></a></nav><main class="cheatsheet-main">
 <div id="sheetContainer" aria-live="polite"></div><div class="empty" id="empty">一致する項目がありません。</div>
 <p class="footnote">※ 最初のZIPに含まれていた <code>flexbox_cheatsheet.pdf</code> は画像ではないため、このHTMLには含めていません。</p>
 <footer class="page-footer">

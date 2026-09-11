@@ -40,6 +40,9 @@ HOLOSCOPE_ROOT = "services/holoscope/"
 HOLOSCOPE_PUBLIC_ROOT = "services/holoscope/public/"
 EXPECTED_STAGE5_HOLOSCOPE_TREE = "91ad6e1661ecc4136dcc1a682c337b83e543b3f5"
 EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT = 86
+CHEATSHEET_ROOT = "tools/cheatsheet/"
+EXPECTED_STAGE9_CHEATSHEET_TREE = "9af9ecef421fcbf7329a9a9c1e23d8a1bae30d9a"
+EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT = 9
 SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
 EXPECTED_STAGE6_SHISHA_TREE = "62add059e6cb627259760668c9cf18831afc9543"
@@ -316,6 +319,65 @@ def main() -> None:
         fail("HoloScope Stage 9 application-route precedence rule missing")
     if holoscope_htaccess.index("Internal application resources") > holoscope_htaccess.index("Current application routes"):
         fail("HoloScope internal-resource deny must precede Stage 9 application route precedence")
+
+    cheatsheet_files = sorted(rel for rel in tracked_rel if rel.startswith(CHEATSHEET_ROOT))
+    if len(cheatsheet_files) != EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT:
+        fail(
+            "Stage 9 technical cheatsheet file-count mismatch: "
+            f"expected {EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT}, got {len(cheatsheet_files)}"
+        )
+
+    actual_cheatsheet_tree = git_tree_sha("tools/cheatsheet")
+    if actual_cheatsheet_tree != EXPECTED_STAGE9_CHEATSHEET_TREE:
+        fail(
+            "Stage 9 technical cheatsheet tree mismatch: "
+            f"expected {EXPECTED_STAGE9_CHEATSHEET_TREE}, got {actual_cheatsheet_tree}"
+        )
+
+    cheatsheet_html = (ROOT / "tools/cheatsheet/index.html").read_text(encoding="utf-8")
+    cheatsheet_css = (ROOT / "tools/cheatsheet/cheatsheet.css").read_text(encoding="utf-8")
+    cheatsheet_js = (ROOT / "tools/cheatsheet/cheatsheet.js").read_text(encoding="utf-8")
+    for marker in (
+        'id="referenceBriefTitle"', 'class="reference-flow"',
+        'data-scope="python"', 'data-scope="web"',
+        'id="clearSearch"', 'aria-keyshortcuts="/"',
+    ):
+        if marker not in cheatsheet_html:
+            fail(f"Technical cheatsheet Stage 9 presentation marker missing: {marker}")
+    for marker in (
+        "const scopeDefinitions", "new URLSearchParams", "history.replaceState",
+        "event.key === '/'", "event.key === 'Escape'", "function clearConditions()",
+    ):
+        if marker not in cheatsheet_js:
+            fail(f"Technical cheatsheet Stage 9 interaction marker missing: {marker}")
+    for marker in (
+        ".reference-brief", ".scope-panel", '.scope-chip[aria-pressed="true"]',
+        ".index-nav a[hidden]",
+    ):
+        if marker not in cheatsheet_css:
+            fail(f"Technical cheatsheet Stage 9 responsive marker missing: {marker}")
+
+    cheatsheet_fragments = "".join(
+        (ROOT / f"tools/cheatsheet/sections/{index:02}.html").read_text(encoding="utf-8")
+        for index in range(1, 7)
+    )
+    if len(re.findall(r"<section\b", cheatsheet_fragments)) != 28:
+        fail("Technical cheatsheet must retain exactly 28 sections")
+    tbody_blocks = re.findall(r"<tbody>(.*?)</tbody>", cheatsheet_fragments, flags=re.S)
+    row_count = sum(block.count("<tr") for block in tbody_blocks)
+    if row_count != 326:
+        fail(f"Technical cheatsheet must retain exactly 326 entries, got {row_count}")
+    for stale in ("pyscript.net/alpha", "ブラウゞ"):
+        if stale in cheatsheet_html or stale in cheatsheet_fragments:
+            fail(f"Technical cheatsheet verified stale marker remains: {stale}")
+    for current in (
+        "Python 3.7以降はLIFO順",
+        "https://pyscript.net/releases/2026.7.3/core.css",
+        "https://pyscript.net/releases/2026.7.3/core.js",
+        'type="py"',
+    ):
+        if current not in cheatsheet_fragments:
+            fail(f"Technical cheatsheet verified Stage 9 correction missing: {current}")
 
     shisha_files = sorted(rel for rel in tracked_rel if rel.startswith(SHISHA_PUBLIC_ROOT))
     if len(shisha_files) != EXPECTED_STAGE6_SHISHA_FILE_COUNT:

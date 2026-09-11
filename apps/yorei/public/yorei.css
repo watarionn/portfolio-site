@@ -1,6 +1,189 @@
 /* =============================================
-   用例採取ページ — index.css
+   用例採取ページ — yorei.css
    ============================================= */
+
+/* ─── Stage 9 portfolio framing ─── */
+.stage9-hero,
+.stage9-overview,
+.stage9-workflow,
+.stage9-state-note,
+.stage9-live {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.stage9-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  background:
+    linear-gradient(135deg, rgba(26, 74, 122, 0.12), transparent 58%),
+    var(--clr-paper);
+  border: 1px solid var(--clr-rule);
+  border-top: 4px solid var(--clr-vermilion);
+  box-shadow: 5px 5px 0 rgba(154, 122, 50, 0.12);
+}
+
+.stage9-hero::after {
+  content: '例';
+  position: absolute;
+  right: clamp(0.5rem, 4vw, 2rem);
+  bottom: -0.32em;
+  font-size: clamp(7rem, 22vw, 13rem);
+  line-height: 1;
+  font-weight: 800;
+  color: rgba(26, 74, 122, 0.045);
+  pointer-events: none;
+}
+
+.stage9-kicker,
+.stage9-meta-label,
+.stage9-flow-label {
+  display: block;
+  font-family: var(--font-e);
+  font-size: clamp(0.58rem, 1vw, 0.68rem);
+  color: var(--clr-gold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.stage9-title {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.45rem;
+  font-size: clamp(2rem, 7vw, 4.4rem);
+  line-height: 1.08;
+  letter-spacing: 0.12em;
+  color: var(--clr-ink);
+}
+
+.stage9-lead {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+  margin-top: 1rem;
+  font-size: clamp(0.88rem, 1.8vw, 1.02rem);
+  line-height: 2;
+  color: var(--clr-ink-mid);
+  letter-spacing: 0.04em;
+}
+
+.stage9-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.4rem;
+}
+
+.stage9-section-heading {
+  margin-bottom: 1rem;
+}
+
+.stage9-section-heading h2,
+.stage9-state-note h2 {
+  margin-top: 0.35rem;
+  font-size: clamp(1.15rem, 3vw, 1.65rem);
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  color: var(--clr-ink);
+}
+
+.stage9-section-heading > p:last-child,
+.stage9-state-note > p {
+  margin-top: 0.55rem;
+  font-size: clamp(0.74rem, 1.35vw, 0.86rem);
+  line-height: 1.9;
+  color: var(--clr-ink-light);
+  letter-spacing: 0.035em;
+}
+
+.stage9-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.stage9-meta-card,
+.stage9-flow-card {
+  background: var(--clr-paper);
+  border: 1px solid var(--clr-rule);
+  padding: 1rem;
+  min-width: 0;
+}
+
+.stage9-meta-card {
+  border-top: 3px solid var(--clr-cobalt);
+}
+
+.stage9-meta-card strong {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.92rem);
+  line-height: 1.55;
+  color: var(--clr-ink);
+}
+
+.stage9-meta-card p,
+.stage9-flow-card p {
+  margin-top: 0.45rem;
+  font-size: clamp(0.68rem, 1.2vw, 0.78rem);
+  line-height: 1.8;
+  color: var(--clr-ink-light);
+}
+
+.stage9-flow-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.stage9-flow-card h3 {
+  margin-top: 0.45rem;
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  line-height: 1.55;
+  letter-spacing: 0.05em;
+  color: var(--clr-ink);
+}
+
+.stage9-flow-card--after {
+  border-color: var(--clr-cobalt);
+  background: linear-gradient(135deg, var(--clr-paper), var(--clr-cobalt-lt));
+}
+
+.stage9-flow-arrow {
+  display: grid;
+  place-items: center;
+  min-width: 2rem;
+  color: var(--clr-vermilion);
+  font-family: var(--font-e);
+  font-size: 1.4rem;
+}
+
+.stage9-state-note {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.7fr) minmax(0, 1.3fr);
+  gap: 1.25rem;
+  align-items: center;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: rgba(192, 57, 43, 0.055);
+  border: 1px solid var(--clr-rule);
+  border-left: 4px solid var(--clr-vermilion);
+}
+
+.stage9-state-note > p {
+  margin-top: 0;
+}
+
+.stage9-live {
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.stage9-section-heading--live {
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--clr-rule);
+}
 
 /* レイアウト：2カラム（フォーム＋プレビュー） */
 .create-layout {
@@ -104,12 +287,21 @@
 
 /* ─── レスポンシブ ─── */
 @media (max-width: 860px) {
+  .stage9-meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stage9-state-note {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
   .create-layout {
     grid-template-columns: 1fr;
   }
   .preview-section {
     position: static;
-    order: -1;
+    order: 0;
   }
   .source-grid {
     grid-template-columns: 1fr;
@@ -117,7 +309,33 @@
   .form-group--full { grid-column: auto; }
 }
 
+@media (max-width: 600px) {
+  .stage9-meta-grid,
+  .stage9-flow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stage9-flow-arrow {
+    min-height: 1.5rem;
+    transform: rotate(90deg);
+  }
+
+  .stage9-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 480px) {
+  .stage9-hero {
+    padding: 1.25rem;
+  }
+
+  .stage9-hero::after {
+    right: -0.2rem;
+    font-size: 8rem;
+  }
+
   .form-section {
     padding: 1rem;
   }

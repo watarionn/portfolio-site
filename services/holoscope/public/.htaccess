@@ -6,7 +6,11 @@ RewriteEngine On
 # Internal application resources must never be served directly.
 RewriteRule ^(?:app|data|templates|tests|releases)(?:/|$) - [F,L,NC]
 
-# Existing public assets may be served directly.
+# Current application routes take precedence over stale same-name directories
+# that can remain on production after non-destructive deployments.
+RewriteRule ^(?:streams|members|learning|articles|generations|games|events|series|stats|admin)(?:/.*)?$ index.php [QSA,L,NC]
+
+# Existing public assets and non-application directories may be served directly.
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]

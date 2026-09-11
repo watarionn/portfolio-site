@@ -38,7 +38,7 @@ HOLOCA_ROOT = "services/holoca/"
 HOLOCA_PUBLIC_ROOT = "services/holoca/public/"
 HOLOSCOPE_ROOT = "services/holoscope/"
 HOLOSCOPE_PUBLIC_ROOT = "services/holoscope/public/"
-EXPECTED_STAGE5_HOLOSCOPE_TREE = "ba9a9051a28382917e87dda6c309c902bd11ea4d"
+EXPECTED_STAGE5_HOLOSCOPE_TREE = "91ad6e1661ecc4136dcc1a682c337b83e543b3f5"
 EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT = 86
 SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
@@ -301,6 +301,21 @@ def main() -> None:
             "Stage 5 HoloScope locked-source tree mismatch: "
             f"expected {EXPECTED_STAGE5_HOLOSCOPE_TREE}, got {actual_holoscope_tree}"
         )
+
+    holoscope_home = (ROOT / "services/holoscope/public/templates/pages/home.php").read_text(encoding="utf-8")
+    holoscope_css = (ROOT / "services/holoscope/public/assets/css/editorial.css").read_text(encoding="utf-8")
+    holoscope_htaccess = (ROOT / "services/holoscope/public/.htaccess").read_text(encoding="utf-8")
+    for marker in ('class="observatory-brief"', 'id="observatoryBriefTitle"', 'class="observatory-axes"', 'class="observation-flow"'):
+        if marker not in holoscope_home:
+            fail(f"HoloScope Stage 9 portfolio marker missing: {marker}")
+    for marker in (".observatory-brief", ".observatory-axes", ".observation-flow"):
+        if marker not in holoscope_css:
+            fail(f"HoloScope Stage 9 responsive marker missing: {marker}")
+    route_rule = "RewriteRule ^(?:streams|members|learning|articles|generations|games|events|series|stats|admin)(?:/.*)?$ index.php [QSA,L,NC]"
+    if route_rule not in holoscope_htaccess:
+        fail("HoloScope Stage 9 application-route precedence rule missing")
+    if holoscope_htaccess.index("Internal application resources") > holoscope_htaccess.index("Current application routes"):
+        fail("HoloScope internal-resource deny must precede Stage 9 application route precedence")
 
     shisha_files = sorted(rel for rel in tracked_rel if rel.startswith(SHISHA_PUBLIC_ROOT))
     if len(shisha_files) != EXPECTED_STAGE6_SHISHA_FILE_COUNT:

@@ -63,9 +63,11 @@ The validator requires that exact subtree and rejects non-public HoloScope sibli
 
 Server-only HoloScope material such as `admin.local.php` must remain private or server-resident and must not be committed here.
 
-## SHISHA locked public viewer
+## SHISHA reviewed public viewer
 
-The SHISHA public viewer remains the exact nine-file Git tree `2b4f36d8c4aeee08c384517e05dda952e3b7724f`, locked from private allowlist merge revision `2640a7a292aaf0eb8396ae4b2312624ed9cb9d7e` and private source-lock merge `2ad649697dd44e8f46092df83e62c530671ca741`.
+The SHISHA public viewer remains an exact nine-file reviewed slice. Stage 9 re-reviewed the presentation while preserving the existing API and runtime boundaries; the approved public tree is now `62add059e6cb627259760668c9cf18831afc9543`. The original public boundary was established by private allowlist merge revision `2640a7a292aaf0eb8396ae4b2312624ed9cb9d7e` and private source-lock merge `2ad649697dd44e8f46092df83e62c530671ca741`.
+
+The Stage 9 revision changes only the public presentation in `index.php` and `assets/app.css`: it adds portfolio context, search-flow explanation, and clearer opening-hours verification guidance. The existing API routes, JavaScript search contract, server-only configuration dependency, and nine-file allowlist remain unchanged in scope. `tools/validate_public_repo.py` locks the newly reviewed tree and blob identities and verifies the required Stage 9 interface markers.
 
 The viewer source intentionally omits private bootstrap shop data and mutable runtime state. The following material must not be committed here:
 

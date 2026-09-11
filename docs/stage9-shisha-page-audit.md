@@ -53,7 +53,7 @@ SHISHA is currently protected by the Stage 6 exact-source lock in `tools/validat
 - exact tree SHA: `2b4f36d8c4aeee08c384517e05dda952e3b7724f`
 - exact blob SHA checks for all nine public files
 
-Therefore a legitimate Stage 9 presentation change must not simply bypass validation. The implementation phase must deliberately re-review the modified public slice, then update the validator's approved SHISHA tree/blob identities and the publication-policy wording to the newly reviewed revision.
+The Stage 9 presentation revision has now been re-reviewed rather than bypassing validation. The approved public slice remains nine files, with tree SHA `62add059e6cb627259760668c9cf18831afc9543`. Only `index.php` and `assets/app.css` changed; their approved blob SHAs are `a2a59dabde4ca9ae39d0e14a421b3b955f57f303` and `6b10095a157c302059c22244a1c22f2ab87091b2`. The validator and publication policy are updated to those identities.
 
 The nine-file allowlist itself should remain closed. No new private/runtime files should be added to the public slice.
 

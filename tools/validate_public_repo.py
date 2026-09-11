@@ -42,7 +42,7 @@ EXPECTED_STAGE5_HOLOSCOPE_TREE = "ba9a9051a28382917e87dda6c309c902bd11ea4d"
 EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT = 86
 SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
-EXPECTED_STAGE6_SHISHA_TREE = "2b4f36d8c4aeee08c384517e05dda952e3b7724f"
+EXPECTED_STAGE6_SHISHA_TREE = "62add059e6cb627259760668c9cf18831afc9543"
 EXPECTED_STAGE6_SHISHA_FILE_COUNT = 9
 SECRET_ROOM_ROOT = "apps/secret-room/"
 SECRET_ROOM_PUBLIC_ROOT = "apps/secret-room/public/"
@@ -135,11 +135,11 @@ EXPECTED_STAGE6_SHISHA_BLOBS = {
     "services/shisha/public/api/facets.php": "f44c9653fa0ea444af0063f8798dc18dbde65fe3",
     "services/shisha/public/api/shops.php": "75a58f0ccd33b1f2a38cae1391c8098391d9a5f0",
     "services/shisha/public/api/stations.php": "a8b44997cdcf948d3a2c9f53eff7589ec8ca3199",
-    "services/shisha/public/assets/app.css": "61b9bf0eb89486038fb4f021cf3db33cfe4a510e",
+    "services/shisha/public/assets/app.css": "6b10095a157c302059c22244a1c22f2ab87091b2",
     "services/shisha/public/assets/app.js": "155c1fe2d3d79dae11a6c324ff9010ae587e32c0",
     "services/shisha/public/config.example.php": "a45bee891e8ea336b414ab415ddf27b22b4faef8",
     "services/shisha/public/includes/bootstrap.php": "3b2355a4b0f6f3c2a919a0edf42387d6780008d5",
-    "services/shisha/public/index.php": "cc4f960a17f3f6bf6aeed0d82ffe3bcaa3eb6527",
+    "services/shisha/public/index.php": "a2a59dabde4ca9ae39d0e14a421b3b955f57f303",
 }
 
 REQUIRED_STAGE7_SECRET_FILES = {
@@ -323,6 +323,24 @@ def main() -> None:
                 f"SHISHA locked-source blob mismatch: {rel_text}: "
                 f"expected {expected_sha}, got {actual_sha}"
             )
+
+    shisha_html = (ROOT / "services/shisha/public/index.php").read_text(encoding="utf-8")
+    shisha_css = (ROOT / "services/shisha/public/assets/app.css").read_text(encoding="utf-8")
+    for marker in (
+        'class="project-intro"', 'id="collector"', 'id="liveTitle"',
+        'id="pref"', 'id="cities"', 'id="line"', 'id="station"',
+        'id="query"', 'id="openAt"', 'id="openNow"', 'id="near"',
+        'id="radius"', 'id="search"', 'id="count"', 'id="sort"',
+        'id="view"', 'id="results"', 'id="more"',
+    ):
+        if marker not in shisha_html:
+            fail(f"SHISHA Stage 9 presentation/interaction marker missing: {marker}")
+    for marker in (
+        ".site-hero", ".capability-grid", ".workflow-strip",
+        ".live-interface", "@media(max-width:720px)",
+    ):
+        if marker not in shisha_css:
+            fail(f"SHISHA Stage 9 responsive marker missing: {marker}")
 
     secret_files = sorted(rel for rel in tracked_rel if rel.startswith(SECRET_ROOM_PUBLIC_ROOT))
     if len(secret_files) != EXPECTED_STAGE7_SECRET_FILE_COUNT:

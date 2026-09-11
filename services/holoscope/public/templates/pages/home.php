@@ -49,6 +49,25 @@ foreach ($countDefinitions as $key => $label) {
     <?php endif; ?>
 </section>
 
+<section class="observatory-brief" aria-labelledby="observatoryBriefTitle">
+    <div class="observatory-brief__intro">
+        <p class="eyebrow">HOW HOLOSCOPE WORKS</p>
+        <h2 id="observatoryBriefTitle">配信を、あとから辿れる観測記録へ。</h2>
+        <p>HoloScopeは配信を単発の動画として並べるのではなく、人物・ゲーム・企画・シリーズ・英語学習の情報へつなぎ直す観測サイトです。入口が違っても、同じ記録へ辿り着けるように情報を構造化しています。</p>
+    </div>
+    <div class="observatory-axes" aria-label="HoloScopeの4つの観測軸">
+        <article class="observatory-axis"><span>01</span><h3>Stream Records</h3><p>配信の要点、見どころ、日時を記事として残す。</p><a href="/holoscope/streams/">配信記録を見る</a></article>
+        <article class="observatory-axis"><span>02</span><h3>Relationships</h3><p>メンバー・ゲーム・企画・シリーズを相互に結び、文脈から探せるようにする。</p><a href="/holoscope/members/">メンバーから辿る</a></article>
+        <article class="observatory-axis"><span>03</span><h3>English Learning</h3><p>配信を英語難度やフレーズの観点でも整理し、視聴を学習導線へ変える。</p><a href="/holoscope/learning/">英語学習を見る</a></article>
+        <article class="observatory-axis"><span>04</span><h3>Editorial & Stats</h3><p>特集と公開データの集計から、個別配信だけでは見えにくい傾向を読む。</p><a href="/holoscope/articles/">特集を見る</a></article>
+    </div>
+    <ol class="observation-flow" aria-label="HoloScopeの観測フロー">
+        <li><span>OBSERVE</span><strong>配信を観測</strong><small>公開情報から要点を記録</small></li>
+        <li><span>STRUCTURE</span><strong>関係を構造化</strong><small>人物・作品・企画へ接続</small></li>
+        <li><span>DISCOVER</span><strong>別の入口から再発見</strong><small>検索・学習・特集・統計へ展開</small></li>
+    </ol>
+</section>
+
 <?php if ($remainingLatestStreams !== []): ?>
 <section class="home-section home-section--priority">
     <div class="section-heading">

@@ -352,6 +352,23 @@ body {
         linear-gradient(135deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01));
 }
 
+/* Stage 9 portfolio framing: explain the observatory model before deeper browsing. */
+.observatory-brief { margin-top: 34px; padding: clamp(26px, 5vw, 48px); border: 1px solid var(--observatory-line); border-radius: 20px; background: rgba(255, 255, 255, .82); }
+.observatory-brief__intro { display: grid; grid-template-columns: minmax(0, .8fr) minmax(320px, 1.2fr); gap: 24px 48px; align-items: end; }
+.observatory-brief__intro .eyebrow { grid-column: 1 / -1; margin-bottom: -10px; }
+.observatory-brief__intro h2 { margin: 0; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -.035em; }
+.observatory-brief__intro > p:last-child { margin: 0; color: var(--observatory-muted); font-size: .98rem; }
+.observatory-axes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin-top: 34px; overflow: hidden; border: 1px solid var(--observatory-line); border-radius: 16px; background: var(--observatory-line); }
+.observatory-axis { min-width: 0; padding: 22px; background: var(--observatory-paper-strong); }
+.observatory-axis > span { color: var(--observatory-signal); font-size: .74rem; font-weight: 900; letter-spacing: .12em; }
+.observatory-axis h3 { margin: 10px 0 8px; font-size: 1.02rem; }
+.observatory-axis p { min-height: 5.4em; margin: 0 0 16px; color: var(--observatory-muted); font-size: .88rem; }
+.observatory-axis a { font-size: .84rem; font-weight: 800; text-underline-offset: .2em; }
+.observation-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 18px 0 0; padding: 0; list-style: none; }
+.observation-flow li { display: grid; gap: 3px; padding: 17px 18px; border-radius: 13px; background: var(--observatory-navy-deep); }
+.observation-flow span { color: var(--observatory-cyan); font-size: .68rem; font-weight: 900; letter-spacing: .12em; }
+.observation-flow strong { color: #fff; }
+.observation-flow small { color: #aebfc7; }
 /* Hierarchy: article sections stay strong; indexes and classifications stay quieter. */
 .home-section--priority {
     margin-top: 58px;
@@ -461,6 +478,10 @@ body {
         grid-template-columns: 1fr 1fr;
         gap: 28px;
     }
+
+    .observatory-axes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 760px) {
@@ -483,6 +504,16 @@ body {
 
     .home-hero-v2__latest {
         margin-top: 4px;
+    }
+
+    .observatory-brief__intro,
+    .observation-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .observatory-brief__intro .eyebrow {
+        grid-column: auto;
+        margin-bottom: 0;
     }
 
     .home-section--priority .stream-card-grid {
@@ -511,6 +542,14 @@ body {
 
     .home-hero-v2 .button {
         text-align: center;
+    }
+
+    .observatory-axes {
+        grid-template-columns: 1fr;
+    }
+
+    .observatory-axis p {
+        min-height: 0;
     }
 }
 

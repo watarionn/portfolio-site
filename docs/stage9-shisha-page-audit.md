@@ -71,18 +71,21 @@ The following remain outside public Git source:
 
 Production deployment remains non-destructive so server-resident SHISHA configuration and runtime data can survive public-viewer updates.
 
-## Planned validation
+## Validation completed
 
-Before Ready for review, validate the exact latest branch head locally without metered GitHub Actions:
+The Stage 9 branch was validated locally on the authorized device without invoking metered GitHub Actions.
 
-- `python tools/validate_public_repo.py`
-- `python tools/build_deployment.py`
-- PHP syntax for modified PHP files
-- JavaScript syntax for `assets/app.js`
-- required SHISHA DOM IDs retained
-- public source remains exactly nine reviewed files
-- no `config.php`, runtime, bootstrap-data, operator, or credential material enters the public repository
-- production route and API behavior compared again before deployment
-- responsive rendering checked at narrow and desktop widths
+- `python tools/validate_public_repo.py`: passed with 219 tracked files.
+- `python tools/build_deployment.py`: passed with 19 mapped entries, 200 files, and 2 retired remote paths.
+- PHP syntax: all six PHP files in `services/shisha/public` passed `php -l` using PHP 8.4.25.
+- JavaScript syntax: `node --check services/shisha/public/assets/app.js` passed.
+- Required SHISHA DOM IDs: 20 checked, with no duplicates and no missing IDs.
+- Public SHISHA source remains exactly nine reviewed files.
+- `config.php`, runtime, bootstrap-data, operator, and credential material remain outside the public repository.
+- `assets/app.js` remains byte-identical to the Stage 6 reviewed client, so the existing API/query semantics are unchanged.
+- Browser QA used the exact Stage 9 page locally with API requests proxied to the live production SHISHA endpoints:
+  - 390 px viewport: `innerWidth=390`, `scrollWidth=390`, no horizontal overflow, capability cards collapse to one column, 1,635 results reported, 60 initial cards rendered, and list/card view switching worked.
+  - 1440 px viewport: `innerWidth=1440`, `scrollWidth=1440`, no horizontal overflow, capability cards render in four columns, 1,635 results reported, 60 initial cards rendered, and list/card view switching worked.
+- Production `/SHISHA/`, `api/facets.php`, and `api/shops.php` were checked before editing; no production deployment has been performed by this PR.
 
-No production deployment is part of this audit commit.
+No production deployment is part of this audit/implementation phase.

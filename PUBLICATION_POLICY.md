@@ -55,13 +55,13 @@ The portfolio shell must not link to `/CHARACTER/` or expose the former characte
 
 `CHARACTER` is listed in `retiredRemotePaths`. On production deployment, the deployment workflow removes that remote directory explicitly and then verifies that `/CHARACTER/character-index.html` no longer returns a public success response. Future deployments continue to enforce the retirement while leaving unrelated remote-only files untouched.
 
-## HoloScope locked public shell
+## HoloScope reviewed public shell
 
-The reviewed HoloScope public shell remains locked as an exact 86-file Git tree with tree SHA `ba9a9051a28382917e87dda6c309c902bd11ea4d`, sourced from the private Stage 5 allowlist revision `e856e990ea31140cb46df225b7ac01e7a469a7c3` and source-lock merge `3cc31a7292456a953d94673fcb6d60d75d9f9e8e`.
+HoloScope remains an exact 86-file reviewed public shell. Stage 9 re-reviewed the home presentation and route precedence while preserving the original Stage 5 public/private boundary; the approved public tree is now `91ad6e1661ecc4136dcc1a682c337b83e543b3f5`. The original boundary was sourced from the private Stage 5 allowlist revision `e856e990ea31140cb46df225b7ac01e7a469a7c3` and source-lock merge `3cc31a7292456a953d94673fcb6d60d75d9f9e8e`.
 
-The validator requires that exact subtree and rejects non-public HoloScope siblings. Private release overlays, legacy material, tests, production runtime data, local admin configuration, mutable operations state, credentials, and private deployment material remain outside this public source tree.
+The Stage 9 revision adds compact observatory-model framing to the home page and makes current application route roots take precedence over stale same-name directories that can remain after non-destructive production deployments. Internal application resources remain denied before that route rule, while unrelated remote-only legacy material is not adopted or deleted.
 
-Server-only HoloScope material such as `admin.local.php` must remain private or server-resident and must not be committed here.
+The validator requires the exact reviewed subtree plus Stage 9 presentation and route markers, and rejects non-public HoloScope siblings. Private release overlays, legacy material, tests, production runtime data, local admin configuration, mutable operations state, credentials, and private deployment material remain outside this public source tree. Server-only HoloScope material such as `admin.local.php`, `data/**`, and `releases/**` must remain private or server-resident and must not be committed here.
 
 ## SHISHA reviewed public viewer
 

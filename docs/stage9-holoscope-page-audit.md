@@ -55,6 +55,22 @@ Stage 9 should fix route precedence for current application route roots before t
 6. Keep protected application internals (`app`, `data`, `templates`, `tests`, `releases`) denied from direct requests.
 7. Re-review the modified 86-file tree and update the exact tree identity in `tools/validate_public_repo.py` and `PUBLICATION_POLICY.md`; do not bypass the lock.
 
+## Stage 9 implementation checkpoint
+
+The Stage 9 implementation changes only three files inside the existing 86-file public shell:
+
+- `.htaccess`: current application route roots now reach `index.php` before stale same-name production directories can win.
+- `templates/pages/home.php`: adds a compact explanation of the four HoloScope system axes and the observe → structure → discover workflow.
+- `assets/css/editorial.css`: styles the new portfolio framing and its responsive 4 → 2 → 1 column behavior.
+
+The re-reviewed HoloScope public tree is `91ad6e1661ecc4136dcc1a682c337b83e543b3f5`. Changed blob identities are:
+
+- `.htaccess`: `22fce57838f705b9db1a01218ea13e838043c544`
+- `assets/css/editorial.css`: `055803476f282f69c170a2b55cec06555f10fcd5`
+- `templates/pages/home.php`: `f4076efa12f222d20d79643352a7f0b47b408ace`
+
+PHP 8.4.25 syntax checking passed for all PHP files in the public HoloScope shell. Route-pattern checks confirm that current application paths such as `articles/`, `members/...`, and `learning/...` are routed to the front controller, while `assets/...`, internal `app/...`, and `release-status.php` are not captured by that precedence rule. The internal-resource deny remains before the application-route rule.
+
 ## Public/private boundary to preserve
 
 - server-resident `data/**` and `releases/**`
@@ -63,18 +79,18 @@ Stage 9 should fix route precedence for current application route roots before t
 - private release overlays and deployment tooling
 - legacy/private material outside the reviewed 86-file public shell
 
-## Planned validation
+## Validation completed
 
-Before Ready for review, validate the exact latest branch head locally without metered GitHub Actions:
+The Stage 9 implementation was validated locally without invoking metered GitHub Actions:
 
-- `python tools/validate_public_repo.py`
-- `python tools/build_deployment.py`
-- PHP syntax for all tracked HoloScope PHP files
-- exact public file count and reviewed tree identity
-- direct-resource deny rules remain effective
-- browser QA at narrow and desktop widths
-- current home/search/discovery routes remain functional
-- `/holoscope/articles/` resolves through the current application instead of the stale legacy directory
-- production release/data directories remain untouched until explicit deployment approval
+- `python tools/validate_public_repo.py`: passed.
+- `python tools/build_deployment.py`: passed.
+- PHP 8.4.25 syntax checking: all HoloScope PHP files passed.
+- Public HoloScope source remains exactly 86 files with reviewed tree `91ad6e1661ecc4136dcc1a682c337b83e543b3f5`.
+- Route precedence checks confirm current application roots are handled before stale same-name directories, while internal-resource deny rules remain earlier.
+- Local application QA used the current production release data only in a temporary non-Git directory: `/holoscope/` returned HTTP 200 with the Stage 9 observatory framing, `/holoscope/articles/` returned HTTP 200 through the current application route, and `/holoscope/app/Application.php` remained HTTP 403.
+- Browser QA at 390 px: no horizontal overflow; four observatory axes collapse to one column and the three-step workflow collapses to one column.
+- Browser QA at 1440 px: no horizontal overflow; four observatory axes render in four columns and the workflow in three columns.
+- Production has not been changed by this PR; server-resident release/data and legacy files remain untouched until explicit deployment approval.
 
-No production deployment is part of this audit commit.
+No production deployment is part of this implementation phase.

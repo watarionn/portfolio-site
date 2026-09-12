@@ -49,3 +49,24 @@ The first visual pass uses the role of each building rather than decorative rand
 This checkpoint does not add characters, animated pedestrians, new projects, new districts, new project detail routes, or homepage replacement. Those remain later visual/experience decisions.
 
 The next Phase 3.2 checkpoint can deepen streets, landmarks, terrain, and map composition without changing the 14-work data contract.
+## Checkpoint 2 scope
+
+Checkpoint 2 turns the four district blocks into a more legible city map without changing the 14-work contract.
+
+- add a map infrastructure layer with a north-south street, cross street, central plaza, and waterside bridge
+- render one visible landmark marker for each district using the existing `districts.json` landmark data
+- deepen district terrain cues with hill contours, archive-grid lines, workshop hatching, and waterside ripples
+- keep infrastructure decorative and non-interactive so project navigation behavior remains unchanged
+- hide the street overlay on narrow mobile layouts while retaining all four landmark markers
+- remove duplicate landmark text from the district metadata once the marker is visible
+
+## Checkpoint 2 acceptance
+
+- exactly one `.city-map__infrastructure` layer renders on the city map
+- exactly four `.district-landmark` markers render from the existing district data
+- desktop renders two street axes, one plaza, and one bridge without horizontal overflow
+- mobile suppresses the infrastructure overlay and keeps the landmark markers readable
+- all 14 project buildings remain selectable and all existing routes remain unchanged
+- contract, runtime, production build, JavaScript syntax, and browser page-error checks remain green
+
+The next checkpoint can focus on map depth and wayfinding details such as district entrances, small street labels, and visit-state visual feedback, without adding characters or changing project routes.

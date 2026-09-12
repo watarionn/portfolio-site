@@ -112,7 +112,7 @@ def main() -> int:
             fail(f"city.html is missing required marker: {marker}")
 
     js = (CITY / "city.js").read_text(encoding="utf-8")
-    for marker in ("portfolio-city.visited.v1", "localStorage", "ArrowRight", "ArrowLeft", "replaceChildren", "prefers-reduced-motion"):
+    for marker in ("portfolio-city.visited.v1", "localStorage", "ArrowRight", "ArrowLeft", "replaceChildren", "prefers-reduced-motion", "buildBuildingVisual"):
         if marker not in js:
             fail(f"city.js is missing required behavior: {marker}")
     if ".innerHTML" in js:
@@ -123,6 +123,10 @@ def main() -> int:
         if marker not in css:
             fail(f"city.css is missing required responsive/map rule: {marker}")
 
+    for project_id in EXPECTED_ROUTES:
+        if f'data-project-id="{project_id}"' not in css:
+            fail(f"city.css is missing a distinct Phase 3.2 building visual for {project_id}")
+
     deployment = load_json(ROOT / "config/deployment-map.json")
     matches = [entry for entry in deployment.get("entries", []) if entry.get("id") == "portfolio-city"]
     if matches != [{"id": "portfolio-city", "sourceRoot": "portfolio-city", "productionRoot": "portfolio-city"}]:
@@ -132,7 +136,7 @@ def main() -> int:
     if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
         fail("validate-public workflow must run the Portfolio City runtime contract")
 
-    print("Portfolio City Phase 3.1 contract passed: 14 works / 4 districts / independent preview / runtime guard")
+    print("Portfolio City Phase 3.2 contract passed: 14 works / 4 districts / 14 handcrafted visuals / runtime guard")
     return 0
 
 

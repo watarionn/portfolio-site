@@ -33,6 +33,9 @@ jobs:
       - name: Validate Portfolio City contract
         run: python tools/check_portfolio_city_contract.py
 
+      - name: Validate Portfolio City runtime contract
+        run: node tools/check_portfolio_city_runtime.mjs
+
       - name: Validate MADORI interaction contract
         run: python tools/check_madori_contract.py
 

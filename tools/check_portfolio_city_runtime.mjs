@@ -249,13 +249,19 @@ assert.equal(districts.length, 4, 'map must render four districts');
 assert.equal(buildings.length, 14, 'map must render fourteen buildings');
 assert.equal(documentMock.querySelectorAll('.building-visual').length, 14, 'every building must render a handcrafted visual');
 assert.equal(documentMock.querySelectorAll('.district-landmark').length, 4, 'every district must render one landmark');
+assert.equal(documentMock.querySelectorAll('.district-scene').length, 4, 'every district must render one environment scene');
+assert.equal(documentMock.querySelectorAll('.district-scene__prop').length, 12, 'district scenes must render twelve environment props');
 assert.equal(documentMock.querySelectorAll('.city-map__infrastructure').length, 1, 'map must render one infrastructure layer');
+assert.equal(documentMock.querySelectorAll('.city-map__street-label').length, 4, 'map must render four street labels');
+assert.equal(documentMock.querySelectorAll('[data-district-progress]').length, 4, 'map must render four district progress labels');
 assert.equal(workRows.length, 14, 'works directory must render fourteen rows');
 
 assert.equal(inspector.querySelector('h3').textContent, 'HoloScope');
 assert.equal(enter.href, '/holoscope/');
 assert.equal(enter.hidden, false);
 assert.equal(buildings[0].classList.contains('is-selected'), true);
+assert.equal(districts[0].classList.contains('is-active-district'), true, 'selected project must activate its district');
+assert.equal(cityMap.dataset.activeDistrict, 'observatory-hill');
 
 buildings[1].focus();
 assert.equal(inspector.querySelector('h3').textContent, '天球儀');
@@ -274,6 +280,8 @@ assert.deepEqual(JSON.parse(storage.get('portfolio-city.visited.v1')), ['prime-d
 assert.equal(visitedCount.textContent, '1');
 assert.equal(buildings[2].classList.contains('is-visited'), true);
 assert.equal(workRows.find((row) => row.dataset.projectId === 'prime-dot-art').classList.contains('is-visited'), true);
+assert.equal(documentMock.querySelectorAll('[data-district-progress]')[0].textContent, 'VISITED 1 / 3');
+assert.equal(districts[0].classList.contains('has-visited'), true);
 
 const worksNav = documentMock.querySelectorAll('[data-panel-target]').find((button) => button.dataset.panelTarget === 'works');
 worksNav.click();

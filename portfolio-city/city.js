@@ -108,9 +108,25 @@ function buildMapInfrastructure() {
     make('span', 'city-map__road city-map__road--spine'),
     make('span', 'city-map__road city-map__road--cross'),
     make('span', 'city-map__plaza'),
-    make('span', 'city-map__bridge')
+    make('span', 'city-map__bridge'),
+    make('span', 'city-map__street-label city-map__street-label--north', 'OBSERVATORY ROAD'),
+    make('span', 'city-map__street-label city-map__street-label--west', 'ARCHIVE STREET'),
+    make('span', 'city-map__street-label city-map__street-label--east', 'WORKSHOP ALLEY'),
+    make('span', 'city-map__street-label city-map__street-label--south', 'WATERSIDE WALK')
   );
   return infrastructure;
+}
+
+function buildDistrictScene(district) {
+  const scene = make('div', 'district-scene');
+  scene.dataset.scene = district.id;
+  scene.setAttribute('aria-hidden', 'true');
+  scene.append(
+    make('span', 'district-scene__prop district-scene__prop--a'),
+    make('span', 'district-scene__prop district-scene__prop--b'),
+    make('span', 'district-scene__prop district-scene__prop--c')
+  );
+  return scene;
 }
 
 function buildDistrictLandmark(district) {
@@ -140,6 +156,8 @@ function renderMap() {
     title.id = `district-${district.id}`;
     heading.append(title, make('span', 'district__count', String(projectsForDistrict(district.id).length).padStart(2, '0')));
 
+    const progress = make('p', 'district__progress', `VISITED 0 / ${projectsForDistrict(district.id).length}`);
+    progress.dataset.districtProgress = district.id;
     const meta = make('p', 'district__meta', `${district.english} / ${district.role}`);
     const buildings = make('div', 'district__buildings');
 
@@ -160,7 +178,7 @@ function renderMap() {
       buildings.append(button);
     }
 
-    section.append(heading, buildDistrictLandmark(district), meta, buildings);
+    section.append(buildDistrictScene(district), heading, buildDistrictLandmark(district), progress, meta, buildings);
     map.append(section);
   }
 }
@@ -187,6 +205,11 @@ function selectProject(projectId, userInitiated) {
   if (!project) return;
 
   state.selectedProjectId = project.id;
+  const map = document.getElementById('cityMap');
+  if (map) map.dataset.activeDistrict = project.district;
+  document.querySelectorAll('.district').forEach((district) => {
+    district.classList.toggle('is-active-district', district.dataset.districtId === project.district);
+  });
   document.querySelectorAll('.building-button').forEach((button) => {
     button.classList.toggle('is-selected', button.dataset.projectId === project.id);
   });
@@ -235,6 +258,16 @@ function refreshVisitedState() {
   document.querySelectorAll('.work-row').forEach((row) => {
     row.classList.toggle('is-visited', state.visited.has(row.dataset.projectId));
   });
+
+  for (const district of state.districts) {
+    const projects = projectsForDistrict(district.id);
+    const visited = projects.filter((project) => state.visited.has(project.id)).length;
+    const section = Array.from(document.querySelectorAll('.district')).find((item) => item.dataset.districtId === district.id);
+    section?.classList.toggle('has-visited', visited > 0);
+    section?.classList.toggle('is-complete-district', visited === projects.length && projects.length > 0);
+    const progress = Array.from(document.querySelectorAll('[data-district-progress]')).find((item) => item.dataset.districtProgress === district.id);
+    if (progress) progress.textContent = `VISITED ${visited} / ${projects.length}`;
+  }
 
   const count = document.getElementById('visitedCount');
   if (count) count.textContent = String(state.visited.size);

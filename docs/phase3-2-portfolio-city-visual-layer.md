@@ -70,3 +70,23 @@ Checkpoint 2 turns the four district blocks into a more legible city map without
 - contract, runtime, production build, JavaScript syntax, and browser page-error checks remain green
 
 The next checkpoint can focus on map depth and wayfinding details such as district entrances, small street labels, and visit-state visual feedback, without adding characters or changing project routes.
+
+## Checkpoint 3 scope
+
+Checkpoint 3 deepens wayfinding and district identity without adding characters or changing routes.
+
+- add three lightweight environmental props to each district as non-interactive CSS scenery
+- add four small street labels to the desktop infrastructure layer
+- visually mark the currently selected district without dimming other districts
+- add district-level `VISITED n / total` progress derived from the existing localStorage visit state
+- preserve all existing project links, keyboard navigation, mobile MAP/WORKS behavior, and reduced-motion handling
+- keep decorative detail deliberately quieter on mobile
+
+## Checkpoint 3 acceptance
+
+- exactly four district scenes and twelve environment props render
+- exactly four street labels render on desktop and disappear with the mobile infrastructure layer
+- selecting or focusing a building marks its parent district as active
+- visit state updates district progress and preserves individual building/work-row visited state
+- desktop 1440 px and mobile 390 px remain free of horizontal overflow
+- contract, runtime, production build, JavaScript syntax, and browser page-error checks remain green

@@ -113,13 +113,13 @@ button { font: inherit; }
 
 .city-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(18rem, .55fr);
-  gap: clamp(3rem, 8vw, 8rem);
-  align-items: end;
-  padding-block: clamp(4.5rem, 9vw, 8rem) clamp(3.5rem, 7vw, 6rem);
+  grid-template-columns: minmax(0, 1.7fr) minmax(16rem, .55fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  padding-block: clamp(2rem, 4vw, 3.5rem) clamp(1.75rem, 3vw, 2.75rem);
 }
 .city-kicker {
-  margin: 0 0 1.8rem;
+  margin: 0 0 .9rem;
   color: var(--vermilion);
   font-size: .7rem;
   font-weight: 700;
@@ -128,16 +128,16 @@ button { font: inherit; }
 .city-hero h1 {
   margin: 0;
   max-width: 100%;
-  font-size: clamp(3.5rem, 6.6vw, 7.5rem);
+  font-size: clamp(2.7rem, 4.6vw, 4.75rem);
   font-weight: 600;
-  line-height: .98;
+  line-height: 1.02;
   letter-spacing: -.055em;
 }
 .city-hero__lead {
-  max-width: 44rem;
-  margin: 2.5rem 0 0;
+  max-width: 40rem;
+  margin: 1.2rem 0 0;
   color: var(--ink-soft);
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size: clamp(.9rem, 1.25vw, 1.05rem);
 }
 .city-status {
   padding-top: 1rem;
@@ -545,8 +545,17 @@ button { font: inherit; }
 @media (max-width: 680px) {
   .city-header__bar { min-height: 4.2rem; }
   .city-wordmark small, .back-link { display: none; }
-  .city-hero { padding-block: 3.6rem 3rem; gap: 2.5rem; }
-  .city-hero h1 { font-size: clamp(3.15rem, 13vw, 5rem); }
+  .city-hero { padding-block: 1.75rem 1.5rem; gap: 1rem; }
+  .city-hero h1 { font-size: clamp(2.35rem, 9.5vw, 3.1rem); }
+  .city-hero__lead { display: none; }
+  .city-status { padding-top: .7rem; }
+  .city-status__label { margin-bottom: .55rem; }
+  .city-status dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
+  .city-status dl > div { display: block; padding: .45rem .55rem; border-bottom: 0; border-right: 1px solid var(--rule); }
+  .city-status dl > div:first-child { padding-left: 0; }
+  .city-status dl > div:last-child { padding-right: 0; border-right: 0; }
+  .city-status dd { margin-top: .25rem; }
+  .city-status > p:last-child { display: none; }
   .city-nav__note { display: none; }
   .mobile-primary-switch { display: flex; }
   .panel-heading { grid-template-columns: 1fr; gap: .75rem; }

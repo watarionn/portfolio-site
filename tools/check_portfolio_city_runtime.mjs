@@ -247,6 +247,7 @@ const buildings = documentMock.querySelectorAll('.building-button');
 const workRows = documentMock.querySelectorAll('.work-row');
 assert.equal(districts.length, 4, 'map must render four districts');
 assert.equal(buildings.length, 14, 'map must render fourteen buildings');
+assert.equal(documentMock.querySelectorAll('.building-visual').length, 14, 'every building must render a handcrafted visual');
 assert.equal(workRows.length, 14, 'works directory must render fourteen rows');
 
 assert.equal(inspector.querySelector('h3').textContent, 'HoloScope');

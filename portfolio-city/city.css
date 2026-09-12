@@ -366,33 +366,16 @@ button { font: inherit; }
   cursor: pointer;
   transition: transform .18s var(--ease), box-shadow .18s ease, background .18s ease;
 }
-.building-button::before,
-.building-button::after {
-  content: "";
+.building-visual {
   position: absolute;
-  pointer-events: none;
-}
-.building-button::before {
-  top: .8rem;
+  top: .45rem;
   left: 50%;
-  width: 3.6rem;
-  height: 2.5rem;
-  border: 1px solid currentColor;
-  background:
-    linear-gradient(90deg, transparent 45%, currentColor 46% 54%, transparent 55%),
-    linear-gradient(0deg, transparent 45%, currentColor 46% 54%, transparent 55%);
-  opacity: .34;
+  width: 5rem;
+  height: 3.15rem;
   transform: translateX(-50%);
-}
-.building-button::after {
-  top: .35rem;
-  left: 50%;
-  width: 4.5rem;
-  height: 1.2rem;
-  border: solid currentColor;
-  border-width: 1px 1px 0;
-  transform: translateX(-50%) skewX(-26deg);
-  opacity: .3;
+  color: var(--ink);
+  opacity: .72;
+  pointer-events: none;
 }
 .building-button:hover,
 .building-button.is-selected {
@@ -595,4 +578,132 @@ button { font: inherit; }
   }
   .building-button:hover,
   .building-button.is-selected { transform: none; }
+}
+
+/* Phase 3.2 / handcrafted city silhouettes */
+.building-visual__mass,
+.building-visual__roof,
+.building-visual__detail {
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+}
+.building-visual__mass {
+  left: 50%;
+  bottom: .08rem;
+  width: 3.8rem;
+  height: 2.15rem;
+  border: 1px solid currentColor;
+  background: rgba(255,255,255,.28);
+  transform: translateX(-50%);
+}
+.building-visual__roof {
+  left: 50%;
+  top: .18rem;
+  width: 4.25rem;
+  height: 1.15rem;
+  border: solid currentColor;
+  border-width: 1px 1px 0;
+  transform: translateX(-50%) skewX(-24deg);
+}
+.building-visual__detail { border: 1px solid currentColor; }
+.building-visual__detail--a {
+  left: 50%;
+  bottom: .45rem;
+  width: 1.7rem;
+  height: .9rem;
+  transform: translateX(-50%);
+}
+.building-visual__detail--b {
+  left: 50%;
+  bottom: .45rem;
+  width: 1px;
+  height: .9rem;
+  border-width: 0 0 0 1px;
+}
+.district::before {
+  content: "";
+  position: absolute;
+  inset: .45rem .45rem auto auto;
+  width: 3.4rem;
+  height: 3.4rem;
+  opacity: .08;
+  pointer-events: none;
+}
+[data-district-id="observatory-hill"]::before { background: radial-gradient(circle at 50% 50%, var(--ink) 0 8%, transparent 9% 28%, var(--ink) 29% 31%, transparent 32%); }
+[data-district-id="archive-street"]::before { background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 9px); }
+[data-district-id="workshop-alley"]::before { background: repeating-linear-gradient(135deg, var(--ink) 0 2px, transparent 2px 9px); }
+[data-district-id="waterside-play"]::before { background: repeating-radial-gradient(ellipse at 50% 120%, transparent 0 8px, var(--ink) 9px 10px, transparent 11px 16px); }
+
+/* Observatory Hill */
+.building-button[data-project-id="holoscope"] .building-visual__mass { width: 1.45rem; height: 2.55rem; }
+.building-button[data-project-id="holoscope"] .building-visual__roof { top: .05rem; width: 2.15rem; height: .7rem; border-radius: 50% 50% 0 0; transform: translateX(-50%); }
+.building-button[data-project-id="holoscope"] .building-visual__detail--a { bottom: 1.35rem; width: 3.05rem; height: .3rem; background: currentColor; }
+.building-button[data-project-id="holoscope"] .building-visual__detail--b { left: 68%; top: .15rem; bottom: auto; height: 1.25rem; transform: rotate(38deg); }
+
+.building-button[data-project-id="sphere"] .building-visual__mass { width: 4.35rem; height: 1.45rem; }
+.building-button[data-project-id="sphere"] .building-visual__roof { top: .2rem; width: 4.1rem; height: 1.65rem; border-radius: 50% 50% 0 0; transform: translateX(-50%); }
+.building-button[data-project-id="sphere"] .building-visual__detail--a { width: 2.1rem; height: 1.05rem; border-radius: 50% 50% 0 0; }
+.building-button[data-project-id="sphere"] .building-visual__detail--b { height: 2.35rem; bottom: .1rem; }
+
+.building-button[data-project-id="prime-dot-art"] .building-visual__mass { width: 4.5rem; height: 2.35rem; background: radial-gradient(circle, currentColor 0 1px, transparent 1.2px) 0 0/9px 9px; }
+.building-button[data-project-id="prime-dot-art"] .building-visual__roof { display: none; }
+/* Archive Street */
+.building-button[data-project-id="yorei"] .building-visual__mass { width: 3.9rem; height: 2.15rem; }
+.building-button[data-project-id="yorei"] .building-visual__roof { width: 4.5rem; transform: translateX(-50%) rotate(-3deg); }
+.building-button[data-project-id="yorei"] .building-visual__detail--a { width: 2.6rem; height: .75rem; border-style: dashed; }
+.building-button[data-project-id="yorei"] .building-visual__detail--b { left: 23%; height: 1.1rem; }
+
+.building-button[data-project-id="actress-finder"] .building-visual__mass { width: 4.3rem; height: 2.2rem; background: repeating-linear-gradient(90deg, transparent 0 .52rem, currentColor .53rem .59rem, transparent .6rem 1rem); }
+.building-button[data-project-id="actress-finder"] .building-visual__roof { top: .08rem; width: 4.65rem; height: 1.1rem; transform: translateX(-50%) skewX(0); clip-path: polygon(50% 0,100% 100%,0 100%); background: currentColor; opacity: .3; }
+.building-button[data-project-id="actress-finder"] .building-visual__detail--a { width: 3.1rem; height: .28rem; bottom: .22rem; background: currentColor; }
+.building-button[data-project-id="actress-finder"] .building-visual__detail--b { display: none; }
+
+.building-button[data-project-id="cheatsheet"] .building-visual__mass { width: 2.65rem; height: 2.75rem; box-shadow: -.7rem .35rem 0 -.05rem var(--paper-soft), -.7rem .35rem 0 0 currentColor, .7rem .65rem 0 -.05rem var(--paper-soft), .7rem .65rem 0 0 currentColor; }
+.building-button[data-project-id="cheatsheet"] .building-visual__roof { display: none; }
+.building-button[data-project-id="cheatsheet"] .building-visual__detail--a { width: 1.5rem; height: 1.7rem; background: repeating-linear-gradient(0deg, currentColor 0 1px, transparent 1px 6px); }
+.building-button[data-project-id="cheatsheet"] .building-visual__detail--b { display: none; }
+
+.building-button[data-project-id="shisha"] .building-visual__mass { width: 3.65rem; height: 1.75rem; }
+.building-button[data-project-id="shisha"] .building-visual__roof { top: .55rem; width: 4.35rem; height: .7rem; transform: translateX(-50%); background: repeating-linear-gradient(90deg, currentColor 0 .35rem, transparent .35rem .7rem); }
+.building-button[data-project-id="shisha"] .building-visual__detail--a { width: 2.2rem; height: .75rem; }
+/* Workshop Alley */
+.building-button[data-project-id="dqb2"] .building-visual__mass { width: 4.3rem; height: 2.1rem; background: repeating-linear-gradient(0deg, transparent 0 .55rem, currentColor .56rem .6rem); }
+.building-button[data-project-id="dqb2"] .building-visual__roof { width: 4.75rem; height: 1.25rem; transform: translateX(-50%) skewX(-12deg); }
+.building-button[data-project-id="dqb2"] .building-visual__detail--a { width: 1.2rem; height: 1.25rem; left: 32%; }
+.building-button[data-project-id="dqb2"] .building-visual__detail--b { left: 70%; height: 1.45rem; }
+
+.building-button[data-project-id="madori"] .building-visual__mass { width: 4.25rem; height: 2.45rem; background: linear-gradient(90deg, transparent 48%, currentColor 49% 51%, transparent 52%), linear-gradient(0deg, transparent 48%, currentColor 49% 51%, transparent 52%); }
+.building-button[data-project-id="madori"] .building-visual__roof { top: .02rem; width: 4.6rem; height: .45rem; transform: translateX(-50%); background: currentColor; }
+.building-button[data-project-id="madori"] .building-visual__detail--a { width: .9rem; height: .8rem; left: 27%; bottom: .32rem; background: var(--paper-soft); }
+.building-button[data-project-id="madori"] .building-visual__detail--b { left: 73%; height: .82rem; bottom: .32rem; }
+
+.building-button[data-project-id="maze-maker"] .building-visual__mass { width: 4rem; height: 2.55rem; background: repeating-linear-gradient(90deg, transparent 0 .55rem, currentColor .56rem .61rem), repeating-linear-gradient(0deg, transparent 0 .5rem, currentColor .51rem .56rem); }
+.building-button[data-project-id="maze-maker"] .building-visual__roof { display: none; }
+.building-button[data-project-id="maze-maker"] .building-visual__detail--a { width: .85rem; height: 1rem; bottom: .08rem; background: var(--paper-soft); border-bottom: 0; }
+.building-button[data-project-id="maze-maker"] .building-visual__detail--b { display: none; }
+
+.building-button[data-project-id="anagram"] .building-visual__mass { width: 4rem; height: 2.05rem; }
+.building-button[data-project-id="anagram"] .building-visual__roof { width: 4.5rem; height: .65rem; transform: translateX(-50%); }
+.building-button[data-project-id="anagram"] .building-visual__detail--a { left: 35%; width: 1.15rem; height: 1.15rem; border-radius: 50%; }
+.building-button[data-project-id="anagram"] .building-visual__detail--b { left: 68%; width: .85rem; height: 1.3rem; border-width: 1px; }
+/* Waterside Play */
+.building-button[data-project-id="aquarium"] .building-visual { color: #315d65; }
+.building-button[data-project-id="aquarium"] .building-visual__mass { width: 4.45rem; height: 2.05rem; border-radius: 1.7rem 1.7rem .2rem .2rem; background: linear-gradient(180deg, transparent 0 35%, rgba(113,141,142,.25) 36% 100%); }
+.building-button[data-project-id="aquarium"] .building-visual__roof { top: .08rem; width: 3.4rem; height: 1.45rem; border-radius: 50% 50% 0 0; transform: translateX(-50%); }
+.building-button[data-project-id="aquarium"] .building-visual__detail--a { width: 2.45rem; height: .65rem; border-radius: 50%; border-style: dotted; }
+.building-button[data-project-id="aquarium"] .building-visual__detail--b { display: none; }
+
+.building-button[data-project-id="holoca"] .building-visual__mass { width: 4.05rem; height: 2.05rem; }
+.building-button[data-project-id="holoca"] .building-visual__roof { top: .45rem; width: 4.5rem; height: .72rem; transform: translateX(-50%); background: repeating-linear-gradient(90deg, currentColor 0 .28rem, transparent .28rem .56rem); }
+.building-button[data-project-id="holoca"] .building-visual__detail--a { width: 1.25rem; height: 1.05rem; left: 34%; }
+.building-button[data-project-id="holoca"] .building-visual__detail--b { left: 68%; width: 1.05rem; height: .72rem; border-width: 1px; }
+
+.building-button[data-project-id="word-generator"] .building-visual__mass { width: 4.15rem; height: 2.15rem; }
+.building-button[data-project-id="word-generator"] .building-visual__roof { top: .12rem; width: 3.3rem; height: .72rem; transform: translateX(-50%); background: currentColor; }
+.building-button[data-project-id="word-generator"] .building-visual__detail--a { width: 2.55rem; height: .85rem; background: repeating-linear-gradient(90deg, transparent 0 .42rem, currentColor .43rem .48rem); }
+.building-button[data-project-id="word-generator"] .building-visual__detail--b { left: 76%; width: .55rem; height: .55rem; border-radius: 50%; border-width: 1px; }
+
+@media (max-width: 680px) {
+  .building-visual { top: .38rem; transform: translateX(-50%) scale(.92); transform-origin: top center; }
 }

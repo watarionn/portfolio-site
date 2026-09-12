@@ -89,6 +89,18 @@ function districtForProject(project) {
   return state.districts.find((district) => district.id === project.district);
 }
 
+function buildBuildingVisual() {
+  const visual = make('span', 'building-visual');
+  visual.setAttribute('aria-hidden', 'true');
+  visual.append(
+    make('span', 'building-visual__mass'),
+    make('span', 'building-visual__roof'),
+    make('span', 'building-visual__detail building-visual__detail--a'),
+    make('span', 'building-visual__detail building-visual__detail--b')
+  );
+  return visual;
+}
+
 function renderMap() {
   const map = document.getElementById('cityMap');
   if (!map) return;
@@ -113,6 +125,7 @@ function renderMap() {
       button.dataset.projectId = project.id;
       button.setAttribute('aria-label', `${district.name}の${project.building}、${project.title}を選択`);
       button.append(
+        buildBuildingVisual(),
         make('span', 'building-button__name', project.building),
         make('span', 'building-button__title', project.title)
       );

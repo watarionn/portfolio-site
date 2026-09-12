@@ -127,8 +127,8 @@ button { font: inherit; }
 }
 .city-hero h1 {
   margin: 0;
-  max-width: 10ch;
-  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  max-width: 100%;
+  font-size: clamp(3.5rem, 6.6vw, 7.5rem);
   font-weight: 600;
   line-height: .98;
   letter-spacing: -.055em;
@@ -546,7 +546,7 @@ button { font: inherit; }
   .city-header__bar { min-height: 4.2rem; }
   .city-wordmark small, .back-link { display: none; }
   .city-hero { padding-block: 3.6rem 3rem; gap: 2.5rem; }
-  .city-hero h1 { font-size: clamp(3.15rem, 17vw, 5rem); }
+  .city-hero h1 { font-size: clamp(3.15rem, 13vw, 5rem); }
   .city-nav__note { display: none; }
   .mobile-primary-switch { display: flex; }
   .panel-heading { grid-template-columns: 1fr; gap: .75rem; }

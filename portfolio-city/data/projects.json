@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    {
+      "id": "holoscope",
+      "title": "HoloScope",
+      "district": "observatory-hill",
+      "building": "観測塔",
+      "route": "/holoscope/",
+      "type": "Data / Operations / Web",
+      "summary": "観測データを集め、関係や傾向を探索できる形へ整える情報観測サービス。",
+      "order": 1
+    },
+    {
+      "id": "sphere",
+      "title": "天球儀",
+      "district": "observatory-hill",
+      "building": "プラネタリウム",
+      "route": "/SPHERE/sphere.html",
+      "type": "Canvas / Voxel",
+      "summary": "同じボクセルデータを2Dと3Dで眺めながら、球体構造を組み立てる設計ツール。",
+      "order": 2
+    },
+    {
+      "id": "prime-dot-art",
+      "title": "素数点画",
+      "district": "observatory-hill",
+      "building": "点画ギャラリー",
+      "route": "/PRIME_DOT_ART/prime_dot_art.html",
+      "type": "Canvas / Algorithm",
+      "summary": "素数列の規則を進行方向へ変換し、数理の動きを点と線の軌跡として描く作品。",
+      "order": 3
+    },
+    {
+      "id": "yorei",
+      "title": "用例採集",
+      "district": "archive-street",
+      "building": "ことば採集所",
+      "route": "/YOREI/yorei.html",
+      "type": "Dictionary / Supabase",
+      "summary": "見出し語、用例、出典を採集し、自分だけの辞書を育てるWebアプリ。",
+      "order": 1
+    },
+    {
+      "id": "actress-finder",
+      "title": "人物索引",
+      "district": "archive-street",
+      "building": "人物資料館",
+      "route": "/OTHER/actress_finder.html",
+      "type": "Search / JSON / Local-first",
+      "summary": "好みの人物情報を整理し、推薦依頼と比較に使えるローカルファーストの索引ツール。",
+      "order": 2
+    },
+    {
+      "id": "cheatsheet",
+      "title": "技術早見表",
+      "district": "archive-street",
+      "building": "技術資料センター",
+      "route": "/CHEATSHEET/",
+      "type": "Reference / Search",
+      "summary": "技術メモを横断検索し、必要な断片へ素早く辿り着くための検索型リファレンス。",
+      "order": 3
+    },
+    {
+      "id": "shisha",
+      "title": "SHISHA 店舗検索",
+      "district": "archive-street",
+      "building": "街の案内所",
+      "route": "/SHISHA/",
+      "type": "Search / PHP",
+      "summary": "地域、駅、現在地、営業時間などから店舗情報を探せるデータベース型検索ツール。",
+      "order": 4
+    },
+    {
+      "id": "dqb2",
+      "title": "DQB2 部屋レシピ図鑑",
+      "district": "workshop-alley",
+      "building": "工務店",
+      "route": "/DQB2/dqb2.html",
+      "type": "Dataset / JavaScript",
+      "summary": "部屋レシピを材料や効果から引ける、建築向けの検索フィールドガイド。",
+      "order": 1
+    },
+    {
+      "id": "madori",
+      "title": "間取図メーカー",
+      "district": "workshop-alley",
+      "building": "設計事務所",
+      "route": "/MADORI/madori.html",
+      "type": "SVG / Drag & Drop",
+      "summary": "部屋や家具を配置し、2Dと3Dの共通状態から間取りを組み立てる編集ツール。",
+      "order": 2
+    },
+    {
+      "id": "maze-maker",
+      "title": "迷路作成補助器",
+      "district": "workshop-alley",
+      "building": "迷路工房",
+      "route": "/MAZE_MAKER/maze_maker.html",
+      "type": "Grid Editor / Canvas",
+      "summary": "マス目を直接編集し、壁や目印を置いて迷路を設計・書き出しできる制作補助器。",
+      "order": 3
+    },
+    {
+      "id": "anagram",
+      "title": "アナグラム補助器",
+      "district": "workshop-alley",
+      "building": "活版印刷店",
+      "route": "/ANAGRAM/anagram.html",
+      "type": "Text Engine / Drag & Drop",
+      "summary": "文字タイルを並べ替え、まとまりを作りながらアナグラムを考える文字作業台。",
+      "order": 4
+    },
+    {
+      "id": "aquarium",
+      "title": "水族館",
+      "district": "waterside-play",
+      "building": "市立水族館",
+      "route": "/AQUARIUM/aquarium.php",
+      "type": "PHP / MySQL / Search",
+      "summary": "魚名と読みを検索し、名前を眺めながら発見できる水中資料館。",
+      "order": 1
+    },
+    {
+      "id": "holoca",
+      "title": "HOLOCA デッキラボ",
+      "district": "waterside-play",
+      "building": "カードショップ",
+      "route": "/HOLOCA/holoca.html",
+      "type": "PHP / Search / Canvas",
+      "summary": "カードを検索し、デッキを組み、レシピとして持ち出せるデッキ構築ワークスペース。",
+      "order": 2
+    },
+    {
+      "id": "word-generator",
+      "title": "ボードゲーム単語集",
+      "district": "waterside-play",
+      "building": "ゲームショップ",
+      "route": "/WORD_GENERATOR/word_generator.html",
+      "type": "Dataset / Random Deck",
+      "summary": "お題デッキを引き、制限時間と履歴を使って遊べるテーブルゲーム向け単語ツール。",
+      "order": 3
+    }
+  ]
+}

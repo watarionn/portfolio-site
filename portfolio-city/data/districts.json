@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "districts": [
+    {
+      "id": "observatory-hill",
+      "name": "観測丘",
+      "english": "OBSERVATORY HILL",
+      "mapArea": "north",
+      "role": "観測・可視化・数理",
+      "description": "遠くを見る、規則を見る、データの形を見る。都市の高台に置く観測系の地区。",
+      "landmark": "展望塔",
+      "order": 1
+    },
+    {
+      "id": "archive-street",
+      "name": "資料通り",
+      "english": "ARCHIVE STREET",
+      "mapArea": "west",
+      "role": "言葉・検索・索引",
+      "description": "ことば、人物、技術、場所を探すための資料と案内が集まる通り。",
+      "landmark": "中央索引板",
+      "order": 2
+    },
+    {
+      "id": "workshop-alley",
+      "name": "工作横丁",
+      "english": "WORKSHOP ALLEY",
+      "mapArea": "east",
+      "role": "設計・組立・編集",
+      "description": "組み立てる、配置する、書き換える。手を動かす制作ツールが並ぶ横丁。",
+      "landmark": "共同作業台",
+      "order": 3
+    },
+    {
+      "id": "waterside-play",
+      "name": "水辺・遊び地区",
+      "english": "WATERSIDE PLAY",
+      "mapArea": "south",
+      "role": "遊び・収集・発見",
+      "description": "水辺を歩きながら、カードやことばや生き物に寄り道できる遊びの地区。",
+      "landmark": "水路広場",
+      "order": 4
+    }
+  ]
+}

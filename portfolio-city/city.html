@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="風花 理珠 / Liz Hookah の制作物を、4つの地区と14の建物として歩く Portfolio City の基盤プレビュー。">
+  <title>Portfolio City | Phase 3.1 Foundation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="city.css">
+</head>
+<body data-mobile-primary="map">
+  <a class="skip-link" href="#city-main">都市の本文へ移動</a>
+
+  <header class="city-header">
+    <div class="city-shell city-header__bar">
+      <a class="city-wordmark" href="city.html" aria-label="Portfolio City の先頭へ">
+        <span>PORTFOLIO CITY</span>
+        <small>Phase 3.1 / Foundation Preview</small>
+      </a>
+      <a class="back-link" href="/">現在のポートフォリオへ戻る ↗</a>
+    </div>
+
+    <div class="city-shell city-hero">
+      <div class="city-hero__copy">
+        <p class="city-kicker">CITY PLAN 001 / 4 DISTRICTS / 14 WORKS</p>
+        <h1>作品を、<br>街として歩く。</h1>
+        <p class="city-hero__lead">
+          制作物をカードの一覧ではなく、それぞれ役割を持つ建物として配置するための新しい入口です。
+          まずは地図、地区、作品データ、訪問状態という都市の骨組みから組み立てています。
+        </p>
+      </div>
+
+      <aside class="city-status" aria-label="Portfolio City の状態">
+        <p class="city-status__label">CITY STATUS</p>
+        <dl>
+          <div><dt>WORKS</dt><dd id="projectCount">14</dd></div>
+          <div><dt>DISTRICTS</dt><dd id="districtCount">4</dd></div>
+          <div><dt>VISITED</dt><dd><span id="visitedCount">0</span> / <span id="visitedTotal">14</span></dd></div>
+        </dl>
+        <p>この段階の建物はCSSによる仮設です。後続Phaseで各作品の外観・地区演出を育てます。</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="city-nav" aria-label="Portfolio City 共通メニュー">
+    <div class="city-shell city-nav__inner">
+      <button type="button" class="city-nav__button" data-panel-target="map" aria-current="page">MAP</button>
+      <button type="button" class="city-nav__button" data-panel-target="works">WORKS</button>
+      <button type="button" class="city-nav__button" data-panel-target="profile">PROFILE</button>
+      <button type="button" class="city-nav__button" data-panel-target="contact">CONTACT</button>
+      <span class="city-nav__note">WALK / READ / ENTER</span>
+    </div>
+  </nav>
+
+  <div class="mobile-primary-switch" aria-label="モバイル表示切替">
+    <button type="button" data-mobile-target="map" aria-pressed="true">MAP</button>
+    <button type="button" data-mobile-target="works" aria-pressed="false">WORKS</button>
+  </div>
+
+  <main id="city-main">
+    <section class="city-panel city-panel--map" data-view-panel="map" aria-labelledby="map-title">
+      <div class="city-shell">
+        <header class="panel-heading">
+          <div>
+            <p>01 / CITY MAP</p>
+            <h2 id="map-title">都市地図</h2>
+          </div>
+          <p>建物を選ぶと、その場所の作品情報が開きます。訪れた作品は街の記録として端末内に残ります。</p>
+        </header>
+
+        <div class="map-layout">
+          <div class="city-map" id="cityMap" aria-label="4地区からなる Portfolio City の地図"></div>
+
+          <aside class="project-inspector" id="projectInspector" aria-live="polite" aria-label="選択中の作品">
+            <p class="project-inspector__eyebrow">SELECT A BUILDING</p>
+            <h3>建物を選んでください</h3>
+            <p class="project-inspector__district">MAP READY</p>
+            <p class="project-inspector__summary">観測丘、資料通り、工作横丁、水辺・遊び地区から気になる場所を選べます。</p>
+            <dl class="project-inspector__facts">
+              <div><dt>BUILDING</dt><dd>---</dd></div>
+              <div><dt>TYPE</dt><dd>---</dd></div>
+              <div><dt>STATUS</dt><dd>UNVISITED</dd></div>
+            </dl>
+            <a class="project-inspector__enter" href="/" hidden>作品へ入る ↗</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="city-panel city-panel--works" data-view-panel="works" aria-labelledby="works-title" hidden>
+      <div class="city-shell">
+        <header class="panel-heading">
+          <div>
+            <p>02 / WORK DIRECTORY</p>
+            <h2 id="works-title">作品案内</h2>
+          </div>
+          <p>地図と同じ14作品を、地区ごとの索引として一覧できます。既存作品ページのURLは変更しません。</p>
+        </header>
+        <div class="works-directory" id="worksDirectory"></div>
+      </div>
+    </section>
+
+    <section class="city-panel city-panel--profile" data-view-panel="profile" aria-labelledby="profile-title" hidden>
+      <div class="city-shell info-layout">
+        <header class="panel-heading panel-heading--stacked">
+          <div>
+            <p>03 / PROFILE</p>
+            <h2 id="profile-title">この街をつくる人</h2>
+          </div>
+        </header>
+        <div class="info-card">
+          <p class="info-card__lead">風花 理珠 / Liz Hookah</p>
+          <p>Web、データ、業務自動化、検索、表現を横断しながら、必要な技術を拾って「使える形」まで組み立てています。</p>
+          <dl class="info-facts">
+            <div><dt>ROLE</dt><dd>System Engineer</dd></div>
+            <div><dt>BASE</dt><dd>Osaka, Japan</dd></div>
+            <div><dt>MOTTO</dt><dd>めざせ万能人</dd></div>
+          </dl>
+          <a href="/D_PROFILE/d_profile.html">詳しいプロフィールを読む ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="city-panel city-panel--contact" data-view-panel="contact" aria-labelledby="contact-title" hidden>
+      <div class="city-shell info-layout">
+        <header class="panel-heading panel-heading--stacked">
+          <div>
+            <p>04 / CONTACT</p>
+            <h2 id="contact-title">市役所窓口</h2>
+          </div>
+        </header>
+        <div class="info-card">
+          <p class="info-card__lead">制作物やお仕事についてのご連絡はこちらから。</p>
+          <div class="contact-list">
+            <a href="mailto:sakawatainfo@gmail.com"><span>Email</span><strong>sakawatainfo@gmail.com</strong><b>↗</b></a>
+            <a href="https://github.com/watarionn"><span>GitHub</span><strong>@watarionn</strong><b>↗</b></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="city-footer">
+    <div class="city-shell city-footer__inner">
+      <p>Portfolio City / Phase 3.1 Foundation</p>
+      <p>既存ポートフォリオは変更せず、独立プレビューとして建設中。</p>
+    </div>
+  </footer>
+
+  <script src="city.js" defer></script>
+</body>
+</html>

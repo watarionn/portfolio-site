@@ -317,8 +317,10 @@ async function loadCity() {
     });
     state.districts = districtPayload.districts.slice().sort(byOrder);
 
-    document.getElementById('projectCount').textContent = String(state.projects.length);
-    document.getElementById('districtCount').textContent = String(state.districts.length);
+    const projectCount = document.getElementById('projectCount');
+    if (projectCount) projectCount.textContent = String(state.projects.length);
+    const districtCount = document.getElementById('districtCount');
+    if (districtCount) districtCount.textContent = String(state.districts.length);
 
     renderMap();
     renderWorksDirectory();

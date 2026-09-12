@@ -13,6 +13,7 @@
   ],
   "entries": [
     {"id": "profile", "sourceRoot": "profile", "productionRoot": "D_PROFILE"},
+    {"id": "portfolio-city", "sourceRoot": "portfolio-city", "productionRoot": "portfolio-city"},
     {"id": "yorei", "sourceRoot": "apps/yorei/public", "productionRoot": "YOREI"},
     {"id": "aquarium", "sourceRoot": "apps/aquarium/public", "productionRoot": "AQUARIUM"},
     {"id": "secret-room", "sourceRoot": "apps/secret-room/public", "productionRoot": "SECRET"},

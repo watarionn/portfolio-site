@@ -101,10 +101,34 @@ function buildBuildingVisual() {
   return visual;
 }
 
+function buildMapInfrastructure() {
+  const infrastructure = make('div', 'city-map__infrastructure');
+  infrastructure.setAttribute('aria-hidden', 'true');
+  infrastructure.append(
+    make('span', 'city-map__road city-map__road--spine'),
+    make('span', 'city-map__road city-map__road--cross'),
+    make('span', 'city-map__plaza'),
+    make('span', 'city-map__bridge')
+  );
+  return infrastructure;
+}
+
+function buildDistrictLandmark(district) {
+  const landmark = make('div', 'district-landmark');
+  landmark.dataset.landmark = district.id;
+  landmark.setAttribute('aria-label', `${district.name}のランドマーク: ${district.landmark}`);
+  landmark.append(
+    make('span', 'district-landmark__visual'),
+    make('span', 'district-landmark__label', district.landmark)
+  );
+  return landmark;
+}
+
 function renderMap() {
   const map = document.getElementById('cityMap');
   if (!map) return;
   map.replaceChildren();
+  map.append(buildMapInfrastructure());
 
   for (const district of [...state.districts].sort(byOrder)) {
     const section = make('section', `district district--${district.mapArea}`);
@@ -116,7 +140,7 @@ function renderMap() {
     title.id = `district-${district.id}`;
     heading.append(title, make('span', 'district__count', String(projectsForDistrict(district.id).length).padStart(2, '0')));
 
-    const meta = make('p', 'district__meta', `${district.english} / ${district.role} / LANDMARK: ${district.landmark}`);
+    const meta = make('p', 'district__meta', `${district.english} / ${district.role}`);
     const buildings = make('div', 'district__buildings');
 
     for (const project of projectsForDistrict(district.id)) {
@@ -136,7 +160,7 @@ function renderMap() {
       buildings.append(button);
     }
 
-    section.append(heading, meta, buildings);
+    section.append(heading, buildDistrictLandmark(district), meta, buildings);
     map.append(section);
   }
 }

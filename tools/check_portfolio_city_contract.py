@@ -114,14 +114,14 @@ def main() -> int:
         fail("Portfolio City HERO/status block must remain removed")
 
     js = (CITY / "city.js").read_text(encoding="utf-8")
-    for marker in ("portfolio-city.visited.v1", "localStorage", "ArrowRight", "ArrowLeft", "replaceChildren", "prefers-reduced-motion", "buildBuildingVisual"):
+    for marker in ("portfolio-city.visited.v1", "localStorage", "ArrowRight", "ArrowLeft", "replaceChildren", "prefers-reduced-motion", "buildBuildingVisual", "buildMapInfrastructure", "buildDistrictLandmark"):
         if marker not in js:
             fail(f"city.js is missing required behavior: {marker}")
     if ".innerHTML" in js:
         fail("city.js must not render data with innerHTML")
 
     css = (CITY / "city.css").read_text(encoding="utf-8")
-    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".district--north", ".district--south"):
+    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark"):
         if marker not in css:
             fail(f"city.css is missing required responsive/map rule: {marker}")
 

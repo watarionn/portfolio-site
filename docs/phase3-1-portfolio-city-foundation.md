@@ -19,7 +19,24 @@ The existing production homepage and the fourteen existing work surfaces remain 
 - per-device visited state stored in localStorage
 - reduced-motion behavior
 - reserved asset directories for later building, landmark, character, and environment work
-- a dedicated `tools/check_portfolio_city_contract.py` guard for the 14-work / 4-district boundary
+- `tools/check_portfolio_city_contract.py` guards the 14-work / 4-district / route boundary
+- `tools/check_portfolio_city_runtime.mjs` executes the real `city.js` against dependency-free DOM, JSON, fetch, and localStorage mocks
+- the normal public validation workflow is wired to run both Portfolio City contracts when that workflow is intentionally used
+
+## Runtime contract coverage
+
+The runtime harness is designed to verify:
+
+- 4 districts are rendered
+- 14 map buildings are rendered
+- 14 WORKS rows are rendered
+- initial HoloScope selection and route
+- focus-driven selection and ArrowRight keyboard movement
+- visited-state persistence through `localStorage`
+- visited styling in both map and WORKS directory
+- MAP / WORKS / PROFILE navigation state
+- mobile MAP switching state
+- all WORKS links keep the locked existing project URLs
 
 ## Locked district assignment
 
@@ -51,6 +68,21 @@ Phase 3.1 does not replace the current `/` homepage, modify any existing project
 
 The visual building art is intentionally provisional. Later phases can replace CSS placeholders without changing the project/district data contract.
 
+## Remaining QA gate
+
+The next gate is execution rather than further feature expansion:
+
+1. run the static Portfolio City contract
+2. run the Node runtime contract
+3. build the deployment artifact
+4. run JavaScript syntax checks
+5. browser-check the city at 1440 px and 390 px
+6. verify MAP / WORKS / PROFILE / CONTACT, building selection, keyboard operation, localStorage restore, project links, horizontal overflow, and page errors
+
+Remote Desktop Commander device `YWSHTMR` was explicitly explored on 2026-09-12 and was offline, so these local/browser execution checks are still pending. They must not be silently treated as passed.
+
 ## Cost and merge safety
 
-Work is performed on a dedicated branch and kept as a Draft pull request. Branch commits use `[skip ci]` so metered GitHub-hosted Actions are not intentionally executed during the implementation loop. Ready-for-review, merge, and production publication remain separate explicit gates.
+Work is performed on a dedicated branch and kept as a Draft pull request. Branch commits use `[skip ci]` so metered GitHub-hosted Actions are not intentionally executed during the implementation loop. GitHub-hosted Actions remain unused for this phase unless explicitly approved later.
+
+Ready-for-review, merge, and production publication remain separate explicit gates.

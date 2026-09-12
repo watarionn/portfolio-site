@@ -43,6 +43,7 @@ REQUIRED_FILES = {
     "portfolio-city/assets/landmarks/.gitkeep",
     "portfolio-city/assets/characters/.gitkeep",
     "portfolio-city/assets/environment/.gitkeep",
+    "tools/check_portfolio_city_runtime.mjs",
 }
 
 
@@ -127,7 +128,11 @@ def main() -> int:
     if matches != [{"id": "portfolio-city", "sourceRoot": "portfolio-city", "productionRoot": "portfolio-city"}]:
         fail("deployment map must contain exactly one portfolio-city entry")
 
-    print("Portfolio City Phase 3.1 contract passed: 14 works / 4 districts / independent preview")
+    validation_workflow = (ROOT / ".github/workflows/validate-public.yml").read_text(encoding="utf-8")
+    if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
+        fail("validate-public workflow must run the Portfolio City runtime contract")
+
+    print("Portfolio City Phase 3.1 contract passed: 14 works / 4 districts / independent preview / runtime guard")
     return 0
 
 

@@ -110,6 +110,8 @@ def main() -> int:
     for marker in ("MAP", "WORKS", "PROFILE", "CONTACT", 'id="cityMap"', 'id="projectInspector"', 'id="worksDirectory"'):
         if marker not in html:
             fail(f"city.html is missing required marker: {marker}")
+    if 'city-hero' in html or 'city-status' in html:
+        fail("Portfolio City HERO/status block must remain removed")
 
     js = (CITY / "city.js").read_text(encoding="utf-8")
     for marker in ("portfolio-city.visited.v1", "localStorage", "ArrowRight", "ArrowLeft", "replaceChildren", "prefers-reduced-motion", "buildBuildingVisual"):

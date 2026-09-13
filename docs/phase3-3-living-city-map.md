@@ -73,3 +73,25 @@ Checkpoint 3 replaces the desktop CSS-only placeholder architecture with fourtee
 - overlapping district backgrounds do not intercept building pointer events
 - mobile keeps the existing stacked inspector flow below the map
 - reduced-motion behavior remains intact
+
+## Phase 3.3 closure — Living City QA
+
+Closure validates the completed Living City against both the technical contract and the original Portfolio City concept.
+
+- desktop 1440 px renders one continuous illustrated city with 14 SVG project buildings
+- desktop building hit areas no longer overlap; the west/east lower rows were moved from 56% to 64% to remove four ambiguous pointer intersections
+- hover remains non-selecting, while click and keyboard focus open the floating inspector
+- the inspector remains inside the map and does not cover the selected building
+- Arrow-key navigation, Escape, close/focus return, visited state, and district completion remain intact
+- tablet 820 px and mobile 390 px retain the stacked map/inspector model without horizontal overflow
+- mobile retains 14 compact CSS buildings and the two-button MAP / WORKS switch
+- browser page-error count remains zero
+- all 14 production project routes return HTTP 200
+
+### Original concept comparison
+
+Phase 3.3 closes the structural gap identified at the start of the Living City work: the MAP now reads as one place rather than four project-card groups, buildings have project-specific visual identities, and exploration happens directly on the city surface.
+
+The remaining difference from the original concept artwork is primarily art-direction density, not missing interaction architecture: the concept contains richer terrain painting, foliage, atmospheric depth, decorative props, and character-scale detail. Those are intentionally left for a later visual-art pass rather than being treated as Phase 3.3 functional defects.
+
+Closure decision: Phase 3.3 is complete once the final static/runtime/build gates remain green with the hit-area correction applied.

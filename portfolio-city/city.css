@@ -1327,7 +1327,7 @@ button { font: inherit; }
   [data-project-id="cheatsheet"],
   [data-project-id="shisha"],
   [data-project-id="maze-maker"],
-  [data-project-id="anagram"] { top: 56%; }
+  [data-project-id="anagram"] { top: 64%; }
 }
 @media (min-width: 981px) {
   .district__heading {

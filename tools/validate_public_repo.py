@@ -4,6 +4,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from validate_holoscope_release import validate_holoscope_release
+
 ROOT = Path(__file__).resolve().parents[1]
 
 FORBIDDEN_EXACT = {
@@ -38,6 +40,7 @@ HOLOCA_ROOT = "services/holoca/"
 HOLOCA_PUBLIC_ROOT = "services/holoca/public/"
 HOLOSCOPE_ROOT = "services/holoscope/"
 HOLOSCOPE_PUBLIC_ROOT = "services/holoscope/public/"
+HOLOSCOPE_RELEASE_ROOT = "services/holoscope/release/"
 EXPECTED_STAGE5_HOLOSCOPE_TREE = "91ad6e1661ecc4136dcc1a682c337b83e543b3f5"
 EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT = 86
 CHEATSHEET_ROOT = "tools/cheatsheet/"
@@ -283,7 +286,7 @@ def main() -> None:
                 fail(f"unreviewed HOLOCA public file is not allowed: {rel_text}")
 
         if rel_text.startswith(HOLOSCOPE_ROOT):
-            if not rel_text.startswith(HOLOSCOPE_PUBLIC_ROOT):
+            if not (rel_text.startswith(HOLOSCOPE_PUBLIC_ROOT) or rel_text.startswith(HOLOSCOPE_RELEASE_ROOT)):
                 fail(f"non-public HoloScope surface is not allowed: {rel_text}")
 
         if rel_text.startswith(SHISHA_ROOT):
@@ -319,6 +322,10 @@ def main() -> None:
         fail("HoloScope Stage 9 application-route precedence rule missing")
     if holoscope_htaccess.index("Internal application resources") > holoscope_htaccess.index("Current application routes"):
         fail("HoloScope internal-resource deny must precede Stage 9 application route precedence")
+
+    release_failures = validate_holoscope_release()
+    if release_failures:
+        fail("HoloScope reviewed release validation failed: " + "; ".join(release_failures))
 
     cheatsheet_files = sorted(rel for rel in tracked_rel if rel.startswith(CHEATSHEET_ROOT))
     if len(cheatsheet_files) != EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT:

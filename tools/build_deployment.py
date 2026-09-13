@@ -11,6 +11,7 @@ from xml.sax.saxutils import escape
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "config/deployment-map.json"
 SEO_CONFIG_PATH = ROOT / "config/seo.json"
+HOLOSCOPE_RELEASE_CONFIG_PATH = ROOT / "config/holoscope-release.json"
 DENIED_EXACT = {".env", "config.php", "user.ini", "admin.local.php", "config.local.php"}
 DENIED_PARTS = {".git", "runtime", "operator"}
 
@@ -196,6 +197,61 @@ def copy_tree(
         )
 
 
+def load_holoscope_release_config() -> dict:
+    try:
+        data = json.loads(HOLOSCOPE_RELEASE_CONFIG_PATH.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError) as exc:
+        raise BuildError(f"cannot load {HOLOSCOPE_RELEASE_CONFIG_PATH.relative_to(ROOT)}: {exc}") from exc
+    if data.get("schemaVersion") != 1:
+        raise BuildError("HoloScope release config schemaVersion must be 1")
+    release_id = data.get("releaseId")
+    if not isinstance(release_id, str) or not 3 <= len(release_id) <= 81:
+        raise BuildError("HoloScope releaseId is invalid")
+    if not release_id[0].isalnum() or any(not (ch.isalnum() or ch in "._-") for ch in release_id):
+        raise BuildError("HoloScope releaseId contains unsafe characters")
+    return data
+
+
+def assemble_holoscope_release(destination_root: Path, build_root: Path, emitted: dict[str, dict]) -> None:
+    data = load_holoscope_release_config()
+    release_id = data["releaseId"]
+    pointer_rel = safe_rel(data.get("pointerSource"), "holoscope.pointerSource")
+    release_rel = safe_rel(data.get("releaseSource"), "holoscope.releaseSource")
+    fallback_rel = safe_rel(data.get("fallbackSource"), "holoscope.fallbackSource")
+    fallback_entries = data.get("fallbackEntries")
+    if not isinstance(fallback_entries, list) or not fallback_entries:
+        raise BuildError("HoloScope fallbackEntries must be a non-empty array")
+    for index, value in enumerate(fallback_entries):
+        entry_rel = safe_rel(value, f"holoscope.fallbackEntries[{index}]")
+        source = ROOT / fallback_rel / entry_rel
+        destination = destination_root / "data" / entry_rel
+        if source.is_dir():
+            copy_tree(source, destination, build_root, emitted, "holoscope-release")
+        else:
+            copy_file(source, destination, build_root, emitted, "holoscope-release")
+
+    copy_file(ROOT / pointer_rel, destination_root / "data/current-release.json", build_root, emitted, "holoscope-release")
+    copy_tree(ROOT / release_rel, destination_root / "releases" / release_id, build_root, emitted, "holoscope-release")
+
+    sidecars = data.get("sidecars")
+    if not isinstance(sidecars, list):
+        raise BuildError("HoloScope sidecars must be an array")
+    for index, item in enumerate(sidecars):
+        if not isinstance(item, dict):
+            raise BuildError(f"HoloScope sidecars[{index}] must be an object")
+        source_rel = safe_rel(item.get("source"), f"holoscope.sidecars[{index}].source")
+        artifact_rel = safe_rel(item.get("artifact"), f"holoscope.sidecars[{index}].artifact")
+        source = ROOT / release_rel / source_rel
+        destination = destination_root / artifact_rel
+        if source.is_dir():
+            copy_tree(source, destination, build_root, emitted, "holoscope-release")
+        else:
+            copy_file(source, destination, build_root, emitted, "holoscope-release")
+
+    if (destination_root / "data/operations").exists():
+        raise BuildError("HoloScope runtime data/operations must not enter the deployment artifact")
+
+
 def render_robots(origin: str) -> str:
     return (
         "# Generated from config/seo.json. Do not edit the artifact directly.\n"
@@ -287,6 +343,8 @@ def build() -> dict:
         before = len(emitted)
         destination_root = build_root / production_rel
         copy_tree(ROOT / source_rel, destination_root, build_root, emitted, entry_id)
+        if entry_id == "holoscope":
+            assemble_holoscope_release(destination_root, build_root, emitted)
         if not (destination_root / "index.html").is_file() and not (destination_root / "index.php").is_file():
             raise BuildError(f"{entry_id} does not emit index.html or index.php")
         entry_summaries.append(

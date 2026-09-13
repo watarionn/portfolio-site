@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /holoscope/
+Disallow: /holoscope/admin/
+Sitemap: https://cf278796.cloudfree.jp/holoscope/sitemap.xml

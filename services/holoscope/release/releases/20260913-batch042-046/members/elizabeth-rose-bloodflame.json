@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_elizabeth_rose_bloodflame",
+  "slug": "elizabeth-rose-bloodflame",
+  "displayName": "Elizabeth Rose Bloodflame",
+  "nameJa": "エリザベス・ローズ・ブラッドフレイム",
+  "channelId": "UCW5uhrG1eCBYditmhL0Ykjw",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCW5uhrG1eCBYditmhL0Ykjw",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_kuy6mtsxkdu",
+      "slug": "elizabeth-rose-bloodflame-kuy6mtsxkdu",
+      "videoId": "KUy6mtsxKDU",
+      "title": "Elizabethの新年衣装はレースと鎧の融合　ファン予想からサプライズ歌唱まで",
+      "summaryOneLine": "ファンアート予想を楽しみ、細部を段階的に公開した後、Inaの「Meconopsis」を歌うサプライズで締めた新年衣装お披露目です。",
+      "streamType": "event",
+      "publishedAt": "2025-01-01T19:00:00Z",
+      "durationSeconds": 1885,
+      "thumbnailUrl": "https://i.ytimg.com/vi/KUy6mtsxKDU/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-01",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "衣装お披露目",
+        "新年"
+      ]
+    },
+    {
+      "uid": "str_0_4kl3rodra",
+      "slug": "elizabeth-rose-bloodflame-0-4kl3rodra",
+      "videoId": "0_4kL3rODrA",
+      "title": "ハンドルを握って「曲がる」を覚える　Elizabethのレース練習記録",
+      "summaryOneLine": "この配信で大きく変わったのは順位ではなく、Elizabeth自身の操作の解像度でした。",
+      "streamType": "game",
+      "publishedAt": "2024-10-24T22:57:28Z",
+      "durationSeconds": 12725,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0_4kL3rODrA/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-10",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 2,
+    "soloCount": 2,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 1
+      },
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/elizabeth-rose-bloodflame/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCW5uhrG1eCBYditmhL0Ykjw",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

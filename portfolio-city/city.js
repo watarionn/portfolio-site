@@ -154,7 +154,12 @@ function renderMap() {
     const heading = make('div', 'district__heading');
     const title = make('h3', '', district.name);
     title.id = `district-${district.id}`;
-    heading.append(title, make('span', 'district__count', String(projectsForDistrict(district.id).length).padStart(2, '0')));
+    const headingMeta = make('div', 'district__heading-meta');
+    const complete = make('span', 'district__complete', 'DISTRICT COMPLETE');
+    complete.dataset.districtComplete = district.id;
+    complete.hidden = true;
+    headingMeta.append(complete, make('span', 'district__count', String(projectsForDistrict(district.id).length).padStart(2, '0')));
+    heading.append(title, headingMeta);
 
     const progress = make('p', 'district__progress', `VISITED 0 / ${projectsForDistrict(district.id).length}`);
     progress.dataset.districtProgress = district.id;
@@ -165,7 +170,9 @@ function renderMap() {
       const button = make('button', 'building-button');
       button.type = 'button';
       button.dataset.projectId = project.id;
-      button.setAttribute('aria-label', `${district.name}の${project.building}、${project.title}を選択`);
+      button.dataset.baseLabel = `${district.name}の${project.building}、${project.title}`;
+      button.setAttribute('aria-label', `${button.dataset.baseLabel}、未訪問`);
+      button.setAttribute('aria-pressed', 'false');
       button.append(
         buildBuildingVisual(),
         make('span', 'building-button__name', project.building),
@@ -211,7 +218,9 @@ function selectProject(projectId, userInitiated) {
     district.classList.toggle('is-active-district', district.dataset.districtId === project.district);
   });
   document.querySelectorAll('.building-button').forEach((button) => {
-    button.classList.toggle('is-selected', button.dataset.projectId === project.id);
+    const selected = button.dataset.projectId === project.id;
+    button.classList.toggle('is-selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
   });
   updateInspector(project);
 
@@ -253,7 +262,9 @@ function markVisited(projectId) {
 
 function refreshVisitedState() {
   document.querySelectorAll('.building-button').forEach((button) => {
-    button.classList.toggle('is-visited', state.visited.has(button.dataset.projectId));
+    const visited = state.visited.has(button.dataset.projectId);
+    button.classList.toggle('is-visited', visited);
+    button.setAttribute('aria-label', `${button.dataset.baseLabel}${visited ? '、訪問済み' : '、未訪問'}`);
   });
   document.querySelectorAll('.work-row').forEach((row) => {
     row.classList.toggle('is-visited', state.visited.has(row.dataset.projectId));
@@ -263,10 +274,17 @@ function refreshVisitedState() {
     const projects = projectsForDistrict(district.id);
     const visited = projects.filter((project) => state.visited.has(project.id)).length;
     const section = Array.from(document.querySelectorAll('.district')).find((item) => item.dataset.districtId === district.id);
+    const complete = visited === projects.length && projects.length > 0;
     section?.classList.toggle('has-visited', visited > 0);
-    section?.classList.toggle('is-complete-district', visited === projects.length && projects.length > 0);
+    section?.classList.toggle('is-complete-district', complete);
+    if (section) section.dataset.visitState = complete ? 'complete' : visited > 0 ? 'started' : 'unvisited';
+    const completion = Array.from(document.querySelectorAll('[data-district-complete]')).find((item) => item.dataset.districtComplete === district.id);
+    if (completion) completion.hidden = !complete;
     const progress = Array.from(document.querySelectorAll('[data-district-progress]')).find((item) => item.dataset.districtProgress === district.id);
-    if (progress) progress.textContent = `VISITED ${visited} / ${projects.length}`;
+    if (progress) {
+      progress.textContent = `VISITED ${visited} / ${projects.length}`;
+      progress.setAttribute('aria-label', `${district.name}の訪問進捗 ${visited}/${projects.length}`);
+    }
   }
 
   const count = document.getElementById('visitedCount');

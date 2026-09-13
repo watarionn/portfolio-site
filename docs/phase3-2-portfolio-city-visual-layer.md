@@ -90,3 +90,26 @@ Checkpoint 3 deepens wayfinding and district identity without adding characters 
 - visit state updates district progress and preserves individual building/work-row visited state
 - desktop 1440 px and mobile 390 px remain free of horizontal overflow
 - contract, runtime, production build, JavaScript syntax, and browser page-error checks remain green
+
+## Checkpoint 4 scope
+
+Checkpoint 4 closes the Phase 3.2 exploration loop without adding new projects or navigation concepts.
+
+- add a compact map legend for selected, visited, and district-complete states
+- expose building selection with `aria-pressed`
+- include visited / unvisited state in each building's accessible label
+- show a small `DISTRICT COMPLETE` badge only after every project in that district has been visited
+- keep district progress derived from the existing localStorage visit state
+- retain the existing visual hierarchy and avoid adding a new hero, modal, tutorial, or reset control
+
+## Checkpoint 4 acceptance
+
+- exactly three legend items render and remain compact on desktop and mobile
+- all four districts expose completion badges, hidden until their own visit count reaches the district total
+- selected building exposes `aria-pressed="true"`
+- accessible building labels distinguish unvisited and visited states
+- completing the three Observatory Hill works changes its progress to `VISITED 3 / 3` and reveals its completion badge
+- desktop 1440 px and mobile 390 px remain free of horizontal overflow
+- contract, runtime, production build, JavaScript syntax, diff check, and browser page-error checks remain green
+
+With Checkpoints 1–4 complete, Phase 3.2 can be treated as visual-layer closure: buildings, terrain, streets, landmarks, district depth, wayfinding, visit feedback, and accessible state cues are all in place without changing the 14-work contract.

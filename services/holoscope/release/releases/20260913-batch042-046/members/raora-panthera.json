@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_raora_panthera",
+  "slug": "raora-panthera",
+  "displayName": "Raora Panthera",
+  "nameJa": null,
+  "channelId": "UCl69AEx4MdqMZH7Jtsm7Tig",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCl69AEx4MdqMZH7Jtsm7Tig",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0xax8tmexl0",
+      "slug": "raora-panthera-0xax8tmexl0",
+      "videoId": "0Xax8TmExL0",
+      "title": "AFK事故から立て直す　Raoraたちの7 Days to Die Day 3",
+      "summaryOneLine": "Day 3は、Raoraの装備喪失という大きなマイナスから始まりました。",
+      "streamType": "game",
+      "publishedAt": "2024-10-12T03:06:20Z",
+      "durationSeconds": 10647,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0Xax8TmExL0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-10",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 1,
+    "soloCount": 1,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/raora-panthera/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCl69AEx4MdqMZH7Jtsm7Tig",
+      "checkedAt": "2026-09-13T04:51:44Z"
+    }
+  ],
+  "createdAt": "2026-09-13T04:51:44Z",
+  "updatedAt": "2026-09-13T04:51:44Z"
+}

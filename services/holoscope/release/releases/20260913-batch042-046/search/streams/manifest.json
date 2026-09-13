@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0.0",
+  "count": 26,
+  "perPage": 24,
+  "shardSize": 100,
+  "cardShardCount": 1,
+  "options": {
+    "member": [
+      {
+        "value": "cecilia-immergreen",
+        "label": "Cecilia Immergreen"
+      },
+      {
+        "value": "elizabeth-rose-bloodflame",
+        "label": "Elizabeth Rose Bloodflame"
+      },
+      {
+        "value": "fuwamoco",
+        "label": "FUWAMOCO"
+      },
+      {
+        "value": "gigi-murin",
+        "label": "Gigi Murin"
+      },
+      {
+        "value": "hakos-baelz",
+        "label": "Hakos Baelz"
+      },
+      {
+        "value": "irys",
+        "label": "IRyS"
+      },
+      {
+        "value": "mori-calliope",
+        "label": "Mori Calliope"
+      },
+      {
+        "value": "nerissa-ravencroft",
+        "label": "Nerissa Ravencroft"
+      },
+      {
+        "value": "ninomae-inanis",
+        "label": "Ninomae Ina'nis"
+      },
+      {
+        "value": "raora-panthera",
+        "label": "Raora Panthera"
+      },
+      {
+        "value": "shiori-novella",
+        "label": "Shiori Novella"
+      },
+      {
+        "value": "takanashi-kiara",
+        "label": "Takanashi Kiara"
+      }
+    ],
+    "generation": [],
+    "type": [
+      {
+        "value": "chatting",
+        "label": "雑談"
+      },
+      {
+        "value": "game",
+        "label": "ゲーム実況"
+      },
+      {
+        "value": "event",
+        "label": "企画"
+      },
+      {
+        "value": "other",
+        "label": "その他"
+      }
+    ],
+    "game": [],
+    "event": [],
+    "series": [],
+    "collaboration": [
+      {
+        "value": "solo",
+        "label": "単独配信"
+      },
+      {
+        "value": "collab",
+        "label": "コラボ配信"
+      }
+    ],
+    "participant": [
+      {
+        "value": "ninomae-inanis",
+        "label": "Ninomae Ina'nis"
+      }
+    ],
+    "month": [
+      {
+        "value": "2026-06",
+        "label": "2026年06月"
+      },
+      {
+        "value": "2026-05",
+        "label": "2026年05月"
+      },
+      {
+        "value": "2026-03",
+        "label": "2026年03月"
+      },
+      {
+        "value": "2025-12",
+        "label": "2025年12月"
+      },
+      {
+        "value": "2025-09",
+        "label": "2025年09月"
+      },
+      {
+        "value": "2025-06",
+        "label": "2025年06月"
+      },
+      {
+        "value": "2025-05",
+        "label": "2025年05月"
+      },
+      {
+        "value": "2025-03",
+        "label": "2025年03月"
+      },
+      {
+        "value": "2025-01",
+        "label": "2025年01月"
+      },
+      {
+        "value": "2024-10",
+        "label": "2024年10月"
+      },
+      {
+        "value": "2024-09",
+        "label": "2024年09月"
+      },
+      {
+        "value": "2024-07",
+        "label": "2024年07月"
+      },
+      {
+        "value": "2024-05",
+        "label": "2024年05月"
+      },
+      {
+        "value": "2024-02",
+        "label": "2024年02月"
+      },
+      {
+        "value": "2023-12",
+        "label": "2023年12月"
+      },
+      {
+        "value": "2023-11",
+        "label": "2023年11月"
+      },
+      {
+        "value": "2023-09",
+        "label": "2023年09月"
+      },
+      {
+        "value": "2022-01",
+        "label": "2022年01月"
+      },
+      {
+        "value": "2020-12",
+        "label": "2020年12月"
+      },
+      {
+        "value": "2020-11",
+        "label": "2020年11月"
+      }
+    ],
+    "duration": [
+      {
+        "value": "short",
+        "label": "30分未満"
+      },
+      {
+        "value": "medium",
+        "label": "30分〜90分未満"
+      },
+      {
+        "value": "long",
+        "label": "90分〜3時間未満"
+      },
+      {
+        "value": "marathon",
+        "label": "3時間以上"
+      },
+      {
+        "value": "unknown",
+        "label": "時間不明"
+      }
+    ],
+    "cefr": [
+      {
+        "value": "A1",
+        "label": "A1"
+      },
+      {
+        "value": "A2",
+        "label": "A2"
+      },
+      {
+        "value": "B1",
+        "label": "B1"
+      },
+      {
+        "value": "B2",
+        "label": "B2"
+      },
+      {
+        "value": "C1",
+        "label": "C1"
+      },
+      {
+        "value": "C2",
+        "label": "C2"
+      },
+      {
+        "value": "unrated",
+        "label": "未評価"
+      }
+    ]
+  }
+}

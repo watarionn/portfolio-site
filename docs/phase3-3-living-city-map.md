@@ -62,3 +62,14 @@ Checkpoint 3 replaces the desktop CSS-only placeholder architecture with fourtee
 - no generated raster artwork, external icon pack, remote image dependency, or JavaScript drawing library is used
 - desktop uses the illustrated SVGs; mobile retains the compact CSS line drawings
 - project routes, visited state, keyboard behavior, district completion, WORKS, PROFILE, and CONTACT remain unchanged
+
+
+## Checkpoint 4 - Building interaction
+
+- desktop hover reacts without changing the selected project
+- click or keyboard focus opens a non-modal floating inspector beside the selected building
+- inspector placement is clamped inside the map layout and avoids covering the selected building
+- close button and Escape hide the desktop inspector while preserving selection and focus
+- overlapping district backgrounds do not intercept building pointer events
+- mobile keeps the existing stacked inspector flow below the map
+- reduced-motion behavior remains intact

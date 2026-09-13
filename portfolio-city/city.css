@@ -1337,3 +1337,97 @@ button { font: inherit; }
     border-bottom: 1px solid rgba(23,19,14,.28);
   }
 }
+
+/* Phase 3.3 / Checkpoint 4 — building interaction */
+.project-inspector__close {
+  display: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+@media (min-width: 981px) {
+  .map-layout {
+    position: relative;
+    display: block;
+  }
+  .city-map {
+    width: 100%;
+  }
+  .project-inspector {
+    position: absolute;
+    z-index: 30;
+    top: var(--inspector-y, 1.2rem);
+    left: var(--inspector-x, 1.2rem);
+    width: min(19rem, calc(100% - 2.4rem));
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(8px) scale(.985);
+    transform-origin: top left;
+    transition:
+      opacity .16s ease,
+      transform .18s var(--ease),
+      visibility .16s step-end;
+  }
+  .project-inspector.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition:
+      opacity .16s ease,
+      transform .18s var(--ease),
+      visibility 0s step-start;
+  }
+  .project-inspector__close {
+    position: absolute;
+    top: .55rem;
+    right: .65rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+  .project-inspector__close:hover,
+  .project-inspector__close:focus-visible {
+    color: var(--vermilion);
+  }
+  .district:has(.building-button:hover) .district-scene {
+    opacity: .3;
+  }
+  .district:has(.building-button:hover) .district-landmark,
+  .district:has(.building-button:focus-visible) .district-landmark {
+    transform: translateY(-2px);
+  }
+  .district-landmark {
+    transition: transform .18s var(--ease), opacity .18s ease;
+  }
+  .building-button:hover,
+  .building-button:focus-visible {
+    z-index: 8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-inspector,
+  .project-inspector.is-open,
+  .district-landmark {
+    transform: none !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@media (min-width: 981px) {
+  .district.is-hover-district .district-scene { opacity: .3; }
+  .district.is-hover-district .district-landmark { transform: translateY(-2px); }
+}
+
+@media (min-width: 981px) {
+  .district { pointer-events: none; }
+  .district .building-button { pointer-events: auto; }
+}

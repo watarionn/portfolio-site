@@ -189,9 +189,10 @@ function renderMap() {
         make('span', 'building-button__name', project.building),
         make('span', 'building-button__title', project.title)
       );
-      button.addEventListener('mouseenter', () => selectProject(project.id, false));
-      button.addEventListener('focus', () => selectProject(project.id, false));
-      button.addEventListener('click', () => selectProject(project.id, true));
+      button.addEventListener('mouseenter', () => section.classList.add('is-hover-district'));
+      button.addEventListener('mouseleave', () => section.classList.remove('is-hover-district'));
+      button.addEventListener('focus', () => selectProject(project.id, false, true));
+      button.addEventListener('click', () => selectProject(project.id, true, true));
       button.addEventListener('keydown', handleBuildingKeydown);
       buildings.append(button);
     }
@@ -202,6 +203,7 @@ function renderMap() {
 }
 
 function handleBuildingKeydown(event) {
+  if (event.key === 'Escape') { setInspectorOpen(false); return; }
   const keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
   if (!keys.includes(event.key)) return;
 
@@ -218,7 +220,43 @@ function handleBuildingKeydown(event) {
   buttons[next]?.focus();
 }
 
-function selectProject(projectId, userInitiated) {
+function positionInspector(project) {
+  if (!window.matchMedia('(min-width: 981px)').matches) return;
+  const inspector = document.getElementById('projectInspector');
+  const button = document.querySelector(`[data-project-id="${project.id}"]`);
+  const layout = inspector?.parentElement;
+  if (!inspector || !button || !layout) return;
+  const layoutRect = layout.getBoundingClientRect();
+  const buttonRect = button.getBoundingClientRect();
+  const inspectorRect = inspector.getBoundingClientRect();
+  const margin = 18;
+  const width = inspectorRect.width || 304;
+  const height = inspectorRect.height || 360;
+  const rightSpace = layoutRect.width - (buttonRect.right - layoutRect.left);
+  const leftSpace = buttonRect.left - layoutRect.left;
+  let x = rightSpace >= width + margin || rightSpace >= leftSpace
+    ? buttonRect.right - layoutRect.left + margin
+    : buttonRect.left - layoutRect.left - width - margin;
+  x = Math.min(Math.max(margin, x), Math.max(margin, layoutRect.width - width - margin));
+  let y = buttonRect.top - layoutRect.top + buttonRect.height / 2 - height / 2;
+  y = Math.min(Math.max(margin, y), Math.max(margin, layoutRect.height - height - margin));
+  inspector.style.setProperty('--inspector-x', `${Math.round(x)}px`);
+  inspector.style.setProperty('--inspector-y', `${Math.round(y)}px`);
+}
+
+function setInspectorOpen(open, project) {
+  const inspector = document.getElementById('projectInspector');
+  if (!inspector) return;
+  const desktop = window.matchMedia('(min-width: 981px)').matches;
+  const effectiveOpen = desktop ? open : true;
+  inspector.classList.toggle('is-open', effectiveOpen);
+  inspector.setAttribute('aria-hidden', desktop && !open ? 'true' : 'false');
+  if (desktop && !open) inspector.setAttribute('inert', '');
+  else inspector.removeAttribute('inert');
+  if (desktop && open && project) requestAnimationFrame(() => positionInspector(project));
+}
+
+function selectProject(projectId, userInitiated, openInspector = false) {
   const project = state.projects.find((item) => item.id === projectId);
   if (!project) return;
 
@@ -234,6 +272,7 @@ function selectProject(projectId, userInitiated) {
     button.setAttribute('aria-pressed', String(selected));
   });
   updateInspector(project);
+  setInspectorOpen(openInspector, project);
 
   if (userInitiated && window.matchMedia('(max-width: 680px)').matches) {
     document.getElementById('projectInspector')?.scrollIntoView({
@@ -367,6 +406,20 @@ function setMobilePrimary(name, activate = true) {
 }
 
 function bindNavigation() {
+  document.querySelector('.project-inspector__close')?.addEventListener('click', () => {
+    document.querySelector(`[data-project-id="${state.selectedProjectId}"]`)?.focus({ preventScroll: true });
+    setInspectorOpen(false);
+  });
+  if (typeof window.addEventListener === 'function') {
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setInspectorOpen(false);
+    });
+    window.addEventListener('resize', () => {
+      const inspector = document.getElementById('projectInspector');
+      const selected = state.projects.find((project) => project.id === state.selectedProjectId);
+      if (inspector?.classList.contains('is-open') && selected) positionInspector(selected);
+    });
+  }
   document.querySelectorAll('[data-panel-target]').forEach((button) => {
     button.addEventListener('click', () => activatePanel(button.dataset.panelTarget));
   });

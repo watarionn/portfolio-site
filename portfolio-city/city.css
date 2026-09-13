@@ -1286,3 +1286,54 @@ button { font: inherit; }
   [data-district-id="waterside-play"] .district-scene__sign { right:30%; bottom:10%; color:rgba(49,93,101,.44); }
   [data-district-id="waterside-play"] .district-scene__detail { left:3%; right:3%; bottom:4%; height:1.4rem; border-top:1px dotted rgba(49,93,101,.36); border-radius:50%; }
 }
+
+/* Phase 3.3 / Checkpoint 3 — illustrated building metaphors */
+@media (min-width: 981px) {
+  .building-button .building-visual {
+    top: -.65rem;
+    width: 8.6rem;
+    height: 6.3rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 1;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 4px 2px rgba(23,19,14,.13));
+  }
+  .building-button .building-visual > * { display: none; }
+  .building-button:hover .building-visual,
+  .building-button.is-selected .building-visual {
+    transform: translateX(-50%) translateY(-4px) scale(1.04);
+    filter: drop-shadow(0 7px 4px rgba(23,19,14,.2));
+  }
+  .building-button { padding-top: 4.95rem; }
+  .building-button.is-visited::after { top: 4rem; }
+  [data-project-id="holoscope"] .building-visual { background-image: url("assets/buildings/holoscope.svg"); }
+  [data-project-id="sphere"] .building-visual { background-image: url("assets/buildings/sphere.svg"); }
+  [data-project-id="prime-dot-art"] .building-visual { background-image: url("assets/buildings/prime-dot-art.svg"); }
+  [data-project-id="yorei"] .building-visual { background-image: url("assets/buildings/yorei.svg"); }
+  [data-project-id="actress-finder"] .building-visual { background-image: url("assets/buildings/actress-finder.svg"); }
+  [data-project-id="cheatsheet"] .building-visual { background-image: url("assets/buildings/cheatsheet.svg"); }
+  [data-project-id="shisha"] .building-visual { background-image: url("assets/buildings/shisha.svg"); }
+  [data-project-id="dqb2"] .building-visual { background-image: url("assets/buildings/dqb2.svg"); }
+  [data-project-id="madori"] .building-visual { background-image: url("assets/buildings/madori.svg"); }
+  [data-project-id="maze-maker"] .building-visual { background-image: url("assets/buildings/maze-maker.svg"); }
+  [data-project-id="anagram"] .building-visual { background-image: url("assets/buildings/anagram.svg"); }
+  [data-project-id="aquarium"] .building-visual { background-image: url("assets/buildings/aquarium.svg"); }
+  [data-project-id="holoca"] .building-visual { background-image: url("assets/buildings/holoca.svg"); }
+  [data-project-id="word-generator"] .building-visual { background-image: url("assets/buildings/word-generator.svg"); }
+}
+@media (min-width: 981px) {
+  [data-project-id="cheatsheet"],
+  [data-project-id="shisha"],
+  [data-project-id="maze-maker"],
+  [data-project-id="anagram"] { top: 56%; }
+}
+@media (min-width: 981px) {
+  .district__heading {
+    width: max-content;
+    max-width: 100%;
+    padding: .28rem .55rem;
+    border-bottom: 1px solid rgba(23,19,14,.28);
+  }
+}

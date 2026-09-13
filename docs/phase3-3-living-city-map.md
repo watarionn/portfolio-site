@@ -52,3 +52,13 @@ Checkpoint 2 enriches the desktop city without changing project data or mobile n
 - keep mobile <=980 px on the readable stacked map, with new desktop-only scenery hidden
 
 Acceptance: desktop retains 14 non-overlapping buildings, gains the new streetscape props, preserves keyboard/visited behavior, and remains free of horizontal overflow; mobile remains structurally unchanged.
+
+## Checkpoint 3 — illustrated building metaphors
+
+Checkpoint 3 replaces the desktop CSS-only placeholder architecture with fourteen hand-authored SVG building illustrations while preserving the existing mobile line-art map.
+
+- every locked project ID receives one local SVG under `portfolio-city/assets/buildings/`
+- the visual metaphor comes from the work itself: telescope tower, dome, giant book, map pin, fish-shaped aquarium, card shop, etc.
+- no generated raster artwork, external icon pack, remote image dependency, or JavaScript drawing library is used
+- desktop uses the illustrated SVGs; mobile retains the compact CSS line drawings
+- project routes, visited state, keyboard behavior, district completion, WORKS, PROFILE, and CONTACT remain unchanged

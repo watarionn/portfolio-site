@@ -85,6 +85,14 @@ def main() -> int:
     if len(project_ids) != len(set(project_ids)) or set(project_ids) != set(EXPECTED_ROUTES):
         fail("project IDs differ from the locked 14-work inventory")
 
+    for project_id in EXPECTED_ROUTES:
+        svg_path = CITY / "assets/buildings" / f"{project_id}.svg"
+        if not svg_path.is_file():
+            fail(f"missing illustrated building asset: {project_id}.svg")
+        svg_text = svg_path.read_text(encoding="utf-8")
+        if "<svg" not in svg_text or "viewBox=" not in svg_text:
+            fail(f"invalid illustrated building asset: {project_id}.svg")
+
     actual_assignments: dict[str, set[str]] = {key: set() for key in EXPECTED_DISTRICTS}
     for project in projects:
         if not isinstance(project, dict):
@@ -127,7 +135,9 @@ def main() -> int:
 
     for project_id in EXPECTED_ROUTES:
         if f'data-project-id="{project_id}"' not in css:
-            fail(f"city.css is missing a distinct Phase 3.2 building visual for {project_id}")
+            fail(f"city.css is missing a distinct building rule for {project_id}")
+        if f'assets/buildings/{project_id}.svg' not in css:
+            fail(f"city.css is missing the illustrated building asset reference for {project_id}")
 
     deployment = load_json(ROOT / "config/deployment-map.json")
     matches = [entry for entry in deployment.get("entries", []) if entry.get("id") == "portfolio-city"]

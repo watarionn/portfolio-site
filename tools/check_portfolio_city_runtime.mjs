@@ -254,12 +254,15 @@ assert.equal(documentMock.querySelectorAll('.district-scene__prop').length, 12, 
 assert.equal(documentMock.querySelectorAll('.city-map__infrastructure').length, 1, 'map must render one infrastructure layer');
 assert.equal(documentMock.querySelectorAll('.city-map__street-label').length, 4, 'map must render four street labels');
 assert.equal(documentMock.querySelectorAll('[data-district-progress]').length, 4, 'map must render four district progress labels');
+assert.equal(documentMock.querySelectorAll('[data-district-complete]').length, 4, 'map must render four district completion badges');
 assert.equal(workRows.length, 14, 'works directory must render fourteen rows');
 
 assert.equal(inspector.querySelector('h3').textContent, 'HoloScope');
 assert.equal(enter.href, '/holoscope/');
 assert.equal(enter.hidden, false);
 assert.equal(buildings[0].classList.contains('is-selected'), true);
+assert.equal(buildings[0].getAttribute('aria-pressed'), 'true');
+assert.match(buildings[0].getAttribute('aria-label'), /未訪問$/);
 assert.equal(districts[0].classList.contains('is-active-district'), true, 'selected project must activate its district');
 assert.equal(cityMap.dataset.activeDistrict, 'observatory-hill');
 
@@ -282,6 +285,15 @@ assert.equal(buildings[2].classList.contains('is-visited'), true);
 assert.equal(workRows.find((row) => row.dataset.projectId === 'prime-dot-art').classList.contains('is-visited'), true);
 assert.equal(documentMock.querySelectorAll('[data-district-progress]')[0].textContent, 'VISITED 1 / 3');
 assert.equal(districts[0].classList.contains('has-visited'), true);
+assert.match(buildings[2].getAttribute('aria-label'), /訪問済み$/);
+buildings[0].focus();
+enter.click();
+buildings[1].focus();
+enter.click();
+assert.equal(districts[0].classList.contains('is-complete-district'), true);
+assert.equal(districts[0].dataset.visitState, 'complete');
+assert.equal(documentMock.querySelectorAll('[data-district-progress]')[0].textContent, 'VISITED 3 / 3');
+assert.equal(documentMock.querySelectorAll('[data-district-complete]')[0].hidden, false);
 
 const worksNav = documentMock.querySelectorAll('[data-panel-target]').find((button) => button.dataset.panelTarget === 'works');
 worksNav.click();

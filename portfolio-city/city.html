@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="風花 理珠 / Liz Hookah の制作物を、4つの地区と14の建物として歩く Portfolio City のビジュアル実装プレビュー。">
-  <title>Portfolio City | Phase 3.2 Visual Layer</title>
+  <meta name="description" content="風花 理珠 / Liz Hookah の制作物を、4つの地区と14の建物として歩く Portfolio City の一枚街マップを育てる Living City Map プレビュー。">
+  <title>Portfolio City | Phase 3.3 Living City Map</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <div class="city-shell city-header__bar">
       <a class="city-wordmark" href="city.html" aria-label="Portfolio City の先頭へ">
         <span>PORTFOLIO CITY</span>
-        <small>Phase 3.2 / Visual Layer</small>
+        <small>Phase 3.3 / Living City Map</small>
       </a>
       <a class="back-link" href="/">現在のポートフォリオへ戻る ↗</a>
     </div>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="map-layout">
-          <div class="city-map" id="cityMap" aria-label="4地区からなる Portfolio City の地図"></div>
+          <div class="city-map" id="cityMap" data-layout="living-city" aria-label="4地区が一続きにつながる Portfolio City の街地図"></div>
 
           <aside class="project-inspector" id="projectInspector" aria-live="polite" aria-label="選択中の作品">
             <p class="project-inspector__eyebrow">SELECT A BUILDING</p>
@@ -130,7 +130,7 @@
 
   <footer class="city-footer">
     <div class="city-shell city-footer__inner">
-      <p>Portfolio City / Phase 3.2 Visual Layer</p>
+      <p>Portfolio City / Phase 3.3 Living City Map</p>
       <p>既存ポートフォリオは変更せず、独立プレビューとして建設中。</p>
     </div>
   </footer>

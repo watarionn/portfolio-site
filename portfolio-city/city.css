@@ -152,7 +152,7 @@ button { font: inherit; }
   display: none;
   position: sticky;
   z-index: 70;
-  top: 3.55rem;
+  top: 3.05rem;
   padding: .6rem var(--gutter);
   gap: .5rem;
   background: var(--paper-soft);
@@ -1031,5 +1031,190 @@ button { font: inherit; }
     white-space: normal;
     text-align: center;
     line-height: 1.2;
+  }
+}
+
+/* Phase 3.3 / Checkpoint 1 — Living City desktop canvas */
+@media (min-width: 981px) {
+  .city-map {
+    min-height: 58rem;
+    display: block;
+    padding: 0;
+    border-radius: 1.2rem;
+    background:
+      radial-gradient(ellipse at 50% 6%, rgba(122,145,109,.20) 0 10%, transparent 28%),
+      radial-gradient(ellipse at 20% 38%, rgba(187,171,126,.16) 0 12%, transparent 34%),
+      radial-gradient(ellipse at 82% 42%, rgba(161,145,112,.14) 0 14%, transparent 36%),
+      linear-gradient(to bottom, #eee8d6 0 68%, #dbe9e4 68% 100%);
+  }
+  .city-map::before {
+    left: -5%;
+    right: -5%;
+    bottom: 3.5%;
+    height: 18%;
+    border-block: 0;
+    background: linear-gradient(180deg, rgba(126,168,171,.12), rgba(126,168,171,.34));
+    transform: rotate(-1.2deg);
+  }
+  .city-map__infrastructure { inset: 0; }
+  .city-map__road--spine {
+    top: 9%;
+    bottom: 17%;
+    left: calc(50% - .55rem);
+    width: 1.1rem;
+    transform: rotate(2deg);
+  }
+  .city-map__road--cross {
+    left: 7%;
+    right: 7%;
+    top: 43%;
+    height: 1.05rem;
+    transform: rotate(-1deg);
+  }
+  .city-map__plaza {
+    top: calc(43% - 1.45rem);
+    left: calc(50% - 1.45rem);
+    width: 2.9rem;
+    box-shadow: 0 0 0 .55rem rgba(248,243,231,.72);
+  }
+  .city-map__bridge {
+    left: 43%;
+    right: 43%;
+    bottom: 13%;
+    height: .95rem;
+  }
+  .district {
+    position: absolute;
+    z-index: 1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  [data-district-id="observatory-hill"] { left: 24%; top: 3%; width: 52%; height: 31%; }
+  [data-district-id="archive-street"] { left: 3%; top: 31%; width: 44%; height: 36%; }
+  [data-district-id="workshop-alley"] { right: 3%; top: 32%; width: 44%; height: 36%; }
+  [data-district-id="waterside-play"] { left: 11%; right: 11%; bottom: 2.5%; height: 28%; }
+  .district__heading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    gap: .55rem;
+    padding: .28rem .48rem;
+    border: 1px solid rgba(23,19,14,.28);
+    background: rgba(248,243,231,.84);
+    backdrop-filter: blur(2px);
+  }
+  .district__heading h3 { font-size: 1rem; }
+  .district__heading-meta { gap: .35rem; }
+  .district__count { font-size: .58rem; }
+  .district__meta { display: none; }
+  .district__progress {
+    position: absolute;
+    top: 2.4rem;
+    left: .1rem;
+    z-index: 4;
+    margin: 0;
+    padding: .12rem .3rem;
+    background: rgba(248,243,231,.74);
+  }
+  .district-landmark {
+    position: absolute;
+    z-index: 4;
+    top: .15rem;
+    right: .1rem;
+    min-height: 1.8rem;
+    margin: 0;
+    padding: .22rem .42rem .22rem .28rem;
+    background: rgba(248,243,231,.78);
+    font-size: .52rem;
+  }
+  .district-landmark__visual { width: 1.2rem; height: 1.2rem; transform: scale(.82); }
+  .district__buildings { position: absolute; inset: 0; display: block; }
+  .building-button {
+    position: absolute;
+    width: 7.5rem;
+    min-height: 6.8rem;
+    padding: 3.8rem .1rem 0;
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    text-align: center;
+    align-items: center;
+    box-shadow: none;
+  }
+  .building-button:hover,
+  .building-button.is-selected {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: none;
+    background: transparent;
+  }
+  .building-button.is-selected { outline: 2px solid rgba(154,52,39,.45); outline-offset: .25rem; }
+  .building-button .building-visual {
+    top: .15rem;
+    transform: translateX(-50%) scale(1.18);
+    transform-origin: top center;
+  }
+  .building-button.is-selected .building-visual { color: var(--vermilion); opacity: .94; }
+  .building-button__name {
+    display: block;
+    max-width: 8rem;
+    color: var(--cobalt);
+    font-size: .48rem;
+    line-height: 1.2;
+  }
+  .building-button__title {
+    display: inline-block;
+    max-width: 7.4rem;
+    margin-top: .08rem;
+    padding: .24rem .46rem;
+    border-radius: .2rem;
+    background: rgba(23,19,14,.88);
+    color: var(--paper-soft);
+    font-size: .72rem;
+    line-height: 1.25;
+    box-shadow: 0 2px 0 rgba(23,19,14,.12);
+  }
+  .building-button.is-visited::after {
+    position: absolute;
+    top: 3.05rem;
+    right: .25rem;
+    padding: .05rem .22rem;
+    background: rgba(248,243,231,.9);
+    font-size: .42rem;
+  }
+  [data-project-id="holoscope"] { left: 41%; top: 4%; }
+  [data-project-id="sphere"] { left: 2%; top: 48%; }
+  [data-project-id="prime-dot-art"] { right: 1%; top: 48%; }
+  [data-project-id="yorei"] { left: 1%; top: 24%; }
+  [data-project-id="actress-finder"] { right: 1%; top: 24%; }
+  [data-project-id="cheatsheet"] { left: 1%; top: 66%; }
+  [data-project-id="shisha"] { right: 1%; top: 66%; }
+  [data-project-id="dqb2"] { left: 1%; top: 24%; }
+  [data-project-id="madori"] { right: 1%; top: 24%; }
+  [data-project-id="maze-maker"] { left: 1%; top: 66%; }
+  [data-project-id="anagram"] { right: 1%; top: 66%; }
+  [data-project-id="aquarium"] { left: 1%; top: 14%; }
+  [data-project-id="holoca"] { left: 40%; top: 0; }
+  [data-project-id="word-generator"] { right: 1%; top: 14%; }
+  .district-scene { opacity: .16; }
+  .district.is-active-district { border: 0; box-shadow: none; }
+  .district.is-active-district .district__heading { border-color: rgba(154,52,39,.62); }
+  .district.is-complete-district { box-shadow: none !important; }
+  .city-map__street-label--north { top: 22%; left: 50.7%; }
+  .city-map__street-label--west { top: 47%; left: 13%; }
+  .city-map__street-label--east { top: 48%; right: 12%; }
+  .city-map__street-label--south { bottom: 9%; }
+}
+
+@media (min-width: 981px) {
+  .district__buildings {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    inset: auto;
   }
 }

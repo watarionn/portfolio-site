@@ -107,7 +107,7 @@ def main() -> int:
         fail("project-to-district assignments differ from the Phase 3.1 plan")
 
     html = (CITY / "city.html").read_text(encoding="utf-8")
-    for marker in ("MAP", "WORKS", "PROFILE", "CONTACT", 'id="cityMap"', 'id="projectInspector"', 'id="worksDirectory"', 'class="map-legend"'):
+    for marker in ("MAP", "WORKS", "PROFILE", "CONTACT", 'id="cityMap"', 'id="projectInspector"', 'id="worksDirectory"', 'class="map-legend"', 'data-layout="living-city"'):
         if marker not in html:
             fail(f"city.html is missing required marker: {marker}")
     if 'city-hero' in html or 'city-status' in html:
@@ -121,7 +121,7 @@ def main() -> int:
         fail("city.js must not render data with innerHTML")
 
     css = (CITY / "city.css").read_text(encoding="utf-8")
-    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark", ".district-scene", ".is-active-district", ".city-map__street-label", ".district__progress", ".map-legend", ".district__complete", ".is-complete-district"):
+    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark", ".district-scene", ".is-active-district", ".city-map__street-label", ".district__progress", ".map-legend", ".district__complete", ".is-complete-district", "@media (min-width: 981px)"):
         if marker not in css:
             fail(f"city.css is missing required responsive/map rule: {marker}")
 
@@ -138,7 +138,7 @@ def main() -> int:
     if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
         fail("validate-public workflow must run the Portfolio City runtime contract")
 
-    print("Portfolio City Phase 3.2 contract passed: 14 works / 4 districts / 14 handcrafted visuals / runtime guard")
+    print("Portfolio City Phase 3.3 contract passed: 14 works / 4 districts / living desktop canvas / runtime guard")
     return 0
 
 

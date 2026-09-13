@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_hakos_baelz",
+  "slug": "hakos-baelz",
+  "displayName": "Hakos Baelz",
+  "nameJa": "ハコス・ベールズ",
+  "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_mkru3ewvipu",
+      "slug": "hakos-baelz-mkru3ewvipu",
+      "videoId": "mkrU3EWVIpU",
+      "title": "「30分だけ」のはずが大混乱　Hakos Baelzが寝坊と“禁断の炒飯”計画を語る",
+      "summaryOneLine": "寝坊で慌ただしく始まった約30分の雑談で、Baelzが過密日程とMcDonald’sのナゲット入り炒飯という突発的な食事案を語りました。",
+      "streamType": "chatting",
+      "publishedAt": "2024-07-02T02:32:00Z",
+      "durationSeconds": 1668,
+      "thumbnailUrl": "https://i.ytimg.com/vi/mkrU3EWVIpU/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-07",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ]
+    },
+    {
+      "uid": "str_1k6stuynt1a",
+      "slug": "hakos-baelz-1k6stuynt1a",
+      "videoId": "1K6stUYNT1A",
+      "title": "Hakos Baelzの新ケープはタスマニアデビル　3つの予想と豆知識で正体を公開",
+      "summaryOneLine": "動物クイズのような進行を経て、Baelzがオーストラリアに生息するタスマニアデビルをモチーフにしたケープを披露しました。",
+      "streamType": "event",
+      "publishedAt": "2023-09-28T01:30:00Z",
+      "durationSeconds": 1420,
+      "thumbnailUrl": "https://i.ytimg.com/vi/1K6stUYNT1A/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-09",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "衣装お披露目",
+        "Council"
+      ]
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 2,
+    "soloCount": 2,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 1
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/hakos-baelz/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

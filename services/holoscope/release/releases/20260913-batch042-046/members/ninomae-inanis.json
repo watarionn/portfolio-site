@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_ninomae_inanis",
+  "slug": "ninomae-inanis",
+  "displayName": "Ninomae Ina'nis",
+  "nameJa": "一伊那尓栖",
+  "channelId": "UCMwGHR0BTZuLsmjY_NT5Pwg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCMwGHR0BTZuLsmjY_NT5Pwg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_xqhkhs2hhxm",
+      "slug": "ninomae-inanis-xqhkhs2hhxm",
+      "videoId": "XQHKHS2hHxM",
+      "title": "Inaの休暇前雑談　Kingdom Hearts IVへの驚きから音楽、食事、Bibooとの外出まで",
+      "summaryOneLine": "Inaが最近気になったゲームと音楽、生活の工夫、Bibooとの外出を落ち着いたテンポで振り返る休暇前雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2026-06-10T23:00:00Z",
+      "durationSeconds": 3831,
+      "thumbnailUrl": "https://i.ytimg.com/vi/XQHKHS2hHxM/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ]
+    },
+    {
+      "uid": "str_0fmux6izsvw",
+      "slug": "ninomae-inanis-0fmux6izsvw",
+      "videoId": "0fmuX6IZsVw",
+      "title": "「自分の好み」だけで決めない　InaがFashion Dreamerで作ったコーデの考え方",
+      "summaryOneLine": "この配信は、かわいい服を次々と選ぶだけの時間ではありません。",
+      "streamType": "game",
+      "publishedAt": "2023-11-17T00:29:46Z",
+      "durationSeconds": 8458,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fmuX6IZsVw/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0h5a1xkuofa",
+      "slug": "ninomae-inanis-0h5a1xkuofa",
+      "videoId": "0h5A1xkuofA",
+      "title": "「分かった」を二人で積み重ねる　InaとAmeliaのPortal 2協力プレイ",
+      "summaryOneLine": "InaとAmeliaの協力プレイは、答えを知っている人が引っ張る配信ではありません。",
+      "streamType": "game",
+      "publishedAt": "2020-12-05T00:47:45Z",
+      "durationSeconds": 5667,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0h5A1xkuofA/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-12",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 3,
+    "soloCount": 3,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 2
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [
+    {
+      "uid": "mem_nerissa_ravencroft",
+      "slug": "nerissa-ravencroft",
+      "displayName": "Nerissa Ravencroft",
+      "streamCount": 1,
+      "label": "共演配信 1件"
+    }
+  ],
+  "streamSearchUrl": "/members/ninomae-inanis/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCMwGHR0BTZuLsmjY_NT5Pwg",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

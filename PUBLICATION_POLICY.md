@@ -28,6 +28,7 @@ The current public repository contains:
 - the AQUARIUM public source under `apps/aquarium/public/**`
 - the HOLOCA public source under `services/holoca/public/**`
 - the HoloScope public application shell under `services/holoscope/public/**`
+- reviewed HoloScope immutable release data under `services/holoscope/release/**`
 - the SHISHA public viewer under `services/shisha/public/**`
 - the SECRET entrance source under `apps/secret-room/public/**`
 
@@ -55,13 +56,13 @@ The portfolio shell must not link to `/CHARACTER/` or expose the former characte
 
 `CHARACTER` is listed in `retiredRemotePaths`. On production deployment, the deployment workflow removes that remote directory explicitly and then verifies that `/CHARACTER/character-index.html` no longer returns a public success response. Future deployments continue to enforce the retirement while leaving unrelated remote-only files untouched.
 
-## HoloScope reviewed public shell
+## HoloScope reviewed public shell and release data
 
-HoloScope remains an exact 86-file reviewed public shell. Stage 9 re-reviewed the home presentation and route precedence while preserving the original Stage 5 public/private boundary; the approved public tree is now `91ad6e1661ecc4136dcc1a682c337b83e543b3f5`. The original boundary was sourced from the private Stage 5 allowlist revision `e856e990ea31140cb46df225b7ac01e7a469a7c3` and source-lock merge `3cc31a7292456a953d94673fcb6d60d75d9f9e8e`.
+HoloScope retains an exact 86-file reviewed application shell under `services/holoscope/public/**`. Stage 9 re-reviewed the home presentation and route precedence while preserving that shell boundary; the approved public tree remains `91ad6e1661ecc4136dcc1a682c337b83e543b3f5`.
 
-The Stage 9 revision adds compact observatory-model framing to the home page and makes current application route roots take precedence over stale same-name directories that can remain after non-destructive production deployments. Internal application resources remain denied before that route rule, while unrelated remote-only legacy material is not adopted or deleted.
+Reviewed immutable release data is versioned separately under `services/holoscope/release/**`. It may contain only the active pointer and an explicitly reviewed release package produced by the private Phase 7 publication pipeline. `config/holoscope-release.json` declares the active release, verified private-source commit, fallback allowlist, and public sidecars. `tools/validate_holoscope_release.py` verifies the pointer, release manifest, exact file inventory, byte sizes, and SHA-256 hashes before deployment.
 
-The validator requires the exact reviewed subtree plus Stage 9 presentation and route markers, and rejects non-public HoloScope siblings. Private release overlays, legacy material, tests, production runtime data, local admin configuration, mutable operations state, credentials, and private deployment material remain outside this public source tree. Server-only HoloScope material such as `admin.local.php`, `data/**`, and `releases/**` must remain private or server-resident and must not be committed here.
+`tools/build_deployment.py` keeps source ownership separate: the 86-file shell is copied normally, then the reviewed release is overlaid into `/holoscope/data`, `/holoscope/releases`, feeds, and sitemap paths. The deployment artifact must not contain `/holoscope/data/operations/**`. Formal source, transcripts, evidence ledgers, review metadata, operator tooling, mutable runtime state, local admin configuration, credentials, and private deployment material remain outside the public repository.
 
 ## SHISHA reviewed public viewer
 

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_cecilia_immergreen",
+  "slug": "cecilia-immergreen",
+  "displayName": "Cecilia Immergreen",
+  "nameJa": null,
+  "channelId": "UCvN5h1ShZtc7nly3pezRayg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCvN5h1ShZtc7nly3pezRayg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0zvti9cibve",
+      "slug": "cecilia-immergreen-0zvti9cibve",
+      "videoId": "0ZvTI9cibvE",
+      "title": "アイスを売って借金返済へ　CeciliaのholoGTA商売記",
+      "summaryOneLine": "この日のholoGTAでCeciliaを動かしていたのは、銃や犯罪だけではなく「アイスを売る」という一貫した目的でした。",
+      "streamType": "game",
+      "publishedAt": "2024-09-23T15:41:35Z",
+      "durationSeconds": 12636,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0ZvTI9cibvE/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-09",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 1,
+    "soloCount": 1,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/cecilia-immergreen/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCvN5h1ShZtc7nly3pezRayg",
+      "checkedAt": "2026-09-13T04:51:44Z"
+    }
+  ],
+  "createdAt": "2026-09-13T04:51:44Z",
+  "updatedAt": "2026-09-13T04:51:44Z"
+}

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_nerissa_ravencroft",
+  "slug": "nerissa-ravencroft",
+  "displayName": "Nerissa Ravencroft",
+  "nameJa": "ネリッサ・レイヴンクロフト",
+  "channelId": "UC_sFNM0z0MWm9A6WlKPuMMg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UC_sFNM0z0MWm9A6WlKPuMMg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_vomhneyv_m",
+      "slug": "nerissa-ravencroft-vomhneyv-m",
+      "videoId": "_vOMhneYv_M",
+      "title": "NerissaとInaがAmiAmiでクリスマスギフト探し　店内を巡って見つけた「相手らしい一品」",
+      "summaryOneLine": "AmiAmiの豊富な商品を見ながら、二人が相手や仲間を思い浮かべてクリスマスギフトを選ぶ買い物企画です。",
+      "streamType": "event",
+      "publishedAt": "2025-12-25T02:30:00Z",
+      "durationSeconds": 759,
+      "thumbnailUrl": "https://i.ytimg.com/vi/_vOMhneYv_M/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [
+        {
+          "uid": "mem_ninomae_inanis",
+          "slug": "ninomae-inanis",
+          "displayName": "Ninomae Ina'nis"
+        }
+      ],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "collab",
+      "month": "2025-12",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "PR",
+        "AmiAmi",
+        "クリスマス"
+      ]
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 1,
+    "soloCount": 0,
+    "collaborationCount": 1,
+    "types": [
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [
+    {
+      "uid": "mem_ninomae_inanis",
+      "slug": "ninomae-inanis",
+      "displayName": "Ninomae Ina'nis",
+      "streamCount": 1,
+      "label": "共演配信 1件"
+    }
+  ],
+  "streamSearchUrl": "/members/nerissa-ravencroft/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UC_sFNM0z0MWm9A6WlKPuMMg",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

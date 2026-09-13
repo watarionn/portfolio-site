@@ -1,0 +1,459 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseId": "20260913-batch042-046",
+  "verifiedCommitSha": "aa69e3faed18c661410b5eb60243aa807ca64bed",
+  "checksReportSha256": "ed952d08bc49d8af704863633a8e504487d9cca4c978387ac5d91ffda0ea9871",
+  "createdAt": "2026-09-13T05:17:39Z",
+  "files": [
+    {
+      "path": "articles/index.json",
+      "bytes": 83,
+      "sha256": "249c54f473e5159a0911c22998a8e2e01b061ed9f623b822c5add0a9d48dc518"
+    },
+    {
+      "path": "events/index.json",
+      "bytes": 65,
+      "sha256": "8fcbad7b9e18d2ca0291a07f6f01e3a7a23d1ac8a63627f9dd4e012e99bac748"
+    },
+    {
+      "path": "feeds/all.xml",
+      "bytes": 15630,
+      "sha256": "3342e9a1db7cbc5f8b0407a8c4c6058b4c24e12c102dc96d7ef84f837701a44c"
+    },
+    {
+      "path": "feeds/articles.xml",
+      "bytes": 364,
+      "sha256": "1cac626241634b7f44aab597b1eb295ae5a628207de5c9a46b260a756c048891"
+    },
+    {
+      "path": "feeds/streams.xml",
+      "bytes": 15624,
+      "sha256": "dd10cc90065059c1a280de3f67cda3a9a27d2aad1b34bd0e446afd188748d6bb"
+    },
+    {
+      "path": "games/index.json",
+      "bytes": 65,
+      "sha256": "8fcbad7b9e18d2ca0291a07f6f01e3a7a23d1ac8a63627f9dd4e012e99bac748"
+    },
+    {
+      "path": "generations/index.json",
+      "bytes": 65,
+      "sha256": "8fcbad7b9e18d2ca0291a07f6f01e3a7a23d1ac8a63627f9dd4e012e99bac748"
+    },
+    {
+      "path": "home.json",
+      "bytes": 6810,
+      "sha256": "bafe107e3e075c24476ceac32c86958adced7732a216cf0f61ab427111065e74"
+    },
+    {
+      "path": "learning/guides/index.json",
+      "bytes": 65,
+      "sha256": "8fcbad7b9e18d2ca0291a07f6f01e3a7a23d1ac8a63627f9dd4e012e99bac748"
+    },
+    {
+      "path": "learning/index.json",
+      "bytes": 1481,
+      "sha256": "db98d2c21ee118c00b3211daf512ffbc907bc305e1a3391b49827a3873f8b030"
+    },
+    {
+      "path": "learning/streams/filters/cefr.json",
+      "bytes": 75,
+      "sha256": "98e4ae86cddd251117992b08f9d0c5458c44da3bf30aaa5a2d4fcea1640404e1"
+    },
+    {
+      "path": "learning/streams/filters/clarity.json",
+      "bytes": 78,
+      "sha256": "d0b8c9098ad6f19b3c49883cbdce9dfee226ab252a85d0ea25af31ee647bbd5f"
+    },
+    {
+      "path": "learning/streams/filters/context.json",
+      "bytes": 78,
+      "sha256": "a4b8570cd284f79a3cf4b5ebbeff8c44b401718ab1cea5587222319af35f3412"
+    },
+    {
+      "path": "learning/streams/filters/member.json",
+      "bytes": 77,
+      "sha256": "c57639e7748b2d0a3468733de315a52402197125ef286e9bdea253ac9526bf0f"
+    },
+    {
+      "path": "learning/streams/filters/overlap.json",
+      "bytes": 78,
+      "sha256": "f484fd5d4b4f0ed83a3025b2e62f04e1950467d8d67d4607571e7bcb5e1c5f8e"
+    },
+    {
+      "path": "learning/streams/filters/slang.json",
+      "bytes": 76,
+      "sha256": "a16cea3797552c13eb447e0dab3083cc4c9cef4c09a49f90fc92ae919ef65b94"
+    },
+    {
+      "path": "learning/streams/filters/speed.json",
+      "bytes": 76,
+      "sha256": "5147e7f38015646733f23d4ffb1e6bd7bf4e048c2b0cbdc23cb5b85006953500"
+    },
+    {
+      "path": "learning/streams/filters/type.json",
+      "bytes": 75,
+      "sha256": "12689bd8e15466737736a2696d1b31bd8061c0388f34737c1e016a2babf243f4"
+    },
+    {
+      "path": "learning/streams/index.json",
+      "bytes": 65,
+      "sha256": "8fcbad7b9e18d2ca0291a07f6f01e3a7a23d1ac8a63627f9dd4e012e99bac748"
+    },
+    {
+      "path": "learning/streams/manifest.json",
+      "bytes": 711,
+      "sha256": "b38c4a4567f69ef1780543dbc00932afabad8644d7caea8446aad14ebe769fe4"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 15742,
+      "sha256": "5ebb3f34b449f804050ceec46c8699645f2c8be573825af438a9448b648f4f49"
+    },
+    {
+      "path": "members/cecilia-immergreen.json",
+      "bytes": 2257,
+      "sha256": "b2789d42b32f2354c2cf2a0e66c30676a81192df71a5c930c1a4ef5c83311b1b"
+    },
+    {
+      "path": "members/elizabeth-rose-bloodflame.json",
+      "bytes": 3603,
+      "sha256": "e5aa5a4eec6ff8fde4c990b7f2f9b98d6556762289f7a4b49bf781a7ce5cb041"
+    },
+    {
+      "path": "members/fuwamoco.json",
+      "bytes": 7813,
+      "sha256": "f635e2e68cd18576ab3cdcb5338fa73da894d83715555c6df9320c1c2fda9f65"
+    },
+    {
+      "path": "members/gigi-murin.json",
+      "bytes": 3263,
+      "sha256": "c1bd2cb32d6a6ed5040a6e70bbf0436aaa95b21fcb408524851ed0119928b2ad"
+    },
+    {
+      "path": "members/hakos-baelz.json",
+      "bytes": 3498,
+      "sha256": "a17fd9db7c8e34e74bdae3621def264b7bf77ad2051aa99efbe69e553f013a32"
+    },
+    {
+      "path": "members/index.json",
+      "bytes": 2721,
+      "sha256": "3a119814101ac65a86b0786f1c674e0d1f6d01f56ebe34eadd14eab5f14e32c5"
+    },
+    {
+      "path": "members/irys.json",
+      "bytes": 2225,
+      "sha256": "b46ebd96d8c2cabb37bbd46d9959fb8ab933e067a520e2e14d62a137c1d34a32"
+    },
+    {
+      "path": "members/mori-calliope.json",
+      "bytes": 3388,
+      "sha256": "3c53009aa582183f598670303ae29d28228b58f51ef7a1e6798b57107b67449b"
+    },
+    {
+      "path": "members/nerissa-ravencroft.json",
+      "bytes": 2733,
+      "sha256": "27d4468b293be52d2a05828e287f6e21ae49e76e8e80a586898242e011e4cc27"
+    },
+    {
+      "path": "members/ninomae-inanis.json",
+      "bytes": 4557,
+      "sha256": "cf8f0d2c3cc03ca7f832f0e097664cad617e39f9a09fdb1240312010374cd130"
+    },
+    {
+      "path": "members/raora-panthera.json",
+      "bytes": 2155,
+      "sha256": "b134e800b6c2aee928e48c2de6e2a61933c7c002f158a811c2b0c590817fdb8f"
+    },
+    {
+      "path": "members/shiori-novella.json",
+      "bytes": 2180,
+      "sha256": "21f4aa0c1bf80ff75652ff2b16db37a9770f4c4dd94bfb74013fab1ab6408e8d"
+    },
+    {
+      "path": "members/takanashi-kiara.json",
+      "bytes": 2311,
+      "sha256": "3304b4194f18302058330619e7058d141b02a045213d13da19780a4ce8ac5502"
+    },
+    {
+      "path": "operations/status.json",
+      "bytes": 760,
+      "sha256": "37f4284dffb41ff551105f34d3146364036a916ab54ab630caeeff94db027992"
+    },
+    {
+      "path": "phrases/index.json",
+      "bytes": 646,
+      "sha256": "26f0f551010d8e40b93ba04762291637a547790dd02dfe44849b68656dde7b7b"
+    },
+    {
+      "path": "redirects.json",
+      "bytes": 54,
+      "sha256": "14858ff89c2b96f16fba56ab388e1b514466889944e7199aa7d1ffa67c36cfd0"
+    },
+    {
+      "path": "robots.txt",
+      "bytes": 126,
+      "sha256": "f80b612990b56901eec6fb1da31b03af7b0e70c5e5dabae5a1edd36ce13e73ff"
+    },
+    {
+      "path": "search/streams/cards/0000.json",
+      "bytes": 27959,
+      "sha256": "5b173d3f79dbf35feac0bdec9fac11de232372d1315ab225d60674c464b7acbe"
+    },
+    {
+      "path": "search/streams/filters/collaboration.json",
+      "bytes": 409,
+      "sha256": "3d5bf2274008c09461aaacb0751e0a503937e502176e0c4997983d266ae0de80"
+    },
+    {
+      "path": "search/streams/filters/duration.json",
+      "bytes": 453,
+      "sha256": "4fdfa69fd601235d4f3909721f74009a23a8b13ba0186af8d8ac2d6c7389d65a"
+    },
+    {
+      "path": "search/streams/filters/member.json",
+      "bytes": 736,
+      "sha256": "7d6c96f8f46907b28f08145664fbc09a0e4965633463377960766ce191f761cd"
+    },
+    {
+      "path": "search/streams/filters/month.json",
+      "bytes": 855,
+      "sha256": "fe90215fa42d26936eee12facbe1263c402d6f74ef3d1ac274263bd3169933c2"
+    },
+    {
+      "path": "search/streams/filters/participant.json",
+      "bytes": 127,
+      "sha256": "4879e1a740cdb89b2a37dca7ca23d7cdbfeb798c9fe80ac264779cf3ba13bd48"
+    },
+    {
+      "path": "search/streams/filters/type.json",
+      "bytes": 448,
+      "sha256": "b956e34e3ccea0fe8dde6380fe9ed5c22c6653d1e279874150e75faf5cf4d0bf"
+    },
+    {
+      "path": "search/streams/inverted/0.json",
+      "bytes": 12693,
+      "sha256": "30d098972b73145b176d2c018a665b7678cc2bbefd5d4af8a3656f4832424d33"
+    },
+    {
+      "path": "search/streams/inverted/1.json",
+      "bytes": 12892,
+      "sha256": "5dd5907522e2430c6af6666c0b70bef20b273442b995e87e2fedea69d8908472"
+    },
+    {
+      "path": "search/streams/inverted/2.json",
+      "bytes": 13122,
+      "sha256": "fb8b514b449a492c0b1d924718e27ee282fceca8a5c8de2a2d249adbb1f39794"
+    },
+    {
+      "path": "search/streams/inverted/3.json",
+      "bytes": 13825,
+      "sha256": "a68f3a41261d051f77bd15f932ccce76c749377befe3587fa88477040ad3edac"
+    },
+    {
+      "path": "search/streams/manifest.json",
+      "bytes": 4529,
+      "sha256": "1bbe97f8bbe44289b4a7807d2c8304c0b5b4937b65d27d00bf1f7dc74ff52ea1"
+    },
+    {
+      "path": "series/index.json",
+      "bytes": 65,
+      "sha256": "8fcbad7b9e18d2ca0291a07f6f01e3a7a23d1ac8a63627f9dd4e012e99bac748"
+    },
+    {
+      "path": "site.json",
+      "bytes": 375,
+      "sha256": "55db92d9a6dbf2db9175f44598c824ce5713820a6abbe065b417d0ceff489ee2"
+    },
+    {
+      "path": "sitemap.xml",
+      "bytes": 644,
+      "sha256": "cca270da92805976769ee2e2099ad72727cdbcc154d0479f72d2cd33e6cac78c"
+    },
+    {
+      "path": "sitemaps/articles.xml",
+      "bytes": 104,
+      "sha256": "556e9d498a75d14317114e179ca2a91cf7008703eea91505c4d0c28442cc65c3"
+    },
+    {
+      "path": "sitemaps/members.xml",
+      "bytes": 1717,
+      "sha256": "7f9677c2cfc5fc94406f30c43503ee8516fe3ffa3942245dd066bb38b90515dc"
+    },
+    {
+      "path": "sitemaps/static.xml",
+      "bytes": 1583,
+      "sha256": "a512e540d7414bb3124e598b00cf1b060c1ffaa32fad08a7e38ae7059e13c8ac"
+    },
+    {
+      "path": "sitemaps/streams.xml",
+      "bytes": 3858,
+      "sha256": "ee8d60e89a0e233f3fc6d5cc4874f0d9d4b2d9f1441b7d6c1ce0d49d263d2cfe"
+    },
+    {
+      "path": "sitemaps/topics.xml",
+      "bytes": 104,
+      "sha256": "556e9d498a75d14317114e179ca2a91cf7008703eea91505c4d0c28442cc65c3"
+    },
+    {
+      "path": "slang/index.json",
+      "bytes": 314,
+      "sha256": "b5a36498e68954f6a7ad4f00c23fd2071960f5772163287f21dc072b983c8df6"
+    },
+    {
+      "path": "stats/games.json",
+      "bytes": 962,
+      "sha256": "5f369c3fa2b2b752df599d4d24c3b9731c76805fbff3ce3e8afb3d3870d49b64"
+    },
+    {
+      "path": "stats/index.json",
+      "bytes": 1451,
+      "sha256": "c05d83acc35afd44f36d8f45aa0611f2387dccccb02985b2f563614c328e8fe8"
+    },
+    {
+      "path": "stats/learning.json",
+      "bytes": 1068,
+      "sha256": "6e3b7f884a157eb74f4db6805353a53ecd5192e007ebf036a915d8052c984067"
+    },
+    {
+      "path": "stats/members.json",
+      "bytes": 6988,
+      "sha256": "4c461b74cb5ff3d86f66e73a921d0da272c259908677652290e952cd9b3e44f2"
+    },
+    {
+      "path": "streams/cecilia-immergreen-0zvti9cibve.json",
+      "bytes": 9287,
+      "sha256": "be53c65c0d9a56c1ec3f9ba4ce9156abe6c032aed61d3f15a8aafd7d2b840441"
+    },
+    {
+      "path": "streams/elizabeth-rose-bloodflame-0-4kl3rodra.json",
+      "bytes": 12078,
+      "sha256": "e016403ef55b3128d0a87579c52b83af9fd65001ee7e71c80bfae09929464c79"
+    },
+    {
+      "path": "streams/elizabeth-rose-bloodflame-kuy6mtsxkdu.json",
+      "bytes": 10179,
+      "sha256": "c715cd78ed62fd7f1b3efde2cff2de1c23d18f01c27735278690fffeeb6438b5"
+    },
+    {
+      "path": "streams/fuwamoco-0c5phpdccg8.json",
+      "bytes": 16303,
+      "sha256": "97206b429a0aebb1eab319f1f7ce97a4f1dfc100c55cd60fed8efb9c3041efcc"
+    },
+    {
+      "path": "streams/fuwamoco-0y9adbfktdg.json",
+      "bytes": 16975,
+      "sha256": "e98e7e8fa68386fc3246dd50a63af9dcf8cd6d6451776024b44fd639f84acd05"
+    },
+    {
+      "path": "streams/fuwamoco-1pnasjvo0mk.json",
+      "bytes": 14671,
+      "sha256": "1525c29c3ab6d0d69e98170190749844535a94aa6c92ddd6962eccae3cbe6b3f"
+    },
+    {
+      "path": "streams/fuwamoco-2lbugkmvebc.json",
+      "bytes": 15289,
+      "sha256": "48cd00946b772faeb611e1286433729b93190260354de1fbfc6f0feacbb48f2d"
+    },
+    {
+      "path": "streams/fuwamoco-drcn-zuqsk.json",
+      "bytes": 15090,
+      "sha256": "5d02d40fe7e41875c07f4374bcb31434076f3f2fcad35238244996ca432af0f0"
+    },
+    {
+      "path": "streams/fuwamoco-dukyszswgu4.json",
+      "bytes": 15279,
+      "sha256": "ef63463320a268725171a2cc78e2a249a142887f4368bb87ebec0aa50508f0cd"
+    },
+    {
+      "path": "streams/fuwamoco-e0gbytqefiy.json",
+      "bytes": 16162,
+      "sha256": "e0342740678b0a0babcb2f128e37ee430489683bc76664562bd1f46dd13ad62d"
+    },
+    {
+      "path": "streams/fuwamoco-gzvc7mqg-ky.json",
+      "bytes": 14496,
+      "sha256": "8f011f5d833a892f5c7d88aa018fcb78a8aff70bebfebde22e8396fc165c4766"
+    },
+    {
+      "path": "streams/fuwamoco-w-pfsfz-bju.json",
+      "bytes": 15165,
+      "sha256": "3a98d82ec9f1727b405ec44031344c7d2a30885da3a1db52f41aaa62b195127e"
+    },
+    {
+      "path": "streams/gigi-murin-0erntlrv7-c.json",
+      "bytes": 10430,
+      "sha256": "e12e091c8db9d05d2f3c8cb68372c1775c4419fcfe8efb4510245763e28e01b3"
+    },
+    {
+      "path": "streams/gigi-murin-0f8dyb0el1c.json",
+      "bytes": 12099,
+      "sha256": "d03e0c9111be6c6c73a8556793147dca2bb3f677c43bc9769a1c0bad93bccd62"
+    },
+    {
+      "path": "streams/hakos-baelz-1k6stuynt1a.json",
+      "bytes": 8887,
+      "sha256": "583ab63fc87a4cfff92e9fe197a359046ce4cd1f06b7e6faae8f11b79d2c9e2f"
+    },
+    {
+      "path": "streams/hakos-baelz-mkru3ewvipu.json",
+      "bytes": 9382,
+      "sha256": "fd3671fdaee84321ff80bfae9e5ee5b0019bb195b6a793310c2f62df1476e48d"
+    },
+    {
+      "path": "streams/index.json",
+      "bytes": 25493,
+      "sha256": "df1048ea4b42fa9be686120e7c1bbb48e0ed55da51db6c24b9074f05fbdc284c"
+    },
+    {
+      "path": "streams/irys-v7jnn0ybwd0.json",
+      "bytes": 8437,
+      "sha256": "d8002217ab99fe99420c921e4d18de0ac02f36191483cb26ece4b5a3c69e4379"
+    },
+    {
+      "path": "streams/mori-calliope-0eghejywaey.json",
+      "bytes": 10075,
+      "sha256": "6254a377eceb8e158f476f545bb5aabc3fe5395c9ca7eecfcd4caf9687b33651"
+    },
+    {
+      "path": "streams/mori-calliope-0fqfi9ntle4.json",
+      "bytes": 10652,
+      "sha256": "7e301d3c40d07ca28a69f9a4c151209aca842986aca7936aa8af13d1f329c922"
+    },
+    {
+      "path": "streams/nerissa-ravencroft-vomhneyv-m.json",
+      "bytes": 8388,
+      "sha256": "9ed92b7270f24c5c188b39232b3018557f04879caac916dfedaa1b03cfc54770"
+    },
+    {
+      "path": "streams/ninomae-inanis-0fmux6izsvw.json",
+      "bytes": 11921,
+      "sha256": "8afca36c39828f92128d679c7db504064a38a08cb717f24ef07e3434687c1147"
+    },
+    {
+      "path": "streams/ninomae-inanis-0h5a1xkuofa.json",
+      "bytes": 11535,
+      "sha256": "2f6756b4e8e5b78513edd700971cb441da43255600c8685eedfc6322dd1e402c"
+    },
+    {
+      "path": "streams/ninomae-inanis-xqhkhs2hhxm.json",
+      "bytes": 11155,
+      "sha256": "9cb1ae042c13c8e2fc65f9ef97eaaf1c8248d6bcd3baf9b44e09039d794a33a8"
+    },
+    {
+      "path": "streams/raora-panthera-0xax8tmexl0.json",
+      "bytes": 10528,
+      "sha256": "c06f77eea9c264727915f35ede525e3f9a6c82499522b64c9faf23686d3edab7"
+    },
+    {
+      "path": "streams/shiori-novella-0xpelt3nfy0.json",
+      "bytes": 10057,
+      "sha256": "82e78b032981c8b0d93ee04eb944c6693b9b2c86120618de51f1e1deb545efde"
+    },
+    {
+      "path": "streams/takanashi-kiara-s15lgzzk-ek.json",
+      "bytes": 8732,
+      "sha256": "cfdd7b5b89907eb7e084ead0109cb1823ade3e13223f859346f36c03cd235ec8"
+    }
+  ]
+}

@@ -39,3 +39,16 @@ Checkpoint 1 deliberately does not add illustrated raster assets, characters, pr
 - mobile 390 px keeps the Phase 3.2 stacked district layout and two-button MAP / WORKS switch
 - desktop and mobile remain free of horizontal overflow and browser page errors
 - contract, runtime, production build, JavaScript syntax, and diff checks remain green
+
+## Checkpoint 2 — Streetscape density
+
+Checkpoint 2 enriches the desktop city without changing project data or mobile navigation.
+
+- add secondary footpaths from the central streets into west/east/south districts
+- soften the main road geometry so the map reads less like a diagram
+- add shoreline, pier, and small-boat details to Waterside Play
+- add one tree, lamp, bench, sign, and local ground detail to every district
+- keep all new scenery decorative and non-interactive
+- keep mobile <=980 px on the readable stacked map, with new desktop-only scenery hidden
+
+Acceptance: desktop retains 14 non-overlapping buildings, gains the new streetscape props, preserves keyboard/visited behavior, and remains free of horizontal overflow; mobile remains structurally unchanged.

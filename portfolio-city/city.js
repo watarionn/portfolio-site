@@ -109,6 +109,12 @@ function buildMapInfrastructure() {
     make('span', 'city-map__road city-map__road--cross'),
     make('span', 'city-map__plaza'),
     make('span', 'city-map__bridge'),
+    make('span', 'city-map__path city-map__path--west'),
+    make('span', 'city-map__path city-map__path--east'),
+    make('span', 'city-map__path city-map__path--south'),
+    make('span', 'city-map__shoreline'),
+    make('span', 'city-map__pier'),
+    make('span', 'city-map__boat'),
     make('span', 'city-map__street-label city-map__street-label--north', 'OBSERVATORY ROAD'),
     make('span', 'city-map__street-label city-map__street-label--west', 'ARCHIVE STREET'),
     make('span', 'city-map__street-label city-map__street-label--east', 'WORKSHOP ALLEY'),
@@ -124,7 +130,12 @@ function buildDistrictScene(district) {
   scene.append(
     make('span', 'district-scene__prop district-scene__prop--a'),
     make('span', 'district-scene__prop district-scene__prop--b'),
-    make('span', 'district-scene__prop district-scene__prop--c')
+    make('span', 'district-scene__prop district-scene__prop--c'),
+    make('span', 'district-scene__tree'),
+    make('span', 'district-scene__lamp'),
+    make('span', 'district-scene__bench'),
+    make('span', 'district-scene__sign'),
+    make('span', 'district-scene__detail')
   );
   return scene;
 }

@@ -251,6 +251,11 @@ assert.equal(documentMock.querySelectorAll('.building-visual').length, 14, 'ever
 assert.equal(documentMock.querySelectorAll('.district-landmark').length, 4, 'every district must render one landmark');
 assert.equal(documentMock.querySelectorAll('.district-scene').length, 4, 'every district must render one environment scene');
 assert.equal(documentMock.querySelectorAll('.district-scene__prop').length, 12, 'district scenes must render twelve environment props');
+assert.equal(documentMock.querySelectorAll('.district-scene__tree').length, 4, 'every district must render tree scenery');
+assert.equal(documentMock.querySelectorAll('.district-scene__lamp').length, 4, 'every district must render a lamp');
+assert.equal(documentMock.querySelectorAll('.district-scene__bench').length, 4, 'every district must render a bench');
+assert.equal(documentMock.querySelectorAll('.district-scene__sign').length, 4, 'every district must render a sign');
+assert.equal(documentMock.querySelectorAll('.city-map__path').length, 3, 'desktop map must render three secondary paths');
 assert.equal(documentMock.querySelectorAll('.city-map__infrastructure').length, 1, 'map must render one infrastructure layer');
 assert.equal(documentMock.querySelectorAll('.city-map__street-label').length, 4, 'map must render four street labels');
 assert.equal(documentMock.querySelectorAll('[data-district-progress]').length, 4, 'map must render four district progress labels');

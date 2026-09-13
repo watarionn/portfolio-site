@@ -1218,3 +1218,71 @@ button { font: inherit; }
     inset: auto;
   }
 }
+
+/* Phase 3.3 / Checkpoint 2 — streetscape density */
+.district-scene__tree,
+.district-scene__lamp,
+.district-scene__bench,
+.district-scene__sign,
+.district-scene__detail,
+.city-map__path,
+.city-map__shoreline,
+.city-map__pier,
+.city-map__boat { display: none; }
+
+@media (min-width: 981px) {
+  .city-map__road { border-radius: 48% 52% 44% 56% / 10% 14% 12% 8%; }
+  .city-map__road--spine { transform: rotate(1.4deg) skewY(-1deg); }
+  .city-map__road--cross { transform: rotate(-1.2deg) skewX(-2deg); }
+  .city-map__path,
+  .city-map__shoreline,
+  .city-map__pier,
+  .city-map__boat { position: absolute; display: block; pointer-events: none; }
+  .city-map__path { height: 1px; border-top: 1px dashed rgba(23,19,14,.26); transform-origin: left center; }
+  .city-map__path--west { left: 18%; top: 53%; width: 24%; transform: rotate(-11deg); }
+  .city-map__path--east { left: 58%; top: 52%; width: 23%; transform: rotate(9deg); }
+  .city-map__path--south { left: 46%; top: 66%; width: 19%; transform: rotate(76deg); }
+  .city-map__shoreline { left: 4%; right: 4%; bottom: 12.7%; height: 1.2rem; border-top: 1px solid rgba(49,93,101,.34); border-radius: 50%; }
+  .city-map__pier { left: 48%; bottom: 6.3%; width: 5rem; height: .9rem; border: solid rgba(23,19,14,.38); border-width: 1px 0; background: repeating-linear-gradient(90deg, rgba(248,243,231,.7) 0 .45rem, transparent .46rem .55rem); transform: rotate(-2deg); }
+  .city-map__boat { left: 28%; bottom: 5.7%; width: 2.8rem; height: .75rem; border: solid rgba(49,93,101,.54); border-width: 0 0 1px; border-radius: 0 0 55% 55%; transform: rotate(-8deg); }
+  .city-map__boat::before { content:""; position:absolute; left:1.35rem; bottom:.2rem; width:1px; height:1.35rem; background:rgba(49,93,101,.54); transform:rotate(4deg); transform-origin:bottom; }
+  .city-map__boat::after { content:""; position:absolute; left:1.4rem; bottom:.7rem; width:1.1rem; height:.8rem; border-left:1px solid rgba(49,93,101,.54); border-bottom:1px solid rgba(49,93,101,.54); transform:skewY(-18deg); }
+
+  .district-scene__tree,
+  .district-scene__lamp,
+  .district-scene__bench,
+  .district-scene__sign,
+  .district-scene__detail { position:absolute; display:block; box-sizing:border-box; color:rgba(23,19,14,.42); }
+  .district-scene__tree { width:1.35rem; height:1.35rem; border:1px solid currentColor; border-radius:52% 48% 46% 54%; box-shadow: .9rem .35rem 0 -.12rem rgba(23,19,14,.08), -.7rem .48rem 0 -.18rem rgba(23,19,14,.07); }
+  .district-scene__tree::after { content:""; position:absolute; left:50%; top:1.1rem; width:1px; height:1.05rem; background:currentColor; }
+  .district-scene__lamp { width:1px; height:2rem; background:currentColor; }
+  .district-scene__lamp::before { content:""; position:absolute; left:-.25rem; top:-.38rem; width:.5rem; height:.42rem; border:1px solid currentColor; border-radius:45% 45% 20% 20%; }
+  .district-scene__bench { width:2rem; height:.45rem; border-block:1px solid currentColor; }
+  .district-scene__bench::before,.district-scene__bench::after { content:""; position:absolute; bottom:-.55rem; width:1px; height:.55rem; background:currentColor; }
+  .district-scene__bench::before { left:.35rem; } .district-scene__bench::after { right:.35rem; }
+  .district-scene__sign { width:1.65rem; height:.8rem; border:1px solid currentColor; }
+  .district-scene__sign::after { content:""; position:absolute; left:50%; top:.8rem; width:1px; height:1rem; background:currentColor; }
+  [data-district-id="observatory-hill"] .district-scene__tree { left:9%; bottom:17%; }
+  [data-district-id="observatory-hill"] .district-scene__lamp { right:18%; top:35%; }
+  [data-district-id="observatory-hill"] .district-scene__bench { left:15%; top:47%; transform:rotate(-6deg); }
+  [data-district-id="observatory-hill"] .district-scene__sign { right:8%; bottom:18%; }
+  [data-district-id="observatory-hill"] .district-scene__detail { left:7%; right:7%; bottom:8%; height:1rem; border-top:1px dotted currentColor; border-radius:50%; }
+
+  [data-district-id="archive-street"] .district-scene__tree { left:6%; top:20%; }
+  [data-district-id="archive-street"] .district-scene__lamp { left:48%; top:18%; }
+  [data-district-id="archive-street"] .district-scene__bench { right:8%; bottom:18%; transform:rotate(4deg); }
+  [data-district-id="archive-street"] .district-scene__sign { left:24%; bottom:9%; }
+  [data-district-id="archive-street"] .district-scene__detail { left:8%; right:10%; top:52%; height:1px; border-top:1px dotted currentColor; transform:rotate(-2deg); }
+
+  [data-district-id="workshop-alley"] .district-scene__tree { right:7%; top:18%; }
+  [data-district-id="workshop-alley"] .district-scene__lamp { left:46%; top:16%; }
+  [data-district-id="workshop-alley"] .district-scene__bench { left:8%; bottom:16%; transform:rotate(-4deg); }
+  [data-district-id="workshop-alley"] .district-scene__sign { right:26%; bottom:9%; }
+  [data-district-id="workshop-alley"] .district-scene__detail { left:11%; right:7%; top:52%; height:1px; border-top:1px dotted currentColor; transform:rotate(2deg); }
+
+  [data-district-id="waterside-play"] .district-scene__tree { left:5%; top:10%; border-radius:50% 50% 42% 58%; }
+  [data-district-id="waterside-play"] .district-scene__lamp { right:14%; top:14%; color:rgba(49,93,101,.46); }
+  [data-district-id="waterside-play"] .district-scene__bench { left:38%; bottom:16%; color:rgba(49,93,101,.44); }
+  [data-district-id="waterside-play"] .district-scene__sign { right:30%; bottom:10%; color:rgba(49,93,101,.44); }
+  [data-district-id="waterside-play"] .district-scene__detail { left:3%; right:3%; bottom:4%; height:1.4rem; border-top:1px dotted rgba(49,93,101,.36); border-radius:50%; }
+}

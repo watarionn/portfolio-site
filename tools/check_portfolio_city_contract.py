@@ -115,21 +115,21 @@ def main() -> int:
         fail("project-to-district assignments differ from the Phase 3.1 plan")
 
     html = (CITY / "city.html").read_text(encoding="utf-8")
-    for marker in ("MAP", "WORKS", "PROFILE", "CONTACT", 'id="cityMap"', 'id="projectInspector"', 'id="worksDirectory"', 'class="map-legend"', 'data-layout="living-city"'):
+    for marker in ("MAP", "WORKS", "PROFILE", "CONTACT", 'id="cityMap"', 'id="projectInspector"', 'id="worksDirectory"', 'class="map-legend"', 'data-layout="living-city"', "project-inspector__close"):
         if marker not in html:
             fail(f"city.html is missing required marker: {marker}")
     if 'city-hero' in html or 'city-status' in html:
         fail("Portfolio City HERO/status block must remain removed")
 
     js = (CITY / "city.js").read_text(encoding="utf-8")
-    for marker in ("portfolio-city.visited.v1", "localStorage", "ArrowRight", "ArrowLeft", "replaceChildren", "prefers-reduced-motion", "buildBuildingVisual", "buildMapInfrastructure", "buildDistrictLandmark", "buildDistrictScene", "is-active-district", "district__progress", "city-map__street-label", "district__complete", "aria-pressed", "city-map__path", "city-map__shoreline", "district-scene__tree", "district-scene__lamp", "district-scene__bench", "district-scene__sign"):
+    for marker in ("portfolio-city.visited.v1", "localStorage", "ArrowRight", "ArrowLeft", "replaceChildren", "prefers-reduced-motion", "buildBuildingVisual", "buildMapInfrastructure", "buildDistrictLandmark", "buildDistrictScene", "is-active-district", "district__progress", "city-map__street-label", "district__complete", "aria-pressed", "city-map__path", "city-map__shoreline", "district-scene__tree", "district-scene__lamp", "district-scene__bench", "district-scene__sign", "positionInspector", "setInspectorOpen", "is-hover-district"):
         if marker not in js:
             fail(f"city.js is missing required behavior: {marker}")
     if ".innerHTML" in js:
         fail("city.js must not render data with innerHTML")
 
     css = (CITY / "city.css").read_text(encoding="utf-8")
-    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark", ".district-scene", ".is-active-district", ".city-map__street-label", ".district__progress", ".map-legend", ".district__complete", ".is-complete-district", "@media (min-width: 981px)", ".city-map__path", ".city-map__shoreline", ".district-scene__tree"):
+    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark", ".district-scene", ".is-active-district", ".city-map__street-label", ".district__progress", ".map-legend", ".district__complete", ".is-complete-district", "@media (min-width: 981px)", ".city-map__path", ".city-map__shoreline", ".district-scene__tree", ".project-inspector.is-open", ".project-inspector__close", "pointer-events: none"):
         if marker not in css:
             fail(f"city.css is missing required responsive/map rule: {marker}")
 

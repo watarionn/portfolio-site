@@ -1431,3 +1431,110 @@ button { font: inherit; }
   .district { pointer-events: none; }
   .district .building-button { pointer-events: auto; }
 }
+
+/* Phase 3.4 / Checkpoint 1 — art-direction depth */
+.city-art { display: none; }
+
+@media (min-width: 981px) {
+  .city-map {
+    background:
+      radial-gradient(ellipse at 50% 9%, rgba(113,146,119,.18) 0 12%, transparent 30%),
+      radial-gradient(ellipse at 16% 42%, rgba(187,171,126,.14) 0 11%, transparent 32%),
+      radial-gradient(ellipse at 84% 45%, rgba(161,145,112,.13) 0 13%, transparent 34%),
+      linear-gradient(to bottom, #e5f0ec 0 18%, #ece8d7 31% 68%, #d8e8e3 68% 100%);
+  }
+  .city-map__infrastructure { overflow: hidden; }
+  .city-art {
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+  }
+  .city-art > span {
+    position: absolute;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .city-art--far { z-index: 0; }
+  .city-art--mid { z-index: 2; }
+  .city-art--near { z-index: 4; }
+  .city-art__mountains {
+    top: -1.5%;
+    left: 2%;
+    width: 96%;
+    height: 22%;
+    background-image: url("assets/environment/mountains.svg");
+    opacity: .88;
+  }
+  .city-art__cloud {
+    width: 13%;
+    aspect-ratio: 22 / 9;
+    background-image: url("assets/environment/cloud.svg");
+    opacity: .72;
+  }
+  .city-art__cloud--a { top: 2%; left: 7%; }
+  .city-art__cloud--b { top: 8%; right: 11%; width: 11%; opacity: .58; }
+  .city-art__tree-cluster {
+    width: 12.5%;
+    aspect-ratio: 22 / 17;
+    background-image: url("assets/environment/tree-cluster.svg");
+    opacity: .9;
+    filter: drop-shadow(0 3px 2px rgba(23,19,14,.09));
+  }
+  .city-art__tree-cluster--a { top: 17%; left: 3%; }
+  .city-art__tree-cluster--b { top: 53%; left: 18%; width: 10.5%; opacity: .76; }
+  .city-art__tree-cluster--c { top: 49%; right: 17%; width: 10.5%; opacity: .78; }
+  .city-art__tree-cluster--d { top: 18%; right: 3%; }
+  .city-art__fountain {
+    top: 37.5%;
+    left: 45.2%;
+    width: 9.5%;
+    aspect-ratio: 1;
+    background-image: url("assets/environment/fountain.svg");
+    filter: drop-shadow(0 4px 2px rgba(23,19,14,.12));
+  }
+  .city-art__market {
+    top: 43%;
+    left: 18.5%;
+    width: 11%;
+    aspect-ratio: 4 / 3;
+    background-image: url("assets/environment/market-stall.svg");
+    opacity: .88;
+  }
+  .city-art__reeds {
+    width: 10%;
+    aspect-ratio: 18 / 13;
+    background-image: url("assets/environment/reeds.svg");
+    opacity: .82;
+  }
+  .city-art__reeds--a { left: 4.5%; bottom: 2.5%; }
+  .city-art__reeds--b { right: 4%; bottom: 7%; transform: scaleX(-1); }
+  .city-art__person {
+    width: 2.1rem;
+    height: 3.6rem;
+    background-image: url("assets/environment/person.svg");
+    opacity: .78;
+    filter: drop-shadow(0 2px 1px rgba(23,19,14,.12));
+  }
+  .city-art__person--a { left: 43%; top: 52%; }
+  .city-art__person--b { right: 42%; top: 57%; transform: scale(.88); opacity: .66; }
+  .city-art__person--c { left: 29%; top: 71%; transform: scale(.82); }
+  .city-art__person--d { right: 27%; top: 72%; transform: scale(.78) scaleX(-1); opacity: .7; }
+  .city-art__flowerbed {
+    width: 8.5%;
+    aspect-ratio: 11 / 5;
+    background-image: url("assets/environment/flowerbed.svg");
+    opacity: .88;
+  }
+  .city-art__flowerbed--a { left: 33%; top: 43.5%; transform: rotate(-3deg); }
+  .city-art__flowerbed--b { right: 32%; top: 44.5%; transform: rotate(4deg); }
+  .city-map__road,
+  .city-map__plaza,
+  .city-map__bridge,
+  .city-map__path,
+  .city-map__shoreline,
+  .city-map__pier,
+  .city-map__boat { z-index: 3; }
+}

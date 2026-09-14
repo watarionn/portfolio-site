@@ -101,9 +101,44 @@ function buildBuildingVisual() {
   return visual;
 }
 
+function buildCityArtLayers() {
+  const far = make('div', 'city-art city-art--far');
+  far.append(
+    make('span', 'city-art__mountains'),
+    make('span', 'city-art__cloud city-art__cloud--a'),
+    make('span', 'city-art__cloud city-art__cloud--b')
+  );
+
+  const mid = make('div', 'city-art city-art--mid');
+  mid.append(
+    make('span', 'city-art__tree-cluster city-art__tree-cluster--a'),
+    make('span', 'city-art__tree-cluster city-art__tree-cluster--b'),
+    make('span', 'city-art__tree-cluster city-art__tree-cluster--c'),
+    make('span', 'city-art__tree-cluster city-art__tree-cluster--d'),
+    make('span', 'city-art__fountain'),
+    make('span', 'city-art__market'),
+    make('span', 'city-art__reeds city-art__reeds--a'),
+    make('span', 'city-art__reeds city-art__reeds--b')
+  );
+
+  const near = make('div', 'city-art city-art--near');
+  near.append(
+    make('span', 'city-art__person city-art__person--a'),
+    make('span', 'city-art__person city-art__person--b'),
+    make('span', 'city-art__person city-art__person--c'),
+    make('span', 'city-art__person city-art__person--d'),
+    make('span', 'city-art__flowerbed city-art__flowerbed--a'),
+    make('span', 'city-art__flowerbed city-art__flowerbed--b')
+  );
+
+  for (const layer of [far, mid, near]) layer.setAttribute('aria-hidden', 'true');
+  return [far, mid, near];
+}
+
 function buildMapInfrastructure() {
   const infrastructure = make('div', 'city-map__infrastructure');
   infrastructure.setAttribute('aria-hidden', 'true');
+  infrastructure.append(...buildCityArtLayers());
   infrastructure.append(
     make('span', 'city-map__road city-map__road--spine'),
     make('span', 'city-map__road city-map__road--cross'),

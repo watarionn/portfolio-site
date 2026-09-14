@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "world": {
+    "chunkWidth": 1024,
+    "chunkHeight": 768,
+    "width": 3200,
+    "height": 2304
+  },
+  "chunks": [
+    { "id": "0:0", "column": 0, "row": 0, "fallback": "legacy" },
+    { "id": "1:0", "column": 1, "row": 0, "fallback": "legacy" },
+    { "id": "2:0", "column": 2, "row": 0, "fallback": "legacy" },
+    { "id": "0:1", "column": 0, "row": 1, "fallback": "legacy" },
+    { "id": "1:1", "column": 1, "row": 1, "fallback": "legacy" },
+    { "id": "2:1", "column": 2, "row": 1, "fallback": "legacy" },
+    { "id": "0:2", "column": 0, "row": 2, "fallback": "legacy" },
+    { "id": "1:2", "column": 1, "row": 2, "fallback": "legacy" },
+    { "id": "2:2", "column": 2, "row": 2, "fallback": "legacy" }
+  ],
+  "districtRegions": [
+    { "districtId": "observatory-hill", "x": 768, "y": 80, "width": 1664, "height": 650 },
+    { "districtId": "archive-street", "x": 120, "y": 700, "width": 1320, "height": 1000 },
+    { "districtId": "workshop-alley", "x": 1760, "y": 720, "width": 1320, "height": 1000 },
+    { "districtId": "waterside-play", "x": 420, "y": 1580, "width": 2360, "height": 620 }
+  ],
+  "cameraPresets": {
+    "desktop": { "zoom": 1.0, "startX": 1600, "startY": 640 },
+    "tablet": { "zoom": 0.72, "startX": 1600, "startY": 720 },
+    "mobile": { "zoom": 0.56, "startX": 1600, "startY": 620 }
+  },
+  "projectPlacements": [
+    { "projectId": "holoscope", "x": 1600, "y": 360, "width": 270, "anchor": "bottom-center" },
+    { "projectId": "sphere", "x": 980, "y": 600, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "prime-dot-art", "x": 2220, "y": 600, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "yorei", "x": 430, "y": 1040, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "actress-finder", "x": 1120, "y": 1040, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "cheatsheet", "x": 430, "y": 1480, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "shisha", "x": 1120, "y": 1480, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "dqb2", "x": 2080, "y": 1040, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "madori", "x": 2760, "y": 1040, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "maze-maker", "x": 2080, "y": 1480, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "anagram", "x": 2760, "y": 1480, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "aquarium", "x": 760, "y": 1880, "width": 260, "anchor": "bottom-center" },
+    { "projectId": "holoca", "x": 1600, "y": 1820, "width": 260, "anchor": "bottom-center" },
+    { "projectId": "word-generator", "x": 2440, "y": 1880, "width": 260, "anchor": "bottom-center" }
+  ]
+}

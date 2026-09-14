@@ -139,3 +139,117 @@
     font-size: .48rem;
   }
 }
+
+/* Phase 3.4 / Explorable City pass */
+.building-button__name,
+.building-button__title {
+  display: none !important;
+}
+
+@media (min-width: 981px) {
+  .city-panel--map .city-shell {
+    width: min(100%, 96rem);
+  }
+  .city-map-viewport {
+    position: relative;
+    width: 100%;
+    height: min(74vh, 52rem);
+    min-height: 38rem;
+    overflow: hidden;
+    border: 1px solid var(--ink);
+    border-radius: 1.2rem;
+    background: #e7eadc;
+    cursor: grab;
+    overscroll-behavior: contain;
+    user-select: none;
+  }
+  .city-map-viewport.is-panning { cursor: grabbing; }
+  .city-map-pan-hint {
+    position: absolute;
+    z-index: 50;
+    right: 1rem;
+    top: 1rem;
+    padding: .42rem .7rem;
+    border: 1px solid rgba(23,19,14,.2);
+    border-radius: 999px;
+    background: rgba(248,243,231,.88);
+    color: var(--ink-soft);
+    font: 700 .56rem/1 var(--sans);
+    letter-spacing: .12em;
+    pointer-events: none;
+  }
+  .city-map {
+    width: 105rem;
+    max-width: none;
+    height: 74rem;
+    min-height: 74rem;
+    border: 0;
+    border-radius: 0;
+  }
+  [data-district-id="observatory-hill"] { left: 20%; width: 60%; }
+  [data-district-id="archive-street"] { left: 2%; width: 46%; }
+  [data-district-id="workshop-alley"] { right: 2%; width: 46%; }
+  [data-district-id="waterside-play"] { left: 7%; right: 7%; }
+  .building-button {
+    width: 10.5rem;
+    min-height: 8.8rem;
+    padding: 0;
+  }
+  .building-button .building-visual {
+    top: -.75rem;
+    width: 11.5rem;
+    height: 8.3rem;
+    opacity: 1;
+    filter: drop-shadow(0 8px 4px rgba(23,19,14,.16));
+  }
+  .building-button:hover .building-visual,
+  .building-button:focus-visible .building-visual,
+  .building-button.is-selected .building-visual {
+    transform: translateX(-50%) translateY(-7px) scale(1.06);
+    filter: drop-shadow(0 12px 6px rgba(23,19,14,.24));
+  }
+  .building-button.is-visited::after {
+    top: auto;
+    bottom: -.2rem;
+    right: .2rem;
+  }
+  .project-inspector {
+    max-width: 20rem;
+  }
+}
+
+@media (max-width: 980px) {
+  .city-map-pan-hint { display: none; }
+}
+@media (min-width: 681px) and (max-width: 980px) {
+  .building-button {
+    min-height: 9.2rem;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .building-button .building-visual {
+    top: 50%;
+    width: 6.8rem;
+    height: 4.9rem;
+    opacity: .95;
+    transform: translate(-50%, -50%) scale(1.18);
+  }
+}
+
+@media (max-width: 680px) {
+  .building-button {
+    width: 6rem;
+    min-height: 5.9rem;
+    padding: 0;
+  }
+  .building-button .building-visual {
+    top: .05rem;
+    width: 6rem;
+    height: 4.8rem;
+  }
+  .building-button.is-visited::after {
+    top: auto;
+    bottom: .05rem;
+  }
+}

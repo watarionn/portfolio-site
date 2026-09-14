@@ -512,5 +512,52 @@ async function loadCity() {
   }
 }
 
+
+function bindDesktopMapPan() {
+  const viewport = document.getElementById('cityMapViewport');
+  if (!viewport) return;
+  const desktop = window.matchMedia('(min-width: 981px)');
+  let drag = null;
+  let moved = false;
+  const centerMap = () => {
+    if (!desktop.matches) return;
+    viewport.scrollLeft = Math.max(0, (viewport.scrollWidth - viewport.clientWidth) / 2);
+    viewport.scrollTop = 0;
+  };
+  viewport.addEventListener('pointerdown', (event) => {
+    if (!desktop.matches || event.button !== 0 || event.target.closest('button, a, .project-inspector')) return;
+    drag = { id: event.pointerId, x: event.clientX, y: event.clientY, left: viewport.scrollLeft, top: viewport.scrollTop };
+    moved = false;
+    viewport.setPointerCapture?.(event.pointerId);
+    viewport.classList.add('is-panning');
+  });
+
+  viewport.addEventListener('pointermove', (event) => {
+    if (!drag || drag.id !== event.pointerId) return;
+    const dx = event.clientX - drag.x;
+    const dy = event.clientY - drag.y;
+    if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+    viewport.scrollLeft = drag.left - dx;
+    viewport.scrollTop = drag.top - dy;
+  });
+  const finish = (event) => {
+    if (!drag || drag.id !== event.pointerId) return;
+    viewport.releasePointerCapture?.(event.pointerId);
+    drag = null;
+    viewport.classList.remove('is-panning');
+  };
+  viewport.addEventListener('pointerup', finish);
+  viewport.addEventListener('pointercancel', finish);
+  viewport.addEventListener('click', (event) => {
+    if (!moved) return;
+    event.preventDefault();
+    event.stopPropagation();
+    moved = false;
+  }, true);
+  requestAnimationFrame(centerMap);
+  window.addEventListener('resize', centerMap);
+}
+
 bindNavigation();
+bindDesktopMapPan();
 loadCity();

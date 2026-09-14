@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-09-14T13:44:03Z",
+  "note": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
+  "status": "insufficient_data",
+  "evaluatedStreamCount": 0,
+  "minimumRequired": 5,
+  "averages": null,
+  "cefrDistribution": [],
+  "methodology": {
+    "scope": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
+    "thresholds": {
+      "count": "1件以上で表示",
+      "percentage": "母数10件以上で表示",
+      "comparison": "各対象10件以上、比較対象3件以上、欠損率20%未満",
+      "learning": "評価済み5件以上で集計値を表示"
+    },
+    "missingValues": [
+      "0",
+      "null",
+      "unrated",
+      "unknown",
+      "not_applicable"
+    ],
+    "excludedRankings": [
+      "人物能力",
+      "人気",
+      "私的関係"
+    ]
+  }
+}

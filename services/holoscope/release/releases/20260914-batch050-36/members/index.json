@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0.0",
+  "count": 12,
+  "items": [
+    {
+      "uid": "mem_cecilia_immergreen",
+      "slug": "cecilia-immergreen",
+      "displayName": "Cecilia Immergreen",
+      "nameJa": null,
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_elizabeth_rose_bloodflame",
+      "slug": "elizabeth-rose-bloodflame",
+      "displayName": "Elizabeth Rose Bloodflame",
+      "nameJa": "エリザベス・ローズ・ブラッドフレイム",
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_fuwamoco",
+      "slug": "fuwamoco",
+      "displayName": "FUWAMOCO",
+      "nameJa": "フワワ・アビスガード／モココ・アビスガード",
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_gigi_murin",
+      "slug": "gigi-murin",
+      "displayName": "Gigi Murin",
+      "nameJa": null,
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_hakos_baelz",
+      "slug": "hakos-baelz",
+      "displayName": "Hakos Baelz",
+      "nameJa": "ハコス・ベールズ",
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_irys",
+      "slug": "irys",
+      "displayName": "IRyS",
+      "nameJa": "IRyS",
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_mori_calliope",
+      "slug": "mori-calliope",
+      "displayName": "Mori Calliope",
+      "nameJa": "森カリオペ",
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_nerissa_ravencroft",
+      "slug": "nerissa-ravencroft",
+      "displayName": "Nerissa Ravencroft",
+      "nameJa": "ネリッサ・レイヴンクロフト",
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_ninomae_inanis",
+      "slug": "ninomae-inanis",
+      "displayName": "Ninomae Ina'nis",
+      "nameJa": "一伊那尓栖",
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_raora_panthera",
+      "slug": "raora-panthera",
+      "displayName": "Raora Panthera",
+      "nameJa": null,
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_shiori_novella",
+      "slug": "shiori-novella",
+      "displayName": "Shiori Novella",
+      "nameJa": null,
+      "activityStatus": "active",
+      "summary": null
+    },
+    {
+      "uid": "mem_takanashi_kiara",
+      "slug": "takanashi-kiara",
+      "displayName": "Takanashi Kiara",
+      "nameJa": "小鳥遊キアラ",
+      "activityStatus": "active",
+      "summary": null
+    }
+  ]
+}

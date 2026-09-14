@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-09-14T13:36:35Z",
+  "generatedAt": "2026-09-14T13:44:03Z",
   "note": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
   "counts": {
     "streams": 36,

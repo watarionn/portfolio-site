@@ -24,3 +24,27 @@ Phase 3.4 raises the visual density of Portfolio City without changing its proje
 - browser page errors remain zero
 
 The next checkpoints can increase local detail and atmosphere, but should not replace the project-specific buildings or make the city harder to scan.
+
+## Checkpoint 2 — Mobile Art Direction Pass
+
+Checkpoint 2 brings the approved mobile concept board into the real 390 px experience without copying the desktop layout verbatim.
+
+- replace the stacked mobile district cards with one vertical illustrated town map
+- use the same 14 project-specific SVG buildings on mobile
+- re-enable and reposition environment layers for mountains, clouds, trees, fountain, market, people, flowerbeds, roads, shoreline, pier, and boat
+- keep MAP / WORKS / PROFILE / CONTACT as a fixed bottom navigation on mobile
+- open project details as a dismissible bottom overlay so the town remains visible behind it
+- add project building thumbnails to the mobile WORKS directory
+- keep tablet 820 px and desktop 1440 px behavior unchanged
+- keep project routes, visited state, keyboard behavior, reduced motion, and existing app implementations unchanged
+
+## Checkpoint 2 acceptance
+
+- mobile 390 px renders 14 illustrated SVG buildings on one vertical town map
+- mobile infrastructure and three art layers are visible; horizontal overflow remains zero
+- project inspector opens as a fixed overlay, remains inside the viewport after its transition, and can be closed
+- WORKS renders 14 rows with 14 project thumbnails
+- desktop 1440 px keeps the floating inspector and art-direction layout
+- tablet 820 px keeps its existing static inspector and does not adopt the mobile-only art layout
+- contract, runtime contract, production build, JavaScript syntax, diff check, and browser QA remain green
+- browser page errors remain zero

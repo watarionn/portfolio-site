@@ -140,6 +140,8 @@ function buildMapInfrastructure() {
   infrastructure.setAttribute('aria-hidden', 'true');
   infrastructure.append(...buildCityArtLayers());
   infrastructure.append(
+    make('span', 'city-map__guide'),
+    make('span', 'city-map__guide-prompt', 'どこへ行こうかな？'),
     make('span', 'city-map__road city-map__road--spine'),
     make('span', 'city-map__road city-map__road--cross'),
     make('span', 'city-map__plaza'),
@@ -283,10 +285,12 @@ function setInspectorOpen(open, project) {
   const inspector = document.getElementById('projectInspector');
   if (!inspector) return;
   const desktop = window.matchMedia('(min-width: 981px)').matches;
-  const effectiveOpen = desktop ? open : true;
+  const mobile = window.matchMedia('(max-width: 680px)').matches;
+  const dismissible = desktop || mobile;
+  const effectiveOpen = dismissible ? open : true;
   inspector.classList.toggle('is-open', effectiveOpen);
-  inspector.setAttribute('aria-hidden', desktop && !open ? 'true' : 'false');
-  if (desktop && !open) inspector.setAttribute('inert', '');
+  inspector.setAttribute('aria-hidden', dismissible && !open ? 'true' : 'false');
+  if (dismissible && !open) inspector.setAttribute('inert', '');
   else inspector.removeAttribute('inert');
   if (desktop && open && project) requestAnimationFrame(() => positionInspector(project));
 }
@@ -309,7 +313,7 @@ function selectProject(projectId, userInitiated, openInspector = false) {
   updateInspector(project);
   setInspectorOpen(openInspector, project);
 
-  if (userInitiated && window.matchMedia('(max-width: 680px)').matches) {
+  if (userInitiated && window.matchMedia('(min-width: 681px) and (max-width: 980px)').matches) {
     document.getElementById('projectInspector')?.scrollIntoView({
       behavior: reducedMotion.matches ? 'auto' : 'smooth',
       block: 'nearest'
@@ -322,6 +326,7 @@ function updateInspector(project) {
   if (!inspector) return;
   const district = districtForProject(project);
   const visited = state.visited.has(project.id);
+  inspector.dataset.projectId = project.id;
 
   inspector.querySelector('.project-inspector__eyebrow').textContent = `WORK ${String(state.projects.indexOf(project) + 1).padStart(2, '0')} / ${district?.english ?? ''}`;
   inspector.querySelector('h3').textContent = project.title;
@@ -404,6 +409,7 @@ function renderWorksDirectory() {
       row.dataset.projectId = project.id;
       row.addEventListener('click', () => markVisited(project.id));
       row.append(
+        make('span', 'work-row__thumb'),
         make('span', 'work-row__num', String(sequence).padStart(2, '0')),
         make('strong', '', project.title),
         make('span', 'work-row__type', `${project.building} / ${project.type}`),

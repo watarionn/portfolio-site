@@ -1,0 +1,85 @@
+/* Phase 3.4 / Checkpoint 3 — district-specific art direction
+   Decorative only: project routes, data and interaction remain untouched. */
+
+@media (min-width: 681px) {
+  [data-district-id] { isolation: isolate; }
+
+  [data-district-id="observatory-hill"] {
+    background-image:
+      radial-gradient(circle at 76% 18%, rgba(38,82,112,.13) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 23% 31%, rgba(38,82,112,.11) 0 1px, transparent 1.5px),
+      linear-gradient(176deg, rgba(255,255,255,.22), transparent 42%),
+      linear-gradient(rgba(224,226,216,.94), rgba(235,229,211,.9));
+    background-size: 31px 31px, 43px 43px, auto, auto;
+  }
+  [data-district-id="observatory-hill"] .district-scene::after {
+    content:""; position:absolute; left:5%; right:5%; bottom:3%; height:18%;
+    border-top:2px solid rgba(38,82,112,.22); border-radius:50% 50% 0 0;
+    box-shadow: 0 -7px 0 -6px rgba(38,82,112,.22), 0 -14px 0 -13px rgba(38,82,112,.18);
+  }
+  [data-landmark="observatory-hill"] { color:#265270; }
+
+  [data-district-id="archive-street"] {
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 1.55rem, rgba(112,88,48,.055) 1.58rem 1.62rem),
+      linear-gradient(90deg, rgba(154,121,64,.07), transparent 24%, transparent 76%, rgba(154,121,64,.07)),
+      linear-gradient(rgba(246,238,214,.94), rgba(240,231,207,.92));
+  }
+  [data-district-id="archive-street"] .district-scene::after {
+    content:"ARCHIVE  •  INDEX  •  REFERENCE"; position:absolute; left:7%; bottom:3%;
+    padding:.18rem .45rem; border:1px solid rgba(112,88,48,.3); background:rgba(248,243,231,.72);
+    color:rgba(112,88,48,.72); font:600 .46rem/1 var(--sans); letter-spacing:.13em;
+  }
+  [data-landmark="archive-street"] { color:#795f32; }
+
+  [data-district-id="workshop-alley"] {
+    background-image:
+      linear-gradient(45deg, rgba(23,19,14,.035) 25%, transparent 25% 75%, rgba(23,19,14,.035) 75%),
+      linear-gradient(-45deg, rgba(23,19,14,.025) 25%, transparent 25% 75%, rgba(23,19,14,.025) 75%),
+      linear-gradient(rgba(229,223,202,.94), rgba(222,217,198,.92));
+    background-size: 24px 24px, 24px 24px, auto;
+  }
+  [data-district-id="workshop-alley"] .district-scene::after {
+    content:""; position:absolute; right:7%; bottom:5%; width:3.2rem; height:3.2rem;
+    border:1px dashed rgba(173,59,45,.34); border-radius:50%;
+    background: repeating-conic-gradient(from 0deg, rgba(173,59,45,.18) 0 5deg, transparent 5deg 30deg);
+  }
+  [data-landmark="workshop-alley"] { color:#8c3f32; }
+
+  [data-district-id="waterside-play"] {
+    background-image:
+      radial-gradient(ellipse at 20% 108%, transparent 0 1.2rem, rgba(49,93,101,.08) 1.25rem 1.32rem, transparent 1.37rem 2.4rem),
+      radial-gradient(ellipse at 78% 112%, transparent 0 1.5rem, rgba(49,93,101,.07) 1.55rem 1.62rem, transparent 1.67rem 2.8rem),
+      linear-gradient(rgba(220,237,232,.92), rgba(190,219,216,.9));
+  }
+  [data-district-id="waterside-play"] .district-scene::after {
+    content:""; position:absolute; left:8%; right:8%; bottom:4%; height:1.8rem;
+    border-top:1px solid rgba(49,93,101,.35); border-radius:50%;
+    box-shadow: 0 .55rem 0 -.48rem rgba(49,93,101,.28), 0 1.05rem 0 -.98rem rgba(49,93,101,.2);
+  }
+  [data-landmark="waterside-play"] { color:#315d65; }
+}
+
+@media (min-width: 981px) {
+  [data-district-id="observatory-hill"] { box-shadow: inset 0 -12px 22px rgba(38,82,112,.045); }
+  [data-district-id="archive-street"] { box-shadow: inset 10px 0 18px rgba(154,121,64,.045); }
+  [data-district-id="workshop-alley"] { box-shadow: inset -10px 0 18px rgba(173,59,45,.04); }
+  [data-district-id="waterside-play"] { box-shadow: inset 0 -18px 24px rgba(49,93,101,.06); }
+}
+
+/* Mobile keeps the accepted one-map interaction model. Give each geographic band
+   a quiet identity through scenery already present in the shared map. */
+@media (max-width: 680px) {
+  .city-map {
+    background:
+      radial-gradient(circle at 18% 22%, rgba(38,82,112,.13), transparent 16%),
+      radial-gradient(circle at 18% 48%, rgba(154,121,64,.11), transparent 17%),
+      radial-gradient(circle at 82% 49%, rgba(173,59,45,.09), transparent 17%),
+      radial-gradient(circle at 50% 79%, rgba(49,93,101,.16), transparent 21%),
+      linear-gradient(to bottom, #dcece8 0 17%, #e8e4d0 30% 72%, #b9d8d5 72% 100%);
+  }
+  .city-art__tree-cluster--a { filter: sepia(.12); }
+  .city-art__tree-cluster--c { filter: sepia(.22) contrast(.96); }
+  .city-art__market { filter: sepia(.2); }
+  .city-art__reeds { filter: saturate(.9); }
+}

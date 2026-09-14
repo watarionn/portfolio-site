@@ -2,7 +2,8 @@
 
 const DATA_PATHS = {
   projects: 'data/projects.json',
-  districts: 'data/districts.json'
+  districts: 'data/districts.json',
+  layout: 'data/map-layout.json'
 };
 
 const VISITED_KEY = 'portfolio-city.visited.v1';
@@ -12,6 +13,7 @@ const EXPECTED_DISTRICT_COUNT = 4;
 const state = {
   projects: [],
   districts: [],
+  layout: null,
   selectedProjectId: null,
   activePanel: 'map',
   mobilePrimary: 'map',
@@ -49,7 +51,7 @@ function byOrder(a, b) {
   return (a.order ?? 0) - (b.order ?? 0) || a.title?.localeCompare(b.title, 'ja') || 0;
 }
 
-function validateData(projectPayload, districtPayload) {
+function validateData(projectPayload, districtPayload, layoutPayload) {
   if (projectPayload?.schemaVersion !== 1 || !Array.isArray(projectPayload.projects)) {
     throw new Error('projects.json の形式が不正です。');
   }
@@ -77,6 +79,19 @@ function validateData(projectPayload, districtPayload) {
     projectIds.add(project.id);
   }
 
+  if (layoutPayload?.schemaVersion !== 1 || !layoutPayload.world || !Array.isArray(layoutPayload.chunks) || !Array.isArray(layoutPayload.projectPlacements)) {
+    throw new Error('map-layout.json の形式が不正です。');
+  }
+  if (!Number.isFinite(layoutPayload.world.chunkWidth) || !Number.isFinite(layoutPayload.world.chunkHeight)) {
+    throw new Error('map-layout.json のチャンク寸法が不正です。');
+  }
+  const placementIds = new Set();
+  for (const placement of layoutPayload.projectPlacements) {
+    if (!projectIds.has(placement.projectId) || placementIds.has(placement.projectId)) throw new Error(`不正または重複した配置: ${placement.projectId}`);
+    if (![placement.x, placement.y, placement.width].every(Number.isFinite)) throw new Error(`配置座標が不正です: ${placement.projectId}`);
+    placementIds.add(placement.projectId);
+  }
+  if (placementIds.size !== projectIds.size) throw new Error('全作品に世界座標の配置が必要です。');
   state.visited = new Set(Array.from(state.visited).filter((id) => projectIds.has(id)));
   saveVisited();
 }
@@ -188,15 +203,48 @@ function buildDistrictLandmark(district) {
   return landmark;
 }
 
+function placementForProject(projectId) {
+  return state.layout?.projectPlacements?.find((item) => item.projectId === projectId) ?? null;
+}
+
+function regionForDistrict(districtId) {
+  return state.layout?.districtRegions?.find((item) => item.districtId === districtId) ?? null;
+}
+
+function buildWorldChunks() {
+  const layer = make('div', 'world-chunks');
+  layer.setAttribute('aria-hidden', 'true');
+  for (const chunk of state.layout?.chunks ?? []) {
+    const node = make('div', 'world-chunk');
+    node.dataset.chunkId = chunk.id;
+    node.dataset.chunkColumn = String(chunk.column);
+    node.dataset.chunkRow = String(chunk.row);
+    node.dataset.chunkMode = chunk.image ? 'illustrated' : (chunk.fallback ?? 'legacy');
+    if (chunk.image) node.dataset.chunkImage = chunk.image;
+    layer.append(node);
+  }
+  return layer;
+}
+
 function renderMap() {
   const map = document.getElementById('cityMap');
   if (!map) return;
   map.replaceChildren();
-  map.append(buildMapInfrastructure());
+  map.dataset.worldLayout = 'v1';
+  map.dataset.worldWidth = String(state.layout.world.width);
+  map.dataset.worldHeight = String(state.layout.world.height);
+  map.append(buildWorldChunks(), buildMapInfrastructure());
 
   for (const district of [...state.districts].sort(byOrder)) {
     const section = make('section', `district district--${district.mapArea}`);
     section.dataset.districtId = district.id;
+    const region = regionForDistrict(district.id);
+    if (region) {
+      section.dataset.worldX = String(region.x);
+      section.dataset.worldY = String(region.y);
+      section.dataset.worldWidth = String(region.width);
+      section.dataset.worldHeight = String(region.height);
+    }
     section.setAttribute('aria-labelledby', `district-${district.id}`);
 
     const heading = make('div', 'district__heading');
@@ -218,6 +266,14 @@ function renderMap() {
       const button = make('button', 'building-button');
       button.type = 'button';
       button.dataset.projectId = project.id;
+      const placement = placementForProject(project.id);
+      if (placement) {
+        button.dataset.worldX = String(placement.x);
+        button.dataset.worldY = String(placement.y);
+        button.dataset.worldWidth = String(placement.width);
+        button.dataset.worldAnchor = placement.anchor;
+        button.dataset.worldZ = String(placement.z ?? Math.round(placement.y));
+      }
       button.dataset.baseLabel = `${district.name}の${project.building}、${project.title}`;
       button.setAttribute('aria-label', `${button.dataset.baseLabel}、未訪問`);
       button.setAttribute('aria-pressed', 'false');
@@ -478,17 +534,19 @@ function renderError(error) {
 
 async function loadCity() {
   try {
-    const [projectResponse, districtResponse] = await Promise.all([
+    const [projectResponse, districtResponse, layoutResponse] = await Promise.all([
       fetch(DATA_PATHS.projects, { cache: 'no-store' }),
-      fetch(DATA_PATHS.districts, { cache: 'no-store' })
+      fetch(DATA_PATHS.districts, { cache: 'no-store' }),
+      fetch(DATA_PATHS.layout, { cache: 'no-store' })
     ]);
-    if (!projectResponse.ok || !districtResponse.ok) throw new Error('JSONファイルの取得に失敗しました。');
+    if (!projectResponse.ok || !districtResponse.ok || !layoutResponse.ok) throw new Error('JSONファイルの取得に失敗しました。');
 
-    const [projectPayload, districtPayload] = await Promise.all([
+    const [projectPayload, districtPayload, layoutPayload] = await Promise.all([
       projectResponse.json(),
-      districtResponse.json()
+      districtResponse.json(),
+      layoutResponse.json()
     ]);
-    validateData(projectPayload, districtPayload);
+    validateData(projectPayload, districtPayload, layoutPayload);
 
     state.projects = projectPayload.projects.slice().sort((a, b) => {
       const da = districtPayload.districts.find((district) => district.id === a.district)?.order ?? 0;
@@ -496,6 +554,7 @@ async function loadCity() {
       return da - db || byOrder(a, b);
     });
     state.districts = districtPayload.districts.slice().sort(byOrder);
+    state.layout = layoutPayload;
 
     const projectCount = document.getElementById('projectCount');
     if (projectCount) projectCount.textContent = String(state.projects.length);

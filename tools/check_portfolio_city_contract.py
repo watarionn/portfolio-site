@@ -43,6 +43,7 @@ REQUIRED_FILES = {
     "portfolio-city/city.js",
     "portfolio-city/data/projects.json",
     "portfolio-city/data/districts.json",
+    "portfolio-city/data/map-layout.json",
     "portfolio-city/assets/README.md",
     "portfolio-city/assets/buildings/.gitkeep",
     "portfolio-city/assets/landmarks/.gitkeep",
@@ -70,10 +71,13 @@ def main() -> int:
 
     project_payload = load_json(CITY / "data/projects.json")
     district_payload = load_json(CITY / "data/districts.json")
+    layout_payload = load_json(CITY / "data/map-layout.json")
     if project_payload.get("schemaVersion") != 1:
         fail("projects schemaVersion must be 1")
     if district_payload.get("schemaVersion") != 1:
         fail("districts schemaVersion must be 1")
+    if layout_payload.get("schemaVersion") != 1:
+        fail("map-layout schemaVersion must be 1")
 
     projects = project_payload.get("projects")
     districts = district_payload.get("districts")
@@ -127,6 +131,28 @@ def main() -> int:
     if actual_assignments != EXPECTED_DISTRICTS:
         fail("project-to-district assignments differ from the Phase 3.1 plan")
 
+    world = layout_payload.get("world", {})
+    if world.get("chunkWidth") != 1024 or world.get("chunkHeight") != 768:
+        fail("Phase 3.5 logical chunk size must remain 1024 x 768")
+    chunks = layout_payload.get("chunks")
+    if not isinstance(chunks, list) or len(chunks) != 9:
+        fail("Checkpoint 1 must register the initial 3 x 3 world chunks")
+    chunk_ids = [item.get("id") for item in chunks if isinstance(item, dict)]
+    if len(chunk_ids) != len(set(chunk_ids)):
+        fail("map-layout chunk IDs must be unique")
+    placements = layout_payload.get("projectPlacements")
+    if not isinstance(placements, list) or len(placements) != 14:
+        fail("map-layout must contain exactly one placement per current project")
+    placement_ids = [item.get("projectId") for item in placements if isinstance(item, dict)]
+    if set(placement_ids) != set(EXPECTED_ROUTES) or len(placement_ids) != len(set(placement_ids)):
+        fail("map-layout placements must match the locked 14-work inventory exactly once")
+    if any(item.get("anchor") != "bottom-center" for item in placements):
+        fail("all Phase 3.5 project placements must use bottom-center anchors")
+    regions = layout_payload.get("districtRegions")
+    region_ids = [item.get("districtId") for item in regions or [] if isinstance(item, dict)]
+    if set(region_ids) != set(EXPECTED_DISTRICTS) or len(region_ids) != 4:
+        fail("map-layout must define one world-space region per district")
+
     html = (CITY / "city.html").read_text(encoding="utf-8")
     for marker in ("MAP", "WORKS", "PROFILE", "CONTACT", 'id="cityMap"', 'id="projectInspector"', 'id="worksDirectory"', 'class="map-legend"', 'data-layout="living-city"', "project-inspector__close", "project-inspector__visual"):
         if marker not in html:
@@ -164,7 +190,7 @@ def main() -> int:
     if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
         fail("validate-public workflow must run the Portfolio City runtime contract")
 
-    print("Portfolio City Phase 3.4 contract passed: 14 works / 4 districts / living city / desktop + mobile art direction / runtime guard")
+    print("Portfolio City Phase 3.5 Checkpoint 1 contract passed: 14 works / 4 districts / 9 chunks / world layout / legacy visual fallback")
     return 0
 
 

@@ -4,6 +4,7 @@ import vm from 'node:vm';
 
 const projectsPayload = JSON.parse(readFileSync('portfolio-city/data/projects.json', 'utf8'));
 const districtsPayload = JSON.parse(readFileSync('portfolio-city/data/districts.json', 'utf8'));
+const layoutPayload = JSON.parse(readFileSync('portfolio-city/data/map-layout.json', 'utf8'));
 const citySource = readFileSync('portfolio-city/city.js', 'utf8');
 
 class MockClassList {
@@ -207,6 +208,7 @@ const matchMediaMock = (query) => ({
 const fetchMock = async (path) => {
   if (path === 'data/projects.json') return { ok: true, json: async () => projectsPayload };
   if (path === 'data/districts.json') return { ok: true, json: async () => districtsPayload };
+  if (path === 'data/map-layout.json') return { ok: true, json: async () => layoutPayload };
   return { ok: false, json: async () => ({}) };
 };
 
@@ -247,6 +249,11 @@ const buildings = documentMock.querySelectorAll('.building-button');
 const workRows = documentMock.querySelectorAll('.work-row');
 assert.equal(districts.length, 4, 'map must render four districts');
 assert.equal(buildings.length, 14, 'map must render fourteen buildings');
+assert.equal(documentMock.querySelectorAll('.world-chunk').length, 9, 'map must register nine world chunks');
+assert.equal(cityMap.dataset.worldLayout, 'v1');
+assert.equal(cityMap.dataset.worldWidth, '3200');
+assert.equal(cityMap.dataset.worldHeight, '2304');
+assert.equal(buildings.filter((button) => button.dataset.worldAnchor === 'bottom-center').length, 14, 'every building must expose world placement data');
 assert.equal(documentMock.querySelectorAll('.building-visual').length, 14, 'every building must render a handcrafted visual');
 assert.equal(documentMock.querySelectorAll('.district-landmark').length, 4, 'every district must render one landmark');
 assert.equal(documentMock.querySelectorAll('.district-scene').length, 4, 'every district must render one environment scene');
@@ -325,4 +332,4 @@ for (const project of projectsPayload.projects) {
   assert.equal(row.href, project.route, `route mismatch for ${project.id}`);
 }
 
-console.log('Portfolio City runtime contract passed: 4 districts / 14 buildings / navigation / keyboard / visited state');
+console.log('Portfolio City Phase 3.5 runtime contract passed: 9 chunks / 4 districts / 14 world placements / navigation / keyboard / visited state');

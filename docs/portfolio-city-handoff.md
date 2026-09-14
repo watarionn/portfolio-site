@@ -7,15 +7,17 @@ Updated: 2026-09-14
 - Canonical repository: `watarionn/portfolio-site`
 - Canonical branch: `main`
 - Production URL: `https://cf278796.cloudfree.jp/portfolio-city/`
-- Current production baseline after Phase 3.4 Checkpoint 2: `5fe1ea5ebf289c7b8becfe36105b35b1b05c81e2`
+- Current production baseline after Phase 3.4 Checkpoint 3: `db01ea57bf9d88c42741b8668c82632faf51d08a`
 - Phase 3.3 Living City Map is closed and production-ready.
-- Phase 3.4 Checkpoint 1 and Checkpoint 2 are merged and deployed.
+- Phase 3.4 Checkpoints 1, 2, and 3 are merged and deployed.
 
 ## Phase 3.4 completed work
 
 Checkpoint 1 added the PC art-direction depth pass: far, mid, and near layers with local hand-authored SVG environment assets.
 
 Checkpoint 2 rebuilt the mobile presentation around the approved illustrated-city concept. Mobile now uses one vertical town map, 14 illustrated project buildings, environment art, fixed bottom navigation, a dismissible inspector overlay, and illustrated WORKS thumbnails.
+
+Checkpoint 3 added district-specific visual identity without changing project routes or interaction models. Observatory Hill now reads as elevated and astronomical, Archive Street as bookish and informational, Workshop Alley as mechanical and handmade, and Waterside Play as aquatic and playful. The pass is isolated in `portfolio-city/district-art.css`.
 
 Desktop and tablet behavior remain intentionally different from the mobile art pass. Desktop keeps the floating building inspector. Tablet keeps the static inspector layout.
 
@@ -32,6 +34,7 @@ The implementation should approach these references without sacrificing route st
 
 - `portfolio-city/city.html` — shared MAP / WORKS / PROFILE / CONTACT shell and inspector markup
 - `portfolio-city/city.css` — desktop, tablet, mobile map art direction and responsive behavior
+- `portfolio-city/district-art.css` — district-specific decorative art direction
 - `portfolio-city/city.js` — city rendering, project selection, visited state, inspector, navigation, keyboard behavior
 - `portfolio-city/data/projects.json` — locked 14-work inventory and production routes
 - `portfolio-city/data/districts.json` — four-district city model
@@ -40,15 +43,15 @@ The implementation should approach these references without sacrificing route st
 - `tools/check_portfolio_city_contract.py` — structural and art-direction contract
 - `tools/check_portfolio_city_runtime.mjs` — runtime behavior guard
 
-## Production QA snapshots
+## Production QA
 
-The following production screenshots were captured after deploying Phase 3.4 Checkpoint 2:
+Checkpoint 3 was validated locally before deployment with all required gates passing. Production was deployed by FTPS without GitHub Actions, then verified at 390 px, 820 px, and 1440 px with zero horizontal overflow and zero browser console errors. All 4 districts and all 14 `.building-button` elements were present in production, and `district-art.css` loaded successfully.
+
+Existing accepted mobile snapshots from Checkpoint 2 remain available at:
 
 - `docs/assets/portfolio-city/phase3-4-mobile/mobile-map-390.png`
 - `docs/assets/portfolio-city/phase3-4-mobile/mobile-inspector-390.png`
 - `docs/assets/portfolio-city/phase3-4-mobile/mobile-works-390.png`
-
-They represent the accepted 390 px mobile state for MAP, inspector overlay, and WORKS directory.
 
 ## Validation gates
 
@@ -74,8 +77,6 @@ Browser QA should cover mobile 390 px, tablet 820 px, and desktop 1440 px. Keep 
 
 ## Recommended next checkpoint
 
-Continue Phase 3.4 with a district-specific art-direction pass rather than another global layout rewrite.
+Perform a Phase 3.4 closure / visual polish audit against the approved concept references and live production rather than starting another global layout rewrite.
 
-Strengthen the visual identity of the four districts while preserving the accepted PC and mobile interaction models. Observatory Hill should read as elevated and astronomical, Archive Street as bookish and informational, Workshop Alley as mechanical and handmade, and Waterside Play as aquatic and playful.
-
-Favor local SVG scenery, terrain treatment, signage, and small props over changes to project data or navigation. Compare each iteration against the approved concept board and the production QA snapshots above.
+Focus on local district detail, spacing, layering, legibility, and any remaining visual inconsistencies across 390 px, 820 px, and 1440 px. Preserve the accepted 14-project structure, navigation, project routes, and interaction models. Any additional scenery should remain decorative, local, accessible, and non-interactive.

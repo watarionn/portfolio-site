@@ -1538,3 +1538,465 @@ button { font: inherit; }
   .city-map__pier,
   .city-map__boat { z-index: 3; }
 }
+
+/* Phase 3.4 / Checkpoint 2 — Mobile Art Direction Pass */
+.project-inspector__visual,
+.work-row__thumb,
+.city-map__guide,
+.city-map__guide-prompt { display: none; }
+
+@media (max-width: 680px) {
+  body { padding-bottom: 4.35rem; }
+  .city-header__bar { min-height: 3.45rem; }
+  .city-wordmark > span { font-size: .83rem; }
+  .city-nav {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 120;
+    background: rgba(248,243,231,.97);
+    color: var(--ink);
+    border-top: 1px solid rgba(23,19,14,.22);
+    border-bottom: 0;
+    box-shadow: 0 -4px 18px rgba(23,19,14,.12);
+  }
+  .city-nav__inner {
+    width: 100%;
+    min-height: 4.15rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    padding: 0;
+    overflow: visible;
+  }  .city-nav__button {
+    min-width: 0;
+    padding: .42rem .1rem .34rem;
+    color: var(--ink-soft);
+    font-size: .55rem;
+    letter-spacing: .06em;
+    line-height: 1.15;
+    display: grid;
+    place-items: center;
+    gap: .12rem;
+    border-right: 1px solid rgba(23,19,14,.08);
+  }
+  .city-nav__button::before {
+    display: block;
+    color: var(--green);
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+  .city-nav__button[data-panel-target="map"]::before { content: "⌂"; }
+  .city-nav__button[data-panel-target="works"]::before { content: "▣"; }
+  .city-nav__button[data-panel-target="profile"]::before { content: "●"; }
+  .city-nav__button[data-panel-target="contact"]::before { content: "✉"; }
+  .city-nav__button[aria-current="page"] {
+    color: var(--green);
+    background: rgba(86,107,85,.08);
+  }
+  .city-nav__note,
+  .mobile-primary-switch { display: none !important; }
+  .city-panel--map { padding: .55rem 0 .8rem; }
+  .city-panel--map .city-shell { padding-inline: .55rem; }
+  .city-panel--map .panel-heading,
+  .city-panel--map .map-legend { display: none; }
+  .map-layout { position: relative; display: block; }
+  .city-map {
+    position: relative;
+    height: 52rem;
+    min-height: 52rem;
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 1.15rem;
+    border-color: rgba(23,19,14,.34);
+    background:
+      radial-gradient(circle at 18% 34%, rgba(107,143,103,.18), transparent 22%),
+      radial-gradient(circle at 82% 40%, rgba(107,143,103,.16), transparent 20%),
+      linear-gradient(to bottom, #dcece8 0 17%, #e8e4d0 30% 72%, #b9d8d5 72% 100%);
+  }
+  .city-map::before {
+    display: block;
+    left: -8%;
+    right: -8%;
+    bottom: 0;
+    height: 28%;
+    border: 0;
+    background: linear-gradient(180deg, rgba(126,184,186,.16), rgba(74,154,164,.28));
+    transform: rotate(-1deg);
+  }
+  .city-map::after {
+    top: .8rem;
+    right: .8rem;
+    width: 1.8rem;
+    background: rgba(248,243,231,.86);
+    font-size: .58rem;
+  }
+  .city-map__infrastructure { inset: 0; overflow: hidden; }
+  .city-map__street-label { display: none; }
+  .city-map__road--spine {
+    top: 10%; bottom: 22%; left: calc(50% - .35rem); width: .7rem;
+    transform: rotate(2deg);
+  }
+  .city-map__road--cross {
+    left: 8%; right: 8%; top: 43%; height: .68rem;
+    transform: rotate(-1.5deg);
+  }
+  .city-map__plaza {
+    top: calc(43% - .85rem); left: calc(50% - .85rem); width: 1.7rem;
+  }
+  .city-map__bridge { left: 39%; right: 39%; bottom: 17%; height: .65rem; }
+  .city-art { display: block; position: absolute; inset: 0; pointer-events: none; }
+  .city-art > span { position: absolute; display: block; background-repeat: no-repeat; background-position: center; background-size: contain; }
+  .city-art--far { z-index: 0; }
+  .city-art--mid { z-index: 2; }
+  .city-art--near { z-index: 4; }
+  .city-art__mountains {
+    top: -.5%; left: -5%; width: 110%; height: 17%;
+    background-image: url("assets/environment/mountains.svg"); opacity: .88;
+  }
+  .city-art__cloud {
+    width: 22%; aspect-ratio: 22/9;
+    background-image: url("assets/environment/cloud.svg"); opacity: .68;
+  }
+  .city-art__cloud--a { top: 3%; left: 7%; }
+  .city-art__cloud--b { top: 9%; right: 7%; width: 18%; opacity: .5; }
+  .city-art__tree-cluster {
+    width: 25%; aspect-ratio: 22/17;
+    background-image: url("assets/environment/tree-cluster.svg"); opacity: .88;
+  }
+  .city-art__tree-cluster--a { top: 16%; left: -3%; }
+  .city-art__tree-cluster--b { top: 39%; left: 2%; width: 20%; }
+  .city-art__tree-cluster--c { top: 40%; right: 1%; width: 20%; }
+  .city-art__tree-cluster--d { top: 17%; right: -3%; }
+  .city-art__fountain {
+    top: 39%; left: 40%; width: 20%; aspect-ratio: 1;
+    background-image: url("assets/environment/fountain.svg");
+  }
+  .city-art__market {
+    top: 47%; left: 7%; width: 22%; aspect-ratio: 4/3;
+    background-image: url("assets/environment/market-stall.svg"); opacity: .82;
+  }
+  .city-art__reeds {
+    width: 22%; aspect-ratio: 18/13;
+    background-image: url("assets/environment/reeds.svg"); opacity: .84;
+  }
+  .city-art__reeds--a { left: -2%; bottom: 1%; }
+  .city-art__reeds--b { right: -2%; bottom: 5%; transform: scaleX(-1); }
+  .city-art__person {
+    width: 1.55rem; height: 2.7rem;
+    background-image: url("assets/environment/person.svg"); opacity: .72;
+  }
+  .city-art__person--a { left: 42%; top: 51%; }
+  .city-art__person--b { right: 39%; top: 57%; transform: scale(.85); }
+  .city-art__person--c { left: 24%; top: 69%; transform: scale(.78); }
+  .city-art__person--d { right: 21%; top: 70%; transform: scale(.75) scaleX(-1); }
+  .city-art__flowerbed {
+    width: 18%; aspect-ratio: 11/5;
+    background-image: url("assets/environment/flowerbed.svg"); opacity: .82;
+  }
+  .city-art__flowerbed--a { left: 26%; top: 43.5%; transform: rotate(-3deg); }
+  .city-art__flowerbed--b { right: 24%; top: 45%; transform: rotate(4deg); }
+  .city-map__guide {
+    display: block;
+    position: absolute;
+    z-index: 7;
+    left: calc(50% - .85rem);
+    top: 48.5%;
+    width: 1.7rem;
+    height: 3rem;
+    background: url("assets/environment/person.svg") center/contain no-repeat;
+    pointer-events: none;
+  }
+  .city-map__guide-prompt {
+    display: block;
+    position: absolute;
+    z-index: 7;
+    left: 50%;
+    top: 45.5%;
+    padding: .32rem .55rem;
+    border: 1px solid rgba(23,19,14,.28);
+    border-radius: 999px;
+    background: rgba(248,243,231,.92);
+    font-family: var(--sans);
+    font-size: .58rem;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .district {
+    position: absolute;
+    z-index: 5;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent !important;
+    box-shadow: none !important;
+    pointer-events: none;
+  }
+  [data-district-id="observatory-hill"] { left: 9%; top: 6%; width: 82%; height: 24%; }
+  [data-district-id="archive-street"] { left: 3%; top: 27%; width: 47%; height: 37%; }
+  [data-district-id="workshop-alley"] { right: 3%; top: 28%; width: 47%; height: 37%; }
+  [data-district-id="waterside-play"] { left: 7%; right: 7%; bottom: 2%; height: 29%; }
+  .district__heading,
+  .district-landmark,
+  .district__progress,
+  .district__meta,
+  .district-scene { display: none; }
+  .district__buildings {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .district .building-button { pointer-events: auto; }
+  .building-button {
+    position: absolute;
+    width: 5.2rem;
+    min-height: 5.4rem;
+    padding: 3.7rem .08rem 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    text-align: center;
+    overflow: visible;
+  }
+  .building-button:hover,
+  .building-button.is-selected {
+    transform: translateY(-3px) scale(1.02);
+    background: transparent;
+    box-shadow: none;
+  }
+  .building-button.is-selected { outline: 2px solid rgba(154,52,39,.45); outline-offset: .12rem; }
+  .building-button .building-visual {
+    top: -.15rem;
+    left: 50%;
+    width: 5.1rem;
+    height: 4rem;
+    background-image: var(--project-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 1;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 3px 2px rgba(23,19,14,.16));
+  }
+  .building-button .building-visual > * { display: none; }
+  .building-button__name { display: none; }
+  .building-button__title {
+    display: inline-block;
+    max-width: 5rem;
+    margin-top: .05rem;
+    padding: .16rem .28rem;
+    border-radius: .18rem;
+    background: rgba(23,19,14,.9);
+    color: var(--paper-soft);
+    font-size: .54rem;
+    line-height: 1.2;
+    box-shadow: 0 2px 0 rgba(23,19,14,.12);
+  }
+  .building-button.is-visited::after {
+    top: 3rem;
+    right: .1rem;
+    padding: .03rem .14rem;
+    background: rgba(248,243,231,.92);
+    font-size: .35rem;
+  }
+  [data-project-id="holoscope"] { left: 37%; top: 0; }
+  [data-project-id="sphere"] { left: 0; top: 52%; }
+  [data-project-id="prime-dot-art"] { right: 0; top: 52%; }
+  [data-project-id="yorei"] { left: 0; top: 8%; }
+  [data-project-id="actress-finder"] { right: 0; top: 8%; }
+  [data-project-id="cheatsheet"] { left: 0; top: 64%; }
+  [data-project-id="shisha"] { right: 0; top: 64%; }
+  [data-project-id="dqb2"] { left: 0; top: 8%; }
+  [data-project-id="madori"] { right: 0; top: 8%; }
+  [data-project-id="maze-maker"] { left: 0; top: 64%; }
+  [data-project-id="anagram"] { right: 0; top: 64%; }
+  [data-project-id="aquarium"] { left: 0; top: 10%; }
+  [data-project-id="holoca"] { left: 36%; top: -2%; }
+  [data-project-id="word-generator"] { right: 0; top: 10%; }
+
+  .project-inspector {
+    position: fixed !important;
+    z-index: 110;
+    left: .72rem;
+    right: .72rem;
+    bottom: 4.75rem;
+    top: auto;
+    max-height: min(67vh, 31rem);
+    overflow: auto;
+    padding: .75rem;
+    border-radius: 1rem;
+    border-color: rgba(23,19,14,.38);
+    box-shadow: 0 10px 34px rgba(23,19,14,.28);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(calc(100% + 6rem));
+    transition: opacity .2s ease, transform .25s var(--ease);
+  }
+  .project-inspector.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .project-inspector__close {
+    display: grid;
+    top: .55rem;
+    right: .55rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(248,243,231,.94);
+  }
+  .project-inspector__visual {
+    display: block;
+    height: 6.5rem;
+    margin: -.15rem 2.35rem .45rem 0;
+    border-radius: .7rem;
+    background:
+      var(--project-image) center/contain no-repeat,
+      linear-gradient(180deg, rgba(220,238,233,.8), rgba(238,232,213,.72));
+  }
+  .project-inspector__eyebrow { margin: 0 0 .28rem; font-size: .52rem; }
+  .project-inspector h3 { font-size: 1.35rem; }
+  .project-inspector__district { margin: .28rem 0 .55rem; font-size: .58rem; }
+  .project-inspector__summary { margin: 0 0 .7rem; font-size: .75rem; line-height: 1.65; }
+  .project-inspector__facts { display: none; }
+  .project-inspector__enter {
+    border-radius: 999px;
+    background: var(--green);
+    padding: .68rem 1rem;
+    justify-content: center;
+    font-size: .68rem;
+  }
+  .city-panel--works { padding-top: 1rem; }
+  .city-panel--works .panel-heading { margin-bottom: 1.1rem; }
+  .works-group__heading { padding: .8rem 0 .55rem; }
+  .works-group__heading h3 { font-size: 1.2rem; }
+  .work-row {
+    grid-template-columns: 3rem 1.6rem minmax(0,1fr) auto;
+    gap: .45rem;
+    align-items: center;
+    padding: .65rem .35rem;
+  }
+  .work-row__thumb {
+    display: block;
+    grid-row: 1 / span 2;
+    width: 3rem;
+    height: 3rem;
+    background: var(--project-image) center/contain no-repeat;
+  }
+  .work-row__num { font-size: .55rem; }
+  .work-row strong { font-size: .82rem; }
+  .work-row__type { grid-column: 3 / -1; grid-row: 2; font-size: .52rem; }
+  .city-footer { padding-bottom: 4.2rem; }
+}
+
+/* Phase 3.4 / mobile art image mapping */
+[data-project-id="holoscope"] { --project-image: url("assets/buildings/holoscope.svg"); }
+[data-project-id="sphere"] { --project-image: url("assets/buildings/sphere.svg"); }
+[data-project-id="prime-dot-art"] { --project-image: url("assets/buildings/prime-dot-art.svg"); }
+[data-project-id="yorei"] { --project-image: url("assets/buildings/yorei.svg"); }
+[data-project-id="actress-finder"] { --project-image: url("assets/buildings/actress-finder.svg"); }
+[data-project-id="cheatsheet"] { --project-image: url("assets/buildings/cheatsheet.svg"); }
+[data-project-id="shisha"] { --project-image: url("assets/buildings/shisha.svg"); }
+[data-project-id="dqb2"] { --project-image: url("assets/buildings/dqb2.svg"); }
+[data-project-id="madori"] { --project-image: url("assets/buildings/madori.svg"); }
+[data-project-id="maze-maker"] { --project-image: url("assets/buildings/maze-maker.svg"); }
+[data-project-id="anagram"] { --project-image: url("assets/buildings/anagram.svg"); }
+[data-project-id="aquarium"] { --project-image: url("assets/buildings/aquarium.svg"); }
+[data-project-id="holoca"] { --project-image: url("assets/buildings/holoca.svg"); }
+[data-project-id="word-generator"] { --project-image: url("assets/buildings/word-generator.svg"); }
+
+/* Phase 3.4 / Checkpoint 2 — mobile density tuning against approved board */
+@media (max-width: 680px) {
+  .city-map {
+    height: clamp(44rem, calc(100svh - 7.8rem), 52rem);
+    min-height: 44rem;
+  }
+  .city-map__infrastructure::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+      url("assets/environment/tree-cluster.svg"),
+      url("assets/environment/tree-cluster.svg"),
+      url("assets/environment/tree-cluster.svg"),
+      url("assets/environment/tree-cluster.svg"),
+      url("assets/environment/tree-cluster.svg"),
+      url("assets/environment/tree-cluster.svg");
+    background-repeat: no-repeat;
+    background-size: 16% auto, 13% auto, 15% auto, 14% auto, 12% auto, 16% auto;
+    background-position: 8% 27%, 82% 25%, 5% 59%, 84% 60%, 24% 78%, 69% 77%;
+    opacity: .72;
+  }
+  .city-map__path,
+  .city-map__shoreline,
+  .city-map__pier,
+  .city-map__boat {
+    display: block;
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .city-map__path {
+    height: .42rem;
+    border-radius: 999px;
+    background: rgba(244,235,207,.96);
+    box-shadow: 0 0 0 1px rgba(23,19,14,.12), inset 0 0 0 1px rgba(255,255,255,.35);
+    transform-origin: left center;
+  }
+  .city-map__path--west { left: 31%; top: 31%; width: 21%; transform: rotate(26deg); }
+  .city-map__path--east { left: 49%; top: 32%; width: 22%; transform: rotate(-28deg); }
+  .city-map__path--south { left: 46%; top: 52%; width: 22%; transform: rotate(82deg); }
+  .city-map__shoreline {
+    left: 2%; right: 2%; bottom: 20%; height: 1.1rem;
+    border-top: 2px solid rgba(49,93,101,.28);
+    border-radius: 50%;
+  }
+  .city-map__pier {
+    left: 46%; bottom: 11%; width: 3.8rem; height: .65rem;
+    border: solid rgba(23,19,14,.24); border-width: 1px 0;
+    background: repeating-linear-gradient(90deg, rgba(151,112,69,.55) 0 .4rem, rgba(238,224,189,.75) .4rem .7rem);
+    transform: rotate(5deg);
+  }
+  .city-map__boat {
+    left: 21%; bottom: 9%; width: 2.4rem; height: .6rem;
+    border: 1px solid rgba(49,93,101,.45);
+    border-radius: 0 0 55% 55%;
+    background: #f8f3e7;
+    transform: rotate(-8deg);
+  }
+  .city-map__boat::before {
+    content: "";
+    position: absolute;
+    left: 1.1rem; bottom: .35rem;
+    width: 1px; height: 1.25rem;
+    background: rgba(49,93,101,.6);
+  }
+  .city-map__boat::after {
+    content: "";
+    position: absolute;
+    left: 1.12rem; bottom: .9rem;
+    width: .9rem; height: .7rem;
+    background: rgba(216,226,218,.9);
+    clip-path: polygon(0 0,100% 50%,0 100%);
+  }
+  .building-button__title {
+    max-width: 4.7rem;
+    padding: .13rem .24rem;
+    background: rgba(23,19,14,.82);
+    font-size: .47rem;
+  }
+  .city-map__guide-prompt { top: 46.5%; font-size: .54rem; }
+}
+
+@media (max-width: 680px) {
+  .city-map__infrastructure { display: block; }
+}

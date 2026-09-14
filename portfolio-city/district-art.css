@@ -83,3 +83,59 @@
   .city-art__market { filter: sepia(.2); }
   .city-art__reeds { filter: saturate(.9); }
 }
+
+/* Phase 3.4 closure polish / Checkpoint 1 — building presence.
+   Keep the accepted geography and hit targets; only strengthen the illustrated
+   building layer and its label hierarchy. */
+@media (min-width: 981px) {
+  .building-button .building-visual {
+    top: -1.15rem;
+    width: 9.8rem;
+    height: 7.25rem;
+    filter: drop-shadow(0 6px 3px rgba(23,19,14,.18));
+  }
+  .building-button:hover .building-visual,
+  .building-button.is-selected .building-visual {
+    transform: translateX(-50%) translateY(-5px) scale(1.06);
+    filter: drop-shadow(0 9px 5px rgba(23,19,14,.24));
+  }
+  .building-button__name { font-size: .5rem; }
+  .building-button__title {
+    max-width: 7.8rem;
+    padding: .22rem .42rem;
+    background: rgba(23,19,14,.84);
+    font-size: .68rem;
+  }
+}
+
+@media (min-width: 681px) and (max-width: 980px) {
+  .building-button { min-height: 9.2rem; padding-top: 4.2rem; }
+  .building-button .building-visual {
+    top: .28rem;
+    width: 5.8rem;
+    height: 3.8rem;
+    opacity: .9;
+    transform: translateX(-50%) scale(1.06);
+    filter: drop-shadow(0 3px 2px rgba(23,19,14,.13));
+  }
+  .building-button__title { font-size: .92rem; }
+}
+
+@media (max-width: 680px) {
+  .building-button {
+    width: 5.6rem;
+    min-height: 5.8rem;
+    padding-top: 4.15rem;
+  }
+  .building-button .building-visual {
+    top: -.38rem;
+    width: 5.85rem;
+    height: 4.55rem;
+    filter: drop-shadow(0 4px 2px rgba(23,19,14,.2));
+  }
+  .building-button__title {
+    max-width: 5.2rem;
+    background: rgba(23,19,14,.78);
+    font-size: .48rem;
+  }
+}

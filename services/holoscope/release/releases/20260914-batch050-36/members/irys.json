@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_irys",
+  "slug": "irys",
+  "displayName": "IRyS",
+  "nameJa": "IRyS",
+  "channelId": "UC8rcEBzJSleTkf_-agPM20g",
+  "officialChannelUrl": "https://www.youtube.com/channel/UC8rcEBzJSleTkf_-agPM20g",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_v7jnn0ybwd0",
+      "slug": "irys-v7jnn0ybwd0",
+      "videoId": "v7JnN0YBWD0",
+      "title": "IRySのホロお正月CUP2022　直前練習と緊張の中で挑んだMario Kart大会",
+      "summaryOneLine": "ロビー待機から始まり、直前練習で得た感触を頼りに、アイテムが飛び交う大会レースへ挑んだ配信です。",
+      "streamType": "event",
+      "publishedAt": "2022-01-07T04:30:00Z",
+      "durationSeconds": 2237,
+      "thumbnailUrl": "https://i.ytimg.com/vi/v7JnN0YBWD0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2022-01",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "ホロお正月CUP2022",
+        "Mario Kart 8 Deluxe"
+      ]
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 1,
+    "soloCount": 1,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/irys/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UC8rcEBzJSleTkf_-agPM20g",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

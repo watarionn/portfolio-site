@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_nerissa_ravencroft",
+  "slug": "nerissa-ravencroft",
+  "displayName": "Nerissa Ravencroft",
+  "nameJa": "ネリッサ・レイヴンクロフト",
+  "channelId": "UC_sFNM0z0MWm9A6WlKPuMMg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UC_sFNM0z0MWm9A6WlKPuMMg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_vomhneyv_m",
+      "slug": "nerissa-ravencroft-vomhneyv-m",
+      "videoId": "_vOMhneYv_M",
+      "title": "NerissaとInaがAmiAmiでクリスマスギフト探し　店内を巡って見つけた「相手らしい一品」",
+      "summaryOneLine": "AmiAmiの豊富な商品を見ながら、二人が相手や仲間を思い浮かべてクリスマスギフトを選ぶ買い物企画です。",
+      "streamType": "event",
+      "publishedAt": "2025-12-25T02:30:00Z",
+      "durationSeconds": 759,
+      "thumbnailUrl": "https://i.ytimg.com/vi/_vOMhneYv_M/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [
+        {
+          "uid": "mem_ninomae_inanis",
+          "slug": "ninomae-inanis",
+          "displayName": "Ninomae Ina'nis"
+        }
+      ],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "collab",
+      "month": "2025-12",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "PR",
+        "AmiAmi",
+        "クリスマス"
+      ]
+    },
+    {
+      "uid": "str_0irqmoh9vao",
+      "slug": "nerissa-ravencroft-0irqmoh9vao",
+      "videoId": "0iRQmOH9Vao",
+      "title": "負けながら覚える初日　NerissaがGranblue Fantasy Versus: Risingで視聴者を先生に変えた練習法",
+      "summaryOneLine": "この配信では、Nerissaが初心者であることを隠さず、その状態をそのまま練習方法へ変えていました。",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 8476,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0nj7ai7rpcy",
+      "slug": "nerissa-ravencroft-0nj7ai7rpcy",
+      "videoId": "0nj7AI7RpCY",
+      "title": "初見の結末を守り、終わってから比べる　Nerissaの『Silent Hill 2』完走",
+      "summaryOneLine": "02:24:13ごろの締めくくりでは、視聴者と共有した初体験、たどり着いた結末、そして死亡回数0をまとめて振り返ります。",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 8865,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 3,
+    "soloCount": 2,
+    "collaborationCount": 1,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 2
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [
+    {
+      "uid": "mem_ninomae_inanis",
+      "slug": "ninomae-inanis",
+      "displayName": "Ninomae Ina'nis",
+      "streamCount": 1,
+      "label": "共演配信 1件"
+    }
+  ],
+  "streamSearchUrl": "/members/nerissa-ravencroft/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UC_sFNM0z0MWm9A6WlKPuMMg",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

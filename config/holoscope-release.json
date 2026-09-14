@@ -1,18 +1,40 @@
 {
   "schemaVersion": 1,
-  "releaseId": "20260913-batch042-046",
-  "verifiedCommitSha": "aa69e3faed18c661410b5eb60243aa807ca64bed",
+  "releaseId": "20260914-batch050-36",
+  "verifiedCommitSha": "a620cc54f2e5cb6b3bbd7db62094393158c6dc8e",
   "pointerSource": "services/holoscope/release/state/current-release.json",
-  "releaseSource": "services/holoscope/release/releases/20260913-batch042-046",
-  "fallbackSource": "services/holoscope/release/releases/20260913-batch042-046",
+  "releaseSource": "services/holoscope/release/releases/20260914-batch050-36",
+  "fallbackSource": "services/holoscope/release/releases/20260914-batch050-36",
   "fallbackEntries": [
-    "articles", "events", "games", "generations", "home.json",
-    "learning", "manifest.json", "members", "phrases", "redirects.json",
-    "search", "series", "site.json", "slang", "stats", "streams"
+    "articles",
+    "events",
+    "games",
+    "generations",
+    "home.json",
+    "learning",
+    "manifest.json",
+    "members",
+    "phrases",
+    "redirects.json",
+    "search",
+    "series",
+    "site.json",
+    "slang",
+    "stats",
+    "streams"
   ],
   "sidecars": [
-    {"source": "feeds", "artifact": "feeds"},
-    {"source": "sitemap.xml", "artifact": "sitemap.xml"},
-    {"source": "sitemaps", "artifact": "sitemaps"}
+    {
+      "source": "feeds",
+      "artifact": "feeds"
+    },
+    {
+      "source": "sitemap.xml",
+      "artifact": "sitemap.xml"
+    },
+    {
+      "source": "sitemaps",
+      "artifact": "sitemaps"
+    }
   ]
 }

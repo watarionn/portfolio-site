@@ -48,3 +48,28 @@ Checkpoint 2 brings the approved mobile concept board into the real 390 px exper
 - tablet 820 px keeps its existing static inspector and does not adopt the mobile-only art layout
 - contract, runtime contract, production build, JavaScript syntax, diff check, and browser QA remain green
 - browser page errors remain zero
+
+## Checkpoint 3 — District Identity Pass
+
+Checkpoint 3 differentiates the four districts through decorative terrain, texture, signage, and atmosphere while preserving the accepted layout and interaction models.
+
+- Observatory Hill uses astronomical texture and elevated contour cues
+- Archive Street uses index / shelf-like texture and archival signage cues
+- Workshop Alley uses drafting-grid and mechanical / gear cues
+- Waterside Play uses layered water, shoreline, and wave cues
+- keep all district art decorative and non-interactive
+- keep all 14 project routes, project data, navigation, visited state, inspectors, and responsive interaction models unchanged
+- isolate this pass in `portfolio-city/district-art.css` so it remains reversible and easy to audit
+
+## Checkpoint 3 acceptance
+
+- all required local validation gates pass on the merged implementation
+- production renders 4 districts and 14 `.building-button` elements
+- `district-art.css` loads successfully in production
+- 390 px, 820 px, and 1440 px retain zero horizontal overflow and zero browser console errors
+- desktop keeps its floating inspector, tablet keeps its static inspector, and mobile keeps its accepted one-map interaction model
+- deployment is completed through FTPS without intentionally consuming GitHub Actions minutes
+
+## Phase 3.4 closure direction
+
+Before adding another major visual system, perform a closure / visual polish audit against the approved concept references and live production. Limit further work to local detail, spacing, layering, legibility, and visual consistency unless a new phase explicitly authorizes a larger redesign.

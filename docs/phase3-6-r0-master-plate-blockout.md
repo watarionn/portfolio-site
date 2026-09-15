@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.6-R0 — Master Plate Blockout
 
 Date: 2026-09-15
-Status: **BLOCKOUT CONTRACT / NOT RUNTIME DATA**
+Status: **REVIEW READY / NOT RUNTIME DATA**
 Coordinate source: `docs/phase3-6-r0-master-plate-blockout.json`
 
 ## Purpose
@@ -124,7 +124,7 @@ A straight road through HoloCa is prohibited.
 
 Water begins mainly after about `y=1850`.
 
-The west and east water bodies sit outside the central peninsula.
+The west and east water bodies sit outside the central peninsula. Their shoreline polygons are defined so they meet dry terrace boundaries without positive-area overlap.
 
 Keep these dry:
 
@@ -157,6 +157,29 @@ Final terrain will still be exported as one WebP per exact `1024 × 768` chunk r
 
 The existing `96` world-unit paint overlap remains required around master boundaries so the painted source can be compared before slicing.
 
+## Review artifacts
+
+The coordinate blockout review images are stored in the approved Portfolio City Google Drive reference area:
+
+- `phase3-6-r0_master-blockout_north-crown.png` — Drive file id `1pJthgnvbl-F0oYXqrvNu4H2lQpMssXZn`
+- `phase3-6-r0_master-blockout_middle-belt.png` — Drive file id `1FwALCxFVK8NsllLQUP2tDebLAJqCP1Vr`
+- `phase3-6-r0_master-blockout_south-belt_v2.png` — Drive file id `1fLwr4Hau62zParl19fvu_9rmiH2GsVBk`
+
+These are geometry QA diagrams, not art-direction masters.
+
+## Validation result
+
+Latest blockout validation confirms:
+
+- JSON parses correctly,
+- all route points remain inside their production master paint bounds,
+- all locked P0 gates are represented by route geometry,
+- current project and reserve anchors remain outside South Belt water zones,
+- west/east water polygons do not positively overlap dry land polygons,
+- `portfolio-city/data/map-layout.json` remains unchanged from `main`,
+- public repository boundary validation passes,
+- Portfolio City runtime contract validation passes.
+
 ## Acceptance gate
 
 This blockout passes only when:
@@ -176,6 +199,6 @@ This blockout passes only when:
 
 Do not generate final terrain after this document alone.
 
-The next review artifact is a three-panel blockout QA sheet showing North Crown, Middle Belt and South Belt at the same world-space scale.
+The next review artifact after blockout approval is the first **rough illustrated master-plate production**, beginning with broad colour masses, roads, cliff faces and water only.
 
-Only after the blockout geometry is approved should the project move into rough illustrated master-plate production.
+Detailed buildings, props and micro-detail remain out of scope until the rough master plates are approved.

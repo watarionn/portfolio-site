@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.6-R0 — Rough Illustrated Master Plates
 
 Date: 2026-09-15
-Status: **CONSTRAINED WATERCOLOUR REVIEW CANDIDATES / NOT RUNTIME ART**
+Status: **MIDDLE BELT APPROVED / NORTH + SOUTH REVIEW CONTINUES / NOT RUNTIME ART**
 Branch: `phase3-6-r0-whole-city-blueprint-reset`
 
 ## Purpose
@@ -37,7 +37,7 @@ The exact geometry remains authoritative in:
 
 Visual roughs may soften edges, but they must not move locked roads, gates, reserve parcels, Growth Frontiers or Expansion Corridors.
 
-## Current review candidates
+## Current review / approval state
 
 Stored in Google Drive under:
 
@@ -49,23 +49,24 @@ Stored in Google Drive under:
 - Drive file id: `1MqglOflwlQcU03JpNhgCo_04NLK5Wn0Y`
 - Status: **review candidate retained**
 
-### Middle Belt
+### Middle Belt — APPROVED
 
-- New mask-constrained candidate: `phase3-6-r0_middle-belt_constrained-watercolor_candidate.png`
-- Drive file id: `19i-OZs9Q798F5jZcj5iRpkwpejk11lxS`
-- Status: **review candidate**
-- Required reading: a broad, mostly dry east-west civic terrace with only tiny fringe water/cliff hints; Central Commons remains small, quiet and subordinate.
+- Approved rough: `phase3-6-r0_middle-belt_APPROVED.png`
+- Drive file id: `1eGZVy39zhO8NMd1CdmtAkJBdojyAzkGy`
+- Status: **APPROVED by user on 2026-09-15**
+- Approved reading: a broad, mostly dry east-west civic terrace with water/cliff presence held to the outer fringe; Central Commons remains visually subordinate; no decorative building or text layer is baked into terrain.
+- The approved rough may still require exact master-ratio export / slicing preparation later. Approval locks visual composition, not runtime registration.
 
 ### South Belt
 
-- New mask-constrained candidate: `phase3-6-r0_south-belt_constrained-watercolor_candidate.png`
-- Drive file id: `159HGEaB2OFyyarTZEaij9Jq4e8EIcOd0`
-- Status: **review candidate**
+- Working candidate lineage: `phase3-6-r0_south-belt_constrained-watercolor_candidate.png` → local-road-edit iterations
+- Status: **review continues; not approved**
 - Required reading: `G-SOUTH → split → pass outside HoloCa protected region → rejoin → one south continuation`; the waterfront remains secondary to the city route.
+- A closed ring road around HoloCa is explicitly forbidden.
 
 ## Superseded roughs
 
-The earlier `phase3-6-r0_rough-illustrated_middle-belt_v2.png` and `phase3-6-r0_rough-illustrated_south-belt_v2.png` remain useful color/style comparisons only. They are superseded as geometry candidates by the mask-constrained versions above.
+The earlier `phase3-6-r0_rough-illustrated_middle-belt_v2.png` and `phase3-6-r0_rough-illustrated_south-belt_v2.png` remain useful color/style comparisons only. They are superseded as geometry candidates by the constrained workflow.
 
 Several automatic image-generation attempts also produced poster layouts, labels, coordinates, buildings, ships, docks and other premature detail. Those outputs are rejected and are not project references.
 
@@ -75,7 +76,7 @@ The project must never treat attractive but structurally incorrect poster art as
 
 The constrained candidates are governed by the mask contract added in Phase 3.6-R0:
 
-- Middle Belt: dry terrain is dominant; east-west road continuity is primary; Central Commons is a small irregular paving patch, not a circular hero plaza.
+- Middle Belt: dry terrain is dominant; east-west road continuity is primary; Central Commons is a small, quiet connector and never a hero plaza.
 - South Belt: the HoloCa protected area is road-free; west/east bypass arms remain separate until the approved rejoin point; no closed ring road is permitted.
 - Buildings, towers, ships, piers, labels, UI and decorative landmarks are forbidden during this rough terrain stage.
 
@@ -86,10 +87,10 @@ The generated binary masks and mask review image are stored outside Git in Googl
 Before Rough Illustrated Master Plates can close:
 
 1. North Crown must read as the only clearly elevated mass.
-2. Middle Belt must remain a broad, mostly level dry civic terrace.
-3. Central Commons must stay visually subordinate.
+2. Middle Belt must remain a broad, mostly level dry civic terrace. **PASS / approved.**
+3. Central Commons must stay visually subordinate. **PASS for the approved Middle Belt rough.**
 4. South Belt must introduce the first real water plane while keeping Aquarium, HoloCa, Word Generator and the south continuation dry.
 5. HoloCa bypass must remain legible and must not become a closed ring.
 6. Reserve parcels must read as ordinary scenery rather than construction pads.
 7. All three plates must feel like one city under one muted storybook art direction.
-8. No detail pass may begin until these three rough compositions are approved.
+8. No detail pass may begin until all three rough compositions are approved.

@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.6-R0 — 13-Chunk Production Handoff
 
-Date: 2026-09-15  
-Status: **APPROVED MASTER PLATES / PRODUCTION HANDOFF / NOT RUNTIME YET**  
+Date: 2026-09-15
+Status: **APPROVED MASTER PLATES / PRODUCTION HANDOFF / NOT RUNTIME YET**
 Branch: `phase3-6-r0-whole-city-blueprint-reset`
 
 ## Purpose

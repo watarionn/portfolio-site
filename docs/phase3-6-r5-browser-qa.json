@@ -1,0 +1,118 @@
+{
+  "status": "PASS",
+  "source": "R5 staged map-layout candidate + exact Pass 8 q90 WebP terrain",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "center": {
+        "viewport": [390, 844],
+        "chunkCount": 13,
+        "projectCount": 14,
+        "imagesLoaded": 13,
+        "pageOverflowX": 0,
+        "stageOverflow": "hidden",
+        "negativeColLeft": 0,
+        "negativeRowTop": 0,
+        "eastEdgeRight": 100,
+        "southEdgeBottom": 100,
+        "allChunksWithinWorld": true,
+        "allProjectsWithinWorld": true,
+        "pan": { "x": 0, "y": 0, "maxX": 246.99999999999994, "maxY": 8.25, "zoom": 2.3 },
+        "stage": [382, 641],
+        "world": [874, 656]
+      },
+      "afterDragPan": { "x": -84.04000091552734, "y": 0, "maxX": 237.24999999999994, "maxY": 0, "zoom": 2.3 },
+      "checks": {
+        "chunks13": true,
+        "projects14": true,
+        "images13": true,
+        "noPageOverflow": true,
+        "negativeColAtZero": true,
+        "negativeRowAtZero": true,
+        "eastAt100": true,
+        "southAt100": true,
+        "chunksInsideWorld": true,
+        "projectsInsideWorld": true,
+        "dragChangedPan": true,
+        "dragClamped": true,
+        "noOverflowAfterDrag": true
+      }
+    },
+    {
+      "width": 820,
+      "height": 1000,
+      "center": {
+        "viewport": [820, 1000],
+        "chunkCount": 13,
+        "projectCount": 14,
+        "imagesLoaded": 13,
+        "pageOverflowX": 0,
+        "stageOverflow": "hidden",
+        "negativeColLeft": 0,
+        "negativeRowTop": 0,
+        "eastEdgeRight": 100,
+        "southEdgeBottom": 100,
+        "allChunksWithinWorld": true,
+        "allProjectsWithinWorld": true,
+        "pan": { "x": 0, "y": 0, "maxX": 240.60000000000002, "maxY": 157.20000000000005, "zoom": 1.6 },
+        "stage": [804, 650],
+        "world": [1283, 962]
+      },
+      "afterDragPan": { "x": -176.87998962402344, "y": -117, "maxX": 240.60000000000002, "maxY": 157.20000000000005, "zoom": 1.6 },
+      "checks": {
+        "chunks13": true,
+        "projects14": true,
+        "images13": true,
+        "noPageOverflow": true,
+        "negativeColAtZero": true,
+        "negativeRowAtZero": true,
+        "eastAt100": true,
+        "southAt100": true,
+        "chunksInsideWorld": true,
+        "projectsInsideWorld": true,
+        "dragChangedPan": true,
+        "dragClamped": true,
+        "noOverflowAfterDrag": true
+      }
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "center": {
+        "viewport": [1440, 1000],
+        "chunkCount": 13,
+        "projectCount": 14,
+        "imagesLoaded": 13,
+        "pageOverflowX": 0,
+        "stageOverflow": "hidden",
+        "negativeColLeft": 0,
+        "negativeRowTop": 0,
+        "eastEdgeRight": 100,
+        "southEdgeBottom": 100,
+        "allChunksWithinWorld": true,
+        "allProjectsWithinWorld": true,
+        "pan": { "x": 0, "y": 0, "maxX": 147.25, "maxY": 193.1875, "zoom": 1.25 },
+        "stage": [1180, 720],
+        "world": [1473, 1104]
+      },
+      "afterDragPan": { "x": -147.25, "y": -129.60000610351562, "maxX": 147.25, "maxY": 193.1875, "zoom": 1.25 },
+      "checks": {
+        "chunks13": true,
+        "projects14": true,
+        "images13": true,
+        "noPageOverflow": true,
+        "negativeColAtZero": true,
+        "negativeRowAtZero": true,
+        "eastAt100": true,
+        "southAt100": true,
+        "chunksInsideWorld": true,
+        "projectsInsideWorld": true,
+        "dragChangedPan": true,
+        "dragClamped": true,
+        "noOverflowAfterDrag": true
+      }
+    }
+  ],
+  "allPass": true
+}

@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.6-R0 — Rough Illustrated Master Plates
 
 Date: 2026-09-15
-Status: **PARTIALLY APPROVED / NORTH CROWN REGISTERED / SOUTH GEOMETRY PASS / NOT RUNTIME ART**
+Status: **PARTIALLY APPROVED / NORTH GEOMETRY PASS CANDIDATE / SOUTH GEOMETRY PASS / NOT RUNTIME ART**
 Branch: `phase3-6-r0-whole-city-blueprint-reset`
 
 ## Purpose
@@ -47,6 +47,11 @@ Stored in Google Drive under:
 
 `Portfolio City_採用設計画像_20260913/02_IllustratedCity/01_DistrictConnections/03_RoughMasterPlates/`
 
+Final three-plate review sheet:
+
+- `phase3-6-r0_rough-master-plates_final-review_v2.png`
+- Drive file id: `1KFBZfVLov7nq7hAKxzrj1myCLSpxsYP6`
+
 ### Middle Belt — APPROVED
 
 - Approved rough: `phase3-6-r0_middle-belt_APPROVED.png`
@@ -75,33 +80,40 @@ Latest validated South route metrics:
 
 The South Belt is structurally ready, but it remains **awaiting explicit user visual approval**.
 
-### North Crown — GEOMETRY REGISTERED / FINAL WATERCOLOUR PENDING
+### North Crown — GEOMETRY QA PASS / VISUAL APPROVAL PENDING
 
-The watercolor North Crown reference has the desired muted storybook mood, but geometry QA showed that its west/east shoulder terraces and cliff/water placement do not preserve the fixed Sphere / HoloScope / Prime Dot Art and reserve coordinates closely enough for approval.
-
-Therefore the watercolor image is now **style reference only**. It is not the geometry authority.
+The earlier freeform watercolor North Crown reference remains style reference only because it reinterpreted the fixed geometry.
 
 North geometry is separately registered in:
 
 - `docs/phase3-6-r0-north-registration.json`
 - `docs/phase3-6-r0-north-registration.md`
 
-The next valid North rough must preserve:
+Latest final rough candidate:
 
-- H3 reserve crown
-- H2 west / centre / east terraces
-- OBS-R1 / OBS-R2 dry clearings
-- Sphere / HoloScope / Prime Dot Art dry clearings
-- open EC-N and G-NORTH
-- exact North spine and side access routes
+- `phase3-6-r0_north-crown_FINAL-ROUGH-CANDIDATE_v4.png`
+- Drive file id: `1QmbzFYNmqodsp7ph_X0SlNq7UglbF3oA`
+- Status: **geometry QA PASS / visual approval pending**
 
-Freeform watercolor generation may supply color, paper texture, soft cliff contours and grouped vegetation only. It may not infer geography.
+Geometry checks for the latest candidate:
+
+- `OBS-R1` centre lies inside H3 reserve crown: PASS
+- `OBS-R2` centre lies inside H3 reserve crown: PASS
+- `Sphere` centre lies inside H2 west terrace: PASS
+- `HoloScope` centre lies inside H2 centre terrace: PASS
+- `Prime Dot Art` centre lies inside H2 east terrace: PASS
+- North spine and side-access routes remain derived from the registered route contract
+- no city-scale water barrier is introduced around North Crown
+
+The candidate intentionally stays rough and sparse. It prioritizes exact registered landform geometry, quiet reserve/project clearings and restrained watercolor massing over decorative detail.
 
 ## Superseded / rejected roughs
 
 Earlier unconstrained generations that introduced poster layouts, titles, legends, coordinates, buildings, ships, docks, QA boards, ring roads or other premature detail are rejected and are not project references.
 
-Programmatic North composites that exposed visible tiling or diagram-like geometry are also rejected as final visual candidates. Their masks remain useful geometry controls only.
+Freeform North watercolor generations that turned the registered highland into an island or introduced extra radial roads / roundabouts are rejected.
+
+Programmatic North composites with visible tiling artifacts are also rejected as final visual candidates. Their masks remain useful geometry controls only.
 
 The project must never treat attractive but structurally incorrect art as terrain authority.
 
@@ -109,7 +121,7 @@ The project must never treat attractive but structurally incorrect art as terrai
 
 Rough Illustrated Master Plates can close only when:
 
-1. North Crown reads as the only clearly elevated mass and matches the North registration contract.
+1. North Crown reads as the only clearly elevated mass and matches the North registration contract. **Geometry PASS / visual approval pending.**
 2. Middle Belt remains the approved broad, mostly level dry civic terrace. **PASS / approved.**
 3. Central Commons remains visually subordinate. **PASS / approved.**
 4. South Belt introduces the first real water plane while keeping Aquarium, HoloCa, Word Generator and the south continuation dry. **Geometry PASS / visual approval pending.**

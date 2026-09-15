@@ -53,14 +53,14 @@
       "paintBounds": { "xMin": -96, "yMin": 1440, "xMax": 3168, "yMax": 3168 },
       "composition": "low dry central peninsula with west/east waterfront wings, HoloCa bypass arms and one rejoined south continuation",
       "landMasses": [
-        { "id": "SB-WEST-TERRACE", "elevation": "L1", "shape": "polygon", "points": [[0,1536],[1180,1536],[1200,1740],[1080,2160],[0,2260]], "role": "Aquarium / west promenade dry terrace" },
+        { "id": "SB-WEST-TERRACE", "elevation": "L1", "shape": "polygon", "points": [[0,1536],[1180,1536],[1200,1740],[1080,1900],[760,1940],[0,1980]], "role": "Aquarium / west promenade dry terrace" },
         { "id": "SB-CENTRE-TERRACE", "elevation": "L1", "shape": "polygon", "points": [[1200,1536],[2000,1536],[2080,1960],[1940,2304],[1260,2304],[1120,1960]], "role": "HoloCa protected landform and bypass" },
-        { "id": "SB-EAST-TERRACE", "elevation": "L1", "shape": "polygon", "points": [[2000,1536],[3072,1536],[3072,2260],[2120,2160],[2000,1740]], "role": "Word Generator / east promenade dry terrace" },
+        { "id": "SB-EAST-TERRACE", "elevation": "L1", "shape": "polygon", "points": [[2000,1536],[3072,1536],[3072,1980],[2440,1940],[2120,1900],[2000,1740]], "role": "Word Generator / east promenade dry terrace" },
         { "id": "SB-SOUTH-RESERVE", "elevation": "L0", "shape": "polygon", "points": [[1024,2304],[2048,2304],[2048,3072],[1024,3072]], "role": "Waterside reserve apron and EC-S corridor" }
       ],
       "waterZones": [
-        { "id": "SB-WATER-W", "shape": "polygon", "points": [[0,1980],[760,1940],[1024,2140],[1024,3072],[0,3072]], "role": "west water body; never crosses west dry anchor" },
-        { "id": "SB-WATER-E", "shape": "polygon", "points": [[2440,1940],[3072,1980],[3072,3072],[2048,3072],[2048,2140]], "role": "east water body; never crosses east dry anchor" }
+        { "id": "SB-WATER-W", "shape": "polygon", "points": [[0,1980],[760,1940],[1120,1960],[1024,2304],[1024,3072],[0,3072]], "role": "west water body beginning south of the Aquarium terrace" },
+        { "id": "SB-WATER-E", "shape": "polygon", "points": [[2080,1960],[2440,1940],[3072,1980],[3072,3072],[2048,3072],[2048,2304]], "role": "east water body beginning south of the Word Generator terrace" }
       ],
       "routes": [
         { "id": "SB-GSOUTH-IN", "width": 160, "points": [[1600,1536],[1600,1580]], "purpose": "short shared throat only" },

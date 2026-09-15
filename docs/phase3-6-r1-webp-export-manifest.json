@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "status": "WEBP_EXPORT_CANDIDATE_NOT_RUNTIME_REGISTERED",
+  "source": "Phase 3.6-R1 final PNG terrain chunks (Pass 8 visual balance, Pass 6 cross-master seam correction)",
+  "encoding": {
+    "format": "WebP",
+    "quality": 90,
+    "method": 6,
+    "alpha": false
+  },
+  "expectedDimensions": {
+    "width": 2048,
+    "height": 1536
+  },
+  "fileCount": 13,
+  "totalBytes": 2682986,
+  "totalMiB": 2.56,
+  "maxMeanAbsRgbDiff": 1.346,
+  "minPsnrDb": 42.97,
+  "drive": {
+    "folderId": "1NgyQpcem_5tCKZeoU3jaCSlyU6hpIo9F",
+    "webpZipId": "1TLrtIzwzMGPzvfwHYtv_wOF7i7o1aDdh",
+    "pngReviewZipId": "1bZjinoV2BP0tM15J0ZNd-AdFab_ka3AU",
+    "finalContactSheetId": "1-XNvk1yJLl-YDX-AIBZ7nkpmXBz1JEwu",
+    "runtimeScaleReviewId": "15jjzlU4YiSeajttvyi8LMGM9dTqOqYNc",
+    "webpDecodedContactSheetId": "1qBZZu-zLoWlhc-EFIoUmzoyjEy5ngnOK",
+    "webpQaSummaryId": "1InsnhT_x2qTHpsxxHEkBBvmtfmxHsl1F"
+  },
+  "files": [
+    {"file":"terrain_c-1_r1.webp","bytes":292756,"meanAbsRgbDiff":1.333,"psnrDb":43.05,"sha256":"c529710531a1c66971d0ecba6539585505ea4d7aa37170b3b95263b2a351b77a"},
+    {"file":"terrain_c0_r0.webp","bytes":77682,"meanAbsRgbDiff":0.697,"psnrDb":48.12,"sha256":"44a8ca70c9a7bd8cc62c959e69f13061928dac760c80c7a25a13dcff2619909d"},
+    {"file":"terrain_c0_r1.webp","bytes":286170,"meanAbsRgbDiff":1.268,"psnrDb":43.47,"sha256":"391b3ec8eca002c9f92316d307e9369c0d4d172551a218204274fa905ffc43d7"},
+    {"file":"terrain_c0_r2.webp","bytes":233942,"meanAbsRgbDiff":1.181,"psnrDb":43.97,"sha256":"1bf08ec5de88ad0960396cdf993dde1738080c64245d83bb9b2bc9013baa7e45"},
+    {"file":"terrain_c1_r-1.webp","bytes":59784,"meanAbsRgbDiff":0.633,"psnrDb":48.69,"sha256":"aa8280767b3f70722a54420c6d553b065e268bf7df48d865e100aaece7eb5641"},
+    {"file":"terrain_c1_r0.webp","bytes":85630,"meanAbsRgbDiff":0.724,"psnrDb":47.51,"sha256":"e65415d2c4c3696a7bc247310cf0ff4ca4cab038887a0abe57f8826705ecca11"},
+    {"file":"terrain_c1_r1.webp","bytes":287702,"meanAbsRgbDiff":1.278,"psnrDb":43.39,"sha256":"6a168fd0864213b481ec9928094d70b23ed685bb9cfa686906b19a03e3010559"},
+    {"file":"terrain_c1_r2.webp","bytes":233344,"meanAbsRgbDiff":1.153,"psnrDb":44.25,"sha256":"1112d20d8e9cd7c74b194bc8034fe5a815c3c630cb8a37ad9b6add169d011896"},
+    {"file":"terrain_c1_r3.webp","bytes":195994,"meanAbsRgbDiff":1.026,"psnrDb":45.21,"sha256":"72cb388ffa12587efaa009935a4f0dea94b49da02b18e3f78886b8d73ec3486d"},
+    {"file":"terrain_c2_r0.webp","bytes":72694,"meanAbsRgbDiff":0.672,"psnrDb":48.31,"sha256":"8bd51ca75d23b4ee71ac922f1bb0a4170354cb57259a3e1f149abb3c71ae9275"},
+    {"file":"terrain_c2_r1.webp","bytes":287194,"meanAbsRgbDiff":1.262,"psnrDb":43.49,"sha256":"d9179b1c53d76fffa40184607e581b20029726ed9a91e423aed4cfbebfb3712f"},
+    {"file":"terrain_c2_r2.webp","bytes":272372,"meanAbsRgbDiff":1.189,"psnrDb":43.89,"sha256":"7ffa13345ce386a812eff6da37fcc283000987f814288cec65273f5bb41098d5"},
+    {"file":"terrain_c3_r1.webp","bytes":297722,"meanAbsRgbDiff":1.346,"psnrDb":42.97,"sha256":"2c76f72e448b7319fc16a2516206eddad38ad0f9a4e58b43ddad9735c1d5828b"}
+  ]
+}

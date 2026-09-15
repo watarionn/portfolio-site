@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.6-R0 — Rough Illustrated Master Plates
 
-Date: 2026-09-15  
-Status: **CLOSED / ALL THREE MASTER PLATES APPROVED / NOT RUNTIME ART**  
+Date: 2026-09-15
+Status: **CLOSED / ALL THREE MASTER PLATES APPROVED / NOT RUNTIME ART**
 Branch: `phase3-6-r0-whole-city-blueprint-reset`
 
 ## Purpose

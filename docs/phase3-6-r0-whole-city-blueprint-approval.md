@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.6-R0 — Whole-City Structural Blueprint Approval
 
 Date: 2026-09-15
-Status: **APPROVED STRUCTURAL BLUEPRINT**
+Status: **APPROVED STRUCTURAL BLUEPRINT / COORDINATE PLAN REVIEW READY**
 Parent decision: `docs/phase3-6-r0-whole-city-blueprint-reset.md`
 
 ## Approved master
@@ -67,9 +67,8 @@ The blueprint's outward openings are therefore production infrastructure, not de
 
 This approval does not yet lock:
 
-- exact final parcel coordinates
 - exact final district polygon boundaries
-- final chunk / render-region slicing
+- final terrain chunk / render-region slicing
 - final shoreline and cliff silhouettes
 - exact bridge placement beyond network continuity requirements
 - final replacement Observatory terrain
@@ -77,22 +76,29 @@ This approval does not yet lock:
 - Archive, Workshop or Waterside final terrain
 - remaining eleven project-building illustrations
 
-Those decisions follow from the approved structural blueprint in later stages.
+Those decisions follow from the approved structural blueprint and the coordinate growth review.
 
 ## R0 state after approval
 
-The structural blueprint direction is now adopted. The current `observatory_terrain.webp` remains withdrawn as final geography but retained as a rendering-quality reference. HoloScope, Sphere and Prime Dot Art remain approved building assets.
+The structural blueprint direction is adopted. The current `observatory_terrain.webp` remains withdrawn as final geography but retained as a rendering-quality reference. HoloScope, Sphere and Prime Dot Art remain approved building assets.
 
-Before R0 can be closed, convert the approved visual blueprint into a machine-checkable spatial plan and run the documented growth simulations for reserve-parcel use, district extension and fifth-district attachment.
+The approved image has now also been converted into a machine-checkable coordinate growth plan; final runtime layout is still intentionally unchanged.
 
 ## Coordinate Growth Layout follow-up
 
-The approved structural blueprint has now been translated into a machine-checkable planning contract:
+The machine-checkable planning contract is:
 
 - `docs/phase3-6-r0-growth-layout.json`
 - `docs/phase3-6-r0-growth-layout.md`
 
-The numeric plan preserves all fourteen current project coordinates as its baseline, adds eight reserve parcels across four Reserve Apron chunks, defines eight district-growth sockets and keeps four separate outward new-district corridors.
+The coordinate plan:
+
+- preserves all fourteen current project coordinates
+- adds four Reserve Apron chunks
+- adds two future-ready reserve parcels per current district
+- defines eight district Growth Frontier sockets
+- keeps four separate outward new-district Expansion Corridors
+- gives the redesigned initial city a 13-chunk structural footprint while preserving lazy-load architecture
 
 The precise coordinate QA diagram is stored in Google Drive as:
 
@@ -101,6 +107,15 @@ The precise coordinate QA diagram is stored in Google Drive as:
 
 This diagram is a review/QA artifact rather than a replacement for the approved art-direction blueprint.
 
-The coordinate checks confirm that all eight reserve parcel envelopes fit their designated Reserve Apron chunks and that district-growth sockets remain distinct from the new-district Expansion Corridors.
+Latest-head machine validation confirms:
 
-`portfolio-city/data/map-layout.json` remains unchanged during this planning stage.
+- all 14 baseline project placements match runtime `map-layout.json`
+- all 8 reserve parcel envelopes fit fully inside their designated Reserve Apron chunks
+- every current district has exactly 2 reserve parcels
+- district-growth sockets remain distinct from new-district expansion sockets
+- Simulations A–D remain structurally possible without moving current projects
+- public repository boundary validation passes
+- Portfolio City runtime contract remains `14 works / 4 districts / 9 runtime chunks`
+- `portfolio-city/data/map-layout.json` remains byte-identical at Git blob level to `main`
+
+The next design gate after approval of this coordinate plan is terrain slicing / render-region planning. No district terrain is authorized before that gate.

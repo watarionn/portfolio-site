@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.5 — Illustrated City Art Bible
 
 Designed: 2026-09-14
-Status: Checkpoint 2 working standard
+Status: Checkpoint 3 quality master / locked for subsequent district art
 Pilot district: Observatory Hill
 
 ## Purpose
@@ -208,3 +208,13 @@ Checkpoint 2 pilot is successful only when:
 - legacy fallback can still be restored without touching project content data
 
 The pilot is a production-style proof, not a concept painting. It must prove that the art direction and modular runtime architecture can coexist.
+
+## 13. Checkpoint 3 quality-master lock
+
+Observatory Hill passed the 2026-09-15 visual quality gate. Its current terrain and three project-building runtime derivatives define the quality bar for subsequent districts.
+
+Canonical decision record: `docs/phase3-5-observatory-quality-master.md`.
+
+Later districts inherit the camera, lighting, edge treatment, material warmth, atmospheric depth, runtime silhouette clarity and detail restraint. They must not copy Observatory Hill's celestial architecture or blue/gold motifs merely for consistency.
+
+Remaining-district production begins only after a separate explicit next-stage instruction.

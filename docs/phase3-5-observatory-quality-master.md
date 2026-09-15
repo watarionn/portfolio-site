@@ -1,0 +1,117 @@
+# Portfolio City Phase 3.5 — Observatory Hill Quality Master
+
+Date: 2026-09-15
+Gate: Phase 3.5 Checkpoint 3 / Quality Master Decision
+Baseline main: `990098edc69fc72f7c7e77ab3248b46f5392f650`
+Working branch: `phase3-5-observatory-polish`
+Decision: **PASS — Observatory Hill is the visual quality master for subsequent illustrated districts.**
+
+## Scope
+
+This checkpoint evaluates Observatory Hill only. It does not authorize production of Archive Street, Workshop Alley, or Waterside Play.
+
+The gate follows the project-specific sequence adopted after the illustrated pilot:
+
+1. Phase 3.5-P1 — Observatory Hill Visual Polish audit
+2. Phase 3.5-P2 — Observatory Hill polish
+3. Checkpoint 3 — Quality Master decision
+
+The older architecture document described the next broad conversion stage as “Checkpoint 3”. For current execution, this quality gate takes precedence before any remaining-district conversion.
+
+## Approved source/runtime set
+
+- Terrain: `observatory_terrain.webp`
+- HoloScope: `holoscope.webp`
+- Sphere: `sphere.webp`
+- Prime Dot Art: `prime-dot-art.webp`
+- Sphere approved master: `sphere_phase3-5-p2_APPROVED.png` in Google Drive
+- Prime Dot Art approved master: `prime-dot-art_phase3-5-p2_APPROVED.png` in Google Drive
+
+## Visual master rules locked by this checkpoint
+
+### 1. Building hierarchy
+
+- HoloScope is the dominant technical lookout and may read largest/tallest.
+- Sphere is the rounded celestial building, clearly entered through a façade rather than read as a freestanding monument.
+- Prime Dot Art is the smallest and most intimate mass, a low mathematical atelier rather than another observatory.
+- Three project buildings must remain distinguishable by silhouette before labels are visible.
+
+### 2. Motif separation
+
+- HoloScope: telescope / observation instrument.
+- Sphere: celestial globe / planetarium architecture.
+- Prime Dot Art: dots, plotted relations, mathematics and restrained drafting/survey motifs.
+- Do not reuse giant rings, gears, clock faces or oversized astronomical devices for Prime Dot Art.
+
+### 3. Storybook rendering
+
+- Warm European storybook-town feeling is the north star.
+- Use cream stone, cobalt/sky-blue roofs and restrained gold accents.
+- Shapes stay simple enough to survive runtime reduction.
+- Avoid photorealism, uniform black outlines and excessive micro-detail.
+- No project title, catchcopy or explanatory text is baked into the artwork.
+
+### 4. Depth and sharpness
+
+- Distant terrain stays softer and lower priority.
+- Clickable project buildings are one visual step sharper than the background.
+- Building edges remain painted rather than vector-hard.
+- Contact shadows are soft, compact and compatible with upper-left lighting.
+
+## Runtime QA result
+
+### Responsive
+
+- 1440 px: PASS
+- 820 px: PASS
+- 390 px: PASS
+- Horizontal page overflow: `0 px` at all three widths.
+- All three Observatory Hill buildings remain identifiable at 390 px.
+
+### Interaction preservation
+
+- Building click / selection: PASS
+- Inspector title and route handoff: PASS
+- Keyboard Arrow navigation: PASS
+- Visited state persistence: PASS
+- DOM buttons remain the interaction source; raster art does not own hit testing.
+- JavaScript page errors: 0.
+- The only local HTTP 404 observed was `/favicon.ico`, unrelated to Portfolio City runtime assets.
+
+### Runtime asset measurements
+
+| Asset | Dimensions | Alpha | Approx. bytes |
+| --- | ---: | --- | ---: |
+| HoloScope | 284 × 320 | yes | 18 KB |
+| Sphere | 296 × 320 | yes | 27 KB |
+| Prime Dot Art | 320 × 319 | yes | 31 KB |
+| Observatory terrain | 768 × 506 | opaque | 42 KB |
+
+All project-building assets remain far below the provisional 250 KB building budget.
+
+## Checkpoint decision matrix
+
+| Criterion | Result | Notes |
+| --- | --- | --- |
+| Natural ground contact | PASS | Compact shadows and bottom-center placement read as grounded at runtime. |
+| Natural contact shadow | PASS | No large floating halo; shadow direction remains compatible with the terrain. |
+| Three-building scale balance | PASS | HoloScope leads; Sphere supports; Prime Dot Art remains intimate. |
+| Silhouette separation | PASS | Telescope / globe / low atelier read as separate families. |
+| Background vs building sharpness | PASS | Terrain recedes; project buildings remain more legible. |
+| 390 px recognition | PASS | All three remain visually distinct. |
+| Sphere reads as a building | PASS | Entrance, façade and side masses prevent monument-only reading. |
+| Prime Dot Art avoids gear language | PASS | Dot network and drafting motif dominate instead. |
+| Storybook-town direction | PASS | Warm stone, blue roofs and restrained detail remain compatible with the approved references. |
+| No baked explanatory text | PASS | Runtime art remains text-free. |
+| Existing interaction contract | PASS | Click, keyboard, inspector, route and visited semantics preserved. |
+| Runtime weight | PASS | Building derivatives are 18–31 KB. |
+
+## Quality-master rule for later districts
+
+Observatory Hill is a **quality bar, not a copy template**. Later districts must inherit camera, lighting, edge softness, runtime clarity, material warmth and detail restraint, while using their own architecture and motifs.
+
+Before a later district can be called complete, its buildings must pass the same 1440 / 820 / 390 silhouette test and interaction regression test used here.
+
+## Stop condition
+
+Checkpoint 3 ends here. Do **not** begin the remaining three districts until a separate next-stage instruction is given.

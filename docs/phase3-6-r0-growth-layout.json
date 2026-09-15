@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "R0_PLANNING_ONLY_NOT_RUNTIME",
+  "status": "R0_REVIEW_READY_NOT_RUNTIME",
   "baselineMain": "cf8e074d0f8f2012820a31bdceb78f9a56bdd110",
   "units": "world",
   "chunkSize": { "width": 1024, "height": 768 },

@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.5 — Illustrated City Art Bible
 
 Designed: 2026-09-14
-Status: Checkpoint 3 quality master / locked for subsequent district art
+Status: Checkpoint 3 quality master / revalidated after Phase 3.5-P2.5 style harmonization
 Pilot district: Observatory Hill
 
 ## Purpose
@@ -211,10 +211,10 @@ The pilot is a production-style proof, not a concept painting. It must prove tha
 
 ## 13. Checkpoint 3 quality-master lock
 
-Observatory Hill passed the 2026-09-15 visual quality gate. Its current terrain and three project-building runtime derivatives define the quality bar for subsequent districts.
+Observatory Hill passed the initial 2026-09-15 visual quality gate, was reopened after production review exposed a style mismatch, and passed revalidation after Phase 3.5-P2.5 harmonization. Its current terrain and three project-building runtime derivatives define the quality bar for subsequent districts.
 
 Canonical decision record: `docs/phase3-5-observatory-quality-master.md`.
 
-Later districts inherit the camera, lighting, edge treatment, material warmth, atmospheric depth, runtime silhouette clarity and detail restraint. They must not copy Observatory Hill's celestial architecture or blue/gold motifs merely for consistency.
+Later districts inherit the camera, lighting, edge treatment, material warmth, atmospheric depth, runtime silhouette clarity and detail restraint. New building art must also be judged directly beside already-approved district art at runtime size; standalone quality is not sufficient. They must not copy Observatory Hill's celestial architecture or blue/gold motifs merely for consistency.
 
 Remaining-district production begins only after a separate explicit next-stage instruction.

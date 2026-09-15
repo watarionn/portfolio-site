@@ -2,9 +2,10 @@
 
 Date: 2026-09-15
 Gate: Phase 3.5 Checkpoint 3 / Quality Master Decision
-Baseline main: `990098edc69fc72f7c7e77ab3248b46f5392f650`
-Working branch: `phase3-5-observatory-polish`
-Decision: **PASS — Observatory Hill is the visual quality master for subsequent illustrated districts.**
+Initial quality-lock baseline: `990098edc69fc72f7c7e77ab3248b46f5392f650`
+P2.5 revalidation baseline: `4766bf04834fb00865012ee1760a5a3be4edc641`
+Working branch: `phase3-5-observatory-style-harmonization`
+Decision: **PASS AFTER REVALIDATION - Observatory Hill is the visual quality master after Phase 3.5-P2.5 style harmonization.**
 
 ## Scope
 
@@ -12,9 +13,13 @@ This checkpoint evaluates Observatory Hill only. It does not authorize productio
 
 The gate follows the project-specific sequence adopted after the illustrated pilot:
 
-1. Phase 3.5-P1 — Observatory Hill Visual Polish audit
-2. Phase 3.5-P2 — Observatory Hill polish
-3. Checkpoint 3 — Quality Master decision
+1. Phase 3.5-P1 - Observatory Hill Visual Polish audit
+2. Phase 3.5-P2 - Observatory Hill polish
+3. Checkpoint 3 - initial Quality Master decision
+4. Phase 3.5-P2.5 - Observatory Hill Style Harmonization
+5. Checkpoint 3 - Quality Master revalidation
+
+The initial Checkpoint 3 PASS was reopened after production review found that the new Sphere and Prime Dot Art still differed visibly from HoloScope and the terrain in colour, edge treatment and overall rendering character. P2.5 corrected that mismatch before the quality master was revalidated.
 
 The older architecture document described the next broad conversion stage as “Checkpoint 3”. For current execution, this quality gate takes precedence before any remaining-district conversion.
 
@@ -24,8 +29,8 @@ The older architecture document described the next broad conversion stage as “
 - HoloScope: `holoscope.webp`
 - Sphere: `sphere.webp`
 - Prime Dot Art: `prime-dot-art.webp`
-- Sphere approved master: `sphere_phase3-5-p2_APPROVED.png` in Google Drive
-- Prime Dot Art approved master: `prime-dot-art_phase3-5-p2_APPROVED.png` in Google Drive
+- Sphere approved master: `sphere_phase3-5-p2-5_APPROVED.png` in Google Drive
+- Prime Dot Art approved master: `prime-dot-art_phase3-5-p2-5_APPROVED.png` in Google Drive
 
 ## Visual master rules locked by this checkpoint
 
@@ -104,7 +109,24 @@ All project-building assets remain far below the provisional 250 KB building bud
 | Storybook-town direction | PASS | Warm stone, blue roofs and restrained detail remain compatible with the approved references. |
 | No baked explanatory text | PASS | Runtime art remains text-free. |
 | Existing interaction contract | PASS | Click, keyboard, inspector, route and visited semantics preserved. |
-| Runtime weight | PASS | Building derivatives are 18–31 KB. |
+| Style harmony with HoloScope | PASS | P2.5 derivatives were rebalanced against HoloScope for saturation, value and edge density, then reviewed in-map at all three widths. |
+| Runtime weight | PASS | Building derivatives are 18-25 KB. |
+
+## P2.5 style-harmonization revalidation
+
+Production review after the first Checkpoint 3 exposed a real visual mismatch that the original QA had underweighted: Sphere and Prime Dot Art were cleaner, brighter and more decorative than HoloScope and the terrain. That first visual lock is therefore superseded by this revalidation.
+
+The approved P2.5 runtime derivatives were tuned against HoloScope rather than judged only as standalone illustrations. Opaque-pixel measurements at runtime scale are:
+
+| Asset | Mean saturation | Mean value | Edge density |
+| --- | ---: | ---: | ---: |
+| HoloScope | 0.377 | 0.546 | 0.0505 |
+| Sphere P2.5 | 0.360 | 0.558 | 0.0513 |
+| Prime Dot Art P2.5 | 0.363 | 0.562 | 0.0486 |
+
+These metrics are diagnostic rather than future hard limits. The actual gate remains the in-map visual comparison: no new building should look like a separately generated product render when placed beside existing approved district art.
+
+The 1440 / 820 / 390 in-map review confirms that the blue/gold palette no longer jumps ahead of HoloScope, edge hardness is comparable, and the three silhouettes remain distinct.
 
 ## Quality-master rule for later districts
 

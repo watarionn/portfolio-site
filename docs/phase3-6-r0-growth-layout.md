@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.6-R0 — Coordinate Growth Layout
 
 Date: 2026-09-15
-Status: **PLANNING CONTRACT / NOT RUNTIME DATA**
+Status: **REVIEW READY / NOT RUNTIME DATA**
 Source image: `phase3-6-r0_whole-city-structural-blueprint_APPROVED.png`
 Coordinate source: `docs/phase3-6-r0-growth-layout.json`
 
@@ -191,6 +191,20 @@ Result: **PASS by structure**.
 
 The east corridor is not the Workshop district-growth socket, so Workshop can continue to grow independently while a new district connects farther east.
 
+## Machine validation result
+
+Latest-head validation confirms:
+
+- 14 / 14 baseline project coordinates match runtime `map-layout.json`
+- 8 / 8 reserve parcel envelopes fit fully inside their designated Reserve Apron chunks
+- each of the 4 current districts has exactly 2 reserve parcels
+- 8 district Growth Frontier sockets are distinct from the 4 new-district Expansion Corridor sockets
+- simulations `SIM-A` through `SIM-D` are present and require no movement of current projects
+- `git diff --check` passes
+- public repository boundary validation passes
+- Portfolio City contract validation remains `14 works / 4 districts / 9 runtime chunks`
+- runtime `map-layout.json` blob SHA remains identical to `main`
+
 ## Connector preservation
 
 The six P0 connector gates remain recorded exactly as the current planning anchors.
@@ -211,7 +225,7 @@ Do not register the four Reserve Apron chunks in runtime data until:
 
 ## Gate for the next step
 
-The Coordinate Growth Layout is ready to close when review confirms:
+The Coordinate Growth Layout is ready for review when:
 
 - all current fourteen positions are preserved as the baseline,
 - eight reserve parcels are plausible,
@@ -220,3 +234,5 @@ The Coordinate Growth Layout is ready to close when review confirms:
 - district extension and new-district expansion use distinct sockets,
 - simulations A–D remain possible without repainting existing terrain,
 - the 13-chunk initial footprint is acceptable as a modular, lazy-loadable production target.
+
+These conditions are now mechanically satisfied; visual/planning approval remains the final gate before terrain slicing begins.

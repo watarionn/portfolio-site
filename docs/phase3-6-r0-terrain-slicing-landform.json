@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "status": "R0_PLANNING_ONLY_NOT_RUNTIME",
+  "baselineMain": "cf8e074d0f8f2012820a31bdceb78f9a56bdd110",
+  "runtimeLayoutUnchanged": true,
+  "worldUnitsPerChunk": { "width": 1024, "height": 768 },
+  "initialStructuralBounds": { "xMin": -1024, "yMin": -768, "xMax": 4096, "yMax": 3072, "width": 5120, "height": 3840 },
+  "futureRendererRequirement": "Runtime percentage positioning must normalize against derived world bounds or explicit origin/min values before negative chunks are registered.",
+  "renderRegionPolicy": {
+    "runtimeUnit": "one terrain asset per chunk",
+    "chunkRenderRegion": "exact chunk rectangle",
+    "recommendedAssetPixels": { "width": 2048, "height": 1536 },
+    "seamSafeBandWorldUnits": 80,
+    "crossMasterPaintOverlapWorldUnits": 96,
+    "districtBlendBandWorldUnits": { "min": 160, "max": 240 }
+  },
+  "masterPlates": [
+    {
+      "id": "NORTH-CROWN",
+      "chunks": ["1:-1", "0:0", "1:0", "2:0"],
+      "nominalBounds": { "xMin": 0, "yMin": -768, "xMax": 3072, "yMax": 768 },
+      "paintBounds": { "xMin": -96, "yMin": -864, "xMax": 3168, "yMax": 864 },
+      "purpose": "Observatory Hill, reserve cap, north growth preparation and the full high-to-mid descent into G-NORTH."
+    },
+    {
+      "id": "MIDDLE-BELT",
+      "chunks": ["-1:1", "0:1", "1:1", "2:1", "3:1"],
+      "nominalBounds": { "xMin": -1024, "yMin": 768, "xMax": 4096, "yMax": 1536 },
+      "paintBounds": { "xMin": -1120, "yMin": 672, "xMax": 4192, "yMax": 1632 },
+      "purpose": "Archive reserve/core, Central Commons, Workshop core/reserve and the continuous east-west civic terrace."
+    },
+    {
+      "id": "SOUTH-BELT",
+      "chunks": ["0:2", "1:2", "2:2", "1:3"],
+      "nominalBounds": { "xMin": 0, "yMin": 1536, "xMax": 3072, "yMax": 3072 },
+      "paintBounds": { "xMin": -96, "yMin": 1440, "xMax": 3168, "yMax": 3168 },
+      "purpose": "Waterside descent, HoloCa bypass/rejoin, waterfront districts, south reserve apron and future south corridor."
+    }
+  ],
+  "elevationClasses": [
+    { "id": "H3", "rank": 5, "role": "highest observatory reserve/crown terrace" },
+    { "id": "H2", "rank": 4, "role": "upper Observatory project terraces" },
+    { "id": "M1", "rank": 3, "role": "Archive/Workshop urban terrace" },
+    { "id": "M0", "rank": 2, "role": "Central Commons and shared transition terrace" },
+    { "id": "L1", "rank": 1, "role": "Waterside urban/prom­enade terrace" },
+    { "id": "L0", "rank": 0, "role": "south reserve/coastal expansion terrace" },
+    { "id": "W", "rank": -1, "role": "water plane; exact shoreline deferred until terrain art stage" }
+  ],
+  "chunkPurposeMatrix": [
+    {
+      "chunk": "1:-1",
+      "master": "NORTH-CROWN",
+      "role": "Observatory reserve cap",
+      "baseElevation": "H3",
+      "currentProjects": [],
+      "reserveParcels": ["OBS-R1", "OBS-R2"],
+      "mustPreserve": ["EC-N at north edge", "GF-OBS-W", "GF-OBS-E", "central dry route x=1600 to 1:0"],
+      "landform": "Broad high plateau with two side reserve terraces and an open north-facing saddle; no permanent landmark in edge bands."
+    },
+    {
+      "chunk": "0:0",
+      "master": "NORTH-CROWN",
+      "role": "Observatory west shoulder",
+      "baseElevation": "H2",
+      "currentProjects": ["sphere"],
+      "reserveParcels": [],
+      "mustPreserve": ["continuous upper terrace across x=1024 seam", "south edge may terrace down without a primary gate"],
+      "landform": "High shoulder terrace, softened cliff/retaining edge and gradual visual descent toward Archive without sealing future seams."
+    },
+    {
+      "chunk": "1:0",
+      "master": "NORTH-CROWN",
+      "role": "Observatory core and main descent",
+      "baseElevation": "H2_TO_M1",
+      "currentProjects": ["holoscope"],
+      "reserveParcels": [],
+      "mustPreserve": ["north route from 1:-1", "G-NORTH x=1600 y=768 width=160"],
+      "landform": "Highest project core with broad central stair/ramp descending south; surrounding terraces stay simple and readable."
+    },
+    {
+      "chunk": "2:0",
+      "master": "NORTH-CROWN",
+      "role": "Observatory east shoulder",
+      "baseElevation": "H2",
+      "currentProjects": ["prime-dot-art"],
+      "reserveParcels": [],
+      "mustPreserve": ["continuous upper terrace across x=2048 seam", "south edge may terrace down without a primary gate"],
+      "landform": "High shoulder terrace mirroring the west in elevation logic but not in decorative detail density."
+    },
+    {
+      "chunk": "-1:1",
+      "master": "MIDDLE-BELT",
+      "role": "Archive reserve apron",
+      "baseElevation": "M1",
+      "currentProjects": [],
+      "reserveParcels": ["ARC-R1", "ARC-R2"],
+      "mustPreserve": ["EC-W y=1260", "GF-ARC-N", "GF-ARC-S", "level route into 0:1"],
+      "landform": "Mostly level scholarly urban terrace with two scenery-backed reserve parcels and a clean west expansion spine."
+    },
+    {
+      "chunk": "0:1",
+      "master": "MIDDLE-BELT",
+      "role": "Archive core",
+      "baseElevation": "M1",
+      "currentProjects": ["yorei", "cheatsheet"],
+      "reserveParcels": [],
+      "mustPreserve": ["east-west Archive street around y=1260", "level connection to -1:1 and 1:1"],
+      "landform": "Dry mid-level urban terrace; local courtyards and trees must not interrupt the east-west street family."
+    },
+    {
+      "chunk": "1:1",
+      "master": "MIDDLE-BELT",
+      "role": "Shared core / Central Commons with Archive inner edge",
+      "baseElevation": "M0",
+      "currentProjects": ["actress-finder", "shisha"],
+      "reserveParcels": [],
+      "mustPreserve": ["G-NORTH", "G-ARCHIVE", "G-WORKSHOP", "G-SOUTH", "neutral shared surface x≈1440..1760"],
+      "landform": "Mostly level civic terrace. Central Commons remains quiet and low-profile; west inner edge may host Archive parcels without turning the Commons into a fifth district."
+    },
+    {
+      "chunk": "2:1",
+      "master": "MIDDLE-BELT",
+      "role": "Workshop core",
+      "baseElevation": "M1",
+      "currentProjects": ["dqb2", "madori", "maze-maker", "anagram"],
+      "reserveParcels": [],
+      "mustPreserve": ["east-west Workshop street around y=1260", "level connection to 1:1 and 3:1"],
+      "landform": "Dry practical urban terrace with restrained industrial grade changes; no major cliff inside the project field."
+    },
+    {
+      "chunk": "3:1",
+      "master": "MIDDLE-BELT",
+      "role": "Workshop reserve apron",
+      "baseElevation": "M1",
+      "currentProjects": [],
+      "reserveParcels": ["WRK-R1", "WRK-R2"],
+      "mustPreserve": ["EC-E y=1260", "GF-WRK-N", "GF-WRK-S", "level route into 2:1"],
+      "landform": "Mostly level workshop terrace with two reserve yards disguised as ordinary scenery and a clean east expansion spine."
+    },
+    {
+      "chunk": "0:2",
+      "master": "SOUTH-BELT",
+      "role": "Waterside west inner district",
+      "baseElevation": "L1",
+      "currentProjects": ["aquarium"],
+      "reserveParcels": [],
+      "mustPreserve": ["G-ARCHIVE-WATER x=760 y=1536 width=120", "Waterside west anchor x=1024 y=1840"],
+      "landform": "Mid-to-low promenade descent with a dry project terrace and water/shoreline allowed mainly toward the outer south/west portions."
+    },
+    {
+      "chunk": "1:2",
+      "master": "SOUTH-BELT",
+      "role": "Waterside centre / HoloCa protected bypass",
+      "baseElevation": "L1",
+      "currentProjects": ["holoca"],
+      "reserveParcels": [],
+      "mustPreserve": ["G-SOUTH", "no straight road through HoloCa", "west/east bypass arms", "route rejoin before south seam"],
+      "landform": "Low central landform with two promenade arms around HoloCa; arms may rejoin south of the landmark so the 1:3 seam can use one central continuation."
+    },
+    {
+      "chunk": "2:2",
+      "master": "SOUTH-BELT",
+      "role": "Waterside east inner district",
+      "baseElevation": "L1",
+      "currentProjects": ["word-generator"],
+      "reserveParcels": [],
+      "mustPreserve": ["G-WORKSHOP-WATER x=2440 y=1536 width=120", "Waterside east anchor x=2048 y=1840"],
+      "landform": "Mid-to-low promenade descent with a dry project terrace and water/shoreline allowed mainly toward the outer south/east portions."
+    },
+    {
+      "chunk": "1:3",
+      "master": "SOUTH-BELT",
+      "role": "Waterside reserve apron / south city continuation",
+      "baseElevation": "L0",
+      "currentProjects": [],
+      "reserveParcels": ["WAT-R1", "WAT-R2"],
+      "mustPreserve": ["central dry continuation from 1:2", "GF-WAT-W", "GF-WAT-E", "EC-S at x=1600 y=3072"],
+      "landform": "Low coastal terrace or peninsula with two reserve parcels on side wings and a central corridor kept free for future city growth."
+    }
+  ],
+  "landformBlockoutRules": [
+    "Do not place an unbroken cliff, shoreline, or permanent landmark across any Growth Frontier or Expansion Corridor socket.",
+    "North Crown is the only clearly high district mass; Middle Belt is predominantly level; South Belt is lower and more open.",
+    "Water begins only in the South Belt and must not leak into Central Commons or become the identity of the middle city.",
+    "The HoloCa bypass splits after G-SOUTH and may rejoin south of HoloCa before the 1:2→1:3 seam.",
+    "Reserve parcels must read as ordinary gardens, yards, terraces, groves or promenades while empty; no blank construction pads.",
+    "Chunk boundaries are technical slices, not visible district borders.",
+    "Final terrain art must keep the adopted Layton-like muted storybook character and avoid dense AI-looking micro-detail."
+  ],
+  "seamContracts": [
+    { "id": "S-OBS-APRON-CORE", "between": ["1:-1", "1:0"], "edge": "y=0", "contract": "dry central route x=1600; H3→H2 continuity; no hard wall" },
+    { "id": "S-OBS-W", "between": ["0:0", "1:0"], "edge": "x=1024", "contract": "upper terrace continuity; Sphere ground must not be cut by seam" },
+    { "id": "S-OBS-E", "between": ["1:0", "2:0"], "edge": "x=2048", "contract": "upper terrace continuity; Prime ground must not be cut by seam" },
+    { "id": "S-NORTH-MID", "between": ["1:0", "1:1"], "edge": "y=768", "contract": "G-NORTH x=1600 width=160; high-to-mid descent continues cleanly" },
+    { "id": "S-ARCHIVE-APRON", "between": ["-1:1", "0:1"], "edge": "x=0", "contract": "level Archive street continues near y=1260" },
+    { "id": "S-ARCHIVE-COMMONS", "between": ["0:1", "1:1"], "edge": "x=1024", "contract": "Archive street continues toward G-ARCHIVE; no themed gate" },
+    { "id": "S-COMMONS-WORKSHOP", "between": ["1:1", "2:1"], "edge": "x=2048", "contract": "Workshop street continues from G-WORKSHOP; no themed gate" },
+    { "id": "S-WORKSHOP-APRON", "between": ["2:1", "3:1"], "edge": "x=3072", "contract": "level Workshop street continues near y=1260" },
+    { "id": "S-ARCHIVE-WATER", "between": ["0:1", "0:2"], "edge": "y=1536", "contract": "G-ARCHIVE-WATER x=760 width=120; M1→L1 descent" },
+    { "id": "S-COMMONS-SOUTH", "between": ["1:1", "1:2"], "edge": "y=1536", "contract": "G-SOUTH x=1600 width=160; bypass split begins after seam" },
+    { "id": "S-WORKSHOP-WATER", "between": ["2:1", "2:2"], "edge": "y=1536", "contract": "G-WORKSHOP-WATER x=2440 width=120; M1→L1 descent" },
+    { "id": "S-WAT-W", "between": ["0:2", "1:2"], "edge": "x=1024", "contract": "Waterside west anchor y=1840 width≈120 stays dry and traversable" },
+    { "id": "S-WAT-E", "between": ["1:2", "2:2"], "edge": "x=2048", "contract": "Waterside east anchor y=1840 width≈120 stays dry and traversable" },
+    { "id": "S-WAT-APRON", "between": ["1:2", "1:3"], "edge": "y=2304", "contract": "post-HoloCa route has rejoined into a central dry continuation around x=1600" }
+  ]
+}

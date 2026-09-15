@@ -4,7 +4,6 @@ Date: 2026-09-15
 Status: **REVIEW READY / NOT RUNTIME DATA**
 Source image: `phase3-6-r0_whole-city-structural-blueprint_APPROVED.png`
 Coordinate source: `docs/phase3-6-r0-growth-layout.json`
-Latest validated head: `a80e58c895447faee0e251f3500fcc8934d134e7`
 
 ## Purpose
 

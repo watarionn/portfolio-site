@@ -84,3 +84,23 @@ Those decisions follow from the approved structural blueprint in later stages.
 The structural blueprint direction is now adopted. The current `observatory_terrain.webp` remains withdrawn as final geography but retained as a rendering-quality reference. HoloScope, Sphere and Prime Dot Art remain approved building assets.
 
 Before R0 can be closed, convert the approved visual blueprint into a machine-checkable spatial plan and run the documented growth simulations for reserve-parcel use, district extension and fifth-district attachment.
+
+## Coordinate Growth Layout follow-up
+
+The approved structural blueprint has now been translated into a machine-checkable planning contract:
+
+- `docs/phase3-6-r0-growth-layout.json`
+- `docs/phase3-6-r0-growth-layout.md`
+
+The numeric plan preserves all fourteen current project coordinates as its baseline, adds eight reserve parcels across four Reserve Apron chunks, defines eight district-growth sockets and keeps four separate outward new-district corridors.
+
+The precise coordinate QA diagram is stored in Google Drive as:
+
+- `Portfolio City_採用設計画像_20260913/02_IllustratedCity/01_DistrictConnections/phase3-6-r0_growth-layout_coordinate-review.png`
+- Drive file id: `1XH_KD4f6ZSZxeRQoG1VYL-O5nN9yMjCv`
+
+This diagram is a review/QA artifact rather than a replacement for the approved art-direction blueprint.
+
+The coordinate checks confirm that all eight reserve parcel envelopes fit their designated Reserve Apron chunks and that district-growth sockets remain distinct from the new-district Expansion Corridors.
+
+`portfolio-city/data/map-layout.json` remains unchanged during this planning stage.

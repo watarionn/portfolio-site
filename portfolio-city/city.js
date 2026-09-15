@@ -211,6 +211,10 @@ function regionForDistrict(districtId) {
   return state.layout?.districtRegions?.find((item) => item.districtId === districtId) ?? null;
 }
 
+function illustratedChunkForDistrict(districtId) {
+  return state.layout?.chunks?.find((item) => item.districtId === districtId && item.image) ?? null;
+}
+
 function buildWorldChunks() {
   const layer = make('div', 'world-chunks');
   layer.setAttribute('aria-hidden', 'true');
@@ -220,7 +224,22 @@ function buildWorldChunks() {
     node.dataset.chunkColumn = String(chunk.column);
     node.dataset.chunkRow = String(chunk.row);
     node.dataset.chunkMode = chunk.image ? 'illustrated' : (chunk.fallback ?? 'legacy');
-    if (chunk.image) node.dataset.chunkImage = chunk.image;
+    if (chunk.image) {
+      node.dataset.chunkImage = chunk.image;
+      if (node.style) node.style.backgroundImage = `url("${chunk.image}")`;
+      const region = chunk.renderRegion ?? {
+        x: chunk.column * state.layout.world.chunkWidth,
+        y: chunk.row * state.layout.world.chunkHeight,
+        width: state.layout.world.chunkWidth,
+        height: state.layout.world.chunkHeight
+      };
+      if (node.style) {
+        node.style.setProperty('--chunk-left', `${region.x / state.layout.world.width * 100}%`);
+        node.style.setProperty('--chunk-top', `${region.y / state.layout.world.height * 100}%`);
+        node.style.setProperty('--chunk-width', `${region.width / state.layout.world.width * 100}%`);
+        node.style.setProperty('--chunk-height', `${region.height / state.layout.world.height * 100}%`);
+      }
+    }
     layer.append(node);
   }
   return layer;
@@ -238,6 +257,11 @@ function renderMap() {
   for (const district of [...state.districts].sort(byOrder)) {
     const section = make('section', `district district--${district.mapArea}`);
     section.dataset.districtId = district.id;
+    const illustratedChunk = illustratedChunkForDistrict(district.id);
+    if (illustratedChunk) {
+      section.dataset.visualMode = 'illustrated';
+      if (section.style) section.style.setProperty('--district-art', `url("${illustratedChunk.image}")`);
+    }
     const region = regionForDistrict(district.id);
     if (region) {
       section.dataset.worldX = String(region.x);
@@ -273,6 +297,10 @@ function renderMap() {
         button.dataset.worldWidth = String(placement.width);
         button.dataset.worldAnchor = placement.anchor;
         button.dataset.worldZ = String(placement.z ?? Math.round(placement.y));
+        if (placement.asset) {
+          button.dataset.visualMode = 'illustrated';
+          if (button.style) button.style.setProperty('--building-art', `url("${placement.asset}")`);
+        }
       }
       button.dataset.baseLabel = `${district.name}の${project.building}、${project.title}`;
       button.setAttribute('aria-label', `${button.dataset.baseLabel}、未訪問`);

@@ -8,7 +8,7 @@
   },
   "chunks": [
     { "id": "0:0", "column": 0, "row": 0, "fallback": "legacy" },
-    { "id": "1:0", "column": 1, "row": 0, "fallback": "legacy" },
+    { "id": "1:0", "column": 1, "row": 0, "districtId": "observatory-hill", "image": "assets/illustrated/observatory/observatory_terrain.webp", "renderRegion": { "x": 768, "y": 80, "width": 1664, "height": 650 } },
     { "id": "2:0", "column": 2, "row": 0, "fallback": "legacy" },
     { "id": "0:1", "column": 0, "row": 1, "fallback": "legacy" },
     { "id": "1:1", "column": 1, "row": 1, "fallback": "legacy" },
@@ -29,9 +29,9 @@
     "mobile": { "zoom": 0.56, "startX": 1600, "startY": 620 }
   },
   "projectPlacements": [
-    { "projectId": "holoscope", "x": 1600, "y": 360, "width": 270, "anchor": "bottom-center" },
-    { "projectId": "sphere", "x": 980, "y": 600, "width": 250, "anchor": "bottom-center" },
-    { "projectId": "prime-dot-art", "x": 2220, "y": 600, "width": 250, "anchor": "bottom-center" },
+    { "projectId": "holoscope", "x": 1600, "y": 360, "width": 270, "anchor": "bottom-center", "asset": "assets/illustrated/observatory/holoscope.webp" },
+    { "projectId": "sphere", "x": 980, "y": 600, "width": 250, "anchor": "bottom-center", "asset": "assets/illustrated/observatory/sphere.webp" },
+    { "projectId": "prime-dot-art", "x": 2220, "y": 600, "width": 250, "anchor": "bottom-center", "asset": "assets/illustrated/observatory/prime-dot-art.webp" },
     { "projectId": "yorei", "x": 430, "y": 1040, "width": 250, "anchor": "bottom-center" },
     { "projectId": "actress-finder", "x": 1120, "y": 1040, "width": 250, "anchor": "bottom-center" },
     { "projectId": "cheatsheet", "x": 430, "y": 1480, "width": 250, "anchor": "bottom-center" },

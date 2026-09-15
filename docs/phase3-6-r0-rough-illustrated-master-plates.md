@@ -1,7 +1,7 @@
 # Portfolio City Phase 3.6-R0 — Rough Illustrated Master Plates
 
 Date: 2026-09-15
-Status: **MIDDLE BELT APPROVED / NORTH + SOUTH REVIEW CONTINUES / NOT RUNTIME ART**
+Status: **MIDDLE BELT APPROVED / SOUTH ROAD GEOMETRY LOCKED / NORTH + SOUTH ROUGH REVIEW CONTINUES / NOT RUNTIME ART**
 Branch: `phase3-6-r0-whole-city-blueprint-reset`
 
 ## Purpose
@@ -34,6 +34,8 @@ The exact geometry remains authoritative in:
 - `docs/phase3-6-r0-terrain-slicing-landform.json`
 - `docs/phase3-6-r0-terrain-mask-contract.json`
 - `docs/phase3-6-r0-terrain-mask-contract.md`
+- `docs/phase3-6-r0-south-road-registration.json`
+- `docs/phase3-6-r0-south-road-registration.md`
 
 Visual roughs may soften edges, but they must not move locked roads, gates, reserve parcels, Growth Frontiers or Expansion Corridors.
 
@@ -57,30 +59,36 @@ Stored in Google Drive under:
 - Approved reading: a broad, mostly dry east-west civic terrace with water/cliff presence held to the outer fringe; Central Commons remains visually subordinate; no decorative building or text layer is baked into terrain.
 - The approved rough may still require exact master-ratio export / slicing preparation later. Approval locks visual composition, not runtime registration.
 
-### South Belt
+### South Belt — SPLIT AUTHORITY
 
-- Working candidate lineage: `phase3-6-r0_south-belt_constrained-watercolor_candidate.png` → local-road-edit iterations
-- Status: **review continues; not approved**
-- Required reading: `G-SOUTH → split → pass outside HoloCa protected region → rejoin → one south continuation`; the waterfront remains secondary to the city route.
+- Visual style / landform reference: `phase3-6-r0_south-belt_STYLE-REFERENCE.png`
+- Drive file id: `1anVfkEMRpA9wjapfHodK92XT2qBvjBD0`
+- Authoritative road layer: `phase3-6-r0_south-road-layer_AUTHORITATIVE.png`
+- Drive file id: `1K_-mjB9hX1fKVTRO2IRrHO62_M-nTT2v`
+- Registration preview: `phase3-6-r0_south-road-registration-preview.png`
+- Drive file id: `1MqGfIXQGuyIjMNn8RJAg0allF-0AdQbV`
+- Status: **visual reference retained / road geometry locked / complete painted rough not yet approved**
+- The generated painted road is no longer treated as coordinate authority.
+- Required route: `G-SOUTH → split → outside HoloCa protected region → rejoin at (1600,2200) → one south continuation → EC-S`.
+- The authoritative transparent road layer has zero overlap with the registered HoloCa protected region at 1536 × 768.
 - A closed ring road around HoloCa is explicitly forbidden.
 
-## Superseded roughs
+## Superseded / rejected roughs
 
 The earlier `phase3-6-r0_rough-illustrated_middle-belt_v2.png` and `phase3-6-r0_rough-illustrated_south-belt_v2.png` remain useful color/style comparisons only. They are superseded as geometry candidates by the constrained workflow.
 
-Several automatic image-generation attempts also produced poster layouts, labels, coordinates, buildings, ships, docks and other premature detail. Those outputs are rejected and are not project references.
+Automatic image-generation attempts that produced poster layouts, labels, coordinates, buildings, ships, docks, QA boards or other premature detail are rejected and are not project references.
 
-The project must never treat attractive but structurally incorrect poster art as terrain authority.
+The project must never treat attractive but structurally incorrect generated art as terrain authority.
 
 ## Terrain Mask Contract
 
-The constrained candidates are governed by the mask contract added in Phase 3.6-R0:
+The constrained candidates are governed by the mask and registration contracts added in Phase 3.6-R0:
 
 - Middle Belt: dry terrain is dominant; east-west road continuity is primary; Central Commons is a small, quiet connector and never a hero plaza.
 - South Belt: the HoloCa protected area is road-free; west/east bypass arms remain separate until the approved rejoin point; no closed ring road is permitted.
+- South road geometry is now maintained as a separate authoritative transparent layer rather than inferred from generated terrain art.
 - Buildings, towers, ships, piers, labels, UI and decorative landmarks are forbidden during this rough terrain stage.
-
-The generated binary masks and mask review image are stored outside Git in Google Drive; Git stores the machine-readable contract.
 
 ## Review gate
 
@@ -90,7 +98,7 @@ Before Rough Illustrated Master Plates can close:
 2. Middle Belt must remain a broad, mostly level dry civic terrace. **PASS / approved.**
 3. Central Commons must stay visually subordinate. **PASS for the approved Middle Belt rough.**
 4. South Belt must introduce the first real water plane while keeping Aquarium, HoloCa, Word Generator and the south continuation dry.
-5. HoloCa bypass must remain legible and must not become a closed ring.
+5. HoloCa bypass must remain legible and must not become a closed ring. **PASS for the authoritative road layer; painted integration still pending.**
 6. Reserve parcels must read as ordinary scenery rather than construction pads.
 7. All three plates must feel like one city under one muted storybook art direction.
 8. No detail pass may begin until all three rough compositions are approved.

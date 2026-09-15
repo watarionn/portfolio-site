@@ -3,7 +3,7 @@
 Date: 2026-09-15
 Baseline main: `cf8e074d0f8f2012820a31bdceb78f9a56bdd110`
 Working branch: `phase3-6-r0-whole-city-blueprint-reset`
-Status: **ADOPTED RESET / BLUEPRINT DESIGN ONLY**
+Status: **ADOPTED RESET / COORDINATE GROWTH LAYOUT REVIEW READY**
 
 ## 1. Decision
 
@@ -277,6 +277,9 @@ Keep:
 - warm cream / pale sandstone civic materials
 - restrained saturation in shared infrastructure
 - readable project silhouettes at runtime size
+- Professor Layton-series-inspired overall drawing character and muted colour mood as an absolute art-direction requirement
+- simplified large forms before small decoration
+- deliberate avoidance of dense AI-like micro-detail, repeated tiny props and over-rendered texture
 
 The former Observatory terrain remains a reference for these qualities, not a fixed geographic template.
 
@@ -324,9 +327,35 @@ R0 passes only when:
 - Simulation A, B, C and D all pass
 - no final Archive, Workshop, Waterside or replacement Observatory terrain is produced before blueprint approval
 
-## 15. Production sequence after R0
+## 15. Coordinate Growth Layout result
 
-After the blueprint passes:
+The approved structural blueprint is now represented numerically by:
+
+- `docs/phase3-6-r0-growth-layout.json`
+- `docs/phase3-6-r0-growth-layout.md`
+
+The plan keeps all fourteen current project coordinates unchanged, adds four Reserve Apron chunks with two reserve parcels each, and separates district Growth Frontier sockets from new-district Expansion Corridors.
+
+The four Reserve Apron chunks are:
+
+- `1:-1` for Observatory Hill
+- `-1:1` for Archive Street
+- `3:1` for Workshop Alley
+- `1:3` for Waterside Play
+
+This changes the future structural production footprint from a 9-chunk core to a 13-chunk initial city, while still allowing lazy loading at runtime.
+
+The outward new-district seed directions remain available at `1:-2`, `-2:1`, `4:1` and `1:4`.
+
+Local latest-head validation confirms that all eight reserve parcel envelopes fit their assigned chunks, all fourteen baseline placements match runtime `map-layout.json`, and Simulations A–D remain structurally possible without moving current projects.
+
+The coordinate QA image is stored in Google Drive as `phase3-6-r0_growth-layout_coordinate-review.png` (file id `1XH_KD4f6ZSZxeRQoG1VYL-O5nN9yMjCv`).
+
+`portfolio-city/data/map-layout.json` remains unchanged until the subsequent terrain-slicing gate is explicitly approved.
+
+## 16. Production sequence after R0
+
+After the blueprint and coordinate plan pass review:
 
 1. lock whole-city geography and growth sockets
 2. define initial terrain render regions / chunk slicing
@@ -340,7 +369,7 @@ After the blueprint passes:
 
 District production may still be reviewed incrementally, but no district is allowed to redefine the city network independently.
 
-## 16. Stop condition
+## 17. Stop condition
 
 R0 is a blueprint stage.
 
@@ -348,4 +377,4 @@ Do not generate final terrain for any district during R0.
 
 Do not generate the remaining eleven project-building assets during R0.
 
-The next artifact is the **Whole-City Master Blueprint**, including current parcels, reserve parcels, Growth Frontiers and future district expansion corridors.
+The coordinate Growth Layout is now review-ready. Terrain slicing is the next design gate only after this plan is accepted.

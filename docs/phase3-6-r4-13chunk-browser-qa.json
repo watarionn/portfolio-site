@@ -1,0 +1,78 @@
+{
+  "phase": "3.6-R4",
+  "status": "PASS_BROWSER_QA_CANDIDATE",
+  "baseHead": "0a66582df72cbfa870b85a0aedd21e86721c2989",
+  "terrainSource": "Phase 3.6-R0 Pass 8 WebP candidate pack, q90",
+  "world": {
+    "minX": -1024,
+    "minY": -768,
+    "width": 5120,
+    "height": 3840,
+    "chunkWidth": 1024,
+    "chunkHeight": 768,
+    "chunkCount": 13,
+    "projectCount": 14
+  },
+  "browser": {
+    "engine": "Chromium 144 headless",
+    "input": "Chrome DevTools Protocol real mouse drag events",
+    "assetLoading": "actual Pass 8 WebPs embedded as data URIs in the QA page only"
+  },
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "stage": [382, 641],
+      "renderedWorld": [874, 656],
+      "zoom": 2.3,
+      "dragPan": [-84.04, -8.25],
+      "pass": true
+    },
+    {
+      "width": 820,
+      "height": 1000,
+      "stage": [804, 650],
+      "renderedWorld": [1283, 962],
+      "zoom": 1.6,
+      "dragPan": [-176.88, -117.0],
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "stage": [1180, 720],
+      "renderedWorld": [1473, 1104],
+      "zoom": 1.25,
+      "dragPan": [-147.25, -129.6],
+      "pass": true
+    }
+  ],
+  "checks": {
+    "thirteenTerrainImagesLoaded": true,
+    "fourteenProjectAnchorsRendered": true,
+    "negativeColumnStartsAtZeroPercent": true,
+    "negativeRowStartsAtZeroPercent": true,
+    "eastEdgeEndsAtOneHundredPercent": true,
+    "southEdgeEndsAtOneHundredPercent": true,
+    "allChunksInsideWorld": true,
+    "allProjectsInsideWorld": true,
+    "realDragChangesPan": true,
+    "panIsClamped": true,
+    "noHorizontalPageOverflowBeforeDrag": true,
+    "noHorizontalPageOverflowAfterDrag": true
+  },
+  "visualReview": {
+    "north": "Pass. Deliberately quieter and simpler than the other belts; no blocking issue at 390/820/1440 browser scale.",
+    "middle": "Pass. Strongest and most stable visual density.",
+    "south": "Pass. Coastal identity remains clear; dry reserve apron and south continuation remain legible.",
+    "crossMasterTransitions": "Pass for browser QA. District transitions remain visible by design but do not read as a broken or missing chunk seam at the tested scales."
+  },
+  "explicitlyUnchanged": [
+    "portfolio-city/data/map-layout.json",
+    "production terrain asset paths",
+    "production deployment",
+    "project authored coordinates",
+    "district geometry"
+  ],
+  "nextGate": "13-chunk runtime registration implementation with staged assets, followed by production-site browser QA before merge/deploy"
+}

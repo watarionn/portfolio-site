@@ -1,0 +1,40 @@
+{
+  "phase": "3.6-R0",
+  "artifact": "south-road-registration",
+  "status": "authoritative-road-layer-approved-for-registration",
+  "worldBounds": {"xMin": 0, "yMin": 1536, "xMax": 3072, "yMax": 3072},
+  "masterAspectRatio": "2:1",
+  "visualStyleReference": {
+    "driveFile": "phase3-6-r0_south-belt_STYLE-REFERENCE.png",
+    "driveFileId": "1anVfkEMRpA9wjapfHodK92XT2qBvjBD0",
+    "authority": "style-and-landform-reference-only",
+    "mustNotDefineRoadGeometry": true
+  },
+  "roadLayer": {
+    "driveFile": "phase3-6-r0_south-road-layer_AUTHORITATIVE.png",
+    "driveFileId": "1K_-mjB9hX1fKVTRO2IRrHO62_M-nTT2v",
+    "authority": "geometry-authority",
+    "pixelSize": [1536, 768],
+    "holoCaProtectedOverlapPixels": 0
+  },
+  "registrationPreview": {
+    "driveFile": "phase3-6-r0_south-road-registration-preview.png",
+    "driveFileId": "1MqGfIXQGuyIjMNn8RJAg0allF-0AdQbV"
+  },
+  "route": {
+    "northEntry": [[1600,1536],[1600,1560]],
+    "westBypass": [[1600,1560],[1400,1660],[1340,1840],[1400,2050],[1600,2200]],
+    "eastBypass": [[1600,1560],[1800,1660],[1860,1840],[1800,2050],[1600,2200]],
+    "southContinuation": [[1600,2200],[1600,2304],[1600,2680],[1600,3072]],
+    "archiveWaterLink": [[760,1536],[760,1840],[1024,1840]],
+    "workshopWaterLink": [[2440,1536],[2440,1840],[2048,1840]]
+  },
+  "holoCaProtectedRegion": {"center": [1600,1820], "radius": 175},
+  "rules": [
+    "The painted South terrain must not define final road geometry.",
+    "Final South production must register the road layer above the terrain base.",
+    "No closed ring road is permitted.",
+    "HoloCa protected region must remain road-free.",
+    "Buildings, ships, towers, labels and UI remain forbidden in the rough terrain stage."
+  ]
+}

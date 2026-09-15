@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_fuwamoco",
+  "slug": "fuwamoco",
+  "displayName": "FUWAMOCO",
+  "nameJa": "フワワ・アビスガード／モココ・アビスガード",
+  "channelId": "UCt9H_RpQzhxzlyBxFqrdHqA",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCt9H_RpQzhxzlyBxFqrdHqA",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_drcn--zuqsk",
+      "slug": "fuwamoco-drcn-zuqsk",
+      "videoId": "dRCn--zUQSk",
+      "title": "FUWAMOCOがEXPO直前の期待と緊張を共有　幕張メッセで楽しむための準備トーク",
+      "summaryOneLine": "EXPOを目前にしたFUWAMOCOが、注目する企画、現地準備、オンライン視聴、そして本番前の緊張を率直に語った雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2026-03-04T23:00:00Z",
+      "durationSeconds": 4926,
+      "thumbnailUrl": "https://i.ytimg.com/vi/dRCn--zUQSk/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-03",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "hololive SUPER EXPO 2026",
+        "雑談"
+      ]
+    },
+    {
+      "uid": "str_0y9adbfktdg",
+      "slug": "fuwamoco-0y9adbfktdg",
+      "videoId": "0Y9AdbfKtdg",
+      "title": "信じたいのに疑ってしまう　FUWAMOCOが走り続けたAmong Us推理戦",
+      "summaryOneLine": "FUWAMOCOのAmong Usは、鋭い推理だけでも、勢い任せの疑い合いだけでもありません。",
+      "streamType": "game",
+      "publishedAt": "2025-09-28T16:30:28Z",
+      "durationSeconds": 11780,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0Y9AdbfKtdg/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-09",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0c5phpdccg8",
+      "slug": "fuwamoco-0c5phpdccg8",
+      "videoId": "0c5pHPdCcg8",
+      "title": "大舞台の余韻をふたりでほどく　FUWAMOCOが語ったhololive fes・EXPOの舞台裏",
+      "summaryOneLine": "この配信は、fesやEXPOの出来事を外から説明するレポートではなく、FUWAMOCO自身が何を見て、何に心を動かされ、何を次へ持っていきたいと感じたかをたどる振り返りです。",
+      "streamType": "chatting",
+      "publishedAt": "2025-03-10T04:37:18Z",
+      "durationSeconds": 12518,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0c5pHPdCcg8/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-03",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_e0gbytqefiy",
+      "slug": "fuwamoco-e0gbytqefiy",
+      "videoId": "e0GbyTqEfiY",
+      "title": "FUWAMOCOと迎えた2025年　過去の苦労、作品づくり、これからの目標を語る新年雑談",
+      "summaryOneLine": "FUWAMOCOが以前の活動環境から現在までを振り返り、作品を届ける喜びと制作の難しさ、2025年への期待を共有した新年雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2025-01-01T08:30:00Z",
+      "durationSeconds": 16149,
+      "thumbnailUrl": "https://i.ytimg.com/vi/e0GbyTqEfiY/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-01",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [
+        "新年",
+        "雑談"
+      ]
+    },
+    {
+      "uid": "str_gzvc7mqg-ky",
+      "slug": "fuwamoco-gzvc7mqg-ky",
+      "videoId": "gzVC7mqG-kY",
+      "title": "FUWAMOCO MORNING episode 105　イベント、カバー曲、今後の予定を朝のニュース形式で紹介",
+      "summaryOneLine": "FUWAMOCOがイベントと音楽の話題、短い休止期間の連絡、犬の写真紹介をまとめた朝番組回です。",
+      "streamType": "other",
+      "publishedAt": "2024-07-05T15:00:00Z",
+      "durationSeconds": 2313,
+      "thumbnailUrl": "https://i.ytimg.com/vi/gzVC7mqG-kY/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-07",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "FUWAMOCO MORNING",
+        "ニュース"
+      ]
+    },
+    {
+      "uid": "str_dukyszswgu4",
+      "slug": "fuwamoco-dukyszswgu4",
+      "videoId": "DUKyszswGU4",
+      "title": "FUWAMOCOの慌ただしい一週間　通院、食事、買い物、家族とのアニメの思い出",
+      "summaryOneLine": "移動と通院から仲間との外出、家族の思い出まで、FUWAMOCOが忙しい一週間を時系列で整理した長時間雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2024-05-26T01:00:00Z",
+      "durationSeconds": 10904,
+      "thumbnailUrl": "https://i.ytimg.com/vi/DUKyszswGU4/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ]
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 13,
+    "soloCount": 13,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 4
+      },
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 4
+      },
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 3
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 2
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/fuwamoco/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCt9H_RpQzhxzlyBxFqrdHqA",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-09-15T04:06:51Z",
+  "status": "PASS",
+  "deploymentBlocked": false,
+  "blockingSeverities": [
+    "FATAL",
+    "ERROR"
+  ],
+  "checks": {
+    "fatalCount": 0,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0
+  },
+  "issues": [],
+  "publicCounts": {
+    "members": 13,
+    "streams": 39,
+    "generations": 0,
+    "games": 0,
+    "events": 0,
+    "series": 0,
+    "articles": 0,
+    "phrases": 0,
+    "slang": 0,
+    "learningStreams": 0
+  },
+  "videoStatusSummary": {
+    "public": 39
+  },
+  "releasePolicy": "FATALまたは未許容ERRORがある場合は公開しません。release単位で切替・ロールバックします。",
+  "mode": "read_only"
+}

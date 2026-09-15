@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_shiori_novella",
+  "slug": "shiori-novella",
+  "displayName": "Shiori Novella",
+  "nameJa": null,
+  "channelId": "UCgnfPPb9JI3e9A4cXHnWbyg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCgnfPPb9JI3e9A4cXHnWbyg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0xpelt3nfy0",
+      "slug": "shiori-novella-0xpelt3nfy0",
+      "videoId": "0XPeLT3nfy0",
+      "title": "﻿# 拠点巡りからタワー攻略へ　Advent再会のPalworldで広がった一日",
+      "summaryOneLine": "この日のPalworldは、Adventの再会を祝う拠点巡りから始まりました。",
+      "streamType": "game",
+      "publishedAt": "2024-02-10T02:31:02Z",
+      "durationSeconds": 8798,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0XPeLT3nfy0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-02",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 1,
+    "soloCount": 1,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/shiori-novella/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCgnfPPb9JI3e9A4cXHnWbyg",
+      "checkedAt": "2026-09-13T04:51:44Z"
+    }
+  ],
+  "createdAt": "2026-09-13T04:51:44Z",
+  "updatedAt": "2026-09-13T04:51:44Z"
+}

@@ -4,7 +4,7 @@ Designed: 2026-09-14
 Baseline: `2361294695381f45e79f69cb38e31753ae30f9c3`
 Status: pilot implemented; Observatory Hill quality master locked 2026-09-15
 
-> Sequence note (2026-09-15): after the illustrated Observatory Hill pilot, the project inserted Phase 3.5-P1, Phase 3.5-P2 and a quality-master Checkpoint 3 before remaining-district conversion. The older ?Checkpoint 3 ? Four-district conversion? heading below is therefore a historical sequence label, not authorization to start that work. See `docs/phase3-5-observatory-quality-master.md`.
+> Sequence note (2026-09-15): after the illustrated Observatory Hill pilot, the project inserted Phase 3.5-P1, Phase 3.5-P2, Phase 3.5-P2.5 and a revalidated quality-master Checkpoint 3. Before any remaining-district terrain production, Phase 3.6-P0 District Connection Design defines the shared connection graph and chunk-seam contracts. The older "Checkpoint 3 - Four-district conversion" heading below is therefore a historical sequence label, not authorization to skip P0. See `docs/phase3-5-observatory-quality-master.md` and `docs/phase3-6-district-connection-design.md`.
 
 ## 1. Goal
 

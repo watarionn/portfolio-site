@@ -5,7 +5,9 @@ Gate: Phase 3.5 Checkpoint 3 / Quality Master Decision
 Initial quality-lock baseline: `990098edc69fc72f7c7e77ab3248b46f5392f650`
 P2.5 revalidation baseline: `4766bf04834fb00865012ee1760a5a3be4edc641`
 Working branch: `phase3-5-observatory-style-harmonization`
-Decision: **PASS AFTER REVALIDATION - Observatory Hill is the visual quality master after Phase 3.5-P2.5 style harmonization.**
+Decision: **PASS AFTER REVALIDATION - Observatory Hill remains the visual quality master after Phase 3.5-P2.5 style harmonization.**
+
+> R0 supersession note (2026-09-15): Phase 3.6-R0 Whole-City Blueprint Reset withdraws `observatory_terrain.webp` from final geographic / terrain-composition approval. The terrain remains an art-direction reference for rendering quality, material warmth, lighting, vegetation grouping and detail density. HoloScope, Sphere and Prime Dot Art remain approved project-building assets. The reset does not invalidate the visual-quality findings below; it only removes the assumption that the current Observatory terrain silhouette is final geography. See `docs/phase3-6-r0-whole-city-blueprint-reset.md`.
 
 ## Scope
 
@@ -25,10 +27,10 @@ The older architecture document described the next broad conversion stage as “
 
 ## Approved source/runtime set
 
-- Terrain: `observatory_terrain.webp`
-- HoloScope: `holoscope.webp`
-- Sphere: `sphere.webp`
-- Prime Dot Art: `prime-dot-art.webp`
+- Terrain reference: `observatory_terrain.webp` — **visual reference only after Phase 3.6-R0; final geography withdrawn**
+- HoloScope: `holoscope.webp` — approved project-building asset
+- Sphere: `sphere.webp` — approved project-building asset
+- Prime Dot Art: `prime-dot-art.webp` — approved project-building asset
 - Sphere approved master: `sphere_phase3-5-p2-5_APPROVED.png` in Google Drive
 - Prime Dot Art approved master: `prime-dot-art_phase3-5-p2-5_APPROVED.png` in Google Drive
 
@@ -90,7 +92,7 @@ The older architecture document described the next broad conversion stage as “
 | HoloScope | 284 × 320 | yes | 18 KB |
 | Sphere | 296 × 320 | yes | 27 KB |
 | Prime Dot Art | 320 × 319 | yes | 31 KB |
-| Observatory terrain | 768 × 506 | opaque | 42 KB |
+| Observatory terrain reference | 768 × 506 | opaque | 42 KB |
 
 All project-building assets remain far below the provisional 250 KB building budget.
 
@@ -110,7 +112,7 @@ All project-building assets remain far below the provisional 250 KB building bud
 | No baked explanatory text | PASS | Runtime art remains text-free. |
 | Existing interaction contract | PASS | Click, keyboard, inspector, route and visited semantics preserved. |
 | Style harmony with HoloScope | PASS | P2.5 derivatives were rebalanced against HoloScope for saturation, value and edge density, then reviewed in-map at all three widths. |
-| Runtime weight | PASS | Building derivatives are 18-25 KB. |
+| Runtime weight | PASS | Building derivatives are 18-31 KB. |
 
 ## P2.5 style-harmonization revalidation
 
@@ -132,8 +134,10 @@ The 1440 / 820 / 390 in-map review confirms that the blue/gold palette no longer
 
 Observatory Hill is a **quality bar, not a copy template**. Later districts must inherit camera, lighting, edge softness, runtime clarity, material warmth and detail restraint, while using their own architecture and motifs.
 
+After Phase 3.6-R0, the same rule also applies to replacement Observatory terrain: reproduce the quality language without copying the withdrawn terrain geography.
+
 Before a later district can be called complete, its buildings must pass the same 1440 / 820 / 390 silhouette test and interaction regression test used here.
 
 ## Stop condition
 
-Checkpoint 3 ends here. Do **not** begin the remaining three districts until a separate next-stage instruction is given.
+Checkpoint 3 ends here. Phase 3.6-R0 now governs geography. Do **not** resume final terrain production until the Whole-City Master Blueprint passes its growth-capacity review.

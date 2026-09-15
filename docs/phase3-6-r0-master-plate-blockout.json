@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "status": "R0_MASTER_PLATE_BLOCKOUT_NOT_RUNTIME",
+  "baselineMain": "cf8e074d0f8f2012820a31bdceb78f9a56bdd110",
+  "runtimeLayoutUnchanged": true,
+  "units": "world",
+  "masterPlates": [
+    {
+      "id": "NORTH-CROWN",
+      "paintBounds": { "xMin": -96, "yMin": -864, "xMax": 3168, "yMax": 864 },
+      "composition": "high crown with three readable project terraces, broad central descent and unblocked north growth axis",
+      "landMasses": [
+        { "id": "NC-H3-CAP", "elevation": "H3", "shape": "polygon", "points": [[1024,-768],[2048,-768],[2048,-40],[1840,40],[1240,40],[1024,-40]], "role": "reserve crown plateau" },
+        { "id": "NC-H2-WEST", "elevation": "H2", "shape": "polygon", "points": [[320,120],[1180,80],[1280,260],[1180,730],[420,730],[180,520]], "role": "Sphere shoulder terrace" },
+        { "id": "NC-H2-CENTRE", "elevation": "H2", "shape": "polygon", "points": [[1220,40],[1980,40],[2050,420],[1870,700],[1330,700],[1150,420]], "role": "HoloScope core terrace" },
+        { "id": "NC-H2-EAST", "elevation": "H2", "shape": "polygon", "points": [[2020,80],[2760,120],[2890,520],[2660,730],[2020,730],[1920,260]], "role": "Prime Dot Art shoulder terrace" }
+      ],
+      "routes": [
+        { "id": "NC-NORTH-SPINE", "width": 160, "points": [[1600,-768],[1600,-420],[1600,80],[1600,420],[1600,768]], "purpose": "EC-N through reserve cap to G-NORTH" },
+        { "id": "NC-WEST-LINK", "width": 120, "points": [[1600,260],[1240,360],[980,600]], "purpose": "Sphere access without cutting the west terrace" },
+        { "id": "NC-EAST-LINK", "width": 120, "points": [[1600,260],[1960,360],[2220,600]], "purpose": "Prime Dot Art access without cutting the east terrace" }
+      ],
+      "gradeTransitions": [
+        { "id": "NC-H3-H2", "type": "shallow terrace edge", "path": [[1040,-40],[1240,40],[1840,40],[2040,-40]], "openings": ["x=1600 north spine"] },
+        { "id": "NC-H2-M1", "type": "broad stepped slope", "path": [[360,720],[1180,700],[1380,610],[1520,560],[1680,560],[1820,610],[2020,700],[2760,720]], "openings": ["G-NORTH x=1600 width=160"] }
+      ],
+      "mustRemainOpen": ["OBS-R1", "OBS-R2", "GF-OBS-W", "GF-OBS-E", "EC-N", "G-NORTH"]
+    },
+    {
+      "id": "MIDDLE-BELT",
+      "paintBounds": { "xMin": -1120, "yMin": 672, "xMax": 4192, "yMax": 1632 },
+      "composition": "single dry civic terrace with a very shallow Commons depression and uninterrupted east-west city street",
+      "landMasses": [
+        { "id": "MB-ARCHIVE", "elevation": "M1", "shape": "rect", "bounds": { "xMin": -1024, "yMin": 768, "xMax": 1400, "yMax": 1536 }, "role": "Archive terrace including reserve apron" },
+        { "id": "MB-COMMONS", "elevation": "M0", "shape": "rounded-rect", "bounds": { "xMin": 1360, "yMin": 980, "xMax": 1840, "yMax": 1500 }, "role": "quiet shared civic terrace, subtly lower than M1" },
+        { "id": "MB-WORKSHOP", "elevation": "M1", "shape": "rect", "bounds": { "xMin": 1800, "yMin": 768, "xMax": 4096, "yMax": 1536 }, "role": "Workshop terrace including reserve apron" }
+      ],
+      "routes": [
+        { "id": "MB-EW-SPINE", "width": 120, "points": [[-1024,1260],[0,1260],[1024,1260],[1440,1260],[1760,1260],[2048,1260],[3072,1260],[4096,1260]], "purpose": "EC-W to EC-E continuous city street" },
+        { "id": "MB-NORTH-ARRIVAL", "width": 160, "points": [[1600,768],[1600,980],[1600,1140]], "purpose": "G-NORTH arrival into Commons" },
+        { "id": "MB-SOUTH-THROAT", "width": 160, "points": [[1600,1380],[1600,1536]], "purpose": "G-SOUTH approach" },
+        { "id": "MB-ARCHIVE-WATER-DESCENT", "width": 120, "points": [[760,1380],[760,1536]], "purpose": "G-ARCHIVE-WATER descent" },
+        { "id": "MB-WORKSHOP-WATER-DESCENT", "width": 120, "points": [[2440,1380],[2440,1536]], "purpose": "G-WORKSHOP-WATER descent" }
+      ],
+      "gradeTransitions": [
+        { "id": "MB-M1-M0-W", "type": "low curb / shallow grade", "path": [[1360,1040],[1400,1260],[1360,1460]], "note": "must not read as a cliff or district gate" },
+        { "id": "MB-M0-M1-E", "type": "low curb / shallow grade", "path": [[1840,1040],[1800,1260],[1840,1460]], "note": "must not read as a cliff or district gate" }
+      ],
+      "mustRemainOpen": ["ARC-R1", "ARC-R2", "WRK-R1", "WRK-R2", "GF-ARC-N", "GF-ARC-S", "GF-WRK-N", "GF-WRK-S", "EC-W", "EC-E", "G-ARCHIVE", "G-WORKSHOP", "G-SOUTH", "G-ARCHIVE-WATER", "G-WORKSHOP-WATER"]
+    },
+    {
+      "id": "SOUTH-BELT",
+      "paintBounds": { "xMin": -96, "yMin": 1440, "xMax": 3168, "yMax": 3168 },
+      "composition": "low dry central peninsula with west/east waterfront wings, HoloCa bypass arms and one rejoined south continuation",
+      "landMasses": [
+        { "id": "SB-WEST-TERRACE", "elevation": "L1", "shape": "polygon", "points": [[0,1536],[1180,1536],[1200,1740],[1080,1900],[760,1940],[0,1980]], "role": "Aquarium / west promenade dry terrace" },
+        { "id": "SB-CENTRE-TERRACE", "elevation": "L1", "shape": "polygon", "points": [[1200,1536],[2000,1536],[2080,1960],[1940,2304],[1260,2304],[1120,1960]], "role": "HoloCa protected landform and bypass" },
+        { "id": "SB-EAST-TERRACE", "elevation": "L1", "shape": "polygon", "points": [[2000,1536],[3072,1536],[3072,1980],[2440,1940],[2120,1900],[2000,1740]], "role": "Word Generator / east promenade dry terrace" },
+        { "id": "SB-SOUTH-RESERVE", "elevation": "L0", "shape": "polygon", "points": [[1024,2304],[2048,2304],[2048,3072],[1024,3072]], "role": "Waterside reserve apron and EC-S corridor" }
+      ],
+      "waterZones": [
+        { "id": "SB-WATER-W", "shape": "polygon", "points": [[0,1980],[760,1940],[1120,1960],[1024,2304],[1024,3072],[0,3072]], "role": "west water body beginning south of the Aquarium terrace" },
+        { "id": "SB-WATER-E", "shape": "polygon", "points": [[2080,1960],[2440,1940],[3072,1980],[3072,3072],[2048,3072],[2048,2304]], "role": "east water body beginning south of the Word Generator terrace" }
+      ],
+      "routes": [
+        { "id": "SB-GSOUTH-IN", "width": 160, "points": [[1600,1536],[1600,1580]], "purpose": "short shared throat only" },
+        { "id": "SB-HOLOCA-W", "width": 120, "points": [[1600,1580],[1450,1680],[1400,1840],[1440,2050],[1600,2200]], "purpose": "west bypass arm around HoloCa" },
+        { "id": "SB-HOLOCA-E", "width": 120, "points": [[1600,1580],[1750,1680],[1800,1840],[1760,2050],[1600,2200]], "purpose": "east bypass arm around HoloCa" },
+        { "id": "SB-SOUTH-SPINE", "width": 160, "points": [[1600,2200],[1600,2304],[1600,2680],[1600,3072]], "purpose": "rejoined dry continuation to EC-S" },
+        { "id": "SB-WEST-ANCHOR", "width": 120, "points": [[760,1536],[760,1840],[1024,1840]], "purpose": "Archive-to-Waterside dry connection" },
+        { "id": "SB-EAST-ANCHOR", "width": 120, "points": [[2440,1536],[2440,1840],[2048,1840]], "purpose": "Workshop-to-Waterside dry connection" }
+      ],
+      "shorelineRules": [
+        "no water north of y=1850 except tiny decorative drainage",
+        "Aquarium and Word Generator project ground remains dry",
+        "HoloCa centre terrace remains fully dry",
+        "1:3 reserve apron remains dry between x=1024..2048",
+        "GF-WAT-W, GF-WAT-E and EC-S cannot be blocked by shoreline"
+      ],
+      "mustRemainOpen": ["WAT-R1", "WAT-R2", "GF-WAT-W", "GF-WAT-E", "EC-S", "G-SOUTH", "G-ARCHIVE-WATER", "G-WORKSHOP-WATER"]
+    }
+  ],
+  "blockoutAcceptance": [
+    "No project or reserve parcel is placed in water or on a hard cliff.",
+    "All six P0 gates land on traversable dry surfaces with their locked clear widths.",
+    "North Crown reads clearly higher than Middle Belt without walling off G-NORTH.",
+    "Middle Belt remains mostly level and Central Commons is only subtly lower and visually subordinate.",
+    "South Belt introduces water only after the middle-city seam and keeps a dry central HoloCa bypass/rejoin system.",
+    "All eight district Growth Frontiers and all four Expansion Corridors remain physically open.",
+    "Blockout contains no final architecture, detailed props or micro-detail; those belong to later art stages."
+  ]
+}

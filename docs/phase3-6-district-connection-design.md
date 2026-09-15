@@ -3,7 +3,7 @@
 Date: 2026-09-15
 Baseline main: `1ffb0d29e96d5acd3bd0e20875e8412ffb324b4e`
 Working branch: `phase3-6-district-connection-design`
-Status: design draft / no terrain production yet
+Status: **PASS / CLOSED** — connection design and wireframe validation complete; no final terrain production performed
 
 ## 1. Purpose
 
@@ -41,7 +41,7 @@ That gap passes through the centre of chunk `1:1` and lines up with Observatory 
 
 ## 3. Central Commons
 
-Chunk `1:1` is designated as the city-wide transition hub, provisionally named **Central Commons**.
+Chunk `1:1` hosts the city-wide transition hub, provisionally named **Central Commons**. The commons core occupies the neutral centre of the chunk; the chunk's west and east portions may still carry blend scenery into Archive Street and Workshop Alley.
 
 Central Commons is infrastructure, not a fifth district.
 
@@ -89,11 +89,11 @@ The following world-coordinate gates are reserved before terrain illustration be
 | Gate | Boundary | Centre | Clear width | Role |
 | --- | --- | ---: | ---: | --- |
 | `G-NORTH` | `y=768` | `x=1600` | 160 | Observatory descent into Central Commons |
-| `G-ARCHIVE` | `x=1440` | `y=1160` | 140 | Central Commons into Archive Street |
-| `G-WORKSHOP` | `x=1760` | `y=1160` | 140 | Central Commons into Workshop Alley |
+| `G-ARCHIVE` | `x=1440` | `y=1260` | 120 | Central Commons into Archive Street |
+| `G-WORKSHOP` | `x=1760` | `y=1260` | 120 | Central Commons into Workshop Alley |
 | `G-SOUTH` | `y=1536` | `x=1600` | 160 | Central Commons into Waterside Play |
-| `G-ARCHIVE-WATER` | `y=1536` | `x=860` | 120 | Archive Street descent into Waterside Play |
-| `G-WORKSHOP-WATER` | `y=1536` | `x=2340` | 120 | Workshop Alley descent into Waterside Play |
+| `G-ARCHIVE-WATER` | `y=1536` | `x=760` | 120 | Archive Street descent into Waterside Play |
+| `G-WORKSHOP-WATER` | `y=1536` | `x=2440` | 120 | Workshop Alley descent into Waterside Play |
 
 Gate centres may move by at most 24 world units during terrain composition if required by art, but both touching terrain assets must use the same final coordinate.
 
@@ -129,8 +129,8 @@ District terrain may span multiple chunks, so internal seams also need fixed lan
 
 | Anchor | Seam | Centre | Purpose |
 | --- | --- | ---: | --- |
-| `A-EW` | `x=1024` | `y=1180` | Archive Street main east-west street |
-| `W-EW` | `x=2048` | `y=1180` | Workshop Alley main east-west street |
+| `A-EW` | `x=1024` | `y=1260` | Archive Street main east-west street |
+| `W-EW` | `x=2048` | `y=1260` | Workshop Alley main east-west street |
 | `WS-WEST` | `x=1024` | `y=1840` | Waterside west promenade continuity |
 | `WS-EAST` | `x=2048` | `y=1840` | Waterside east promenade continuity |
 
@@ -180,14 +180,39 @@ The transition should be readable without labels but should never look like a th
 
 ## 10. Central Commons composition target
 
-Reserve the quietest area around approximately `x=1600`, `y=1160` for the civic hub.
+Reserve the quietest area around approximately `x=1600`, `y=1260` for the civic hub.
 
 The hub should widen the north-south path into a modest square, then release traffic west, east, and south.
 Suggested non-project focal element: one small fountain, compass-like paving medallion, or civic wayfinding sculpture.
 
 It must remain visually subordinate to project buildings.
 
-## 11. Future data representation
+## 11. Wireframe validation
+
+A desktop world-space overlay was tested against the current 14 project placements before any terrain art was produced.
+
+The first draft exposed two problems: the east-west corridor at `y=1160` ran too close to Actress Finder / DQB2, and the original southern feeder gates at `x=860 / 2340` were unnecessarily close to SHISHA / Maze Maker.
+
+The validated geometry therefore moves the Archive / Workshop main street to `y=1260`, uses a 120-world-unit clear lane, and moves the two side Waterside gates outward to `x=760 / 2440`.
+
+Validated route skeleton:
+
+- north spine: `(1600,650) -> (1600,1260)`
+- Archive main street: `(1600,1260) -> (1440,1260) -> (1024,1260) -> (760,1260)`
+- Workshop main street: `(1600,1260) -> (1760,1260) -> (2048,1260) -> (2440,1260)`
+- south spine: `(1600,1260) -> (1600,1536)`, then split around HoloCa
+- west split: `-> (1420,1650) -> (1240,1740) -> (1180,1840) -> (1024,1840)`
+- east split: `-> (1780,1650) -> (1960,1740) -> (2020,1840) -> (2048,1840)`
+- Archive feeder: `(760,1260) -> (760,1536) -> (900,1660) -> (1080,1740) -> (1180,1840) -> (1024,1840)`
+- Workshop feeder: mirror through `x=1600` to `(2048,1840)`
+
+Approximate minimum centreline clearance to an existing project anchor is 220 world units on the two main side streets, about 240 around HoloCa, and over 250 on the side Waterside feeders. With 250-260-unit building widths and 120-unit branch lanes, the wireframe preserves roughly 35 world units or more of edge-to-edge breathing room at the tightest point.
+
+The 1440 desktop overlay visually confirms that Central Commons fits inside the neutral gap and that no route requires moving an existing project. Existing 820 / 390 layouts retain zero horizontal overflow; the connector geometry remains a shared-world production contract rather than a separate mobile map.
+
+This wireframe is a planning aid only. It is not a runtime asset and is not shipped.
+
+## 12. Future data representation
 
 No runtime schema change is required during P0.
 
@@ -209,7 +234,7 @@ A future record should contain at least:
 
 The visual art remains authoritative for exact curves, but the registry prevents future chunks from forgetting where connections must meet.
 
-## 12. Production order after P0
+## 13. Production order after P0
 
 Once this design is approved, remaining production should proceed in this order:
 
@@ -223,7 +248,7 @@ Each district remains separately reviewable and deployable.
 
 Do not generate all remaining district art in one batch.
 
-## 13. P0 acceptance criteria
+## 14. P0 acceptance criteria
 
 Phase 3.6-P0 passes when:
 
@@ -237,8 +262,18 @@ Phase 3.6-P0 passes when:
 - the scheme works with the current `1024 x 768` chunk architecture
 - future project growth can extend roads from known connector lanes without repainting the whole city
 
-## 14. Stop condition
+## 15. P0 closure decision
 
-P0 ends with the connection design and, if needed, a non-final connector wireframe.
+Decision: **PASS / CLOSED** on 2026-09-15.
 
-Do not begin Archive Street final terrain or building production until a separate next-stage instruction is given.
+The wireframe-validated connector geometry is now the production contract for the next stage. All acceptance criteria above are satisfied without moving any of the existing 14 project placements.
+
+The next authorized stage is **Central Commons connector terrain design**. This is a new stage and must begin from the validated P0 geometry rather than re-deriving district connections ad hoc.
+
+No final Archive Street, Workshop Alley, or Waterside Play terrain or project-building art was produced during P0.
+
+## 16. Stop condition
+
+P0 ends here. Preserve the validated geometry until a later stage explicitly revises it.
+
+Do not begin Archive Street final terrain or building production before Central Commons connector terrain design establishes the shared transition surface.

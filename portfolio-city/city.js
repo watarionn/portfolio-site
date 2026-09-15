@@ -82,8 +82,16 @@ function validateData(projectPayload, districtPayload, layoutPayload) {
   if (layoutPayload?.schemaVersion !== 1 || !layoutPayload.world || !Array.isArray(layoutPayload.chunks) || !Array.isArray(layoutPayload.projectPlacements)) {
     throw new Error('map-layout.json の形式が不正です。');
   }
-  if (!Number.isFinite(layoutPayload.world.chunkWidth) || !Number.isFinite(layoutPayload.world.chunkHeight)) {
-    throw new Error('map-layout.json のチャンク寸法が不正です。');
+  if (![layoutPayload.world.chunkWidth, layoutPayload.world.chunkHeight, layoutPayload.world.width, layoutPayload.world.height].every(Number.isFinite)
+    || layoutPayload.world.chunkWidth <= 0 || layoutPayload.world.chunkHeight <= 0
+    || layoutPayload.world.width <= 0 || layoutPayload.world.height <= 0) {
+    throw new Error('map-layout.json のワールド寸法が不正です。');
+  }
+  if (layoutPayload.world.minX !== undefined && !Number.isFinite(layoutPayload.world.minX)) {
+    throw new Error('map-layout.json の minX が不正です。');
+  }
+  if (layoutPayload.world.minY !== undefined && !Number.isFinite(layoutPayload.world.minY)) {
+    throw new Error('map-layout.json の minY が不正です。');
   }
   const placementIds = new Set();
   for (const placement of layoutPayload.projectPlacements) {
@@ -94,6 +102,41 @@ function validateData(projectPayload, districtPayload, layoutPayload) {
   if (placementIds.size !== projectIds.size) throw new Error('全作品に世界座標の配置が必要です。');
   state.visited = new Set(Array.from(state.visited).filter((id) => projectIds.has(id)));
   saveVisited();
+}
+
+function resolveWorldBounds(world) {
+  const minX = Number.isFinite(world?.minX) ? world.minX : 0;
+  const minY = Number.isFinite(world?.minY) ? world.minY : 0;
+  const width = world?.width;
+  const height = world?.height;
+  return { minX, minY, width, height, maxX: minX + width, maxY: minY + height };
+}
+
+function worldPointToPercent(x, y, world) {
+  const bounds = resolveWorldBounds(world);
+  return {
+    x: (x - bounds.minX) / bounds.width * 100,
+    y: (y - bounds.minY) / bounds.height * 100
+  };
+}
+
+function worldRectToPercent(region, world) {
+  const point = worldPointToPercent(region.x, region.y, world);
+  return {
+    left: point.x,
+    top: point.y,
+    width: region.width / world.width * 100,
+    height: region.height / world.height * 100
+  };
+}
+
+function chunkRenderRegion(chunk, world) {
+  return chunk.renderRegion ?? {
+    x: chunk.column * world.chunkWidth,
+    y: chunk.row * world.chunkHeight,
+    width: world.chunkWidth,
+    height: world.chunkHeight
+  };
 }
 
 function projectsForDistrict(districtId) {
@@ -227,17 +270,13 @@ function buildWorldChunks() {
     if (chunk.image) {
       node.dataset.chunkImage = chunk.image;
       if (node.style) node.style.backgroundImage = `url("${chunk.image}")`;
-      const region = chunk.renderRegion ?? {
-        x: chunk.column * state.layout.world.chunkWidth,
-        y: chunk.row * state.layout.world.chunkHeight,
-        width: state.layout.world.chunkWidth,
-        height: state.layout.world.chunkHeight
-      };
+      const region = chunkRenderRegion(chunk, state.layout.world);
+      const percent = worldRectToPercent(region, state.layout.world);
       if (node.style) {
-        node.style.setProperty('--chunk-left', `${region.x / state.layout.world.width * 100}%`);
-        node.style.setProperty('--chunk-top', `${region.y / state.layout.world.height * 100}%`);
-        node.style.setProperty('--chunk-width', `${region.width / state.layout.world.width * 100}%`);
-        node.style.setProperty('--chunk-height', `${region.height / state.layout.world.height * 100}%`);
+        node.style.setProperty('--chunk-left', `${percent.left}%`);
+        node.style.setProperty('--chunk-top', `${percent.top}%`);
+        node.style.setProperty('--chunk-width', `${percent.width}%`);
+        node.style.setProperty('--chunk-height', `${percent.height}%`);
       }
     }
     layer.append(node);
@@ -249,9 +288,14 @@ function renderMap() {
   const map = document.getElementById('cityMap');
   if (!map) return;
   map.replaceChildren();
+  const worldBounds = resolveWorldBounds(state.layout.world);
   map.dataset.worldLayout = 'v1';
-  map.dataset.worldWidth = String(state.layout.world.width);
-  map.dataset.worldHeight = String(state.layout.world.height);
+  map.dataset.worldMinX = String(worldBounds.minX);
+  map.dataset.worldMinY = String(worldBounds.minY);
+  map.dataset.worldWidth = String(worldBounds.width);
+  map.dataset.worldHeight = String(worldBounds.height);
+  map.dataset.worldMaxX = String(worldBounds.maxX);
+  map.dataset.worldMaxY = String(worldBounds.maxY);
   map.append(buildWorldChunks(), buildMapInfrastructure());
 
   for (const district of [...state.districts].sort(byOrder)) {

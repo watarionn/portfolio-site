@@ -70,8 +70,10 @@ The parcel is scenery while empty. It must never appear as a blank construction 
 
 The Observatory reserve apron is the north cap `1:-1`.
 
-- `OBS-R1`: `(1280, -220)`
-- `OBS-R2`: `(1920, -220)`
+- `OBS-R1`: `(1320, -220)`
+- `OBS-R2`: `(1860, -220)`
+
+These positions keep both `340`-world-unit envelopes fully inside the reserve apron while preserving the separate north corridor around `x=1600`.
 
 Once both are occupied, Observatory Hill grows sideways instead of consuming the northward new-district route:
 
@@ -114,8 +116,10 @@ The city-scale east corridor remains at `y=1260`, continuing into `4:1`.
 
 Waterside receives south reserve apron `1:3`.
 
-- `WAT-R1`: `(1280, 2520)`
-- `WAT-R2`: `(1920, 2520)`
+- `WAT-R1`: `(1320, 2520)`
+- `WAT-R2`: `(1860, 2520)`
+
+These positions mirror the Observatory spacing and leave the future southward city corridor centered around `x=1600`.
 
 District growth spreads sideways:
 

@@ -22,6 +22,12 @@ class MockClassList {
   contains(name) { return this.values.has(name); }
 }
 
+class MockStyle {
+  constructor() { this.values = new Map(); this.backgroundImage = ''; }
+  setProperty(name, value) { this.values.set(name, String(value)); }
+  getPropertyValue(name) { return this.values.get(name) ?? ''; }
+}
+
 class MockElement {
   constructor(tagName = 'div', id = '') {
     this.tagName = tagName.toUpperCase();
@@ -39,6 +45,7 @@ class MockElement {
     this.type = '';
     this.focused = false;
     this.scrolled = false;
+    this.style = new MockStyle();
   }
   get className() { return Array.from(this.classList.values).join(' '); }
   set className(value) {
@@ -251,8 +258,18 @@ assert.equal(districts.length, 4, 'map must render four districts');
 assert.equal(buildings.length, 14, 'map must render fourteen buildings');
 assert.equal(documentMock.querySelectorAll('.world-chunk').length, 9, 'map must register nine world chunks');
 assert.equal(cityMap.dataset.worldLayout, 'v1');
+assert.equal(cityMap.dataset.worldMinX, '0');
+assert.equal(cityMap.dataset.worldMinY, '0');
 assert.equal(cityMap.dataset.worldWidth, '3200');
 assert.equal(cityMap.dataset.worldHeight, '2304');
+assert.equal(cityMap.dataset.worldMaxX, '3200');
+assert.equal(cityMap.dataset.worldMaxY, '2304');
+const currentIllustrated = documentMock.querySelectorAll('.world-chunk').find((chunk) => chunk.dataset.chunkId === '1:0');
+assert.ok(currentIllustrated, 'current illustrated Observatory chunk must render');
+assert.equal(currentIllustrated.style.getPropertyValue('--chunk-left'), '24%');
+assert.equal(currentIllustrated.style.getPropertyValue('--chunk-top'), `${80 / 2304 * 100}%`);
+assert.equal(currentIllustrated.style.getPropertyValue('--chunk-width'), '52%');
+assert.equal(currentIllustrated.style.getPropertyValue('--chunk-height'), `${650 / 2304 * 100}%`);
 assert.equal(buildings.filter((button) => button.dataset.worldAnchor === 'bottom-center').length, 14, 'every building must expose world placement data');
 assert.equal(documentMock.querySelectorAll('.building-visual').length, 14, 'every building must render a handcrafted visual');
 assert.equal(documentMock.querySelectorAll('.district-landmark').length, 4, 'every district must render one landmark');

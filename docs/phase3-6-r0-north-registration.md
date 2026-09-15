@@ -67,6 +67,15 @@ The style reference remains valuable for:
 
 It may **not** be used to infer geography.
 
+## Registration artifacts
+
+Google Drive folder `03_RoughMasterPlates` contains:
+
+- `phase3-6-r0_north-registration-pack_v1.zip`
+- Drive file id: `1Y60rz_ygEkESPIDIZGth4FNZVGmU6pva`
+
+The pack contains the H3 mask, H2 mask, project/reserve protection mask, authoritative North road layer and registration preview. These files are production controls, not final runtime assets.
+
 ## Current master-plate status
 
 - Middle Belt: **APPROVED** by user

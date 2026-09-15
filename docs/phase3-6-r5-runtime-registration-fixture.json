@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "status": "STAGED_REGISTRATION_FIXTURE_ASSET_COMMIT_PENDING",
+  "world": {
+    "chunkWidth": 1024,
+    "chunkHeight": 768,
+    "minX": -1024,
+    "minY": -768,
+    "width": 5120,
+    "height": 3840
+  },
+  "assetRoot": "portfolio-city/assets/illustrated/terrain",
+  "chunks": [
+    { "id": "1:-1", "column": 1, "row": -1, "image": "assets/illustrated/terrain/terrain_c1_r-1.webp", "width": 2048, "height": 1536, "bytes": 59784, "sha256": "aa8280767b3f70722a54420c6d553b065e268bf7df48d865e100aaece7eb5641" },
+    { "id": "0:0", "column": 0, "row": 0, "image": "assets/illustrated/terrain/terrain_c0_r0.webp", "width": 2048, "height": 1536, "bytes": 77682, "sha256": "44a8ca70c9a7bd8cc62c959e69f13061928dac760c80c7a25a13dcff2619909d" },
+    { "id": "1:0", "column": 1, "row": 0, "image": "assets/illustrated/terrain/terrain_c1_r0.webp", "width": 2048, "height": 1536, "bytes": 85630, "sha256": "e65415d2c4c3696a7bc247310cf0ff4ca4cab038887a0abe57f8826705ecca11" },
+    { "id": "2:0", "column": 2, "row": 0, "image": "assets/illustrated/terrain/terrain_c2_r0.webp", "width": 2048, "height": 1536, "bytes": 72694, "sha256": "8bd51ca75d23b4ee71ac922f1bb0a4170354cb57259a3e1f149abb3c71ae9275" },
+    { "id": "-1:1", "column": -1, "row": 1, "image": "assets/illustrated/terrain/terrain_c-1_r1.webp", "width": 2048, "height": 1536, "bytes": 292756, "sha256": "c529710531a1c66971d0ecba6539585505ea4d7aa37170b3b95263b2a351b77a" },
+    { "id": "0:1", "column": 0, "row": 1, "image": "assets/illustrated/terrain/terrain_c0_r1.webp", "width": 2048, "height": 1536, "bytes": 286170, "sha256": "391b3ec8eca002c9f92316d307e9369c0d4d172551a218204274fa905ffc43d7" },
+    { "id": "1:1", "column": 1, "row": 1, "image": "assets/illustrated/terrain/terrain_c1_r1.webp", "width": 2048, "height": 1536, "bytes": 287702, "sha256": "6a168fd0864213b481ec9928094d70b23ed685bb9cfa686906b19a03e3010559" },
+    { "id": "2:1", "column": 2, "row": 1, "image": "assets/illustrated/terrain/terrain_c2_r1.webp", "width": 2048, "height": 1536, "bytes": 287194, "sha256": "d9179b1c53d76fffa40184607e581b20029726ed9a91e423aed4cfbebfb3712f" },
+    { "id": "3:1", "column": 3, "row": 1, "image": "assets/illustrated/terrain/terrain_c3_r1.webp", "width": 2048, "height": 1536, "bytes": 297722, "sha256": "2c76f72e448b7319fc16a2516206eddad38ad0f9a4e58b43ddad9735c1d5828b" },
+    { "id": "0:2", "column": 0, "row": 2, "image": "assets/illustrated/terrain/terrain_c0_r2.webp", "width": 2048, "height": 1536, "bytes": 233942, "sha256": "1bf08ec5de88ad0960396cdf993dde1738080c64245d83bb9b2bc9013baa7e45" },
+    { "id": "1:2", "column": 1, "row": 2, "image": "assets/illustrated/terrain/terrain_c1_r2.webp", "width": 2048, "height": 1536, "bytes": 233344, "sha256": "1112d20d8e9cd7c74b194bc8034fe5a815c3c630cb8a37ad9b6add169d011896" },
+    { "id": "2:2", "column": 2, "row": 2, "image": "assets/illustrated/terrain/terrain_c2_r2.webp", "width": 2048, "height": 1536, "bytes": 272372, "sha256": "7ffa13345ce386a812eff6da37fcc283000987f814288cec65273f5bb41098d5" },
+    { "id": "1:3", "column": 1, "row": 3, "image": "assets/illustrated/terrain/terrain_c1_r3.webp", "width": 2048, "height": 1536, "bytes": 195994, "sha256": "72cb388ffa12587efaa009935a4f0dea94b49da02b18e3f78886b8d73ec3486d" }
+  ],
+  "cameraPresets": {
+    "desktop": { "zoom": 1.0, "startX": 1600, "startY": 640 },
+    "tablet": { "zoom": 0.72, "startX": 1600, "startY": 720 },
+    "mobile": { "zoom": 0.56, "startX": 1600, "startY": 620 }
+  },
+  "projectCoordinatePolicy": "UNCHANGED_FROM_CURRENT_MAP_LAYOUT",
+  "districtRegionPolicy": "UNCHANGED_FROM_CURRENT_MAP_LAYOUT",
+  "webpExport": {
+    "fileCount": 13,
+    "totalBytes": 2682986,
+    "totalMiB": 2.56,
+    "quality": 90,
+    "method": 6,
+    "maxMeanAbsRgbDiff": 1.346,
+    "minPsnrDb": 42.97
+  }
+}

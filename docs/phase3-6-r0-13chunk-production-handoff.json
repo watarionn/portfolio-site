@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "status": "R0_PRODUCTION_HANDOFF_APPROVED_MASTERS_NOT_RUNTIME",
+  "runtimeLayoutUnchanged": true,
+  "approvalDate": "2026-09-15",
+  "sourceContracts": [
+    "docs/phase3-6-r0-terrain-slicing-landform.json",
+    "docs/phase3-6-r0-master-plate-blockout.json",
+    "docs/phase3-6-r0-terrain-mask-contract.json",
+    "docs/phase3-6-r0-north-registration.json",
+    "docs/phase3-6-r0-south-road-registration.json",
+    "docs/phase3-6-r0-rough-illustrated-master-plates.md"
+  ],
+  "productionRules": {
+    "worldUnitsPerChunk": { "width": 1024, "height": 768 },
+    "workingPixelsPerWorldUnit": 2,
+    "runtimeTerrainAssetPixels": { "width": 2048, "height": 1536 },
+    "workingMasterFormat": "PNG or layered source outside Git",
+    "runtimeFormat": "WebP opaque where possible",
+    "crossMasterPaintOverlapWorldUnits": 96,
+    "crossMasterPaintOverlapPixels": 192,
+    "seamSafeBandWorldUnits": 80,
+    "noPerChunkRescaleAfterCrop": true,
+    "chunkBoundariesAreTechnicalOnly": true,
+    "runtimeAssetDirectory": "portfolio-city/assets/illustrated/terrain/chunks/",
+    "filenamePattern": "terrain_c{column}_r{row}.webp"
+  },
+  "approvedMasterPlates": [
+    {
+      "id": "NORTH-CROWN",
+      "approvedRough": { "file": "phase3-6-r0_north-crown_APPROVED.png", "driveId": "1TlAKQsh-NwJZfEnb_QfKGD7Tw2hZhOvu" },
+      "nominalWorldBounds": { "xMin": 0, "yMin": -768, "xMax": 3072, "yMax": 768 },
+      "paintWorldBounds": { "xMin": -96, "yMin": -864, "xMax": 3168, "yMax": 864 },
+      "workingCanvasPixels": { "width": 6528, "height": 3456 },
+      "nominalContentRectPx": { "x": 192, "y": 192, "width": 6144, "height": 3072 },
+      "chunks": ["1:-1", "0:0", "1:0", "2:0"]
+    },
+    {
+      "id": "MIDDLE-BELT",
+      "approvedRough": { "file": "phase3-6-r0_middle-belt_APPROVED.png", "driveId": "1eGZVy39zhO8NMd1CdmtAkJBdojyAzkGy" },
+      "nominalWorldBounds": { "xMin": -1024, "yMin": 768, "xMax": 4096, "yMax": 1536 },
+      "paintWorldBounds": { "xMin": -1120, "yMin": 672, "xMax": 4192, "yMax": 1632 },
+      "workingCanvasPixels": { "width": 10624, "height": 1920 },
+      "nominalContentRectPx": { "x": 192, "y": 192, "width": 10240, "height": 1536 },
+      "chunks": ["-1:1", "0:1", "1:1", "2:1", "3:1"]
+    },
+    {
+      "id": "SOUTH-BELT",
+      "approvedRough": { "file": "phase3-6-r0_south-belt_APPROVED.png", "driveId": "1I9uytZItj5WDwjpLzfiYnbV0O-EREsNN" },
+      "nominalWorldBounds": { "xMin": 0, "yMin": 1536, "xMax": 3072, "yMax": 3072 },
+      "paintWorldBounds": { "xMin": -96, "yMin": 1440, "xMax": 3168, "yMax": 3168 },
+      "workingCanvasPixels": { "width": 6528, "height": 3456 },
+      "nominalContentRectPx": { "x": 192, "y": 192, "width": 6144, "height": 3072 },
+      "chunks": ["0:2", "1:2", "2:2", "1:3"]
+    }
+  ],
+  "chunkExports": [
+    { "chunk": "1:-1", "column": 1, "row": -1, "master": "NORTH-CROWN", "worldRect": { "x": 1024, "y": -768, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 2240, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c1_r-1.webp", "renderRegion": { "x": 1024, "y": -768, "width": 1024, "height": 768 } },
+    { "chunk": "0:0", "column": 0, "row": 0, "master": "NORTH-CROWN", "worldRect": { "x": 0, "y": 0, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 192, "y": 1728, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c0_r0.webp", "renderRegion": { "x": 0, "y": 0, "width": 1024, "height": 768 } },
+    { "chunk": "1:0", "column": 1, "row": 0, "master": "NORTH-CROWN", "worldRect": { "x": 1024, "y": 0, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 2240, "y": 1728, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c1_r0.webp", "renderRegion": { "x": 1024, "y": 0, "width": 1024, "height": 768 } },
+    { "chunk": "2:0", "column": 2, "row": 0, "master": "NORTH-CROWN", "worldRect": { "x": 2048, "y": 0, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 4288, "y": 1728, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c2_r0.webp", "renderRegion": { "x": 2048, "y": 0, "width": 1024, "height": 768 } },
+    { "chunk": "-1:1", "column": -1, "row": 1, "master": "MIDDLE-BELT", "worldRect": { "x": -1024, "y": 768, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 192, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c-1_r1.webp", "renderRegion": { "x": -1024, "y": 768, "width": 1024, "height": 768 } },
+    { "chunk": "0:1", "column": 0, "row": 1, "master": "MIDDLE-BELT", "worldRect": { "x": 0, "y": 768, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 2240, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c0_r1.webp", "renderRegion": { "x": 0, "y": 768, "width": 1024, "height": 768 } },
+    { "chunk": "1:1", "column": 1, "row": 1, "master": "MIDDLE-BELT", "worldRect": { "x": 1024, "y": 768, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 4288, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c1_r1.webp", "renderRegion": { "x": 1024, "y": 768, "width": 1024, "height": 768 } },
+    { "chunk": "2:1", "column": 2, "row": 1, "master": "MIDDLE-BELT", "worldRect": { "x": 2048, "y": 768, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 6336, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c2_r1.webp", "renderRegion": { "x": 2048, "y": 768, "width": 1024, "height": 768 } },
+    { "chunk": "3:1", "column": 3, "row": 1, "master": "MIDDLE-BELT", "worldRect": { "x": 3072, "y": 768, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 8384, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c3_r1.webp", "renderRegion": { "x": 3072, "y": 768, "width": 1024, "height": 768 } },
+    { "chunk": "0:2", "column": 0, "row": 2, "master": "SOUTH-BELT", "worldRect": { "x": 0, "y": 1536, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 192, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c0_r2.webp", "renderRegion": { "x": 0, "y": 1536, "width": 1024, "height": 768 } },
+    { "chunk": "1:2", "column": 1, "row": 2, "master": "SOUTH-BELT", "worldRect": { "x": 1024, "y": 1536, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 2240, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c1_r2.webp", "renderRegion": { "x": 1024, "y": 1536, "width": 1024, "height": 768 } },
+    { "chunk": "2:2", "column": 2, "row": 2, "master": "SOUTH-BELT", "worldRect": { "x": 2048, "y": 1536, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 4288, "y": 192, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c2_r2.webp", "renderRegion": { "x": 2048, "y": 1536, "width": 1024, "height": 768 } },
+    { "chunk": "1:3", "column": 1, "row": 3, "master": "SOUTH-BELT", "worldRect": { "x": 1024, "y": 2304, "width": 1024, "height": 768 }, "workingMasterCropPx": { "x": 2240, "y": 1728, "width": 2048, "height": 1536 }, "runtimeAsset": "portfolio-city/assets/illustrated/terrain/chunks/terrain_c1_r3.webp", "renderRegion": { "x": 1024, "y": 2304, "width": 1024, "height": 768 } }
+  ],
+  "productionGate": [
+    "Paint or upscale each approved master into its working paintBounds at exactly 2 px per world unit.",
+    "Preserve the 96-world-unit paint overlap outside nominal bounds for seam continuity, but export only the exact chunk crop rectangles.",
+    "Do not independently redraw, resize, warp or color-grade a single chunk after cropping.",
+    "Verify all 14 seam contracts at 100% and at runtime scale before runtime registration.",
+    "Keep all current project/reserve/growth sockets readable and dry according to the source contracts.",
+    "Do not update map-layout.json until the 13 exported WebP assets pass seam and runtime-size QA.",
+    "When runtime registration begins, normalize percentage positioning against derived world min/max bounds because negative chunk coordinates exist."
+  ]
+}

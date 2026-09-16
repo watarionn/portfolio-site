@@ -1,0 +1,138 @@
+{
+  "phase": "3.6-R6",
+  "status": "FINAL_RUNTIME_ASSETS_VERIFIED",
+  "format": "WebP q90",
+  "chunkCount": 13,
+  "seamContracts": 14,
+  "seamResult": "14/14 PASS",
+  "totalBytes": 2247098,
+  "runtimeAssetRoot": "portfolio-city/assets/illustrated/terrain/",
+  "chunks": {
+    "1:-1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r-1.webp",
+      "bytes": 156208,
+      "sha256": "55e63f09cf6544b7f202818662106deebcb89cd1a2a4812379ad8fa701443fb7",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "0:0": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c0_r0.webp",
+      "bytes": 118254,
+      "sha256": "446096585f3643c482a33e9a086209203872f247b6e5326c5e1aa92de46f9dd8",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "1:0": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r0.webp",
+      "bytes": 119934,
+      "sha256": "19f6bd0accabdbae79f80fd98d872ef99aee4493b89f6d3b040418968cde364b",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "2:0": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c2_r0.webp",
+      "bytes": 118766,
+      "sha256": "860a85b3da7a50bbf1ee4ce587492a8ce5b1b30e30260bfd439e7608d67deff9",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "-1:1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c-1_r1.webp",
+      "bytes": 203924,
+      "sha256": "55224b881fb56afe6519e70a469005106b67c6a177fa0d86d19766234a9988a2",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "0:1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c0_r1.webp",
+      "bytes": 168964,
+      "sha256": "1228892fd4797ba84aa6518c10c2b7d9a7886ba788652f8c686b59043414e96c",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "1:1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r1.webp",
+      "bytes": 148464,
+      "sha256": "5f396e8e33e3a4928e5fb6e42ee4df20ad26d8db461f1c74c8eed5f04dd2b18a",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "2:1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c2_r1.webp",
+      "bytes": 172866,
+      "sha256": "45ac669bcd53725ab7bddbf0de024a57f5185c69d950259d260a31a1cb7cd9f2",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "3:1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c3_r1.webp",
+      "bytes": 201902,
+      "sha256": "9331e3f89ce4d7e89b2af6eeaa7af6a88ea74b4f23a910b1fc0c595d130b65ef",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "0:2": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c0_r2.webp",
+      "bytes": 215560,
+      "sha256": "aac4a0414c698e68a0642645f17e2a5dd8374cc9d95fbbbdbdeff431a98f51cb",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "1:2": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r2.webp",
+      "bytes": 182244,
+      "sha256": "631836ab12b3ddefef15a91cc75fd17eb98cc76922c6e58df68de4ce63775c88",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "2:2": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c2_r2.webp",
+      "bytes": 211636,
+      "sha256": "af7eda1b3994d42e7b2618992a78fab3a6ff1e1682ec8ee5d49102edf9d77949",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    "1:3": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r3.webp",
+      "bytes": 228376,
+      "sha256": "022e241cd78bb59e1a8736b17f087d234415c56d5c7276b2137a31463407a5b9",
+      "dimensions": [
+        2048,
+        1536
+      ]
+    }
+  },
+  "workingMasters": {
+    "northDriveId": "15jZe4j45vxJNj6UxS_XL4jl7aLioWu2Y",
+    "middleDriveId": "1Eta1rbIsUacIxgr5GOuV9ZsLrTNla7hH",
+    "southDriveId": "1eQ0TunZN1d7VphHwZ4DWhf_OgA0ATjuR"
+  },
+  "driveRuntimePackage": {
+    "id": "1Wa9CgDVzsAz9MoGpvvmpBM82cAjlZZd1",
+    "name": "PortfolioCity_R6_FINAL_RuntimePackage_v1.zip"
+  }
+}

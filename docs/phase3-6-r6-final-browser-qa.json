@@ -1,0 +1,83 @@
+{
+  "phase": "3.6-R6",
+  "status": "PASS",
+  "generatedAt": "2026-09-16T08:20:21.575Z",
+  "browser": "Google Chrome via Puppeteer",
+  "viewports": {
+    "mobile-390": {
+      "width": 390,
+      "height": 844,
+      "maxAnchorErrorPx": 0.024083,
+      "maxWidthErrorPx": 0.011744,
+      "horizontalOverflowPx": 0,
+      "terrainAssets": 13,
+      "allChecksPass": true,
+      "checks": {
+        "terrainModeFull": true,
+        "chunkCount13": true,
+        "projectCount14": true,
+        "districtCount4": true,
+        "noHorizontalOverflow": true,
+        "anchorErrorWithinPointOnePx": true,
+        "widthErrorWithinPointOnePx": true,
+        "allTerrainAssets200And2048x1536": true,
+        "noConsoleOrPageErrors": true
+      }
+    },
+    "tablet-820": {
+      "width": 820,
+      "height": 1000,
+      "maxAnchorErrorPx": 0.020731,
+      "maxWidthErrorPx": 0.011744,
+      "horizontalOverflowPx": 0,
+      "terrainAssets": 13,
+      "allChecksPass": true,
+      "checks": {
+        "terrainModeFull": true,
+        "chunkCount13": true,
+        "projectCount14": true,
+        "districtCount4": true,
+        "noHorizontalOverflow": true,
+        "anchorErrorWithinPointOnePx": true,
+        "widthErrorWithinPointOnePx": true,
+        "allTerrainAssets200And2048x1536": true,
+        "noConsoleOrPageErrors": true
+      }
+    },
+    "desktop-1440": {
+      "width": 1440,
+      "height": 900,
+      "maxAnchorErrorPx": 0.0019,
+      "maxWidthErrorPx": 5e-05,
+      "horizontalOverflowPx": 0,
+      "terrainAssets": 13,
+      "allChecksPass": true,
+      "checks": {
+        "terrainModeFull": true,
+        "chunkCount13": true,
+        "projectCount14": true,
+        "districtCount4": true,
+        "noHorizontalOverflow": true,
+        "anchorErrorWithinPointOnePx": true,
+        "widthErrorWithinPointOnePx": true,
+        "allTerrainAssets200And2048x1536": true,
+        "noConsoleOrPageErrors": true
+      }
+    }
+  },
+  "globalChecks": {
+    "terrainChunks": "13/13",
+    "projectPlacements": "14/14",
+    "districts": "4/4",
+    "horizontalOverflow": "0 at all viewports",
+    "consoleOrPageErrors": "0 application errors"
+  },
+  "notes": [
+    "Anchor/width checks use the authored layout box in .world-projects, excluding hover/selected CSS transforms.",
+    "A local favicon.ico 404 was ignored because it is outside Portfolio City application assets."
+  ],
+  "driveRuntimePackage": {
+    "id": "1Wa9CgDVzsAz9MoGpvvmpBM82cAjlZZd1",
+    "name": "PortfolioCity_R6_FINAL_RuntimePackage_v1.zip"
+  }
+}

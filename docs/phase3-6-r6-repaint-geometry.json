@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "R6_B_REPAINT_GEOMETRY_LOCKED",
+  "source": "docs/phase3-6-r0-master-plate-blockout.json",
+  "pixelDensity": 2,
+  "masters": {
+    "NORTH-CROWN": {"worldBounds": [0,-768,3072,768], "routePolicy": "R0 widths unchanged"},
+    "MIDDLE-BELT": {"worldBounds": [-1024,768,4096,1536], "routeOverrides": {"MB-EW-SPINE": 160}},
+    "SOUTH-BELT": {"worldBounds": [0,1536,3072,3072], "routePolicy": "R0 widths unchanged"}
+  },
+  "forecourt": {
+    "widthFormula": "project width + 120 world",
+    "heightFormula": "max(220, forecourt width * 0.72)",
+    "centerYFormula": "project y - project width * 0.60",
+    "purpose": "keep a readable local clearing around each project without moving its authored anchor"
+  },
+  "geometryRules": [
+    "route centerlines are immutable",
+    "HoloCa bypass remains split and rejoined",
+    "no new roundabout or ring road",
+    "all 14 project x/y/width values remain unchanged",
+    "terrain repaint may change texture and landform brush scale only"
+  ]
+}

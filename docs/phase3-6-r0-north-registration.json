@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "status": "R0_NORTH_REGISTRATION_NOT_RUNTIME",
+  "runtimeLayoutUnchanged": true,
+  "masterPlate": "NORTH-CROWN",
+  "worldBounds": { "xMin": 0, "yMin": -768, "xMax": 3072, "yMax": 768 },
+  "geometryAuthority": "docs/phase3-6-r0-master-plate-blockout.json",
+  "styleReference": {
+    "name": "north watercolor style reference",
+    "status": "STYLE_ONLY_NOT_GEOMETRY",
+    "note": "The watercolor candidate has the desired mood but does not preserve the fixed Sphere / HoloScope / Prime / reserve terrace geometry closely enough for approval."
+  },
+  "elevationMasks": [
+    {
+      "id": "H3",
+      "role": "reserve crown plateau",
+      "polygons": [[[1024,-768],[2048,-768],[2048,-40],[1840,40],[1240,40],[1024,-40]]]
+    },
+    {
+      "id": "H2",
+      "role": "west / centre / east project terraces",
+      "polygons": [
+        [[320,120],[1180,80],[1280,260],[1180,730],[420,730],[180,520]],
+        [[1220,40],[1980,40],[2050,420],[1870,700],[1330,700],[1150,420]],
+        [[2020,80],[2760,120],[2890,520],[2660,730],[2020,730],[1920,260]]
+      ]
+    }
+  ],
+  "protectedOpenAreas": [
+    { "id": "OBS-R1", "center": [1320,-220], "radiusX": 170, "radiusY": 95 },
+    { "id": "OBS-R2", "center": [1860,-220], "radiusX": 170, "radiusY": 95 },
+    { "id": "Sphere", "center": [980,600], "radiusX": 220, "radiusY": 110 },
+    { "id": "HoloScope", "center": [1600,360], "radiusX": 250, "radiusY": 125 },
+    { "id": "PrimeDotArt", "center": [2220,600], "radiusX": 220, "radiusY": 110 }
+  ],
+  "authoritativeRoutes": [
+    { "id": "NC-NORTH-SPINE", "width": 160, "points": [[1600,-768],[1600,-420],[1600,80],[1600,420],[1600,768]] },
+    { "id": "NC-WEST-LINK", "width": 120, "points": [[1600,260],[1240,360],[980,600]] },
+    { "id": "NC-EAST-LINK", "width": 120, "points": [[1600,260],[1960,360],[2220,600]] }
+  ],
+  "mustRemainOpen": ["OBS-R1","OBS-R2","GF-OBS-W","GF-OBS-E","EC-N","G-NORTH"],
+  "renderingRules": [
+    "North Crown remains the only clearly elevated master plate.",
+    "All five protected open areas remain dry, buildable and free of hard cliffs.",
+    "EC-N and G-NORTH remain physically open.",
+    "Water is optional and decorative only; it must not box in the district or occupy protected project/reserve ground.",
+    "No buildings, labels, UI or micro-detail are baked into rough terrain.",
+    "Style transfer may change texture, color and contour softness only; geometry comes from this registration contract."
+  ]
+}

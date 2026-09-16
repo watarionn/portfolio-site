@@ -1,0 +1,44 @@
+{
+  "phase": "3.6-R0",
+  "artifact": "south-road-registration",
+  "status": "final-review-candidate-geometry-pass",
+  "worldBounds": {"xMin": 0, "yMin": 1536, "xMax": 3072, "yMax": 3072},
+  "masterAspectRatio": "2:1",
+  "candidate": {
+    "driveFile": "phase3-6-r0_south-belt_FINAL-REVIEW-CANDIDATE_v5.png",
+    "driveFileId": "1RrJmfEbS31FFp2robOga56CF3lm3fZKW",
+    "approval": "awaiting-user-final-adoption"
+  },
+  "route": {
+    "northEntry": [[1600,1536],[1600,1560]],
+    "westBypassControl": [[1600,1560],[1480,1610],[1330,1710],[1240,1840],[1310,2010],[1450,2135],[1600,2200]],
+    "eastBypassControl": [[1600,1560],[1730,1600],[1870,1705],[1950,1840],[1880,2010],[1730,2140],[1600,2200]],
+    "southContinuation": [[1600,2200],[1600,2304],[1600,2680],[1600,3072]],
+    "archiveWaterLink": [[760,1536],[760,1700],[790,1810],[900,1840],[1024,1840]],
+    "workshopWaterLink": [[2440,1536],[2440,1700],[2410,1810],[2290,1840],[2048,1840]]
+  },
+  "visualHierarchy": {
+    "westBypass": "primary",
+    "eastBypass": "secondary-narrow",
+    "northEntry": "primary",
+    "southContinuation": "primary",
+    "sideLinks": "subordinate"
+  },
+  "holoCaProtectedRegion": {"center": [1600,1820], "radius": 175},
+  "qa": {
+    "reviewResolution": [1536,768],
+    "minimumCenterlineClearanceWorld": 241.81,
+    "requiredClearanceIncludingPrimaryHalfWidthWorld": 190.0,
+    "dryMaskCompliancePercent": 99.74,
+    "holoCaProtectedOverlapPixels": 0,
+    "result": "PASS"
+  },
+  "rules": [
+    "Road-neutral watercolor terrain remains separate from road geometry authority.",
+    "The west bypass is visually primary and the east bypass is intentionally quieter to prevent a hero-ring reading.",
+    "HoloCa protected region must remain road-free.",
+    "The route must rejoin at 1600,2200 and continue south as one spine.",
+    "Buildings, ships, towers, labels and UI remain forbidden in the rough terrain stage.",
+    "Runtime terrain remains unchanged until later explicit approval."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "phase": "3.6-R6",
+  "status": "R6-A_CALIBRATED_R6-B_READY",
+  "world": {"minX": -1024, "minY": -768, "width": 5120, "height": 3840, "chunks": 13},
+  "buildingScaleAuthority": {
+    "source": "portfolio-city/data/map-layout.json projectPlacements",
+    "primaryAnchor": {"projectId": "holoscope", "widthWorld": 270},
+    "rule": "render project width and bottom-center anchor in world space at every breakpoint"
+  },
+  "terrainScaleTargets": {
+    "primaryRoadWidthWorld": [150, 180],
+    "secondaryRoadWidthWorld": [105, 135],
+    "localPathWidthWorld": [70, 90],
+    "projectForecourtWidthWorld": [360, 460],
+    "vegetationMassDiameterWorld": [120, 240],
+    "minimumMeaningfulFeatureWorld": 35
+  },
+  "masterRepaint": ["NORTH-CROWN", "MIDDLE-BELT", "SOUTH-BELT"],
+  "mustNotChange": ["world bounds", "13 chunk topology", "project x/y", "project width", "district membership", "negative-origin renderer"],
+  "visualRule": "increase terrain feature scale, not world zoom; preserve centerlines and anchors"
+}

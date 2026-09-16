@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_koseki_bijou",
+  "slug": "koseki-bijou",
+  "displayName": "Koseki Bijou",
+  "nameJa": null,
+  "channelId": "UC9p_lqQ0FEDz327Vgf5JwqA",
+  "officialChannelUrl": "https://www.youtube.com/channel/UC9p_lqQ0FEDz327Vgf5JwqA",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0ulqecv2e1e",
+      "slug": "koseki-bijou-0ulqecv2e1e",
+      "videoId": "0uLQecv2e1E",
+      "title": "「このキャラは私のために作られた」　Bibooが『MONGIL: STAR DIVE』で“欲しい”を見つけるまで",
+      "summaryOneLine": "02:01:49ごろには財布や硬貨の音を冗談にして締めています。",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 7333,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0vo2t5w7f-k",
+      "slug": "koseki-bijou-0vo2t5w7f-k",
+      "videoId": "0vO2t5w7F-k",
+      "title": "「生きているだけで助け」　Adventが『EARTH DEFENSE FORCE 6』で作った役割",
+      "summaryOneLine": "01:54:01ごろ、危ない場面を支えたShioriへ「心配せずに済んだ」と感謝し、hard carryと表現しました。操作を教える人、前へ出る人、生き残る人。それぞれの動きが役割として認められたところに、Adventらしい防衛戦がありました。",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 8047,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 2,
+    "soloCount": 2,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 2
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/koseki-bijou/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UC9p_lqQ0FEDz327Vgf5JwqA",
+      "checkedAt": "2026-09-15T03:58:45Z"
+    }
+  ],
+  "createdAt": "2026-09-15T03:58:45Z",
+  "updatedAt": "2026-09-15T03:58:45Z"
+}

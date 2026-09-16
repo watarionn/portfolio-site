@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_cecilia_immergreen",
+  "slug": "cecilia-immergreen",
+  "displayName": "Cecilia Immergreen",
+  "nameJa": null,
+  "channelId": "UCvN5h1ShZtc7nly3pezRayg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCvN5h1ShZtc7nly3pezRayg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0zvti9cibve",
+      "slug": "cecilia-immergreen-0zvti9cibve",
+      "videoId": "0ZvTI9cibvE",
+      "title": "アイスを売って借金返済へ　CeciliaのholoGTA商売記",
+      "summaryOneLine": "この日のholoGTAでCeciliaを動かしていたのは、銃や犯罪だけではなく「アイスを売る」という一貫した目的でした。",
+      "streamType": "game",
+      "publishedAt": "2024-09-23T15:41:35Z",
+      "durationSeconds": 12636,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0ZvTI9cibvE/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-09",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0ylsq79mx1q",
+      "slug": "cecilia-immergreen-0ylsq79mx1q",
+      "videoId": "0ylsQ79Mx1Q",
+      "title": "消えた進行をOtomosと取り戻す　CeciliaのELDEN RING再走",
+      "summaryOneLine": "- **00:04:07** — 久しぶりの再開で、ほぼ初プレイの感覚だと話す\n- **00:09:28** — backseatを大きく解禁する\n- **00:09:46** — 現在level 104、以前はlevel 120だったと確認\n- **00:27:29** — summonsで失った区間を進める案を出す\n- **00:52:20** — dr",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11050,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_11oir30gazc",
+      "slug": "cecilia-immergreen-11oir30gazc",
+      "videoId": "11oiR30GAZc",
+      "title": "欠点があるから、毎年観たい　Ceciliaが『The Golden Compass』を愛する理由",
+      "summaryOneLine": "- **00:04:12** — 本作を「最高の映画」と紹介する\n- **00:05:13** — 普段は映画に入り込みにくいと語る\n- **00:07:28** — 機内での初視聴が自分を変えたと振り返る\n- **00:15:11** — 成功に必要な条件が揃っていたという視点を示す\n- **00:21:16** — 音楽の良さに反応する\n- **01:5",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 8187,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 3,
+    "soloCount": 3,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 2
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/cecilia-immergreen/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCvN5h1ShZtc7nly3pezRayg",
+      "checkedAt": "2026-09-13T04:51:44Z"
+    }
+  ],
+  "createdAt": "2026-09-13T04:51:44Z",
+  "updatedAt": "2026-09-13T04:51:44Z"
+}

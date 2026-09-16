@@ -276,6 +276,31 @@ function illustratedChunkForDistrict(districtId) {
   return state.layout?.chunks?.find((item) => item.districtId === districtId && item.image) ?? null;
 }
 
+function buildWorldEdgeFrame() {
+  const frame = make('div', 'world-edge-frame');
+  frame.setAttribute('aria-hidden', 'true');
+  for (const corner of ['nw', 'ne', 'sw', 'se']) {
+    frame.append(make('span', `world-edge-frame__mist world-edge-frame__mist--${corner}`));
+  }
+  const feathers = [
+    ['right', 38.5, 0, 3, 20], ['left', 58.5, 0, 3, 20],
+    ['down', 20, 18.5, 20, 3], ['down', 60, 18.5, 20, 3],
+    ['right', 18.5, 20, 3, 20], ['left', 78.5, 20, 3, 20],
+    ['right', 18.5, 60, 3, 20], ['left', 78.5, 60, 3, 20],
+    ['up', 20, 78.5, 20, 3], ['up', 60, 78.5, 20, 3],
+    ['right', 38.5, 80, 3, 20], ['left', 58.5, 80, 3, 20]
+  ];
+  for (const [direction, left, top, width, height] of feathers) {
+    const edge = make('span', `world-edge-frame__feather world-edge-frame__feather--${direction}`);
+    edge.style?.setProperty('--edge-left', `${left}%`);
+    edge.style?.setProperty('--edge-top', `${top}%`);
+    edge.style?.setProperty('--edge-width', `${width}%`);
+    edge.style?.setProperty('--edge-height', `${height}%`);
+    frame.append(edge);
+  }
+  return frame;
+}
+
 function buildWorldDetails() {
   const layer = make('div', 'world-details');
   layer.setAttribute('aria-hidden', 'true');
@@ -336,7 +361,9 @@ function renderMap() {
   map.dataset.terrainMode = fullTerrain ? 'full' : 'legacy';
   const worldProjects = fullTerrain ? make('div', 'world-projects') : null;
   const worldDetails = fullTerrain ? buildWorldDetails() : null;
+  const worldEdgeFrame = fullTerrain ? buildWorldEdgeFrame() : null;
   map.append(buildWorldChunks(), buildMapInfrastructure());
+  if (worldEdgeFrame) map.append(worldEdgeFrame);
   if (worldDetails) map.append(worldDetails);
   if (worldProjects) map.append(worldProjects);
 

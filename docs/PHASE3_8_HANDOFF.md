@@ -54,3 +54,11 @@ Do not merge or deploy without explicit user approval. Use `[skip ci]` for commi
 - Workshop Alley uses restrained earth/wood tones; Waterside Play uses cooler sage/waterside tones.
 - The treatment is intentionally low-opacity so it reads as grounding, not as a new colored platform.
 - 390 / 820 / 1440 browser QA remains PASS with 28 details, 14 projects, 13 terrain chunks, and zero horizontal overflow.
+
+## P4 / P4.1 storybook world-edge framing
+- Added a separate `world-edge-frame` layer between terrain and environmental details.
+- Four low-opacity paper-mist fields soften the outer blank corners without adding or moving terrain chunks.
+- P4.1 adds 12 narrow feather bands along the exposed edges of the cross-shaped 13-chunk topology.
+- The treatment is decorative only: chunk topology, bounds, roads, project placements, clearings, and water geometry remain authoritative and unchanged.
+- Browser QA at 390 / 820 / 1440 remains PASS; terrain remains readable and the ivory voids read more like intentional storybook margin than missing tiles.
+- Keep the edge treatment restrained. Do not increase opacity enough to wash out terrain artwork.

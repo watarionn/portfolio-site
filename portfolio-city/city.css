@@ -2560,3 +2560,67 @@ button { font: inherit; }
     opacity: .29;
   }
 }
+
+/* Phase 3.8-P4 — storybook world-edge mist */
+.city-map[data-terrain-mode="full"] .world-edge-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__mist {
+  position: absolute;
+  width: 44%;
+  height: 44%;
+  filter: blur(.34rem);
+  opacity: .88;
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__mist--nw {
+  left: -1%; top: -1%;
+  background: radial-gradient(ellipse at 100% 100%, transparent 0 48%, rgba(240,234,216,.16) 60%, rgba(240,234,216,.62) 76%, rgba(240,234,216,.94) 100%);
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__mist--ne {
+  right: -1%; top: -1%;
+  width: 43%;
+  background: radial-gradient(ellipse at 0 100%, transparent 0 47%, rgba(240,234,216,.15) 60%, rgba(240,234,216,.60) 77%, rgba(240,234,216,.94) 100%);
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__mist--sw {
+  left: -1%; bottom: -1%;
+  width: 43%; height: 43%;
+  background: radial-gradient(ellipse at 100% 0, transparent 0 48%, rgba(240,234,216,.14) 60%, rgba(240,234,216,.57) 77%, rgba(240,234,216,.92) 100%);
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__mist--se {
+  right: -1%; bottom: -1%;
+  width: 45%; height: 42%;
+  background: radial-gradient(ellipse at 0 0, transparent 0 49%, rgba(240,234,216,.14) 60%, rgba(240,234,216,.56) 77%, rgba(240,234,216,.92) 100%);
+}
+@media (max-width: 680px) {
+  .city-map[data-terrain-mode="full"] .world-edge-frame__mist {
+    filter: blur(.26rem);
+    opacity: .82;
+  }
+}
+
+/* Phase 3.8-P4.1 — exposed terrain edge feathering */
+.city-map[data-terrain-mode="full"] .world-edge-frame__feather {
+  position: absolute;
+  left: var(--edge-left);
+  top: var(--edge-top);
+  width: var(--edge-width);
+  height: var(--edge-height);
+  opacity: .82;
+  filter: blur(.20rem);
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__feather--right {
+  background: linear-gradient(90deg, rgba(240,234,216,.72) 0%, rgba(240,234,216,.30) 48%, transparent 100%);
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__feather--left {
+  background: linear-gradient(270deg, rgba(240,234,216,.72) 0%, rgba(240,234,216,.30) 48%, transparent 100%);
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__feather--down {
+  background: linear-gradient(180deg, rgba(240,234,216,.72) 0%, rgba(240,234,216,.30) 48%, transparent 100%);
+}
+.city-map[data-terrain-mode="full"] .world-edge-frame__feather--up {
+  background: linear-gradient(0deg, rgba(240,234,216,.72) 0%, rgba(240,234,216,.30) 48%, transparent 100%);
+}

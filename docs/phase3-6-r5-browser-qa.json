@@ -1,118 +1,30 @@
 {
   "status": "PASS",
-  "source": "R5 staged map-layout candidate + exact Pass 8 q90 WebP terrain",
+  "source": "actual R5 runtime tree with registered Pass 8 q90 WebP terrain",
+  "world": { "minX": -1024, "minY": -768, "width": 5120, "height": 3840 },
+  "commonChecks": {
+    "chunks13": true,
+    "projects14": true,
+    "terrainResources13": true,
+    "negativeColumnAtZero": true,
+    "negativeRowAtZero": true,
+    "eastEdgeAt100": true,
+    "southEdgeAt100": true,
+    "noDocumentHorizontalOverflow": true,
+    "fullTerrainVisible": true,
+    "legacyInfrastructureSuppressed": true,
+    "tabletLegacyCardsSuppressed": true,
+    "authoredProjectCoordinatesUnchanged": true
+  },
   "viewports": [
-    {
-      "width": 390,
-      "height": 844,
-      "center": {
-        "viewport": [390, 844],
-        "chunkCount": 13,
-        "projectCount": 14,
-        "imagesLoaded": 13,
-        "pageOverflowX": 0,
-        "stageOverflow": "hidden",
-        "negativeColLeft": 0,
-        "negativeRowTop": 0,
-        "eastEdgeRight": 100,
-        "southEdgeBottom": 100,
-        "allChunksWithinWorld": true,
-        "allProjectsWithinWorld": true,
-        "pan": { "x": 0, "y": 0, "maxX": 246.99999999999994, "maxY": 8.25, "zoom": 2.3 },
-        "stage": [382, 641],
-        "world": [874, 656]
-      },
-      "afterDragPan": { "x": -84.04000091552734, "y": 0, "maxX": 237.24999999999994, "maxY": 0, "zoom": 2.3 },
-      "checks": {
-        "chunks13": true,
-        "projects14": true,
-        "images13": true,
-        "noPageOverflow": true,
-        "negativeColAtZero": true,
-        "negativeRowAtZero": true,
-        "eastAt100": true,
-        "southAt100": true,
-        "chunksInsideWorld": true,
-        "projectsInsideWorld": true,
-        "dragChangedPan": true,
-        "dragClamped": true,
-        "noOverflowAfterDrag": true
-      }
-    },
-    {
-      "width": 820,
-      "height": 1000,
-      "center": {
-        "viewport": [820, 1000],
-        "chunkCount": 13,
-        "projectCount": 14,
-        "imagesLoaded": 13,
-        "pageOverflowX": 0,
-        "stageOverflow": "hidden",
-        "negativeColLeft": 0,
-        "negativeRowTop": 0,
-        "eastEdgeRight": 100,
-        "southEdgeBottom": 100,
-        "allChunksWithinWorld": true,
-        "allProjectsWithinWorld": true,
-        "pan": { "x": 0, "y": 0, "maxX": 240.60000000000002, "maxY": 157.20000000000005, "zoom": 1.6 },
-        "stage": [804, 650],
-        "world": [1283, 962]
-      },
-      "afterDragPan": { "x": -176.87998962402344, "y": -117, "maxX": 240.60000000000002, "maxY": 157.20000000000005, "zoom": 1.6 },
-      "checks": {
-        "chunks13": true,
-        "projects14": true,
-        "images13": true,
-        "noPageOverflow": true,
-        "negativeColAtZero": true,
-        "negativeRowAtZero": true,
-        "eastAt100": true,
-        "southAt100": true,
-        "chunksInsideWorld": true,
-        "projectsInsideWorld": true,
-        "dragChangedPan": true,
-        "dragClamped": true,
-        "noOverflowAfterDrag": true
-      }
-    },
-    {
-      "width": 1440,
-      "height": 1000,
-      "center": {
-        "viewport": [1440, 1000],
-        "chunkCount": 13,
-        "projectCount": 14,
-        "imagesLoaded": 13,
-        "pageOverflowX": 0,
-        "stageOverflow": "hidden",
-        "negativeColLeft": 0,
-        "negativeRowTop": 0,
-        "eastEdgeRight": 100,
-        "southEdgeBottom": 100,
-        "allChunksWithinWorld": true,
-        "allProjectsWithinWorld": true,
-        "pan": { "x": 0, "y": 0, "maxX": 147.25, "maxY": 193.1875, "zoom": 1.25 },
-        "stage": [1180, 720],
-        "world": [1473, 1104]
-      },
-      "afterDragPan": { "x": -147.25, "y": -129.60000610351562, "maxX": 147.25, "maxY": 193.1875, "zoom": 1.25 },
-      "checks": {
-        "chunks13": true,
-        "projects14": true,
-        "images13": true,
-        "noPageOverflow": true,
-        "negativeColAtZero": true,
-        "negativeRowAtZero": true,
-        "eastAt100": true,
-        "southAt100": true,
-        "chunksInsideWorld": true,
-        "projectsInsideWorld": true,
-        "dragChangedPan": true,
-        "dragClamped": true,
-        "noOverflowAfterDrag": true
-      }
-    }
+    { "size": [390, 844], "clientWidth": 467, "scrollWidth": 768, "initialScrollLeft": 160, "panMode": "native overflow" },
+    { "size": [820, 1000], "clientWidth": 725, "scrollWidth": 1024, "initialScrollLeft": 162, "panMode": "native overflow" },
+    { "size": [1440, 1000], "clientWidth": 1295, "scrollWidth": 1680, "initialScrollLeft": 214, "pan": { "tested": true, "after": 385, "max": 385, "clamped": true } }
   ],
+  "visualReview": {
+    "390": "PASS: centered city view; terrain and building illustrations visible; no legacy map overlay",
+    "820": "PASS: terrain dominant; legacy tablet cards removed; building illustrations remain independent",
+    "1440": "PASS: terrain dominant; compact desktop district UI retained; drag-to-explore works"
+  },
   "allPass": true
 }

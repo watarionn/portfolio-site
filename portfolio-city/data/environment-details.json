@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "details": [
+    {
+      "id": "north-wall-west",
+      "district": "observatory-hill",
+      "type": "stone-wall",
+      "x": 1220,
+      "y": 545,
+      "width": 240,
+      "height": 24,
+      "rotate": -13
+    },
+    {
+      "id": "north-wall-east",
+      "district": "observatory-hill",
+      "type": "stone-wall",
+      "x": 2050,
+      "y": 590,
+      "width": 155,
+      "height": 22,
+      "rotate": 9
+    },
+    {
+      "id": "north-hedge-west",
+      "district": "observatory-hill",
+      "type": "hedge",
+      "x": 1260,
+      "y": 415,
+      "width": 125,
+      "height": 56,
+      "rotate": -9
+    },
+    {
+      "id": "north-hedge-east",
+      "district": "observatory-hill",
+      "type": "hedge",
+      "x": 1925,
+      "y": 410,
+      "width": 145,
+      "height": 58,
+      "rotate": 7
+    },
+    {
+      "id": "north-flower-west",
+      "district": "observatory-hill",
+      "type": "star-marker",
+      "x": 1395,
+      "y": 620,
+      "width": 74,
+      "height": 74,
+      "rotate": -6
+    },
+    {
+      "id": "north-bench-east",
+      "district": "observatory-hill",
+      "type": "bench",
+      "x": 1940,
+      "y": 650,
+      "width": 88,
+      "height": 38,
+      "rotate": 7
+    },
+    {
+      "id": "north-lamp-west",
+      "district": "observatory-hill",
+      "type": "lamp",
+      "x": 1445,
+      "y": 455,
+      "width": 36,
+      "height": 72,
+      "rotate": 0
+    },
+    {
+      "id": "archive-wall-a",
+      "district": "archive-street",
+      "type": "stone-wall",
+      "x": 355,
+      "y": 1190,
+      "width": 225,
+      "height": 24,
+      "rotate": -4
+    },
+    {
+      "id": "archive-wall-b",
+      "district": "archive-street",
+      "type": "stone-wall",
+      "x": 1080,
+      "y": 1410,
+      "width": 155,
+      "height": 22,
+      "rotate": 6
+    },
+    {
+      "id": "archive-hedge-a",
+      "district": "archive-street",
+      "type": "hedge",
+      "x": 655,
+      "y": 930,
+      "width": 145,
+      "height": 58,
+      "rotate": 2
+    },
+    {
+      "id": "archive-hedge-b",
+      "district": "archive-street",
+      "type": "book-cart",
+      "x": 1230,
+      "y": 1285,
+      "width": 116,
+      "height": 72,
+      "rotate": -8
+    },
+    {
+      "id": "archive-flower-a",
+      "district": "archive-street",
+      "type": "flowerbed",
+      "x": 760,
+      "y": 1190,
+      "width": 132,
+      "height": 48,
+      "rotate": 3
+    },
+    {
+      "id": "archive-bench-a",
+      "district": "archive-street",
+      "type": "bench",
+      "x": 620,
+      "y": 1370,
+      "width": 92,
+      "height": 40,
+      "rotate": -2
+    },
+    {
+      "id": "archive-lamp-a",
+      "district": "archive-street",
+      "type": "lamp",
+      "x": 835,
+      "y": 1105,
+      "width": 36,
+      "height": 72,
+      "rotate": 0
+    },
+    {
+      "id": "workshop-wall-a",
+      "district": "workshop-alley",
+      "type": "stone-wall",
+      "x": 2165,
+      "y": 1215,
+      "width": 205,
+      "height": 24,
+      "rotate": 4
+    },
+    {
+      "id": "workshop-wall-b",
+      "district": "workshop-alley",
+      "type": "crate-stack",
+      "x": 2710,
+      "y": 1335,
+      "width": 100,
+      "height": 74,
+      "rotate": -5
+    },
+    {
+      "id": "workshop-hedge-a",
+      "district": "workshop-alley",
+      "type": "hedge",
+      "x": 1980,
+      "y": 930,
+      "width": 135,
+      "height": 56,
+      "rotate": -4
+    },
+    {
+      "id": "workshop-hedge-b",
+      "district": "workshop-alley",
+      "type": "hedge",
+      "x": 2560,
+      "y": 1245,
+      "width": 145,
+      "height": 58,
+      "rotate": 7
+    },
+    {
+      "id": "workshop-flower-a",
+      "district": "workshop-alley",
+      "type": "barrel",
+      "x": 2305,
+      "y": 1195,
+      "width": 58,
+      "height": 72,
+      "rotate": -3
+    },
+    {
+      "id": "workshop-bench-a",
+      "district": "workshop-alley",
+      "type": "bench",
+      "x": 2490,
+      "y": 1390,
+      "width": 92,
+      "height": 40,
+      "rotate": 4
+    },
+    {
+      "id": "workshop-lamp-a",
+      "district": "workshop-alley",
+      "type": "lamp",
+      "x": 2210,
+      "y": 1090,
+      "width": 36,
+      "height": 72,
+      "rotate": 0
+    },
+    {
+      "id": "water-bench-west",
+      "district": "waterside-play",
+      "type": "bench",
+      "x": 1020,
+      "y": 1960,
+      "width": 98,
+      "height": 42,
+      "rotate": 2
+    },
+    {
+      "id": "water-lamp-west",
+      "district": "waterside-play",
+      "type": "lamp",
+      "x": 1195,
+      "y": 1715,
+      "width": 38,
+      "height": 78,
+      "rotate": 0
+    },
+    {
+      "id": "water-lamp-east",
+      "district": "waterside-play",
+      "type": "lamp",
+      "x": 2040,
+      "y": 1685,
+      "width": 38,
+      "height": 78,
+      "rotate": 0
+    },
+    {
+      "id": "water-flower-west",
+      "district": "waterside-play",
+      "type": "reeds",
+      "x": 1320,
+      "y": 1840,
+      "width": 84,
+      "height": 92,
+      "rotate": -4
+    },
+    {
+      "id": "water-flower-east",
+      "district": "waterside-play",
+      "type": "bollard",
+      "x": 1940,
+      "y": 1825,
+      "width": 42,
+      "height": 66,
+      "rotate": 3
+    },
+    {
+      "id": "water-hedge-west",
+      "district": "waterside-play",
+      "type": "hedge",
+      "x": 1080,
+      "y": 1660,
+      "width": 145,
+      "height": 58,
+      "rotate": -5
+    },
+    {
+      "id": "water-wall-east",
+      "district": "waterside-play",
+      "type": "stone-wall",
+      "x": 2290,
+      "y": 1760,
+      "width": 175,
+      "height": 22,
+      "rotate": 8
+    }
+  ]
+}

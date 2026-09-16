@@ -31,3 +31,18 @@
 
 ## Release rule
 Do not merge or deploy without explicit user approval. Use `[skip ci]` for commits where applicable to avoid metered GitHub Actions work.
+
+## P2 district identity pass
+- North Crown / Observatory Hill: quiet observation-garden character with a restrained star marker.
+- Archive Street: old-town / scholarly atmosphere with a small book cart.
+- Workshop Alley: craft-street character with crate stack and barrel accents.
+- Waterside Play: promenade character with reeds and a small waterside bollard.
+- Density remains 28 details total, 7 per district; P2 replaces generic props rather than adding more clutter.
+- District signature props are covered by the Phase 3.8 checker so later edits cannot silently erase each district's identity.
+
+## P2 visual QA
+- 390 / 820 / 1440 browser QA: PASS.
+- 28/28 detail nodes rendered; 14/14 projects and 13/13 terrain chunks remain present.
+- horizontal overflow: 0; desktop drag remains functional.
+- Specialized props remain visually subordinate to buildings and terrain.
+- The rejected 36-item P1 draft remains rejected; do not restore the denser oval-hedge arrangement.

@@ -7,7 +7,7 @@ LAYOUT = ROOT / "portfolio-city" / "data" / "map-layout.json"
 JS = ROOT / "portfolio-city" / "city.js"
 CSS = ROOT / "portfolio-city" / "city.css"
 
-ALLOWED_TYPES = {"stone-wall", "hedge", "flowerbed", "lamp", "bench"}
+ALLOWED_TYPES = {"stone-wall", "hedge", "flowerbed", "lamp", "bench", "star-marker", "book-cart", "crate-stack", "barrel", "reeds", "bollard"}
 EXPECTED_DISTRICTS = {
     "observatory-hill",
     "archive-street",
@@ -55,6 +55,16 @@ for item in details:
         fail(f"non-positive size for {detail_id}")
 if set(district_counts.values()) != {7}:
     fail(f"expected 7 details per district, got {district_counts}")
+signatures = {
+    "observatory-hill": {"star-marker"},
+    "archive-street": {"book-cart"},
+    "workshop-alley": {"crate-stack", "barrel"},
+    "waterside-play": {"reeds", "bollard"},
+}
+for district, required in signatures.items():
+    actual = {item["type"] for item in details if item["district"] == district}
+    if not required.issubset(actual):
+        fail(f"missing district signature props for {district}: {required - actual}")
 
 js = JS.read_text(encoding="utf-8")
 css = CSS.read_text(encoding="utf-8")
@@ -72,6 +82,12 @@ for token in (
     ".world-detail--flowerbed",
     ".world-detail--lamp",
     ".world-detail--bench",
+    ".world-detail--star-marker",
+    ".world-detail--book-cart",
+    ".world-detail--crate-stack",
+    ".world-detail--barrel",
+    ".world-detail--reeds",
+    ".world-detail--bollard",
     "pointer-events: none",
 ):
     if token not in css:

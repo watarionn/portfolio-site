@@ -2417,3 +2417,83 @@ button { font: inherit; }
   .city-map[data-terrain-mode="full"] .world-detail { opacity: .62; }
   .city-map[data-terrain-mode="full"] .world-detail--lamp { opacity: .48; }
 }
+
+/* Phase 3.8-P2 — district identity props */
+.city-map[data-terrain-mode="full"] .world-detail--star-marker {
+  border-radius: 50%;
+  border: 1px solid rgba(115,98,64,.24);
+  background:
+    radial-gradient(circle at center, rgba(231,215,164,.72) 0 16%, transparent 17%),
+    conic-gradient(from 22.5deg, rgba(124,104,68,.34) 0 4%, transparent 4% 21%, rgba(124,104,68,.30) 21% 25%, transparent 25% 46%, rgba(124,104,68,.28) 46% 50%, transparent 50% 71%, rgba(124,104,68,.28) 71% 75%, transparent 75%),
+    radial-gradient(circle at center, rgba(194,177,126,.32), rgba(128,112,79,.18) 62%, transparent 64%);
+  opacity: .62;
+}
+.city-map[data-terrain-mode="full"] .world-detail--book-cart {
+  border-radius: 12% 12% 18% 18%;
+  background:
+    linear-gradient(180deg, rgba(120,83,57,.74) 0 18%, transparent 19%),
+    repeating-linear-gradient(180deg, rgba(221,201,161,.68) 0 12%, rgba(150,101,71,.54) 13% 24%);
+  box-shadow: inset 0 0 0 1px rgba(72,58,44,.18);
+  opacity: .64;
+}
+.city-map[data-terrain-mode="full"] .world-detail--book-cart::before,
+.city-map[data-terrain-mode="full"] .world-detail--book-cart::after {
+  content: "";
+  position: absolute;
+  bottom: -9%;
+  width: 22%; height: 30%;
+  border-radius: 50%;
+  background: rgba(72,64,52,.55);
+}
+.city-map[data-terrain-mode="full"] .world-detail--book-cart::before { left: 9%; }
+.city-map[data-terrain-mode="full"] .world-detail--book-cart::after { right: 9%; }
+.city-map[data-terrain-mode="full"] .world-detail--crate-stack {
+  border-radius: 9%;
+  background:
+    linear-gradient(90deg, transparent 0 47%, rgba(83,62,42,.23) 48% 52%, transparent 53%),
+    linear-gradient(180deg, transparent 0 47%, rgba(83,62,42,.23) 48% 52%, transparent 53%),
+    linear-gradient(135deg, transparent 0 45%, rgba(87,62,41,.20) 46% 50%, transparent 51%),
+    linear-gradient(45deg, transparent 0 45%, rgba(87,62,41,.18) 46% 50%, transparent 51%),
+    rgba(159,112,72,.58);
+  box-shadow: inset 0 0 0 1px rgba(80,58,42,.24), .08rem .10rem 0 rgba(89,65,44,.18);
+  opacity: .68;
+}
+.city-map[data-terrain-mode="full"] .world-detail--barrel {
+  border-radius: 45% 45% 42% 42%;
+  background:
+    linear-gradient(180deg, rgba(78,67,52,.55) 0 8%, transparent 9% 43%, rgba(78,67,52,.46) 44% 52%, transparent 53% 91%, rgba(78,67,52,.52) 92%),
+    linear-gradient(90deg, rgba(121,83,55,.66), rgba(174,124,74,.68) 45% 55%, rgba(110,77,53,.64));
+  box-shadow: inset 0 0 0 1px rgba(73,58,45,.20);
+  opacity: .70;
+}
+.city-map[data-terrain-mode="full"] .world-detail--reeds {
+  background:
+    linear-gradient(78deg, transparent 0 45%, rgba(81,105,68,.70) 46% 49%, transparent 50%),
+    linear-gradient(88deg, transparent 0 47%, rgba(99,122,76,.72) 48% 51%, transparent 52%),
+    linear-gradient(101deg, transparent 0 46%, rgba(75,101,65,.68) 47% 50%, transparent 51%);
+  opacity: .66;
+}
+.city-map[data-terrain-mode="full"] .world-detail--reeds::before,
+.city-map[data-terrain-mode="full"] .world-detail--reeds::after {
+  content: "";
+  position: absolute;
+  bottom: 8%;
+  width: 7%; height: 84%;
+  border-radius: 60% 60% 30% 30%;
+  background: rgba(91,112,69,.58);
+}
+.city-map[data-terrain-mode="full"] .world-detail--reeds::before { left: 25%; transform: rotate(-8deg); }
+.city-map[data-terrain-mode="full"] .world-detail--reeds::after { right: 22%; transform: rotate(9deg); }
+.city-map[data-terrain-mode="full"] .world-detail--bollard {
+  border-radius: 42% 42% 16% 16%;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(213,199,158,.72) 0 18%, rgba(83,76,63,.52) 20% 32%, transparent 34%),
+    linear-gradient(90deg, transparent 33%, rgba(76,70,59,.58) 34% 66%, transparent 67%);
+  opacity: .64;
+}
+.city-map[data-terrain-mode="full"] .world-detail--observatory-hill.world-detail--star-marker { mix-blend-mode: multiply; }
+.city-map[data-terrain-mode="full"] .world-detail--archive-street.world-detail--book-cart { filter: sepia(.16) saturate(.82) drop-shadow(0 .08rem .06rem rgba(53,45,31,.14)); }
+.city-map[data-terrain-mode="full"] .world-detail--workshop-alley.world-detail--crate-stack,
+.city-map[data-terrain-mode="full"] .world-detail--workshop-alley.world-detail--barrel { filter: sepia(.20) saturate(.88) drop-shadow(0 .08rem .06rem rgba(53,45,31,.16)); }
+.city-map[data-terrain-mode="full"] .world-detail--waterside-play.world-detail--reeds,
+.city-map[data-terrain-mode="full"] .world-detail--waterside-play.world-detail--bollard { filter: saturate(.80) hue-rotate(-7deg) drop-shadow(0 .06rem .05rem rgba(47,57,43,.12)); }

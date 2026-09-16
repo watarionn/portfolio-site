@@ -1,0 +1,170 @@
+{
+  "phase": "3.7",
+  "title": "Visual Polish Runtime Candidate",
+  "baseCommit": "57c4f20d5e3d716f375545982fea7b8cd78f1bf3",
+  "chunkCount": 13,
+  "chunks": {
+    "terrain_c-1_r1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c-1_r1.webp",
+      "bytes": 194524,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "e5d1f04723c679dc90c09e54d09fce039589427ff2406550b5a983c77a0b0be9"
+    },
+    "terrain_c0_r0": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c0_r0.webp",
+      "bytes": 129078,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "b02b99e0e6a0d43569b616e38c2b2ed7abff205530e70d02b7ce1ab13064e183"
+    },
+    "terrain_c0_r1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c0_r1.webp",
+      "bytes": 165222,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "e638a6e3594b4f93567f1ff2ebb09428e9bbc49091e192c939d8b09070948f5a"
+    },
+    "terrain_c0_r2": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c0_r2.webp",
+      "bytes": 187004,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "a38b3e13c503f5a0738bbade1320213b26aeca1aff9d9016e27cdc973d86f7dc"
+    },
+    "terrain_c1_r-1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r-1.webp",
+      "bytes": 172244,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "20464d9216f1a7a862296cb756626c5c3be03aa00e2d02d09c9b3b0b7c0061b5"
+    },
+    "terrain_c1_r0": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r0.webp",
+      "bytes": 130836,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "cdedbbc10ae33f4a615918cef364a2a9c4443629cc0a88c6115c8e4b3ae94989"
+    },
+    "terrain_c1_r1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r1.webp",
+      "bytes": 145050,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "777e76162c6dad3dfee0fb3a63381f35890f60b7ea7b6c634e68d76c247bb5d5"
+    },
+    "terrain_c1_r2": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r2.webp",
+      "bytes": 162784,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "6d22fec28acc183f05644ed6ddda3347f8bfc566dd13700d6a9d27d969749de2"
+    },
+    "terrain_c1_r3": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c1_r3.webp",
+      "bytes": 203766,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "eea0fe87335299fdaf7de7dd87e0d5e44aca39ff28c2d18018711b0c54a465e7"
+    },
+    "terrain_c2_r0": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c2_r0.webp",
+      "bytes": 128094,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "897ba1abc77c952035d79629743fc53014a4d28633613bb9090b74977d5a1f07"
+    },
+    "terrain_c2_r1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c2_r1.webp",
+      "bytes": 165550,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "040bb502c0369595578bd9d09ca3523f240fb4bd451e760da675602981fc0921"
+    },
+    "terrain_c2_r2": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c2_r2.webp",
+      "bytes": 183230,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "25ce4893f2fadaf8adf82812bf51f893b333a5f5030933a5c94f4ba8d8809ba0"
+    },
+    "terrain_c3_r1": {
+      "file": "portfolio-city/assets/illustrated/terrain/terrain_c3_r1.webp",
+      "bytes": 192964,
+      "width": 2048,
+      "height": 1536,
+      "sha256": "713fec9899f60edffa93ef804ec91266360f4521fab86a7104796b2c5c66b004"
+    }
+  },
+  "totalBytes": 2160346,
+  "qa": {
+    "reconstruction": {
+      "reconstructionBlend": 0.82,
+      "seamCount": 16,
+      "maxSeamMean": 19.044921875,
+      "maxSeamP95": 69.0,
+      "baselineMaxSeamMean": 32.552408854166664,
+      "baselineMaxSeamP95": 80.0,
+      "runtimeVsTargetMeanAbsDiffActive": 1.7557712864077795
+    },
+    "browser": [
+      {
+        "chunks": 13,
+        "clientWidth": 467,
+        "heading": "none",
+        "infra": "none",
+        "overflowX": 0,
+        "scrollLeft": 160,
+        "scrollWidth": 768,
+        "terrainMode": "full",
+        "terrainResources": 13,
+        "viewport": [
+          390,
+          844
+        ],
+        "pan": {
+          "tested": false
+        }
+      },
+      {
+        "chunks": 13,
+        "clientWidth": 725,
+        "heading": "none",
+        "infra": "none",
+        "overflowX": 0,
+        "scrollLeft": 162,
+        "scrollWidth": 1024,
+        "terrainMode": "full",
+        "terrainResources": 13,
+        "viewport": [
+          820,
+          1000
+        ],
+        "pan": {
+          "tested": false
+        }
+      },
+      {
+        "chunks": 13,
+        "clientWidth": 1295,
+        "heading": "flex",
+        "infra": "none",
+        "overflowX": 0,
+        "scrollLeft": 214,
+        "scrollWidth": 1680,
+        "terrainMode": "full",
+        "terrainResources": 13,
+        "viewport": [
+          1440,
+          1000
+        ],
+        "pan": {
+          "tested": true,
+          "before": 214,
+          "after": 385,
+          "max": 385
+        }
+      }
+    ]
+  }
+}

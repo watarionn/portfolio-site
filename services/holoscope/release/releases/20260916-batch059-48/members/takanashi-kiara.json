@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_takanashi_kiara",
+  "slug": "takanashi-kiara",
+  "displayName": "Takanashi Kiara",
+  "nameJa": "小鳥遊キアラ",
+  "channelId": "UCHsx4Hqa-1ORjQTh9TYDhww",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCHsx4Hqa-1ORjQTh9TYDhww",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_s15lgzzk_ek",
+      "slug": "takanashi-kiara-s15lgzzk-ek",
+      "videoId": "S15LgZZk_ek",
+      "title": "Kiaraが新宿で8つのミッションに挑戦　ガチャ、限定アイス、Exit 8探しを完遂",
+      "summaryOneLine": "Kiaraが新宿を歩き回り、ランダムに選んだ8つの課題をすべて達成して最後の告知へつなげる街歩きVlogです。",
+      "streamType": "event",
+      "publishedAt": "2024-09-13T19:00:00Z",
+      "durationSeconds": 1128,
+      "thumbnailUrl": "https://i.ytimg.com/vi/S15LgZZk_ek/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-09",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "Vlog",
+        "日本"
+      ]
+    },
+    {
+      "uid": "str_0msmz4rk4k4",
+      "slug": "takanashi-kiara-0msmz4rk4k4",
+      "videoId": "0msmZ4rK4k4",
+      "title": "秒差をそろえ、熱を言葉にする　KiaraとEssieが並走した決勝ウォッチアロング",
+      "summaryOneLine": "この配信の中心は、どちらの予想が正しかったかではありません。",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 13633,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 2,
+    "soloCount": 2,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 2
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/takanashi-kiara/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCHsx4Hqa-1ORjQTh9TYDhww",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

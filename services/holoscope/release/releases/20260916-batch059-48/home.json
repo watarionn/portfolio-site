@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0.0",
+  "latestStreams": [
+    {
+      "uid": "str_xqhkhs2hhxm",
+      "slug": "ninomae-inanis-xqhkhs2hhxm",
+      "videoId": "XQHKHS2hHxM",
+      "title": "Inaの休暇前雑談　Kingdom Hearts IVへの驚きから音楽、食事、Bibooとの外出まで",
+      "summaryOneLine": "Inaが最近気になったゲームと音楽、生活の工夫、Bibooとの外出を落ち着いたテンポで振り返る休暇前雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2026-06-10T23:00:00Z",
+      "durationSeconds": 3831,
+      "thumbnailUrl": "https://i.ytimg.com/vi/XQHKHS2hHxM/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ]
+    },
+    {
+      "uid": "str_0erntlrv7-c",
+      "slug": "gigi-murin-0erntlrv7-c",
+      "videoId": "0erNTlRV7-c",
+      "title": "「For Justice!」が組織になるまで　Gigiが選んだKnights of Justice",
+      "summaryOneLine": "この配信をGigi視点で追うと、Chapter 3の出来事そのものより、「自分たちは何のために戦うのか」を決めていく過程が一本の線になります。",
+      "streamType": "game",
+      "publishedAt": "2026-05-30T04:02:15Z",
+      "durationSeconds": 10034,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0erNTlRV7-c/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_gigi_murin",
+        "slug": "gigi-murin",
+        "displayName": "Gigi Murin"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_drcn--zuqsk",
+      "slug": "fuwamoco-drcn-zuqsk",
+      "videoId": "dRCn--zUQSk",
+      "title": "FUWAMOCOがEXPO直前の期待と緊張を共有　幕張メッセで楽しむための準備トーク",
+      "summaryOneLine": "EXPOを目前にしたFUWAMOCOが、注目する企画、現地準備、オンライン視聴、そして本番前の緊張を率直に語った雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2026-03-04T23:00:00Z",
+      "durationSeconds": 4926,
+      "thumbnailUrl": "https://i.ytimg.com/vi/dRCn--zUQSk/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-03",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "hololive SUPER EXPO 2026",
+        "雑談"
+      ]
+    },
+    {
+      "uid": "str_vomhneyv_m",
+      "slug": "nerissa-ravencroft-vomhneyv-m",
+      "videoId": "_vOMhneYv_M",
+      "title": "NerissaとInaがAmiAmiでクリスマスギフト探し　店内を巡って見つけた「相手らしい一品」",
+      "summaryOneLine": "AmiAmiの豊富な商品を見ながら、二人が相手や仲間を思い浮かべてクリスマスギフトを選ぶ買い物企画です。",
+      "streamType": "event",
+      "publishedAt": "2025-12-25T02:30:00Z",
+      "durationSeconds": 759,
+      "thumbnailUrl": "https://i.ytimg.com/vi/_vOMhneYv_M/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [
+        {
+          "uid": "mem_ninomae_inanis",
+          "slug": "ninomae-inanis",
+          "displayName": "Ninomae Ina'nis"
+        }
+      ],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "collab",
+      "month": "2025-12",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "PR",
+        "AmiAmi",
+        "クリスマス"
+      ]
+    },
+    {
+      "uid": "str_0y9adbfktdg",
+      "slug": "fuwamoco-0y9adbfktdg",
+      "videoId": "0Y9AdbfKtdg",
+      "title": "信じたいのに疑ってしまう　FUWAMOCOが走り続けたAmong Us推理戦",
+      "summaryOneLine": "FUWAMOCOのAmong Usは、鋭い推理だけでも、勢い任せの疑い合いだけでもありません。",
+      "streamType": "game",
+      "publishedAt": "2025-09-28T16:30:28Z",
+      "durationSeconds": 11780,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0Y9AdbfKtdg/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-09",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0f8dyb0el1c",
+      "slug": "gigi-murin-0f8dyb0el1c",
+      "videoId": "0f8dYb0eL1c",
+      "title": "弓だけでは終わらない　GigiがGrugとして6時間寄り道し続けたOblivion Remastered",
+      "summaryOneLine": "このOblivion配信は、特定のクエスト攻略を追うより、GigiがGrugとして世界へ反応し続ける様子を楽しむ回です。",
+      "streamType": "game",
+      "publishedAt": "2025-06-03T04:24:38Z",
+      "durationSeconds": 21214,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0f8dYb0eL1c/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_gigi_murin",
+        "slug": "gigi-murin",
+        "displayName": "Gigi Murin"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-06",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "beginnerStreams": [],
+  "generations": [],
+  "popularGames": [],
+  "recentEvents": [],
+  "activeSeries": [],
+  "latestArticles": [],
+  "counts": {
+    "streams": 48,
+    "members": 13,
+    "generations": 0,
+    "games": 0,
+    "events": 0,
+    "series": 0
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "dimension": "member",
+  "values": {
+    "cecilia-immergreen": [
+      12,
+      43,
+      46
+    ],
+    "elizabeth-rose-bloodflame": [
+      8,
+      10
+    ],
+    "fuwamoco": [
+      2,
+      4,
+      7,
+      9,
+      14,
+      16,
+      17,
+      18,
+      20,
+      30,
+      32,
+      34,
+      36,
+      40,
+      44,
+      47
+    ],
+    "gigi-murin": [
+      1,
+      5,
+      41
+    ],
+    "hakos-baelz": [
+      15,
+      22
+    ],
+    "irys": [
+      23
+    ],
+    "koseki-bijou": [
+      37,
+      39
+    ],
+    "mori-calliope": [
+      6,
+      25,
+      27,
+      29,
+      38,
+      45
+    ],
+    "nerissa-ravencroft": [
+      3,
+      26,
+      35
+    ],
+    "ninomae-inanis": [
+      0,
+      21,
+      24,
+      28,
+      31
+    ],
+    "raora-panthera": [
+      11,
+      42
+    ],
+    "shiori-novella": [
+      19
+    ],
+    "takanashi-kiara": [
+      13,
+      33
+    ]
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_mori_calliope",
+  "slug": "mori-calliope",
+  "displayName": "Mori Calliope",
+  "nameJa": "森カリオペ",
+  "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCL_qhgtOy0dy1Agp8vkySQg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0eghejywaey",
+      "slug": "mori-calliope-0eghejywaey",
+      "videoId": "0eghejYwaeY",
+      "title": "100万再生祝いはゲームから音楽の夢へ　Calliope×syudouの対談配信",
+      "summaryOneLine": "ゲームを遊びながら100万再生を祝うだけでなく、音楽家同士が次の目標を言葉にしていく配信でした。",
+      "streamType": "event",
+      "publishedAt": "2025-05-23T11:19:20Z",
+      "durationSeconds": 4467,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0eghejYwaeY/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0fqfi9ntle4",
+      "slug": "mori-calliope-0fqfi9ntle4",
+      "videoId": "0fQfi9ntlE4",
+      "title": "リズムゲーム苦手から音楽に乗るまで　Calliopeがつかんだ遊び方",
+      "summaryOneLine": "この配信で面白いのは、Calliopeが苦手意識を消してから遊ぶのではなく、苦手なまま音楽へ乗り、失敗を笑い、物語にも興味を広げていくところです。",
+      "streamType": "game",
+      "publishedAt": "2020-11-05T16:50:57Z",
+      "durationSeconds": 6031,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fQfi9ntlE4/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0kc1cmtaamq",
+      "slug": "mori-calliope-0kc1cmtaamq",
+      "videoId": "0kc1cmtAaMQ",
+      "title": "「自分がゲームにいる」を自分で演じる　CalliopeがGoddess Orderで作ったライブ吹替",
+      "summaryOneLine": "この配信では、Calliopeがゲーム内の自分を“見る側”に留まりませんでした。",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 10821,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0kzv6lvgx6y",
+      "slug": "mori-calliope-0kzv6lvgx6y",
+      "videoId": "0kzv6LvGX6Y",
+      "title": "Calliope先生の英語ゲーム教室　Myth5人が“同じ答え”を探してKiaraのEigo Jouzuまで走った夜",
+      "summaryOneLine": "最後に残ったEigo Jouzuトロフィーは、厳密な英語力テストの結果ではありません。",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 5517,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0uunytdmnjg",
+      "slug": "mori-calliope-0uunytdmnjg",
+      "videoId": "0uunytDmnJg",
+      "title": "怖がりながら効果音を拾う　Calliopeの『Mad Father』実況はホラーと音楽が交差する",
+      "summaryOneLine": "怖い場面を食事で乗り切り、謎を解き、物語へ辛口のコメントを入れ、その途中で効果音を創作素材として拾う。",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 4791,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_11czzeujqtg",
+      "slug": "mori-calliope-11czzeujqtg",
+      "videoId": "11CzzeUJQTg",
+      "title": "動かないコントローラーから始まった狩り　CalliopeがMonster Hunter Riseで見つけた次の遊び方",
+      "summaryOneLine": "- **00:07:35** — Monster Hunter RiseのPCデモを初めて遊ぶと説明\n- **00:27:29** — Switch Axeを試す\n- **00:32:05** — 「やりながら覚える」と進める\n- **00:38:17** — 「このゲームが好き」と反応する\n- **00:46:04** — Monster Hunter W",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 9955,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 6,
+    "soloCount": 6,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 4
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 2
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/mori-calliope/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCL_qhgtOy0dy1Agp8vkySQg",
+      "checkedAt": "2026-09-14T10:05:59Z"
+    }
+  ],
+  "createdAt": "2026-09-14T10:05:59Z",
+  "updatedAt": "2026-09-14T10:05:59Z"
+}

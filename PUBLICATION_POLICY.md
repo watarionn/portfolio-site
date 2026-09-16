@@ -66,9 +66,9 @@ Reviewed immutable release data is versioned separately under `services/holoscop
 
 ## SHISHA reviewed public viewer
 
-The SHISHA public viewer remains an exact nine-file reviewed slice. Stage 9 re-reviewed the presentation while preserving the existing API and runtime boundaries; the approved public tree is now `62add059e6cb627259760668c9cf18831afc9543`. The original public boundary was established by private allowlist merge revision `2640a7a292aaf0eb8396ae4b2312624ed9cb9d7e` and private source-lock merge `2ad649697dd44e8f46092df83e62c530671ca741`.
+The SHISHA public surface is an exact thirteen-file reviewed slice. The original nine-file Stage 9 store-finder boundary remains intact in behavior, and four static Shisha Advisor public-auth/verification files are now intentionally included under `services/shisha/public/advisor/**`. The approved public tree is `e4a6f7e5086c674ba612463ec9dcfb2634f89440`. The original public boundary was established by private allowlist merge revision `2640a7a292aaf0eb8396ae4b2312624ed9cb9d7e` and private source-lock merge `2ad649697dd44e8f46092df83e62c530671ca741`.
 
-The Stage 9 revision changes only the public presentation in `index.php` and `assets/app.css`: it adds portfolio context, search-flow explanation, and clearer opening-hours verification guidance. The existing API routes, JavaScript search contract, server-only configuration dependency, and nine-file allowlist remain unchanged in scope. `tools/validate_public_repo.py` locks the newly reviewed tree and blob identities and verifies the required Stage 9 interface markers.
+The store finder keeps its existing API routes, JavaScript search contract, server-only configuration dependency, and runtime/data separation. Its `index.php` adds only a navigation link to `/SHISHA/advisor/`. The Advisor addition consists of `advisor/index.html`, `advisor/advisor.css`, `advisor/privacy.html`, and `advisor/terms.html`; these pages contain no credentials or mutable runtime data and are intended to provide a public Shisha Advisor homepage and policy pages on the existing site. `tools/validate_public_repo.py` locks the reviewed thirteen-file tree and every approved SHISHA blob identity.
 
 The viewer source intentionally omits private bootstrap shop data and mutable runtime state. The following material must not be committed here:
 

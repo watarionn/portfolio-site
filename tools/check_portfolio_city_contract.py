@@ -133,13 +133,20 @@ def main() -> int:
 
     world = layout_payload.get("world", {})
     if world.get("chunkWidth") != 1024 or world.get("chunkHeight") != 768:
-        fail("Phase 3.5 logical chunk size must remain 1024 x 768")
+        fail("logical chunk size must remain 1024 x 768")
+    if {k: world.get(k) for k in ("minX", "minY", "width", "height")} != {"minX": -1024, "minY": -768, "width": 5120, "height": 3840}:
+        fail("Phase 3.6 R5 world bounds must match the locked negative-origin world")
     chunks = layout_payload.get("chunks")
-    if not isinstance(chunks, list) or len(chunks) != 9:
-        fail("Checkpoint 1 must register the initial 3 x 3 world chunks")
+    expected_chunk_ids = {"1:-1", "0:0", "1:0", "2:0", "-1:1", "0:1", "1:1", "2:1", "3:1", "0:2", "1:2", "2:2", "1:3"}
+    if not isinstance(chunks, list) or len(chunks) != 13:
+        fail("Phase 3.6 R5 must register exactly 13 terrain chunks")
     chunk_ids = [item.get("id") for item in chunks if isinstance(item, dict)]
-    if len(chunk_ids) != len(set(chunk_ids)):
-        fail("map-layout chunk IDs must be unique")
+    if set(chunk_ids) != expected_chunk_ids or len(chunk_ids) != len(set(chunk_ids)):
+        fail("map-layout chunk IDs must match the locked 13-chunk topology")
+    for chunk in chunks:
+        image = chunk.get("image")
+        if not image or not (CITY / image).is_file():
+            fail(f"missing registered terrain asset for chunk {chunk.get('id')}: {image}")
     placements = layout_payload.get("projectPlacements")
     if not isinstance(placements, list) or len(placements) != 14:
         fail("map-layout must contain exactly one placement per current project")
@@ -190,7 +197,7 @@ def main() -> int:
     if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
         fail("validate-public workflow must run the Portfolio City runtime contract")
 
-    print("Portfolio City Phase 3.5 Checkpoint 1 contract passed: 14 works / 4 districts / 9 chunks / world layout / legacy visual fallback")
+    print("Portfolio City Phase 3.6 R5 contract passed: 14 works / 4 districts / 13 terrain chunks / negative-origin world")
     return 0
 
 

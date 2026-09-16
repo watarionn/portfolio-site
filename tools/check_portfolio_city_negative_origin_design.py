@@ -75,18 +75,18 @@ def main():
         assert close(x_pct, sample["xPercent"])
         assert close(y_pct, sample["yPercent"])
 
-    legacy_world = dict(layout["world"])
-    assert legacy_world.get("minX", 0) == 0
-    assert legacy_world.get("minY", 0) == 0
-    illustrated = next(item for item in layout["chunks"] if item.get("image"))
-    region = illustrated["renderRegion"]
+    current_world = layout["world"]
+    assert {key: current_world[key] for key in ("chunkWidth", "chunkHeight", "minX", "minY", "width", "height")} == {key: world[key] for key in ("chunkWidth", "chunkHeight", "minX", "minY", "width", "height")}
+
+    legacy_world = {"chunkWidth": 1024, "chunkHeight": 768, "width": 3200, "height": 2304}
+    region = {"x": 768, "y": 80, "width": 1664, "height": 650}
     old_left = region["x"] / legacy_world["width"] * 100
     old_top = region["y"] / legacy_world["height"] * 100
     normalized = rect_percent(region["x"], region["y"], region["width"], region["height"], legacy_world)
     assert close(old_left, normalized["left"])
     assert close(old_top, normalized["top"])
 
-    print("Negative-origin runtime design contract passed: 13 chunks / 14 projects / legacy zero-origin compatibility")
+    print("Negative-origin runtime design contract passed: current 13-chunk world / 14 projects / legacy zero-origin compatibility")
 
 
 if __name__ == "__main__":

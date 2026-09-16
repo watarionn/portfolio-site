@@ -256,20 +256,20 @@ const buildings = documentMock.querySelectorAll('.building-button');
 const workRows = documentMock.querySelectorAll('.work-row');
 assert.equal(districts.length, 4, 'map must render four districts');
 assert.equal(buildings.length, 14, 'map must render fourteen buildings');
-assert.equal(documentMock.querySelectorAll('.world-chunk').length, 9, 'map must register nine world chunks');
+assert.equal(documentMock.querySelectorAll('.world-chunk').length, 13, 'map must register thirteen world chunks');
 assert.equal(cityMap.dataset.worldLayout, 'v1');
-assert.equal(cityMap.dataset.worldMinX, '0');
-assert.equal(cityMap.dataset.worldMinY, '0');
-assert.equal(cityMap.dataset.worldWidth, '3200');
-assert.equal(cityMap.dataset.worldHeight, '2304');
-assert.equal(cityMap.dataset.worldMaxX, '3200');
-assert.equal(cityMap.dataset.worldMaxY, '2304');
+assert.equal(cityMap.dataset.worldMinX, '-1024');
+assert.equal(cityMap.dataset.worldMinY, '-768');
+assert.equal(cityMap.dataset.worldWidth, '5120');
+assert.equal(cityMap.dataset.worldHeight, '3840');
+assert.equal(cityMap.dataset.worldMaxX, '4096');
+assert.equal(cityMap.dataset.worldMaxY, '3072');
 const currentIllustrated = documentMock.querySelectorAll('.world-chunk').find((chunk) => chunk.dataset.chunkId === '1:0');
 assert.ok(currentIllustrated, 'current illustrated Observatory chunk must render');
-assert.equal(currentIllustrated.style.getPropertyValue('--chunk-left'), '24%');
-assert.equal(currentIllustrated.style.getPropertyValue('--chunk-top'), `${80 / 2304 * 100}%`);
-assert.equal(currentIllustrated.style.getPropertyValue('--chunk-width'), '52%');
-assert.equal(currentIllustrated.style.getPropertyValue('--chunk-height'), `${650 / 2304 * 100}%`);
+assert.equal(currentIllustrated.style.getPropertyValue('--chunk-left'), '40%');
+assert.equal(currentIllustrated.style.getPropertyValue('--chunk-top'), '20%');
+assert.equal(currentIllustrated.style.getPropertyValue('--chunk-width'), '20%');
+assert.equal(currentIllustrated.style.getPropertyValue('--chunk-height'), '20%');
 assert.equal(buildings.filter((button) => button.dataset.worldAnchor === 'bottom-center').length, 14, 'every building must expose world placement data');
 assert.equal(documentMock.querySelectorAll('.building-visual').length, 14, 'every building must render a handcrafted visual');
 assert.equal(documentMock.querySelectorAll('.district-landmark').length, 4, 'every district must render one landmark');
@@ -349,4 +349,4 @@ for (const project of projectsPayload.projects) {
   assert.equal(row.href, project.route, `route mismatch for ${project.id}`);
 }
 
-console.log('Portfolio City Phase 3.5 runtime contract passed: 9 chunks / 4 districts / 14 world placements / navigation / keyboard / visited state');
+console.log('Portfolio City Phase 3.6 R5 runtime contract passed: 13 chunks / 4 districts / 14 world placements / negative origin / navigation / keyboard / visited state');

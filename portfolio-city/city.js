@@ -298,7 +298,9 @@ function renderMap() {
   map.dataset.worldMaxY = String(worldBounds.maxY);
   const fullTerrain = (state.layout?.chunks?.length === 13) && state.layout.chunks.every((chunk) => Boolean(chunk.image));
   map.dataset.terrainMode = fullTerrain ? 'full' : 'legacy';
+  const worldProjects = fullTerrain ? make('div', 'world-projects') : null;
   map.append(buildWorldChunks(), buildMapInfrastructure());
+  if (worldProjects) map.append(worldProjects);
 
   for (const district of [...state.districts].sort(byOrder)) {
     const section = make('section', `district district--${district.mapArea}`);
@@ -351,8 +353,22 @@ function renderMap() {
         if (region) {
           const localX = (placement.x - region.x) / region.width * 100;
           const localY = (placement.y - region.y) / region.height * 100;
+          const localWidth = placement.width / region.width * 100;
+          const visualHeightWorld = placement.visualHeight ?? placement.width * 1.2;
+          const localHeight = visualHeightWorld / region.height * 100;
+          const worldPoint = worldPointToPercent(placement.x, placement.y, state.layout.world);
+          const worldWidth = placement.width / state.layout.world.width * 100;
+          const worldHeight = visualHeightWorld / state.layout.world.height * 100;
+          button.style?.setProperty('--project-world-left', `${worldPoint.x}%`);
+          button.style?.setProperty('--project-world-top', `${worldPoint.y}%`);
+          button.style?.setProperty('--project-world-width', `${worldWidth}%`);
+          button.style?.setProperty('--project-world-half-width', `${worldWidth / 2}%`);
+          button.style?.setProperty('--project-world-height', `${worldHeight}%`);
           button.style?.setProperty('--project-left', `${localX}%`);
           button.style?.setProperty('--project-top', `${localY}%`);
+          button.style?.setProperty('--project-width', `${localWidth}%`);
+          button.style?.setProperty('--project-half-width', `${localWidth / 2}%`);
+          button.style?.setProperty('--project-height', `${localHeight}%`);
         }
         if (placement.asset) {
           button.dataset.visualMode = 'illustrated';
@@ -372,7 +388,8 @@ function renderMap() {
       button.addEventListener('focus', () => selectProject(project.id, false, true));
       button.addEventListener('click', () => selectProject(project.id, true, true));
       button.addEventListener('keydown', handleBuildingKeydown);
-      buildings.append(button);
+      if (worldProjects) worldProjects.append(button);
+      else buildings.append(button);
     }
 
     section.append(buildDistrictScene(district), heading, buildDistrictLandmark(district), progress, meta, buildings);

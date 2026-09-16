@@ -2209,3 +2209,96 @@ button { font: inherit; }
     display: none !important;
   }
 }
+
+
+/* Phase 3.6-R6-A — authored world-scale building calibration */
+.city-map[data-terrain-mode="full"] .building-button {
+  left: calc(var(--project-left) - var(--project-half-width)) !important;
+  top: calc(var(--project-top) - var(--project-height)) !important;
+  right: auto !important;
+  width: var(--project-width) !important;
+  height: var(--project-height) !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+.city-map[data-terrain-mode="full"] .building-button .building-visual {
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+  background-position: center bottom !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.city-map[data-terrain-mode="full"] .building-button[data-visual-mode="illustrated"] .building-visual {
+  background-image: var(--building-art) !important;
+}
+.city-map[data-terrain-mode="full"] .building-button:not([data-visual-mode="illustrated"]) .building-visual {
+  background-image: var(--project-image) !important;
+}
+.city-map[data-terrain-mode="full"] .building-button .building-visual > * {
+  display: none !important;
+}
+.city-map[data-terrain-mode="full"] .building-button__name,
+.city-map[data-terrain-mode="full"] .building-button__title {
+  display: none !important;
+}
+.city-map[data-terrain-mode="full"] .building-button.is-visited::after {
+  top: auto;
+  bottom: .05rem;
+  right: -.25rem;
+}
+
+/* R6-A correction: full-terrain districts must stay in world-coordinate space at every breakpoint. */
+.city-map[data-terrain-mode="full"] .district {
+  position: absolute !important;
+}
+
+/* R6-A correction: explicit 4:3 map heights make vertical world percentages definite. */
+@media (min-width: 981px) {
+  .city-map[data-terrain-mode="full"] { height: 78.75rem; min-height: 78.75rem; aspect-ratio: auto; }
+}
+@media (min-width: 681px) and (max-width: 980px) {
+  .city-map[data-terrain-mode="full"] { height: 48rem; min-height: 48rem; aspect-ratio: auto; }
+}
+@media (max-width: 680px) {
+  .city-map[data-terrain-mode="full"] { height: 36rem; min-height: 36rem; aspect-ratio: auto; }
+}
+
+/* R6-A correction: full-terrain project anchors remain absolute at every breakpoint. */
+.city-map[data-terrain-mode="full"] .building-button { position: absolute !important; }
+
+/* R6-A world project layer: authored x/y/width are resolved against the same map space as terrain chunks. */
+.city-map[data-terrain-mode="full"] .world-projects {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+.city-map[data-terrain-mode="full"] .world-projects .building-button {
+  position: absolute !important;
+  left: calc(var(--project-world-left) - var(--project-world-half-width)) !important;
+  top: calc(var(--project-world-top) - var(--project-world-height)) !important;
+  width: var(--project-world-width) !important;
+  height: var(--project-world-height) !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  pointer-events: auto;
+}
+.city-map[data-terrain-mode="full"] .world-projects .building-visual {
+  position: absolute;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+  background-position: center bottom !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_gigi_murin",
+  "slug": "gigi-murin",
+  "displayName": "Gigi Murin",
+  "nameJa": null,
+  "channelId": "UCDHABijvPBnJm7F-KlNME3w",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCDHABijvPBnJm7F-KlNME3w",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0erntlrv7-c",
+      "slug": "gigi-murin-0erntlrv7-c",
+      "videoId": "0erNTlRV7-c",
+      "title": "「For Justice!」が組織になるまで　Gigiが選んだKnights of Justice",
+      "summaryOneLine": "この配信をGigi視点で追うと、Chapter 3の出来事そのものより、「自分たちは何のために戦うのか」を決めていく過程が一本の線になります。",
+      "streamType": "game",
+      "publishedAt": "2026-05-30T04:02:15Z",
+      "durationSeconds": 10034,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0erNTlRV7-c/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_gigi_murin",
+        "slug": "gigi-murin",
+        "displayName": "Gigi Murin"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0f8dyb0el1c",
+      "slug": "gigi-murin-0f8dyb0el1c",
+      "videoId": "0f8dYb0eL1c",
+      "title": "弓だけでは終わらない　GigiがGrugとして6時間寄り道し続けたOblivion Remastered",
+      "summaryOneLine": "このOblivion配信は、特定のクエスト攻略を追うより、GigiがGrugとして世界へ反応し続ける様子を楽しむ回です。",
+      "streamType": "game",
+      "publishedAt": "2025-06-03T04:24:38Z",
+      "durationSeconds": 21214,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0f8dYb0eL1c/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_gigi_murin",
+        "slug": "gigi-murin",
+        "displayName": "Gigi Murin"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-06",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0wu1lnq1jbq",
+      "slug": "gigi-murin-0wu1lnq1jbq",
+      "videoId": "0wu1lnq1JBQ",
+      "title": "時系列を解かずに物語へ乗る　Gigiの『13 Sentinels: Aegis Rim』と焼きそばパン",
+      "summaryOneLine": "05:07:23ごろ、Gigiは物語をfunnyでgoofyだと笑いつつ、mysteryはintriguingだと振り返ります。謎を早く正解へ変えるより、謎のまま反応し続ける。その読み方が、5時間超の配信を一本の冒険にしていました。",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 18553,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_gigi_murin",
+        "slug": "gigi-murin",
+        "displayName": "Gigi Murin"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 3,
+    "soloCount": 3,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 3
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/gigi-murin/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCDHABijvPBnJm7F-KlNME3w",
+      "checkedAt": "2026-09-13T04:51:44Z"
+    }
+  ],
+  "createdAt": "2026-09-13T04:51:44Z",
+  "updatedAt": "2026-09-13T04:51:44Z"
+}

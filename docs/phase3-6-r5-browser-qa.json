@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "source": "actual R5 runtime tree with registered Pass 8 q90 WebP terrain",
+  "world": { "minX": -1024, "minY": -768, "width": 5120, "height": 3840 },
+  "commonChecks": {
+    "chunks13": true,
+    "projects14": true,
+    "terrainResources13": true,
+    "negativeColumnAtZero": true,
+    "negativeRowAtZero": true,
+    "eastEdgeAt100": true,
+    "southEdgeAt100": true,
+    "noDocumentHorizontalOverflow": true,
+    "fullTerrainVisible": true,
+    "legacyInfrastructureSuppressed": true,
+    "tabletLegacyCardsSuppressed": true,
+    "authoredProjectCoordinatesUnchanged": true
+  },
+  "viewports": [
+    { "size": [390, 844], "clientWidth": 467, "scrollWidth": 768, "initialScrollLeft": 160, "panMode": "native overflow" },
+    { "size": [820, 1000], "clientWidth": 725, "scrollWidth": 1024, "initialScrollLeft": 162, "panMode": "native overflow" },
+    { "size": [1440, 1000], "clientWidth": 1295, "scrollWidth": 1680, "initialScrollLeft": 214, "pan": { "tested": true, "after": 385, "max": 385, "clamped": true } }
+  ],
+  "visualReview": {
+    "390": "PASS: centered city view; terrain and building illustrations visible; no legacy map overlay",
+    "820": "PASS: terrain dominant; legacy tablet cards removed; building illustrations remain independent",
+    "1440": "PASS: terrain dominant; compact desktop district UI retained; drag-to-explore works"
+  },
+  "allPass": true
+}

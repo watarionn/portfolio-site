@@ -296,6 +296,8 @@ function renderMap() {
   map.dataset.worldHeight = String(worldBounds.height);
   map.dataset.worldMaxX = String(worldBounds.maxX);
   map.dataset.worldMaxY = String(worldBounds.maxY);
+  const fullTerrain = (state.layout?.chunks?.length === 13) && state.layout.chunks.every((chunk) => Boolean(chunk.image));
+  map.dataset.terrainMode = fullTerrain ? 'full' : 'legacy';
   map.append(buildWorldChunks(), buildMapInfrastructure());
 
   for (const district of [...state.districts].sort(byOrder)) {
@@ -312,6 +314,11 @@ function renderMap() {
       section.dataset.worldY = String(region.y);
       section.dataset.worldWidth = String(region.width);
       section.dataset.worldHeight = String(region.height);
+      const districtPercent = worldRectToPercent(region, state.layout.world);
+      section.style?.setProperty('--district-left', `${districtPercent.left}%`);
+      section.style?.setProperty('--district-top', `${districtPercent.top}%`);
+      section.style?.setProperty('--district-width', `${districtPercent.width}%`);
+      section.style?.setProperty('--district-height', `${districtPercent.height}%`);
     }
     section.setAttribute('aria-labelledby', `district-${district.id}`);
 
@@ -341,6 +348,12 @@ function renderMap() {
         button.dataset.worldWidth = String(placement.width);
         button.dataset.worldAnchor = placement.anchor;
         button.dataset.worldZ = String(placement.z ?? Math.round(placement.y));
+        if (region) {
+          const localX = (placement.x - region.x) / region.width * 100;
+          const localY = (placement.y - region.y) / region.height * 100;
+          button.style?.setProperty('--project-left', `${localX}%`);
+          button.style?.setProperty('--project-top', `${localY}%`);
+        }
         if (placement.asset) {
           button.dataset.visualMode = 'illustrated';
           if (button.style) button.style.setProperty('--building-art', `url("${placement.asset}")`);
@@ -634,6 +647,7 @@ async function loadCity() {
     if (districtCount) districtCount.textContent = String(state.districts.length);
 
     renderMap();
+    window.requestAnimationFrame?.(() => window.requestAnimationFrame?.(positionMapViewport));
     renderWorksDirectory();
     refreshVisitedState();
     if (state.projects[0]) selectProject(state.projects[0].id, false);
@@ -644,17 +658,28 @@ async function loadCity() {
 }
 
 
+function positionMapViewport() {
+  const viewport = document.getElementById('cityMapViewport');
+  const map = document.getElementById('cityMap');
+  if (!viewport || !map) return;
+  const fullTerrain = map.dataset.terrainMode === 'full';
+  if (!fullTerrain && !window.matchMedia('(min-width: 981px)').matches) return;
+  const bounds = resolveWorldBounds(state.layout?.world || {});
+  const presets = state.layout?.cameraPresets || {};
+  const preset = window.matchMedia('(max-width: 680px)').matches ? presets.mobile
+    : window.matchMedia('(max-width: 980px)').matches ? presets.tablet : presets.desktop;
+  const startX = Number(preset?.startX ?? (bounds.minX + bounds.width / 2));
+  const ratioX = Math.min(1, Math.max(0, (startX - bounds.minX) / bounds.width));
+  viewport.scrollLeft = Math.max(0, Math.min(viewport.scrollWidth - viewport.clientWidth, ratioX * viewport.scrollWidth - viewport.clientWidth / 2));
+  viewport.scrollTop = 0;
+}
+
 function bindDesktopMapPan() {
   const viewport = document.getElementById('cityMapViewport');
   if (!viewport) return;
   const desktop = window.matchMedia('(min-width: 981px)');
   let drag = null;
   let moved = false;
-  const centerMap = () => {
-    if (!desktop.matches) return;
-    viewport.scrollLeft = Math.max(0, (viewport.scrollWidth - viewport.clientWidth) / 2);
-    viewport.scrollTop = 0;
-  };
   viewport.addEventListener('pointerdown', (event) => {
     if (!desktop.matches || event.button !== 0 || event.target.closest('button, a, .project-inspector')) return;
     drag = { id: event.pointerId, x: event.clientX, y: event.clientY, left: viewport.scrollLeft, top: viewport.scrollTop };
@@ -685,8 +710,8 @@ function bindDesktopMapPan() {
     event.stopPropagation();
     moved = false;
   }, true);
-  requestAnimationFrame(centerMap);
-  window.addEventListener('resize', centerMap);
+  window.requestAnimationFrame?.(positionMapViewport);
+  window.addEventListener('resize', positionMapViewport);
 }
 
 bindNavigation();

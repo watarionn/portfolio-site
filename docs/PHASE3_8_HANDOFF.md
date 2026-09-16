@@ -46,3 +46,11 @@ Do not merge or deploy without explicit user approval. Use `[skip ci]` for commi
 - horizontal overflow: 0; desktop drag remains functional.
 - Specialized props remain visually subordinate to buildings and terrain.
 - The rejected 36-item P1 draft remains rejected; do not restore the denser oval-hedge arrangement.
+
+## P3 building forecourt grounding
+- Added a non-interactive `building-forecourt` element behind each of the 14 project buildings.
+- Forecourts do not change project x/y/width or the authored clearings.
+- Observatory Hill uses muted moss/stone tones; Archive Street uses warmer old-stone tones.
+- Workshop Alley uses restrained earth/wood tones; Waterside Play uses cooler sage/waterside tones.
+- The treatment is intentionally low-opacity so it reads as grounding, not as a new colored platform.
+- 390 / 820 / 1440 browser QA remains PASS with 28 details, 14 projects, 13 terrain chunks, and zero horizontal overflow.

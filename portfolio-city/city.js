@@ -159,6 +159,12 @@ function districtForProject(project) {
   return state.districts.find((district) => district.id === project.district);
 }
 
+function buildBuildingForecourt(districtId) {
+  const visual = make('span', `building-forecourt building-forecourt--${districtId}`);
+  visual.setAttribute('aria-hidden', 'true');
+  return visual;
+}
+
 function buildBuildingVisual() {
   const visual = make('span', 'building-visual');
   visual.setAttribute('aria-hidden', 'true');
@@ -375,6 +381,7 @@ function renderMap() {
       const button = make('button', 'building-button');
       button.type = 'button';
       button.dataset.projectId = project.id;
+      button.dataset.districtId = district.id;
       const placement = placementForProject(project.id);
       if (placement) {
         button.dataset.worldX = String(placement.x);
@@ -411,6 +418,7 @@ function renderMap() {
       button.setAttribute('aria-label', `${button.dataset.baseLabel}、未訪問`);
       button.setAttribute('aria-pressed', 'false');
       button.append(
+        buildBuildingForecourt(district.id),
         buildBuildingVisual(),
         make('span', 'building-button__name', project.building),
         make('span', 'building-button__title', project.title)

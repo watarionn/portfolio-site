@@ -72,11 +72,13 @@ for token in (
     "environment-details.json",
     "function buildWorldDetails()",
     "worldDetails = fullTerrain ? buildWorldDetails() : null",
+    "function buildBuildingForecourt(districtId)",
 ):
     if token not in js:
         fail(f"missing JS integration token: {token}")
 for token in (
     ".world-details",
+    ".building-forecourt",
     ".world-detail--stone-wall",
     ".world-detail--hedge",
     ".world-detail--flowerbed",

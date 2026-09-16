@@ -3,7 +3,8 @@
 const DATA_PATHS = {
   projects: 'data/projects.json',
   districts: 'data/districts.json',
-  layout: 'data/map-layout.json'
+  layout: 'data/map-layout.json',
+  details: 'data/environment-details.json'
 };
 
 const VISITED_KEY = 'portfolio-city.visited.v1';
@@ -14,6 +15,7 @@ const state = {
   projects: [],
   districts: [],
   layout: null,
+  details: [],
   selectedProjectId: null,
   activePanel: 'map',
   mobilePrimary: 'map',
@@ -51,7 +53,7 @@ function byOrder(a, b) {
   return (a.order ?? 0) - (b.order ?? 0) || a.title?.localeCompare(b.title, 'ja') || 0;
 }
 
-function validateData(projectPayload, districtPayload, layoutPayload) {
+function validateData(projectPayload, districtPayload, layoutPayload, detailPayload) {
   if (projectPayload?.schemaVersion !== 1 || !Array.isArray(projectPayload.projects)) {
     throw new Error('projects.json の形式が不正です。');
   }
@@ -100,6 +102,16 @@ function validateData(projectPayload, districtPayload, layoutPayload) {
     placementIds.add(placement.projectId);
   }
   if (placementIds.size !== projectIds.size) throw new Error('全作品に世界座標の配置が必要です。');
+  if (detailPayload?.schemaVersion !== 1 || !Array.isArray(detailPayload.details)) {
+    throw new Error('environment-details.json の形式が不正です。');
+  }
+  const detailIds = new Set();
+  for (const detail of detailPayload.details) {
+    if (!detail.id || detailIds.has(detail.id)) throw new Error('環境ディテールIDが重複または欠落しています。');
+    if (!districtIds.has(detail.district)) throw new Error(`不明な環境ディテール地区: ${detail.district}`);
+    if (![detail.x, detail.y, detail.width, detail.height].every(Number.isFinite)) throw new Error(`環境ディテール座標が不正です: ${detail.id}`);
+    detailIds.add(detail.id);
+  }
   state.visited = new Set(Array.from(state.visited).filter((id) => projectIds.has(id)));
   saveVisited();
 }
@@ -258,6 +270,24 @@ function illustratedChunkForDistrict(districtId) {
   return state.layout?.chunks?.find((item) => item.districtId === districtId && item.image) ?? null;
 }
 
+function buildWorldDetails() {
+  const layer = make('div', 'world-details');
+  layer.setAttribute('aria-hidden', 'true');
+  for (const detail of state.details) {
+    const node = make('span', `world-detail world-detail--${detail.type} world-detail--${detail.district}`);
+    node.dataset.detailId = detail.id;
+    node.dataset.detailType = detail.type;
+    const point = worldPointToPercent(detail.x, detail.y, state.layout.world);
+    node.style?.setProperty('--detail-left', `${point.x}%`);
+    node.style?.setProperty('--detail-top', `${point.y}%`);
+    node.style?.setProperty('--detail-width', `${detail.width / state.layout.world.width * 100}%`);
+    node.style?.setProperty('--detail-height', `${detail.height / state.layout.world.height * 100}%`);
+    node.style?.setProperty('--detail-rotate', `${detail.rotate ?? 0}deg`);
+    layer.append(node);
+  }
+  return layer;
+}
+
 function buildWorldChunks() {
   const layer = make('div', 'world-chunks');
   layer.setAttribute('aria-hidden', 'true');
@@ -299,7 +329,9 @@ function renderMap() {
   const fullTerrain = (state.layout?.chunks?.length === 13) && state.layout.chunks.every((chunk) => Boolean(chunk.image));
   map.dataset.terrainMode = fullTerrain ? 'full' : 'legacy';
   const worldProjects = fullTerrain ? make('div', 'world-projects') : null;
+  const worldDetails = fullTerrain ? buildWorldDetails() : null;
   map.append(buildWorldChunks(), buildMapInfrastructure());
+  if (worldDetails) map.append(worldDetails);
   if (worldProjects) map.append(worldProjects);
 
   for (const district of [...state.districts].sort(byOrder)) {
@@ -636,19 +668,21 @@ function renderError(error) {
 
 async function loadCity() {
   try {
-    const [projectResponse, districtResponse, layoutResponse] = await Promise.all([
+    const [projectResponse, districtResponse, layoutResponse, detailResponse] = await Promise.all([
       fetch(DATA_PATHS.projects, { cache: 'no-store' }),
       fetch(DATA_PATHS.districts, { cache: 'no-store' }),
-      fetch(DATA_PATHS.layout, { cache: 'no-store' })
+      fetch(DATA_PATHS.layout, { cache: 'no-store' }),
+      fetch(DATA_PATHS.details, { cache: 'no-store' })
     ]);
-    if (!projectResponse.ok || !districtResponse.ok || !layoutResponse.ok) throw new Error('JSONファイルの取得に失敗しました。');
+    if (!projectResponse.ok || !districtResponse.ok || !layoutResponse.ok || !detailResponse.ok) throw new Error('JSONファイルの取得に失敗しました。');
 
-    const [projectPayload, districtPayload, layoutPayload] = await Promise.all([
+    const [projectPayload, districtPayload, layoutPayload, detailPayload] = await Promise.all([
       projectResponse.json(),
       districtResponse.json(),
-      layoutResponse.json()
+      layoutResponse.json(),
+      detailResponse.json()
     ]);
-    validateData(projectPayload, districtPayload, layoutPayload);
+    validateData(projectPayload, districtPayload, layoutPayload, detailPayload);
 
     state.projects = projectPayload.projects.slice().sort((a, b) => {
       const da = districtPayload.districts.find((district) => district.id === a.district)?.order ?? 0;
@@ -657,6 +691,7 @@ async function loadCity() {
     });
     state.districts = districtPayload.districts.slice().sort(byOrder);
     state.layout = layoutPayload;
+    state.details = detailPayload.details;
 
     const projectCount = document.getElementById('projectCount');
     if (projectCount) projectCount.textContent = String(state.projects.length);

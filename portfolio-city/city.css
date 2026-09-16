@@ -2302,3 +2302,118 @@ button { font: inherit; }
   background-repeat: no-repeat !important;
   background-size: contain !important;
 }
+
+
+/* Phase 3.8-P1 — storybook town environmental detail layer */
+.city-map[data-terrain-mode="full"] .world-details {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+.city-map[data-terrain-mode="full"] .world-detail {
+  position: absolute;
+  left: var(--detail-left);
+  top: var(--detail-top);
+  width: var(--detail-width);
+  height: var(--detail-height);
+  transform: translate(-50%, -50%) rotate(var(--detail-rotate));
+  transform-origin: center;
+  opacity: .74;
+  filter: drop-shadow(0 .08rem .06rem rgba(53,45,31,.16));
+}
+.city-map[data-terrain-mode="full"] .world-detail--stone-wall {
+  opacity: .54;
+  mix-blend-mode: multiply;
+  border: 1px solid rgba(83,73,57,.20);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 8% 48%, rgba(239,226,191,.55) 0 7%, transparent 8%),
+    radial-gradient(circle at 28% 54%, rgba(117,106,85,.36) 0 8%, transparent 9%),
+    radial-gradient(circle at 52% 42%, rgba(226,211,176,.48) 0 7%, transparent 8%),
+    radial-gradient(circle at 74% 58%, rgba(107,98,79,.30) 0 8%, transparent 9%),
+    radial-gradient(circle at 92% 44%, rgba(232,218,184,.48) 0 7%, transparent 8%),
+    linear-gradient(180deg, rgba(188,173,142,.74), rgba(139,126,102,.68));
+}
+
+.city-map[data-terrain-mode="full"] .world-detail--hedge {
+  border-radius: 54% 46% 58% 42%;
+  background:
+    radial-gradient(ellipse at 12% 55%, rgba(75,105,66,.92) 0 15%, transparent 16%),
+    radial-gradient(ellipse at 30% 38%, rgba(106,132,78,.88) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 52% 58%, rgba(69,96,59,.94) 0 19%, transparent 20%),
+    radial-gradient(ellipse at 72% 40%, rgba(113,137,82,.88) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 90% 56%, rgba(72,100,62,.90) 0 15%, transparent 16%);
+  filter: blur(.035rem) drop-shadow(0 .06rem .07rem rgba(42,53,31,.14));
+  mix-blend-mode: multiply;
+  opacity: .55;
+}
+.city-map[data-terrain-mode="full"] .world-detail--flowerbed {
+  opacity: .62;
+  mix-blend-mode: multiply;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 14% 44%, rgba(241,215,136,.90) 0 3%, transparent 4%),
+    radial-gradient(circle at 29% 62%, rgba(211,157,139,.76) 0 3%, transparent 4%),
+    radial-gradient(circle at 43% 34%, rgba(239,226,176,.92) 0 3%, transparent 4%),
+    radial-gradient(circle at 57% 65%, rgba(225,184,132,.82) 0 3%, transparent 4%),
+    radial-gradient(circle at 72% 36%, rgba(198,150,137,.70) 0 3%, transparent 4%),
+    radial-gradient(circle at 88% 58%, rgba(241,218,149,.86) 0 3%, transparent 4%),
+    linear-gradient(180deg, rgba(102,126,72,.82), rgba(67,98,62,.78));
+  box-shadow: inset 0 0 0 1px rgba(89,75,55,.14);
+}
+.city-map[data-terrain-mode="full"] .world-detail--lamp {
+  border-radius: 45% 45% 14% 14%;
+  background: linear-gradient(90deg, transparent 42%, rgba(73,68,56,.72) 43% 57%, transparent 58%);
+  opacity: .66;
+}
+.city-map[data-terrain-mode="full"] .world-detail--lamp::before {
+  content: "";
+  position: absolute;
+  left: 17%; right: 17%; top: 2%; height: 34%;
+  border: 1px solid rgba(73,62,48,.58);
+  border-radius: 42% 42% 36% 36%;
+  background: radial-gradient(circle at 50% 45%, rgba(246,224,158,.82), rgba(215,185,118,.48) 46%, rgba(71,65,53,.52) 49% 58%, transparent 60%);
+}
+.city-map[data-terrain-mode="full"] .world-detail--lamp::after {
+  content: "";
+  position: absolute;
+  left: 24%; right: 24%; bottom: 0; height: 8%;
+  border-radius: 50%;
+  background: rgba(76,69,56,.58);
+}
+
+.city-map[data-terrain-mode="full"] .world-detail--bench {
+  border-radius: 18%;
+  background:
+    linear-gradient(180deg, transparent 0 20%, rgba(128,92,62,.74) 21% 46%, transparent 47% 58%, rgba(114,82,57,.72) 59% 78%, transparent 79%),
+    linear-gradient(90deg, transparent 0 12%, rgba(74,68,57,.60) 13% 18%, transparent 19% 81%, rgba(74,68,57,.60) 82% 87%, transparent 88%);
+  opacity: .68;
+}
+.city-map[data-terrain-mode="full"] .world-detail--observatory-hill { opacity: .72; }
+.city-map[data-terrain-mode="full"] .world-detail--archive-street { filter: sepia(.08) drop-shadow(0 .08rem .06rem rgba(53,45,31,.15)); }
+.city-map[data-terrain-mode="full"] .world-detail--workshop-alley { filter: sepia(.12) saturate(.94) drop-shadow(0 .08rem .06rem rgba(53,45,31,.15)); }
+.city-map[data-terrain-mode="full"] .world-detail--waterside-play { filter: saturate(.88) hue-rotate(-5deg) drop-shadow(0 .08rem .06rem rgba(53,45,31,.14)); }
+
+/* Ground buildings into the painted forecourts without changing authored placement. */
+.city-map[data-terrain-mode="full"] .world-projects .building-button::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 1.5%;
+  width: 82%;
+  height: 15%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(64,53,36,.20) 0 24%, rgba(64,53,36,.11) 42%, transparent 72%);
+  filter: blur(.06rem);
+  pointer-events: none;
+  z-index: 0;
+}
+.city-map[data-terrain-mode="full"] .world-projects .building-visual { z-index: 1; }
+
+@media (max-width: 680px) {
+  .city-map[data-terrain-mode="full"] .world-detail { opacity: .62; }
+  .city-map[data-terrain-mode="full"] .world-detail--lamp { opacity: .48; }
+}

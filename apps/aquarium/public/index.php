@@ -47,7 +47,7 @@ $totalFish = count($fishRows);
     <div class="hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">AQUARIUM / FISH NAME ARCHIVE</p>
-        <h1><span class="title-en">AQUARIUM</span><span class="title-ja">魚の名前を、読む。</span></h1>
+        <h1><span class="title-en">AQUARIUM</span></h1>
         <p class="hero-lead">漢字で出会って、読みをめくる。魚名と読みを往復しながら探せる、小さな水中フィールドインデックスです。</p>
       </div>
 

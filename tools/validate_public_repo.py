@@ -48,7 +48,7 @@ EXPECTED_STAGE9_CHEATSHEET_TREE = "9af9ecef421fcbf7329a9a9c1e23d8a1bae30d9a"
 EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT = 9
 SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
-EXPECTED_STAGE6_SHISHA_TREE = "e4a6f7e5086c674ba612463ec9dcfb2634f89440"
+EXPECTED_STAGE6_SHISHA_TREE = "91979092aa1da3c980ac56fc3bbc95ec1f5bf3af"
 EXPECTED_STAGE6_SHISHA_FILE_COUNT = 13
 SECRET_ROOM_ROOT = "apps/secret-room/"
 SECRET_ROOM_PUBLIC_ROOT = "apps/secret-room/public/"
@@ -119,9 +119,9 @@ REQUIRED_STAGE4_HOLOCA_FILES = {
 EXPECTED_STAGE4_HOLOCA_BLOBS = {
     "services/holoca/public/card_search_api.php": "ac4194259e1bfdec98f25ba8a4c904fbd073cb2e",
     "services/holoca/public/holoca.css": "0020d0bf35b18ea9946f7c90ec7db4a0df604002",
-    "services/holoca/public/holoca.html": "67f68842b8f3b9915b8f387a7743132e94119b54",
+    "services/holoca/public/holoca.html": "9f84e1d6889192605066fde21c09eb8d9e5f85d2",
     "services/holoca/public/holoca.js": "0ca68949ebbea99ff676bf764f8d9a8e73c1a575",
-    "services/holoca/public/index.html": "67f68842b8f3b9915b8f387a7743132e94119b54",
+    "services/holoca/public/index.html": "9f84e1d6889192605066fde21c09eb8d9e5f85d2",
 }
 
 REQUIRED_STAGE6_SHISHA_FILES = {
@@ -148,7 +148,7 @@ EXPECTED_STAGE6_SHISHA_BLOBS = {
     "services/shisha/public/assets/app.css": "6b10095a157c302059c22244a1c22f2ab87091b2",
     "services/shisha/public/assets/app.js": "155c1fe2d3d79dae11a6c324ff9010ae587e32c0",
     "services/shisha/public/advisor/advisor.css": "9c5c03343110e75b22a648ea35d418d2161d2068",
-    "services/shisha/public/advisor/index.html": "71d51a9cc67342878e2bcb7b410de3364c1ed6ac",
+    "services/shisha/public/advisor/index.html": "6c9f0b5777751bda689fbcff80e31c93a4e62feb",
     "services/shisha/public/advisor/privacy.html": "fdfff1d200dcab72885442ee87d2afaba2e10500",
     "services/shisha/public/advisor/terms.html": "1362890a443662f7132e205c2b20ced9bf549524",
     "services/shisha/public/config.example.php": "a45bee891e8ea336b414ab415ddf27b22b4faef8",

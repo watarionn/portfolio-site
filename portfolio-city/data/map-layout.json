@@ -165,7 +165,8 @@
       "x": 430,
       "y": 1040,
       "width": 250,
-      "anchor": "bottom-center"
+      "anchor": "bottom-center",
+      "asset": "assets/illustrated/archive/yorei.webp"
     },
     {
       "projectId": "actress-finder",

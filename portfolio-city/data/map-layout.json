@@ -173,7 +173,8 @@
       "x": 1120,
       "y": 1040,
       "width": 250,
-      "anchor": "bottom-center"
+      "anchor": "bottom-center",
+      "asset": "assets/illustrated/archive/actress-finder.webp"
     },
     {
       "projectId": "cheatsheet",

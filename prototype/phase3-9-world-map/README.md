@@ -1,10 +1,12 @@
-# Phase 3.9 CP1 Skeleton Harness
+# Phase 3.9 Interaction Prototype
 
 Development-only interaction prototype for Portfolio City.
 
 ## Scope
 
-CP1 validates only the normalized H2 world plane and four current district hit regions.
+CP1 established the normalized H2 world plane and four current district hit regions.
+
+CP2 adds the first camera-interaction contract without entering District View.
 
 Included:
 - abstract mainland / water / highland / offshore shapes,
@@ -15,9 +17,14 @@ Included:
 - prototype debug overlay,
 - responsive first-pass framing.
 
+CP2 included:
+- constrained pointer / touch pan,
+- arrow-key pan when the map viewport is focused,
+- camera snapshot / restore / reset debug controls,
+- automatic camera snapshot when a district is selected,
+- responsive re-clamping after viewport resize.
+
 Not included yet:
-- map pan,
-- camera persistence,
 - District View,
 - project buildings,
 - Building Preview,

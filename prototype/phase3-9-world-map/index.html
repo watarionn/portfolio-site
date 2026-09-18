@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio City Phase 3.9 CP1</title>
+  <title>Portfolio City Phase 3.9 CP2</title>
   <link rel="stylesheet" href="./prototype.css">
 </head>
 <body>
   <main class="prototype-shell">
     <header class="prototype-header">
-      <p class="eyebrow">Phase 3.9 / CP1 Skeleton Harness</p>
+      <p class="eyebrow">Phase 3.9 / CP2 Camera Interaction</p>
       <h1>H2 Spatial Blueprint</h1>
       <p>地形と地区の位置関係だけを検証する隔離プロトタイプ。完成アートではありません。</p>
     </header>
-    <section class="viewport" aria-label="Portfolio City world map prototype">
+    <section class="viewport" tabindex="0" aria-label="Portfolio City world map prototype. Drag or use arrow keys to pan.">
       <div class="world" id="world">
         <div class="mass mainland" aria-hidden="true"></div>
         <div class="mass highland" aria-hidden="true"></div>
@@ -32,11 +32,18 @@
       </div>
     </section>
     <aside class="debug" aria-live="polite">
-      <strong>CP1 debug</strong>
+      <strong>CP2 debug</strong>
       <span>state: <b id="debug-state">P0 World Map</b></span>
       <span>canvas: 100 x 64</span>
       <span>selected: <b id="debug-selected">none</b></span>
+      <span>camera: <b id="debug-camera"></b></span>
+      <span>saved: <b id="debug-saved">none</b></span>
       <span>viewport: <b id="debug-viewport"></b></span>
+      <span class="debug-actions">
+        <button type="button" id="snapshot-camera">Snapshot</button>
+        <button type="button" id="restore-camera">Restore</button>
+        <button type="button" id="reset-camera">Reset</button>
+      </span>
     </aside>
   </main>
   <script src="./prototype.js"></script>

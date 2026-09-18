@@ -134,3 +134,34 @@ button { font: inherit; }
   .world { width: 240%; left: -70%; top: 4%; }
   .district { width: 13%; min-width: 76px; }
 }
+/* CP2 camera interaction */
+.viewport {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.viewport.is-dragging { cursor: grabbing; }
+.viewport:focus-visible {
+  outline: 4px solid currentColor;
+  outline-offset: 4px;
+}
+.world {
+  --camera-x: 0px;
+  --camera-y: 0px;
+  transform: translate3d(var(--camera-x), var(--camera-y), 0);
+  will-change: transform;
+}
+.debug-actions {
+  display: inline-flex;
+  gap: 6px;
+}
+.debug-actions button {
+  padding: 3px 7px;
+  border: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+}
+.debug-actions button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

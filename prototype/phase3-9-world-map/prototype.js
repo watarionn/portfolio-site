@@ -17,6 +17,12 @@ const buildingGrid = document.querySelector("#building-grid");
 const previousDistrictButton = document.querySelector("#previous-district");
 const nextDistrictButton = document.querySelector("#next-district");
 const returnWorldButton = document.querySelector("#return-world");
+const buildingPreview = document.querySelector("#building-preview");
+const previewTitle = document.querySelector("#preview-title");
+const previewId = document.querySelector("#preview-id");
+const previewRoute = document.querySelector("#preview-route");
+const closePreviewButton = document.querySelector("#close-preview");
+const openWorkButton = document.querySelector("#open-work");
 
 const DISTRICT_SEQUENCE = ["archive", "observatory", "workshop", "waterside"];
 const DISTRICT_DATA = {
@@ -37,6 +43,8 @@ const DISTRICT_DATA = {
 const camera = { x: 0, y: 0, zoom: 1 };
 let savedCamera = null;
 let activeDistrict = null;
+let activeProject = null;
+let previewReturnTarget = null;
 let drag = null;
 const PAN_STEP = 36;
 const EDGE_SLACK = 20;
@@ -66,13 +74,23 @@ function renderDistrictView(id) {
   const district = DISTRICT_DATA[id]; activeDistrict = id;
   districtName.textContent = district.name; districtRole.textContent = district.role;
   buildingGrid.replaceChildren(...district.projects.map(([projectId, title, route]) => {
-    const card = document.createElement("article"); card.className = "building-placeholder"; card.dataset.projectId = projectId;
+    const card = document.createElement("button"); card.type = "button"; card.className = "building-placeholder"; card.dataset.projectId = projectId; card.dataset.route = route;
     const marker = document.createElement("div"); marker.className = "building-placeholder__shape"; marker.setAttribute("aria-hidden", "true");
     const heading = document.createElement("h3"); heading.textContent = title;
     const meta = document.createElement("p"); meta.textContent = `${projectId} · ${route}`;
-    card.append(marker, heading, meta); return card;
+    card.append(marker, heading, meta); card.addEventListener("click", () => openBuildingPreview(projectId, title, route, card)); return card;
   }));
   stateOutput.textContent = `P1 District View / ${district.name}`; selectedOutput.textContent = id;
+}
+function openBuildingPreview(projectId, title, route, trigger) {
+  activeProject = { projectId, title, route }; previewReturnTarget = trigger;
+  previewTitle.textContent = title; previewId.textContent = `project: ${projectId}`; previewRoute.textContent = `canonical route: ${route}`;
+  buildingPreview.hidden = false; stateOutput.textContent = `P2 Building Preview / ${title}`; selectedOutput.textContent = projectId; previewTitle.focus();
+}
+function closeBuildingPreview() {
+  if (buildingPreview.hidden) return;
+  buildingPreview.hidden = true; stateOutput.textContent = `P1 District View / ${DISTRICT_DATA[activeDistrict].name}`; selectedOutput.textContent = activeDistrict;
+  const target = previewReturnTarget; previewReturnTarget = null; activeProject = null; if (target?.isConnected) target.focus();
 }
 function enterDistrict(id) { snapshotCamera(); renderDistrictView(id); worldPanel.hidden = true; districtPanel.hidden = false; returnWorldButton.focus(); }
 function moveDistrict(delta) {
@@ -98,6 +116,13 @@ viewport.addEventListener("keydown", (event) => {
   if (!delta) return; event.preventDefault(); camera.x += delta[0]; camera.y += delta[1]; renderCamera();
 });
 districts.forEach((district) => { district.setAttribute("aria-pressed", "false"); district.addEventListener("click", () => enterDistrict(district.dataset.district)); });
+buildingPreview.addEventListener("click", (event) => { if (event.target.matches("[data-preview-close]")) closeBuildingPreview(); });
+closePreviewButton.addEventListener("click", closeBuildingPreview);
+openWorkButton.addEventListener("click", () => {
+  if (!activeProject) return;
+  stateOutput.textContent = `P2 Building Preview / Open Work contract: ${activeProject.route}`;
+});
+document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !buildingPreview.hidden) { event.preventDefault(); closeBuildingPreview(); } });
 previousDistrictButton.addEventListener("click", () => moveDistrict(-1)); nextDistrictButton.addEventListener("click", () => moveDistrict(1)); returnWorldButton.addEventListener("click", returnToWorld);
 snapshotButton.addEventListener("click", snapshotCamera); restoreButton.addEventListener("click", restoreCamera); resetButton.addEventListener("click", resetCamera);
 window.addEventListener("resize", updateViewportDebug); updateViewportDebug();

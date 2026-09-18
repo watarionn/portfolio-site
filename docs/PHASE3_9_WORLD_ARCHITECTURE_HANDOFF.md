@@ -161,11 +161,24 @@ Implemented:
 - Building Preview remains deferred to CP4,
 - production runtime remains untouched.
 
-Commit: pending CP3 checkpoint commit.
+Commit: `dd54265`
+
+### CP4 COMPLETE - Building Preview
+
+Implemented:
+- all 14 project-building placeholders are interactive controls,
+- selecting a building opens P2 Building Preview,
+- preview carries canonical project id, title, and route,
+- Back to District, backdrop click, and Escape return to the same District View,
+- focus returns to the building that opened the preview,
+- Open Work is defined as an inert affordance that exposes the canonical route contract without navigating,
+- production runtime remains untouched.
+
+Commit: pending CP4 checkpoint commit.
 
 ## QA state at handoff
 
-Passed through CP3:
+Passed through CP4:
 
 - `node --check prototype/phase3-9-world-map/prototype.js`
 - `git diff --check`
@@ -174,6 +187,7 @@ Passed through CP3:
 - `python tools/check_portfolio_city_phase38_storybook_details.py`
 - CP2 camera interaction/isolation contract
 - CP3 district-flow structure checked against the 4-district / 14-project canonical data contract
+- CP4 preview contract keeps all canonical routes inert inside the isolated prototype
 
 Existing runtime contract remains:
 - 13 chunks
@@ -201,17 +215,17 @@ The previous Phase 3.9 runtime locks remain documented in `docs/PHASE3_9_HANDOFF
 
 ## Exact next step
 
-**CP4 Building Preview**
+**CP5 Interaction Prototype Closure / Migration Readiness Gate**
 
-Implement only inside the isolated prototype:
+Audit the isolated World Map -> District View -> Building Preview flow as one complete interaction contract:
 
-1. selecting a project-building placeholder opens a Building Preview layer/state,
-2. preview uses the canonical project id/title/route already carried by CP3,
-3. preview must provide an explicit close/back path to the same District View,
-4. define the eventual Open Work affordance without changing canonical routes,
+1. validate pointer, touch, keyboard, Escape/back, focus restoration, and reduced-motion behavior,
+2. validate all 4 districts and all 14 canonical project ids/routes,
+3. run responsive smoke checks at the agreed desktop/mobile widths,
+4. document any blockers before production migration planning,
 5. keep production runtime untouched.
 
-Do not start CP4 without the next explicit user approval.
+Do not start CP5 without the next explicit user approval.
 
 ## Safety / workflow
 

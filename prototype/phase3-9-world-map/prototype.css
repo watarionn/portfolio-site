@@ -33,3 +33,14 @@
 .building-placeholder h3 { margin: 0 0 6px; } .building-placeholder p { margin: 0; overflow-wrap: anywhere; font: 12px ui-monospace, monospace; }
 .district-nav { display: flex; justify-content: space-between; gap: 12px; } .district-note { margin: 22px 0 0; font-size: 13px; }
 @media (max-width: 600px) { .prototype-shell { padding: 12px; } .viewport { min-height: 540px; aspect-ratio: auto; } .world { width: 240%; left: -70%; top: 4%; } .district { width: 13%; min-width: 76px; } .district-view__toolbar { flex-direction: column; gap: 14px; } .building-grid { grid-template-columns: 1fr; } }
+.building-placeholder { cursor: pointer; text-align: left; color: inherit; font: inherit; }
+.building-placeholder:hover,.building-placeholder:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; background: rgba(255,255,255,.62); }
+.building-preview { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 20px; }
+.building-preview[hidden] { display: none; }
+.building-preview__backdrop { position: absolute; inset: 0; background: rgba(40,38,31,.58); }
+.building-preview__card { position: relative; width: min(560px, 100%); padding: clamp(22px, 5vw, 42px); border: 2px solid #28261f; background: #f5eed9; box-shadow: 0 18px 70px rgba(0,0,0,.28); }
+.building-preview__card h3 { margin: 6px 0 18px; font-size: clamp(26px, 5vw, 44px); }
+.building-preview__card p { overflow-wrap: anywhere; }
+.building-preview__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+#open-work { font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .world,.district,.building-placeholder { transition: none !important; scroll-behavior: auto !important; } }

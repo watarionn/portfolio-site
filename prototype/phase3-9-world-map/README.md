@@ -6,30 +6,25 @@ Development-only interaction prototype for Portfolio City.
 
 CP1 established the normalized H2 world plane and four current district hit regions.
 
-CP2 adds the first camera-interaction contract without entering District View.
+CP2 added constrained pointer/touch/keyboard camera interaction plus camera snapshot / restore.
 
-Included:
-- abstract mainland / water / highland / offshore shapes,
-- Archive, Observatory, Workshop, and Waterside anchors,
-- F-A / F-B / F-C frontier markers,
-- noninteractive cloud/frontier scenery,
-- keyboard-focusable district buttons,
-- prototype debug overlay,
-- responsive first-pass framing.
+CP3 adds the first complete World Map -> District View -> World Map flow while keeping Building Preview and production routing out of scope.
 
-CP2 included:
-- constrained pointer / touch pan,
-- arrow-key pan when the map viewport is focused,
-- camera snapshot / restore / reset debug controls,
-- automatic camera snapshot when a district is selected,
-- responsive re-clamping after viewport resize.
+CP3 includes:
+- four placeholder District Views,
+- current project counts of Observatory 3 / Archive 4 / Workshop 4 / Waterside 3,
+- 14 project-building placeholders mapped one-to-one to the canonical project ids and routes,
+- authored district sequence Archive -> Observatory -> Workshop -> Waterside -> Archive,
+- previous / next district navigation,
+- explicit Return to World,
+- restoration of the camera snapshot captured immediately before district entry,
+- keyboard focus return to the district that was active.
 
-Not included yet:
-- District View,
-- project buildings,
+Still not included:
 - Building Preview,
-- production routing,
-- final illustrated geography.
+- opening canonical Work routes from the prototype,
+- production runtime migration,
+- final illustrated geography or district art.
 
 ## Run
 

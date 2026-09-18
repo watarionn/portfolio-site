@@ -3,47 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio City Phase 3.9 CP2</title>
+  <title>Portfolio City Phase 3.9 CP3</title>
   <link rel="stylesheet" href="./prototype.css">
 </head>
 <body>
   <main class="prototype-shell">
     <header class="prototype-header">
-      <p class="eyebrow">Phase 3.9 / CP2 Camera Interaction</p>
+      <p class="eyebrow">Phase 3.9 / CP3 District Flow</p>
       <h1>H2 Spatial Blueprint</h1>
-      <p>地形と地区の位置関係だけを検証する隔離プロトタイプ。完成アートではありません。</p>
+      <p>World Map → District View の往復と14作品の所属だけを検証する隔離プロトタイプ。完成アートではありません。</p>
     </header>
-    <section class="viewport" tabindex="0" aria-label="Portfolio City world map prototype. Drag or use arrow keys to pan.">
-      <div class="world" id="world">
-        <div class="mass mainland" aria-hidden="true"></div>
-        <div class="mass highland" aria-hidden="true"></div>
-        <div class="mass bay" aria-hidden="true"></div>
-        <div class="mass offshore" aria-hidden="true"></div>
-        <div class="frontier frontier-a" aria-hidden="true">F-A</div>
-        <div class="frontier frontier-b" aria-hidden="true">F-B</div>
-        <div class="frontier frontier-c" aria-hidden="true">F-C</div>        <button class="district archive" data-district="archive" aria-label="Archive Street"><span>Archive</span></button>
-        <button class="district observatory" data-district="observatory" aria-label="Observatory Hill"><span>Observatory</span></button>
-        <button class="district workshop" data-district="workshop" aria-label="Workshop Alley"><span>Workshop</span></button>
-        <button class="district waterside" data-district="waterside" aria-label="Waterside Play"><span>Waterside</span></button>
-        <div class="commons" aria-hidden="true">Commons?</div>
-        <div class="cloud cloud-west" aria-hidden="true"></div>
-        <div class="cloud cloud-east" aria-hidden="true"></div>
-        <div class="cloud cloud-south" aria-hidden="true"></div>
+    <section id="world-panel">
+      <section class="viewport" tabindex="0" aria-label="Portfolio City world map prototype. Drag or use arrow keys to pan.">
+        <div class="world" id="world">
+          <div class="mass mainland" aria-hidden="true"></div><div class="mass highland" aria-hidden="true"></div>
+          <div class="mass bay" aria-hidden="true"></div><div class="mass offshore" aria-hidden="true"></div>
+          <div class="frontier frontier-a" aria-hidden="true">F-A</div><div class="frontier frontier-b" aria-hidden="true">F-B</div>
+          <div class="frontier frontier-c" aria-hidden="true">F-C</div>
+          <button class="district archive" data-district="archive" aria-label="Archive Street"><span>Archive</span></button>
+          <button class="district observatory" data-district="observatory" aria-label="Observatory Hill"><span>Observatory</span></button>
+          <button class="district workshop" data-district="workshop" aria-label="Workshop Alley"><span>Workshop</span></button>
+          <button class="district waterside" data-district="waterside" aria-label="Waterside Play"><span>Waterside</span></button>
+          <div class="commons" aria-hidden="true">Commons?</div>
+          <div class="cloud cloud-west" aria-hidden="true"></div><div class="cloud cloud-east" aria-hidden="true"></div>
+          <div class="cloud cloud-south" aria-hidden="true"></div>
+        </div>
+      </section>
+    </section>
+    <section class="district-view" id="district-panel" hidden aria-labelledby="district-name">
+      <div class="district-view__toolbar">
+        <button type="button" id="return-world">Return to World</button>
+        <div><p class="eyebrow">Placeholder District View</p><h2 id="district-name" tabindex="-1"></h2><p id="district-role"></p></div>
       </div>
+      <div class="building-grid" id="building-grid" aria-label="Project building placeholders"></div>
+      <nav class="district-nav" aria-label="District navigation">
+        <button type="button" id="previous-district">← Previous District</button>
+        <button type="button" id="next-district">Next District →</button>
+      </nav>
+      <p class="district-note">Building Preview is intentionally deferred to CP4. Project routes are shown as contract evidence only.</p>
     </section>
     <aside class="debug" aria-live="polite">
-      <strong>CP2 debug</strong>
-      <span>state: <b id="debug-state">P0 World Map</b></span>
-      <span>canvas: 100 x 64</span>
-      <span>selected: <b id="debug-selected">none</b></span>
-      <span>camera: <b id="debug-camera"></b></span>
-      <span>saved: <b id="debug-saved">none</b></span>
-      <span>viewport: <b id="debug-viewport"></b></span>
-      <span class="debug-actions">
-        <button type="button" id="snapshot-camera">Snapshot</button>
-        <button type="button" id="restore-camera">Restore</button>
-        <button type="button" id="reset-camera">Reset</button>
-      </span>
+      <strong>CP3 debug</strong><span>state: <b id="debug-state">P0 World Map</b></span><span>canvas: 100 x 64</span>
+      <span>selected: <b id="debug-selected">none</b></span><span>camera: <b id="debug-camera"></b></span>
+      <span>saved: <b id="debug-saved">none</b></span><span>viewport: <b id="debug-viewport"></b></span>
+      <span class="debug-actions"><button type="button" id="snapshot-camera">Snapshot</button><button type="button" id="restore-camera">Restore</button><button type="button" id="reset-camera">Reset</button></span>
     </aside>
   </main>
   <script src="./prototype.js"></script>

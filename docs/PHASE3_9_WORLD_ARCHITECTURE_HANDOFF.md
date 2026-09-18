@@ -149,16 +149,31 @@ Commit: `c9ff501`
 
 Production runtime files remain unchanged.
 
+### CP3 COMPLETE - District Flow
+
+Implemented:
+- World Map district selection enters one of four placeholder District Views,
+- current project counts remain Observatory 3 / Archive 4 / Workshop 4 / Waterside 3,
+- all 14 placeholders map one-to-one to the existing canonical project ids/routes,
+- previous / next navigation uses Archive -> Observatory -> Workshop -> Waterside -> Archive,
+- explicit Return to World restores the camera snapshot captured before district entry,
+- focus returns to the active district target,
+- Building Preview remains deferred to CP4,
+- production runtime remains untouched.
+
+Commit: pending CP3 checkpoint commit.
+
 ## QA state at handoff
 
-Passed after CP2:
+Passed through CP3:
 
 - `node --check prototype/phase3-9-world-map/prototype.js`
 - `git diff --check`
 - `node tools/check_portfolio_city_runtime.mjs`
 - `python tools/check_portfolio_city_contract.py`
 - `python tools/check_portfolio_city_phase38_storybook_details.py`
-- CP2 static interaction/isolation contract
+- CP2 camera interaction/isolation contract
+- CP3 district-flow structure checked against the 4-district / 14-project canonical data contract
 
 Existing runtime contract remains:
 - 13 chunks
@@ -186,24 +201,17 @@ The previous Phase 3.9 runtime locks remain documented in `docs/PHASE3_9_HANDOFF
 
 ## Exact next step
 
-**CP3 District Flow**
+**CP4 Building Preview**
 
 Implement only inside the isolated prototype:
 
-1. selecting one of the four World Map districts enters a placeholder District View,
-2. create four District Views with current project counts:
-   - Observatory 3
-   - Archive 4
-   - Workshop 4
-   - Waterside 3
-3. total 14 project-building placeholders map one-to-one to the existing canonical work ids/routes,
-4. add previous / next district controls using the working authored sequence,
-5. add explicit Return to World,
-6. Return to World restores the camera snapshot captured before district entry,
-7. keep Building Preview for CP4, not CP3,
-8. keep production runtime untouched.
+1. selecting a project-building placeholder opens a Building Preview layer/state,
+2. preview uses the canonical project id/title/route already carried by CP3,
+3. preview must provide an explicit close/back path to the same District View,
+4. define the eventual Open Work affordance without changing canonical routes,
+5. keep production runtime untouched.
 
-After CP3, run local isolation + existing runtime contracts and commit with `[skip ci]`.
+Do not start CP4 without the next explicit user approval.
 
 ## Safety / workflow
 

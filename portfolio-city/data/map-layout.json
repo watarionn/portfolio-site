@@ -181,7 +181,8 @@
       "x": 430,
       "y": 1480,
       "width": 250,
-      "anchor": "bottom-center"
+      "anchor": "bottom-center",
+      "asset": "assets/illustrated/archive/cheatsheet.webp"
     },
     {
       "projectId": "shisha",

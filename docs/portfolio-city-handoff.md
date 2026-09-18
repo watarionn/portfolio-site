@@ -1,15 +1,22 @@
 # Portfolio City handoff
 
-Updated: 2026-09-14
+Updated: 2026-09-18
+
+> Current continuation point: see `docs/PHASE3_9_HANDOFF.md`.
+> The latest production main is `35444da469696981090e415702c64e1225546ab9`.
+> Phase 3.9 currently has 6 illustrated runtime buildings. The next adopted visual direction is the World Veil Pass: preserve the cross-shaped active city, add low-detail scenery beneath currently blank visible areas so the world reads as rectangular, then soften those peripheral areas with semi-transparent world-fixed cloud / fog.
 
 ## Canonical state
 
 - Canonical repository: `watarionn/portfolio-site`
 - Canonical branch: `main`
 - Production URL: `https://cf278796.cloudfree.jp/portfolio-city/`
-- Current production baseline after Phase 3.4 Checkpoint 3: `db01ea57bf9d88c42741b8668c82632faf51d08a`
-- Phase 3.3 Living City Map is closed and production-ready.
-- Phase 3.4 Checkpoints 1, 2, and 3 are merged and deployed.
+- Current production baseline: `35444da469696981090e415702c64e1225546ab9`
+- Detailed current state and next-step contract: `docs/PHASE3_9_HANDOFF.md`
+
+## Historical note
+
+The remainder of this document describes the earlier Phase 3.4 handoff and is retained for historical context. For current work, `docs/PHASE3_9_HANDOFF.md` is authoritative.
 
 ## Phase 3.4 completed work
 
@@ -38,45 +45,37 @@ The implementation should approach these references without sacrificing route st
 - `portfolio-city/city.js` — city rendering, project selection, visited state, inspector, navigation, keyboard behavior
 - `portfolio-city/data/projects.json` — locked 14-work inventory and production routes
 - `portfolio-city/data/districts.json` — four-district city model
-- `portfolio-city/assets/buildings/` — 14 project-specific SVG building assets
-- `portfolio-city/assets/environment/` — environment SVG assets
-- `tools/check_portfolio_city_contract.py` — structural and art-direction contract
-- `tools/check_portfolio_city_runtime.mjs` — runtime behavior guard
+- `portfolio-city/assets/buildings/` — legacy/project-specific SVG building assets
+- `portfolio-city/assets/illustrated/` — current illustrated terrain and accepted runtime building art
+- `portfolio-city/data/map-layout.json` — current world, terrain chunks, district regions and project placements
+- `portfolio-city/data/environment-details.json` — Phase 3.8 world-detail registry
+- `tools/check_portfolio_city_contract.py` — structural contract
+- `tools/check_portfolio_city_phase37_visual_polish.py` — Phase 3.7 visual contract
+- `tools/check_portfolio_city_phase38_storybook_details.py` — Phase 3.8 detail/world-edge contract
 
-## Production QA
-
-Checkpoint 3 was validated locally before deployment with all required gates passing. Production was deployed by FTPS without GitHub Actions, then verified at 390 px, 820 px, and 1440 px with zero horizontal overflow and zero browser console errors. All 4 districts and all 14 `.building-button` elements were present in production, and `district-art.css` loaded successfully.
-
-Existing accepted mobile snapshots from Checkpoint 2 remain available at:
-
-- `docs/assets/portfolio-city/phase3-4-mobile/mobile-map-390.png`
-- `docs/assets/portfolio-city/phase3-4-mobile/mobile-inspector-390.png`
-- `docs/assets/portfolio-city/phase3-4-mobile/mobile-works-390.png`
-
-## Validation gates
+## Current validation gates
 
 Before proposing further Portfolio City changes, run:
 
 ```text
 python tools/check_portfolio_city_contract.py
-node tools/check_portfolio_city_runtime.mjs
-python tools/build_deployment.py
+python tools/check_portfolio_city_phase37_visual_polish.py
+python tools/check_portfolio_city_phase38_storybook_details.py
 node --check portfolio-city/city.js
 git diff --check
 ```
 
-Browser QA should cover mobile 390 px, tablet 820 px, and desktop 1440 px. Keep horizontal overflow at zero and browser page errors at zero.
+The historical `tools/check_portfolio_city_runtime.mjs` may fail because its mock does not include `environment-details.json`; do not report it as PASS unless that mock is updated separately.
+
+Browser QA should cover mobile 390 px, tablet 820 px, and desktop 1440 px. Keep horizontal overflow at zero, verify 14 projects, preserve map drag behavior, and distinguish app/runtime failures from the unrelated root `/favicon.ico` 404.
 
 ## Development rules
 
-- Never commit directly to `main`.
-- Use a work branch and Draft PR, validate the latest head locally, then move to review and merge only after approval.
-- Prefer local validation and `[skip ci]` implementation commits so paid CI is not intentionally consumed.
-- Do not change the existing homepage or unrelated apps when working on Portfolio City.
+- Never commit implementation work directly to `main`; use a work branch and Draft PR.
+- Validate the latest head locally before Ready for review.
+- Merge and deploy only after explicit approval.
+- Prefer `[skip ci]` where applicable to avoid intentionally consuming metered GitHub Actions.
+- Production deployment is manual FTPS; upload only changed production files when practical.
+- Do not change unrelated apps when working on Portfolio City.
 - Keep the 14 production project routes unchanged unless a separate migration is explicitly approved.
-
-## Recommended next checkpoint
-
-Perform a Phase 3.4 closure / visual polish audit against the approved concept references and live production rather than starting another global layout rewrite.
-
-Focus on local district detail, spacing, layering, legibility, and any remaining visual inconsistencies across 390 px, 820 px, and 1440 px. Preserve the accepted 14-project structure, navigation, project routes, and interaction models. Any additional scenery should remain decorative, local, accessible, and non-interactive.
+- Once an illustration is accepted, preserve that exact source art unless the user explicitly requests a redesign.

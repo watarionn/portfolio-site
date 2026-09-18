@@ -1,0 +1,356 @@
+'use strict';
+/* =========================================================
+   MindMap App  ‚Äì  SVGÊèèÁîª„Éô„Éº„Çπ ÂÖ®Èù¢ÊîπË®ÇÁâà
+   ========================================================= */
+
+const MAX_HISTORY = 60;
+const NODE_DEFAULT_W = 130;
+const NODE_DEFAULT_H = 50;
+const NS = 'http://www.w3.org/2000/svg';
+const APP_VERSION = '1.0.0';
+const ONBOARDING_KEY = 'mindmap-maker-onboarding-v1';
+
+/* ‚îÄ‚îÄ‚îÄ Áä∂ÊÖã ‚îÄ‚îÄ‚îÄ */
+const S = {
+  mode: 'add',           // add | edit | connect | multi
+  connType: 'curve',     // curve | line
+  selectedShape: 'rect',
+  nodes:       [],       // {id,x,y,w,h,text,shape,style:{bg,fg,bc,bw,fs,overflow,halign}}
+  conns:       [],       // {id,from,to,type}
+  groups:      [],       // {id,name,nodeIds}
+  selNodeId:   null,     // Á∑®ÈõÜ/Êé•Á∂ö„É¢„Éº„Éâ„ÅÆÂçò‰∏ÄÈÅ∏Êäû
+  multiSelIds: [],       // Ë§áÊï∞ÈÅ∏Êäû„É¢„Éº„Éâ„ÅÆÈÅ∏Êäû„É™„Çπ„Éà
+  connFrom:    null,     // Êé•Á∂öÂÖÉ„Éé„Éº„ÉâID
+  selConnId:   null,     // ÈÅ∏Êäû‰∏≠„ÅÆÊé•Á∂öÁ∑öID
+  dragNode: null,        // {id,startX,startY,ox,oy, multiStarts:[{id,ox,oy}]}
+  pan:    { active:false, sx:0, sy:0, svx:0, svy:0 },
+  gesture:{ active:false, dist:0, scale:1, mid:{x:0,y:0}, svx:0, svy:0 },
+  rubber: { active:false, sx:0, sy:0 },  // „É©„Éê„Éº„Éê„É≥„Éâ
+  view:   { x:0, y:0, scale:1 },
+  history:[],
+  histIdx:-1,
+  idSeq:  0,
+  title: 'Untitled Mind Map',
+  searchIds: [],
+};
+
+function uid(prefix='n') { return prefix + (++S.idSeq); }
+
+/* ‚îÄ‚îÄ‚îÄ DOM ‚îÄ‚îÄ‚îÄ */
+const $  = id => document.getElementById(id);
+const svgWrap  = $('canvas-wrapper');
+const mainSvg  = $('main-svg');
+const viewport = $('viewport');
+const groupLayer = $('group-layer');
+const connLayer  = $('conn-layer');
+const nodeLayer  = $('node-layer');
+const connPreview= $('conn-preview');
+const rubberBand = $('rubber-band');
+const ctxMenu    = $('ctx-menu');
+const connCtxMenu= $('conn-ctx-menu');
+const multiBar   = $('multi-bar');
+const toast      = $('toast');
+const btnUndo    = $('btn-undo');
+const btnRedo    = $('btn-redo');
+const mapTitleBtn = $('map-title-btn');
+const saveStatus = $('save-status');
+const minimapSvg = $('minimap-svg');
+const minimapContent = $('minimap-content');
+const minimapViewport = $('minimap-viewport');
+
+/* =========================================================
+   ÂàùÊúüÂåñ
+   ========================================================= */
+function init() {
+  setView(0, 0, 1);
+  addRootNode();
+  bindAll();
+  pushHistory();
+  renderAll();
+}
+
+function addRootNode() {
+  const cx = svgWrap.clientWidth  / 2;
+  const cy = svgWrap.clientHeight / 2;
+  const node = makeNode(cx - 65, cy - 25, '‰∏≠ÂøÉ„ÉÜ„Éº„Éû', 'rect');
+  node.style.bg = '#7c6f4a';
+  node.style.fg = '#fdf8ef';
+  node.style.bc = '#a08c5a';
+  node.style.bw = 0;
+  node.style.fs = 16;
+  S.nodes.push(node);
+}
+
+/* =========================================================
+   „Éé„Éº„ÉâÁîüÊàê
+   ========================================================= */
+function makeNode(x, y, text='Êñ∞„Åó„ÅÑË¶ÅÁ¥†', shape=null) {
+  const sh = shape || S.selectedShape;
+  const isCircle   = sh === 'circle';
+  const isDiamond  = sh === 'diamond';
+  const isTriangle = sh === 'triangle';
+  const w = isCircle ? 90 : (isDiamond||isTriangle) ? 110 : NODE_DEFAULT_W;
+  const h = isCircle ? 90 : (isDiamond||isTriangle) ? 80  : NODE_DEFAULT_H;
+  return {
+    id: uid('n'), x, y, w, h, text, shape: sh,
+    style:{ bg:'#fffbf2', fg:'#3a3020', bc:'#9a8a62', bw:2, fs:14, overflow:'visible', halign:'center' }
+  };
+}
+
+/* =========================================================
+   ÊèèÁîª
+   ========================================================= */
+function renderAll() {
+  renderGroups();
+  renderConns();
+  renderNodes();
+  updateMultiBar();
+  updateUndoRedo();
+  renderMinimap();
+  updateMapTitleUI();
+}
+
+/* ‚îÄ‚îÄ‚îÄ „Ç∞„É´„Éº„ÉóÊû† ‚îÄ‚îÄ‚îÄ */
+function renderGroups() {
+  groupLayer.innerHTML = '';
+  S.groups.forEach(g => {
+    const members = S.nodes.filter(n => g.nodeIds.includes(n.id));
+    if (members.length === 0) return;
+    const pad = 16;
+    const minX = Math.min(...members.map(n=>n.x)) - pad;
+    const minY = Math.min(...members.map(n=>n.y)) - pad;
+    const maxX = Math.max(...members.map(n=>n.x+n.w)) + pad;
+    const maxY = Math.max(...members.map(n=>n.y+n.h)) + pad;
+    const rect = svgEl('rect',{
+      x:minX, y:minY, width:maxX-minX, height:maxY-minY,
+      rx:12, class:'group-rect', 'data-gid':g.id
+    });
+    const lbl = svgEl('text',{
+      x:minX+10, y:minY+14, class:'group-label'
+    });
+    lbl.textContent = g.name || '„Ç∞„É´„Éº„Éó';
+    groupLayer.appendChild(rect);
+    groupLayer.appendChild(lbl);
+  });
+}
+
+/* ‚îÄ‚îÄ‚îÄ Êé•Á∂öÁ∑ö ‚îÄ‚îÄ‚îÄ */
+function renderConns() {
+  connLayer.innerHTML = '';
+  S.conns.forEach(c => {
+    const from = S.nodes.find(n=>n.id===c.from);
+    const to   = S.nodes.find(n=>n.id===c.to);
+    if (!from||!to) return;
+    const fx = from.x + from.w/2, fy = from.y + from.h/2;
+    const tx = to.x   + to.w/2,   ty = to.y   + to.h/2;
+    const d  = buildPath(fx,fy,tx,ty,c.type||S.connType);
+    const isSel = c.id === S.selConnId;
+
+    // Ë¶ã„ÅüÁõÆ„Éë„Çπ
+    const path = svgEl('path',{
+      d, class:'conn-path'+(isSel?' selected':''),
+      'data-cid':c.id,
+      'marker-end': isSel ? 'url(#arr-end-sel)' : 'url(#arr-end)'
+    });
+    // Â§™„ÅÑ„Éí„ÉÉ„Éà„Ç®„É™„Ç¢
+    const hit = svgEl('path',{
+      d, class:'conn-hit', 'data-cid':c.id
+    });
+    hit.addEventListener('click', e=>{ e.stopPropagation(); onConnClick(c.id, e.clientX, e.clientY); });
+    connLayer.appendChild(path);
+    connLayer.appendChild(hit);
+  });
+}
+
+function buildPath(fx,fy,tx,ty,type) {
+  if (type==='line') return `M${fx},${fy} L${tx},${ty}`;
+  const dx = tx-fx, dy = ty-fy;
+  const cx1 = fx + dx*0.45, cy1 = fy + dy*0.05;
+  const cx2 = tx - dx*0.45, cy2 = ty - dy*0.05;
+  return `M${fx},${fy} C${cx1},${cy1} ${cx2},${cy2} ${tx},${ty}`;
+}
+
+/* ‚îÄ‚îÄ‚îÄ „Éé„Éº„Éâ ‚îÄ‚îÄ‚îÄ */
+function renderNodes() {
+  // Êó¢Â≠òË¶ÅÁ¥†„ÇíMap„ÅßÁÆ°ÁêÜ
+  const existing = new Map();
+  nodeLayer.querySelectorAll('.node-g').forEach(g => existing.set(g.dataset.id, g));
+
+  const currentIds = new Set(S.nodes.map(n=>n.id));
+  existing.forEach((g,id)=>{ if(!currentIds.has(id)) g.remove(); });
+
+  S.nodes.forEach(node => {
+    let g = existing.get(node.id);
+    if (!g) {
+      g = svgEl('g',{ class:'node-g', 'data-id':node.id });
+      bindNodeSvgEvents(g, node.id);
+      nodeLayer.appendChild(g);
+    }
+    updateNodeSvg(g, node);
+  });
+}
+
+function updateNodeSvg(g, node) {
+  g.innerHTML = '';
+  const s = node.style;
+  const { x,y,w,h,shape,text } = node;
+  const isSel   = node.id === S.selNodeId;
+  const isMulti = S.multiSelIds.includes(node.id);
+  const isSearch = S.searchIds.includes(node.id);
+
+  g.setAttribute('class', 'node-g' + (isSel?' selected':'') + (isMulti?' multi-sel':'') + (isSearch?' search-match':''));
+  g.setAttribute('data-id', node.id);
+
+  /* ‚îÄ‚îÄ ÂΩ¢Áä∂„Åî„Å®„ÅÆSVGË¶ÅÁ¥† ‚îÄ‚îÄ */
+  let shapeEl;
+
+  if (shape === 'rect') {
+    shapeEl = svgEl('rect',{
+      x, y, width:w, height:h, rx:6,
+      fill:s.bg, stroke:s.bc, 'stroke-width':s.bw, class:'node-shape'
+    });
+
+  } else if (shape === 'circle') {
+    const rx = w/2, ry = h/2;
+    shapeEl = svgEl('ellipse',{
+      cx: x+rx, cy: y+ry, rx, ry,
+      fill:s.bg, stroke:s.bc, 'stroke-width':s.bw, class:'node-shape'
+    });
+
+  } else if (shape === 'diamond') {
+    // Ëè±ÂΩ¢Ôºö‰∏≠ÂøÉ„Åã„Çâ4È†ÇÁÇπ
+    const cx=x+w/2, cy=y+h/2;
+    const pts = `${cx},${y} ${x+w},${cy} ${cx},${y+h} ${x},${cy}`;
+    shapeEl = svgEl('polygon',{
+      points:pts, fill:s.bg, stroke:s.bc, 'stroke-width':s.bw, class:'node-shape'
+    });
+
+  } else if (shape === 'triangle') {
+    // ‰∏âËßíÂΩ¢Ôºö‰∏ä„Åã„Çâ‰∏ã„Å∏
+    const cx=x+w/2;
+    const pts = `${cx},${y} ${x+w},${y+h} ${x},${y+h}`;
+    shapeEl = svgEl('polygon',{
+      points:pts, fill:s.bg, stroke:s.bc, 'stroke-width':s.bw, class:'node-shape'
+    });
+
+  } else if (shape === 'arrow') {
+    // Âè∞ÊòéÁü•È£≠ÂΩ¢ÔºàÊ®ü„ÅÆÈî∂„ÅÑ‰∏âËàÛŸéú‰º¨ËøÉÂΩ¢Ôºâ
+    const pt = `${x},${y+10} ${x+w*.75},${y+10} ${x+w*.75},${y} ${x+w},${y+h/2} ${x+w*.75},${y+h} ${x+w*.75},${y+h-10} ${x},${y+h-10}`;
+    shapeEl = svgEl('polygon, {points:pt, fill:s.bg, stroke:s.bc, 'stroke-width':s.bw, class:'node-shape });
+
+  } else if (shape === 'cloud') {
+    // Èõ≤ÂΩ¢Ôºö„Å§„Å™Êó∫ÁöÑ„Å™Áõ¥Á∑ö„ÅÆ„Åæ˚é˚¶Ü„é
++éé´é
+◊é
+ìé
+Îñí[ñ:Á¢£û“û⁄ké
+üé´¢&Àé
++¢bØé˚égé(ÄÄÄÅçΩπÕ–Å…Öë•’ÃÄÙÅ5Ö—†πµ•∏°‹Ä®Ä¿∏»»∞Å†Ä®Ä¿∏––§Ï(ÄÄÄÅçΩπÕ–ÅÕ°Ω’±ëï»ÄÙÅ5Ö—†πµÖ‡†‡∞Å5Ö—†πµ•∏°†Ä®Ä¿∏ƒ»∞Äƒ‡§§Ï(ÄÄÄÅçΩπÕ–ÅêÄÙÅl(ÄÄÄÄÄÅÅ4ÄëÌ‡Ä¨Å…Öë•’ÃÅÙÄëÌ‰Ä¨Å†ÅıÄ∞(ÄÄÄÄÄÅÅ ÄëÌ‡Ä¨Å‹Ä¥Å…Öë•’ÃÅıÄ∞(ÄÄÄÄÄÅÅÄëÌ…Öë•’ÕÙÄëÌ…Öë•’ÕÙÄ¿Ä¿Ä¿ÄëÌ‡Ä¨Å‹Ä¥Å…Öë•’ÃÅÙÄëÌ‰Ä¨Å†Ä¥Ä»Ä®Å…Öë•’ÃÅıÄ∞(ÄÄÄÄÄÅÅÄëÌ‡Ä¨Å‹Ä¨ÅÕ°Ω’±ëï»ÅÙÄëÌ‰Ä¨Å†Ä®Ä¿∏Ã‡ÅÙÄëÌ‡Ä¨Å‹Ä¥Å…Öë•’ÃÄ®Äƒ∏‘ÅÙÄëÌ‰Ä¨Å†Ä®Ä¿∏»¿ÅÙÄëÌ‡Ä¨Å‹Ä¥Å…Öë•’ÃÄ®Äƒ∏‡ÅÙÄëÌ‰Ä¨Å†Ä®Ä¿∏»¿ÅıÄ∞(ÄÄÄÄÄÅÅÄëÌ‡Ä¨Å‹Ä®Ä¿∏‡¿ÅÙÄëÌ‰Ä¥Å…Öë•’ÃÄ®Ä¿∏ƒ¿ÅÙÄëÌ‡Ä¨Å‹Ä®Ä¿∏‘»ÅÙÄëÌ‰Ä¥Å…Öë•’ÃÄ®Ä¿∏ƒ¡ÙÄëÌ‡Ä¨Å‹Ä®Ä¿∏–Ÿ } ${y + h * 0.12 }`,
+      `C ${x + w * 0.40} ${y - radius * 0.35 } ${x + w * 0.15} ${y - radius * 0.18} ${x + radius * 1.55} ${y + h * 0.24 }`,
+      `C ${x - shoulder } ${y + h * 0.42 } ${x - shoulder} ${y + h * 0.84 } ${x + radius } ${y + h }`,
+      'Z'
+    ].join(' ');
+    shapeEl = svgEl('path',{ d, fill:s.bg, stroke:s.bc, 'stroke-width':s.bw, class:'node-shape' });
+
+  } else {
+    // fallback
+    shapeEl = svgEl('rect',{x,y,width:w,height:h,fill:s.bg,stroke:s.bc,'stroke-width':s.bw,class:'node-shape' });
+  }
+
+  g.appendChild(shapeEl);
+
+  /* ‚îÄ‚îÄ„ÉÜ„Ç≠„Çπ„Éà ‚îÄ‚îÄ */
+  const txt = svgEl('text', {
+    class:'node-text', 'fill':s.fg, 'font-size':s.fs,
+    'text-anchor':s.halign==='left'?'start':s.halign==='right'?'end':'middle',
+    'dominant-baseline':'middle', 'pointer-events':'none'
+  });
+  // ÊëÜ„ÅÆ‰∏≠ÂøÉ„Åã„ÇâÂæÆË™øÊï¥(Â∑¶ÂØå„ÅõËæº„Åø)
+  const tx = s.Halign==='left' ? x+10 : s.halign==='right' ? x+w-10 : x+w/2;
+  txt.setAttribute('x', tx);
+  txt.setAttribute('y', y h/2);
+
+  // ÊîπÊçõ: ÂΩ≤‰øµ„Åå„ÅÇ„Çå„Å∞ÂæòÂâµ„Å´Ëßå„ÅÑÁ∑ö„ÄÅ„ÅÇ„Åµ„Çå„Çã„Å®„Éò„Éº„Çπ„É©„Ç§„É≥ÔºàÂçòË°åÔºâ„ÅßÂàÜÂà≤
+  const lines = text.split(/\n/);
+  const lineH = s.fs * 1.4;
+  const totalH = lines.length*lineH;
+  lines.forEach((line,i)=>{
+    const tsp = svgEl('tspan', {
+      x:tx,
+      y: y h/2 - totalH/2 + lineH/2 + i*lineH
+    });
+    tsp.textContent = line;
+    txt.appendChild(tsp);
+  });
+  g.appendChild(txt);
+
+  /* ‚îÄ‚îÄ ÂëºÂê∏‰∏≠„Éè„É≥„Éâ„É´ -- */
+  ['nh-tl','nh-tr','nh-bl','nh-br'].forEach(pos=>{
+    const [cx,cy] = cornerPos(pos,node);
+    const h = svgEl('circle',{cx,cy,r:6,class:'resize-handle '+pos, 'data-h':pos});
+    h.style.display = isSel ? '' : 'none';
+    g.appendChild(h);
+  });
+
+  /* ‚îÄ‚îÄ ÈÅ∏Êäû„É™„É≥„Ç∞ ‚îÄ‚îÄ */
+  if (isSel||isMulti) {
+    const rng = svgEl('rect',{x:x-4,y:y-4,width:w+1 height:h+8,rx:10,class:'node-ring'});
+    g.insertBefore(rng,g.firstChild);
+  }
+
+  g.style.cursor = S.mode==='add'?'move':S.mode==='connect'?'crosshair':'default';
+}
+
+function cornerPos(pos,n){
+  return {
+    'nh-tl':[n.x,m.y],
+    'nh-tr':[n.x+n.w,n.y],
+    'nh-bl':[n.x,n.y+n.h],
+    'nh-br':[n.x+n.w,n.y+n.h],
+  }[pos];
+}
+
+/* ‚îÄ‚îÄ‚îÄ „Éï„Ç©„Éº„ÇØ„Çπ„É™„É≥„ÇØ ‚îÄ‚îÄ‚îÄ */
+function svgEl(name, attrs = {}) {
+  const el = document.createElementNS(NS, name);
+  Object.entries(attrs).forEach(([k,v])=> {
+    if (v!==null && v!==undefined) el.setAttribute(k, v);
+  });
+  return el;
+}
+
+/* =========================================================
+   „Ç§„Éô„É≥„Éà„Éê„Ç§„É≥„Éà„É≥„Ç∞
+   ========================================================= */
+function bindNodeSvgEvents(g,id) {
+  g.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    e.stopPropagation();
+    const node = S.nodes.find(n=>n.id===id);
+    if (!node) return;
+
+    // „É™„Çµ„Ç§„Ç∫„Éè„É≥„Éâ„É´
+    const handle = e.target.closest('.resize-handle');
+    if (handle) {
+      startResize(e, node, handle.dataset.h);
+      return;
+    }
+
+    if (S.mode === 'connect') {
+      if (!S.connFrom) {
+        S.connFrom = id;
+        S.selNodeId = id;
+        renderNodes();
+      } else if (S.connFrom !== id) {
+        createConn(S.connFrom, id);
+        S.connFrom = null;
+        S.selNodeId = null;
+        connPreview.style.display='none';
+        renderAll();
+      }
+      return;
+    }
+
+    if (S.mode==='multi') {
+      if (S.multiSelIds.includes(id)) {
+        S.multiSelIds = S.multiSelIdsECB1‰S8‚œÇŒ 

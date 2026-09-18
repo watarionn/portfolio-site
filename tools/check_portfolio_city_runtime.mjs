@@ -5,6 +5,7 @@ import vm from 'node:vm';
 const projectsPayload = JSON.parse(readFileSync('portfolio-city/data/projects.json', 'utf8'));
 const districtsPayload = JSON.parse(readFileSync('portfolio-city/data/districts.json', 'utf8'));
 const layoutPayload = JSON.parse(readFileSync('portfolio-city/data/map-layout.json', 'utf8'));
+const detailPayload = JSON.parse(readFileSync('portfolio-city/data/environment-details.json', 'utf8'));
 const citySource = readFileSync('portfolio-city/city.js', 'utf8');
 
 class MockClassList {
@@ -216,6 +217,7 @@ const fetchMock = async (path) => {
   if (path === 'data/projects.json') return { ok: true, json: async () => projectsPayload };
   if (path === 'data/districts.json') return { ok: true, json: async () => districtsPayload };
   if (path === 'data/map-layout.json') return { ok: true, json: async () => layoutPayload };
+  if (path === 'data/environment-details.json') return { ok: true, json: async () => detailPayload };
   return { ok: false, json: async () => ({}) };
 };
 

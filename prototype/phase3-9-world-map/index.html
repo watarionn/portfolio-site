@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio City Phase 3.9 CP1</title>
+  <link rel="stylesheet" href="./prototype.css">
+</head>
+<body>
+  <main class="prototype-shell">
+    <header class="prototype-header">
+      <p class="eyebrow">Phase 3.9 / CP1 Skeleton Harness</p>
+      <h1>H2 Spatial Blueprint</h1>
+      <p>地形と地区の位置関係だけを検証する隔離プロトタイプ。完成アートではありません。</p>
+    </header>
+    <section class="viewport" aria-label="Portfolio City world map prototype">
+      <div class="world" id="world">
+        <div class="mass mainland" aria-hidden="true"></div>
+        <div class="mass highland" aria-hidden="true"></div>
+        <div class="mass bay" aria-hidden="true"></div>
+        <div class="mass offshore" aria-hidden="true"></div>
+        <div class="frontier frontier-a" aria-hidden="true">F-A</div>
+        <div class="frontier frontier-b" aria-hidden="true">F-B</div>
+        <div class="frontier frontier-c" aria-hidden="true">F-C</div>        <button class="district archive" data-district="archive" aria-label="Archive Street"><span>Archive</span></button>
+        <button class="district observatory" data-district="observatory" aria-label="Observatory Hill"><span>Observatory</span></button>
+        <button class="district workshop" data-district="workshop" aria-label="Workshop Alley"><span>Workshop</span></button>
+        <button class="district waterside" data-district="waterside" aria-label="Waterside Play"><span>Waterside</span></button>
+        <div class="commons" aria-hidden="true">Commons?</div>
+        <div class="cloud cloud-west" aria-hidden="true"></div>
+        <div class="cloud cloud-east" aria-hidden="true"></div>
+        <div class="cloud cloud-south" aria-hidden="true"></div>
+      </div>
+    </section>
+    <aside class="debug" aria-live="polite">
+      <strong>CP1 debug</strong>
+      <span>state: <b id="debug-state">P0 World Map</b></span>
+      <span>canvas: 100 x 64</span>
+      <span>selected: <b id="debug-selected">none</b></span>
+      <span>viewport: <b id="debug-viewport"></b></span>
+    </aside>
+  </main>
+  <script src="./prototype.js"></script>
+</body>
+</html>

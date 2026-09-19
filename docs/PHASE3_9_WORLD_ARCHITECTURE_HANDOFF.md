@@ -799,3 +799,19 @@ Document:
 CP-D5E result: **PASS**.
 
 Exact next checkpoint: **CP-D5F Approved Master Binary Intake + Real 192-Tile Export**. Preserve the locked clean Master source as a real binary, normalize/export at the approved 8192x6144 geometry without changing geography, run the deterministic slicer, and perform seam/manifest QA before prototype binding. Production feature flag remains disabled.
+
+
+### CP-D5F PARTIAL PASS - Approved Master Binary Intake / Real 192-Tile Export
+
+The locked D5A-R1 clean world concept was recovered as a real binary source (1448x1086, exact 4:3), normalized to the approved 8192x6144 production geometry, and actually sliced into 192 WebP tiles at 512x512 with A01-P12 coverage and SHA-256 manifest.
+
+Geometry/coverage/naming/single-source slicing QA: **PASS**.
+
+Important quality limitation: 8192x6144 normalization increases pixel dimensions but does not create genuine additional illustration detail beyond the approved 1448x1086 source. Treat this derivative as integration-ready, not automatically final-resolution art.
+
+Important repository limitation: the connected GitHub contents writer is UTF-8-text-only and cannot safely commit JPEG/WebP binary assets. Binary branch intake is therefore still open; no nonexistent asset path has been faked.
+
+Document:
+- `docs/phase3-9-d5f-real-master-export.md`
+
+Exact next checkpoint: **CP-D5G Binary Asset Intake + Prototype Visual QA**. Use a binary-capable repository/deployment path for the exported Master/tiles, bind the real manifest, and QA seams/loading/anchors at desktop/tablet/mobile. Keep production feature flag disabled.

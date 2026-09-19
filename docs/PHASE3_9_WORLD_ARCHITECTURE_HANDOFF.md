@@ -780,3 +780,22 @@ Marker family:
 CP-D5D result: **PASS**.
 
 Exact next checkpoint: **CP-D5E District Marker Prototype + Tile Stage Skeleton**. Implement the marker family and manifest-driven terrain stage in the isolated prototype. Do not fabricate or replace the approved Master binary. Production feature flag remains disabled.
+
+
+### CP-D5E COMPLETE - District Marker Prototype + Tile Stage Skeleton
+
+Implemented in `prototype/phase3-9-world-map/`:
+- four storybook marker glyphs with unchanged geographic anchors,
+- larger accessible hit targets,
+- keyboard/reduced-motion treatment,
+- manifest-driven `terrain-stage`,
+- safe structural fallback until real exported Master tiles exist.
+
+The skeleton validates 16x12 / 192 records before binding. No fake final Master art has been committed. Visibility-driven lazy tile selection remains a real-asset QA task rather than being simulated prematurely.
+
+Document:
+- `docs/phase3-9-d5e-marker-tile-stage.md`
+
+CP-D5E result: **PASS**.
+
+Exact next checkpoint: **CP-D5F Approved Master Binary Intake + Real 192-Tile Export**. Preserve the locked clean Master source as a real binary, normalize/export at the approved 8192x6144 geometry without changing geography, run the deterministic slicer, and perform seam/manifest QA before prototype binding. Production feature flag remains disabled.

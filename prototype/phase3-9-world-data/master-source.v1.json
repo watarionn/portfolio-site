@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "master": {"width":8192,"height":6144,"aspectRatio":"4:3"},
+  "grid": {"columns":16,"rows":12,"cellCount":192},
+  "sourceTile": {"width":512,"height":512},
+  "runtimeBaseline": {"format":"webp","quality":90},
+  "currentHomes": {
+    "observatory":{"cell":"H05","rect":{"x":3584,"y":2048,"width":512,"height":512}},
+    "archive":{"cell":"G06","rect":{"x":3072,"y":2560,"width":512,"height":512}},
+    "workshop":{"cell":"I06","rect":{"x":4096,"y":2560,"width":512,"height":512}},
+    "waterside":{"cell":"H07","rect":{"x":3584,"y":3072,"width":512,"height":512}}
+  }
+}

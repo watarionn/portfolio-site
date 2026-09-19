@@ -712,3 +712,25 @@ PASS:
 D5A now locks broad world silhouette/topology only. Micro terrain, atmosphere, buildings, labels, and UI remain unlocked.
 
 Exact next checkpoint: **CP-D5B Macro Terrain & Detail Density Pass**. Preserve the D5A silhouette and W0 anchors while refining terrain hierarchy and reducing overcommitment in remote cells.
+
+
+### CP-D5B COMPLETE - Published World View Interaction Blueprint
+
+User-approved default interaction is now locked: the entry World View is a **zoomed local crop of the huge Master World**, spatially matching the four canonical W0 anchors.
+
+Reference relationship:
+- Observatory H05 north / slightly east
+- Archive G06 west
+- Workshop I06 east
+- Waterside H07 south
+
+Production removes the debug grid, cell IDs, crosshairs, and plus signs. Visitors see clean terrain plus four UI-layer district targets. Selecting a target transitions World View -> District View -> Building Preview -> canonical Work route.
+
+Document:
+- `docs/phase3-9-published-world-view-blueprint.md`
+
+Desktop can show the cluster together. Mobile uses the same coordinates with readable scale and short pan. A later World overview control may zoom farther out, but the full Master World is not the default entry view and unpublished geography remains non-interactive.
+
+CP-D5B result: **PASS**.
+
+Exact next checkpoint: **CP-D5C W0 World View Prototype**. Implement this no-grid local World View in the isolated Phase 3.9 prototype, preserving the existing District View / Building Preview flow. Keep production feature flag disabled.

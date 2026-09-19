@@ -8,6 +8,22 @@
     layout: 'data/map-layout.json'
   };
   const DISTRICT_SEQUENCE = ['archive-street', 'observatory-hill', 'workshop-alley', 'waterside-play'];
+  const H2_WORLD = {
+    width: 100,
+    height: 64,
+    initialDesktopCrop: { x: 20, y: 9, width: 60, height: 49 },
+    districtAnchors: {
+      'archive-street': { x: 35, y: 33 },
+      'observatory-hill': { x: 55, y: 20 },
+      'workshop-alley': { x: 63, y: 34 },
+      'waterside-play': { x: 49, y: 47 }
+    },
+    fronts: [
+      { id: 'inland', x: 24, y: 27 },
+      { id: 'coastal', x: 67, y: 49 },
+      { id: 'offshore', x: 82, y: 39 }
+    ]
+  };
   const shell = document.getElementById('worldHierarchyShell');
 
   const state = {
@@ -135,6 +151,60 @@
       viewport.removeEventListener('pointercancel', endDrag);
       viewport.removeEventListener('keydown', onKeyDown);
     };
+  }
+
+  function renderWorldMap() {
+    if (!state.enabled) return false;
+    const panel = document.getElementById('worldHierarchyWorld');
+    if (!panel) return false;
+
+    const viewport = document.createElement('div');
+    viewport.className = 'world-h2-viewport';
+    viewport.tabIndex = 0;
+    viewport.setAttribute('aria-label', 'Portfolio City 世界地図');
+
+    const world = document.createElement('div');
+    world.className = 'world-h2-map';
+    world.dataset.geography = 'mainland-archipelago-hybrid';
+
+    for (const layer of ['mainland', 'southern-inlet', 'highland', 'offshore-islands', 'frontier-clouds']) {
+      const element = document.createElement('div');
+      element.className = `world-h2-layer world-h2-layer--${layer}`;
+      element.setAttribute('aria-hidden', 'true');
+      world.append(element);
+    }
+
+    for (const district of state.districts) {
+      const anchor = H2_WORLD.districtAnchors[district.id];
+      if (!anchor) continue;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'world-h2-district';
+      button.dataset.worldDistrict = district.id;
+      button.style.setProperty('--world-x', `${anchor.x}%`);
+      button.style.setProperty('--world-y', `${(anchor.y / H2_WORLD.height) * 100}%`);
+      button.textContent = district.name;
+      button.addEventListener('click', () => {
+        if (enterDistrict(district.id, `world-district-${district.id}`)) renderDistrictView(district.id);
+      });
+      button.id = `world-district-${district.id}`;
+      world.append(button);
+    }
+
+    for (const front of H2_WORLD.fronts) {
+      const marker = document.createElement('span');
+      marker.className = 'world-h2-frontier';
+      marker.dataset.frontier = front.id;
+      marker.style.setProperty('--world-x', `${front.x}%`);
+      marker.style.setProperty('--world-y', `${(front.y / H2_WORLD.height) * 100}%`);
+      marker.setAttribute('aria-hidden', 'true');
+      world.append(marker);
+    }
+
+    viewport.append(world);
+    panel.replaceChildren(viewport);
+    bindWorldViewport(viewport, { panStep: 36 });
+    return true;
   }
 
   function byOrder(a, b) {
@@ -333,6 +403,7 @@
     if (!loaded) return false;
     bindDistrictView();
     bindBuildingPreview();
+    renderWorldMap();
     if (state.activeDistrictId) renderDistrictView();
     return setLevel(state.level);
   }
@@ -355,6 +426,7 @@
       return entered;
     },
     returnToWorld,
+    renderWorldMap,
     renderDistrictView,
     moveDistrict,
     renderBuildingPreview,

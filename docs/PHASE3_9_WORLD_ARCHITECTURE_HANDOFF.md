@@ -3,7 +3,7 @@
 Updated: 2026-09-19
 Branch: `phase3-9-world-scale-growth-model`
 Draft PR: #100
-Production migration: M4 BUILDING PREVIEW + OPEN WORK COMPLETE (feature flag OFF)
+Production migration: M5 VISUAL MIGRATION COMPLETE (feature flag OFF)
 Production deploy: NOT performed
 
 ## Current objective
@@ -304,7 +304,23 @@ Implemented behind the same hard-disabled feature flag:
 
 Exact next checkpoint: **M5 Visual Migration**. Introduce the approved H2 geography/frontier visual structure in reversible slices while keeping accepted buildings stable.
 
-Do not start M5 without the next explicit user approval.
+### M5 COMPLETE - Visual Migration
+
+Implemented as a reversible H2 structural visual layer behind the hard-disabled feature flag:
+- 100 x 64 H2 logical world contract,
+- four stable district anchors from the approved spatial blueprint,
+- abstract mainland, southern inlet, highland, offshore-island, and frontier-cloud layers,
+- F-A Inland / F-B Coastal / F-C Offshore frontier markers,
+- keyboard-focusable World Map district targets,
+- accepted building artwork remains isolated to District View and unchanged,
+- no legacy terrain or accepted building assets removed or rewritten,
+- no visitor-visible change while the feature flag is false.
+
+This M5 slice deliberately uses CSS/DOM geography primitives rather than declaring any newly generated final-art asset production-approved.
+
+Exact next checkpoint: **M6 Cutover Gate**. Compare old/new paths, verify rollback and production-like QA, and decide whether the hierarchy is ready to become the default. Do not remove the legacy path inside M6.
+
+Do not start M6 without the next explicit user approval.
 
 ## Safety / workflow
 

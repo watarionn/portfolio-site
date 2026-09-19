@@ -4,72 +4,48 @@ Updated: 2026-09-19
 
 ## Decision
 
-The production data layer uses the hosting MariaDB instance administered through phpMyAdmin.
+Production factual data uses MariaDB through PHP/PDO. CSV is an import source, not a browser/runtime database. EXPLORE topology stays authored JSON and notebook progress stays in localStorage.
 
-CSV is an import source, not a browser/runtime database.
+## Verified source and normalization audit
 
-## Source audit
+| source | raw rows | normalized identity |
+| --- | ---: | ---: |
+| hLF-ensen.csv | 591 | 554 lines |
+| hLF-eki.csv | 11,147 | 10,860 stations / 10,860 station-line pairs |
+| hmaf.csv | 495,147 | 487,728 distinct address codes |
 
-The three Drive sources were inspected directly as cp932 CSV.
-
-| source | rows | important key behavior |
-| --- | ---: | --- |
-| hLF-eki.csv | 11,147 | EKICD has 10,860 distinct values |
-| hLF-ensen.csv | 591 | ENSCD has 554 distinct values |
-| hmaf.csv | 495,147 | JUCD has 487,728 distinct values |
-
-Address JUCD is CHAR(11), not numeric. Some valid codes contain letters. It must never be cast to an integer.
-
-Line codes and address codes are intentionally non-unique in the source. Surrogate record IDs preserve every source row.
+ENSCD/EKICD can be reused by historical revisions. In the adopted snapshot later rows are newer, so the importer uses the last occurrence per duplicated code. Address JUCD is non-unique and remains an indexed CHAR(11), with a surrogate row id.
 
 ## Runtime boundary
 
 ```text
-cp932 CSV (Drive / local source)
-        |
-        v
-prepare_geo_import.py
-        |
-        v
-UTF-8 import chunks
-        |
-        v
-MariaDB
-  geo_station_records
-  geo_line_records
-  geo_address_records
-        |
-        v
-PHP/PDO JSON API
-        |
-        +--> DATA LAB
-        +--> same-name station experience
-        +--> line traveler
-        +--> EXPLORE data lookups
+CP932 CSV -> prepare_geo_import.py -> UTF-8 normalized CSV
+          -> MariaDB (geo_lines / geo_stations / geo_station_lines / geo_addresses)
+          -> PHP/PDO JSON API -> DATA LAB / special experiences / EXPLORE lookups
 ```
 
-The forest topology, questions, authored landmarks, and special-experience links remain JSON because they are authored experience definitions rather than database facts.
+No raw master CSV is published under the web root. Credentials remain server-only.
 
-## Address search
+## Local source QA, 2026-09-19
 
-The first production implementation uses bounded component search and a strict result limit.
+The adopted source files were reprocessed against the normalized contract:
 
-1. Prefer indexed prefix matches against prefecture / municipality / town / block.
-2. If no prefix result exists, allow a bounded contains fallback.
-3. Never return the full 495k-row dataset to the browser.
-4. Benchmark on the actual hosting MariaDB before considering a custom n-gram index.
+- line raw / normalized: 591 / 554
+- station raw / normalized: 11,147 / 10,860
+- unique station-line pairs: 10,860
+- address raw / distinct address codes: 495,147 / 487,728
+- 五能線 resolves to line code 2146 and 43 current station points in source order
+- 住吉 resolves to 9 current station identities before the existing 150 m physical-place grouping
 
-This deliberately avoids depending on a Japanese FULLTEXT parser/plugin that may not be configurable on shared hosting.
+These checks establish the pre-MariaDB baseline. Server import and API benchmarks remain the next deployment gate.
 
-## Same-name stations
+## Search policy
 
-Do not equate source row count with physical station count. A station name can have multiple line records for one interchange.
+Station/line searches use indexed identity/name fields and bounded results. Address search prefers indexed component-prefix matches and only uses bounded contains fallback when needed. The browser never receives the complete address dataset.
 
-The current Sumiyoshi prototype has 9 source rows and groups them into 6 displayed points using the existing 150 m trial rule. Production grouping remains an application-level derived view until a stable station-place identity rule is approved.
+Same-name station display distinguishes station identities from physical places. The existing 150 m grouping remains an application-derived view until a stronger place-identity rule is approved.
 
-## Portfolio City integration
-
-Target public routes:
+## Routes
 
 - /geo/
 - /geo/lab/
@@ -77,6 +53,14 @@ Target public routes:
 - /geo/same-name/
 - /geo/line/
 
-The GEO implementation should remain isolated from the active Portfolio City world-hierarchy migration until its own Layout Lock. Registration into Portfolio City's project inventory is a later integration step.
+GEO remains isolated from the active Portfolio City world-hierarchy migration until Layout Lock. Final illustration assets are deferred until then.
 
-Final Portfolio City illustration assets are not produced during this architecture phase.
+## Next gate
+
+1. create/configure the Shin Free Server MariaDB database
+2. apply apps/geo/database/schema.sql
+3. import the normalized UTF-8 CSVs
+4. run count + 五能線 / 住吉 / 七日町 smoke queries
+5. connect the protected PDO config
+6. benchmark the read-only APIs
+7. migrate DATA LAB v9 from embedded data to the API

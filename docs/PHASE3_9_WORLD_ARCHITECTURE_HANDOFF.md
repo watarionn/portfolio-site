@@ -420,3 +420,29 @@ Result: PASS.
 The blockout is reference evidence only, not production-approved final art.
 
 Exact next checkpoint: **CP-D3 Geography Translation Blueprint**. Convert the accepted composition logic into a production-art specification covering land/water/highland silhouettes, route hierarchy, district focal envelopes, frontier/cloud behavior, responsive camera framing, and explicit visual anti-patterns. Do not generate/install final production art or flip the feature flag during CP-D3.
+
+
+### CP-D3 COMPLETE - Geography Translation Blueprint
+
+The accepted CP-D2 composition logic is now translated into an art-production specification.
+
+Document:
+- `docs/phase3-9-geography-translation-blueprint.md`
+
+Locked guidance now covers:
+- offset focal envelopes for H05 Observatory / G06 Archive / I06 Workshop / H07 Waterside,
+- one irregular connected mainland,
+- southern inlet explaining Waterside,
+- northern highland gradient supporting Observatory,
+- partial east/offshore geography for F-C,
+- scenic route hierarchy that deliberately avoids grid-aligned cross roads,
+- subordinate irregular Central Commons seam space,
+- organic multi-depth frontier/cloud reveal,
+- separate desktop/tablet/mobile W0 framing behavior,
+- separable art-layer contract,
+- explicit anti-pattern rejection list,
+- acceptance gate for the first illustrated candidate.
+
+CP-D3 result: **READY FOR ART BLOCKOUT**.
+
+Exact next checkpoint: **CP-D4 World Art Blockout**. Create the first large-world visual candidate from the translation blueprint. Treat it as review/reference art until explicit visual approval. Do not flip the hierarchy feature flag, merge, deploy, or remove the legacy runtime during CP-D4.

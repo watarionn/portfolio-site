@@ -3,7 +3,7 @@
 Updated: 2026-09-19
 Branch: `phase3-9-world-scale-growth-model`
 Draft PR: #100
-Production migration: NOT started
+Production migration: M1 SHELL STARTED (feature flag OFF)
 Production deploy: NOT performed
 
 ## Current objective
@@ -247,7 +247,19 @@ Plan status: READY FOR REVIEW. Production runtime remains untouched.
 
 Exact next checkpoint: **M1 Production Shell**. Add the new state shell behind a disabled feature flag with no visitor-visible production change.
 
-Do not start M1 without the next explicit user approval.
+### M1 COMPLETE - Production Shell
+
+Implemented behind a hard-disabled feature flag:
+- inert World / District / Preview semantic containers in production city.html,
+- isolated world-hierarchy-shell.js state controller,
+- explicit world/district/preview level state,
+- active district/project, camera snapshot, and return-focus state slots,
+- no integration with current city.js behavior,
+- no visitor-visible change while the flag is false.
+
+Exact next checkpoint: **M2 World Interaction**. Port the CP5 World camera and district-entry interaction behind the same disabled feature flag.
+
+Do not start M2 without the next explicit user approval.
 
 ## Safety / workflow
 

@@ -833,3 +833,14 @@ Document: `docs/phase3-9-d5g-master-world-runtime-assets.md`
 Production hierarchy feature flag remains OFF. No merge or deployment performed.
 
 Exact next checkpoint: **CP-D5H Real-Tile Visual / Browser QA** at desktop/tablet/mobile, followed by explicit cutover review only if visual QA passes.
+
+
+### CP-D5H COMPLETE - Real-Tile Visual / Browser QA
+
+Canonical Master World runtime tiles were rendered in headless Microsoft Edge at 1440x1000, 820x900, and 390x844. Non-empty captures are retained as `docs/phase3-9-d5h-{1440,820,390}.png`.
+
+The 192-tile QA, deterministic rebuild, JS syntax, existing Portfolio City contract/runtime checks, and diff check remain PASS. Production hierarchy flag remains OFF.
+
+Document: `docs/phase3-9-d5h-real-tile-visual-qa.md`
+
+Exact next checkpoint: **CP-D5I Cutover Review**. Review the real Master World composition and interaction against the accepted Phase 3.9 architecture, then decide whether to prepare the feature-flag cutover. No main merge/deploy before that review.

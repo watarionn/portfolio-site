@@ -653,3 +653,22 @@ Synthetic 1600 x 1200 geometry smoke test produced 192 cells at 100 x 100 with c
 CP-D4J result: **PASS**.
 
 Exact next checkpoint: **CP-D4K Real Master Source Specification + Export Trial**. Select practical Master source resolution candidates divisible by 16 x 12, evaluate tile density/runtime weight, define source retention/versioning, then run the slicer on the first real Master World artwork when ready. Production remains untouched.
+
+
+### CP-D4K COMPLETE - Real Master Source Specification + Export Trial
+
+First production-art source baseline is locked:
+
+**8192 x 6144 px -> 16 x 12 -> 192 source tiles @ 512 x 512 px**
+
+Files:
+- `docs/phase3-9-master-source-spec.md`
+- `prototype/phase3-9-world-data/master-source.v1.json`
+
+A real-size geometry trial verified exact 512 x 512 representative crops for H05, G06, I06, and H07. The giant authoring source will not be required as a runtime download; runtime uses optimized sliced tiles.
+
+The architecture remains resolution-independent, so a later higher-resolution Master can be adopted if real-art QA demonstrates a need.
+
+CP-D4K result: **PASS**.
+
+Exact next checkpoint: **CP-D4L Master Artwork Production Blueprint**. Convert zoning, W0 geography, reveal/frontier rules, source dimensions, and layer separation into the final clean-terrain art brief before producing the real Master World artwork.

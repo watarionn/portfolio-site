@@ -612,3 +612,27 @@ W0 expansion fronts F-A Inland, F-B Coastal, and F-C Offshore retain distinct re
 CP-D4H result: **PASS**.
 
 Exact next checkpoint: **CP-D4I World Asset Tiling / Expansion Strategy**. Define maintainable Visitor World art regions/tiles so future local district reveals can update a small area without replacing one monolithic world image. Keep production feature flag disabled.
+
+
+### CP-D4I COMPLETE - Single Master Artwork / Deterministic Tile Slicing
+
+User-approved asset strategy is now locked:
+
+**Author one continuous Master World illustration -> slice deterministically into 16 x 12 -> serve 192 runtime terrain tiles.**
+
+Document:
+- `docs/phase3-9-master-artwork-tile-slicing.md`
+
+Key rules:
+- never author the 192 terrain cells independently,
+- exact slicing preserves coastline/road/ridge/palette continuity,
+- runtime tile IDs map directly to A01-P12,
+- master source dimensions must be divisible by 16 x 12,
+- terrain edits happen in the Master source first,
+- hash comparison allows only changed tiles to be replaced after a revision,
+- frontier/clouds, buildings, labels, hitboxes, and debug grid remain separate layers,
+- runtime consumes optimized tiles, not the huge authoring source.
+
+CP-D4I result: **PASS**.
+
+Exact next checkpoint: **CP-D4J Tile Export Contract + Prototype Slicer**. Define the manifest and build an isolated deterministic slicer that validates dimensions, emits A01-P12, hashes outputs, and reports changed tiles. Do not bind to production runtime yet.

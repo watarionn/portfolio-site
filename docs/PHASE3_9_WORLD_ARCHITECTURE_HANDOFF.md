@@ -446,3 +446,22 @@ Locked guidance now covers:
 CP-D3 result: **READY FOR ART BLOCKOUT**.
 
 Exact next checkpoint: **CP-D4 World Art Blockout**. Create the first large-world visual candidate from the translation blueprint. Treat it as review/reference art until explicit visual approval. Do not flip the hierarchy feature flag, merge, deploy, or remove the legacy runtime during CP-D4.
+
+
+### CP-D4A COMPLETE - Exact Master World Coordinate Overlay
+
+The first generated Master World concept is now separated from the canonical coordinate system.
+
+Canonical planning surface:
+- exact 16 x 12 grid,
+- A-P west-to-east,
+- 01-12 north-to-south,
+- 192 district addresses,
+- H05 Observatory / G06 Archive / I06 Workshop / H07 Waterside highlighted exactly.
+
+A pixel-exact planning/debug overlay was produced as `portfolio_city_master_world_16x12_exact_overlay.png`. The generated geography beneath it remains provisional; the coordinate overlay is authoritative. The final visitor view will not show grid lines or cell ids.
+
+Detailed record:
+- `docs/phase3-9-exact-master-world-overlay.md`
+
+Exact next checkpoint: **CP-D4B Master World Terrain Zoning**. Classify the 192 cells only at coarse terrain level while intentionally retaining large undetermined frontier areas. Do not assign speculative future district identities, flip the feature flag, merge, or deploy.

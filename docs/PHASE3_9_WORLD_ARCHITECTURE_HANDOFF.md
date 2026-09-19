@@ -3,7 +3,7 @@
 Updated: 2026-09-19
 Branch: `phase3-9-world-scale-growth-model`
 Draft PR: #100
-Production migration: M5 VISUAL MIGRATION COMPLETE (feature flag OFF)
+Production migration: M6 CUTOVER GATE COMPLETE - HOLD FOR VISUAL APPROVAL (feature flag OFF)
 Production deploy: NOT performed
 
 ## Current objective
@@ -320,7 +320,31 @@ This M5 slice deliberately uses CSS/DOM geography primitives rather than declari
 
 Exact next checkpoint: **M6 Cutover Gate**. Compare old/new paths, verify rollback and production-like QA, and decide whether the hierarchy is ready to become the default. Do not remove the legacy path inside M6.
 
-Do not start M6 without the next explicit user approval.
+### M6 COMPLETE - Cutover Gate
+
+Gate result: **HOLD FOR VISUAL APPROVAL**. Technical rollback/readiness checks pass, but the hierarchy is intentionally not enabled by default yet.
+
+Verified:
+- final pre-cutover / rollback baseline: `fa21e7fcf74b4598f5dd130a90ad8e016171af3e`,
+- feature flag remains false,
+- legacy cityMapViewport path remains present,
+- new hierarchy shell remains hidden and aria-hidden while disabled,
+- 14 unique canonical projects / 4 canonical districts / exactly one district membership each,
+- canonical routes remain sourced from projects.json rather than duplicated into the controller,
+- runtime / data contract / Phase 3.8 storybook checks pass,
+- Headless Edge smoke passes at 1440x900, 820x900, and 390x844,
+- no document-level horizontal overflow at those widths,
+- no non-favicon SEVERE browser-console errors,
+- legacy path is retained for at least one additional checkpoint.
+
+Why HOLD instead of cutover:
+- M5 geography is explicitly structural CSS/DOM study geometry, not approved final illustrated world art.
+- Enabling it now would make a wireframe-quality H2 world visitor-visible before visual approval.
+- Therefore M6 does not flip the feature flag and does not remove legacy runtime.
+
+Exact next checkpoint: **M6.1 Visual Approval / Production Art Gate**. Review or create the actual H2 illustrated world presentation while keeping the current rollback baseline intact. Only after visual approval should a separate explicit cutover authorization flip the default hierarchy.
+
+Do not start M6.1, flip the feature flag, merge, or deploy without the next explicit user approval.
 
 ## Safety / workflow
 

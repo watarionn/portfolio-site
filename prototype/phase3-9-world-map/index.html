@@ -1,68 +1,11 @@
-<!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio City Phase 3.9 CP5</title>
-  <link rel="stylesheet" href="./prototype.css">
-</head>
-<body>
-  <main class="prototype-shell">
-    <header class="prototype-header">
-      <p class="eyebrow">Phase 3.9 / CP5 Closure Gate</p>
-      <h1>H2 Spatial Blueprint</h1>
-      <p>World Map → District View → Building Preview の操作契約を閉じる最終隔離プロトタイプ。完成アートではありません。</p>
-    </header>
-    <section id="world-panel">
-      <section class="viewport" tabindex="0" aria-label="Portfolio City world map prototype. Drag or use arrow keys to pan.">
-        <div class="world" id="world">
-          <div class="mass mainland" aria-hidden="true"></div><div class="mass highland" aria-hidden="true"></div>
-          <div class="mass bay" aria-hidden="true"></div><div class="mass offshore" aria-hidden="true"></div>
-          <div class="frontier frontier-a" aria-hidden="true">F-A</div><div class="frontier frontier-b" aria-hidden="true">F-B</div>
-          <div class="frontier frontier-c" aria-hidden="true">F-C</div>
-          <button class="district archive" data-district="archive" aria-label="Archive Street"><span>Archive</span></button>
-          <button class="district observatory" data-district="observatory" aria-label="Observatory Hill"><span>Observatory</span></button>
-          <button class="district workshop" data-district="workshop" aria-label="Workshop Alley"><span>Workshop</span></button>
-          <button class="district waterside" data-district="waterside" aria-label="Waterside Play"><span>Waterside</span></button>
-          <div class="commons" aria-hidden="true">Commons?</div>
-          <div class="cloud cloud-west" aria-hidden="true"></div><div class="cloud cloud-east" aria-hidden="true"></div>
-          <div class="cloud cloud-south" aria-hidden="true"></div>
-        </div>
-      </section>
-    </section>
-    <section class="district-view" id="district-panel" hidden aria-labelledby="district-name">
-      <div class="district-view__toolbar">
-        <button type="button" id="return-world">Return to World</button>
-        <div><p class="eyebrow">Placeholder District View</p><h2 id="district-name" tabindex="-1"></h2><p id="district-role"></p></div>
-      </div>
-      <div class="building-grid" id="building-grid" aria-label="Project building placeholders"></div>
-      <nav class="district-nav" aria-label="District navigation">
-        <button type="button" id="previous-district">← Previous District</button>
-        <button type="button" id="next-district">Next District →</button>
-      </nav>
-      <p class="district-note">Select a project building to inspect its CP4 preview. Open Work remains an inert contract affordance in this isolated prototype.</p>
-      <section class="building-preview" id="building-preview" hidden aria-labelledby="preview-title">
-        <div class="building-preview__backdrop" data-preview-close aria-hidden="true"></div>
-        <article class="building-preview__card" role="dialog" aria-modal="true" aria-describedby="preview-route">
-          <p class="eyebrow">P2 Building Preview</p>
-          <h3 id="preview-title" tabindex="-1"></h3>
-          <p id="preview-id"></p>
-          <p id="preview-route"></p>
-          <div class="building-preview__actions">
-            <button type="button" id="close-preview">Back to District</button>
-            <button type="button" id="open-work" aria-describedby="open-work-note">Open Work</button>
-          </div>
-          <p id="open-work-note">Prototype contract only. Canonical route is preserved, but navigation is intentionally disabled until production migration.</p>
-        </article>
-      </section>
-    </section>
-    <aside class="debug" aria-live="polite">
-      <strong>CP5 debug</strong><span>state: <b id="debug-state">P0 World Map</b></span><span>canvas: 100 x 64</span>
-      <span>selected: <b id="debug-selected">none</b></span><span>camera: <b id="debug-camera"></b></span>
-      <span>saved: <b id="debug-saved">none</b></span><span>viewport: <b id="debug-viewport"></b></span>
-      <span class="debug-actions"><button type="button" id="snapshot-camera">Snapshot</button><button type="button" id="restore-camera">Restore</button><button type="button" id="reset-camera">Reset</button></span>
-    </aside>
-  </main>
-  <script src="./prototype.js"></script>
-</body>
-</html>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portfolio City Phase 3.9 D5C</title><link rel="stylesheet" href="./prototype.css"></head><body>
+<main class="prototype-shell"><header class="prototype-header"><p class="eyebrow">Phase 3.9 / CP-D5C</p><h1>Published World View</h1><p>巨大なMaster Worldの一角を探索し、地区から作品へ入る隔離プロトタイプ。</p></header>
+<section id="world-panel"><section class="viewport" tabindex="0" aria-label="Portfolio City published world. Drag or use arrow keys to pan."><div class="world" id="world">
+<div class="world-art" aria-hidden="true"></div>
+<button class="district archive" data-district="archive" aria-label="Archive Street"><span class="district-emblem">A</span><span class="district-label">Archive</span></button>
+<button class="district observatory" data-district="observatory" aria-label="Observatory Hill"><span class="district-emblem">O</span><span class="district-label">Observatory</span></button>
+<button class="district workshop" data-district="workshop" aria-label="Workshop Alley"><span class="district-emblem">W</span><span class="district-label">Workshop</span></button>
+<button class="district waterside" data-district="waterside" aria-label="Waterside Play"><span class="district-emblem">S</span><span class="district-label">Waterside</span></button>
+<div class="frontier-vignette" aria-hidden="true"></div></div></section></section>
+<section class="district-view" id="district-panel" hidden aria-labelledby="district-name"><div class="district-view__toolbar"><button type="button" id="return-world">Return to World</button><div><p class="eyebrow">District View</p><h2 id="district-name" tabindex="-1"></h2><p id="district-role"></p></div></div><div class="building-grid" id="building-grid"></div><nav class="district-nav"><button id="previous-district">← Previous District</button><button id="next-district">Next District →</button></nav><section class="building-preview" id="building-preview" hidden><div class="building-preview__backdrop" data-preview-close></div><article class="building-preview__card" role="dialog" aria-modal="true"><h3 id="preview-title" tabindex="-1"></h3><p id="preview-id"></p><p id="preview-route"></p><div class="building-preview__actions"><button id="close-preview">Back to District</button><button id="open-work">Open Work</button></div></article></section></section>
+<aside class="debug"><strong>D5C debug</strong><span>state: <b id="debug-state">World View</b></span><span>selected: <b id="debug-selected">none</b></span><span>camera: <b id="debug-camera"></b></span><span>saved: <b id="debug-saved">none</b></span><span>viewport: <b id="debug-viewport"></b></span><span class="debug-actions"><button id="snapshot-camera">Snapshot</button><button id="restore-camera">Restore</button><button id="reset-camera">Reset</button></span></aside></main><script src="./prototype.js"></script></body></html>

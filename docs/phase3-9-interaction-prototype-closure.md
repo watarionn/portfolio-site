@@ -26,6 +26,21 @@ CP5 found one accessibility gap in the CP4 modal: keyboard Tab could leave the B
 - Open Work: inert in prototype, canonical route preserved
 - Production runtime: untouched
 
+## Responsive smoke evidence
+
+Headless Edge + Selenium passed at:
+- 1440 x 900
+- 390 x 844
+
+Both sizes verified 4 / 3 / 4 / 3 project counts by district, Preview Escape + focus restoration, modal Tab containment, and Return to World focus restoration.
+
+Static/runtime checks also passed:
+- JavaScript syntax
+- git diff whitespace check
+- Portfolio City runtime contract
+- 14 works / 4 districts / 13 terrain chunks contract
+- Phase 3.8 storybook detail contract
+
 ## Gate result
 
 No prototype blocker remains for the next design step. The next step is a Production Migration Plan, not production implementation. Runtime migration, merge, and deployment remain separately gated.

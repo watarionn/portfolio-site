@@ -188,7 +188,7 @@ Closure work:
 - Open Work remains inert and canonical routes remain unchanged,
 - production runtime remains untouched.
 
-Commit: pending CP5 checkpoint commit.
+Commit: `55acec1`
 
 ## QA state at handoff
 

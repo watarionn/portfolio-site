@@ -3,7 +3,7 @@
 Updated: 2026-09-19
 Branch: `phase3-9-world-scale-growth-model`
 Draft PR: #100
-Production migration: M1 SHELL STARTED (feature flag OFF)
+Production migration: M2 WORLD INTERACTION COMPLETE (feature flag OFF)
 Production deploy: NOT performed
 
 ## Current objective
@@ -260,7 +260,21 @@ Implemented behind a hard-disabled feature flag:
 
 Exact next checkpoint: **M2 World Interaction**. Port the CP5 World camera and district-entry interaction behind the same disabled feature flag.
 
-Do not start M2 without the next explicit user approval.
+### M2 COMPLETE - World Interaction
+
+Implemented behind the same hard-disabled feature flag:
+- camera set/pan/clamp state contract,
+- camera snapshot and restore,
+- district entry snapshots World camera and switches state to District,
+- Return to World restores saved camera,
+- pointer/touch pan binding helper,
+- viewport arrow-key pan binding helper,
+- all handlers are inert while the feature flag is false,
+- no current city.js integration and no visitor-visible change.
+
+Exact next checkpoint: **M3 District View**. Render the four canonical districts and 14 project-building entries inside the disabled hierarchy shell while reusing accepted artwork/fallback contracts.
+
+Do not start M3 without the next explicit user approval.
 
 ## Safety / workflow
 

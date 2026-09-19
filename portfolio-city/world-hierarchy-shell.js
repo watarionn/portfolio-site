@@ -76,6 +76,8 @@
       next.y = clamp(next.y, bounds.minY, bounds.maxY);
     }
     state.worldCamera = next;
+    const world = document.querySelector('#worldHierarchyWorld .world-h2-map');
+    if (world) world.style.transform = `translate3d(${next.x}px, ${next.y}px, 0) scale(${next.zoom})`;
     return true;
   }
 
@@ -110,7 +112,8 @@
   function returnToWorld() {
     if (!state.enabled) return false;
     state.activeProjectId = null;
-    restoreWorldCamera();
+    const restored = restoreWorldCamera();
+    if (restored) setWorldCamera(state.worldCamera);
     return setLevel('world');
   }
 
@@ -257,6 +260,7 @@
 
     viewport.append(world);
     panel.replaceChildren(viewport);
+    setWorldCamera(state.worldCamera);
     bindWorldViewport(viewport, { panStep: 36 });
     return true;
   }

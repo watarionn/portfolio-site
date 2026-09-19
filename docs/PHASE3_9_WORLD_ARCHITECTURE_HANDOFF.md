@@ -869,3 +869,16 @@ Captures: `docs/phase3-9-d5j-1440.png`, `docs/phase3-9-d5j-390.png`
 No main merge, deployment, or default activation occurred.
 
 Exact next checkpoint: **CP-D5K Activation Gate / Final Cutover Review**. Review the enabled production-shell presentation and activation mechanism, then determine whether the Phase 3.9 branch is ready for a default-flag flip. Main merge/deployment remains a separate explicit release action.
+
+
+### CP-D5K COMPLETE - Activation Gate / Final Cutover Review
+
+Activation-gate review found and corrected one interaction defect: world pan input updated camera state but did not visually transform the rendered world. `setWorldCamera()` now applies the camera transform, the camera is reapplied after world rendering, and saved camera position is reapplied when returning from a district.
+
+All syntax, existing Portfolio City contract/runtime, Master World 192-tile QA, reconstruction, and diff checks pass. The reversible `?world39=1` path remains available and `DEFAULT_FEATURE_FLAG = false` remains unchanged.
+
+Document: `docs/phase3-9-d5k-activation-gate.md`
+
+No default activation, main merge, or production deployment occurred.
+
+Exact next checkpoint: **CP-D5L Activation Candidate QA**. Create and test the branch-only default-ON candidate, verify default URL behavior and rollback diff, then stop before main merge/deployment for explicit release approval.

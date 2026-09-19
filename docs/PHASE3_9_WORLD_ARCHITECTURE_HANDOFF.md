@@ -394,3 +394,29 @@ The visible world must not expose the 16 x 12 grid. Geography, roads, coastline,
 Detailed blueprint: `docs/phase3-9-master-grid-district-flow.md`
 
 Exact next checkpoint: **CP-D2 Published Cluster Composition Test**. Produce a non-final visitor-view blockout that hides the grid, tests irregular H2-derived geography over the four stable homes, demonstrates F-A/F-B/F-C reveal directions, and compares desktop/mobile W0 camera framing. Do not create final production art or flip the feature flag.
+
+
+### CP-D2 COMPLETE - Published Cluster Composition Test
+
+A separate non-final visitor-view blockout now tests the locked 16 x 12 address topology without exposing grid cells.
+
+Evidence:
+- `prototype/phase3-9-composition-test/index.html`
+- `prototype/phase3-9-composition-test/composition.css`
+- `docs/phase3-9-published-cluster-composition-test.md`
+
+Result: PASS.
+- W0 homes remain H05 / G06 / I06 / H07.
+- asymmetric mainland and southern inlet break the four-quadrant reading,
+- Observatory retains a highland relationship,
+- Waterside now reads against actual water,
+- Archive / Workshop remain land-connected,
+- Central Commons is subordinate seam geography,
+- F-A Inland / F-B Coastal / F-C Offshore remain distinct,
+- desktop shows cluster + frontier context,
+- mobile intentionally crops at readable district scale for short-pan navigation,
+- the 16 x 12 grid remains invisible in visitor view.
+
+The blockout is reference evidence only, not production-approved final art.
+
+Exact next checkpoint: **CP-D3 Geography Translation Blueprint**. Convert the accepted composition logic into a production-art specification covering land/water/highland silhouettes, route hierarchy, district focal envelopes, frontier/cloud behavior, responsive camera framing, and explicit visual anti-patterns. Do not generate/install final production art or flip the feature flag during CP-D3.

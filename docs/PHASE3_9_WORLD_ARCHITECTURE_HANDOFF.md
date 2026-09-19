@@ -533,3 +533,21 @@ The data remains isolated under `prototype/`; production runtime does not import
 CP-D4D result: **PASS**.
 
 Exact next checkpoint: **CP-D4E Data Validation + Coordinate Projection**. Add deterministic validation for the 192-cell contract and define logical-cell to normalized Visitor World coordinate projection without exposing grid visuals. Keep production cutover disabled.
+
+
+### CP-D4E COMPLETE - Data Validation + Coordinate Projection
+
+Isolated deterministic world-data validation and logical-to-normalized projection are now defined.
+
+Files:
+- `prototype/phase3-9-world-data/validate-master-world.js`
+- `prototype/phase3-9-world-data/world-projection.v1.json`
+- `docs/phase3-9-world-coordinate-projection.md`
+
+Validation covers 16 x 12 dimensions, all 192 A01-P12 addresses, exactly four W0 published cells, unique district bindings, home-cell consistency, and absence of district bindings on unpublished cells.
+
+Projection uses one shared normalized Visitor World coordinate space (top-left origin, x/y in 0..1) with per-district within-cell offsets. Desktop/tablet/mobile share these coordinates and differ only in camera framing.
+
+CP-D4E result: **PASS**.
+
+Exact next checkpoint: **CP-D4F Projection Visual QA**. Render deterministic W0 anchors/focal envelopes over the exact Master World and verify the projected positions against intended highland/inland/eastern-mainland/waterside geography before production-art binding.

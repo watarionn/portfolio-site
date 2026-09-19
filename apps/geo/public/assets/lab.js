@@ -1,0 +1,66 @@
+(() => {
+  const modes = {
+    station: { endpoint: '../api/stations.php', placeholder: '駅名を検索' },
+    line: { endpoint: '../api/lines.php', placeholder: '路線名を検索' },
+    address: { endpoint: '../api/addresses.php', placeholder: '住所を検索' }
+  };
+  let mode = 'station';
+  const q = document.querySelector('#q');
+  const form = document.querySelector('#search-form');
+  const results = document.querySelector('#results');
+  const status = document.querySelector('#status');
+
+  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
+    mode = button.dataset.mode;
+    document.querySelectorAll('[data-mode]').forEach(x => x.setAttribute('aria-selected', String(x === button)));
+    q.placeholder = modes[mode].placeholder;
+    results.replaceChildren();
+    status.textContent = '検索語を入力してください。';
+    q.focus();
+  }));
+
+  fetch('../api/stats.php').then(r => r.json()).then(data => {
+    if (!data.ok) return;
+    const s = data.stats;
+    document.querySelector('#stats').innerHTML = [
+      [s.station_codes, '駅コード'],
+      [s.station_records, '駅・路線レコード'],
+      [s.line_records, '路線レコード'],
+      [s.address_records, '住所レコード']
+    ].map(([n,label]) => '<div class="geo-stat"><b>'+Number(n).toLocaleString('ja-JP')+'</b><small>'+label+'</small></div>').join('');
+  }).catch(() => {});
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    const value = q.value.trim();
+    if (!value) return;
+    status.textContent = '検索中…';
+    results.replaceChildren();
+    try {
+      const response = await fetch(modes[mode].endpoint + '?q=' + encodeURIComponent(value));
+      const data = await response.json();
+      if (!data.ok) throw new Error(data.error || '検索に失敗しました。');
+      status.textContent = data.count + '件を表示';
+      data.results.forEach(row => {
+        const article = document.createElement('article');
+        article.className = 'geo-result';
+        if (mode === 'station') {
+          article.innerHTML = '<b></b><small></small>';
+          article.querySelector('b').textContent = row.station_name + '（' + (row.station_reading || '') + '）';
+          article.querySelector('small').textContent = row.line_name + ' / ' + row.station_code;
+        } else if (mode === 'line') {
+          article.innerHTML = '<b></b><small></small>';
+          article.querySelector('b').textContent = row.line_name;
+          article.querySelector('small').textContent = row.line_code + ' / ' + (row.line_reading || '');
+        } else {
+          article.innerHTML = '<b></b><small></small>';
+          article.querySelector('b').textContent = [row.prefecture_name,row.municipality_name,row.town_name,row.block_name].filter(Boolean).join('');
+          article.querySelector('small').textContent = [row.postal_code ? '〒'+row.postal_code : '', row.address_code].filter(Boolean).join(' / ');
+        }
+        results.append(article);
+      });
+    } catch (error) {
+      status.textContent = error.message;
+    }
+  });
+})();

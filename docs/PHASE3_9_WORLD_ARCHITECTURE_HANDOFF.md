@@ -465,3 +465,26 @@ Detailed record:
 - `docs/phase3-9-exact-master-world-overlay.md`
 
 Exact next checkpoint: **CP-D4B Master World Terrain Zoning**. Classify the 192 cells only at coarse terrain level while intentionally retaining large undetermined frontier areas. Do not assign speculative future district identities, flip the feature flag, merge, or deploy.
+
+
+### CP-D4B COMPLETE - Master World Terrain Zoning
+
+The exact 16 x 12 Master World now has a coarse, intentionally revisable terrain zoning model.
+
+Document:
+- `docs/phase3-9-master-world-terrain-zoning.md`
+
+Zone vocabulary:
+SEA / COAST / LOWLAND / FOREST / HIGHLAND / COLD / DRY / FRONTIER plus the four published home cells.
+
+Confidence is intentionally uneven:
+- W0 published core = high confidence,
+- F-A/F-B/F-C near frontier = medium confidence,
+- far world = low confidence,
+- many cells remain FRONTIER and can be redesigned before publication.
+
+This is a planning layer, not a promise that future districts inherit the current far-world biome.
+
+CP-D4B result: **PASS**.
+
+Exact next checkpoint: **CP-D4C Exact Zoning Overlay**. Keep the deterministic 16 x 12 coordinate geometry and render zoning as a debug/design layer, separate from clean visitor art.

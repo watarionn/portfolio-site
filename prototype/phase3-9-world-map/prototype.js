@@ -98,7 +98,7 @@ function moveDistrict(delta) {
   renderDistrictView(DISTRICT_SEQUENCE[next]); districtName.focus();
 }
 function returnToWorld() {
-  districtPanel.hidden = true; worldPanel.hidden = false; stateOutput.textContent = "P0 World Map"; restoreCamera();
+  districtPanel.hidden = true; worldPanel.hidden = false; stateOutput.textContent = "World View"; restoreCamera();
   const target = districts.find((district) => district.dataset.district === activeDistrict); if (target) target.focus();
 }
 

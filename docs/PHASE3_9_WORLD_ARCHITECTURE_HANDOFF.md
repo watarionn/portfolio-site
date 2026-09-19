@@ -344,7 +344,21 @@ Why HOLD instead of cutover:
 
 Exact next checkpoint: **M6.1 Visual Approval / Production Art Gate**. Review or create the actual H2 illustrated world presentation while keeping the current rollback baseline intact. Only after visual approval should a separate explicit cutover authorization flip the default hierarchy.
 
-Do not start M6.1, flip the feature flag, merge, or deploy without the next explicit user approval.
+Do not flip the feature flag, merge, or deploy without explicit user approval.
+
+### M6.1 DECISION LOCK - Master Grid
+
+User-approved world-growth contract:
+- Master Grid = **16 x 12 (192 cells)**,
+- **1 cell = 1 district**,
+- the grid is internal and visitor-invisible,
+- undeveloped cells may remain the majority of the Master World,
+- visitors see only the Published World / clickable vicinity rather than the full grid,
+- a new district publishes one cell; projects added to an existing district remain inside its District View,
+- camera framing must derive from published cells and frontier context, not the full 16 x 12 bounds,
+- the earlier H2 100 x 64 coordinates are now composition-study evidence, not the canonical logical world coordinate system.
+
+This decision is locked before further production-art work. No feature-flag flip, merge, or deployment is authorized by this decision alone.
 
 ## Safety / workflow
 

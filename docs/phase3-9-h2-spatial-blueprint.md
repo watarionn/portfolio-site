@@ -1,13 +1,23 @@
 # Phase 3.9 - H2 Spatial Blueprint
 
 Updated: 2026-09-19
-Status: normalized non-art spatial plan
+Status: superseded composition study; logical grid locked separately
 
 ## Purpose
 
 Translate the selected H2 Mainland + Archipelago geography family into a coordinate-level composition without locking the production grid, final coastlines, or final illustrated terrain.
 
-All coordinates use a normalized 100 x 64 design canvas. They are proportions, not pixels or logical cells.
+All coordinates below use the earlier normalized 100 x 64 composition study. They remain useful as visual-composition evidence, but they are no longer the logical world model.
+
+## Locked logical world model (2026-09-19)
+
+- Master Grid: **16 columns x 12 rows = 192 district cells**.
+- **1 cell = 1 district**.
+- The logical grid is internal and is not drawn for visitors.
+- Unpublished / undeveloped cells may occupy most of the Master Grid without creating a UX problem because visitors only receive the Published World / clickable vicinity.
+- Publishing a new district reveals one district cell; ordinary project growth stays inside that district's District View.
+- The Master Grid and visitor camera remain separate concepts. Camera framing derives from published cells plus frontier context, never from the full 16 x 12 extent.
+- The previous 100 x 64 H2 coordinates are retained only to guide geography and composition while migration moves to cell coordinates.
 
 ## Master canvas
 
@@ -187,7 +197,7 @@ Carry these into implementation:
 4. Cloud frontier moves locally when geography is published.
 5. At least two qualitatively different expansion fronts remain viable after the first new district opens.
 6. Mobile and desktop share world coordinates but may use different entry framing.
-7. Logical grid dimensions remain an implementation decision, not an art constraint.
+7. Logical grid dimensions are locked at 16 x 12, with exactly one district per cell. The grid remains an implementation structure rather than a visible art constraint.
 
 ## Blueprint gate
 

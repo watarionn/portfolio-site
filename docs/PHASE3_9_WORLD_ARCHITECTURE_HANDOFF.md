@@ -588,3 +588,27 @@ Entry cameras intentionally include frontier context but never the entire 16x12 
 CP-D4G result: **PASS**.
 
 Exact next checkpoint: **CP-D4H World Reveal / Frontier Contract**. Define publication-driven reveal behavior for clean Visitor World art and cloud/frontier masks. Unpublished geography remains scenery, not disabled district UI. Keep production feature flag disabled.
+
+
+### CP-D4H COMPLETE - World Reveal / Frontier Contract
+
+Publication-driven local reveal is now defined.
+
+Files:
+- `prototype/phase3-9-world-data/world-reveal.v1.json`
+- `docs/phase3-9-world-reveal-frontier-contract.md`
+
+Key lock:
+- no rectangular/game-like fog-of-war,
+- clouds/frontier are scenery, never disabled district UI,
+- only PUBLISHED cells receive district interaction,
+- nearby unpublished terrain may be visible but remains non-interactive,
+- publishing one cell reveals/refines only a local neighborhood and does not publish neighbors,
+- reveal masks are organic and may cross cell boundaries,
+- existing published anchors never move during expansion.
+
+W0 expansion fronts F-A Inland, F-B Coastal, and F-C Offshore retain distinct reveal semantics.
+
+CP-D4H result: **PASS**.
+
+Exact next checkpoint: **CP-D4I World Asset Tiling / Expansion Strategy**. Define maintainable Visitor World art regions/tiles so future local district reveals can update a small area without replacing one monolithic world image. Keep production feature flag disabled.

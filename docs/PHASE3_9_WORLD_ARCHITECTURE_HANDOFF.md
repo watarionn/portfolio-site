@@ -488,3 +488,27 @@ This is a planning layer, not a promise that future districts inherit the curren
 CP-D4B result: **PASS**.
 
 Exact next checkpoint: **CP-D4C Exact Zoning Overlay**. Keep the deterministic 16 x 12 coordinate geometry and render zoning as a debug/design layer, separate from clean visitor art.
+
+
+### CP-D4C COMPLETE - Master Map / Visitor World Separation
+
+The world architecture is now explicitly split into three responsibilities:
+
+1. **Master Map** - exact 16 x 12 authoring/debug coordinates, publication state, terrain zoning, frontier metadata.
+2. **Visitor World** - continuous illustrated geography with no visible grid.
+3. **Runtime Interaction Overlay** - clickable district geometry, focus/labels, camera anchors, project interaction.
+
+Document:
+- `docs/phase3-9-master-visitor-separation.md`
+
+Current canonical homes remain:
+- H05 Observatory Hill
+- G06 Archive Street
+- I06 Workshop Alley
+- H07 Waterside Play
+
+Only PUBLISHED cells become district navigation targets. Far-world cells remain mutable before publication. Desktop/tablet/mobile share one logical world and one visitor-art geography, while camera framing may differ.
+
+CP-D4C result: **PASS**.
+
+Exact next checkpoint: **CP-D4D Master World Data Contract**. Create an isolated machine-readable baseline for all 192 cells, carrying cell address, coarse terrain zone, publication state, and current district binding where applicable. Do not wire it into production runtime yet.

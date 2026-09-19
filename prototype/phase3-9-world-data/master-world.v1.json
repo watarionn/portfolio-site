@@ -1,0 +1,1001 @@
+{
+  "schemaVersion": 1,
+  "coordinateVersion": 1,
+  "grid": {
+    "columns": 16,
+    "rows": 12,
+    "columnLabels": "A-P",
+    "rowLabels": "01-12",
+    "cellCount": 192,
+    "cellMeaning": "one stable district home address"
+  },
+  "policy": {
+    "publicGridVisible": false,
+    "visitorWorldSeparate": true,
+    "unpublishedMutable": true
+  },
+  "districts": {
+    "observatory": {
+      "homeCell": "H05"
+    },
+    "archive": {
+      "homeCell": "G06"
+    },
+    "workshop": {
+      "homeCell": "I06"
+    },
+    "waterside": {
+      "homeCell": "H07"
+    }
+  },
+  "cells": {
+    "A01": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "B01": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C01": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D01": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E01": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "F01": {
+      "terrain": "cold",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "G01": {
+      "terrain": "cold",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "H01": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "I01": {
+      "terrain": "cold",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "J01": {
+      "terrain": "cold",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "K01": {
+      "terrain": "cold",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L01": {
+      "terrain": "cold",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M01": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N01": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O01": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "P01": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A02": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "B02": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C02": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D02": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E02": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F02": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "G02": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "H02": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "I02": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "J02": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "K02": {
+      "terrain": "cold",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L02": {
+      "terrain": "cold",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M02": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N02": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O02": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "P02": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A03": {
+      "terrain": "forest",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "B03": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C03": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D03": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E03": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F03": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "G03": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "H03": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "I03": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "J03": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "K03": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L03": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M03": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N03": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O03": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "P03": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A04": {
+      "terrain": "forest",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "B04": {
+      "terrain": "forest",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C04": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D04": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E04": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F04": {
+      "terrain": "highland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "G04": {
+      "terrain": "highland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "H04": {
+      "terrain": "highland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "I04": {
+      "terrain": "lowland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "J04": {
+      "terrain": "lowland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "K04": {
+      "terrain": "forest",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L04": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M04": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N04": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O04": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "P04": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A05": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "B05": {
+      "terrain": "forest",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C05": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D05": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E05": {
+      "terrain": "forest",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F05": {
+      "terrain": "lowland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "G05": {
+      "terrain": "highland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "H05": {
+      "terrain": "highland",
+      "state": "PUBLISHED",
+      "confidence": "LOCKED",
+      "districtId": "observatory",
+      "districtName": "Observatory Hill"
+    },
+    "I05": {
+      "terrain": "highland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "J05": {
+      "terrain": "coast",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "K05": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L05": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M05": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N05": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O05": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "P05": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A06": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "B06": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C06": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D06": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E06": {
+      "terrain": "forest",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F06": {
+      "terrain": "lowland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "G06": {
+      "terrain": "lowland",
+      "state": "PUBLISHED",
+      "confidence": "LOCKED",
+      "districtId": "archive",
+      "districtName": "Archive Street"
+    },
+    "H06": {
+      "terrain": "lowland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "I06": {
+      "terrain": "lowland",
+      "state": "PUBLISHED",
+      "confidence": "LOCKED",
+      "districtId": "workshop",
+      "districtName": "Workshop Alley"
+    },
+    "J06": {
+      "terrain": "coast",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "K06": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L06": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M06": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N06": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O06": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "P06": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A07": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "B07": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C07": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D07": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E07": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F07": {
+      "terrain": "coast",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "G07": {
+      "terrain": "lowland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "H07": {
+      "terrain": "coast",
+      "state": "PUBLISHED",
+      "confidence": "LOCKED",
+      "districtId": "waterside",
+      "districtName": "Waterside Play"
+    },
+    "I07": {
+      "terrain": "coast",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "J07": {
+      "terrain": "sea",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "K07": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L07": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M07": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N07": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O07": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "P07": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A08": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "B08": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C08": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D08": {
+      "terrain": "dry",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E08": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F08": {
+      "terrain": "sea",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "G08": {
+      "terrain": "coast",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "H08": {
+      "terrain": "lowland",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "I08": {
+      "terrain": "coast",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "J08": {
+      "terrain": "sea",
+      "state": "NEAR_FRONTIER",
+      "confidence": "MEDIUM"
+    },
+    "K08": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L08": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M08": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N08": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O08": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "P08": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A09": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "B09": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C09": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D09": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E09": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F09": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "G09": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "H09": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "I09": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "J09": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "K09": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L09": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M09": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N09": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O09": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "P09": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A10": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "B10": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C10": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D10": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E10": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F10": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "G10": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "H10": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "I10": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "J10": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "K10": {
+      "terrain": "lowland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L10": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M10": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N10": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "O10": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "P10": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A11": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "B11": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "C11": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D11": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E11": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F11": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "G11": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "H11": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "I11": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "J11": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "K11": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "L11": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "M11": {
+      "terrain": "highland",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "N11": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "O11": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "P11": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "A12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "B12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "C12": {
+      "terrain": "coast",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "D12": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "E12": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "F12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "G12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "H12": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "I12": {
+      "terrain": "sea",
+      "state": "UNPUBLISHED",
+      "confidence": "LOW"
+    },
+    "J12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "K12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "L12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "M12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "N12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "O12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    },
+    "P12": {
+      "terrain": "frontier",
+      "state": "UNRESOLVED",
+      "confidence": "LOW"
+    }
+  }
+}

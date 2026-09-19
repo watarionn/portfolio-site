@@ -8,6 +8,8 @@ const stateOutput = document.querySelector("#debug-state");
 const viewportOutput = document.querySelector("#debug-viewport");
 const cameraOutput = document.querySelector("#debug-camera");
 const savedOutput = document.querySelector("#debug-saved");
+const tileOutput = document.querySelector("#debug-tiles");
+const terrainStage = document.querySelector("#terrain-stage");
 const snapshotButton = document.querySelector("#snapshot-camera");
 const restoreButton = document.querySelector("#restore-camera");
 const resetButton = document.querySelector("#reset-camera");
@@ -135,3 +137,40 @@ document.addEventListener("keydown", (event) => {
 previousDistrictButton.addEventListener("click", () => moveDistrict(-1)); nextDistrictButton.addEventListener("click", () => moveDistrict(1)); returnWorldButton.addEventListener("click", returnToWorld);
 snapshotButton.addEventListener("click", snapshotCamera); restoreButton.addEventListener("click", restoreCamera); resetButton.addEventListener("click", resetCamera);
 window.addEventListener("resize", updateViewportDebug); updateViewportDebug();
+
+
+/* CP-D5E terrain tile stage: dormant until a real exported manifest exists. */
+const TERRAIN_MANIFEST_URL = "./world-tiles/manifest.json";
+function tilePosition(cellId) {
+  const col = cellId.charCodeAt(0) - 65;
+  const row = Number(cellId.slice(1)) - 1;
+  return { left: col * 6.25, top: row * (100 / 12) };
+}
+async function bindTerrainManifest() {
+  try {
+    const response = await fetch(TERRAIN_MANIFEST_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error("manifest unavailable");
+    const manifest = await response.json();
+    if (manifest?.grid?.columns !== 16 || manifest?.grid?.rows !== 12 || Object.keys(manifest.tiles || {}).length !== 192) {
+      throw new Error("manifest contract mismatch");
+    }
+    const fragment = document.createDocumentFragment();
+    Object.entries(manifest.tiles).forEach(([cellId, tile]) => {
+      const image = document.createElement("img");
+      const pos = tilePosition(cellId);
+      image.className = "terrain-tile";
+      image.src = `./world-tiles/${tile.file}`;
+      image.alt = "";
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.style.left = `${pos.left}%`;
+      image.style.top = `${pos.top}%`;
+      fragment.append(image);
+    });
+    terrainStage.replaceChildren(fragment);
+    tileOutput.textContent = "192-tile manifest bound";
+  } catch (error) {
+    tileOutput.textContent = "fallback / manifest not bound";
+  }
+}
+bindTerrainManifest();

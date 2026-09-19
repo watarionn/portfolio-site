@@ -672,3 +672,22 @@ The architecture remains resolution-independent, so a later higher-resolution Ma
 CP-D4K result: **PASS**.
 
 Exact next checkpoint: **CP-D4L Master Artwork Production Blueprint**. Convert zoning, W0 geography, reveal/frontier rules, source dimensions, and layer separation into the final clean-terrain art brief before producing the real Master World artwork.
+
+
+### CP-D4L COMPLETE - Master Artwork Production Blueprint
+
+Final art-production blueprint:
+- `docs/phase3-9-master-artwork-production-blueprint.md`
+
+Locked target:
+- one clean 8192 x 6144 terrain Master,
+- deterministic 16 x 12 slicing to 192 x 512-square runtime tiles,
+- W0 remains a small local cluster,
+- dominant connected mainland + asymmetric coast + southern inlet + eastern offshore opportunity + Observatory-supporting highland,
+- no generated/project buildings, labels, debug grid, hitboxes, or final reveal clouds baked into terrain,
+- Central Commons remains subordinate connective geography,
+- detail density decreases outward to preserve future flexibility.
+
+CP-D4L result: **PASS / READY FOR MASTER ART PRODUCTION**.
+
+Exact next checkpoint: **CP-D5A Master Silhouette Blockout**. Produce the first clean world terrain artwork focused on land/sea silhouette and W0 topology only. No project buildings, labels, grid, or final cloud/reveal layer.

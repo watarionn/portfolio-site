@@ -3,7 +3,7 @@
 Updated: 2026-09-19
 Branch: `phase3-9-world-scale-growth-model`
 Draft PR: #100
-Production migration: M2 WORLD INTERACTION COMPLETE (feature flag OFF)
+Production migration: M3 DISTRICT VIEW COMPLETE (feature flag OFF)
 Production deploy: NOT performed
 
 ## Current objective
@@ -274,7 +274,22 @@ Implemented behind the same hard-disabled feature flag:
 
 Exact next checkpoint: **M3 District View**. Render the four canonical districts and 14 project-building entries inside the disabled hierarchy shell while reusing accepted artwork/fallback contracts.
 
-Do not start M3 without the next explicit user approval.
+### M3 COMPLETE - District View
+
+Implemented behind the same hard-disabled feature flag:
+- canonical projects.json / districts.json / map-layout.json loading path,
+- four District Views driven from canonical district metadata,
+- 14 project-building controls driven from canonical project records,
+- illustrated asset reuse from existing map-layout placements,
+- explicit fallback marker for projects without accepted illustrated assets,
+- Archive -> Observatory -> Workshop -> Waterside district cycle,
+- previous / next / Return to World controls,
+- no duplicated project titles or routes in the new controller,
+- no visitor-visible change while the feature flag is false.
+
+Exact next checkpoint: **M4 Building Preview + Open Work**. Port the CP5 preview modal contract and resolve Open Work directly from canonical projects.json routes.
+
+Do not start M4 without the next explicit user approval.
 
 ## Safety / workflow
 

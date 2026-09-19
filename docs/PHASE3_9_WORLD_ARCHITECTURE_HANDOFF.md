@@ -855,3 +855,17 @@ Result: PASS. Canonical 192-tile manifest binding, 4:3 world geometry, exact W0 
 Document: `docs/phase3-9-d5i-cutover-review.md`
 
 Exact next checkpoint: **CP-D5J Cutover Package / Pre-Activation QA**. Prepare a reversible activation path and exercise the production hierarchy shell locally with Master World enabled before any main merge/deploy.
+
+
+### CP-D5J COMPLETE - Cutover Package / Pre-Activation QA
+
+A reversible pre-activation path now exists in the real production shell: `?world39=1` enables Phase 3.9 locally while `DEFAULT_FEATURE_FLAG = false` keeps the visitor default unchanged.
+
+Pre-activation QA passed: JS syntax, Portfolio City contract/runtime checks, 192-tile Master World QA, diff check, plus real `city.html?world39=1` browser captures at 1440 x 1200 and 390 x 844.
+
+Document: `docs/phase3-9-d5j-cutover-package.md`
+Captures: `docs/phase3-9-d5j-1440.png`, `docs/phase3-9-d5j-390.png`
+
+No main merge, deployment, or default activation occurred.
+
+Exact next checkpoint: **CP-D5K Activation Gate / Final Cutover Review**. Review the enabled production-shell presentation and activation mechanism, then determine whether the Phase 3.9 branch is ready for a default-flag flip. Main merge/deployment remains a separate explicit release action.

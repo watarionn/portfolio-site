@@ -1,7 +1,8 @@
 'use strict';
 
 (() => {
-  const FEATURE_FLAG = false;
+  const DEFAULT_FEATURE_FLAG = false;
+  const FEATURE_FLAG = new URLSearchParams(window.location.search).get('world39') === '1' || DEFAULT_FEATURE_FLAG;
   const DATA_PATHS = {
     projects: 'data/projects.json',
     districts: 'data/districts.json',

@@ -636,3 +636,20 @@ Key rules:
 CP-D4I result: **PASS**.
 
 Exact next checkpoint: **CP-D4J Tile Export Contract + Prototype Slicer**. Define the manifest and build an isolated deterministic slicer that validates dimensions, emits A01-P12, hashes outputs, and reports changed tiles. Do not bind to production runtime yet.
+
+
+### CP-D4J COMPLETE - Tile Export Contract + Prototype Slicer
+
+Implemented:
+- `tools/world-tiles/slice-master-world.py`
+- `tools/world-tiles/manifest-contract.v1.json`
+- `tools/world-tiles/README.md`
+- `docs/phase3-9-tile-export-prototype.md`
+
+The authoring tool rejects invalid Master dimensions, slices exactly 16 x 12, emits A01-P12, hashes each runtime tile, writes a manifest, and can report changed tiles against a previous manifest.
+
+Synthetic 1600 x 1200 geometry smoke test produced 192 cells at 100 x 100 with complete A01-P12 coverage and 192 unique output hashes.
+
+CP-D4J result: **PASS**.
+
+Exact next checkpoint: **CP-D4K Real Master Source Specification + Export Trial**. Select practical Master source resolution candidates divisible by 16 x 12, evaluate tile density/runtime weight, define source retention/versioning, then run the slicer on the first real Master World artwork when ready. Production remains untouched.

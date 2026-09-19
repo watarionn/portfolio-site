@@ -734,3 +734,23 @@ Desktop can show the cluster together. Mobile uses the same coordinates with rea
 CP-D5B result: **PASS**.
 
 Exact next checkpoint: **CP-D5C W0 World View Prototype**. Implement this no-grid local World View in the isolated Phase 3.9 prototype, preserving the existing District View / Building Preview flow. Keep production feature flag disabled.
+
+
+### CP-D5C COMPLETE - W0 World View Prototype
+
+The isolated `prototype/phase3-9-world-map/` now reflects the approved local World View interaction:
+- no visible grid/cell IDs,
+- W0 local crop,
+- four projected district targets,
+- desktop cluster framing,
+- mobile readable-scale short pan,
+- existing District View -> Building Preview flow preserved.
+
+The background remains structural prototype terrain, not the locked binary Master World art. Production feature flag remains disabled.
+
+Document:
+- `docs/phase3-9-d5c-world-view-prototype.md`
+
+CP-D5C result: **PASS**.
+
+Exact next checkpoint: **CP-D5D Real Master Art Binding Plan + District Marker Visual Family**.

@@ -368,3 +368,29 @@ This decision is locked before further production-art work. No feature-flag flip
 - Do not use metered GitHub Actions.
 - Use local validation and `[skip ci]`.
 - User approval to proceed means the immediate next checkpoint only.
+
+
+### CP-D1 COMPLETE - Published Cluster / District Flow
+
+The 16 x 12 Master Grid has now been translated into a stable launch-cluster topology.
+
+Working district homes:
+- Observatory Hill: H05
+- Archive Street: G06
+- Workshop Alley: I06
+- Waterside Play: H07
+
+Central Commons remains non-address connective geography rather than consuming a district cell.
+
+Three expansion-front families remain open:
+- F-A Inland / west-northwest
+- F-B Coastal / south-southeast
+- F-C Offshore / east
+
+Future District 5 and District 6 should open on different fronts where their actual semantics allow it. Candidate frontier cells are reserves only; no future district identity is preassigned.
+
+The visible world must not expose the 16 x 12 grid. Geography, roads, coastline, clouds, and district focal points may cross or offset within logical cell boundaries.
+
+Detailed blueprint: `docs/phase3-9-master-grid-district-flow.md`
+
+Exact next checkpoint: **CP-D2 Published Cluster Composition Test**. Produce a non-final visitor-view blockout that hides the grid, tests irregular H2-derived geography over the four stable homes, demonstrates F-A/F-B/F-C reveal directions, and compares desktop/mobile W0 camera framing. Do not create final production art or flip the feature flag.

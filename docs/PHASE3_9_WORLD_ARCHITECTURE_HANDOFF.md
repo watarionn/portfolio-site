@@ -251,6 +251,7 @@ Exact next checkpoint: **M1 Production Shell**. Add the new state shell behind a
 
 Implemented behind a hard-disabled feature flag:
 - inert World / District / Preview semantic containers in production city.html,
+- shell controller loaded before city.js with defer,
 - isolated world-hierarchy-shell.js state controller,
 - explicit world/district/preview level state,
 - active district/project, camera snapshot, and return-focus state slots,

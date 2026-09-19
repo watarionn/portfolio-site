@@ -2624,3 +2624,20 @@ button { font: inherit; }
 .city-map[data-terrain-mode="full"] .world-edge-frame__feather--up {
   background: linear-gradient(0deg, rgba(240,234,216,.72) 0%, rgba(240,234,216,.30) 48%, transparent 100%);
 }
+
+/* Phase 3.9 M5: H2 structural world study. Inert while world hierarchy feature flag is off. */
+.world-h2-viewport { position: relative; overflow: hidden; min-height: 34rem; touch-action: none; }
+.world-h2-map { position: relative; width: min(100rem, 150vw); aspect-ratio: 4 / 3; margin: 0 auto; overflow: hidden; background: #b9d2d0; }
+.world-master-terrain { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: repeat(16, 1fr); grid-template-rows: repeat(12, 1fr); }
+.world-master-tile { display: block; width: 100%; height: 100%; object-fit: cover; grid-column: calc(var(--tile-column) + 1); grid-row: calc(var(--tile-row) + 1); }
+.world-h2-map[data-terrain-bound="true"] .world-h2-layer { display: none; }
+.world-h2-layer, .world-h2-district, .world-h2-frontier { position: absolute; }
+.world-h2-layer { inset: 0; pointer-events: none; }
+.world-h2-layer--mainland { clip-path: polygon(8% 18%, 29% 10%, 48% 12%, 70% 8%, 85% 22%, 82% 43%, 69% 57%, 59% 77%, 37% 84%, 18% 70%, 10% 48%); background: #d7cda5; }
+.world-h2-layer--southern-inlet { clip-path: polygon(38% 64%, 48% 58%, 57% 62%, 66% 73%, 60% 100%, 37% 100%); background: #a9c8c9; }
+.world-h2-layer--highland { clip-path: polygon(42% 8%, 58% 4%, 75% 12%, 68% 28%, 50% 30%); background: rgba(126, 139, 105, .42); }
+.world-h2-layer--offshore-islands { clip-path: polygon(77% 47%, 87% 40%, 95% 49%, 91% 62%, 79% 60%); background: #d2c79c; }
+.world-h2-layer--frontier-clouds { box-shadow: inset 0 0 7rem 3rem rgba(245, 241, 226, .78); }
+.world-h2-district { left: var(--world-x); top: var(--world-y); transform: translate(-50%, -50%); z-index: 3; }
+.world-h2-frontier { left: var(--world-x); top: var(--world-y); width: 4rem; height: 2rem; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(245, 241, 226, .64); filter: blur(.3rem); }
+@media (max-width: 680px) { .world-h2-map { width: 180vw; } .world-h2-viewport { min-height: 30rem; } }

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "revealModel": "publication-driven-local-reveal",
+  "layers": [
+    "visitor-world-base",
+    "frontier-atmosphere",
+    "published-district-art",
+    "runtime-interaction"
+  ],
+  "states": {
+    "published": {"districtInteractive": true, "terrainMayBeClear": true},
+    "near_frontier": {"districtInteractive": false, "terrainMayBePartial": true},
+    "unpublished": {"districtInteractive": false, "terrainMayBeSoft": true},
+    "unresolved": {"districtInteractive": false, "terrainMayBeObscured": true}
+  },
+  "reveal": {
+    "trigger": "district-publication",
+    "primaryRadiusCells": 0.72,
+    "contextRadiusCells": 1.55,
+    "edgeFeatherCells": 0.55,
+    "shape": "organic-authored-mask",
+    "rectangularFogOfWar": false,
+    "neighborCellsAutomaticallyPublished": false
+  },
+  "w0": {
+    "publishedCells": ["H05","G06","I06","H07"],
+    "fronts": {
+      "F-A": ["F05","F06","G05","G07"],
+      "F-B": ["I07","G07","H08","I08"],
+      "F-C": ["J05","J06","J07","K06"]
+    }
+  },
+  "rules": {
+    "cloudsAreSceneryNotDisabledUI": true,
+    "unpublishedCellsHaveNoHitTargets": true,
+    "revealDoesNotMoveExistingDistricts": true,
+    "revealMayExposeNoninteractiveTerrain": true,
+    "maskMayCrossCellBoundaries": true,
+    "fullMasterWorldNeverRequiredInDOM": true
+  }
+}

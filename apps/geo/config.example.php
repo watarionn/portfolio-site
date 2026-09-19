@@ -1,5 +1,5 @@
 <?php
-// Copy this file to the protected server config.php location.
+// Production target: /geo/config.php next to index.php.\n// Keep the real file server-only; deployment excludes config.php.
 // Never commit the real password.
 define('GEO_DB_HOST', 'localhost');
 define('GEO_DB_NAME', 'cf278796_geo');

@@ -241,7 +241,13 @@ The plan must define:
 4. camera/state/focus migration strategy,
 5. staged QA and rollback gates.
 
-Do not start production migration planning without the next explicit user approval. Do not modify production runtime until the plan itself is approved.
+Production Migration Plan completed in `docs/phase3-9-production-migration-plan.md`.
+
+Plan status: READY FOR REVIEW. Production runtime remains untouched.
+
+Exact next checkpoint: **M1 Production Shell**. Add the new state shell behind a disabled feature flag with no visitor-visible production change.
+
+Do not start M1 without the next explicit user approval.
 
 ## Safety / workflow
 

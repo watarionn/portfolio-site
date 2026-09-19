@@ -754,3 +754,29 @@ Document:
 CP-D5C result: **PASS**.
 
 Exact next checkpoint: **CP-D5D Real Master Art Binding Plan + District Marker Visual Family**.
+
+
+### CP-D5D COMPLETE - Master Art Binding + District Marker Family
+
+Real-art runtime binding and the district navigation marker family are now locked.
+
+Document:
+- `docs/phase3-9-d5d-art-binding-marker-family.md`
+
+Binding:
+- approved 8192x6144 Master -> deterministic CP-D4J slicer -> A01-P12 runtime tiles + manifest,
+- runtime requests camera-visible tiles plus a one-tile preload margin,
+- tiles form one seamless 16x12 world surface and carry no interaction semantics.
+
+Marker family:
+- quiet illustrated storybook medallions,
+- Observatory = dome/star,
+- Archive = book/arch,
+- Workshop = workshop/tool mark,
+- Waterside = wave/pier,
+- shared visual grammar, larger invisible hit targets, accessible buttons,
+- no generic red plus/map-pin treatment.
+
+CP-D5D result: **PASS**.
+
+Exact next checkpoint: **CP-D5E District Marker Prototype + Tile Stage Skeleton**. Implement the marker family and manifest-driven terrain stage in the isolated prototype. Do not fabricate or replace the approved Master binary. Production feature flag remains disabled.

@@ -691,3 +691,24 @@ Locked target:
 CP-D4L result: **PASS / READY FOR MASTER ART PRODUCTION**.
 
 Exact next checkpoint: **CP-D5A Master Silhouette Blockout**. Produce the first clean world terrain artwork focused on land/sea silhouette and W0 topology only. No project buildings, labels, grid, or final cloud/reveal layer.
+
+
+### CP-D5A COMPLETE - Master Silhouette LOCKED
+
+The refined world concept passed a second exact 16 x 12 + W0 anchor audit.
+
+Document:
+- `docs/phase3-9-d5a-silhouette-lock.md`
+
+PASS:
+- H05 Observatory: elevated/foothill relationship,
+- G06 Archive: connected inland mainland,
+- I06 Workshop: connected eastern mainland,
+- H07 Waterside: inlet/water relationship,
+- huge-world scale,
+- future flexibility,
+- grid-independent visitor composition.
+
+D5A now locks broad world silhouette/topology only. Micro terrain, atmosphere, buildings, labels, and UI remain unlocked.
+
+Exact next checkpoint: **CP-D5B Macro Terrain & Detail Density Pass**. Preserve the D5A silhouette and W0 anchors while refining terrain hierarchy and reducing overcommitment in remote cells.

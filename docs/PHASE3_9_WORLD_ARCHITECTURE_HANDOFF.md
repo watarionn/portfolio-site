@@ -882,3 +882,17 @@ Document: `docs/phase3-9-d5k-activation-gate.md`
 No default activation, main merge, or production deployment occurred.
 
 Exact next checkpoint: **CP-D5L Activation Candidate QA**. Create and test the branch-only default-ON candidate, verify default URL behavior and rollback diff, then stop before main merge/deployment for explicit release approval.
+
+
+### CP-D5L COMPLETE - Activation Candidate QA
+
+A branch-only default-ON release candidate is now prepared. The normal `portfolio-city/city.html` URL mounts Phase 3.9 on this branch, while `?world39=0` provides an explicit rollback/QA override and `?world39=1` still forces activation.
+
+Normal-URL browser captures were produced at 1440 x 1200 and 390 x 844. Syntax, Portfolio City contract/runtime, and diff checks pass.
+
+Document: `docs/phase3-9-d5l-activation-candidate-qa.md`
+Captures: `docs/phase3-9-d5l-1440.png`, `docs/phase3-9-d5l-390.png`
+
+No main merge or production deployment occurred. Production remains unchanged.
+
+Next boundary: **Phase 3.9 Release Gate**. Merge to main and production deployment require explicit release approval after this release-candidate checkpoint.

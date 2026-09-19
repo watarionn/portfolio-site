@@ -3,7 +3,7 @@
 Updated: 2026-09-19
 Branch: `phase3-9-world-scale-growth-model`
 Draft PR: #100
-Production migration: M3 DISTRICT VIEW COMPLETE (feature flag OFF)
+Production migration: M4 BUILDING PREVIEW + OPEN WORK COMPLETE (feature flag OFF)
 Production deploy: NOT performed
 
 ## Current objective
@@ -289,7 +289,22 @@ Implemented behind the same hard-disabled feature flag:
 
 Exact next checkpoint: **M4 Building Preview + Open Work**. Port the CP5 preview modal contract and resolve Open Work directly from canonical projects.json routes.
 
-Do not start M4 without the next explicit user approval.
+### M4 COMPLETE - Building Preview + Open Work
+
+Implemented behind the same hard-disabled feature flag:
+- project-building selection opens a modal Building Preview,
+- preview content resolves directly from canonical projects.json,
+- Open Work href uses the selected project's canonical route unchanged,
+- Back to District and Escape close Preview,
+- Tab / Shift+Tab focus containment,
+- focus restoration to the originating project building,
+- preview dialog semantics and labelled title,
+- no route reconstruction or duplicated route table,
+- no visitor-visible change while the feature flag is false.
+
+Exact next checkpoint: **M5 Visual Migration**. Introduce the approved H2 geography/frontier visual structure in reversible slices while keeping accepted buildings stable.
+
+Do not start M5 without the next explicit user approval.
 
 ## Safety / workflow
 

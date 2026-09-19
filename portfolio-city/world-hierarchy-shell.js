@@ -209,6 +209,92 @@
     return renderDistrictView();
   }
 
+  function renderBuildingPreview(projectId) {
+    if (!state.enabled) return false;
+    const panel = document.getElementById('worldHierarchyPreview');
+    const project = state.projects.find((item) => item.id === projectId);
+    if (!panel || !project) return false;
+
+    state.activeProjectId = project.id;
+    const title = document.createElement('h2');
+    title.id = 'worldHierarchyPreviewTitle';
+    title.tabIndex = -1;
+    title.textContent = project.title;
+
+    const building = document.createElement('p');
+    building.textContent = project.building;
+    const summary = document.createElement('p');
+    summary.textContent = project.summary;
+    const type = document.createElement('p');
+    type.textContent = project.type;
+
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.dataset.previewAction = 'back';
+    back.textContent = '地区へ戻る';
+
+    const open = document.createElement('a');
+    open.dataset.previewAction = 'open';
+    open.href = project.route;
+    open.textContent = '作品へ入る ↗';
+
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-modal', 'true');
+    panel.setAttribute('aria-labelledby', title.id);
+    panel.replaceChildren(title, building, summary, type, back, open);
+    setLevel('preview');
+    title.focus();
+    return true;
+  }
+
+  function closeBuildingPreview() {
+    if (!state.enabled || state.level !== 'preview') return false;
+    const projectId = state.activeProjectId;
+    state.activeProjectId = null;
+    if (!setLevel('district')) return false;
+    const target = document.querySelector(`#worldHierarchyDistrict [data-project-id="${CSS.escape(projectId ?? '')}"]`);
+    target?.focus();
+    return true;
+  }
+
+  function bindBuildingPreview() {
+    if (!state.enabled) return false;
+    const districtPanel = document.getElementById('worldHierarchyDistrict');
+    const previewPanel = document.getElementById('worldHierarchyPreview');
+    if (!districtPanel || !previewPanel) return false;
+
+    districtPanel.addEventListener('click', (event) => {
+      const projectButton = event.target.closest('[data-project-id]');
+      if (projectButton) renderBuildingPreview(projectButton.dataset.projectId);
+    });
+
+    previewPanel.addEventListener('click', (event) => {
+      if (event.target.closest('[data-preview-action="back"]')) closeBuildingPreview();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (!state.enabled || state.level !== 'preview') return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeBuildingPreview();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusable = [...previewPanel.querySelectorAll('button:not([disabled]), a[href]')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+    return true;
+  }
+
   function bindDistrictView() {
     if (!state.enabled) return false;
     const panel = document.getElementById('worldHierarchyDistrict');
@@ -246,6 +332,7 @@
     const loaded = await loadCanonicalDistrictData();
     if (!loaded) return false;
     bindDistrictView();
+    bindBuildingPreview();
     if (state.activeDistrictId) renderDistrictView();
     return setLevel(state.level);
   }
@@ -270,6 +357,8 @@
     returnToWorld,
     renderDistrictView,
     moveDistrict,
+    renderBuildingPreview,
+    closeBuildingPreview,
     bindWorldViewport,
     mount
   });

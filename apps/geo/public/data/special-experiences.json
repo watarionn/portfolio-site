@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "experiences": [
+    {
+      "id": "same-name-sumiyoshi",
+      "type": "same-name-station",
+      "label": "住吉",
+      "route": "/geo/same-name/?station=住吉",
+      "query": {"stationName": "住吉", "groupingRadiusM": 150}
+    },
+    {
+      "id": "gono-line-traveler",
+      "type": "line-traveler",
+      "label": "五能線",
+      "route": "/geo/line/?line=五能線",
+      "query": {"lineName": "五能線"}
+    },
+    {
+      "id": "same-kanji-different-reading",
+      "type": "reading-contrast",
+      "label": "同じ字・違う読み",
+      "route": "/geo/lab/?view=reading-contrast",
+      "examples": ["七日町", "登戸", "高田", "神田"]
+    }
+  ]
+}

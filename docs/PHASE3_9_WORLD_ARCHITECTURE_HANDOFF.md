@@ -551,3 +551,21 @@ Projection uses one shared normalized Visitor World coordinate space (top-left o
 CP-D4E result: **PASS**.
 
 Exact next checkpoint: **CP-D4F Projection Visual QA**. Render deterministic W0 anchors/focal envelopes over the exact Master World and verify the projected positions against intended highland/inland/eastern-mainland/waterside geography before production-art binding.
+
+
+### CP-D4F COMPLETE - Projection Visual QA
+
+The CP-D4E normalized anchors were rendered against the exact Master World zoning reference and visually audited.
+
+Document:
+- `docs/phase3-9-projection-visual-qa.md`
+
+Verified W0 anchors:
+- Observatory H05 -> (0.47875, 0.36500)
+- Archive G06 -> (0.39500, 0.46500)
+- Workshop I06 -> (0.54250, 0.45500)
+- Waterside H07 -> (0.47750, 0.55333)
+
+Result: **PASS**. The offsets preserve the intended highland / western mainland / eastern mainland / waterside relationships and break exact grid-center symmetry without changing stable district addresses.
+
+Exact next checkpoint: **CP-D4G Visitor Crop + Camera Anchor Contract**. Define deterministic desktop/tablet/mobile W0 entry framing and pan bounds from published anchors plus frontier context. Keep final-art binding and production cutover disabled.

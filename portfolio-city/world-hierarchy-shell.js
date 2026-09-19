@@ -5,7 +5,8 @@
   const DATA_PATHS = {
     projects: 'data/projects.json',
     districts: 'data/districts.json',
-    layout: 'data/map-layout.json'
+    layout: 'data/map-layout.json',
+    terrainManifest: 'assets/world/v1/terrain/manifest.json'
   };
   const DISTRICT_SEQUENCE = ['archive-street', 'observatory-hill', 'workshop-alley', 'waterside-play'];
   const H2_WORLD = {
@@ -23,6 +24,16 @@
       { id: 'coastal', x: 67, y: 49 },
       { id: 'offshore', x: 82, y: 39 }
     ]
+  };
+  const MASTER_WORLD = {
+    columns: 16,
+    rows: 12,
+    districtAnchors: {
+      'archive-street': 'G06',
+      'observatory-hill': 'H05',
+      'workshop-alley': 'I06',
+      'waterside-play': 'H07'
+    }
   };
   const shell = document.getElementById('worldHierarchyShell');
 
@@ -153,6 +164,41 @@
     };
   }
 
+  function masterCellPosition(cellId) {
+    const col = cellId.charCodeAt(0) - 65;
+    const row = Number(cellId.slice(1)) - 1;
+    return { x: ((col + 0.5) / MASTER_WORLD.columns) * 100, y: ((row + 0.5) / MASTER_WORLD.rows) * 100 };
+  }
+
+  async function bindMasterTerrain(world, stage) {
+    try {
+      const response = await fetch(DATA_PATHS.terrainManifest, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Master World manifest unavailable');
+      const manifest = await response.json();
+      if (manifest?.grid?.columns !== 16 || manifest?.grid?.rows !== 12 || Object.keys(manifest.tiles || {}).length !== 192) {
+        throw new Error('Master World manifest contract mismatch');
+      }
+      const fragment = document.createDocumentFragment();
+      for (const [cellId, tile] of Object.entries(manifest.tiles)) {
+        const image = document.createElement('img');
+        image.className = 'world-master-tile';
+        image.src = `assets/world/v1/terrain/${tile.file}`;
+        image.alt = '';
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        image.style.setProperty('--tile-column', cellId.charCodeAt(0) - 65);
+        image.style.setProperty('--tile-row', Number(cellId.slice(1)) - 1);
+        fragment.append(image);
+      }
+      stage.replaceChildren(fragment);
+      world.dataset.terrainBound = 'true';
+      return true;
+    } catch (error) {
+      world.dataset.terrainBound = 'false';
+      return false;
+    }
+  }
+
   function renderWorldMap() {
     if (!state.enabled) return false;
     const panel = document.getElementById('worldHierarchyWorld');
@@ -165,7 +211,13 @@
 
     const world = document.createElement('div');
     world.className = 'world-h2-map';
-    world.dataset.geography = 'mainland-archipelago-hybrid';
+    world.dataset.geography = 'master-world-v1';
+
+    const terrainStage = document.createElement('div');
+    terrainStage.className = 'world-master-terrain';
+    terrainStage.setAttribute('aria-hidden', 'true');
+    world.append(terrainStage);
+    bindMasterTerrain(world, terrainStage);
 
     for (const layer of ['mainland', 'southern-inlet', 'highland', 'offshore-islands', 'frontier-clouds']) {
       const element = document.createElement('div');
@@ -175,14 +227,15 @@
     }
 
     for (const district of state.districts) {
-      const anchor = H2_WORLD.districtAnchors[district.id];
+      const cellId = MASTER_WORLD.districtAnchors[district.id];
+      const anchor = cellId ? masterCellPosition(cellId) : null;
       if (!anchor) continue;
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'world-h2-district';
       button.dataset.worldDistrict = district.id;
       button.style.setProperty('--world-x', `${anchor.x}%`);
-      button.style.setProperty('--world-y', `${(anchor.y / H2_WORLD.height) * 100}%`);
+      button.style.setProperty('--world-y', `${anchor.y}%`);
       button.textContent = district.name;
       button.addEventListener('click', () => {
         if (enterDistrict(district.id, `world-district-${district.id}`)) renderDistrictView(district.id);

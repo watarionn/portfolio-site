@@ -815,3 +815,21 @@ Document:
 - `docs/phase3-9-d5f-real-master-export.md`
 
 Exact next checkpoint: **CP-D5G Binary Asset Intake + Prototype Visual QA**. Use a binary-capable repository/deployment path for the exported Master/tiles, bind the real manifest, and QA seams/loading/anchors at desktop/tablet/mobile. Keep production feature flag disabled.
+
+
+### CP-D5G COMPLETE - Master World Runtime Asset Intake
+
+The transported Master World has now been formally staged in the dedicated worktree as one canonical 8192x6144 Master plus 192 deterministic 512x512 WebP runtime tiles and a SHA-256 manifest.
+
+Runtime paths:
+- `portfolio-city/assets/world/v1/master/portfolio-city-master-world-v1.jpg`
+- `portfolio-city/assets/world/v1/terrain/manifest.json`
+- `portfolio-city/assets/world/v1/terrain/A01.webp` through `P12.webp`
+
+QA passes exact 16x12 coverage, 192 hashes/dimensions, deterministic zero-change rebuild, and full-world reconstruction (43.39 dB PSNR). The isolated prototype now consumes these canonical runtime assets directly. The disabled production hierarchy shell also has manifest-driven terrain binding and exact H05/G06/I06/H07 W0 cell-center projection.
+
+Document: `docs/phase3-9-d5g-master-world-runtime-assets.md`
+
+Production hierarchy feature flag remains OFF. No merge or deployment performed.
+
+Exact next checkpoint: **CP-D5H Real-Tile Visual / Browser QA** at desktop/tablet/mobile, followed by explicit cutover review only if visual QA passes.

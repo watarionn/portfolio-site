@@ -140,7 +140,7 @@ window.addEventListener("resize", updateViewportDebug); updateViewportDebug();
 
 
 /* CP-D5E terrain tile stage: dormant until a real exported manifest exists. */
-const TERRAIN_MANIFEST_URL = "./world-tiles/manifest.json";
+const TERRAIN_MANIFEST_URL = "../../portfolio-city/assets/world/v1/terrain/manifest.json";
 function tilePosition(cellId) {
   const col = cellId.charCodeAt(0) - 65;
   const row = Number(cellId.slice(1)) - 1;
@@ -159,7 +159,7 @@ async function bindTerrainManifest() {
       const image = document.createElement("img");
       const pos = tilePosition(cellId);
       image.className = "terrain-tile";
-      image.src = `./world-tiles/${tile.file}`;
+      image.src = `../../portfolio-city/assets/world/v1/terrain/${tile.file}`;
       image.alt = "";
       image.loading = "lazy";
       image.decoding = "async";

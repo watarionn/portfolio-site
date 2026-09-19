@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": {
+    "origin": "top-left",
+    "x": "0..1 west-to-east",
+    "y": "0..1 north-to-south",
+    "columns": 16,
+    "rows": 12,
+    "formula": {
+      "x": "(columnIndex + 0.5 + offsetX) / 16",
+      "y": "(rowIndex + 0.5 + offsetY) / 12"
+    },
+    "offsetRange": {"min": -0.49, "max": 0.49}
+  },
+  "districts": {
+    "observatory": {"homeCell":"H05","offset":{"x":0.16,"y":-0.12}},
+    "archive": {"homeCell":"G06","offset":{"x":-0.18,"y":0.08}},
+    "workshop": {"homeCell":"I06","offset":{"x":0.18,"y":-0.04}},
+    "waterside": {"homeCell":"H07","offset":{"x":0.14,"y":0.14}}
+  }
+}

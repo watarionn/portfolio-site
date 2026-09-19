@@ -14,14 +14,12 @@ $select = "
            prefecture_name, municipality_name, town_name, block_name,
            prefecture_kana, municipality_kana, town_kana, block_kana,
            street_name_flag, common_name_flag, is_last
-    FROM geo_address_records
+    FROM geo_addresses
 ";
 $where = implode(' OR ', array_map(static fn(string $field): string => "{$field} LIKE ?", $fields));
 
 try {
     $pdo = geo_pdo();
-
-    // Indexed component-prefix pass. This is the normal fast path.
     $prefix = $literal . '%';
     $sql = $select . " WHERE ({$where}) ORDER BY is_last DESC, address_record_id LIMIT {$limit}";
     $stmt = $pdo->prepare($sql);
@@ -29,8 +27,6 @@ try {
     $rows = $stmt->fetchAll();
     $mode = 'prefix';
 
-    // Some source fields contain a larger municipality/town string.
-    // Only fall back to contains search when the indexed prefix pass found nothing.
     if (!$rows) {
         $contains = '%' . $literal . '%';
         $stmt = $pdo->prepare($sql);
@@ -39,14 +35,8 @@ try {
         $mode = 'contains-fallback';
     }
 
-    geo_respond([
-        'ok' => true,
-        'query' => $q,
-        'mode' => $mode,
-        'count' => count($rows),
-        'results' => $rows,
-    ]);
+    geo_respond(['ok'=>true,'query'=>$q,'mode'=>$mode,'count'=>count($rows),'results'=>$rows]);
 } catch (Throwable $e) {
     error_log('GEO address search failed: ' . $e->getMessage());
-    geo_respond(['ok' => false, 'error' => '住所検索に失敗しました。'], 500);
+    geo_respond(['ok'=>false,'error'=>'住所検索に失敗しました。'],500);
 }

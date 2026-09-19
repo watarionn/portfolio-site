@@ -569,3 +569,22 @@ Verified W0 anchors:
 Result: **PASS**. The offsets preserve the intended highland / western mainland / eastern mainland / waterside relationships and break exact grid-center symmetry without changing stable district addresses.
 
 Exact next checkpoint: **CP-D4G Visitor Crop + Camera Anchor Contract**. Define deterministic desktop/tablet/mobile W0 entry framing and pan bounds from published anchors plus frontier context. Keep final-art binding and production cutover disabled.
+
+
+### CP-D4G COMPLETE - Visitor Crop + Camera Anchor Contract
+
+W0 entry framing is now deterministic and machine-readable.
+
+Files:
+- `prototype/phase3-9-world-data/world-camera.v1.json`
+- `docs/phase3-9-visitor-camera-contract.md`
+
+Published projected envelope:
+- x 0.39500 .. 0.54250
+- y 0.36500 .. 0.55333
+
+Entry cameras intentionally include frontier context but never the entire 16x12 world. Desktop/tablet/mobile share one world coordinate model. Mobile prioritizes readable districts and short pan rather than shrinking the full cluster.
+
+CP-D4G result: **PASS**.
+
+Exact next checkpoint: **CP-D4H World Reveal / Frontier Contract**. Define publication-driven reveal behavior for clean Visitor World art and cloud/frontier masks. Unpublished geography remains scenery, not disabled district UI. Keep production feature flag disabled.

@@ -1,139 +1,73 @@
 #!/usr/bin/env python3
-"""Prepare cp932 GEO source CSVs for MariaDB/phpMyAdmin import.
-
-No source dataset is committed to the repository.
-
-Example:
-    python apps/geo/tools/prepare_geo_import.py \
-      --stations /path/to/hLF-eki.csv \
-      --lines /path/to/hLF-ensen.csv \
-      --addresses /path/to/hmaf.csv \
-      --output build/geo-import
-"""
+"""Prepare CP932 GEO source CSVs as normalized UTF-8 MariaDB imports."""
 
 from __future__ import annotations
-
-import argparse
-import csv
-import json
+import argparse, csv, json
 from pathlib import Path
 
-STATION_COLUMNS = [
-    "station_code", "line_code", "line_name", "line_name_short",
-    "line_name_abbrev", "line_reading", "corp_type", "station_name",
-    "station_reading", "longitude", "latitude", "prefecture_code",
-]
-LINE_COLUMNS = [
-    "line_code", "line_name", "line_name_short",
-    "line_name_abbrev", "line_reading", "corp_type",
-]
-ADDRESS_COLUMNS = [
-    "address_code", "postal_code", "prefecture_code", "prefecture_name",
-    "municipality_name", "town_name", "block_name", "prefecture_kana",
-    "municipality_kana", "town_kana", "block_kana", "street_name_flag",
-    "common_name_flag", "is_last",
-]
+STATION_COLUMNS=["station_code","station_name","station_reading","longitude","latitude","prefecture_code"]
+STATION_LINE_COLUMNS=["station_code","line_code","source_order"]
+LINE_COLUMNS=["line_code","line_name","line_name_short","line_name_abbrev","line_reading","corp_type"]
+ADDRESS_COLUMNS=["address_code","postal_code","prefecture_code","prefecture_name","municipality_name","town_name","block_name","prefecture_kana","municipality_kana","town_kana","block_kana","street_name_flag","common_name_flag","is_last"]
 
-
-def clean(value: str | None) -> str:
-    return "" if value is None else value.strip()
-
-
-def write_rows(source: Path, output: Path, transform, columns, chunk_size: int | None = None):
-    count = 0
-    part = 0
-    writer = None
-    handle = None
-
-    def open_part():
-        nonlocal part, writer, handle
-        if handle:
-            handle.close()
-        part += 1
-        target = output if chunk_size is None else output.with_name(f"{output.stem}-{part:02d}{output.suffix}")
-        handle = target.open("w", encoding="utf-8", newline="")
-        writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
-        writer.writeheader()
-
-    open_part()
-    try:
-        with source.open("r", encoding="cp932", newline="") as src:
-            for raw in csv.DictReader(src):
-                if chunk_size and count and count % chunk_size == 0:
-                    open_part()
-                writer.writerow(transform(raw))
-                count += 1
-    finally:
-        if handle:
-            handle.close()
-    return count, part
-
-
-def station_row(r):
-    return dict(zip(STATION_COLUMNS, [
-        clean(r.get("EKICD")), clean(r.get("ENSCD")), clean(r.get("ENSNM")),
-        clean(r.get("ENSNM2")), clean(r.get("ENSNM3")), clean(r.get("ENSNMK")),
-        clean(r.get("CORP_TYPE")), clean(r.get("EKINM")), clean(r.get("EKINMK")),
-        clean(r.get("LNG")), clean(r.get("LAT")), clean(r.get("JUCD")),
-    ]))
-
-
-def line_row(r):
-    return dict(zip(LINE_COLUMNS, [
-        clean(r.get("ENSCD")), clean(r.get("ENSNM")), clean(r.get("ENSNM2")),
-        clean(r.get("ENSNM3")), clean(r.get("ENSNMK")), clean(r.get("CORP_TYPE")),
-    ]))
-
-
-def address_row(r):
-    code = clean(r.get("JUCD"))
-    return dict(zip(ADDRESS_COLUMNS, [
-        code, clean(r.get("POST_POSTCD")), code[:2], clean(r.get("JUNM1")),
-        clean(r.get("JUNM2")), clean(r.get("JUNM3")), clean(r.get("JUNM4")),
-        clean(r.get("JUNMK1")), clean(r.get("JUNMK2")), clean(r.get("JUNMK3")),
-        clean(r.get("JUNMK4")), clean(r.get("TOORINA_FLAG")),
-        clean(r.get("TUUSHOU_FLAG")), clean(r.get("IS_LAST")),
-    ]))
-
+def clean(v): return "" if v is None else v.strip()
+def writer(path, columns):
+    h=path.open("w",encoding="utf-8",newline=""); w=csv.DictWriter(h,fieldnames=columns); w.writeheader(); return h,w
+def open_address_part(base, part):
+    return writer(base.with_name(f"{base.stem}-{part:02d}{base.suffix}"),ADDRESS_COLUMNS)
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--stations", required=True, type=Path)
-    parser.add_argument("--lines", required=True, type=Path)
-    parser.add_argument("--addresses", required=True, type=Path)
-    parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--address-chunk-size", type=int, default=50000)
-    args = parser.parse_args()
+    p=argparse.ArgumentParser()
+    p.add_argument("--stations",required=True,type=Path); p.add_argument("--lines",required=True,type=Path)
+    p.add_argument("--addresses",required=True,type=Path); p.add_argument("--output",required=True,type=Path)
+    p.add_argument("--address-chunk-size",type=int,default=50000)
+    a=p.parse_args(); a.output.mkdir(parents=True,exist_ok=True)
 
-    args.output.mkdir(parents=True, exist_ok=True)
+    # Lines: source contains 591 rows but ENSCD repeats. Keep first row per code after
+    # validating that repeated codes do not disagree on canonical fields.
+    lines={}
+    with a.lines.open("r",encoding="cp932",newline="") as f:
+        line_source_count=0
+        for r in csv.DictReader(f):
+            line_source_count+=1; code=clean(r.get("ENSCD"))
+            row=dict(zip(LINE_COLUMNS,[code,clean(r.get("ENSNM")),clean(r.get("ENSNM2")),clean(r.get("ENSNM3")),clean(r.get("ENSNMK")),clean(r.get("CORP_TYPE"))]))
+            if code in lines and lines[code] != row:
+                raise ValueError(f"Conflicting line rows for ENSCD={code}")
+            lines.setdefault(code,row)
+    h,w=writer(a.output/"geo_lines.csv",LINE_COLUMNS)
+    for row in lines.values(): w.writerow(row)
+    h.close()
 
-    station_count, _ = write_rows(
-        args.stations, args.output / "geo_station_records.csv",
-        station_row, STATION_COLUMNS
-    )
-    line_count, _ = write_rows(
-        args.lines, args.output / "geo_line_records.csv",
-        line_row, LINE_COLUMNS
-    )
-    address_count, address_parts = write_rows(
-        args.addresses, args.output / "geo_address_records.csv",
-        address_row, ADDRESS_COLUMNS, args.address_chunk_size
-    )
+    stations={}; junctions=set(); station_source_count=0
+    with a.stations.open("r",encoding="cp932",newline="") as f:
+        for order,r in enumerate(csv.DictReader(f),1):
+            station_source_count+=1; sc=clean(r.get("EKICD")); lc=clean(r.get("ENSCD"))
+            row=dict(zip(STATION_COLUMNS,[sc,clean(r.get("EKINM")),clean(r.get("EKINMK")),clean(r.get("LNG")),clean(r.get("LAT")),clean(r.get("JUCD"))]))
+            if sc in stations and stations[sc] != row:
+                raise ValueError(f"Conflicting station rows for EKICD={sc}")
+            stations.setdefault(sc,row); junctions.add((sc,lc,order))
+    h,w=writer(a.output/"geo_stations.csv",STATION_COLUMNS)
+    for row in stations.values(): w.writerow(row)
+    h.close()
+    h,w=writer(a.output/"geo_station_lines.csv",STATION_LINE_COLUMNS)
+    for sc,lc,order in junctions: w.writerow({"station_code":sc,"line_code":lc,"source_order":order})
+    h.close()
 
-    manifest = {
-        "encoding": "utf-8",
-        "station_records": station_count,
-        "line_records": line_count,
-        "address_records": address_count,
-        "address_parts": address_parts,
-        "address_chunk_size": args.address_chunk_size,
-    }
-    (args.output / "manifest.json").write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    print(json.dumps(manifest, ensure_ascii=False))
+    address_count=0; address_codes=set(); part=1; ah,aw=open_address_part(a.output/"geo_addresses.csv",part)
+    with a.addresses.open("r",encoding="cp932",newline="") as f:
+        for r in csv.DictReader(f):
+            if a.address_chunk_size and address_count and address_count%a.address_chunk_size==0:
+                ah.close(); part+=1; ah,aw=open_address_part(a.output/"geo_addresses.csv",part)
+            code=clean(r.get("JUCD")); address_codes.add(code)
+            vals=[code,clean(r.get("POST_POSTCD")),code[:2],clean(r.get("JUNM1")),clean(r.get("JUNM2")),clean(r.get("JUNM3")),clean(r.get("JUNM4")),clean(r.get("JUNMK1")),clean(r.get("JUNMK2")),clean(r.get("JUNMK3")),clean(r.get("JUNMK4")),clean(r.get("TOORINA_FLAG")),clean(r.get("TUUSHOU_FLAG")),clean(r.get("IS_LAST"))]
+            aw.writerow(dict(zip(ADDRESS_COLUMNS,vals))); address_count+=1
+    ah.close()
 
+    manifest={"encoding":"utf-8","line_source_records":line_source_count,"lines":len(lines),"station_source_records":station_source_count,"stations":len(stations),"station_lines":len(junctions),"address_records":address_count,"unique_address_codes":len(address_codes),"address_parts":part}
+    expected={"line_source_records":591,"lines":554,"station_source_records":11147,"stations":10860,"address_records":495147,"unique_address_codes":487728}
+    manifest["expected"]=expected; manifest["verified"]=all(manifest[k]==v for k,v in expected.items())
+    (a.output/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    if not manifest["verified"]: raise SystemExit("Source count verification failed: "+json.dumps(manifest,ensure_ascii=False))
+    print(json.dumps(manifest,ensure_ascii=False))
 
-if __name__ == "__main__":
-    main()
+if __name__=="__main__": main()

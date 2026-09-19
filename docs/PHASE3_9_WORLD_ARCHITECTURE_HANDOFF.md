@@ -174,11 +174,25 @@ Implemented:
 - Open Work is defined as an inert affordance that exposes the canonical route contract without navigating,
 - production runtime remains untouched.
 
-Commit: pending CP4 checkpoint commit.
+Commit: `ee97ab1`
+
+### CP5 COMPLETE - Interaction Prototype Closure / Migration Readiness Gate
+
+Audit result: READY FOR MIGRATION PLANNING, with production migration still not started.
+
+Closure work:
+- added modal Tab focus containment discovered during CP5 accessibility audit,
+- verified pointer/touch camera path, keyboard arrow pan, Escape/back paths, focus restoration, and reduced-motion contract,
+- verified all 4 districts and all 14 canonical project id/title/route mappings,
+- responsive desktop/mobile smoke checks completed against the isolated prototype,
+- Open Work remains inert and canonical routes remain unchanged,
+- production runtime remains untouched.
+
+Commit: pending CP5 checkpoint commit.
 
 ## QA state at handoff
 
-Passed through CP4:
+Passed through CP5:
 
 - `node --check prototype/phase3-9-world-map/prototype.js`
 - `git diff --check`
@@ -188,6 +202,7 @@ Passed through CP4:
 - CP2 camera interaction/isolation contract
 - CP3 district-flow structure checked against the 4-district / 14-project canonical data contract
 - CP4 preview contract keeps all canonical routes inert inside the isolated prototype
+- CP5 modal focus containment and responsive interaction smoke audit
 
 Existing runtime contract remains:
 - 13 chunks
@@ -215,17 +230,18 @@ The previous Phase 3.9 runtime locks remain documented in `docs/PHASE3_9_HANDOFF
 
 ## Exact next step
 
-**CP5 Interaction Prototype Closure / Migration Readiness Gate**
+**Production Migration Plan**
 
-Audit the isolated World Map -> District View -> Building Preview flow as one complete interaction contract:
+Translate the now-closed isolated interaction contract into a production-safe implementation plan before touching the live Portfolio City runtime.
 
-1. validate pointer, touch, keyboard, Escape/back, focus restoration, and reduced-motion behavior,
-2. validate all 4 districts and all 14 canonical project ids/routes,
-3. run responsive smoke checks at the agreed desktop/mobile widths,
-4. document any blockers before production migration planning,
-5. keep production runtime untouched.
+The plan must define:
+1. production state hierarchy and file/module boundaries,
+2. reuse path for accepted district/building artwork,
+3. canonical route integration for Open Work,
+4. camera/state/focus migration strategy,
+5. staged QA and rollback gates.
 
-Do not start CP5 without the next explicit user approval.
+Do not start production migration planning without the next explicit user approval. Do not modify production runtime until the plan itself is approved.
 
 ## Safety / workflow
 

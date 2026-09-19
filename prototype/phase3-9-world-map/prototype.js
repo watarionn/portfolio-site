@@ -122,7 +122,16 @@ openWorkButton.addEventListener("click", () => {
   if (!activeProject) return;
   stateOutput.textContent = `P2 Building Preview / Open Work contract: ${activeProject.route}`;
 });
-document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !buildingPreview.hidden) { event.preventDefault(); closeBuildingPreview(); } });
+document.addEventListener("keydown", (event) => {
+  if (buildingPreview.hidden) return;
+  if (event.key === "Escape") { event.preventDefault(); closeBuildingPreview(); return; }
+  if (event.key !== "Tab") return;
+  const focusable = [...buildingPreview.querySelectorAll("button:not([disabled])")];
+  if (!focusable.length) return;
+  const first = focusable[0]; const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
 previousDistrictButton.addEventListener("click", () => moveDistrict(-1)); nextDistrictButton.addEventListener("click", () => moveDistrict(1)); returnWorldButton.addEventListener("click", returnToWorld);
 snapshotButton.addEventListener("click", snapshotCamera); restoreButton.addEventListener("click", restoreCamera); resetButton.addEventListener("click", resetCamera);
 window.addEventListener("resize", updateViewportDebug); updateViewportDebug();

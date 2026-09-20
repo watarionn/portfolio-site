@@ -126,7 +126,7 @@ P4-A: Single-map architecture. DONE. Duplicate legacy map presentation and the p
 P4-B: Compact MAP heading. DONE. The MAP heading is now a 56px desktop/tablet orientation strip and approximately 46px on the mobile QA viewport, with the world map promoted as the visual focus.
 P4-C: Framed viewport. DONE. world-h2-viewport is mounted inside a responsive wood / brass / parchment-style world-map-frame with non-interactive decorative layers.
 P4-D: District card prototype. DONE. District marker clicks now keep the world level visible and open a clamped selection card with district summary, project count, landmark, enter action, and close action.
-P4-E: Mobile bottom sheet + keyboard/focus behavior.
+P4-E: Mobile bottom sheet + keyboard/focus behavior. DONE. Mobile uses a viewport-attached bottom sheet; focus enters the primary action, Tab/Shift+Tab cycle within the card, Escape closes it, and focus returns to the originating district marker.
 P4-F: Browser QA at 1440, 820, and 390 widths, then production review.
 
 ## Acceptance criteria for the design phase

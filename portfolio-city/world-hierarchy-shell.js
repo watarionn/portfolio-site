@@ -232,6 +232,8 @@
       viewportRect.height - inset,
       window.innerHeight - viewportRect.top - inset - mobileBottomReserve
     );
+    card.style.setProperty('--district-card-visible-left', `${visibleLeft + viewport.scrollLeft}px`);
+    card.style.setProperty('--district-card-visible-width', `${Math.max(0, visibleRight - visibleLeft)}px`);
     const markerX = markerRect.left - viewportRect.left + markerRect.width / 2;
     const markerY = markerRect.top - viewportRect.top + markerRect.height / 2;
     let left = markerX + gap;
@@ -306,6 +308,48 @@
       if (enterDistrict(district.id, marker.id)) renderDistrictView(district.id);
     });
     close.addEventListener('click', () => closeDistrictCard());
+    enter.focus({ preventScroll: true });
+    return true;
+  }
+
+  function bindDistrictCardAccessibility() {
+    document.addEventListener('keydown', (event) => {
+      if (!state.enabled || !state.districtCardOpen || state.level !== 'world') return;
+      const card = document.querySelector('.world-district-card');
+      if (!card) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeDistrictCard();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      const focusable = [...card.querySelectorAll('button:not([disabled]), a[href]')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!card.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus({ preventScroll: true });
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus({ preventScroll: true });
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus({ preventScroll: true });
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (!state.districtCardOpen || state.level !== 'world') return;
+      const card = document.querySelector('.world-district-card');
+      const marker = state.districtCardReturnFocusId
+        ? document.getElementById(state.districtCardReturnFocusId)
+        : null;
+      const viewport = document.querySelector('.world-h2-viewport');
+      if (card && marker && viewport) positionDistrictCard(card, marker, viewport);
+    });
     return true;
   }
 
@@ -583,6 +627,7 @@
     if (!loaded) return false;
     bindDistrictView();
     bindBuildingPreview();
+    bindDistrictCardAccessibility();
     renderWorldMap();
     if (state.activeDistrictId) renderDistrictView();
     return setLevel(state.level);

@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "canvas": {
+    "aspectRatio": "16:9",
+    "runtimeWidth": 2048,
+    "runtimeHeight": 1152
+  },
+  "districts": [
+    {
+      "districtId": "observatory-hill",
+      "background": "assets/districts/observatory-hill/background.webp",
+      "buildings": [
+        {
+          "projectId": "prime-dot-art",
+          "asset": "assets/districts/observatory-hill/buildings/prime-dot-art.webp",
+          "x": 27,
+          "y": 65,
+          "width": 17,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 18, "y": 40, "width": 18, "height": 28 },
+          "popupPreferred": "upper-right"
+        },
+        {
+          "projectId": "sphere",
+          "asset": "assets/districts/observatory-hill/buildings/sphere.webp",
+          "x": 50,
+          "y": 47,
+          "width": 18,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 41, "y": 21, "width": 18, "height": 29 },
+          "popupPreferred": "below"
+        },
+        {
+          "projectId": "holoscope",
+          "asset": "assets/districts/observatory-hill/buildings/holoscope.webp",
+          "x": 72,
+          "y": 64,
+          "width": 18,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 63, "y": 36, "width": 18, "height": 31 },
+          "popupPreferred": "upper-left"
+        }
+      ]
+    },
+    {
+      "districtId": "archive-street",
+      "background": "assets/districts/archive-street/background.webp",
+      "buildings": [
+        {
+          "projectId": "yorei",
+          "asset": "assets/districts/archive-street/buildings/yorei.webp",
+          "x": 24,
+          "y": 75,
+          "width": 17,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 15, "y": 45, "width": 18, "height": 33 },
+          "popupPreferred": "right"
+        },
+        {
+          "projectId": "actress-finder",
+          "asset": "assets/districts/archive-street/buildings/actress-finder.webp",
+          "x": 74,
+          "y": 74,
+          "width": 17,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 65, "y": 44, "width": 18, "height": 33 },
+          "popupPreferred": "left"
+        },
+        {
+          "projectId": "cheatsheet",
+          "asset": "assets/districts/archive-street/buildings/cheatsheet.webp",
+          "x": 35,
+          "y": 50,
+          "width": 15,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 27, "y": 25, "width": 16, "height": 28 },
+          "popupPreferred": "lower-right"
+        },
+        {
+          "projectId": "shisha",
+          "asset": "assets/districts/archive-street/buildings/shisha.webp",
+          "x": 65,
+          "y": 50,
+          "width": 15,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 57, "y": 25, "width": 16, "height": 28 },
+          "popupPreferred": "lower-left"
+        }
+      ]
+    },
+    {
+      "districtId": "workshop-alley",
+      "background": "assets/districts/workshop-alley/background.webp",
+      "buildings": [
+        {
+          "projectId": "dqb2",
+          "asset": "assets/districts/workshop-alley/buildings/dqb2.webp",
+          "x": 25,
+          "y": 76,
+          "width": 18,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 15, "y": 45, "width": 20, "height": 34 },
+          "popupPreferred": "upper-right"
+        },
+        {
+          "projectId": "madori",
+          "asset": "assets/districts/workshop-alley/buildings/madori.webp",
+          "x": 74,
+          "y": 75,
+          "width": 18,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 64, "y": 44, "width": 20, "height": 34 },
+          "popupPreferred": "upper-left"
+        },
+        {
+          "projectId": "maze-maker",
+          "asset": "assets/districts/workshop-alley/buildings/maze-maker.webp",
+          "x": 35,
+          "y": 49,
+          "width": 16,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 26, "y": 22, "width": 18, "height": 30 },
+          "popupPreferred": "lower-right"
+        },
+        {
+          "projectId": "anagram",
+          "asset": "assets/districts/workshop-alley/buildings/anagram.webp",
+          "x": 64,
+          "y": 48,
+          "width": 16,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 55, "y": 21, "width": 18, "height": 30 },
+          "popupPreferred": "lower-left"
+        }
+      ]
+    },
+    {
+      "districtId": "waterside-play",
+      "background": "assets/districts/waterside-play/background.webp",
+      "buildings": [
+        {
+          "projectId": "aquarium",
+          "asset": "assets/districts/waterside-play/buildings/aquarium.webp",
+          "x": 27,
+          "y": 68,
+          "width": 20,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 16, "y": 36, "width": 22, "height": 35 },
+          "popupPreferred": "upper-right"
+        },
+        {
+          "projectId": "holoca",
+          "asset": "assets/districts/waterside-play/buildings/holoca.webp",
+          "x": 73,
+          "y": 66,
+          "width": 18,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 63, "y": 36, "width": 20, "height": 33 },
+          "popupPreferred": "upper-left"
+        },
+        {
+          "projectId": "word-generator",
+          "asset": "assets/districts/waterside-play/buildings/word-generator.webp",
+          "x": 51,
+          "y": 43,
+          "width": 17,
+          "anchor": "bottom-center",
+          "hitbox": { "x": 42, "y": 17, "width": 18, "height": 29 },
+          "popupPreferred": "below"
+        }
+      ]
+    }
+  ]
+}

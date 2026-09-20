@@ -41,6 +41,8 @@
     level: 'world',
     activeDistrictId: null,
     activeProjectId: null,
+    districtCardOpen: false,
+    districtCardReturnFocusId: null,
     worldCamera: { x: 0, y: 0, zoom: 1 },
     savedWorldCamera: null,
     returnFocusId: null,
@@ -103,6 +105,9 @@
     snapshotWorldCamera();
     state.activeDistrictId = districtId;
     state.activeProjectId = null;
+    state.districtCardOpen = false;
+    state.districtCardReturnFocusId = null;
+    document.querySelector('.world-district-card')?.remove();
     state.returnFocusId = returnFocusId;
     return setLevel('district');
   }
@@ -122,7 +127,7 @@
     let drag = null;
 
     const onPointerDown = (event) => {
-      if (event.target.closest('button, a')) return;
+      if (event.target.closest('button, a, .world-district-card')) return;
       drag = { id: event.pointerId, x: event.clientX, y: event.clientY, camera: copyCamera(state.worldCamera) };
       viewport.setPointerCapture?.(event.pointerId);
     };
@@ -201,6 +206,109 @@
     }
   }
 
+  function closeDistrictCard({ restoreFocus = true } = {}) {
+    const returnFocusId = state.districtCardReturnFocusId;
+    document.querySelector('.world-district-card')?.remove();
+    document.querySelectorAll('.world-h2-district[aria-expanded="true"]').forEach((button) => {
+      button.setAttribute('aria-expanded', 'false');
+    });
+    state.districtCardOpen = false;
+    state.districtCardReturnFocusId = null;
+    if (restoreFocus && returnFocusId) document.getElementById(returnFocusId)?.focus({ preventScroll: true });
+    return true;
+  }
+
+  function positionDistrictCard(card, marker, viewport) {
+    const viewportRect = viewport.getBoundingClientRect();
+    const markerRect = marker.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const gap = 18;
+    const inset = 12;
+    const mobileBottomReserve = window.matchMedia('(max-width: 680px)').matches ? 76 : 0;
+    const visibleLeft = Math.max(inset, -viewportRect.left + inset);
+    const visibleRight = Math.min(viewportRect.width - inset, window.innerWidth - viewportRect.left - inset);
+    const visibleTop = Math.max(inset, -viewportRect.top + inset);
+    const visibleBottom = Math.min(
+      viewportRect.height - inset,
+      window.innerHeight - viewportRect.top - inset - mobileBottomReserve
+    );
+    const markerX = markerRect.left - viewportRect.left + markerRect.width / 2;
+    const markerY = markerRect.top - viewportRect.top + markerRect.height / 2;
+    let left = markerX + gap;
+    if (left + cardRect.width > visibleRight) left = markerX - cardRect.width - gap;
+    left = clamp(left, visibleLeft, Math.max(visibleLeft, visibleRight - cardRect.width));
+    const top = clamp(
+      markerY - cardRect.height / 2,
+      visibleTop,
+      Math.max(visibleTop, visibleBottom - cardRect.height)
+    );
+    card.style.left = `${left}px`;
+    card.style.top = `${top}px`;
+  }
+
+  function openDistrictCard(district, marker, viewport) {
+    if (!district || !marker || !viewport) return false;
+    closeDistrictCard({ restoreFocus: false });
+    state.activeDistrictId = district.id;
+    state.districtCardOpen = true;
+    state.districtCardReturnFocusId = marker.id;
+    marker.setAttribute('aria-expanded', 'true');
+
+    const card = document.createElement('aside');
+    card.className = 'world-district-card';
+    card.dataset.districtCard = district.id;
+    card.setAttribute('role', 'dialog');
+    card.setAttribute('aria-modal', 'false');
+
+    const eyebrow = document.createElement('p');
+    eyebrow.className = 'world-district-card__eyebrow';
+    eyebrow.textContent = district.english;
+
+    const title = document.createElement('h3');
+    title.id = `world-district-card-title-${district.id}`;
+    title.textContent = district.name;
+    card.setAttribute('aria-labelledby', title.id);
+
+    const role = document.createElement('p');
+    role.className = 'world-district-card__role';
+    role.textContent = district.role;
+
+    const description = document.createElement('p');
+    description.className = 'world-district-card__description';
+    description.textContent = district.description;
+
+    const facts = document.createElement('div');
+    facts.className = 'world-district-card__facts';
+    const projectCount = state.projects.filter((project) => project.district === district.id).length;
+    facts.textContent = `${projectCount} PROJECTS · ${district.landmark}`;
+
+    const actions = document.createElement('div');
+    actions.className = 'world-district-card__actions';
+
+    const enter = document.createElement('button');
+    enter.type = 'button';
+    enter.className = 'world-district-card__enter';
+    enter.dataset.districtCardAction = 'enter';
+    enter.textContent = '地区を見る';
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'world-district-card__close';
+    close.dataset.districtCardAction = 'close';
+    close.textContent = '閉じる';
+
+    actions.append(enter, close);
+    card.append(eyebrow, title, role, description, facts, actions);
+    viewport.append(card);
+    positionDistrictCard(card, marker, viewport);
+
+    enter.addEventListener('click', () => {
+      if (enterDistrict(district.id, marker.id)) renderDistrictView(district.id);
+    });
+    close.addEventListener('click', () => closeDistrictCard());
+    return true;
+  }
+
   function renderWorldMap() {
     if (!state.enabled) return false;
     const panel = document.getElementById('worldHierarchyWorld');
@@ -239,10 +347,10 @@
       button.style.setProperty('--world-x', `${anchor.x}%`);
       button.style.setProperty('--world-y', `${anchor.y}%`);
       button.textContent = district.name;
-      button.addEventListener('click', () => {
-        if (enterDistrict(district.id, `world-district-${district.id}`)) renderDistrictView(district.id);
-      });
       button.id = `world-district-${district.id}`;
+      button.setAttribute('aria-haspopup', 'dialog');
+      button.setAttribute('aria-expanded', 'false');
+      button.addEventListener('click', () => openDistrictCard(district, button, viewport));
       world.append(button);
     }
 

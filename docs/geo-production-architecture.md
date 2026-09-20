@@ -55,15 +55,23 @@ Same-name station display distinguishes station identities from physical places.
 
 GEO remains isolated from the active Portfolio City world-hierarchy migration until Layout Lock. Final illustration assets are deferred until then.
 
+## Protected production config
+
+GEO reuses the site's existing protected root `config.php` instead of publishing a separate configuration file under `/geo/`.
+
+Source resolution:
+- local source: `apps/geo/public/api/_common.php` -> `apps/geo/config.php`
+- production mapping: `/geo/api/_common.php` -> protected site-root `/config.php`
+
+Production only needs the `GEO_DB_HOST`, `GEO_DB_NAME`, `GEO_DB_USER`, `GEO_DB_PASS`, and optional `GEO_DB_CHARSET` constants added to that existing server-only file. The deployment artifact and FTPS workflow exclude `config.php`, so normal releases preserve the protected configuration.
+
 ## Next gate
 
-1. create/configure the Shin Free Server MariaDB database
-2. apply apps/geo/database/schema.sql
-3. import the normalized UTF-8 CSVs
-4. run count + 五能線 / 住吉 / 七日町 smoke queries
-5. connect the protected PDO config
-6. benchmark the read-only APIs
-7. migrate DATA LAB v9 from embedded data to the API
+1. add the GEO_* constants to the existing protected production root config.php
+2. deploy the GEO public artifact after explicit release approval
+3. run apps/geo/tools/smoke_geo_api.py against the production /geo URL
+4. benchmark the read-only APIs
+5. migrate DATA LAB v9 from embedded data to the API
 
 
 ## Production database verification
@@ -76,4 +84,4 @@ Verified in phpMyAdmin on 2026-09-20 after the normalized import completed:
 - geo_addresses: 495,147
 - distinct address_code: 487,728
 
-All five counts match the importer manifest and expected snapshot. The MariaDB production data load is therefore count-verified. Content smoke checks remain the next gate before enabling the PHP API against production data.
+All five counts match the importer manifest and expected snapshot. The MariaDB production data load is therefore count-verified. The remaining runtime gate is the protected PDO configuration plus production HTTP smoke tests.

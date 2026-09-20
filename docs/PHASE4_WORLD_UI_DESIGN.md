@@ -122,7 +122,7 @@ Mobile <= 680px:
 - world-h2-map may remain wider than the viewport for exploration
 
 ## 9. Implementation checkpoints
-P4-A: Single-map architecture. Remove duplicate legacy map presentation and public world39 switch.
+P4-A: Single-map architecture. DONE. Duplicate legacy map presentation and the public world39 switch are removed from the active MAP UI.
 P4-B: Compact MAP heading. Replace current oversized panel-heading content for the map panel only.
 P4-C: Framed viewport. Add world-map-frame and responsive visual treatment.
 P4-D: District card prototype. Change world marker click from direct district transition to selection card.

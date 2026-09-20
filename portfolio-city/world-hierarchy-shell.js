@@ -1,9 +1,6 @@
 'use strict';
 
 (() => {
-  const DEFAULT_FEATURE_FLAG = true;
-  const world39Override = new URLSearchParams(window.location.search).get('world39');
-  const FEATURE_FLAG = world39Override === '1' || (world39Override !== '0' && DEFAULT_FEATURE_FLAG);
   const DATA_PATHS = {
     projects: 'data/projects.json',
     districts: 'data/districts.json',
@@ -40,7 +37,7 @@
   const shell = document.getElementById('worldHierarchyShell');
 
   const state = {
-    enabled: FEATURE_FLAG,
+    enabled: true,
     level: 'world',
     activeDistrictId: null,
     activeProjectId: null,

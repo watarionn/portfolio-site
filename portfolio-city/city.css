@@ -2625,7 +2625,7 @@ button { font: inherit; }
   background: linear-gradient(0deg, rgba(240,234,216,.72) 0%, rgba(240,234,216,.30) 48%, transparent 100%);
 }
 
-/* Phase 3.9 M5: H2 structural world study. Inert while world hierarchy feature flag is off. */
+/* Phase 4.0: canonical Master World presentation. */
 .world-h2-viewport { position: relative; overflow: hidden; min-height: 34rem; touch-action: none; }
 .world-h2-map { position: relative; width: min(100rem, 150vw); aspect-ratio: 4 / 3; margin: 0 auto; overflow: hidden; background: #b9d2d0; }
 .world-master-terrain { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: repeat(16, 1fr); grid-template-rows: repeat(12, 1fr); }

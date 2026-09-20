@@ -161,11 +161,21 @@ def main() -> int:
         fail("map-layout must define one world-space region per district")
 
     html = (CITY / "city.html").read_text(encoding="utf-8")
-    for marker in ("MAP", "WORKS", "PROFILE", "CONTACT", 'id="cityMap"', 'id="projectInspector"', 'id="worksDirectory"', 'class="map-legend"', 'data-layout="living-city"', "project-inspector__close", "project-inspector__visual"):
+    for marker in ("MAP", "WORKS", "PROFILE", "CONTACT", 'id="worldHierarchyShell"', 'id="worldHierarchyWorld"', 'id="worldHierarchyDistrict"', 'id="worldHierarchyPreview"', 'data-world-hierarchy-version="m1"', 'class="panel-heading panel-heading--map"', "PORTFOLIO CITY / WORLD MAP", "地区を選んで探索", 'id="worksDirectory"'):
         if marker not in html:
             fail(f"city.html is missing required marker: {marker}")
+    for legacy_marker in ('id="cityMap"', 'id="cityMapViewport"', 'id="projectInspector"', 'class="map-legend"', 'data-layout="living-city"'):
+        if legacy_marker in html:
+            fail(f"city.html must not expose the retired legacy map presentation: {legacy_marker}")
     if 'city-hero' in html or 'city-status' in html:
         fail("Portfolio City HERO/status block must remain removed")
+
+    world_js = (CITY / "world-hierarchy-shell.js").read_text(encoding="utf-8")
+    for marker in ("terrainManifest", "world-master-tile", "world-h2-viewport", "world-map-frame", "world-map-frame__matte", "world-map-frame__corner", "world-district-card", "openDistrictCard", "closeDistrictCard", "bindDistrictCardAccessibility", "districtCardOpen", "aria-haspopup", "aria-expanded", "preventScroll", "--district-card-mobile-top", "enabled: true"):
+        if marker not in world_js:
+            fail(f"world-hierarchy-shell.js is missing canonical world behavior: {marker}")
+    if "world39" in world_js:
+        fail("public world39 presentation switch must remain retired")
 
     js = (CITY / "city.js").read_text(encoding="utf-8")
     for marker in ("portfolio-city.visited.v1", "localStorage", "ArrowRight", "ArrowLeft", "replaceChildren", "prefers-reduced-motion", "buildBuildingVisual", "buildMapInfrastructure", "buildDistrictLandmark", "buildDistrictScene", "is-active-district", "district__progress", "city-map__street-label", "district__complete", "aria-pressed", "city-map__path", "city-map__shoreline", "district-scene__tree", "district-scene__lamp", "district-scene__bench", "district-scene__sign", "positionInspector", "setInspectorOpen", "is-hover-district", "buildCityArtLayers", "city-art--far", "city-art--mid", "city-art--near", "city-map__guide", "work-row__thumb"):
@@ -178,7 +188,7 @@ def main() -> int:
             fail(f"city.js must not use inline mobile image variable: {forbidden}")
 
     css = (CITY / "city.css").read_text(encoding="utf-8")
-    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark", ".district-scene", ".is-active-district", ".city-map__street-label", ".district__progress", ".map-legend", ".district__complete", ".is-complete-district", "@media (min-width: 981px)", ".city-map__path", ".city-map__shoreline", ".district-scene__tree", ".project-inspector.is-open", ".project-inspector__close", "pointer-events: none", ".city-art__mountains", ".city-art__tree-cluster", ".city-art__person", "Phase 3.4 / Checkpoint 2", "--project-image", ".project-inspector__visual", ".work-row__thumb"):
+    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".panel-heading--map", ".city-panel--map", ".world-map-frame", ".world-map-frame__matte", ".world-map-frame__corner", ".world-district-card", ".world-district-card__actions", "position: sticky", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark", ".district-scene", ".is-active-district", ".city-map__street-label", ".district__progress", ".map-legend", ".district__complete", ".is-complete-district", "@media (min-width: 981px)", ".city-map__path", ".city-map__shoreline", ".district-scene__tree", ".project-inspector.is-open", ".project-inspector__close", "pointer-events: none", ".city-art__mountains", ".city-art__tree-cluster", ".city-art__person", "Phase 3.4 / Checkpoint 2", "--project-image", ".project-inspector__visual", ".work-row__thumb"):
         if marker not in css:
             fail(f"city.css is missing required responsive/map rule: {marker}")
 
@@ -197,7 +207,7 @@ def main() -> int:
     if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
         fail("validate-public workflow must run the Portfolio City runtime contract")
 
-    print("Portfolio City Phase 3.6 R5 contract passed: 14 works / 4 districts / 13 terrain chunks / negative-origin world")
+    print("Portfolio City Phase 4 P4-F contract passed: release-candidate world UI / district flow / mobile bottom sheet")
     return 0
 
 

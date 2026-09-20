@@ -1,9 +1,6 @@
 'use strict';
 
 (() => {
-  const DEFAULT_FEATURE_FLAG = true;
-  const world39Override = new URLSearchParams(window.location.search).get('world39');
-  const FEATURE_FLAG = world39Override === '1' || (world39Override !== '0' && DEFAULT_FEATURE_FLAG);
   const DATA_PATHS = {
     projects: 'data/projects.json',
     districts: 'data/districts.json',
@@ -40,10 +37,12 @@
   const shell = document.getElementById('worldHierarchyShell');
 
   const state = {
-    enabled: FEATURE_FLAG,
+    enabled: true,
     level: 'world',
     activeDistrictId: null,
     activeProjectId: null,
+    districtCardOpen: false,
+    districtCardReturnFocusId: null,
     worldCamera: { x: 0, y: 0, zoom: 1 },
     savedWorldCamera: null,
     returnFocusId: null,
@@ -106,6 +105,9 @@
     snapshotWorldCamera();
     state.activeDistrictId = districtId;
     state.activeProjectId = null;
+    state.districtCardOpen = false;
+    state.districtCardReturnFocusId = null;
+    document.querySelector('.world-district-card')?.remove();
     state.returnFocusId = returnFocusId;
     return setLevel('district');
   }
@@ -125,7 +127,7 @@
     let drag = null;
 
     const onPointerDown = (event) => {
-      if (event.target.closest('button, a')) return;
+      if (event.target.closest('button, a, .world-district-card')) return;
       drag = { id: event.pointerId, x: event.clientX, y: event.clientY, camera: copyCamera(state.worldCamera) };
       viewport.setPointerCapture?.(event.pointerId);
     };
@@ -204,6 +206,157 @@
     }
   }
 
+  function closeDistrictCard({ restoreFocus = true } = {}) {
+    const returnFocusId = state.districtCardReturnFocusId;
+    document.querySelector('.world-district-card')?.remove();
+    document.querySelectorAll('.world-h2-district[aria-expanded="true"]').forEach((button) => {
+      button.setAttribute('aria-expanded', 'false');
+    });
+    state.districtCardOpen = false;
+    state.districtCardReturnFocusId = null;
+    if (restoreFocus && returnFocusId) document.getElementById(returnFocusId)?.focus({ preventScroll: true });
+    return true;
+  }
+
+  function positionDistrictCard(card, marker, viewport) {
+    const viewportRect = viewport.getBoundingClientRect();
+    const markerRect = marker.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const gap = 18;
+    const inset = 12;
+    const mobileBottomReserve = window.matchMedia('(max-width: 680px)').matches ? 76 : 0;
+    const visibleLeft = Math.max(inset, -viewportRect.left + inset);
+    const visibleRight = Math.min(viewportRect.width - inset, window.innerWidth - viewportRect.left - inset);
+    const visibleTop = Math.max(inset, -viewportRect.top + inset);
+    const visibleBottom = Math.min(
+      viewportRect.height - inset,
+      window.innerHeight - viewportRect.top - inset - mobileBottomReserve
+    );
+    card.style.setProperty('--district-card-visible-left', `${visibleLeft + viewport.scrollLeft}px`);
+    card.style.setProperty('--district-card-visible-width', `${Math.max(0, visibleRight - visibleLeft)}px`);
+    card.style.setProperty(
+      '--district-card-mobile-top',
+      `${Math.max(visibleTop, visibleBottom - cardRect.height) + viewport.scrollTop}px`
+    );
+    const markerX = markerRect.left - viewportRect.left + markerRect.width / 2;
+    const markerY = markerRect.top - viewportRect.top + markerRect.height / 2;
+    let left = markerX + gap;
+    if (left + cardRect.width > visibleRight) left = markerX - cardRect.width - gap;
+    left = clamp(left, visibleLeft, Math.max(visibleLeft, visibleRight - cardRect.width));
+    const top = clamp(
+      markerY - cardRect.height / 2,
+      visibleTop,
+      Math.max(visibleTop, visibleBottom - cardRect.height)
+    );
+    card.style.left = `${left}px`;
+    card.style.top = `${top}px`;
+  }
+
+  function openDistrictCard(district, marker, viewport) {
+    if (!district || !marker || !viewport) return false;
+    closeDistrictCard({ restoreFocus: false });
+    state.activeDistrictId = district.id;
+    state.districtCardOpen = true;
+    state.districtCardReturnFocusId = marker.id;
+    marker.setAttribute('aria-expanded', 'true');
+
+    const card = document.createElement('aside');
+    card.className = 'world-district-card';
+    card.dataset.districtCard = district.id;
+    card.setAttribute('role', 'dialog');
+    card.setAttribute('aria-modal', 'false');
+
+    const eyebrow = document.createElement('p');
+    eyebrow.className = 'world-district-card__eyebrow';
+    eyebrow.textContent = district.english;
+
+    const title = document.createElement('h3');
+    title.id = `world-district-card-title-${district.id}`;
+    title.textContent = district.name;
+    card.setAttribute('aria-labelledby', title.id);
+
+    const role = document.createElement('p');
+    role.className = 'world-district-card__role';
+    role.textContent = district.role;
+
+    const description = document.createElement('p');
+    description.className = 'world-district-card__description';
+    description.textContent = district.description;
+
+    const facts = document.createElement('div');
+    facts.className = 'world-district-card__facts';
+    const projectCount = state.projects.filter((project) => project.district === district.id).length;
+    facts.textContent = `${projectCount} PROJECTS · ${district.landmark}`;
+
+    const actions = document.createElement('div');
+    actions.className = 'world-district-card__actions';
+
+    const enter = document.createElement('button');
+    enter.type = 'button';
+    enter.className = 'world-district-card__enter';
+    enter.dataset.districtCardAction = 'enter';
+    enter.textContent = '地区を見る';
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'world-district-card__close';
+    close.dataset.districtCardAction = 'close';
+    close.textContent = '閉じる';
+
+    actions.append(enter, close);
+    card.append(eyebrow, title, role, description, facts, actions);
+    viewport.append(card);
+    positionDistrictCard(card, marker, viewport);
+
+    enter.addEventListener('click', () => {
+      if (enterDistrict(district.id, marker.id)) renderDistrictView(district.id);
+    });
+    close.addEventListener('click', () => closeDistrictCard());
+    enter.focus({ preventScroll: true });
+    return true;
+  }
+
+  function bindDistrictCardAccessibility() {
+    document.addEventListener('keydown', (event) => {
+      if (!state.enabled || !state.districtCardOpen || state.level !== 'world') return;
+      const card = document.querySelector('.world-district-card');
+      if (!card) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeDistrictCard();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      const focusable = [...card.querySelectorAll('button:not([disabled]), a[href]')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!card.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus({ preventScroll: true });
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus({ preventScroll: true });
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus({ preventScroll: true });
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (!state.districtCardOpen || state.level !== 'world') return;
+      const card = document.querySelector('.world-district-card');
+      const marker = state.districtCardReturnFocusId
+        ? document.getElementById(state.districtCardReturnFocusId)
+        : null;
+      const viewport = document.querySelector('.world-h2-viewport');
+      if (card && marker && viewport) positionDistrictCard(card, marker, viewport);
+    });
+    return true;
+  }
+
   function renderWorldMap() {
     if (!state.enabled) return false;
     const panel = document.getElementById('worldHierarchyWorld');
@@ -242,10 +395,10 @@
       button.style.setProperty('--world-x', `${anchor.x}%`);
       button.style.setProperty('--world-y', `${anchor.y}%`);
       button.textContent = district.name;
-      button.addEventListener('click', () => {
-        if (enterDistrict(district.id, `world-district-${district.id}`)) renderDistrictView(district.id);
-      });
       button.id = `world-district-${district.id}`;
+      button.setAttribute('aria-haspopup', 'dialog');
+      button.setAttribute('aria-expanded', 'false');
+      button.addEventListener('click', () => openDistrictCard(district, button, viewport));
       world.append(button);
     }
 
@@ -260,7 +413,23 @@
     }
 
     viewport.append(world);
-    panel.replaceChildren(viewport);
+
+    const frame = document.createElement('div');
+    frame.className = 'world-map-frame';
+
+    for (const corner of ['nw', 'ne', 'sw', 'se']) {
+      const stud = document.createElement('span');
+      stud.className = `world-map-frame__corner world-map-frame__corner--${corner}`;
+      stud.setAttribute('aria-hidden', 'true');
+      frame.append(stud);
+    }
+
+    const matte = document.createElement('div');
+    matte.className = 'world-map-frame__matte';
+    matte.append(viewport);
+    frame.append(matte);
+
+    panel.replaceChildren(frame);
     setWorldCamera(state.worldCamera);
     bindWorldViewport(viewport, { panStep: 36 });
     return true;
@@ -462,6 +631,7 @@
     if (!loaded) return false;
     bindDistrictView();
     bindBuildingPreview();
+    bindDistrictCardAccessibility();
     renderWorldMap();
     if (state.activeDistrictId) renderDistrictView();
     return setLevel(state.level);

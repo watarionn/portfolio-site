@@ -204,6 +204,39 @@ button { font: inherit; }
 }
 .panel-heading--stacked { grid-template-columns: 1fr; }
 
+.city-panel--map { padding-block: clamp(1.25rem, 2vw, 2rem); }
+.panel-heading--map {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  min-height: 3.5rem;
+  margin-bottom: 1rem;
+  padding: .45rem 0 .6rem;
+  border-bottom-color: rgba(23, 19, 14, .42);
+}
+.panel-heading--map > div {
+  display: flex;
+  align-items: baseline;
+  gap: .9rem;
+  min-width: 0;
+}
+.panel-heading--map > div > p {
+  margin: 0;
+  flex: 0 0 auto;
+  font-size: .58rem;
+  letter-spacing: .13em;
+}
+.panel-heading--map h2 {
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+.panel-heading--map > p {
+  font-size: .72rem;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+
 .map-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(18rem, .55fr);
@@ -476,6 +509,17 @@ button { font: inherit; }
   .city-nav__note { display: none; }
   .mobile-primary-switch { display: flex; }
   .panel-heading { grid-template-columns: 1fr; gap: .75rem; }
+  .panel-heading--map {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .6rem;
+    min-height: 2.9rem;
+    margin-bottom: .75rem;
+    padding: .3rem 0 .4rem;
+  }
+  .panel-heading--map > div { gap: .45rem; }
+  .panel-heading--map > div > p { font-size: .5rem; letter-spacing: .1em; }
+  .panel-heading--map h2 { font-size: 1.05rem; }
+  .panel-heading--map > p { font-size: .66rem; letter-spacing: .04em; }
   .city-map {
     min-height: auto;
     grid-template-columns: 1fr;
@@ -1600,7 +1644,6 @@ button { font: inherit; }
   .mobile-primary-switch { display: none !important; }
   .city-panel--map { padding: .55rem 0 .8rem; }
   .city-panel--map .city-shell { padding-inline: .55rem; }
-  .city-panel--map .panel-heading,
   .city-panel--map .map-legend { display: none; }
   .map-layout { position: relative; display: block; }
   .city-map {
@@ -2625,8 +2668,162 @@ button { font: inherit; }
   background: linear-gradient(0deg, rgba(240,234,216,.72) 0%, rgba(240,234,216,.30) 48%, transparent 100%);
 }
 
-/* Phase 3.9 M5: H2 structural world study. Inert while world hierarchy feature flag is off. */
-.world-h2-viewport { position: relative; overflow: hidden; min-height: 34rem; touch-action: none; }
+/* Phase 4.0: canonical Master World presentation. */
+.world-map-frame {
+  position: relative;
+  padding: clamp(.7rem, 1.2vw, 1.05rem);
+  border: 1px solid #443326;
+  border-radius: .72rem;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.08), transparent 18% 82%, rgba(0,0,0,.08)),
+    repeating-linear-gradient(7deg, rgba(255,255,255,.025) 0 2px, rgba(0,0,0,.025) 2px 4px),
+    linear-gradient(135deg, #76543a, #4b3427 46%, #68482f);
+  box-shadow:
+    0 .8rem 1.8rem rgba(23,19,14,.22),
+    inset 0 0 0 1px rgba(226,197,135,.25),
+    inset 0 0 0 .3rem rgba(31,22,17,.24);
+}
+.world-map-frame::before {
+  content: "";
+  position: absolute;
+  inset: .42rem;
+  border: 1px solid rgba(190,151,79,.72);
+  border-radius: .42rem;
+  box-shadow: inset 0 0 0 1px rgba(255,244,210,.13);
+  pointer-events: none;
+  z-index: 4;
+}
+.world-map-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, rgba(255,255,255,.07), transparent 24% 72%, rgba(0,0,0,.08));
+  pointer-events: none;
+  z-index: 5;
+}
+.world-map-frame__matte {
+  position: relative;
+  padding: clamp(.42rem, .75vw, .65rem);
+  border: 1px solid rgba(88,68,43,.72);
+  background: linear-gradient(135deg, #d9c9a7, #c7b691 52%, #dbcbaa);
+  box-shadow:
+    inset 0 .18rem .28rem rgba(255,255,255,.18),
+    inset 0 -.2rem .35rem rgba(68,50,31,.16);
+}
+.world-map-frame__corner {
+  position: absolute;
+  z-index: 6;
+  width: .52rem;
+  height: .52rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0d99b 0 13%, #b68c49 26% 54%, #73542c 76% 100%);
+  box-shadow: 0 1px 2px rgba(23,19,14,.38);
+  pointer-events: none;
+}
+.world-map-frame__corner--nw { top: .62rem; left: .62rem; }
+.world-map-frame__corner--ne { top: .62rem; right: .62rem; }
+.world-map-frame__corner--sw { bottom: .62rem; left: .62rem; }
+.world-map-frame__corner--se { right: .62rem; bottom: .62rem; }
+
+.world-h2-viewport {
+  position: relative;
+  overflow: hidden;
+  min-height: 34rem;
+  touch-action: none;
+  border: 1px solid rgba(49,38,26,.62);
+  background: #b9d2d0;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    inset 0 0 1.15rem rgba(31,28,23,.2);
+}
+.world-h2-viewport:focus-visible {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 3px;
+}
+.world-district-card {
+  position: absolute;
+  z-index: 12;
+  width: min(20rem, calc(100% - 1.5rem));
+  padding: 1rem 1rem .9rem;
+  border: 1px solid rgba(78,58,37,.72);
+  border-radius: .45rem;
+  background:
+    linear-gradient(rgba(248,243,231,.97), rgba(239,232,213,.98)),
+    var(--paper-soft);
+  color: var(--ink);
+  box-shadow:
+    0 .75rem 1.65rem rgba(23,19,14,.24),
+    inset 0 0 0 2px rgba(255,255,255,.35);
+}
+.world-district-card::before {
+  content: "";
+  position: absolute;
+  inset: .3rem;
+  border: 1px solid rgba(154,121,64,.32);
+  border-radius: .28rem;
+  pointer-events: none;
+}
+.world-district-card__eyebrow {
+  margin: 0 0 .25rem;
+  color: var(--vermilion);
+  font-family: var(--serif-en);
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+}
+.world-district-card h3 {
+  margin: 0;
+  font-family: var(--mincho);
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+.world-district-card__role {
+  margin: .28rem 0 0;
+  color: var(--ink-soft);
+  font-size: .74rem;
+  font-weight: 600;
+}
+.world-district-card__description {
+  margin: .72rem 0;
+  color: var(--ink-muted);
+  font-size: .78rem;
+  line-height: 1.7;
+}
+.world-district-card__facts {
+  padding-top: .55rem;
+  border-top: 1px solid rgba(78,58,37,.2);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.world-district-card__actions {
+  display: flex;
+  gap: .5rem;
+  margin-top: .8rem;
+}
+.world-district-card__actions button {
+  min-height: 2.2rem;
+  padding: .45rem .8rem;
+  border: 1px solid rgba(23,19,14,.55);
+  border-radius: 999px;
+  font: 600 .72rem/1 var(--sans);
+  cursor: pointer;
+}
+.world-district-card__enter {
+  background: var(--ink);
+  color: var(--paper-soft);
+}
+.world-district-card__close {
+  background: transparent;
+  color: var(--ink-soft);
+}
+.world-h2-district[aria-expanded="true"] {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 3px;
+}
 .world-h2-map { position: relative; width: min(100rem, 150vw); aspect-ratio: 4 / 3; margin: 0 auto; overflow: hidden; background: #b9d2d0; }
 .world-master-terrain { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: repeat(16, 1fr); grid-template-rows: repeat(12, 1fr); }
 .world-master-tile { display: block; width: 100%; height: 100%; object-fit: cover; grid-column: calc(var(--tile-column) + 1); grid-row: calc(var(--tile-row) + 1); }
@@ -2640,4 +2837,63 @@ button { font: inherit; }
 .world-h2-layer--frontier-clouds { box-shadow: inset 0 0 7rem 3rem rgba(245, 241, 226, .78); }
 .world-h2-district { left: var(--world-x); top: var(--world-y); transform: translate(-50%, -50%); z-index: 3; }
 .world-h2-frontier { left: var(--world-x); top: var(--world-y); width: 4rem; height: 2rem; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(245, 241, 226, .64); filter: blur(.3rem); }
-@media (max-width: 680px) { .world-h2-map { width: 180vw; } .world-h2-viewport { min-height: 30rem; } }
+@media (max-width: 680px) {
+  .world-map-frame {
+    padding: .48rem;
+    border-radius: .5rem;
+    box-shadow:
+      0 .48rem 1.1rem rgba(23,19,14,.19),
+      inset 0 0 0 1px rgba(226,197,135,.22),
+      inset 0 0 0 .2rem rgba(31,22,17,.2);
+  }
+  .world-map-frame::before { inset: .27rem; border-radius: .3rem; }
+  .world-map-frame__matte { padding: .3rem; }
+  .world-map-frame__corner { width: .38rem; height: .38rem; }
+  .world-map-frame__corner--nw { top: .39rem; left: .39rem; }
+  .world-map-frame__corner--ne { top: .39rem; right: .39rem; }
+  .world-map-frame__corner--sw { bottom: .39rem; left: .39rem; }
+  .world-map-frame__corner--se { right: .39rem; bottom: .39rem; }
+  .world-district-card {
+    left: var(--district-card-visible-left, .4rem) !important;
+    right: auto !important;
+    top: var(--district-card-mobile-top, auto) !important;
+    bottom: auto;
+    width: var(--district-card-visible-width, calc(100% - .8rem));
+    max-height: calc(100% - .8rem);
+    overflow: auto;
+    padding: .9rem .9rem .8rem;
+    border-radius: .75rem .75rem .28rem .28rem;
+    box-shadow:
+      0 -.6rem 1.4rem rgba(23,19,14,.2),
+      inset 0 0 0 2px rgba(255,255,255,.35);
+  }
+  .world-district-card::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: .38rem;
+    left: 50%;
+    width: 2.6rem;
+    height: .22rem;
+    border-radius: 999px;
+    background: rgba(78,58,37,.28);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .world-district-card__eyebrow { margin-top: .18rem; }
+  .world-district-card__description {
+    margin: .55rem 0;
+    font-size: .75rem;
+    line-height: 1.55;
+  }
+  .world-district-card__actions {
+    position: sticky;
+    bottom: -.8rem;
+    margin-inline: -.9rem;
+    padding: .65rem .9rem .8rem;
+    background: linear-gradient(180deg, rgba(239,232,213,.75), rgba(239,232,213,.98) 35%);
+  }
+  .world-district-card__actions button { flex: 1 1 0; min-height: 2.45rem; }
+  .world-h2-map { width: 180vw; }
+  .world-h2-viewport { min-height: 30rem; }
+}

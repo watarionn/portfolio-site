@@ -450,52 +450,166 @@
     if (!panel || !district) return false;
 
     const projects = state.projects.filter((project) => project.district === district.id).sort(byOrder);
+    const sequenceIndex = DISTRICT_SEQUENCE.indexOf(district.id);
+    const previousDistrict = state.districts.find(
+      (item) => item.id === DISTRICT_SEQUENCE[(sequenceIndex - 1 + DISTRICT_SEQUENCE.length) % DISTRICT_SEQUENCE.length]
+    );
+    const nextDistrict = state.districts.find(
+      (item) => item.id === DISTRICT_SEQUENCE[(sequenceIndex + 1) % DISTRICT_SEQUENCE.length]
+    );
+
+    const page = document.createElement('section');
+    page.className = 'district-page';
+    page.dataset.districtPage = district.id;
+    page.dataset.districtArea = district.mapArea ?? '';
+
+    const hero = document.createElement('header');
+    hero.className = 'district-page__hero';
+
+    const identity = document.createElement('div');
+    identity.className = 'district-page__identity';
+
+    const eyebrow = document.createElement('p');
+    eyebrow.className = 'district-page__eyebrow';
+    eyebrow.textContent = district.english;
+
     const heading = document.createElement('h2');
+    heading.className = 'district-page__title';
+    heading.id = `district-page-title-${district.id}`;
+    heading.tabIndex = -1;
     heading.textContent = district.name;
-    const meta = document.createElement('p');
-    meta.textContent = district.role;
+
+    const role = document.createElement('p');
+    role.className = 'district-page__role';
+    role.textContent = district.role;
+
+    identity.append(eyebrow, heading, role);
+
+    const introduction = document.createElement('div');
+    introduction.className = 'district-page__intro';
+
+    const description = document.createElement('p');
+    description.className = 'district-page__description';
+    description.textContent = district.description;
+
+    const facts = document.createElement('dl');
+    facts.className = 'district-page__facts';
+    for (const [term, value] of [['PROJECTS', String(projects.length)], ['LANDMARK', district.landmark]]) {
+      const item = document.createElement('div');
+      const dt = document.createElement('dt');
+      const dd = document.createElement('dd');
+      dt.textContent = term;
+      dd.textContent = value;
+      item.append(dt, dd);
+      facts.append(item);
+    }
+
+    introduction.append(description, facts);
+    hero.append(identity, introduction);
+
+    const field = document.createElement('section');
+    field.className = 'district-page__field';
+    field.setAttribute('aria-labelledby', heading.id);
+
+    const fieldHeading = document.createElement('div');
+    fieldHeading.className = 'district-page__field-heading';
+
+    const fieldLabel = document.createElement('p');
+    fieldLabel.className = 'district-page__field-label';
+    fieldLabel.textContent = 'DISTRICT PROJECTS';
+
+    const fieldCount = document.createElement('p');
+    fieldCount.className = 'district-page__field-count';
+    fieldCount.textContent = `${projects.length} PROJECTS`;
+
+    fieldHeading.append(fieldLabel, fieldCount);
+
     const grid = document.createElement('div');
+    grid.className = 'district-project-grid';
     grid.dataset.districtProjects = district.id;
 
     for (const project of projects) {
       const button = document.createElement('button');
       button.type = 'button';
+      button.className = 'district-project-card';
       button.dataset.projectId = project.id;
       button.dataset.canonicalRoute = project.route;
       button.dataset.assetMode = projectAsset(project.id) ? 'illustrated' : 'fallback';
-      button.setAttribute('aria-label', `${project.title}、${project.building}`);
+      button.setAttribute('aria-label', `${project.title}、${project.building}。詳細を見る`);
+
+      const visual = document.createElement('span');
+      visual.className = 'district-project-card__visual';
+      visual.setAttribute('aria-hidden', 'true');
 
       const asset = projectAsset(project.id);
       if (asset) {
         const image = document.createElement('img');
         image.src = asset;
         image.alt = '';
-        image.setAttribute('aria-hidden', 'true');
-        button.append(image);
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        visual.append(image);
       } else {
         const fallback = document.createElement('span');
+        fallback.className = 'district-project-card__fallback';
         fallback.dataset.buildingFallback = project.id;
-        fallback.setAttribute('aria-hidden', 'true');
-        button.append(fallback);
+        fallback.textContent = project.building;
+        visual.append(fallback);
       }
 
+      const body = document.createElement('span');
+      body.className = 'district-project-card__body';
+
+      const building = document.createElement('span');
+      building.className = 'district-project-card__building';
+      building.textContent = project.building;
+
       const title = document.createElement('span');
+      title.className = 'district-project-card__title';
       title.textContent = project.title;
-      button.append(title);
+
+      const type = document.createElement('span');
+      type.className = 'district-project-card__type';
+      type.textContent = project.type;
+
+      const summary = document.createElement('span');
+      summary.className = 'district-project-card__summary';
+      summary.textContent = project.summary;
+
+      const action = document.createElement('span');
+      action.className = 'district-project-card__action';
+      action.textContent = '作品を見る';
+
+      body.append(building, title, type, summary, action);
+      button.append(visual, body);
       grid.append(button);
     }
 
-    const controls = document.createElement('div');
+    field.append(fieldHeading, grid);
+
+    const controls = document.createElement('nav');
+    controls.className = 'district-page__nav';
     controls.dataset.districtNavigation = '';
-    for (const [action, label] of [['previous', '前の地区'], ['world', '世界地図へ戻る'], ['next', '次の地区']]) {
+    controls.setAttribute('aria-label', '地区ナビゲーション');
+
+    const navigationItems = [
+      ['previous', previousDistrict ? `← ${previousDistrict.name}` : '← 前の地区'],
+      ['world', '世界地図へ戻る'],
+      ['next', nextDistrict ? `${nextDistrict.name} →` : '次の地区 →']
+    ];
+
+    for (const [action, label] of navigationItems) {
       const button = document.createElement('button');
       button.type = 'button';
+      button.className = `district-page__nav-button district-page__nav-button--${action}`;
       button.dataset.districtAction = action;
       button.textContent = label;
       controls.append(button);
     }
 
-    panel.replaceChildren(heading, meta, grid, controls);
+    page.append(hero, field, controls);
+    panel.replaceChildren(page);
+    queueMicrotask(() => heading.focus({ preventScroll: true }));
     return true;
   }
 

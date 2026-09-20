@@ -127,7 +127,7 @@ P4-B: Compact MAP heading. DONE. The MAP heading is now a 56px desktop/tablet or
 P4-C: Framed viewport. DONE. world-h2-viewport is mounted inside a responsive wood / brass / parchment-style world-map-frame with non-interactive decorative layers.
 P4-D: District card prototype. DONE. District marker clicks now keep the world level visible and open a clamped selection card with district summary, project count, landmark, enter action, and close action.
 P4-E: Mobile bottom sheet + keyboard/focus behavior. DONE. Mobile uses a viewport-attached bottom sheet; focus enters the primary action, Tab/Shift+Tab cycle within the card, Escape closes it, and focus returns to the originating district marker.
-P4-F: Browser QA at 1440, 820, and 390 widths, then production review.
+P4-F: Browser QA at 1440, 820, and 390 widths, then production review. DONE. Full world -> district card -> district -> project preview -> district -> world navigation passed at all three targets, including exact 390x844 mobile emulation.
 
 ## Acceptance criteria for the design phase
 - only one map is visible on the MAP screen
@@ -136,3 +136,36 @@ P4-F: Browser QA at 1440, 820, and 390 widths, then production review.
 - district selection is understandable before entering a district
 - desktop and mobile use the same information hierarchy
 - Master World coordinates, terrain tiles, and district anchor cells remain unchanged
+
+## 10. P4-F final QA and production review
+
+Browser QA targets:
+- 1440x1000 desktop
+- 820x900 tablet
+- exact 390x844 mobile emulation, devicePixelRatio 1
+
+Verified at every target:
+- one world hierarchy shell, one world-map-frame, one world-h2-viewport
+- zero legacy cityMap elements
+- 192 Master World tiles and four district markers
+- data-terrain-bound=true
+- no horizontal document overflow
+- keyboard camera pan changes x from 0 to -36px
+- district marker opens the card while state remains world
+- Escape closes the card and restores focus to the marker
+- 地区を見る enters District View
+- project selection opens Project Preview
+- Escape returns Preview to District View
+- 世界地図へ戻る restores World View and the saved -36px camera
+- browser console has no application errors
+
+The exact 390x844 emulation also verifies the bottom sheet remains inside the visible world viewport. During P4-F a mobile overlap with the fixed bottom navigation was found and corrected by anchoring the sheet to the calculated visible viewport top rather than the physical world viewport bottom.
+
+Production review on 2026-09-20:
+- current production city.html returns HTTP 200
+- production Master World manifest returns HTTP 200
+- production does not yet contain the Phase 4 WORLD MAP heading
+- production still contains the pre-Phase-4 legacy cityMap markup
+- therefore the Phase 4 branch has not been deployed unintentionally
+
+Phase 4.0 is a release candidate in PR #103. Production should change only after the PR is explicitly merged and the normal deployment workflow succeeds.

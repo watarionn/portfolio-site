@@ -2856,8 +2856,8 @@ button { font: inherit; }
   .world-district-card {
     left: var(--district-card-visible-left, .4rem) !important;
     right: auto !important;
-    top: auto !important;
-    bottom: .4rem;
+    top: var(--district-card-mobile-top, auto) !important;
+    bottom: auto;
     width: var(--district-card-visible-width, calc(100% - .8rem));
     max-height: calc(100% - .8rem);
     overflow: auto;

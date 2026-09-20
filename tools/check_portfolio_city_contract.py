@@ -171,7 +171,7 @@ def main() -> int:
         fail("Portfolio City HERO/status block must remain removed")
 
     world_js = (CITY / "world-hierarchy-shell.js").read_text(encoding="utf-8")
-    for marker in ("terrainManifest", "world-master-tile", "world-h2-viewport", "world-map-frame", "world-map-frame__matte", "world-map-frame__corner", "world-district-card", "openDistrictCard", "closeDistrictCard", "bindDistrictCardAccessibility", "districtCardOpen", "aria-haspopup", "aria-expanded", "preventScroll", "enabled: true"):
+    for marker in ("terrainManifest", "world-master-tile", "world-h2-viewport", "world-map-frame", "world-map-frame__matte", "world-map-frame__corner", "world-district-card", "openDistrictCard", "closeDistrictCard", "bindDistrictCardAccessibility", "districtCardOpen", "aria-haspopup", "aria-expanded", "preventScroll", "--district-card-mobile-top", "enabled: true"):
         if marker not in world_js:
             fail(f"world-hierarchy-shell.js is missing canonical world behavior: {marker}")
     if "world39" in world_js:
@@ -207,7 +207,7 @@ def main() -> int:
     if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
         fail("validate-public workflow must run the Portfolio City runtime contract")
 
-    print("Portfolio City Phase 4 P4-E contract passed: district card keyboard flow / mobile bottom sheet / framed Master World")
+    print("Portfolio City Phase 4 P4-F contract passed: release-candidate world UI / district flow / mobile bottom sheet")
     return 0
 
 

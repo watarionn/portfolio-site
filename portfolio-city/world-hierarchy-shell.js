@@ -234,6 +234,10 @@
     );
     card.style.setProperty('--district-card-visible-left', `${visibleLeft + viewport.scrollLeft}px`);
     card.style.setProperty('--district-card-visible-width', `${Math.max(0, visibleRight - visibleLeft)}px`);
+    card.style.setProperty(
+      '--district-card-mobile-top',
+      `${Math.max(visibleTop, visibleBottom - cardRect.height) + viewport.scrollTop}px`
+    );
     const markerX = markerRect.left - viewportRect.left + markerRect.width / 2;
     const markerY = markerRect.top - viewportRect.top + markerRect.height / 2;
     let left = markerX + gap;

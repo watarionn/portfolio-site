@@ -64,3 +64,16 @@ GEO remains isolated from the active Portfolio City world-hierarchy migration un
 5. connect the protected PDO config
 6. benchmark the read-only APIs
 7. migrate DATA LAB v9 from embedded data to the API
+
+
+## Production database verification
+
+Verified in phpMyAdmin on 2026-09-20 after the normalized import completed:
+
+- geo_lines: 554
+- geo_stations: 10,860
+- geo_station_lines: 10,860
+- geo_addresses: 495,147
+- distinct address_code: 487,728
+
+All five counts match the importer manifest and expected snapshot. The MariaDB production data load is therefore count-verified. Content smoke checks remain the next gate before enabling the PHP API against production data.

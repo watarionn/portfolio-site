@@ -2669,7 +2669,78 @@ button { font: inherit; }
 }
 
 /* Phase 4.0: canonical Master World presentation. */
-.world-h2-viewport { position: relative; overflow: hidden; min-height: 34rem; touch-action: none; }
+.world-map-frame {
+  position: relative;
+  padding: clamp(.7rem, 1.2vw, 1.05rem);
+  border: 1px solid #443326;
+  border-radius: .72rem;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.08), transparent 18% 82%, rgba(0,0,0,.08)),
+    repeating-linear-gradient(7deg, rgba(255,255,255,.025) 0 2px, rgba(0,0,0,.025) 2px 4px),
+    linear-gradient(135deg, #76543a, #4b3427 46%, #68482f);
+  box-shadow:
+    0 .8rem 1.8rem rgba(23,19,14,.22),
+    inset 0 0 0 1px rgba(226,197,135,.25),
+    inset 0 0 0 .3rem rgba(31,22,17,.24);
+}
+.world-map-frame::before {
+  content: "";
+  position: absolute;
+  inset: .42rem;
+  border: 1px solid rgba(190,151,79,.72);
+  border-radius: .42rem;
+  box-shadow: inset 0 0 0 1px rgba(255,244,210,.13);
+  pointer-events: none;
+  z-index: 4;
+}
+.world-map-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, rgba(255,255,255,.07), transparent 24% 72%, rgba(0,0,0,.08));
+  pointer-events: none;
+  z-index: 5;
+}
+.world-map-frame__matte {
+  position: relative;
+  padding: clamp(.42rem, .75vw, .65rem);
+  border: 1px solid rgba(88,68,43,.72);
+  background: linear-gradient(135deg, #d9c9a7, #c7b691 52%, #dbcbaa);
+  box-shadow:
+    inset 0 .18rem .28rem rgba(255,255,255,.18),
+    inset 0 -.2rem .35rem rgba(68,50,31,.16);
+}
+.world-map-frame__corner {
+  position: absolute;
+  z-index: 6;
+  width: .52rem;
+  height: .52rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0d99b 0 13%, #b68c49 26% 54%, #73542c 76% 100%);
+  box-shadow: 0 1px 2px rgba(23,19,14,.38);
+  pointer-events: none;
+}
+.world-map-frame__corner--nw { top: .62rem; left: .62rem; }
+.world-map-frame__corner--ne { top: .62rem; right: .62rem; }
+.world-map-frame__corner--sw { bottom: .62rem; left: .62rem; }
+.world-map-frame__corner--se { right: .62rem; bottom: .62rem; }
+
+.world-h2-viewport {
+  position: relative;
+  overflow: hidden;
+  min-height: 34rem;
+  touch-action: none;
+  border: 1px solid rgba(49,38,26,.62);
+  background: #b9d2d0;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    inset 0 0 1.15rem rgba(31,28,23,.2);
+}
+.world-h2-viewport:focus-visible {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 3px;
+}
 .world-h2-map { position: relative; width: min(100rem, 150vw); aspect-ratio: 4 / 3; margin: 0 auto; overflow: hidden; background: #b9d2d0; }
 .world-master-terrain { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: repeat(16, 1fr); grid-template-rows: repeat(12, 1fr); }
 .world-master-tile { display: block; width: 100%; height: 100%; object-fit: cover; grid-column: calc(var(--tile-column) + 1); grid-row: calc(var(--tile-row) + 1); }
@@ -2683,4 +2754,22 @@ button { font: inherit; }
 .world-h2-layer--frontier-clouds { box-shadow: inset 0 0 7rem 3rem rgba(245, 241, 226, .78); }
 .world-h2-district { left: var(--world-x); top: var(--world-y); transform: translate(-50%, -50%); z-index: 3; }
 .world-h2-frontier { left: var(--world-x); top: var(--world-y); width: 4rem; height: 2rem; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(245, 241, 226, .64); filter: blur(.3rem); }
-@media (max-width: 680px) { .world-h2-map { width: 180vw; } .world-h2-viewport { min-height: 30rem; } }
+@media (max-width: 680px) {
+  .world-map-frame {
+    padding: .48rem;
+    border-radius: .5rem;
+    box-shadow:
+      0 .48rem 1.1rem rgba(23,19,14,.19),
+      inset 0 0 0 1px rgba(226,197,135,.22),
+      inset 0 0 0 .2rem rgba(31,22,17,.2);
+  }
+  .world-map-frame::before { inset: .27rem; border-radius: .3rem; }
+  .world-map-frame__matte { padding: .3rem; }
+  .world-map-frame__corner { width: .38rem; height: .38rem; }
+  .world-map-frame__corner--nw { top: .39rem; left: .39rem; }
+  .world-map-frame__corner--ne { top: .39rem; right: .39rem; }
+  .world-map-frame__corner--sw { bottom: .39rem; left: .39rem; }
+  .world-map-frame__corner--se { right: .39rem; bottom: .39rem; }
+  .world-h2-map { width: 180vw; }
+  .world-h2-viewport { min-height: 30rem; }
+}

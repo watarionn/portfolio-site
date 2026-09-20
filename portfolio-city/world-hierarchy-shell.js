@@ -257,7 +257,23 @@
     }
 
     viewport.append(world);
-    panel.replaceChildren(viewport);
+
+    const frame = document.createElement('div');
+    frame.className = 'world-map-frame';
+
+    for (const corner of ['nw', 'ne', 'sw', 'se']) {
+      const stud = document.createElement('span');
+      stud.className = `world-map-frame__corner world-map-frame__corner--${corner}`;
+      stud.setAttribute('aria-hidden', 'true');
+      frame.append(stud);
+    }
+
+    const matte = document.createElement('div');
+    matte.className = 'world-map-frame__matte';
+    matte.append(viewport);
+    frame.append(matte);
+
+    panel.replaceChildren(frame);
     setWorldCamera(state.worldCamera);
     bindWorldViewport(viewport, { panStep: 36 });
     return true;

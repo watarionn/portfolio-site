@@ -123,24 +123,29 @@
   function bindWorldViewport(viewport, options = {}) {
     if (!state.enabled || !viewport) return () => {};
     const panStep = options.panStep ?? 36;
-    const bounds = options.bounds ?? null;
+    const resolveBounds = () => typeof options.bounds === 'function' ? options.bounds() : (options.bounds ?? null);
     let drag = null;
 
     const onPointerDown = (event) => {
       if (event.target.closest('button, a, .world-district-card')) return;
       drag = { id: event.pointerId, x: event.clientX, y: event.clientY, camera: copyCamera(state.worldCamera) };
-      viewport.setPointerCapture?.(event.pointerId);
+      // iOS Safari can auto-release pointer capture after a pan gesture.
+      // Do not capture touch pointers; subsequent swipes must start cleanly.
+      if (event.pointerType !== 'touch') viewport.setPointerCapture?.(event.pointerId);
     };
     const onPointerMove = (event) => {
       if (!drag || drag.id !== event.pointerId) return;
+      if (event.pointerType === 'touch') event.preventDefault();
       setWorldCamera({
         x: drag.camera.x + event.clientX - drag.x,
         y: drag.camera.y + event.clientY - drag.y
-      }, bounds);
+      }, resolveBounds());
     };
     const endDrag = (event) => {
       if (!drag || drag.id !== event.pointerId) return;
-      viewport.releasePointerCapture?.(event.pointerId);
+      if (event.pointerType !== 'touch' && viewport.hasPointerCapture?.(event.pointerId)) {
+        viewport.releasePointerCapture?.(event.pointerId);
+      }
       drag = null;
     };
     const onKeyDown = (event) => {
@@ -153,7 +158,7 @@
       }[event.key];
       if (!delta) return;
       event.preventDefault();
-      panWorldBy(delta[0], delta[1], bounds);
+      panWorldBy(delta[0], delta[1], resolveBounds());
     };
 
     viewport.addEventListener('pointerdown', onPointerDown);
@@ -504,7 +509,7 @@
       }, bounds);
     });
 
-    bindWorldViewport(viewport, { panStep: 36, bounds: cameraBounds() });
+    bindWorldViewport(viewport, { panStep: 36, bounds: cameraBounds });
     return true;
   }
 

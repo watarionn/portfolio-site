@@ -459,6 +459,18 @@
       minY: Math.min(0, viewport.clientHeight - world.offsetHeight),
       maxY: 0
     });
+
+    // Re-clamp after layout settles. Mobile Safari can resolve percentage
+    // widths and the map's 4:3 height one frame later than the initial mount.
+    requestAnimationFrame(() => {
+      const bounds = cameraBounds();
+      setWorldCamera({
+        x: clamp(state.worldCamera.x, bounds.minX, bounds.maxX),
+        y: clamp(state.worldCamera.y, bounds.minY, bounds.maxY),
+        zoom: 1
+      }, bounds);
+    });
+
     bindWorldViewport(viewport, { panStep: 36, bounds: cameraBounds() });
     return true;
   }

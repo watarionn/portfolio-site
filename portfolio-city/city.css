@@ -2825,8 +2825,8 @@ button { font: inherit; }
   outline-offset: 3px;
 }
 .world-h2-map { position: relative; width: min(100rem, 150vw); aspect-ratio: 4 / 3; margin: 0 auto; overflow: hidden; background: #b9d2d0; }
-.world-master-terrain { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: repeat(16, 1fr); grid-template-rows: repeat(12, 1fr); }
-.world-master-tile { display: block; width: 100%; height: 100%; object-fit: cover; grid-column: calc(var(--tile-column) + 1); grid-row: calc(var(--tile-row) + 1); }
+.world-master-terrain { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: repeat(16, minmax(0, 1fr)); grid-template-rows: repeat(12, minmax(0, 1fr)); overflow: hidden; }
+.world-master-tile { display: block; min-width: 0; min-height: 0; width: 100%; height: 100%; object-fit: fill; grid-column: calc(var(--tile-column) + 1); grid-row: calc(var(--tile-row) + 1); }
 .world-h2-map[data-terrain-bound="true"] .world-h2-layer { display: none; }
 .world-h2-layer, .world-h2-district, .world-h2-frontier { position: absolute; }
 .world-h2-layer { inset: 0; pointer-events: none; }
@@ -2896,4 +2896,13 @@ button { font: inherit; }
   .world-district-card__actions button { flex: 1 1 0; min-height: 2.45rem; }
   .world-h2-map { width: 180vw; }
   .world-h2-viewport { min-height: 30rem; }
+}
+
+
+/* World Map mobile coherence hotfix */
+@media (max-width: 680px) {
+  .world-h2-viewport { min-height: 0; aspect-ratio: 4 / 3; touch-action: pan-y; }
+  .world-h2-map { width: 100%; height: 100%; aspect-ratio: 4 / 3; }
+  .world-master-terrain { width: 100%; height: 100%; }
+  .world-master-tile { object-fit: fill; }
 }

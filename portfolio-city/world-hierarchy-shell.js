@@ -35,6 +35,7 @@
     }
   };
   const shell = document.getElementById('worldHierarchyShell');
+  const WORLD_ZOOM = { min: 0.65, max: 1.8, step: 0.2 };
 
   const state = {
     enabled: true,
@@ -166,13 +167,35 @@
     // iOS Safari fallback: use native touch events for repeated map drags.
     // Pointer Events remain for mouse/pen and keyboard accessibility.
     let touchDrag = null;
+    let pinch = null;
+    const touchDistance = (a, b) => Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
+    const touchMidpoint = (a, b) => ({ x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 });
     const onTouchStart = (event) => {
-      if (event.target.closest('button, a, .world-district-card')) return;
+      if (event.target.closest('button, a, .world-district-card, .world-map-zoom')) return;
+      if (event.touches.length >= 2) {
+        const a = event.touches[0];
+        const b = event.touches[1];
+        pinch = {
+          distance: Math.max(1, touchDistance(a, b)),
+          zoom: state.worldCamera.zoom
+        };
+        touchDrag = null;
+        return;
+      }
       const touch = event.touches[0];
       if (!touch) return;
+      pinch = null;
       touchDrag = { x: touch.clientX, y: touch.clientY, camera: copyCamera(state.worldCamera) };
     };
     const onTouchMove = (event) => {
+      if (event.touches.length >= 2 && pinch && options.zoomAt) {
+        const a = event.touches[0];
+        const b = event.touches[1];
+        const midpoint = touchMidpoint(a, b);
+        event.preventDefault();
+        options.zoomAt(pinch.zoom * (touchDistance(a, b) / pinch.distance), midpoint.x, midpoint.y);
+        return;
+      }
       if (!touchDrag) return;
       const touch = event.touches[0];
       if (!touch) return;
@@ -182,7 +205,14 @@
         y: touchDrag.camera.y + touch.clientY - touchDrag.y
       }, resolveBounds());
     };
-    const endTouchDrag = () => { touchDrag = null; };
+    const endTouchDrag = (event) => {
+      pinch = null;
+      touchDrag = null;
+      if (event.touches?.length === 1) {
+        const touch = event.touches[0];
+        touchDrag = { x: touch.clientX, y: touch.clientY, camera: copyCamera(state.worldCamera) };
+      }
+    };
 
     viewport.addEventListener('pointerdown', onPointerDown);
     viewport.addEventListener('pointermove', onPointerMove);
@@ -460,6 +490,32 @@
       frame.append(stud);
     }
 
+    const zoomControls = document.createElement('div');
+    zoomControls.className = 'world-map-zoom';
+    zoomControls.setAttribute('aria-label', '地図の拡大縮小');
+    for (const [action, label, title] of [
+      ['in', '+', '拡大'],
+      ['out', '−', '縮小'],
+      ['reset', '1:1', '標準倍率に戻す']
+    ]) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.worldZoom = action;
+      button.textContent = label;
+      button.setAttribute('aria-label', title);
+      button.addEventListener('click', () => {
+        const rect = viewport.getBoundingClientRect();
+        const target = action === 'in'
+          ? state.worldCamera.zoom + WORLD_ZOOM.step
+          : action === 'out'
+            ? state.worldCamera.zoom - WORLD_ZOOM.step
+            : 1;
+        zoomAt(target, rect.left + rect.width / 2, rect.top + rect.height / 2);
+      });
+      zoomControls.append(button);
+    }
+    frame.append(zoomControls);
+
     const matte = document.createElement('div');
     matte.className = 'world-map-frame__matte';
     matte.append(viewport);
@@ -522,12 +578,28 @@
       setWorldCamera(state.worldCamera);
     }
 
-    const cameraBounds = () => ({
-      minX: Math.min(0, viewport.clientWidth - world.offsetWidth),
+    const cameraBounds = (zoom = state.worldCamera.zoom) => ({
+      minX: Math.min(0, viewport.clientWidth - world.offsetWidth * zoom),
       maxX: 0,
-      minY: Math.min(0, viewport.clientHeight - world.offsetHeight),
+      minY: Math.min(0, viewport.clientHeight - world.offsetHeight * zoom),
       maxY: 0
     });
+
+    const zoomAt = (nextZoom, clientX, clientY) => {
+      const zoom = clamp(nextZoom, WORLD_ZOOM.min, WORLD_ZOOM.max);
+      const previous = state.worldCamera.zoom || 1;
+      const frame = viewport.getBoundingClientRect();
+      const focalX = clientX - frame.left;
+      const focalY = clientY - frame.top;
+      const localX = (focalX - state.worldCamera.x) / previous;
+      const localY = (focalY - state.worldCamera.y) / previous;
+      setWorldCamera({
+        x: focalX - localX * zoom,
+        y: focalY - localY * zoom,
+        zoom
+      }, cameraBounds(zoom));
+      return zoom;
+    };
 
     // Re-clamp after layout settles. Mobile Safari can resolve percentage
     // widths and the map's 4:3 height one frame later than the initial mount.
@@ -540,7 +612,7 @@
       }, bounds);
     });
 
-    bindWorldViewport(viewport, { panStep: 36, bounds: cameraBounds });
+    bindWorldViewport(viewport, { panStep: 36, bounds: cameraBounds, zoomAt });
     return true;
   }
 

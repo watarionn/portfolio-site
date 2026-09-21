@@ -1,6 +1,6 @@
 # Phase 5 District Scenery Production Spec
 
-Status: P5-B-4 COMPLETE / ready for background illustration production
+Status: P5-B background production IN PROGRESS / Archive Street + Workshop Alley approved
 
 ## 1. Final district-page model
 

@@ -88,7 +88,10 @@ P5-B District scenery and visual identities — IN PROGRESS
 - P5-B-2 background composition direction: defined for all four districts
 - P5-B-3 rough building placement: defined in normalized scene coordinates
 - P5-B-4 production specification: DONE
-- next gate: produce the actual background illustrations, starting with Archive Street
+- Archive Street background: APPROVED
+- Workshop Alley background: APPROVED
+- next gate: Waterside Play background production
+- handoff: docs/PHASE5_DISTRICT_SCENERY_HANDOFF_20260921.md
 
 P5-C Project-card completion
 - verify all 14 projects

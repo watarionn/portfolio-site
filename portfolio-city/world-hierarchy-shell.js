@@ -440,7 +440,14 @@
         const viewportHeight = viewport.clientHeight;
         const worldWidth = world.offsetWidth;
         const worldHeight = world.offsetHeight;
-        const cluster = masterCellPosition('H06');
+        const districtPositions = Object.values(MASTER_WORLD.districtAnchors)
+          .map(masterCellPosition);
+        const cluster = districtPositions.reduce(
+          (sum, position) => ({ x: sum.x + position.x, y: sum.y + position.y }),
+          { x: 0, y: 0 }
+        );
+        cluster.x /= districtPositions.length;
+        cluster.y /= districtPositions.length;
         const clusterX = worldWidth * cluster.x / 100;
         const clusterY = worldHeight * cluster.y / 100;
         const x = viewportWidth / 2 - clusterX;

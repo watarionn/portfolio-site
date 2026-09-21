@@ -127,6 +127,7 @@
     let drag = null;
 
     const onPointerDown = (event) => {
+      if (event.pointerType === 'touch') return;
       if (event.target.closest('button, a, .world-district-card')) return;
       drag = { id: event.pointerId, x: event.clientX, y: event.clientY, camera: copyCamera(state.worldCamera) };
       // iOS Safari can auto-release pointer capture after a pan gesture.
@@ -134,14 +135,15 @@
       if (event.pointerType !== 'touch') viewport.setPointerCapture?.(event.pointerId);
     };
     const onPointerMove = (event) => {
+      if (event.pointerType === 'touch') return;
       if (!drag || drag.id !== event.pointerId) return;
-      if (event.pointerType === 'touch') event.preventDefault();
       setWorldCamera({
         x: drag.camera.x + event.clientX - drag.x,
         y: drag.camera.y + event.clientY - drag.y
       }, resolveBounds());
     };
     const endDrag = (event) => {
+      if (event.pointerType === 'touch') return;
       if (!drag || drag.id !== event.pointerId) return;
       if (event.pointerType !== 'touch' && viewport.hasPointerCapture?.(event.pointerId)) {
         viewport.releasePointerCapture?.(event.pointerId);
@@ -161,11 +163,36 @@
       panWorldBy(delta[0], delta[1], resolveBounds());
     };
 
+    // iOS Safari fallback: use native touch events for repeated map drags.
+    // Pointer Events remain for mouse/pen and keyboard accessibility.
+    let touchDrag = null;
+    const onTouchStart = (event) => {
+      if (event.target.closest('button, a, .world-district-card')) return;
+      const touch = event.touches[0];
+      if (!touch) return;
+      touchDrag = { x: touch.clientX, y: touch.clientY, camera: copyCamera(state.worldCamera) };
+    };
+    const onTouchMove = (event) => {
+      if (!touchDrag) return;
+      const touch = event.touches[0];
+      if (!touch) return;
+      event.preventDefault();
+      setWorldCamera({
+        x: touchDrag.camera.x + touch.clientX - touchDrag.x,
+        y: touchDrag.camera.y + touch.clientY - touchDrag.y
+      }, resolveBounds());
+    };
+    const endTouchDrag = () => { touchDrag = null; };
+
     viewport.addEventListener('pointerdown', onPointerDown);
     viewport.addEventListener('pointermove', onPointerMove);
     viewport.addEventListener('pointerup', endDrag);
     viewport.addEventListener('pointercancel', endDrag);
     viewport.addEventListener('keydown', onKeyDown);
+    viewport.addEventListener('touchstart', onTouchStart, { passive: true });
+    viewport.addEventListener('touchmove', onTouchMove, { passive: false });
+    viewport.addEventListener('touchend', endTouchDrag, { passive: true });
+    viewport.addEventListener('touchcancel', endTouchDrag, { passive: true });
 
     return () => {
       viewport.removeEventListener('pointerdown', onPointerDown);
@@ -173,6 +200,10 @@
       viewport.removeEventListener('pointerup', endDrag);
       viewport.removeEventListener('pointercancel', endDrag);
       viewport.removeEventListener('keydown', onKeyDown);
+      viewport.removeEventListener('touchstart', onTouchStart);
+      viewport.removeEventListener('touchmove', onTouchMove);
+      viewport.removeEventListener('touchend', endTouchDrag);
+      viewport.removeEventListener('touchcancel', endTouchDrag);
     };
   }
 

@@ -431,31 +431,57 @@
 
     panel.replaceChildren(frame);
 
-    // Phones should open on the district cluster at an exploration-friendly
-    // scale, not on the entire 16x12 world. Keep the terrain itself coherent
-    // and move the camera instead of cropping individual tiles.
+    // Center phones from the rendered district markers themselves. Using
+    // offsetWidth plus percentage math was unreliable in Mobile Safari while
+    // the oversized map was still settling.
     if (window.matchMedia('(max-width: 680px)').matches && !state.savedWorldCamera) {
-      requestAnimationFrame(() => {
-        const viewportWidth = viewport.clientWidth;
-        const viewportHeight = viewport.clientHeight;
-        const worldWidth = world.offsetWidth;
-        const worldHeight = world.offsetHeight;
-        const districtPositions = Object.values(MASTER_WORLD.districtAnchors)
-          .map(masterCellPosition);
-        const cluster = districtPositions.reduce(
-          (sum, position) => ({ x: sum.x + position.x, y: sum.y + position.y }),
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const markers = [...world.querySelectorAll('.world-h2-district')];
+        const viewportRect = viewport.getBoundingClientRect();
+        const worldRect = world.getBoundingClientRect();
+        if (!markers.length || !worldRect.width || !worldRect.height) return;
+
+        const centers = markers.map((marker) => {
+          const rect = marker.getBoundingClientRect();
+          return {
+            x: rect.left - worldRect.left + rect.width / 2,
+            y: rect.top - worldRect.top + rect.height / 2
+          };
+        });
+        const cluster = centers.reduce(
+          (sum, point) => ({ x: sum.x + point.x, y: sum.y + point.y }),
           { x: 0, y: 0 }
         );
-        cluster.x /= districtPositions.length;
-        cluster.y /= districtPositions.length;
-        const clusterX = worldWidth * cluster.x / 100;
-        const clusterY = worldHeight * cluster.y / 100;
-        const x = viewportWidth / 2 - clusterX;
-        const y = viewportHeight / 2 - clusterY;
-        const minX = Math.min(0, viewportWidth - worldWidth);
-        const minY = Math.min(0, viewportHeight - worldHeight);
-        setWorldCamera({ x: clamp(x, minX, 0), y: clamp(y, minY, 0), zoom: 1 });
-      });
+        cluster.x /= centers.length;
+        cluster.y /= centers.length;
+
+        const x = viewportRect.width / 2 - cluster.x;
+        const y = viewportRect.height / 2 - cluster.y;
+        const bounds = {
+          minX: Math.min(0, viewportRect.width - worldRect.width),
+          maxX: 0,
+          minY: Math.min(0, viewportRect.height - worldRect.height),
+          maxY: 0
+        };
+        setWorldCamera({
+          x: clamp(x, bounds.minX, bounds.maxX),
+          y: clamp(y, bounds.minY, bounds.maxY),
+          zoom: 1
+        }, bounds);
+
+        requestAnimationFrame(() => {
+          const visible = markers.every((marker) => {
+            const rect = marker.getBoundingClientRect();
+            const frame = viewport.getBoundingClientRect();
+            const inset = 8;
+            return rect.left >= frame.left + inset &&
+              rect.right <= frame.right - inset &&
+              rect.top >= frame.top + inset &&
+              rect.bottom <= frame.bottom - inset;
+          });
+          viewport.dataset.districtMarkersVisible = visible ? 'true' : 'false';
+        });
+      }));
     } else {
       setWorldCamera(state.worldCamera);
     }

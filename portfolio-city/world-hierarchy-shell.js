@@ -430,8 +430,36 @@
     frame.append(matte);
 
     panel.replaceChildren(frame);
-    setWorldCamera(state.worldCamera);
-    bindWorldViewport(viewport, { panStep: 36 });
+
+    // Phones should open on the district cluster at an exploration-friendly
+    // scale, not on the entire 16x12 world. Keep the terrain itself coherent
+    // and move the camera instead of cropping individual tiles.
+    if (window.matchMedia('(max-width: 680px)').matches && !state.savedWorldCamera) {
+      requestAnimationFrame(() => {
+        const viewportWidth = viewport.clientWidth;
+        const viewportHeight = viewport.clientHeight;
+        const worldWidth = world.offsetWidth;
+        const worldHeight = world.offsetHeight;
+        const cluster = masterCellPosition('H06');
+        const clusterX = worldWidth * cluster.x / 100;
+        const clusterY = worldHeight * cluster.y / 100;
+        const x = viewportWidth / 2 - clusterX;
+        const y = viewportHeight / 2 - clusterY;
+        const minX = Math.min(0, viewportWidth - worldWidth);
+        const minY = Math.min(0, viewportHeight - worldHeight);
+        setWorldCamera({ x: clamp(x, minX, 0), y: clamp(y, minY, 0), zoom: 1 });
+      });
+    } else {
+      setWorldCamera(state.worldCamera);
+    }
+
+    const cameraBounds = () => ({
+      minX: Math.min(0, viewport.clientWidth - world.offsetWidth),
+      maxX: 0,
+      minY: Math.min(0, viewport.clientHeight - world.offsetHeight),
+      maxY: 0
+    });
+    bindWorldViewport(viewport, { panStep: 36, bounds: cameraBounds() });
     return true;
   }
 

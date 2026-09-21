@@ -127,6 +127,7 @@
     let drag = null;
 
     const onPointerDown = (event) => {
+      if (event.pointerType === 'touch') return;
       if (event.target.closest('button, a, .world-district-card')) return;
       drag = { id: event.pointerId, x: event.clientX, y: event.clientY, camera: copyCamera(state.worldCamera) };
       // iOS Safari can auto-release pointer capture after a pan gesture.
@@ -134,14 +135,15 @@
       if (event.pointerType !== 'touch') viewport.setPointerCapture?.(event.pointerId);
     };
     const onPointerMove = (event) => {
+      if (event.pointerType === 'touch') return;
       if (!drag || drag.id !== event.pointerId) return;
-      if (event.pointerType === 'touch') event.preventDefault();
       setWorldCamera({
         x: drag.camera.x + event.clientX - drag.x,
         y: drag.camera.y + event.clientY - drag.y
       }, resolveBounds());
     };
     const endDrag = (event) => {
+      if (event.pointerType === 'touch') return;
       if (!drag || drag.id !== event.pointerId) return;
       if (event.pointerType !== 'touch' && viewport.hasPointerCapture?.(event.pointerId)) {
         viewport.releasePointerCapture?.(event.pointerId);

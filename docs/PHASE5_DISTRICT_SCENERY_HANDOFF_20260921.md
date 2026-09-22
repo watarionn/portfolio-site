@@ -132,3 +132,42 @@ Revision target:
 - formalize one left foreground parcel and one smaller rear-left parcel
 - create at least one additional genuine buildable parcel away from the primary circulation line
 - keep water visible inside the mobile critical band
+
+## Update — six-slot district architecture, 2026-09-22
+
+Latest adopted rule supersedes the earlier "current projects plus at least one future parcel" target.
+
+Each district now has:
+- maximum six project-building slots
+- all six slots designed before final background painting
+- no exposed placeholder lots
+- unused slots covered by removable filler assets
+- three visual layers: background base / filler assets / project building assets
+- filler -> project replacement without repainting the background base
+
+Waterside Play is the first district using this rule.
+
+Authoritative Waterside plan:
+- docs/PHASE5_WATERSIDE_PLAY_6_SLOT_PLAN.md
+
+Approved visual reference allowed for the revision:
+- /Portfolio City/Phase5_DistrictScenery/Accepted/waterside-play-background-approved.png
+- rejected Waterside images remain reference-prohibited
+
+Waterside slot assignment:
+- WP-01 foreground-left -> aquarium
+- WP-02 foreground-right -> holoca
+- WP-03 middle-left -> word-generator
+- WP-04 middle-right -> filler / future project
+- WP-05 rear-left -> filler / future project
+- WP-06 rear-right -> filler / future project
+
+The central foreground approach, bridge and mobile-visible water window are protected no-build space.
+
+Next resume point:
+1. revise the Waterside Play background geometry around the six locked slot envelopes
+2. place neutral masses in all six slots
+3. run 1440 / 820 / exact 390 composability review
+4. only after PASS, lock runtime slot data and produce transparent building/filler art
+
+PR #105 must remain Draft and unmerged.

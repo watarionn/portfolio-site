@@ -46,10 +46,10 @@ The coordinate is the bottom-center building anchor / baseline target.
 | --- | --- | ---: | ---: | ---: | --- | --- |
 | WP-S1 | foreground-left | 24 | 82 | 20 | aquarium | flower garden + low shade tree |
 | WP-S2 | foreground-right | 77 | 81 | 18 | holoca | small fountain court |
-| WP-S3 | middle-left | 21 | 61 | 15 | future | riverside kiosk + planters |
-| WP-S4 | middle-right | 74 | 59 | 15 | future | small café / waterside house |
-| WP-S5 | rear-left | 37 | 47 | 13 | word-generator | compact pavilion + shrubs |
-| WP-S6 | rear-right | 64 | 46 | 13 | future | tiny townhouse + cypress cluster |
+| WP-S3 | middle-left | 21 | 63 | 15 | future | riverside kiosk + planters |
+| WP-S4 | middle-right | 74 | 61 | 15 | future | small café / waterside house |
+| WP-S5 | rear-left | 38 | 54 | 12 | word-generator | compact pavilion + shrubs |
+| WP-S6 | rear-right | 64 | 52 | 12 | future | tiny townhouse + cypress cluster |
 
 The current project assignment is intentionally asymmetric:
 - aquarium -> WP-S1
@@ -135,8 +135,8 @@ Required sizes:
 - S2: 18%
 - S3: 15%
 - S4: 15%
-- S5: 13%
-- S6: 13%
+- S5: 12%
+- S6: 12%
 
 PASS only when:
 - all six masses have believable ground contact
@@ -145,6 +145,29 @@ PASS only when:
 - the main foreground approach remains readable
 - no two expanded touch targets become inseparable
 - the scene still reads as Waterside Play at 1440 / 820 / exact 390
+
+## Approved-master overlay audit
+
+A six-mass overlay was tested directly on the approved Waterside Play master.
+
+Result: FAIL as a direct-placement solution.
+
+Observed:
+- the two foreground parcels remain strong
+- the middle-left parcel is recoverable by clearing movable props
+- the current right quay needs a wider dry terrace for WP-S4
+- rear slot candidates collide with bridge / water-edge geometry if the existing master is kept unchanged
+- simply adding three more coordinates to the current painting would create floating or pasted-on buildings
+
+Therefore the coordinates above are target coordinates for the revised six-slot blockout, not a claim that the current approved painting already contains six valid parcels.
+
+The next background revision must reshape land geometry first:
+- widen / formalize the right middle terrace for WP-S4
+- create a compact dry rear-left bridge-landing parcel for WP-S5
+- create a compact dry rear-right terrace for WP-S6
+- keep the center water corridor and bridge readable between those rear parcels
+
+The approved master remains the visual/style reference, not the final terrain geometry.
 
 ## Art-direction continuity
 

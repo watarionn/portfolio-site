@@ -171,3 +171,33 @@ Next resume point:
 4. only after PASS, lock runtime slot data and produce transparent building/filler art
 
 PR #105 must remain Draft and unmerged.
+
+## Update — six-slot capacity architecture (2026-09-22)
+
+Latest adopted direction:
+- maximum six project buildings per district
+- design six buildable slots from the beginning
+- do not expose obvious empty lots
+- unused slots are occupied by independent filler assets
+- adding a project replaces one filler with one project-building asset
+- district art layers are background base / filler assets / project-building assets
+- design the six-slot town geometry before painting the final background
+
+Waterside Play is the first prototype.
+
+Authoritative plan:
+- docs/PHASE5_WATERSIDE_PLAY_SIX_SLOT_PLAN.md
+
+Current Waterside assignment:
+- WP-S1: aquarium
+- WP-S2: holoca
+- WP-S5: word-generator
+- WP-S3 / WP-S4 / WP-S6: filler until future projects arrive
+
+Next resume point:
+1. produce the Waterside Play six-slot blockout / neutral-mass test
+2. verify 1440 / 820 / exact 390 composition
+3. only then paint the revised final background base
+
+PR #105 must remain Draft and must not be merged yet.
+Rejected images remain prohibited references.

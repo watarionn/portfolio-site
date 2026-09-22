@@ -104,3 +104,27 @@ Authoritative Waterside slot plan:
 - Historical approved masters remain preserved; runtime suitability is a separate status.
 - Master World topology and district anchors do not move.
 - PR #105 remains Draft until scenery and district interaction are complete.
+
+## Six-slot district rule — 2026-09-22
+
+The composability model is now capacity-first rather than current-project-first.
+
+- Every district is designed with exactly six stable buildable slots.
+- Six is the maximum number of project buildings in one district.
+- A slot is real terrain with a believable contact plane and circulation access, not an empty placeholder graphic.
+- Currently unused slots are visually completed by independent filler assets.
+- Filler assets are removed one-for-one when a project building occupies that slot.
+- The runtime scene therefore separates:
+  1. background base
+  2. filler assets
+  3. project-building assets
+- Filler assets must not be baked into the background base.
+- Slot positions are stable. Adding a project should not require repainting terrain or moving neighboring slots.
+- The six slots should vary by perspective tier and scale; do not arrange them as a symmetric grid or radial diagram.
+- Permanent district identity elements such as water, bridges, primary roads and major plazas are not slots.
+
+Waterside Play is the first district to adopt this rule concretely.
+Authoritative layout:
+- docs/PHASE5_WATERSIDE_PLAY_SIX_SLOT_PLAN.md
+
+The prior minimum of "current projects plus one future parcel" is superseded by this six-slot rule.

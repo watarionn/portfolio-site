@@ -201,3 +201,37 @@ Next resume point:
 
 PR #105 must remain Draft and must not be merged yet.
 Rejected images remain prohibited references.
+
+
+## Update — Waterside Play six-slot background adopted (2026-09-22)
+
+Waterside Play six-slot background:
+- visual approval: APPROVED
+- background geometry neutral-mass audit v2: PASS
+- central water / bridge remain permanent non-slot identity space
+- left bank slots: WP-S1 foreground, WP-S3 middle, WP-S5 rear
+- right bank slots: WP-S2 foreground, WP-S4 middle, WP-S6 rear
+
+Final anchors:
+- WP-S1 aquarium: x 24, y 83, width 20
+- WP-S2 holoca: x 77, y 83, width 18
+- WP-S3 filler/future: x 19, y 65, width 15
+- WP-S4 filler/future: x 81, y 64, width 15
+- WP-S5 word-generator: x 28, y 52, width 13
+- WP-S6 filler/future: x 78, y 52, width 13
+
+Adopted master:
+- /Portfolio City/Phase5_DistrictScenery/Accepted/waterside-play-background-six-slot-approved.png
+- Library file id: libfile_7664216e2cb08191baba45bbd70bedc4
+- Backing file id at adoption: file_00000000a56c820cbf8aea096b6a6b79
+
+The earlier Waterside Play approved master is historical only for runtime design.
+
+Next production gate:
+1. design / produce filler assets for WP-S3, WP-S4, WP-S6
+2. produce the three Waterside Play project-building assets
+3. run combined six-slot compositing + hotspot QA
+4. only after that move to runtime WebP import
+
+PR #105 remains Draft and must not be merged.
+Rejected images remain prohibited references.

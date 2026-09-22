@@ -2,36 +2,41 @@
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Portfolio City Placement Tool</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#17181b;color:#eee}header,.controls,.output{padding:12px 16px}.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#22252a}.controls label{display:flex;gap:6px;align-items:center}.controls input[type=number]{width:86px}button,input,select{font:inherit}.stage-wrap{padding:16px;overflow:auto}.stage{position:relative;margin:auto;background:#333;overflow:hidden;max-width:100%;touch-action:none}.stage img{position:absolute;user-select:none;-webkit-user-drag:none}.bg{inset:0;width:100%;height:100%}.asset{transform-origin:50% 100%;cursor:grab}.asset.dragging{cursor:grabbing}.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;padding:10px;background:#202228;border-radius:8px}.readout code{font-size:13px}.output textarea{width:100%;min-height:210px;background:#101114;color:#d9f3dd;border:1px solid #444;padding:10px}.hint{color:#aaa;font-size:13px}.file{max-width:220px}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#17181b;color:#eee}header,.controls,.output{padding:12px 16px}.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;background:#22252a}.controls label{display:flex;gap:6px;align-items:center}.controls input[type=number]{width:82px}button,input,select{font:inherit}.stage-wrap{padding:16px;overflow:auto}.stage{position:relative;margin:auto;background:#333;overflow:hidden;max-width:100%;touch-action:none}.stage img{position:absolute;user-select:none;-webkit-user-drag:none}.bg{inset:0;width:100%;height:100%}.asset{transform-origin:50% 100%;cursor:grab}.asset.selected{filter:drop-shadow(0 0 3px #fff)}.asset.dragging{cursor:grabbing}.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;padding:10px;background:#202228;border-radius:8px}.readout code{font-size:13px}.output textarea{width:100%;min-height:300px;background:#101114;color:#d9f3dd;border:1px solid #444;padding:10px}.hint{color:#aaa;font-size:13px}.file{max-width:220px}.slots{display:flex;gap:4px}.slots button.active{outline:2px solid #ddd}
 </style></head><body>
-<header><b>Portfolio City Placement Tool</b> <span class="hint">背景の上で建物をドラッグ。サイズ・回転・座標を保存できる。</span></header>
+<header><b>Portfolio City Placement Tool</b> <span class="hint">最大6建物。選択中の建物をドラッグ・拡縮・回転して配置JSONを保存。</span></header>
 <div class="controls">
 <label>背景 <input class="file" id="bgFile" type="file" accept="image/*"></label>
-<label>建物 <input class="file" id="assetFile" type="file" accept="image/*"></label>
+<label>建物 <input class="file" id="assetFile" type="file" accept="image/*" multiple></label>
+<div class="slots" id="slots"></div>
 <label>幅% <input id="width" type="number" value="46" min="1" max="200" step=".1"></label>
 <label>回転° <input id="rotation" type="number" value="0" min="-180" max="180" step=".1"></label>
 <label>微調整 <select id="step"><option>.1</option><option>.25</option><option>.5</option><option>1</option></select>%</label>
 <button data-nudge="0,-1">↑</button><button data-nudge="-1,0">←</button><button data-nudge="1,0">→</button><button data-nudge="0,1">↓</button>
-<button id="reset">初期値</button><button id="copy">JSONをコピー</button><button id="download">JSON保存</button>
+<button id="reset">選択を初期値</button><button id="remove">選択を外す</button><button id="copy">JSONをコピー</button><button id="download">JSON保存</button>
 </div>
-<div class="stage-wrap"><div id="stage" class="stage"><img id="bg" class="bg"><img id="asset" class="asset"></div></div>
+<div class="stage-wrap"><div id="stage" class="stage"><img id="bg" class="bg"></div></div>
 <div class="output"><div class="readout">
-<div>X <code id="rx"></code></div><div>Y <code id="ry"></code></div><div>幅 <code id="rw"></code></div><div>回転 <code id="rr"></code></div><div>px X <code id="rpx"></code></div><div>px Y <code id="rpy"></code></div>
-</div><p class="hint">座標アンカーは建物の下辺中央。背景元画像のpx座標も同時に記録する。</p><textarea id="json" readonly></textarea></div>
+<div>選択 <code id="rs"></code></div><div>X <code id="rx"></code></div><div>Y <code id="ry"></code></div><div>幅 <code id="rw"></code></div><div>回転 <code id="rr"></code></div><div>px X <code id="rpx"></code></div><div>px Y <code id="rpy"></code></div>
+</div><p class="hint">全建物のアンカーは下辺中央。クリックした建物が選択対象。JSONには6スロット分をまとめて保存する。</p><textarea id="json" readonly></textarea></div>
 <script>
-(()=>{const $=s=>document.querySelector(s),stage=$('#stage'),bg=$('#bg'),asset=$('#asset');
-let state={x_percent:24,y_percent:84,width_percent:46,rotation_deg:0},names={background:null,asset:null},drag=null;
-function load(inp,img,key){const f=inp.files[0];if(!f)return;names[key]=f.name;const u=URL.createObjectURL(f);img.onload=()=>{if(key==='background'){stage.style.aspectRatio=img.naturalWidth+'/'+img.naturalHeight;}render();URL.revokeObjectURL(u)};img.src=u}
-function data(){const W=bg.naturalWidth||0,H=bg.naturalHeight||0;return {schema:'portfolio-city-placement/v1',background:names.background,asset:names.asset,anchor:'bottom-center',x_percent:+state.x_percent.toFixed(4),y_percent:+state.y_percent.toFixed(4),width_percent:+state.width_percent.toFixed(4),rotation_deg:+state.rotation_deg.toFixed(3),background_px:{width:W,height:H},anchor_px:{x:+(W*state.x_percent/100).toFixed(2),y:+(H*state.y_percent/100).toFixed(2)}}}
-function render(){asset.style.left=state.x_percent+'%';asset.style.top=state.y_percent+'%';asset.style.width=state.width_percent+'%';asset.style.height='auto';asset.style.transform='translate(-50%,-100%) rotate('+state.rotation_deg+'deg)';$('#width').value=state.width_percent;$('#rotation').value=state.rotation_deg;const d=data();$('#rx').textContent=d.x_percent+'%';$('#ry').textContent=d.y_percent+'%';$('#rw').textContent=d.width_percent+'%';$('#rr').textContent=d.rotation_deg+'°';$('#rpx').textContent=d.anchor_px.x;$('#rpy').textContent=d.anchor_px.y;$('#json').value=JSON.stringify(d,null,2)}
-$('#bgFile').onchange=e=>load(e.target,bg,'background');$('#assetFile').onchange=e=>load(e.target,asset,'asset');
-$('#width').oninput=e=>{state.width_percent=+e.target.value;render()};$('#rotation').oninput=e=>{state.rotation_deg=+e.target.value;render()};
-document.querySelectorAll('[data-nudge]').forEach(b=>b.onclick=()=>{const [dx,dy]=b.dataset.nudge.split(',').map(Number),s=+$('#step').value;state.x_percent+=dx*s;state.y_percent+=dy*s;render()});
-asset.onpointerdown=e=>{drag={x:e.clientX,y:e.clientY,sx:state.x_percent,sy:state.y_percent};asset.setPointerCapture(e.pointerId);asset.classList.add('dragging')};
-asset.onpointermove=e=>{if(!drag)return;const r=stage.getBoundingClientRect();state.x_percent=drag.sx+(e.clientX-drag.x)/r.width*100;state.y_percent=drag.sy+(e.clientY-drag.y)/r.height*100;render()};
-asset.onpointerup=asset.onpointercancel=()=>{drag=null;asset.classList.remove('dragging')};
-$('#reset').onclick=()=>{state={x_percent:24,y_percent:84,width_percent:46,rotation_deg:0};render()};
+(()=>{const $=s=>document.querySelector(s),stage=$('#stage'),bg=$('#bg');
+const defaults=[{x:24,y:84,w:46},{x:77,y:83,w:46},{x:19,y:65,w:35},{x:81,y:64,w:35},{x:26,y:51,w:32},{x:78,y:52,w:32}];
+let background=null,selected=0,drag=null,assets=Array.from({length:6},(_,i)=>({slot:i+1,name:null,img:null,x:defaults[i].x,y:defaults[i].y,w:defaults[i].w,rot:0}));
+function mkSlots(){const el=$('#slots');el.innerHTML='';assets.forEach((a,i)=>{const b=document.createElement('button');b.textContent='S'+(i+1);b.className=i===selected?'active':'';b.onclick=()=>select(i);el.appendChild(b)})}
+function select(i){selected=i;mkSlots();render()}
+function loadBg(){const f=$('#bgFile').files[0];if(!f)return;background=f.name;const u=URL.createObjectURL(f);bg.onload=()=>{stage.style.aspectRatio=bg.naturalWidth+'/'+bg.naturalHeight;URL.revokeObjectURL(u);render()};bg.src=u}
+function attachPointer(img,i){img.onpointerdown=e=>{select(i);drag={px:e.clientX,py:e.clientY,x:assets[i].x,y:assets[i].y,i};img.setPointerCapture(e.pointerId);img.classList.add('dragging')};img.onpointermove=e=>{if(!drag||drag.i!==i)return;const r=stage.getBoundingClientRect(),a=assets[i];a.x=drag.x+(e.clientX-drag.px)/r.width*100;a.y=drag.y+(e.clientY-drag.py)/r.height*100;render()};img.onpointerup=img.onpointercancel=()=>{drag=null;img.classList.remove('dragging')}}
+function setFiles(){[...$('#assetFile').files].slice(0,6).forEach((f,i)=>{const a=assets[i];a.name=f.name;if(a.img)a.img.remove();const img=document.createElement('img');img.className='asset';img.dataset.slot=i+1;stage.appendChild(img);a.img=img;attachPointer(img,i);const u=URL.createObjectURL(f);img.onload=()=>{URL.revokeObjectURL(u);render()};img.src=u});select(0)}
+function entry(a){const W=bg.naturalWidth||0,H=bg.naturalHeight||0;return {slot:'S'+a.slot,asset:a.name,anchor:'bottom-center',x_percent:+a.x.toFixed(4),y_percent:+a.y.toFixed(4),width_percent:+a.w.toFixed(4),rotation_deg:+a.rot.toFixed(3),anchor_px:{x:+(W*a.x/100).toFixed(2),y:+(H*a.y/100).toFixed(2)}}}
+function data(){return {schema:'portfolio-city-placement/v2',background,background_px:{width:bg.naturalWidth||0,height:bg.naturalHeight||0},assets:assets.filter(a=>a.name).map(entry)}}
+function render(){assets.forEach((a,i)=>{if(!a.img)return;a.img.style.left=a.x+'%';a.img.style.top=a.y+'%';a.img.style.width=a.w+'%';a.img.style.height='auto';a.img.style.transform='translate(-50%,-100%) rotate('+a.rot+'deg)';a.img.classList.toggle('selected',i===selected);a.img.style.zIndex=String(i+1)});const a=assets[selected],d=entry(a);$('#width').value=a.w;$('#rotation').value=a.rot;$('#rs').textContent='S'+a.slot+(a.name?' / '+a.name:'');$('#rx').textContent=d.x_percent+'%';$('#ry').textContent=d.y_percent+'%';$('#rw').textContent=d.width_percent+'%';$('#rr').textContent=d.rotation_deg+'°';$('#rpx').textContent=d.anchor_px.x;$('#rpy').textContent=d.anchor_px.y;$('#json').value=JSON.stringify(data(),null,2)}
+$('#bgFile').onchange=loadBg;$('#assetFile').onchange=setFiles;
+$('#width').oninput=e=>{assets[selected].w=+e.target.value;render()};$('#rotation').oninput=e=>{assets[selected].rot=+e.target.value;render()};
+document.querySelectorAll('[data-nudge]').forEach(b=>b.onclick=()=>{const [dx,dy]=b.dataset.nudge.split(',').map(Number),s=+$('#step').value,a=assets[selected];a.x+=dx*s;a.y+=dy*s;render()});
+$('#reset').onclick=()=>{const a=assets[selected],d=defaults[selected];a.x=d.x;a.y=d.y;a.w=d.w;a.rot=0;render()};
+$('#remove').onclick=()=>{const a=assets[selected];if(a.img)a.img.remove();a.img=null;a.name=null;render()};
 $('#copy').onclick=async()=>{await navigator.clipboard.writeText($('#json').value);$('#copy').textContent='コピー済み';setTimeout(()=>$('#copy').textContent='JSONをコピー',1000)};
-$('#download').onclick=()=>{const blob=new Blob([$('#json').value],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='placement.json';a.click();URL.revokeObjectURL(a.href)};
-render()})();
+$('#download').onclick=()=>{const blob=new Blob([$('#json').value],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio-city-placement.json';a.click();URL.revokeObjectURL(a.href)};
+mkSlots();render()})();
 </script></body></html>

@@ -88,3 +88,24 @@ After Waterside Play:
 - World -> district -> building popup -> project is the intended navigation hierarchy.
 - On mobile, project popup becomes a bottom sheet.
 - Keep PR #105 Draft until scene art and interactive district flow are complete.
+
+
+## Update — composability review
+
+The scenery approval state and runtime compositing state are now tracked separately.
+
+- Archive Street: approved art master preserved; runtime compositing HOLD after terrain/parcel review.
+- Workshop Alley: approved art master preserved; next parcel/compositing audit candidate.
+- Waterside Play: approved art master preserved; selected as the first neutral-mass composability prototype.
+- Observatory Hill: old approved master preserved as historical/reference art; final runtime background requires redesign around genuine terraced buildable parcels.
+
+New authoritative composability rules:
+- docs/PHASE5_COMPOSABLE_DISTRICT_BACKGROUND_SPEC.md
+- a background must pass both scenery quality and compositing quality
+- future expansion capacity is part of approval
+- rejected images remain reference-prohibited
+
+Next resume point:
+1. neutral-mass test on Waterside Play
+2. lock real parcel/perspective coordinates if PASS
+3. otherwise revise only the background geometry before project-building production

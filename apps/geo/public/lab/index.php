@@ -11,12 +11,12 @@
   <nav class="geo-nav"><a href="../">← 沿線・駅・住所</a><a href="../explore/">EXPLORE</a></nav>
   <p class="geo-kicker">DATA LAB</p>
   <h1>駅・路線・住所</h1>
-  <p class="geo-lead">自作した駅・路線・住所データを、MariaDBから検索します。</p>
+  <p class="geo-lead">自作した駅・路線・住所データを使ったページです。</p>
 
   <div class="geo-tabs" role="tablist" aria-label="検索対象">
-    <button data-mode="station" aria-selected="true">駅</button>
-    <button data-mode="line" aria-selected="false">路線</button>
-    <button data-mode="address" aria-selected="false">住所</button>
+    <button type="button" role="tab" data-mode="station" aria-selected="true">駅</button>
+    <button type="button" role="tab" data-mode="line" aria-selected="false">路線</button>
+    <button type="button" role="tab" data-mode="address" aria-selected="false">住所</button>
   </div>
 
   <form class="geo-search" id="search-form">

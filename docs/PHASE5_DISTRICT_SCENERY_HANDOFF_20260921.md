@@ -109,3 +109,26 @@ Next resume point:
 1. neutral-mass test on Waterside Play
 2. lock real parcel/perspective coordinates if PASS
 3. otherwise revise only the background geometry before project-building production
+
+
+## Waterside Play neutral-mass audit v1/v2
+
+The approved Waterside Play art master was tested with neutral project-building masses before any new building art was produced.
+
+Result:
+- holoca: strong foreground-right land parcel
+- aquarium: usable foreground-left land parcel with minor planter/path cleanup
+- word-generator: plausible smaller rear-left parcel, but existing benches/lamps should be cleared or shifted
+- future expansion: no clean fourth parcel in the current composition without occupying the main foreground approach or weakening the visible water corridor
+
+Verdict: **SCENERY PASS / COMPOSITING REVISE**.
+
+The approved master remains preserved and may be used only as the approved source/reference for the revision. It is not yet the final runtime background.
+
+Revision target:
+- preserve the waterside identity, bridge, open water and Professor Layton-inspired storybook style
+- keep the central foreground-to-water route visually open
+- preserve the strong right circular plaza
+- formalize one left foreground parcel and one smaller rear-left parcel
+- create at least one additional genuine buildable parcel away from the primary circulation line
+- keep water visible inside the mobile critical band

@@ -235,3 +235,35 @@ Next production gate:
 
 PR #105 remains Draft and must not be merged.
 Rejected images remain prohibited references.
+
+## Update — Waterside Play six-slot background APPROVED (2026-09-22)
+
+- The six-slot Waterside Play background has been explicitly approved by the user.
+- Canonical Google Drive file: `Portfolio City_採用設計画像_20260913/02_IllustratedCity/04_Phase5_DistrictScenery/03_WatersidePlay/background-approved.png`
+- Drive file id: `1j3_NnnrXExcqu3wMU2AHMAk6EqPqMUVM`
+- The previous approved background is preserved as `background-approved-20260921-legacy.png` and is historical only.
+- Slot assignment remains:
+  - S1 Aquarium
+  - S2 Holoca
+  - S3 filler candidate
+  - S4 filler candidate
+  - S5 Word Generator
+  - S6 filler candidate
+- Tuned placement baseline:
+  - S1 x24 y83
+  - S2 x77 y83
+  - S3 x19 y65
+  - S4 x81 y64
+  - S5 x26 y51
+  - S6 x78 y52
+- Aquarium / Holoca / Word Generator v1: placement/silhouette acceptable, art style rejected for excessive vector-like appearance.
+- Aquarium / Holoca / Word Generator v2: produced as hand-drawn/paper-texture candidates, not yet approved.
+- The generated concept-board / district-overview images created during single-building attempts are rejected and must not be used as references.
+
+Next resume point:
+1. composite Aquarium / Holoca / Word Generator v2 onto the canonical approved background
+2. compare with the candidate fillers at S3 / S4 / S6
+3. run desktop/tablet/exact-390 visual review
+4. only explicitly approved assets may move into accepted/runtime state
+
+PR #105 remains Draft and must not be merged yet.

@@ -16,10 +16,13 @@ Production factual data lives in MariaDB. The browser never loads the 495,147-ro
 - import preparation: `tools/prepare_geo_import.py`
 - canonical schema: `database/schema.sql`
 - public PHP/API: `public/`
+- DATA LAB browser client: `public/assets/lab.js` (API-only, no embedded master arrays)
 - forest/game definitions: JSON under `public/data/`
 - discovery progress: browser localStorage
 
 Database credentials are server-only. PHP prefers `GEO_DB_HOST`, `GEO_DB_NAME`, `GEO_DB_USER`, `GEO_DB_PASS`, and `GEO_DB_CHARSET`.
+
+The DATA LAB v9 prototype contract has been migrated to the production API architecture. See `docs/geo-data-lab-v9-api-migration.md` and `database/API_BENCHMARK_20260922.md`.
 
 ## Verified source contract
 

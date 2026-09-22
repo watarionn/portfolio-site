@@ -359,3 +359,33 @@ P5-B-4 is complete when:
 - hotspot coordinate contract is defined
 - missing-art inventory is explicit
 - the next task can begin with actual background illustration production without another architecture decision
+
+## 15. Six-slot layered scenery update — 2026-09-22
+
+The production model is updated from a two-art-layer scene to a three-art-layer scene.
+
+Art layers:
+1. background base
+2. filler assets for vacant slots
+3. project-building assets for occupied slots
+
+Interaction hotspots and popup UI remain separate from those art layers.
+
+Each district must be designed around six genuine buildable slots before background illustration polish.
+Six is the hard maximum per district.
+
+A vacant slot must look like an ordinary finished part of town, using a removable filler such as a small house, shop, kiosk, flower garden, fountain, pavilion or tree group.
+
+When a new project is added:
+- remove the slot's filler asset
+- insert the project building asset at the same slot anchor / perspective envelope
+- keep the background base unchanged
+
+Waterside Play is the prototype:
+- docs/PHASE5_WATERSIDE_PLAY_SIX_SLOT_PLAN.md
+- aquarium -> WP-S1
+- holoca -> WP-S2
+- word-generator -> WP-S5
+- WP-S3 / WP-S4 / WP-S6 start as filler-occupied future slots
+
+The earlier Waterside Play three-building placement values are historical rough placement only and are superseded by the six-slot plan.

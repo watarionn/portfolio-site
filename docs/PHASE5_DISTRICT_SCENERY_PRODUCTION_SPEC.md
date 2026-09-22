@@ -8,13 +8,16 @@ The finished District View is not a permanent project-card list.
 
 Its primary interaction surface is a layered illustrated scene:
 
-1. district background illustration
-2. independently positioned transparent building illustrations
-3. accessible building hotspot buttons
-4. project popup / dossier
-5. minimal previous / world / next navigation
+1. district background base
+2. removable filler assets for unused buildable slots
+3. independently positioned transparent project-building illustrations
+4. accessible building hotspot buttons
+5. project popup / dossier
+6. minimal previous / world / next navigation
 
-The background establishes place. The building layer establishes projects. The UI layer must never be baked into the artwork.
+Each district is designed around six buildable slots before the final background is painted. A slot contains either its filler asset or its project-building asset, never both. Empty slots must not appear as exposed placeholder lots.
+
+The background establishes fixed place geometry. The filler layer keeps unused capacity looking like a finished town. The project-building layer establishes projects. The UI layer must never be baked into the artwork.
 
 ## 2. Runtime asset layout
 
@@ -24,12 +27,14 @@ Target repository layout:
 portfolio-city/assets/districts/
   observatory-hill/
     background.webp
+    fillers/
     buildings/
       holoscope.webp
       sphere.webp
       prime-dot-art.webp
   archive-street/
     background.webp
+    fillers/
     buildings/
       yorei.webp
       actress-finder.webp
@@ -37,6 +42,7 @@ portfolio-city/assets/districts/
       shisha.webp
   workshop-alley/
     background.webp
+    fillers/
     buildings/
       dqb2.webp
       madori.webp
@@ -44,6 +50,7 @@ portfolio-city/assets/districts/
       anagram.webp
   waterside-play/
     background.webp
+    fillers/
     buildings/
       aquarium.webp
       holoca.webp
@@ -61,6 +68,13 @@ Do not encode labels, project names, popup frames, hover marks, or clickable out
 - output: WebP, sRGB, no alpha required
 - target quality: visually lossless at approximately q88-q92
 - all important geometry must remain readable inside the central mobile-safe band
+
+### Filler layer
+- transparent background required
+- one removable filler group per unused slot
+- may use planting, fountain, kiosk, tiny house, small shop, tree group or similar ordinary city element
+- silhouette must remain quieter/lower than the project building envelope for the same slot
+- filler must not include fixed terrain that would disappear when the slot becomes a project
 
 ### Building layer
 - transparent background required
@@ -93,6 +107,14 @@ Mobile critical-content band:
 Important building centers should stay inside the mobile critical-content band whenever possible. Decorative environment may extend to the edges.
 
 Buildings must not overlap enough that their expanded touch targets collide.
+
+Latest composability rule:
+- every district has exactly six designed slot envelopes and a maximum of six project buildings
+- current-project-only placements in the sections below are historical starting points until that district receives its six-slot audit
+- all six neutral masses must pass before a revised background is runtime-approved
+
+Authoritative general rule:
+- docs/PHASE5_COMPOSABLE_DISTRICT_BACKGROUND_SPEC.md
 
 ## 5. Observatory Hill
 
@@ -202,20 +224,29 @@ Background only:
 
 Water must remain visible even on the 390px mobile crop.
 
-Initial building placement:
-- aquarium: center x 27, baseline y 68, visual width about 20%
-- holoca: center x 73, baseline y 66, visual width about 18%
-- word-generator: center x 51, baseline y 43, visual width about 17%
+Six-slot revision target:
+- WP-01: x 22, baseline y 83, max width 20% -> aquarium
+- WP-02: x 74, baseline y 80, max width 18% -> holoca
+- WP-03: x 31, baseline y 61, max width 15% -> word-generator
+- WP-04: x 77, baseline y 57, max width 14% -> filler / future project
+- WP-05: x 20, baseline y 46, max width 12% -> filler / future project
+- WP-06: x 69, baseline y 49, max width 12% -> filler / future project
 
 Depth:
-- aquarium and holoca flank the middle ground
-- word-generator is a rear-center destination across or beside the water
-- the watercourse remains a strong compositional line
+- WP-01 and WP-02 are foreground anchors
+- WP-03 and WP-04 form an asymmetric middle tier on the two banks
+- WP-05 and WP-06 are small rear parcels
+- the central approach, bridge and mobile-visible water window are protected no-build space
 
-Popup preference:
+Popup preference for current projects:
 - aquarium: upper-right
 - holoca: upper-left
-- word-generator: below
+- word-generator: inward/right or below after final mass QA
+
+Authoritative plan:
+- docs/PHASE5_WATERSIDE_PLAY_6_SLOT_PLAN.md
+
+The previous rear-center word-generator placement is superseded for the background revision because it conflicts with the bridge/water sightline.
 
 ## 9. Hotspot data contract
 
@@ -302,23 +333,26 @@ Therefore the next art-production gate is real, not merely an implementation tas
 
 ## 13. Production order
 
-1. Archive Street background
-2. Workshop Alley background
-3. Waterside Play background
-4. Observatory Hill final 16:9 background
-5. missing building illustrations
-6. scene assembly prototype
-7. hotspot tuning
-8. popup integration
-9. responsive QA
+1. Waterside Play six-slot geometry lock
+2. Waterside Play background revision
+3. Waterside Play six-mass QA at 1440 / 820 / exact 390
+4. Workshop Alley six-slot audit
+5. Observatory Hill six-slot redesign
+6. Archive Street six-slot salvage/redesign decision
+7. missing filler and project-building illustrations
+8. scene assembly prototype
+9. hotspot tuning
+10. popup integration
+11. responsive QA
 
-The first three backgrounds are prioritized because their district identity depends most strongly on environmental context.
+Approved art masters are preserved as visual references where explicitly allowed, but runtime approval now requires the six-slot compositing gate. Rejected images remain reference-prohibited.
 
 ## 14. P5-B-4 exit criteria
 
 P5-B-4 is complete when:
 - image sizes and formats are fixed
-- layer separation is fixed
+- three-layer separation (background base / filler / project building) is fixed
+- six-slot district capacity is fixed
 - asset paths are fixed
 - all 14 project placement targets are documented
 - background-only content is defined for all four districts

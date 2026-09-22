@@ -26,7 +26,7 @@ function geo_pdo(): PDO {
         return $pdo;
     }
 
-    $configPath = __DIR__ . '/../../config.php';
+    $configPath = __DIR__ . '/../../../config.php';
     if (!is_file($configPath)) {
         error_log('GEO database config is missing.');
         geo_respond(['ok' => false, 'error' => '検索サービスは現在利用できません。'], 503);

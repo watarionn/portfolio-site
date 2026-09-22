@@ -1,2 +1,6 @@
 public-inventory.json
 build/
+config.php
+**/config.php
+.env
+.env.*

@@ -9,3 +9,9 @@
 .geo-result-reading{display:block;margin-top:4px;color:#555}
 .forest-wrap{margin-top:30px;padding-top:22px;border-top:1px solid #ddd}
 .geo-forest-link{display:inline-block;padding:10px 15px;border:1px solid #bbb;border-radius:8px;background:#fff;text-decoration:none}
+
+.forest-loading{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;padding:10px 14px;border-radius:10px;background:rgba(255,253,242,.88);color:#4d5049;font-size:13px}
+.forest-quiz>strong{display:block;margin-bottom:7px;font-size:13px;line-height:1.45}
+.forest-quiz-message{display:block;min-height:18px;margin-top:6px;font-size:12px;font-weight:700;color:#6a5d48}
+.forest-special{position:absolute;z-index:5;right:14px;bottom:14px;text-decoration:none;box-shadow:0 3px 10px rgba(0,0,0,.12)}
+@media(max-width:700px){.forest-special{right:10px;bottom:68px;max-width:52vw;text-align:center}.forest-loading{position:fixed;top:50%;z-index:8}}

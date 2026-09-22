@@ -82,6 +82,8 @@
         const wrap = document.createElement('div');
         wrap.className = 'forest-object';
         wrap.dataset.type = item.type;
+        wrap.dataset.itemId = item.id;
+        wrap.dataset.edge = item.position.x <= 10 ? 'left' : item.position.x >= 90 ? 'right' : 'center';
         wrap.style.left = item.position.x + '%';
         wrap.style.top = item.position.y + '%';
 

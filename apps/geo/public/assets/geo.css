@@ -22,3 +22,9 @@
 .forest-area[data-area='A'] .forest-object>button{box-shadow:0 2px 8px rgba(34,38,27,.18)}
 .forest-area[data-area='A'] .forest-quiz{min-width:150px;box-shadow:0 4px 14px rgba(34,38,27,.22)}
 @media(max-width:700px){.forest-area[data-area='A']{background-image:none;background-color:#7b8064}}
+
+/* Keep expanded Area A quizzes inside the illustration without moving trigger coordinates. */
+.forest-area[data-area='A'] .forest-object[data-edge='left']{transform:translate(0,-50%)}
+.forest-area[data-area='A'] .forest-object[data-edge='left'] .forest-quiz{transform:translateX(-4%)}
+.forest-area[data-area='A'] .forest-object[data-item-id='oshor'] .forest-quiz,.forest-area[data-area='A'] .forest-object[data-item-id='gumyo'] .forest-quiz{transform:translateX(-22%)}
+.forest-area[data-area='A'] .forest-object[data-item-id='yuriage'] .forest-quiz{transform:translateX(-8%)}

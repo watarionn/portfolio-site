@@ -1,6 +1,6 @@
 <?php
 // Local development: copy to apps/geo/config.php.
-// Production: add these GEO_* constants to the existing protected site-root config.php.
+// Production: add these GEO_* constants to the existing protected config.php above the public web root.
 // The deployment workflow excludes config.php and preserves the server-only file.
 // Never commit the real password.
 define('GEO_DB_HOST', 'localhost');

@@ -15,3 +15,10 @@
 .forest-quiz-message{display:block;min-height:18px;margin-top:6px;font-size:12px;font-weight:700;color:#6a5d48}
 .forest-special{position:absolute;z-index:5;right:14px;bottom:14px;text-decoration:none;box-shadow:0 3px 10px rgba(0,0,0,.12)}
 @media(max-width:700px){.forest-special{right:10px;bottom:68px;max-width:52vw;text-align:center}.forest-loading{position:fixed;top:50%;z-index:8}}
+
+/* Phase 2-D: Area A UI composite / layout-lock candidate */
+.forest-area[data-area='A']{background-image:linear-gradient(rgba(247,242,220,.05),rgba(55,60,39,.08)),url('./forest/area-a-desktop.png');background-size:cover;background-position:center;background-repeat:no-repeat}
+.forest-area[data-area='A'] .forest-object{z-index:2}
+.forest-area[data-area='A'] .forest-object>button{box-shadow:0 2px 8px rgba(34,38,27,.18)}
+.forest-area[data-area='A'] .forest-quiz{min-width:150px;box-shadow:0 4px 14px rgba(34,38,27,.22)}
+@media(max-width:700px){.forest-area[data-area='A']{background-image:none;background-color:#7b8064}}

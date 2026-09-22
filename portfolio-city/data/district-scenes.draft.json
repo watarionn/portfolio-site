@@ -17,7 +17,12 @@
           "y": 65,
           "width": 17,
           "anchor": "bottom-center",
-          "hitbox": { "x": 18, "y": 40, "width": 18, "height": 28 },
+          "hitbox": {
+            "x": 18,
+            "y": 40,
+            "width": 18,
+            "height": 28
+          },
           "popupPreferred": "upper-right"
         },
         {
@@ -27,7 +32,12 @@
           "y": 47,
           "width": 18,
           "anchor": "bottom-center",
-          "hitbox": { "x": 41, "y": 21, "width": 18, "height": 29 },
+          "hitbox": {
+            "x": 41,
+            "y": 21,
+            "width": 18,
+            "height": 29
+          },
           "popupPreferred": "below"
         },
         {
@@ -37,7 +47,12 @@
           "y": 64,
           "width": 18,
           "anchor": "bottom-center",
-          "hitbox": { "x": 63, "y": 36, "width": 18, "height": 31 },
+          "hitbox": {
+            "x": 63,
+            "y": 36,
+            "width": 18,
+            "height": 31
+          },
           "popupPreferred": "upper-left"
         }
       ]
@@ -53,7 +68,12 @@
           "y": 75,
           "width": 17,
           "anchor": "bottom-center",
-          "hitbox": { "x": 15, "y": 45, "width": 18, "height": 33 },
+          "hitbox": {
+            "x": 15,
+            "y": 45,
+            "width": 18,
+            "height": 33
+          },
           "popupPreferred": "right"
         },
         {
@@ -63,7 +83,12 @@
           "y": 74,
           "width": 17,
           "anchor": "bottom-center",
-          "hitbox": { "x": 65, "y": 44, "width": 18, "height": 33 },
+          "hitbox": {
+            "x": 65,
+            "y": 44,
+            "width": 18,
+            "height": 33
+          },
           "popupPreferred": "left"
         },
         {
@@ -73,7 +98,12 @@
           "y": 50,
           "width": 15,
           "anchor": "bottom-center",
-          "hitbox": { "x": 27, "y": 25, "width": 16, "height": 28 },
+          "hitbox": {
+            "x": 27,
+            "y": 25,
+            "width": 16,
+            "height": 28
+          },
           "popupPreferred": "lower-right"
         },
         {
@@ -83,7 +113,12 @@
           "y": 50,
           "width": 15,
           "anchor": "bottom-center",
-          "hitbox": { "x": 57, "y": 25, "width": 16, "height": 28 },
+          "hitbox": {
+            "x": 57,
+            "y": 25,
+            "width": 16,
+            "height": 28
+          },
           "popupPreferred": "lower-left"
         }
       ]
@@ -99,7 +134,12 @@
           "y": 76,
           "width": 18,
           "anchor": "bottom-center",
-          "hitbox": { "x": 15, "y": 45, "width": 20, "height": 34 },
+          "hitbox": {
+            "x": 15,
+            "y": 45,
+            "width": 20,
+            "height": 34
+          },
           "popupPreferred": "upper-right"
         },
         {
@@ -109,7 +149,12 @@
           "y": 75,
           "width": 18,
           "anchor": "bottom-center",
-          "hitbox": { "x": 64, "y": 44, "width": 20, "height": 34 },
+          "hitbox": {
+            "x": 64,
+            "y": 44,
+            "width": 20,
+            "height": 34
+          },
           "popupPreferred": "upper-left"
         },
         {
@@ -119,7 +164,12 @@
           "y": 49,
           "width": 16,
           "anchor": "bottom-center",
-          "hitbox": { "x": 26, "y": 22, "width": 18, "height": 30 },
+          "hitbox": {
+            "x": 26,
+            "y": 22,
+            "width": 18,
+            "height": 30
+          },
           "popupPreferred": "lower-right"
         },
         {
@@ -129,7 +179,12 @@
           "y": 48,
           "width": 16,
           "anchor": "bottom-center",
-          "hitbox": { "x": 55, "y": 21, "width": 18, "height": 30 },
+          "hitbox": {
+            "x": 55,
+            "y": 21,
+            "width": 18,
+            "height": 30
+          },
           "popupPreferred": "lower-left"
         }
       ]
@@ -141,32 +196,47 @@
         {
           "projectId": "aquarium",
           "asset": "assets/districts/waterside-play/buildings/aquarium.webp",
-          "x": 27,
-          "y": 68,
+          "x": 24,
+          "y": 83,
           "width": 20,
           "anchor": "bottom-center",
-          "hitbox": { "x": 16, "y": 36, "width": 22, "height": 35 },
+          "hitbox": {
+            "x": 14,
+            "y": 53,
+            "width": 20,
+            "height": 33
+          },
           "popupPreferred": "upper-right"
         },
         {
           "projectId": "holoca",
           "asset": "assets/districts/waterside-play/buildings/holoca.webp",
-          "x": 73,
-          "y": 66,
+          "x": 77,
+          "y": 83,
           "width": 18,
           "anchor": "bottom-center",
-          "hitbox": { "x": 63, "y": 36, "width": 20, "height": 33 },
+          "hitbox": {
+            "x": 68,
+            "y": 54,
+            "width": 18,
+            "height": 32
+          },
           "popupPreferred": "upper-left"
         },
         {
           "projectId": "word-generator",
           "asset": "assets/districts/waterside-play/buildings/word-generator.webp",
-          "x": 51,
-          "y": 43,
-          "width": 17,
+          "x": 28,
+          "y": 52,
+          "width": 13,
           "anchor": "bottom-center",
-          "hitbox": { "x": 42, "y": 17, "width": 18, "height": 29 },
-          "popupPreferred": "below"
+          "hitbox": {
+            "x": 21,
+            "y": 32,
+            "width": 14,
+            "height": 23
+          },
+          "popupPreferred": "lower-right"
         }
       ]
     }

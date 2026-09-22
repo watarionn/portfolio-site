@@ -240,3 +240,27 @@ Area A becomes the forest art master only after a trial passes:
 - visual restraint sufficient for later areas to become progressively more distinctive
 
 After acceptance, Areas B–G inherit the same line, palette, texture and perspective language while varying path topology, density and special-experience motifs.
+
+
+## Phase 2-D desktop layout lock — 2026-09-23
+
+Status: **DESKTOP LAYOUT LOCKED**
+
+The adopted Trial 03 master was composited at its native 1536 × 1024 size with the seven canonical interaction coordinates, three exits, and top-right discovery notebook.
+
+Desktop checks passed:
+
+- all seven trigger positions remain readable with HTML/CSS-style light controls
+- left / right / bottom navigation corridors remain usable
+- discovery notebook fits the intended quiet top-right region
+- expanded-panel QA passed at the four high-risk positions: 膳所, 忍路, 求名, 閖上
+- all four expanded panels remain inside the illustration bounds
+- none of the four expanded panels collide with the three exits or discovery notebook
+- no canonical interaction coordinate was moved
+- Trial 01 and Trial 02 remain rejected and are not implementation references
+
+QA-only composites were generated locally and intentionally remain outside the production asset tree.
+
+This lock is **desktop-only**. Full Area A Layout Lock is not yet declared because the mobile composition must be produced and reviewed separately. The desktop master must not be destructively center-cropped for mobile.
+
+Next gate: **Phase 2-D Mobile Composition** using a portrait companion master that preserves the same location, palette, path language, and seven interaction pockets.

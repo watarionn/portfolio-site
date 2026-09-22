@@ -181,3 +181,23 @@ Tasks:
 - Do not make Area A visually more special than E/F/G.
 - Keep the seven live interaction positions unless a later explicit layout decision changes them.
 - Keep data truth in MariaDB/API; forest art remains presentation only.
+
+
+## Phase 2-D progress — 2026-09-23
+
+Area A desktop UI composite QA is complete.
+
+- Trial 03 only: confirmed
+- seven canonical interaction controls: PASS
+- left/right/bottom exits: PASS
+- top-right discovery notebook: PASS
+- expanded quiz checks at 膳所 / 忍路 / 求名 / 閖上: PASS
+- expanded panels contained within the desktop illustration: PASS
+- expanded panels vs exits/notebook: no collision
+- canonical coordinates changed: no
+
+Decision: **Area A Desktop Layout Lock**.
+
+This is intentionally not the full Area A Layout Lock. Mobile remains a separate composition gate and must not use a destructive center crop of the desktop master.
+
+Next phase: **Phase 2-D Mobile Composition**.

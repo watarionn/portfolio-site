@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "worldCoordinateSpace": "normalized-0..1",
+  "publishedEnvelope": {
+    "minX": 0.395,
+    "maxX": 0.5425,
+    "minY": 0.365,
+    "maxY": 0.55333,
+    "center": {"x": 0.46875, "y": 0.459165}
+  },
+  "entryCameras": {
+    "desktop": {
+      "center": {"x": 0.475, "y": 0.465},
+      "viewportWorldFraction": {"width": 0.42, "height": 0.42},
+      "intent": "published cluster plus meaningful west/east/south frontier context"
+    },
+    "tablet": {
+      "center": {"x": 0.475, "y": 0.47},
+      "viewportWorldFraction": {"width": 0.38, "height": 0.46},
+      "intent": "retain all four published anchors with moderate frontier"
+    },
+    "mobile": {
+      "center": {"x": 0.47, "y": 0.46},
+      "viewportWorldFraction": {"width": 0.27, "height": 0.42},
+      "intent": "keep districts readable; short horizontal pan reveals cluster edges"
+    }
+  },
+  "panBounds": {
+    "desktop": {"minX": 0.27, "maxX": 0.69, "minY": 0.25, "maxY": 0.69},
+    "tablet": {"minX": 0.29, "maxX": 0.67, "minY": 0.23, "maxY": 0.71},
+    "mobile": {"minX": 0.32, "maxX": 0.63, "minY": 0.24, "maxY": 0.70}
+  },
+  "rules": {
+    "fullWorldVisibleAtEntry": false,
+    "sameWorldCoordinatesAcrossBreakpoints": true,
+    "mobileMayPan": true,
+    "unpublishedCellsInteractive": false,
+    "cameraMayExposeFrontierScenery": true
+  }
+}

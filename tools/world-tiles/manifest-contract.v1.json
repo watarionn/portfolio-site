@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "description": "Manifest contract emitted by slice-master-world.py",
+  "required": ["schemaVersion", "grid", "source", "tile", "tiles", "changedTiles", "changedTileCount"],
+  "invariants": {
+    "grid.columns": 16,
+    "grid.rows": 12,
+    "grid.cellCount": 192,
+    "tileIds": "A01-P12 exactly once",
+    "sourceDimensions": "divisible by 16 horizontally and 12 vertically",
+    "hash": "SHA-256 of emitted runtime tile bytes"
+  }
+}

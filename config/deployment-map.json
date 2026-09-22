@@ -112,6 +112,11 @@
       "productionRoot": "PIXEL-ART_MAKER"
     },
     {
+      "id": "placement-tool",
+      "sourceRoot": "tools/placement-tool",
+      "productionRoot": "PLACEMENT_TOOL"
+    },
+    {
       "id": "word-generator",
       "sourceRoot": "tools/word-generator",
       "productionRoot": "WORD_GENERATOR"

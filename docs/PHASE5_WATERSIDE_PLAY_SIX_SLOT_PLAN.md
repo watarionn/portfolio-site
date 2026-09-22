@@ -44,8 +44,8 @@ The coordinate is the bottom-center building anchor / baseline target.
 
 | Slot | Depth | x | y | Visual width | Current occupant | Vacant-state filler |
 | --- | --- | ---: | ---: | ---: | --- | --- |
-| WP-S1 | foreground-left | 24 | 82 | 20 | aquarium | flower garden + low shade tree |
-| WP-S2 | foreground-right | 77 | 81 | 18 | holoca | small fountain court |
+| WP-S1 | foreground-left | 24 | 83 | 20 | aquarium | flower garden + low shade tree |
+| WP-S2 | foreground-right | 77 | 83 | 18 | holoca | small fountain court |
 | WP-S3 | middle-left | 21 | 63 | 15 | future | riverside kiosk + planters |
 | WP-S4 | middle-right | 74 | 61 | 15 | future | small café / waterside house |
 | WP-S5 | rear-left | 38 | 54 | 12 | word-generator | compact pavilion + shrubs |
@@ -189,3 +189,38 @@ The revision is a geometry refit around six buildable parcels, not a style reset
 Create the Waterside Play six-slot blockout / neutral-mass composition using this plan.
 
 Only after that blockout passes should the final revised background base be painted.
+
+
+## Final neutral-mass audit v2
+
+Result: BACKGROUND GEOMETRY PASS.
+
+The adopted background was re-tested after fitting the six anchors to its actual left/right terrace geometry.
+
+Final anchor pattern:
+- left bank: WP-S1 foreground / WP-S3 middle / WP-S5 rear
+- right bank: WP-S2 foreground / WP-S4 middle / WP-S6 rear
+- the central water corridor and bridge remain permanent non-slot identity space
+
+The previous v1 coordinates that placed WP-S5 / WP-S6 toward the bridge/water corridor are superseded.
+
+Current project assignment:
+- WP-S1: aquarium
+- WP-S2: holoca
+- WP-S5: word-generator
+- WP-S3 / WP-S4 / WP-S6: filler
+
+The next gate is filler-asset design and later interaction/hitbox tuning. Background geometry does not need another repaint for the current six-slot plan.
+
+## Adopted background master
+
+Persistent Library path:
+- /Portfolio City/Phase5_DistrictScenery/Accepted/waterside-play-background-six-slot-approved.png
+
+Library file id:
+- libfile_7664216e2cb08191baba45bbd70bedc4
+
+Backing file id at adoption:
+- file_00000000a56c820cbf8aea096b6a6b79
+
+This six-slot master supersedes the earlier Waterside Play master for runtime-design work. The older approved master remains historical only.

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "district-scenes.schema.v1.json",
+  "title": "Portfolio City District Scenes",
+  "type": "object",
+  "required": ["schemaVersion", "canvas", "districts"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "canvas": {
+      "type": "object",
+      "required": ["aspectRatio", "runtimeWidth", "runtimeHeight"],
+      "properties": {
+        "aspectRatio": { "const": "16:9" },
+        "runtimeWidth": { "const": 2048 },
+        "runtimeHeight": { "const": 1152 }
+      },
+      "additionalProperties": false
+    },
+    "districts": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["districtId", "background", "buildings"],
+        "properties": {
+          "districtId": {
+            "enum": [
+              "observatory-hill",
+              "archive-street",
+              "workshop-alley",
+              "waterside-play"
+            ]
+          },
+          "background": { "type": "string" },
+          "buildings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "projectId",
+                "asset",
+                "x",
+                "y",
+                "width",
+                "anchor",
+                "hitbox",
+                "popupPreferred"
+              ],
+              "properties": {
+                "projectId": { "type": "string" },
+                "asset": { "type": "string" },
+                "x": { "type": "number", "minimum": 0, "maximum": 100 },
+                "y": { "type": "number", "minimum": 0, "maximum": 100 },
+                "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+                "anchor": { "const": "bottom-center" },
+                "hitbox": {
+                  "type": "object",
+                  "required": ["x", "y", "width", "height"],
+                  "properties": {
+                    "x": { "type": "number", "minimum": 0, "maximum": 100 },
+                    "y": { "type": "number", "minimum": 0, "maximum": 100 },
+                    "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+                    "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 }
+                  },
+                  "additionalProperties": false
+                },
+                "popupPreferred": {
+                  "enum": ["left", "right", "above", "below", "upper-left", "upper-right", "lower-left", "lower-right"]
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

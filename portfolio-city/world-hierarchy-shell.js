@@ -656,7 +656,7 @@
 
       const background = document.createElement('img');
       background.className = 'district-scene__background';
-      background.src = 'https://drive.google.com/uc?export=view&id=1j3_NnnrXExcqu3wMU2AHMAk6EqPqMUVM';
+      background.src = 'assets/districts/waterside-play/background-approved.png';
       background.alt = '';
       background.style.position = 'absolute';
       background.style.inset = '0';
@@ -681,7 +681,7 @@
       aquarium.style.transformOrigin = '50% 100%';
 
       const aquariumImage = document.createElement('img');
-      aquariumImage.src = 'https://drive.google.com/uc?export=view&id=1zLu2aRiZ3T8mIYEwgp5YnAAnbLVe_LcR';
+      aquariumImage.src = 'assets/districts/waterside-play/aquarium-s1-placement-asset.png';
       aquariumImage.alt = '';
       aquariumImage.setAttribute('aria-hidden', 'true');
       aquariumImage.style.display = 'block';

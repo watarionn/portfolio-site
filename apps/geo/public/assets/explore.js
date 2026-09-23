@@ -84,8 +84,20 @@
         wrap.dataset.type = item.type;
         wrap.dataset.itemId = item.id;
         wrap.dataset.edge = item.position.x <= 10 ? 'left' : item.position.x >= 90 ? 'right' : 'center';
-        wrap.style.left = item.position.x + '%';
-        wrap.style.top = item.position.y + '%';
+        const mobileAreaAPositions = {
+          oyumi: { x: 36, y: 15 },
+          juso: { x: 18, y: 28 },
+          kisaichi: { x: 73, y: 29 },
+          oshor: { x: 80, y: 43 },
+          zeze: { x: 16, y: 51 },
+          gumyo: { x: 73, y: 64 },
+          yuriage: { x: 35, y: 70 },
+        };
+        const mobilePosition = current === 'A' ? mobileAreaAPositions[item.id] : null;
+        wrap.style.setProperty('--forest-x', item.position.x + '%');
+        wrap.style.setProperty('--forest-y', item.position.y + '%');
+        wrap.style.setProperty('--forest-mobile-x', (mobilePosition?.x ?? item.position.x) + '%');
+        wrap.style.setProperty('--forest-mobile-y', (mobilePosition?.y ?? item.position.y) + '%');
 
         const trigger = document.createElement('button');
         trigger.type = 'button';

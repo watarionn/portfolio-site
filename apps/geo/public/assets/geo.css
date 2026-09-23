@@ -28,3 +28,35 @@
 .forest-area[data-area='A'] .forest-object[data-edge='left'] .forest-quiz{transform:translateX(-4%)}
 .forest-area[data-area='A'] .forest-object[data-item-id='oshor'] .forest-quiz,.forest-area[data-area='A'] .forest-object[data-item-id='gumyo'] .forest-quiz{transform:translateX(-22%)}
 .forest-area[data-area='A'] .forest-object[data-item-id='yuriage'] .forest-quiz{transform:translateX(-8%)}
+
+
+/* Phase 2-D: world-space sign layer. Labels remain HTML/CSS, never baked into forest art. */
+.forest-object{left:var(--forest-x);top:var(--forest-y)}
+.forest-object>button{
+  position:relative;
+  border-color:#6b5639;
+  border-radius:4px;
+  background:linear-gradient(#d8bd83,#bd985f);
+  color:#342a1f;
+  box-shadow:0 2px 0 #765a37,0 4px 9px rgba(35,31,24,.24);
+  font-family:Georgia,"Yu Mincho","Hiragino Mincho ProN",serif;
+  letter-spacing:.04em;
+}
+.forest-object>button::before,.forest-object>button::after{
+  content:"";
+  position:absolute;
+  top:100%;
+  width:3px;
+  height:8px;
+  background:#765a37;
+}
+.forest-object>button::before{left:16%}
+.forest-object>button::after{right:16%}
+.forest-object[data-type="address"]>button{border-radius:4px;background:linear-gradient(#d8bd83,#bd985f)}
+
+@media(max-width:700px){
+  .forest-area[data-area='A'] .forest-object{
+    left:var(--forest-mobile-x);
+    top:var(--forest-mobile-y);
+  }
+}

@@ -2955,6 +2955,7 @@ button { font: inherit; }
 
 
 /* Waterside Play production pilot: one scene coordinate system */
+/* deployment sync: 2026-09-23 production pilot verification */
 .district-production-pilot { width: 100%; }
 .district-production-pilot__title { margin: 0 0 1rem; }
 .district-scene {

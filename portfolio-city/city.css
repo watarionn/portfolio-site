@@ -3014,6 +3014,6 @@ button { font: inherit; }
 .district-production-pilot__nav button { min-height: 2.75rem; }
 @media (max-width: 680px) {
   .district-production-pilot__title { margin-inline: var(--gutter); }
-  .district-scene { width: 100vw; margin-left: calc(50% - 50vw); }
+  .district-production-pilot > .district-scene {\n    width: calc(100% - (2 * var(--gutter)));\n    margin-inline: var(--gutter);\n  }
   .district-production-pilot__nav { margin-inline: var(--gutter); }
 }

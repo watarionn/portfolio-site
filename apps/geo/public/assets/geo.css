@@ -60,3 +60,17 @@
     top:var(--forest-mobile-y);
   }
 }
+
+
+/* Phase 2-D: Area B full-layout lock. Artwork remains separate from HTML/CSS labels. */
+.forest-area[data-area='B']{background-image:linear-gradient(rgba(247,242,220,.05),rgba(55,60,39,.08)),url('./forest/area-b-desktop.png');background-size:cover;background-position:center;background-repeat:no-repeat}
+.forest-area[data-area='B'] .forest-object{z-index:2}
+.forest-area[data-area='B'] .forest-object>button{box-shadow:0 2px 8px rgba(34,38,27,.18)}
+.forest-area[data-area='B'] .forest-quiz{min-width:150px;box-shadow:0 4px 14px rgba(34,38,27,.22)}
+@media(max-width:700px){
+  .forest-area[data-area='B']{min-height:0;aspect-ratio:9/16;background-image:linear-gradient(rgba(247,242,220,.04),rgba(55,60,39,.06)),url('./forest/area-b-mobile.png');background-size:100% 100%;background-position:center;background-color:#7b8064}
+  .forest-area[data-area='B'] .forest-object{left:var(--forest-mobile-x);top:var(--forest-mobile-y)}
+}
+.forest-area[data-area='B'] .forest-object[data-item-id='kyobate'] .forest-quiz{transform:translateX(4%)}
+.forest-area[data-area='B'] .forest-object[data-item-id='pashikuru'] .forest-quiz,.forest-area[data-area='B'] .forest-object[data-item-id='itab'] .forest-quiz{transform:translateX(-22%)}
+.forest-area[data-area='B'] .forest-object[data-item-id='senpoji'] .forest-quiz{transform:translateX(-8%)}

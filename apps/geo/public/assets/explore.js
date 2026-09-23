@@ -84,16 +84,27 @@
         wrap.dataset.type = item.type;
         wrap.dataset.itemId = item.id;
         wrap.dataset.edge = item.position.x <= 10 ? 'left' : item.position.x >= 90 ? 'right' : 'center';
-        const mobileAreaAPositions = {
-          oyumi: { x: 36, y: 15 },
-          juso: { x: 18, y: 28 },
-          kisaichi: { x: 73, y: 29 },
-          oshor: { x: 80, y: 43 },
-          zeze: { x: 16, y: 51 },
-          gumyo: { x: 73, y: 64 },
-          yuriage: { x: 35, y: 70 },
+        const mobilePositions = {
+          A: {
+            oyumi: { x: 36, y: 15 },
+            juso: { x: 18, y: 28 },
+            kisaichi: { x: 73, y: 29 },
+            oshor: { x: 80, y: 43 },
+            zeze: { x: 16, y: 51 },
+            gumyo: { x: 73, y: 64 },
+            yuriage: { x: 35, y: 70 },
+          },
+          B: {
+            kugunari: { x: 31, y: 20 },
+            nozoki: { x: 63, y: 29 },
+            kottoi: { x: 27, y: 39 },
+            pashikuru: { x: 72, y: 48 },
+            kyobate: { x: 25, y: 59 },
+            itab: { x: 70, y: 68 },
+            senpoji: { x: 42, y: 79 },
+          },
         };
-        const mobilePosition = current === 'A' ? mobileAreaAPositions[item.id] : null;
+        const mobilePosition = mobilePositions[current]?.[item.id] || null;
         wrap.style.setProperty('--forest-x', item.position.x + '%');
         wrap.style.setProperty('--forest-y', item.position.y + '%');
         wrap.style.setProperty('--forest-mobile-x', (mobilePosition?.x ?? item.position.x) + '%');

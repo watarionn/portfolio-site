@@ -646,22 +646,47 @@
       const scene = document.createElement('div');
       scene.className = 'district-scene district-scene--waterside';
       scene.setAttribute('aria-label', '水辺・遊び地区');
+      // Inline critical geometry makes the production pilot test independent
+      // from stylesheet cache/deploy skew. Remove after the scene renderer is locked.
+      scene.style.position = 'relative';
+      scene.style.width = '100%';
+      scene.style.aspectRatio = '1672 / 941';
+      scene.style.overflow = 'hidden';
+      scene.style.background = '#d9d1bf';
 
       const background = document.createElement('img');
       background.className = 'district-scene__background';
       background.src = 'https://drive.google.com/uc?export=view&id=1j3_NnnrXExcqu3wMU2AHMAk6EqPqMUVM';
       background.alt = '';
+      background.style.position = 'absolute';
+      background.style.inset = '0';
+      background.style.width = '100%';
+      background.style.height = '100%';
+      background.style.display = 'block';
 
       const aquarium = document.createElement('button');
       aquarium.type = 'button';
       aquarium.className = 'district-scene__building district-scene__building--aquarium';
       aquarium.dataset.projectId = 'aquarium';
       aquarium.setAttribute('aria-label', '水族館、詳細を見る');
+      aquarium.style.position = 'absolute';
+      aquarium.style.left = '19.9606%';
+      aquarium.style.top = '57.1039%';
+      aquarium.style.width = '25%';
+      aquarium.style.margin = '0';
+      aquarium.style.padding = '0';
+      aquarium.style.border = '0';
+      aquarium.style.background = 'transparent';
+      aquarium.style.transform = 'translate(-50%, -100%)';
+      aquarium.style.transformOrigin = '50% 100%';
 
       const aquariumImage = document.createElement('img');
       aquariumImage.src = 'https://drive.google.com/uc?export=view&id=1zLu2aRiZ3T8mIYEwgp5YnAAnbLVe_LcR';
       aquariumImage.alt = '';
       aquariumImage.setAttribute('aria-hidden', 'true');
+      aquariumImage.style.display = 'block';
+      aquariumImage.style.width = '100%';
+      aquariumImage.style.height = 'auto';
       aquarium.append(aquariumImage);
 
       scene.append(background, aquarium);

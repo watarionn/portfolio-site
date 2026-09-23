@@ -2952,3 +2952,59 @@ button { font: inherit; }
 }
 .world-map-zoom button:active { transform: translateY(1px); }
 .world-h2-map { transform-origin: 0 0; }
+
+
+/* Waterside Play production pilot: one scene coordinate system */
+.district-production-pilot { width: 100%; }
+.district-production-pilot__title { margin: 0 0 1rem; }
+.district-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  overflow: hidden;
+  background: #d9d1bf;
+}
+.district-scene__background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.district-scene__building {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: 50% 100%;
+}
+.district-scene__building img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+.district-scene__building--aquarium {
+  left: 19.9606%;
+  top: 57.1039%;
+  width: 25%;
+  transform: translate(-50%, -100%);
+}
+.district-scene__building:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 3px;
+}
+.district-production-pilot__nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .5rem;
+  margin-top: .75rem;
+}
+.district-production-pilot__nav button { min-height: 2.75rem; }
+@media (max-width: 680px) {
+  .district-production-pilot__title { margin-inline: var(--gutter); }
+  .district-scene { width: 100vw; margin-left: calc(50% - 50vw); }
+  .district-production-pilot__nav { margin-inline: var(--gutter); }
+}

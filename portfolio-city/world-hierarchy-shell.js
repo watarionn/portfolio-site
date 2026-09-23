@@ -681,7 +681,7 @@
       aquarium.style.transformOrigin = '50% 100%';
 
       const aquariumImage = document.createElement('img');
-      aquariumImage.src = 'assets/districts/waterside-play/aquarium-s1-placement-asset.png';
+      aquariumImage.src = 'assets/districts/waterside-play/aquarium-s1-final.png';
       aquariumImage.alt = '';
       aquariumImage.setAttribute('aria-hidden', 'true');
       aquariumImage.style.display = 'block';

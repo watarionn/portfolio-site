@@ -631,6 +631,57 @@
     if (!panel || !district) return false;
 
     const projects = state.projects.filter((project) => project.district === district.id).sort(byOrder);
+
+    // Waterside Play production pilot: background and building share one 1672x941
+    // coordinate system. The whole scene scales responsively as a single unit.
+    if (district.id === 'waterside-play') {
+      const page = document.createElement('section');
+      page.className = 'district-production-pilot';
+      page.dataset.districtPage = district.id;
+
+      const heading = document.createElement('h2');
+      heading.className = 'district-production-pilot__title';
+      heading.textContent = district.name;
+
+      const scene = document.createElement('div');
+      scene.className = 'district-scene district-scene--waterside';
+      scene.setAttribute('aria-label', '水辺・遊び地区');
+
+      const background = document.createElement('img');
+      background.className = 'district-scene__background';
+      background.src = 'https://drive.google.com/uc?export=view&id=1j3_NnnrXExcqu3wMU2AHMAk6EqPqMUVM';
+      background.alt = '';
+
+      const aquarium = document.createElement('button');
+      aquarium.type = 'button';
+      aquarium.className = 'district-scene__building district-scene__building--aquarium';
+      aquarium.dataset.projectId = 'aquarium';
+      aquarium.setAttribute('aria-label', '水族館、詳細を見る');
+
+      const aquariumImage = document.createElement('img');
+      aquariumImage.src = 'https://drive.google.com/uc?export=view&id=1zLu2aRiZ3T8mIYEwgp5YnAAnbLVe_LcR';
+      aquariumImage.alt = '';
+      aquariumImage.setAttribute('aria-hidden', 'true');
+      aquarium.append(aquariumImage);
+
+      scene.append(background, aquarium);
+
+      const controls = document.createElement('div');
+      controls.dataset.districtNavigation = '';
+      controls.className = 'district-production-pilot__nav';
+      for (const [action, label] of [['previous', '前の地区'], ['world', '世界地図へ戻る'], ['next', '次の地区']]) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.districtAction = action;
+        button.textContent = label;
+        controls.append(button);
+      }
+
+      page.append(heading, scene, controls);
+      panel.replaceChildren(page);
+      return true;
+    }
+
     const heading = document.createElement('h2');
     heading.textContent = district.name;
     const meta = document.createElement('p');

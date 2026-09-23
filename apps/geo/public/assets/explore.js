@@ -133,7 +133,7 @@
   }
 
   function showQuiz(wrap, item, trigger, reading) {
-    wrap.querySelector('.forest-quiz')?.remove();
+    areaEl.querySelectorAll('.forest-quiz').forEach(quiz => quiz.remove());
     const box = document.createElement('div');
     box.className = 'forest-quiz';
 

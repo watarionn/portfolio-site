@@ -264,3 +264,26 @@ QA-only composites were generated locally and intentionally remain outside the p
 This lock is **desktop-only**. Full Area A Layout Lock is not yet declared because the mobile composition must be produced and reviewed separately. The desktop master must not be destructively center-cropped for mobile.
 
 Next gate: **Phase 2-D Mobile Composition** using a portrait companion master that preserves the same location, palette, path language, and seven interaction pockets.
+
+## Phase 2-D Area A full layout lock — 2026-09-23
+
+Status: **FULL LAYOUT LOCKED (desktop + mobile)**.
+
+- Desktop master remains `assets/forest/area-a-desktop.png` (1536x1024), Trial 03 adopted.
+- Mobile master is `assets/forest/area-a-mobile.png` (941x1672), Trial 05 adopted.
+- Mobile uses a 9:16 world-space composition and a dedicated presentation coordinate set for the same seven Area A items.
+- Canonical desktop positions in `forest.json` remain unchanged; mobile recomposition is presentation-only.
+- Place-name labels are interactive HTML/CSS wooden signs, not baked into either background image.
+- Mobile expanded-panel QA passed for 膳所 / 忍路 / 求名 / 閖上 with no canvas, exit, notebook, or other-trigger collisions.
+- Desktop layout lock from the previous gate remains valid.
+- Both background masters are now bound in the implementation branch.
+- Rejected trials remain excluded from production assets.
+
+Verification at lock:
+- `node --check apps/geo/public/assets/explore.js`: PASS.
+- `git diff --check`: PASS.
+- Desktop asset: 1536x1024, SHA-256 prefix `ca26f7a1077f31b4`.
+- Mobile asset: 941x1672, SHA-256 prefix `80f155e4c8da4358`.
+- Local PHP CLI was unavailable, so no new PHP syntax check was claimed at this gate; this phase did not modify PHP.
+
+Next gate: **Area A implementation closure / PR #117 review**. Keep the PR draft and do not merge or deploy without explicit authorization.

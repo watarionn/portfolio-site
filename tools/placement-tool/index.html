@@ -21,7 +21,7 @@
 </div><p class="hint">全建物のアンカーは下辺中央。クリックした建物が選択対象。JSONには6スロット分をまとめて保存する。</p><textarea id="json" readonly></textarea></div>
 <script>
 (()=>{const $=s=>document.querySelector(s),stage=$('#stage'),bg=$('#bg');
-const defaults=[{x:24,y:84,w:46},{x:77,y:83,w:46},{x:19,y:65,w:35},{x:81,y:64,w:35},{x:26,y:51,w:32},{x:78,y:52,w:32}];
+const defaults=[{x:19.9606,y:57.1039,w:25},{x:77,y:83,w:46},{x:19,y:65,w:35},{x:81,y:64,w:35},{x:26,y:51,w:32},{x:78,y:52,w:32}];
 let background=null,selected=0,drag=null,assets=Array.from({length:6},(_,i)=>({slot:i+1,name:null,img:null,x:defaults[i].x,y:defaults[i].y,w:defaults[i].w,rot:0}));
 function mkSlots(){const el=$('#slots');el.innerHTML='';assets.forEach((a,i)=>{const b=document.createElement('button');b.textContent='S'+(i+1);b.className=i===selected?'active':'';b.onclick=()=>select(i);el.appendChild(b)})}
 function select(i){selected=i;mkSlots();render()}

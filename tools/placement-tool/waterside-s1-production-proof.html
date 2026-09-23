@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Waterside Play S1 Production Coordinate Proof</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#1c1b18;color:#f4efe4;font-family:system-ui,sans-serif}
+main{width:min(1180px,100%);margin:auto;padding:16px}.note,.coords{font-size:13px;line-height:1.6}
+.viewport{width:100%;overflow:hidden;border:1px solid #746e62;background:#000}
+.scene{position:relative;width:100%;aspect-ratio:1672/941}
+.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.asset{position:absolute;left:19.9606%;top:57.1039%;width:25%;height:auto;transform:translate(-50%,-100%);transform-origin:50% 100%;display:block}
+.anchor{position:absolute;left:19.9606%;top:57.1039%;width:10px;height:10px;border-radius:50%;background:#fff;outline:2px solid #111;transform:translate(-50%,-50%)}
+.hotspot{position:absolute;left:19.9606%;top:57.1039%;width:25%;aspect-ratio:1.5;transform:translate(-50%,-100%);background:transparent;border:1px dashed rgba(255,255,255,.7)}
+@media(max-width:520px){main{padding:0}.note,.coords{margin:10px 12px}.viewport{border-inline:0}}
+</style></head><body><main>
+<p class="note">Production geometry proof. Background and building share one 1672×941 scene coordinate system. No object-fit/crop. The building image below is the previously archived Drive copy used only to verify production coordinate behavior; the accepted final S1 asset is not replaced by it.</p>
+<div class="viewport"><div class="scene">
+<img class="bg" src="https://drive.google.com/uc?export=view&id=1j3_NnnrXExcqu3wMU2AHMAk6EqPqMUVM" alt="">
+<img class="asset" src="https://drive.google.com/uc?export=view&id=1zLu2aRiZ3T8mIYEwgp5YnAAnbLVe_LcR" alt="Aquarium geometry reference">
+<button class="hotspot" aria-label="Aquarium hotspot"></button><span class="anchor"></span>
+</div></div>
+<p class="coords">bottom-center = 19.9606%, 57.1039% / width = 25% / rotation = 0° / source canvas = 1672×941</p>
+</main></body></html>

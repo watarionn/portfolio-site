@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Collector</title>
+  <meta name="description" content="URL一覧を正規化・重複排除し、画像や動画を安全に整理保存するWindowsデスクトップツール。X、Pixiv、Generic DOM向けBridgeを同梱。">
+  <meta property="og:title" content="Media Collector">
+  <meta property="og:description" content="Plan-firstでURLを確認し、重複排除・ファイル検証・manifest生成まで扱うローカルメディア整理ツール。">
+  <meta property="og:image" content="assets/og-preview.png">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">Python / Desktop / Media Workflow</p>
+        <h1>Media Collector</h1>
+      </div>
+      <p class="version">v0.4.0 RC</p>
+    </header>
+
+    <figure class="app-shot">
+      <img src="assets/app-screenshot.png" alt="Media CollectorでURLのPlanとDownload Resultsを確認している実アプリ画面">
+    </figure>
+
+    <section class="intro" aria-labelledby="about-heading">
+      <h2 id="about-heading">このツールについて</h2>
+      <p>以前使っていた複数の画像・メディア収集スクリプトを、安全な共通ワークフローへ作り直しました。URLを貼ってPlanを確認し、正規化・重複排除・manifest生成を行ったうえで、必要な場合だけ保存処理を実行します。</p>
+    </section>
+
+    <section class="grid" aria-label="主な機能">
+      <article>
+        <h2>Plan-first workflow</h2>
+        <p>ネットワーク保存を始める前に、URLの正規化結果、画像・動画種別、重複数を一覧で確認できます。</p>
+      </article>
+      <article>
+        <h2>Source adapters</h2>
+        <p>X、Pixiv、Generic URLを共通形式へ変換します。Browser Bridgeは現在のページに見えているメディアURLだけを抽出します。</p>
+      </article>
+      <article>
+        <h2>Safe download</h2>
+        <p>Content-Typeとファイルシグネチャを確認し、容量上限、動画既定OFF、SHA-256重複排除を通して保存します。</p>
+      </article>
+      <article>
+        <h2>Manifest</h2>
+        <p>Planと保存結果をJSON / TSVで出力します。tokenやsignature系のクエリ値は記録時にREDACTEDへ置換します。</p>
+      </article>
+    </section>
+
+    <section class="safety" aria-labelledby="safety-heading">
+      <h2 id="safety-heading">安全設計</h2>
+      <ul>
+        <li>Plan作成だけではファイルをダウンロードしない</li>
+        <li>旧ツールにあった認証トークン、Cookie、パスワードを新リポジトリへ移植しない</li>
+        <li>Browser Bridgeはdocument.cookie、localStorage、sessionStorage、Authorization情報を扱わない</li>
+        <li>同一内容はSHA-256で検出し、二重保存を抑止</li>
+        <li>画像・動画はContent-Typeだけでなく実ファイルのシグネチャも確認</li>
+        <li>署名付きURLの機密的なクエリ値はmanifestと解析結果画面で伏せる</li>
+      </ul>
+    </section>
+
+    <section class="download" aria-labelledby="download-heading">
+      <div>
+        <h2 id="download-heading">Download</h2>
+        <p>Windows向けソースリリースです。Python 3.10以上とTkinterを使用し、追加のPythonパッケージは不要です。</p>
+      </div>
+      <a class="download-button" href="downloads/MediaCollector-0.4.0-source.zip" download>v0.4.0 ZIP</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Release</dt><dd>2026-09-24</dd></div>
+      <div><dt>SHA-256</dt><dd><code>8459bf4a7d8913327bfc2e0e37d2f325f633bc8ccfa498e86ed35b54432bc0c7</code></dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/watarionn/media-collector">GitHub / watarionn/media-collector</a></dd></div>
+      <div><dt>Bridges</dt><dd>X / Pixiv / Generic DOM</dd></div>
+    </dl>
+
+    <footer>
+      <a href="/" class="back-link">作品一覧へ戻る</a>
+    </footer>
+  </main>
+</body>
+</html>

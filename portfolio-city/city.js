@@ -8,7 +8,7 @@ const DATA_PATHS = {
 };
 
 const VISITED_KEY = 'portfolio-city.visited.v1';
-const EXPECTED_PROJECT_COUNT = 15;
+const EXPECTED_PROJECT_COUNT = 16;
 const EXPECTED_DISTRICT_COUNT = 4;
 
 const state = {

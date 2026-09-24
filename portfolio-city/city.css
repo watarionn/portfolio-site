@@ -1364,6 +1364,7 @@ button { font: inherit; }
   [data-project-id="maze-maker"] .building-visual { background-image: url("assets/buildings/maze-maker.svg"); }
   [data-project-id="anagram"] .building-visual { background-image: url("assets/buildings/anagram.svg"); }
   [data-project-id="mindmap-maker"] .building-visual { background-image: url("assets/buildings/mindmap-maker.svg"); }
+  [data-project-id="ai-creation-workbench"] .building-visual { background-image: url("assets/buildings/ai-creation-workbench.svg"); }
   [data-project-id="aquarium"] .building-visual { background-image: url("assets/buildings/aquarium.svg"); }
   [data-project-id="holoca"] .building-visual { background-image: url("assets/buildings/holoca.svg"); }
   [data-project-id="word-generator"] .building-visual { background-image: url("assets/buildings/word-generator.svg"); }
@@ -1953,6 +1954,7 @@ button { font: inherit; }
 [data-project-id="maze-maker"] { --project-image: url("assets/buildings/maze-maker.svg"); }
 [data-project-id="anagram"] { --project-image: url("assets/buildings/anagram.svg"); }
 [data-project-id="mindmap-maker"] { --project-image: url("assets/buildings/mindmap-maker.svg"); }
+[data-project-id="ai-creation-workbench"] { --project-image: url("assets/buildings/ai-creation-workbench.svg"); }
 [data-project-id="aquarium"] { --project-image: url("assets/buildings/aquarium.svg"); }
 [data-project-id="holoca"] { --project-image: url("assets/buildings/holoca.svg"); }
 [data-project-id="word-generator"] { --project-image: url("assets/buildings/word-generator.svg"); }

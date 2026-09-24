@@ -177,6 +177,11 @@
       "id": "s3-upload-audit",
       "sourceRoot": "tools/s3-upload-audit/public",
       "productionRoot": "S3_UPLOAD_AUDIT"
+    },
+    {
+      "id": "video-workbench",
+      "sourceRoot": "tools/video-workbench/public",
+      "productionRoot": "VIDEO_WORKBENCH"
     }
   ],
   "aliases": [

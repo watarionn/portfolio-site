@@ -877,7 +877,7 @@
     state.projects = [...projectPayload.projects].sort(byOrder);
     state.districts = [...districtPayload.districts].sort(byOrder);
     state.placements = [...layoutPayload.projectPlacements];
-    return state.projects.length === 17 && state.districts.length === 4;
+    return state.projects.length === 18 && state.districts.length === 4;
   }
 
   async function mount() {

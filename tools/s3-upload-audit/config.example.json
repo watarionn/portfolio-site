@@ -1,0 +1,11 @@
+{
+  "provider": "awscli",
+  "executable": "aws",
+  "profile": "your-read-only-profile",
+  "bucket": "your-bucket-name",
+  "top_n": 1,
+  "parallel": 4,
+  "timeout_seconds": 60,
+  "folder_pattern": "^\\d+_{target}$",
+  "stale_after_days": 30
+}

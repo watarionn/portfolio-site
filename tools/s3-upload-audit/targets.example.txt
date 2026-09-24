@@ -1,0 +1,4 @@
+# One logical target per line.
+ALPHA
+BETA
+GAMMA

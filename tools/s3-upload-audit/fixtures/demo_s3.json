@@ -1,0 +1,49 @@
+{
+  "name": "Offline Demo — monthly upload audit",
+  "reference_date": "2026-09-24",
+  "config": {
+    "provider": "awscli",
+    "executable": "aws",
+    "profile": "demo-readonly",
+    "bucket": "demo-bucket",
+    "top_n": 1,
+    "parallel": 4,
+    "timeout_seconds": 10,
+    "folder_pattern": "^\\d+_{target}$",
+    "stale_after_days": 30
+  },
+  "targets": [
+    "ALPHA",
+    "BETA",
+    "GAMMA",
+    "DELTA",
+    "EPSILON",
+    "ZETA"
+  ],
+  "duplicates": [
+    "ALPHA"
+  ],
+  "root_folders": [
+    "001_ALPHA",
+    "002_BETA",
+    "003_GAMMA",
+    "005_EPSILON",
+    "006_ZETA"
+  ],
+  "files": {
+    "001_ALPHA": [
+      "001_ALPHA/report_20260924.csv",
+      "001_ALPHA/report_20260920.csv"
+    ],
+    "002_BETA": [
+      "002_BETA/report_20260801.csv"
+    ],
+    "003_GAMMA": [],
+    "005_EPSILON": [
+      "005_EPSILON/readme.txt"
+    ],
+    "006_ZETA": [
+      "__PROVIDER_ERROR__"
+    ]
+  }
+}

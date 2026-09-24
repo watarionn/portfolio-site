@@ -187,6 +187,11 @@
       "id": "project-snapshot-generator",
       "sourceRoot": "tools/project-snapshot-generator/public",
       "productionRoot": "PROJECT_SNAPSHOT_GENERATOR"
+    },
+    {
+      "id": "media-collector",
+      "sourceRoot": "tools/media-collector/public",
+      "productionRoot": "MEDIA_COLLECTOR"
     }
   ],
   "aliases": [

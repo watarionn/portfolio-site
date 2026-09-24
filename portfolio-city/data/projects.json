@@ -160,6 +160,16 @@
       "type": "Prompt / Pose / Asset Tools",
       "summary": "プロンプト、ポーズ、モデル情報、制作メモ、素材整理を1つのローカルファーストな作業台にまとめた制作支援ツール。",
       "order": 6
+    },
+    {
+      "id": "mkpdf-studio",
+      "title": "mkPDF Studio",
+      "district": "archive-street",
+      "building": "製本工房",
+      "route": "/MKPDF_STUDIO/",
+      "type": "Python / Desktop / PDF",
+      "summary": "画像入りアーカイブを展開前に安全検査し、ページの並べ替え・回転・除外を確認してからPDFへまとめるローカルファーストのWindowsデスクトップツール。",
+      "order": 5
     }
   ]
 }

@@ -1,0 +1,3 @@
+[console_scripts]
+mkpdf-safe = mkpdf_safe.cli:main
+mkpdf-studio = mkpdf_safe.gui:main

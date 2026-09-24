@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" role="img" aria-label="mkPDF Studio 製本工房">
+  <g stroke="#292822" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="80" cy="108" rx="55" ry="7" fill="#d7ccb1" stroke="none" opacity=".65"/>
+    <path d="M28 99V50l52-28 52 28v49z" fill="#eadfc7"/>
+    <path d="M20 52L80 18l60 34-8 10-52-29-52 29z" fill="#7f684b"/>
+    <rect x="67" y="72" width="26" height="27" rx="2" fill="#64533f"/>
+    <rect x="39" y="52" width="32" height="24" rx="3" fill="#fffaf0"/>
+    <path d="M45 58h19M45 64h16M45 70h20" stroke="#a06d50" stroke-width="2"/>
+    <rect x="94" y="51" width="27" height="25" rx="3" fill="#f4ead7"/>
+    <path d="M100 57h15M100 63h15M100 69h11" stroke="#7b6a55" stroke-width="2"/>
+    <path d="M77 40h6v18h-6z" fill="#b97855"/>
+    <path d="M68 46h24" stroke="#b97855"/>
+  </g>
+</svg>

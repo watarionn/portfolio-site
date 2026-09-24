@@ -1,0 +1,2 @@
+mkPDF_Studio-v1.0.0.zip
+SHA-256: bdd62f2c686a213e9c0afa755f058ed94f3cd051e50ea234dea16ec3b00fb1da

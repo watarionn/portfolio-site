@@ -167,6 +167,11 @@
       "id": "ai-creation-workbench",
       "sourceRoot": "tools/ai-creation-workbench",
       "productionRoot": "AI_CREATION_WORKBENCH"
+    },
+    {
+      "id": "mkpdf-studio",
+      "sourceRoot": "tools/mkpdf-studio/public",
+      "productionRoot": "MKPDF_STUDIO"
     }
   ],
   "aliases": [

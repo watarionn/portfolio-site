@@ -1,0 +1,2 @@
+Pillow<13,>=12
+tkinterdnd2==0.6.3

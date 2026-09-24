@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Workbench</title>
+  <meta name="description" content="動画の範囲カットとフレーム書き出しを1画面にまとめた、FFmpegベースのWindowsデスクトップツール。">
+  <meta property="og:title" content="Video Workbench">
+  <meta property="og:description" content="Fast Cut / Precise Cutとフレーム書き出しを、安全な入出力チェック付きで扱う動画作業ツール。">
+  <meta property="og:image" content="assets/og-preview.png">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">Python / Desktop / FFmpeg</p>
+        <h1>Video Workbench</h1>
+      </div>
+      <p class="version">v0.4.0 RC</p>
+    </header>
+
+    <figure class="app-shot">
+      <img src="assets/app-screenshot.png" alt="Video Workbenchで範囲カットとフレーム書き出しを設定している画面">
+    </figure>
+
+    <section class="intro" aria-labelledby="about-heading">
+      <h2 id="about-heading">このツールについて</h2>
+      <p>以前使っていた動画カット用ツールとフレーム書き出し用ツールを、1つのWindowsデスクトップアプリとして再構成しました。動画情報の確認、指定範囲の切り出し、PNG / JPGのフレーム書き出しを同じ画面から操作できます。</p>
+    </section>
+
+    <section class="grid" aria-label="主な機能">
+      <article>
+        <h2>Fast / Precise Cut</h2>
+        <p>ストリームコピーによる高速カットと、時間位置を優先する再エンコード方式を分けて選択できます。</p>
+      </article>
+      <article>
+        <h2>Frame export</h2>
+        <p>PNG / JPG、全フレームまたはFPS指定に対応。実行前におおよその出力枚数も確認できます。</p>
+      </article>
+      <article>
+        <h2>Media inspection</h2>
+        <p>ffprobeから動画の長さ、解像度、FPS、映像・音声ストリーム、ファイルサイズを取得して表示します。</p>
+      </article>
+      <article>
+        <h2>Local workflow</h2>
+        <p>動画は外部サービスへ送信せず、PC上のFFmpeg / ffprobeを使ってローカルで処理します。</p>
+      </article>
+    </section>
+
+    <section class="safety" aria-labelledby="safety-heading">
+      <h2 id="safety-heading">安全設計</h2>
+      <ul>
+        <li>既存ファイル・既存出力フォルダへの上書きは既定で拒否</li>
+        <li>開始・終了時間、FPS、JPG品質を実行前に検証</li>
+        <li>FFmpegを非対話モードで実行し、入力待ちによる停止を防止</li>
+        <li>出力後にffprobeまたは生成フレーム数で結果を確認</li>
+        <li>日本語や空白を含むWindowsパスに対応</li>
+      </ul>
+    </section>
+
+    <section class="download" aria-labelledby="download-heading">
+      <div>
+        <h2 id="download-heading">Download</h2>
+        <p>Windows向けソースリリースです。Python 3、FFmpeg、ffprobeを使用します。</p>
+      </div>
+      <a class="download-button" href="downloads/VideoWorkbench-0.4.0-source.zip" download>v0.4.0 ZIP</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Release</dt><dd>2026-09-24</dd></div>
+      <div><dt>SHA-256</dt><dd><code>1f5b83b5a59028a3f4f41ed45685a563602955aedbe01c1285cbd9b0a47ad42d</code></dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/watarionn/video-workbench">GitHub / watarionn/video-workbench</a></dd></div>
+      <div><dt>Network</dt><dd>Core workflow does not require network access</dd></div>
+    </dl>
+
+    <footer>
+      <a href="/" class="back-link">作品一覧へ戻る</a>
+    </footer>
+  </main>
+</body>
+</html>

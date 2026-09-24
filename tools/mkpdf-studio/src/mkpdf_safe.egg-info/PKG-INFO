@@ -1,7 +1,0 @@
-Metadata-Version: 2.4
-Name: mkpdf-safe
-Version: 1.0.0
-Summary: Local-first safe archive-to-PDF desktop studio
-Requires-Python: >=3.11
-Requires-Dist: Pillow<13,>=12
-Requires-Dist: tkinterdnd2==0.6.3

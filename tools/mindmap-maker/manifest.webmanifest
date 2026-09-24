@@ -1,0 +1,17 @@
+{
+  "name": "MindMap Maker",
+  "short_name": "MindMap",
+  "description": "ブラウザだけで使えるSVGベースの軽量マインドマップエディタ",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f0e8",
+  "theme_color": "#ede7d9",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

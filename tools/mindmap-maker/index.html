@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MindMap Maker</title>
+  <meta name="description" content="ブラウザだけで使える、軽量なSVGマインドマップエディタ。ノード編集・接続・検索・自動整列・JSON保存・画像出力に対応。">
+  <meta name="theme-color" content="#ede7d9">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MindMap Maker">
+  <meta property="og:description" content="思考を、軽く、自由につなぐ。ブラウザだけで動くSVGマインドマップエディタ。">
+  <meta property="og:image" content="og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header id="header">
+  <div class="hdr-group">
+    <button class="icon-btn" id="btn-undo" title="元に戻す" aria-label="元に戻す" disabled>
+      <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05 1-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-redo" title="やり直す" aria-label="やり直す" disabled>
+      <svg viewBox="0 0 24 24"><path d="M18.4 10.6C16.55 9 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 15.7c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 15.5h9V6.5l-3.6 4.1z"/></svg>
+    </button>
+  </div>
+  <div class="hdr-center">
+    <button class="hdr-title" id="map-title-btn" title="マップ名を変更">Untitled Mind Map</button>
+    <div id="save-status" class="save-status" aria-live="polite">自動保存</div>
+  </div>
+  <div class="hdr-group">
+    <button class="icon-btn" id="btn-search" title="ノードを検索 (Ctrl/⌘+F)" aria-label="ノードを検索">
+      <svg viewBox="0 0 24 24"><path d="M9.5 3a6.5 6.5 0 104.03 11.6L19.93 21 21 19.93l-6.4-6.4A6.5 6.5 0 009.5 3zm0 2a4.5 4.5 0 110 9 4.5 4.5 0 010-9z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-layout" title="自動整列" aria-label="自動整列">
+      <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm9-2h7v7h-7v-7zm2 2v3h3v-3h-3z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-file-open" title="ファイル" aria-label="ファイルメニュー">
+      <svg viewBox="0 0 24 24"><path d="M10 4H2v16h20V6H12l-2-2zm10 14H4V8h16v10z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-fit" title="全体を表示" aria-label="マップ全体を表示">
+      <svg viewBox="0 0 24 24"><path d="M4 9V4h5V2H2v7h2zm11-7v2h5v5h2V2h-7zM4 15H2v7h7v-2H4v-5zm16 5h-5v2h7v-7h-2v5z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-export-open" title="出力" aria-label="出力メニュー">
+      <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5v-2z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- モードバー + 接続種別 -->
+<div id="toolbar">
+  <div id="mode-bar">
+    <button class="mode-btn active" data-mode="add">
+      <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>追加
+    </button>
+    <button class="mode-btn" data-mode="edit">
+      <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.42l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.82z"/></svg>編集
+    </button>
+    <button class="mode-btn" data-mode="connect">
+      <svg viewBox="0 0 24 24"><path d="M17 7a5 5 0 00-4.584 3H8a3 3 0 000 6h.416A5 5 0 1017 7zM8 14a1 1 0 110-2h4.126A5.015 5.015 0 0012 13a5 5 0 00.874 2H8zm9 1a3 3 0 110-6 3 3 0 010 6z"/></svg>接続
+    </button>
+    <button class="mode-btn" data-mode="multi">
+      <svg viewBox="0 0 24 24"><path d="M3 5h2V3C3.9 3 3 3.9 3 5zm0 8h2v-2H3v2zm4 8h2v-2H7v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2c0-1.1-.9-2-2-2zM5 21v-2H3c0 1.1.9 2 2 2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2zm0-4h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2zm4 8h2v-2h-2v2z"/></svg>複数
+    </button>
+  </div>
+  <div id="conn-type-bar" class="hidden">
+    <button class="conn-btn active" data-conn="curve">～ 曲線</button>
+    <button class="conn-btn" data-conn="line">— 直線</button>
+  </div>
+</div>
+
+<!-- SVGキャンバス -->
+<div id="canvas-wrapper">
+  <svg id="main-svg" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dot-grid" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+        <circle cx="0" cy="0" r="0.9" fill="rgba(140,120,80,0.35)"/>
+      </pattern>
+      <marker id="arr-end" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#9a8a62"/>
+      </marker>
+      <marker id="arr-end-sel" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#c0874a"/>
+      </marker>
+    </defs>
+    <rect id="bg-rect" width="100%" height="100%" fill="url(#dot-grid)"/>
+    <g id="viewport">
+      <g id="group-layer"></g>
+      <g id="conn-layer"></g>
+      <g id="node-layer"></g>
+      <line id="conn-preview" stroke="#c0874a" stroke-width="2" stroke-dasharray="7,4" display="none" pointer-events="none"/>
+    </g>
+    <rect id="rubber-band" fill="rgba(124,111,74,0.10)" stroke="#7c6f4a" stroke-width="1.5" stroke-dasharray="5,3" display="none" pointer-events="none"/>
+  </svg>
+</div>
+
+<!-- ミニマップ -->
+<div id="minimap" class="minimap" aria-label="ミニマップ。クリックすると表示位置を移動します" tabindex="0">
+  <svg id="minimap-svg" viewBox="0 0 180 110">
+    <rect class="minimap-bg" x="0" y="0" width="180" height="110" rx="9"/>
+    <g id="minimap-content"></g>
+    <rect id="minimap-viewport" class="minimap-viewport" x="0" y="0" width="20" height="20" rx="2"/>
+  </svg>
+</div>
+
+<!-- 形状選択パネル -->
+<div id="shape-panel">
+  <span class="panel-label">形状</span>
+  <div class="shape-scroll">
+    <button class="shape-btn active" data-shape="rect" aria-label="長方形ノード">
+      <svg viewBox="0 0 44 30"><rect x="2" y="2" width="40" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="circle" aria-label="円形ノード">
+      <svg viewBox="0 0 44 30"><ellipse cx="22" cy="15" rx="20" ry="13" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="cloud" title="雲形" aria-label="雲形ノード">
+      <svg viewBox="0 0 44 30"><path d="M11 24h23a7 7 0 0 0 1-13.9A10 10 0 0 0 16.5 8 7 7 0 0 0 11 24z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="diamond" aria-label="菱形ノード">
+      <svg viewBox="0 0 44 30"><polygon points="22,2 42,15 22,28 2,15" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="triangle" aria-label="三角形ノード">
+      <svg viewBox="0 0 44 30"><polygon points="22,2 42,28 2,28" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="line" aria-label="矢印ノード">
+      <svg viewBox="0 0 44 30"><path d="M4,15 L32,15 M24,8 L32,15 L24,22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- コンテキストメニュー（ノード） -->
+<div id="ctx-menu" class="hidden">
+  <button class="ctx-item" id="ctx-edit-text">
+    <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>テキスト編集
+  </button>
+  <button class="ctx-item" id="ctx-style">
+    <svg viewBox="0 0 24 24"><circle cx="6.5" cy="10.5" r="1.5"/><circle cx="9.5" cy="6" r="1.5"/><circle cx="14.5" cy="6" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01a1.49 1.49 0 01.39-.99c0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8z"/></svg>スタイル
+  </button>
+  <button class="ctx-item" id="ctx-copy-node">
+    <svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>コピー
+  </button>
+  <button class="ctx-item" id="ctx-group-sel">
+    <svg viewBox="0 0 24 24"><path d="M3 5h2V3C3.9 3 3 3.9 3 5zm0 8h2v-2H3v2zm14 8h2v-2h-2v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2c0-1.1-.9-2-2-2zM5 21v-2H3c0 1.1.9 2 2 2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2zm0-4h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2zm4 8h2v-2h-2v2z"/></svg>グループ化
+  </button>
+  <div class="ctx-sep"></div>
+  <button class="ctx-item danger" id="ctx-del">
+    <svg viewBox="0 0 24 24"><path d="M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4h-3.5z"/></svg>削除
+  </button>
+</div>
+
+<!-- コンテキストメニュー（接続線） -->
+<div id="conn-ctx-menu" class="hidden">
+  <button class="ctx-item danger" id="conn-ctx-del">
+    <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>この接続を削除
+  </button>
+</div>
+
+<!-- スタイルモーダル -->
+<div id="style-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="style-title">
+  <div class="modal-box">
+    <div class="modal-hdr"><span id="style-title">スタイル設定</span><button class="modal-x" id="style-close" aria-label="閉じる">✕</button></div>
+    <div class="modal-body">
+      <div class="opt-row"><label>背景色</label><input type="color" id="opt-bg" value="#2a2a3e"></div>
+      <div class="opt-row"><label>文字色</label><input type="color" id="opt-fg" value="#ffffff"></div>
+      <div class="opt-row"><label>枠線色</label><input type="color" id="opt-border-c" value="#6c63ff"></div>
+      <div class="opt-row">
+        <label>枠線太さ <span id="opt-bw-val">2</span>px</label>
+        <input type="range" id="opt-bw" min="0" max="8" value="2">
+      </div>
+      <div class="opt-row">
+        <label>フォントサイズ <span id="opt-fs-val">14</span>px</label>
+        <input type="range" id="opt-fs" min="9" max="36" value="14">
+      </div>
+      <div class="opt-row">
+        <label>文字はみ出し</label>
+        <div class="tog-group" data-key="overflow">
+          <button class="tog active" data-val="visible">許可</button>
+          <button class="tog" data-val="hidden">禁止</button>
+        </div>
+      </div>
+      <div class="opt-row">
+        <label>水平揃え</label>
+        <div class="tog-group" data-key="halign">
+          <button class="tog" data-val="left">左</button>
+          <button class="tog active" data-val="center">中</button>
+          <button class="tog" data-val="right">右</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="mbtn secondary" id="style-cancel">キャンセル</button>
+      <button class="mbtn" id="style-apply">適用</button>
+    </div>
+  </div>
+</div>
+
+<!-- テキスト編集モーダル -->
+<div id="edit-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+  <div class="modal-box">
+    <div class="modal-hdr"><span id="edit-title">テキスト編集</span><button class="modal-x" id="edit-close" aria-label="閉じる">✕</button></div>
+    <div class="modal-body">
+      <textarea id="edit-ta" rows="4" placeholder="テキストを入力..."></textarea>
+    </div>
+    <div class="modal-ftr">
+      <button class="mbtn secondary" id="edit-cancel">キャンセル</button>
+      <button class="mbtn" id="edit-ok">決定</button>
+    </div>
+  </div>
+</div>
+
+<!-- ファイルモーダル -->
+<div id="file-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="file-title">
+  <div class="modal-box compact">
+    <div class="modal-hdr"><span id="file-title">ファイル</span><button class="modal-x" id="file-close" aria-label="閉じる">✕</button></div>
+    <div class="file-actions">
+      <label class="file-field">
+        <span>マップ名</span>
+        <input type="text" id="map-title-input" maxlength="80" value="Untitled Mind Map">
+      </label>
+      <button class="file-action" id="file-new">新規作成<span>現在のマップをリセット</span></button>
+      <button class="file-action" id="file-sample">サンプルマップを開く<span>機能を試せるデモマップを読み込み</span></button>
+      <button class="file-action" id="file-help">使い方を見る<span>基本操作とショートカット</span></button>
+      <button class="file-action" id="file-save-local">ブラウザに保存<span>この端末へ保存</span></button>
+      <button class="file-action" id="file-load-local">保存データを読み込み<span>この端末の保存内容を復元</span></button>
+      <button class="file-action" id="file-import-json">JSONを開く<span>書き出したマップを読み込み</span></button>
+      <button class="file-action" id="file-export-json">JSONとして保存<span>編集可能な形式で書き出し</span></button>
+      <div class="app-version">MindMap Maker v1.0.0 · ローカルファースト</div>
+    </div>
+  </div>
+</div>
+<input type="file" id="json-file-input" accept="application/json,.json" hidden>
+
+<!-- 検索モーダル -->
+<div id="search-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="search-title">
+  <div class="modal-box search-box">
+    <div class="modal-hdr"><span id="search-title">ノードを検索</span><button class="modal-x" id="search-close" aria-label="閉じる">✕</button></div>
+    <div class="modal-body search-body">
+      <input type="search" id="search-input" class="text-input" placeholder="キーワードを入力..." autocomplete="off">
+      <div id="search-summary" class="search-summary">ノード名を検索できます</div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 出力モーダル -->
+<div id="export-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="export-title">
+  <div class="modal-box compact">
+    <div class="modal-hdr"><span id="export-title">出力形式を選択</span><button class="modal-x" id="export-close" aria-label="閉じる">✕</button></div>
+    <div class="modal-ftr wrap">
+      <button class="mbtn secondary" id="exp-png">PNG</button>
+      <button class="mbtn secondary" id="exp-jpg">JPG</button>
+      <button class="mbtn secondary" id="exp-svg">SVG</button>
+      <button class="mbtn" id="exp-json">JSON</button>
+    </div>
+  </div>
+</div>
+
+<!-- グループ名入力モーダル -->
+<div id="group-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="group-title">
+  <div class="modal-box compact">
+    <div class="modal-hdr"><span id="group-title">グループ名</span><button class="modal-x" id="group-close" aria-label="閉じる">✕</button></div>
+    <div class="modal-body">
+      <input type="text" id="group-name-input" placeholder="グループ名（省略可）" class="text-input">
+    </div>
+    <div class="modal-ftr">
+      <button class="mbtn secondary" id="group-cancel">キャンセル</button>
+      <button class="mbtn" id="group-ok">作成</button>
+    </div>
+  </div>
+</div>
+
+<!-- 初回ガイド -->
+<div id="onboarding-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="onboarding-title">
+  <div class="modal-box welcome-box">
+    <div class="welcome-hero">
+      <img src="favicon.svg" alt="" class="welcome-logo">
+      <div>
+        <div class="eyebrow">MindMap Maker v1.0</div>
+        <h1 id="onboarding-title">思考を、軽く、自由につなぐ。</h1>
+      </div>
+    </div>
+    <p class="welcome-copy">追加・接続・整理・検索まで、ブラウザだけで完結する軽量マインドマップエディタです。データはこの端末に保存されます。</p>
+    <div class="welcome-grid" aria-label="基本操作">
+      <div><strong>1. 追加</strong><span>空白をクリックしてノードを置く</span></div>
+      <div><strong>2. 編集</strong><span>ノードを選んで文字や色を変更</span></div>
+      <div><strong>3. 接続</strong><span>2つのノードを順番に選んでつなぐ</span></div>
+      <div><strong>4. 整理</strong><span>検索・複数選択・自動整列で整える</span></div>
+    </div>
+    <div class="modal-ftr welcome-actions">
+      <button class="mbtn secondary" id="onboarding-blank">空のマップから始める</button>
+      <button class="mbtn" id="onboarding-sample">サンプルを見る</button>
+    </div>
+  </div>
+</div>
+
+<!-- ヘルプ -->
+<div id="help-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="help-title">
+  <div class="modal-box help-box">
+    <div class="modal-hdr"><span id="help-title">使い方</span><button class="modal-x" id="help-close" aria-label="閉じる">✕</button></div>
+    <div class="modal-body help-body">
+      <section>
+        <h2>基本操作</h2>
+        <p><b>追加</b>：空白をクリック / タップしてノードを追加。</p>
+        <p><b>編集</b>：ノードを選択。ダブルクリックで文字を編集。</p>
+        <p><b>接続</b>：接続モードで、始点と終点のノードを順番に選択。</p>
+        <p><b>複数</b>：ドラッグ範囲選択後、グループ化や一括削除。</p>
+      </section>
+      <section>
+        <h2>便利な機能</h2>
+        <p>検索でノードへ瞬時に移動。自動整列は接続関係をもとに配置します。右下のミニマップから大きなマップ内を移動できます。</p>
+      </section>
+      <section>
+        <h2>ショートカット</h2>
+        <div class="shortcut-grid">
+          <kbd>Ctrl / ⌘ + Z</kbd><span>元に戻す</span>
+          <kbd>Ctrl / ⌘ + Shift + Z</kbd><span>やり直す</span>
+          <kbd>Ctrl / ⌘ + S</kbd><span>保存</span>
+          <kbd>Ctrl / ⌘ + O</kbd><span>JSONを開く</span>
+          <kbd>Ctrl / ⌘ + F</kbd><span>検索</span>
+          <kbd>Ctrl / ⌘ + D</kbd><span>選択ノードを複製</span>
+          <kbd>F</kbd><span>全体表示</span>
+          <kbd>L</kbd><span>自動整列</span>
+          <kbd>?</kbd><span>このヘルプ</span>
+          <kbd>Esc</kbd><span>閉じる / 解除</span>
+        </div>
+      </section>
+      <section class="privacy-note">
+        <h2>保存について</h2>
+        <p>自動保存はブラウザの localStorage を使用します。外部サーバーへの送信処理はありません。端末をまたぐ場合はJSONで書き出してください。</p>
+      </section>
+    </div>
+    <div class="modal-ftr">
+      <button class="mbtn secondary" id="help-sample">サンプルマップを開く</button>
+      <button class="mbtn" id="help-ok">わかった</button>
+    </div>
+  </div>
+</div>
+
+<!-- 複数選択フローティングバー -->
+<div id="multi-bar" class="hidden">
+  <span id="multi-count">0個選択中</span>
+  <button class="mbar-btn" id="multi-group">グループ化</button>
+  <button class="mbar-btn danger" id="multi-del">削除</button>
+</div>
+
+<!-- トースト -->
+<div id="toast" class="hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

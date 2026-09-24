@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download Workbench</title>
+  <meta name="description" content="yt-dlpとffmpegを使い、URL解析・形式選択・動画/音声保存・範囲指定・字幕やメタデータ出力を扱うWindowsデスクトップツール。">
+  <meta property="og:title" content="Download Workbench">
+  <meta property="og:description" content="Analyzeしてから形式・字幕・範囲を確認し、権限確認後に保存するローカルDownload Workbench。">
+  <meta property="og:image" content="assets/og-preview.png">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">Python / Tkinter / yt-dlp / FFmpeg</p>
+        <h1>Download Workbench</h1>
+      </div>
+      <p class="version">v0.4.0 RC</p>
+    </header>
+
+    <figure class="app-shot">
+      <img src="assets/app-screenshot.png" alt="Download Workbenchで形式一覧、範囲指定、権限確認を表示している実アプリ画面">
+    </figure>
+
+    <section class="intro" aria-labelledby="about-heading">
+      <h2 id="about-heading">このツールについて</h2>
+      <p>以前使っていたyt-dlp系ツールを、認証状態やCookie、ブラウザプロファイルを持ち込まずに作り直したWindows向けデスクトップツールです。URLをまずAnalyzeし、形式・字幕・長さなどを確認してから、必要な保存処理だけを実行できます。</p>
+    </section>
+
+    <section class="grid" aria-label="主な機能">
+      <article>
+        <h2>Analyze first</h2>
+        <p>保存を始める前にタイトル、投稿者、長さ、extractor、利用可能なformat、字幕を確認できます。</p>
+      </article>
+      <article>
+        <h2>Video / Audio / Format ID</h2>
+        <p>通常の動画保存、音声抽出、明示的なFormat ID指定を同じ画面から切り替えられます。</p>
+      </article>
+      <article>
+        <h2>Range download</h2>
+        <p>秒、MM:SS、HH:MM:SSで開始・終了位置を指定し、必要な区間だけ保存できます。Precise rangeにも対応します。</p>
+      </article>
+      <article>
+        <h2>Subtitles & metadata</h2>
+        <p>字幕言語、自動字幕、Info JSON、Thumbnailを必要なものだけ明示的に選択できます。</p>
+      </article>
+    </section>
+
+    <section class="safety" aria-labelledby="safety-heading">
+      <h2 id="safety-heading">安全設計</h2>
+      <ul>
+        <li>Analyzeではメディアをダウンロードしない</li>
+        <li>Downloadは保存権限・許可の確認チェックを入れた場合だけ有効</li>
+        <li>yt-dlpは常に<code>--ignore-config</code>で起動し、既存設定のCookieや認証状態を暗黙に読み込まない</li>
+        <li>Cookie自動取得、ブラウザプロファイル読み込み、Authorization生成を実装しない</li>
+        <li>DRM回避、アクセス制御回避、ペイウォール回避を実装しない</li>
+        <li>URLに埋め込まれたtokenやsignature類はCommand Previewで伏せる</li>
+        <li>既存ファイルは上書きしない</li>
+      </ul>
+    </section>
+
+    <section class="download" aria-labelledby="download-heading">
+      <div>
+        <h2 id="download-heading">Download</h2>
+        <p>Windows向けソースリリースです。Python 3.10以上、Tkinter、yt-dlp、ffmpegが必要です。追加のPythonパッケージは不要です。</p>
+      </div>
+      <a class="download-button" href="downloads/DownloadWorkbench-0.4.0-source.zip" download>v0.4.0 ZIP</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Release</dt><dd>2026-09-25</dd></div>
+      <div><dt>SHA-256</dt><dd><code>f3f8cecbbfea9ee7b7789dda747bde6e17b1cc604e7948577aeac10721d9bac4</code></dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/watarionn/download-workbench">GitHub / watarionn/download-workbench</a></dd></div>
+      <div><dt>Runtime</dt><dd>Python / Tkinter / yt-dlp / FFmpeg</dd></div>
+    </dl>
+
+    <footer>
+      <a href="/" class="back-link">作品一覧へ戻る</a>
+    </footer>
+  </main>
+</body>
+</html>

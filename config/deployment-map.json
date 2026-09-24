@@ -192,6 +192,11 @@
       "id": "media-collector",
       "sourceRoot": "tools/media-collector/public",
       "productionRoot": "MEDIA_COLLECTOR"
+    },
+    {
+      "id": "download-workbench",
+      "sourceRoot": "tools/download-workbench/public",
+      "productionRoot": "DOWNLOAD_WORKBENCH"
     }
   ],
   "aliases": [

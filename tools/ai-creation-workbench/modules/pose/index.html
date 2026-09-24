@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ControlNet Pose Helper</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>ControlNet Pose Helper</h1>
+      <p>SDXL / ControlNet用のポーズ参照画像を作る簡易ツール。ドラッグで関節を動かし、PNG / SVG / JSONとして保存できます。</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel canvas-panel" aria-label="編集キャンバス">
+      <div class="canvas-toolbar">
+        <div class="status" id="statusText">関節をドラッグしてポーズを編集</div>
+        <div class="mini-help">ホイール: 拡大縮小 / ドラッグ: 関節移動 / 矢印キー: 選択関節を微調整</div>
+      </div>
+      <div class="stage-wrap" id="stageWrap">
+        <canvas id="poseCanvas" width="1024" height="1024"></canvas>
+      </div>
+    </section>
+
+    <aside class="panel control-panel" aria-label="設定">
+      <section class="control-section major">
+        <h2>大: ユーザーが主に触る設定</h2>
+
+        <div class="field-group">
+          <label for="presetSelect">ポーズプリセット</label>
+          <div class="row">
+            <select id="presetSelect">
+              <option value="standing_front">正面立ち</option>
+              <option value="arms_up">両手上げ</option>
+              <option value="walking">歩き</option>
+              <option value="sitting_chair">椅子座り</option>
+              <option value="straddling_chair">椅子またぎ</option>
+              <option value="crouch">しゃがみ</option>
+              <option value="side_view">横向き風</option>
+            </select>
+            <button id="applyPresetBtn" type="button">適用</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="drawMode">出力モード</label>
+          <select id="drawMode">
+            <option value="openpose">OpenPose風カラーマップ</option>
+            <option value="stick">黒線の棒人間</option>
+            <option value="white_stick">白線の棒人間</option>
+            <option value="silhouette">簡易シルエット</option>
+          </select>
+          <p class="hint">OpenPose ControlNetへ直接渡すなら「OpenPose風カラーマップ」、Canny用なら「黒線の棒人間」が扱いやすいです。</p>
+        </div>
+
+        <div class="field-grid two">
+          <label>幅(px)<input id="canvasWidth" type="number" min="256" max="2048" step="64" value="1024"></label>
+          <label>高さ(px)<input id="canvasHeight" type="number" min="256" max="2048" step="64" value="1024"></label>
+        </div>
+
+        <div class="field-grid two">
+          <label>線幅<input id="lineWidth" type="range" min="2" max="30" value="10"></label>
+          <label>関節サイズ<input id="jointSize" type="range" min="4" max="32" value="13"></label>
+        </div>
+
+        <div class="field-grid two">
+          <label>背景
+            <select id="backgroundMode">
+              <option value="black">黒</option>
+              <option value="white">白</option>
+              <option value="transparent">透明</option>
+              <option value="gray">グレー</option>
+            </select>
+          </label>
+          <label>ズーム<input id="zoomRange" type="range" min="50" max="200" value="100"></label>
+        </div>
+      </section>
+
+      <section class="control-section major">
+        <h2>大: 保存</h2>
+        <div class="button-grid">
+          <button id="exportPngBtn" type="button">PNG保存</button>
+          <button id="exportSvgBtn" type="button">SVG保存</button>
+          <button id="exportJsonBtn" type="button">JSON保存</button>
+          <button id="copyPromptBtn" type="button">設定メモをコピー</button>
+        </div>
+        <label class="check"><input id="exportReference" type="checkbox"> PNG/SVGに下絵も含める</label>
+        <p class="hint">JSONは後で同じポーズを再編集するための保存形式です。PNGだけで作業を続けるという苦行を避けられます。</p>
+      </section>
+
+      <section class="control-section medium">
+        <h2>中: 編集補助</h2>
+        <div class="check-grid">
+          <label class="check"><input id="showGrid" type="checkbox" checked> グリッド表示</label>
+          <label class="check"><input id="showJoints" type="checkbox" checked> 関節表示</label>
+          <label class="check"><input id="showLabels" type="checkbox"> 関節名表示</label>
+          <label class="check"><input id="mirrorMode" type="checkbox"> 左右対称編集</label>
+          <label class="check"><input id="showChairGuide" type="checkbox"> 椅子ガイド表示</label>
+          <label class="check"><input id="keepInside" type="checkbox" checked> 関節を画面内に制限</label>
+        </div>
+        <div class="button-grid">
+          <button id="centerPoseBtn" type="button">中央寄せ</button>
+          <button id="flipPoseBtn" type="button">左右反転</button>
+          <button id="resetPoseBtn" type="button">初期化</button>
+          <button id="clearSelectionBtn" type="button">選択解除</button>
+        </div>
+      </section>
+
+      <section class="control-section medium">
+        <h2>中: 下絵・トレース</h2>
+        <label for="referenceInput">参照画像を読み込み</label>
+        <input id="referenceInput" type="file" accept="image/*">
+        <div class="field-grid two">
+          <label>下絵透明度<input id="referenceOpacity" type="range" min="0" max="100" value="35"></label>
+          <label>下絵表示
+            <select id="referenceFit">
+              <option value="contain">全体表示</option>
+              <option value="cover">画面いっぱい</option>
+              <option value="stretch">引き伸ばし</option>
+            </select>
+          </label>
+        </div>
+        <div class="button-grid">
+          <button id="toggleReferenceBtn" type="button">下絵ON/OFF</button>
+          <button id="clearReferenceBtn" type="button">下絵削除</button>
+        </div>
+      </section>
+
+      <section class="control-section small">
+        <h2>小: JSON読み込み</h2>
+        <input id="jsonInput" type="file" accept="application/json,.json">
+        <p class="hint">保存済みJSONを読むと、キャンバスサイズ・関節位置・表示設定を復元します。</p>
+      </section>
+
+      <section class="control-section small">
+        <h2>小: 選択関節</h2>
+        <div id="selectedJointBox" class="selected-box">未選択</div>
+        <div class="field-grid two">
+          <label>X<input id="jointX" type="number" step="1"></label>
+          <label>Y<input id="jointY" type="number" step="1"></label>
+        </div>
+        <button id="applyJointPositionBtn" type="button">座標を反映</button>
+      </section>
+
+      <section class="control-section small">
+        <h2>小: 使い方</h2>
+        <ol class="help-list">
+          <li>プリセットを選んで適用します。</li>
+          <li>関節をドラッグして目的ポーズに寄せます。</li>
+          <li>必要なら下絵を読み込み、上から関節を合わせます。</li>
+          <li>PNG保存してControlNet参照画像に使います。</li>
+        </ol>
+      </section>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

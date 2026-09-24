@@ -150,6 +150,16 @@
       "type": "SVG / Local-first",
       "summary": "ノードを置き、つなぎ、検索・整列しながら思考を育てるローカルファーストのマインドマップエディタ。",
       "order": 5
+    },
+    {
+      "id": "ai-creation-workbench",
+      "title": "AI Creation Workbench",
+      "district": "workshop-alley",
+      "building": "制作支援工房",
+      "route": "/AI_CREATION_WORKBENCH/",
+      "type": "Prompt / Pose / Asset Tools",
+      "summary": "プロンプト、ポーズ、モデル情報、制作メモ、素材整理を1つのローカルファーストな作業台にまとめた制作支援ツール。",
+      "order": 6
     }
   ]
 }

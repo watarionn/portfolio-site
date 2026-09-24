@@ -1,0 +1,23 @@
+{
+  "format": "ai-creation-workbench-models",
+  "version": 2,
+  "records": [
+    {
+      "input_url": "https://civitai.com/models/900001/acw-demo-model?modelVersionId=900101",
+      "status": "OK",
+      "source": "Offline demo",
+      "error": "",
+      "model_type": "Checkpoint",
+      "model_name": "ACW Demo Model",
+      "version_name": "v1.0 Demo",
+      "creator": "Local Sample",
+      "file_name": "acw-demo.safetensors",
+      "trigger_words": "demo-style, warm-light",
+      "recommended_settings": "Steps 24 · CFG 5.5",
+      "base_model": "Demo Base",
+      "model_id": 900001,
+      "version_id": 900101,
+      "download_url": ""
+    }
+  ]
+}

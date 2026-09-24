@@ -246,6 +246,13 @@
       "y": 1020,
       "width": 260,
       "anchor": "bottom-center"
+    },
+    {
+      "projectId": "ai-creation-workbench",
+      "x": 3520,
+      "y": 1390,
+      "width": 260,
+      "anchor": "bottom-center"
     }
   ]
 }

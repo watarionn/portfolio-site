@@ -150,6 +150,11 @@
       "id": "mindmap-maker",
       "sourceRoot": "tools/mindmap-maker",
       "productionRoot": "MINDMAP_MAKER"
+    },
+    {
+      "id": "ai-creation-workbench",
+      "sourceRoot": "tools/ai-creation-workbench",
+      "productionRoot": "AI_CREATION_WORKBENCH"
     }
   ],
   "aliases": [

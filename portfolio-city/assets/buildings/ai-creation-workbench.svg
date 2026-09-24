@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" role="img" aria-label="AI Creation Workbench 制作支援工房">
+  <g stroke="#292822" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="80" cy="108" rx="56" ry="7" fill="#d7ccb1" stroke="none" opacity=".65"/>
+    <path d="M28 99V48l52-27 52 27v51z" fill="#e7dcc2"/>
+    <path d="M20 51L80 17l60 34-8 10-52-29-52 29z" fill="#6e6675"/>
+    <rect x="67" y="72" width="26" height="27" rx="2" fill="#5e5665"/>
+    <rect x="39" y="54" width="31" height="22" rx="4" fill="#fff4df"/>
+    <rect x="91" y="54" width="30" height="22" rx="4" fill="#f0e6d4"/>
+    <circle cx="51" cy="64" r="4" fill="#b96b57"/>
+    <circle cx="109" cy="64" r="4" fill="#6b7d75"/>
+    <path d="M55 64h9M96 64h9M80 32v16M69 43h22" fill="none"/>
+    <path d="M45 86h17M98 86h17" stroke="#8d7950"/>
+  </g>
+</svg>

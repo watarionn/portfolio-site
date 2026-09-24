@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Prompt Lab、Pose Studio、Model Inspector、Asset Organizerをまとめたローカルファースト制作支援ワークベンチ。">
+  <title>AI Creation Workbench</title>
+  <meta name="theme-color" content="#26231f">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Creation Workbench">
+  <meta property="og:description" content="Prompt・Pose・Model・Assetをひとつのローカルファースト制作支援ワークベンチへ。">
+  <meta property="og:image" content="og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">AC</div>
+      <div><h1>AI Creation Workbench</h1><p>Prompt · Pose · Model · Assets, in one workspace</p></div>
+    </div>
+    <div class="top-actions">
+      <button class="ghost-dark" id="openHelp" aria-label="使い方とショートカットを開く">Help</button>
+      <button class="ghost-dark" id="openNotebook" aria-label="制作ノートとお気に入りを開く">Notebook <span id="favoriteCount">0</span></button>
+      <div class="status-pill" id="statusPill">v1.0.0</div>
+    </div>
+  </header>
+
+  <nav class="workspace-tabs" aria-label="ワークスペース切り替え" role="tablist">
+    <button class="tab active" data-panel="prompt" role="tab" id="tab-prompt" aria-controls="panel-prompt" aria-selected="true" tabindex="0">Prompt Lab</button>
+    <button class="tab" data-panel="pose" role="tab" id="tab-pose" aria-controls="panel-pose" aria-selected="false" tabindex="-1">Pose Studio</button>
+    <button class="tab" data-panel="model" role="tab" id="tab-model" aria-controls="panel-model" aria-selected="false" tabindex="-1">Model Inspector</button>
+    <button class="tab" data-panel="assets" role="tab" id="tab-assets" aria-controls="panel-assets" aria-selected="false" tabindex="-1">Asset Organizer</button>
+    <button class="tab" data-panel="about" role="tab" id="tab-about" aria-controls="panel-about" aria-selected="false" tabindex="-1">About</button>
+  </nav>
+
+  <main>
+    <section class="workspace active" id="panel-prompt" role="tabpanel" aria-labelledby="tab-prompt" tabindex="0">
+      <div class="workspace-head">
+        <div><span class="eyebrow">LOCAL GENERATOR</span><h2 id="prompt-title">Prompt Lab</h2><p>PromptDB形式の辞書とテンプレートを読み込み、seed付きで再現可能な候補をブラウザだけで生成します。</p></div>
+        <div class="head-actions"><button id="promptDbImportButton">PromptDBを読込</button><button id="promptDbReset">Demoへ戻す</button></div>
+      </div>
+      <input id="promptDbFolder" class="visually-hidden" type="file" webkitdirectory multiple aria-label="PromptDBフォルダを選択">
+      <div id="promptDbStatus" class="source-banner">Built-in demo · 11 word categories · 6 groups</div>
+
+      <div class="grid two-col">
+        <section class="card controls-card">
+          <h3>Generate</h3>
+          <label>グループ<select id="promptGroup"></select></label>
+          <div class="field-row"><label>件数<input id="promptCount" type="number" min="1" max="50" value="8"></label><label>Seed<input id="promptSeed" type="number" placeholder="random"></label></div>
+          <label class="check"><input id="promptDedupe" type="checkbox" checked> 重複候補を除外</label>
+          <div class="button-row"><button class="primary" id="generatePrompts">生成</button><button id="shuffleSeed">Seedを振る</button></div>
+          <p class="note">PromptDBの <code>config.json</code> / <code>words/*.txt</code> / <code>sentences/*.txt</code> をフォルダごと読み込めます。読込データはブラウザ外へ送信しません。</p>
+        </section>
+
+        <section class="card prompt-preview-card">
+          <div class="card-head-row"><h3>Results</h3><div class="button-row compact"><button id="copyPrompts">Copy</button><button id="exportPromptTxt">TXT</button><button id="exportPromptCsv">CSV</button><button id="exportPromptJson">JSON</button></div></div>
+          <div id="promptSummary" class="summary">まだ生成されていません。</div>
+          <div id="promptResults" class="result-list empty-state">Generateを押すと候補がここに並びます。</div>
+        </section>
+      </div>
+    </section>
+
+    <section class="workspace" id="panel-pose" role="tabpanel" aria-labelledby="tab-pose" tabindex="0">
+      <div class="workspace-head"><div><span class="eyebrow">POSE AUTHORING</span><h2 id="pose-title">Pose Studio</h2><p>既存のControlNet Pose Helperを、そのまま編集可能な制作モジュールとして統合しています。</p></div><button id="reloadPose">Pose Studioを再読込</button></div>
+      <div class="pose-frame-wrap"><iframe id="poseFrame" title="Pose Studio" src="modules/pose/index.html"></iframe></div>
+    </section>
+
+    <section class="workspace" id="panel-model" role="tabpanel" aria-labelledby="tab-model" tabindex="0">
+      <div class="workspace-head">
+        <div><span class="eyebrow">MODEL RESEARCH</span><h2 id="model-title">Model Inspector</h2><p>Civitai URLをモデルID / バージョンIDへ分解。API取得に加え、保存済みAPI JSONをオフライン資料として利用できます。</p></div>
+        <div class="head-actions"><button id="offlineJsonButton">API JSONを読込</button><button id="clearOfflineJson">Offline DBを解除</button></div>
+      </div>
+      <input id="offlineJsonFiles" class="visually-hidden" type="file" accept="application/json,.json" multiple aria-label="Civitai API JSONを選択">
+      <div id="offlineDbStatus" class="source-banner">Offline DB: 0 models / 0 versions</div>
+
+      <div class="grid two-col model-grid">
+        <section class="card controls-card">
+          <h3>Inspect</h3>
+          <label>URL一覧<textarea id="modelUrls" rows="9" placeholder="https://civitai.com/models/12345/example&#10;1行に1URL"></textarea></label>
+          <label>取得モード<select id="modelFetchMode"><option value="auto">Auto · Offline優先 → API</option><option value="offline">Offline only</option><option value="api">API only</option></select></label>
+          <label>API key <span class="muted">任意・保存しません</span><input id="modelApiKey" type="password" autocomplete="off" placeholder="restricted model用"></label>
+          <div class="button-row"><button class="primary" id="inspectModels">取得</button><button id="clearModels">クリア</button></div>
+          <p class="note">Offline JSONはCivitaiのmodel / model-version APIレスポンス、またはこのツールのJSONエクスポートを読み込めます。API keyはlocalStorageへ保存しません。</p>
+        </section>
+
+        <section class="card model-results-card">
+          <div class="card-head-row"><h3>Results</h3><div class="button-row compact"><button id="exportModelsCsv">CSV</button><button id="exportModelsJson">JSON</button></div></div>
+          <div id="modelSummary" class="summary">URLを入力してください。</div>
+          <div id="modelResults" class="result-list empty-state">モデル情報がここに並びます。</div>
+        </section>
+      </div>
+    </section>
+
+    <section class="workspace" id="panel-assets" role="tabpanel" aria-labelledby="tab-assets" tabindex="0">
+      <div class="workspace-head">
+        <div><span class="eyebrow">LOCAL ASSET AUDIT</span><h2 id="assets-title">Asset Organizer</h2><p>元のcollect_png_json.batを発展。フォルダを再帰走査してPNG / JSONを対応付け、重複名を安全に整理します。</p></div>
+      </div>
+      <div class="grid two-col asset-grid">
+        <section class="card controls-card">
+          <h3>Scan</h3>
+          <button class="primary" id="scanAssetFolder">フォルダを監査</button>
+          <input id="assetFolderInput" class="visually-hidden" type="file" webkitdirectory multiple accept="image/png,application/json,.png,.json">
+          <button id="collectAssetFolder">collectへコピー <span class="beta">Chrome/Edge</span></button>
+          <div class="button-row"><button id="exportAssetJson">Manifest JSON</button><button id="exportAssetCsv">Manifest CSV</button></div>
+          <p class="note">「フォルダを監査」は読み取りのみ。「collectへコピー」はFile System Access API対応ブラウザで、選択元の直下に <code>collect/</code> を作成し、PNG/JSONだけを重複回避名でコピーします。元ファイルは削除しません。</p>
+        </section>
+        <section class="card">
+          <div class="card-head-row"><h3>Inventory</h3><span id="assetSummary" class="summary inline-summary">未監査</span></div>
+          <div class="asset-stats" id="assetStats"><div><strong>0</strong><span>PNG</span></div><div><strong>0</strong><span>JSON</span></div><div><strong>0</strong><span>Pairs</span></div><div><strong>0</strong><span>Orphans</span></div></div>
+          <div id="assetResults" class="asset-list empty-state">フォルダを選ぶと、同名stemのPNG/JSONペアと孤立ファイルを表示します。</div>
+        </section>
+      </div>
+    </section>
+
+    <section class="workspace" id="panel-about" role="tabpanel" aria-labelledby="tab-about" tabindex="0">
+      <div class="workspace-head"><div><span class="eyebrow">PRODUCT NOTES</span><h2 id="about-title">About</h2><p>元は別々だった制作支援ツールを、役割を保ったまま1つの作業台へまとめた公開版 v1.0.0 です。</p></div></div>
+      <div class="grid four-col">
+        <article class="card"><h3>Prompt Lab</h3><p>PromptDB互換フォルダ読込、seed、テンプレート、辞書、重複除外、複数形式エクスポート。</p></article>
+        <article class="card"><h3>Pose Studio</h3><p>関節ドラッグ、プリセット、参照画像、OpenPose風描画、PNG / SVG / JSON保存。</p></article>
+        <article class="card"><h3>Model Inspector</h3><p>URL解析、Civitai API、保存JSONフォールバック、trigger・推奨設定整理。</p></article>
+        <article class="card"><h3>Asset Organizer</h3><p>PNG / JSON再帰監査、ペア検出、manifest、非破壊collectコピー。</p></article>
+      </div>
+      <section class="card privacy-card"><h3>Data handling</h3><p>Prompt Lab / Pose Studio / Asset Organizer / Notebook はブラウザ内処理です。Model InspectorだけはAPIモードで取得操作をしたときにCivitai APIへ通信します。API keyはlocalStorageへ保存しません。</p></section>
+    </section>
+  </main>
+
+  <footer>AI Creation Workbench · v1.0.0 · Local-first where possible</footer>
+
+  <div class="modal hidden" id="onboardingModal" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle" aria-hidden="true">
+    <div class="modal-card welcome-card">
+      <div class="welcome-hero">
+        <img class="welcome-logo" src="favicon.svg" alt="">
+        <div><span class="eyebrow">WELCOME TO v1.0</span><h2 id="onboardingTitle">制作の前後を、ひとつの机に。</h2></div>
+      </div>
+      <p class="welcome-copy">Promptを組み、Poseを整え、Model情報を記録し、PNG/JSON素材を監査する。個人制作の小さな道具を、ブラウザで行き来できる1つのWorkbenchへまとめました。</p>
+      <div class="welcome-grid">
+        <div><strong>Prompt</strong><span>seedで再現できる候補生成</span></div>
+        <div><strong>Pose</strong><span>関節ドラッグと参照保存</span></div>
+        <div><strong>Model</strong><span>API / Offline JSONを整理</span></div>
+        <div><strong>Assets</strong><span>PNG / JSONのペア監査</span></div>
+      </div>
+      <div class="welcome-actions"><button id="startBlank">空のまま始める</button><button class="primary" id="startDemo">サンプルWorkspaceを開く</button></div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" aria-hidden="true">
+    <div class="modal-card help-card">
+      <div class="modal-head"><div><span class="eyebrow">GUIDE</span><h2 id="helpTitle">使い方 / Shortcuts</h2></div><button id="closeHelp" aria-label="ヘルプを閉じる">Close</button></div>
+      <div class="help-body">
+        <section><h3>基本の流れ</h3><p>上のタブで作業机を切り替えます。Prompt / Pose / Model / Assets は独立して使え、Notebookだけが横断的なメモとお気に入りを保持します。</p></section>
+        <section><h3>データの扱い</h3><p>Prompt、Pose、Asset、Notebookは原則ブラウザ内で処理します。Model InspectorはAPIモードを選んだときだけCivitai APIへ通信します。API keyは保存しません。</p></section>
+        <section><h3>Keyboard</h3><div class="shortcut-grid"><kbd>1–5</kbd><span>Workspace切替</span><kbd>N</kbd><span>Notebook</span><kbd>?</kbd><span>このHelp</span><kbd>Esc</kbd><span>Modalを閉じる</span><kbd>Ctrl/⌘ + Enter</kbd><span>Prompt生成</span></div></section>
+        <section class="privacy-note"><h3>Sample</h3><p>初回ガイドの「サンプルWorkspace」では、外部通信なしでPrompt・Offline Model・Asset監査・Notebookを一度に試せます。</p><button id="loadDemoFromHelp">サンプルWorkspaceを読み込む</button></section>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="notebookModal" role="dialog" aria-modal="true" aria-labelledby="notebookTitle" aria-hidden="true">
+    <div class="modal-card notebook-card">
+      <div class="modal-head"><div><span class="eyebrow">LOCAL WORKSPACE</span><h2 id="notebookTitle">Notebook</h2></div><button id="closeNotebook" aria-label="Notebookを閉じる">Close</button></div>
+      <div class="notebook-grid">
+        <section><h3>制作メモ</h3><textarea id="workspaceNotes" rows="14" placeholder="モデル比較、次に試すseed、制作条件など…"></textarea><p id="notesStatus" class="summary">自動保存</p></section>
+        <section><div class="card-head-row"><h3>Favorites</h3><button id="exportWorkspace">Workspace JSON</button></div><div id="favoritesList" class="favorites-list empty-state">お気に入りはまだありません。</div></section>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

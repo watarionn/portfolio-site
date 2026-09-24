@@ -10,7 +10,7 @@ CITY = ROOT / "portfolio-city"
 EXPECTED_DISTRICTS = {
     "observatory-hill": {"holoscope", "sphere", "prime-dot-art"},
     "archive-street": {"yorei", "actress-finder", "cheatsheet", "shisha"},
-    "workshop-alley": {"dqb2", "madori", "maze-maker", "anagram", "mindmap-maker"},
+    "workshop-alley": {"dqb2", "madori", "maze-maker", "anagram", "mindmap-maker", "ai-creation-workbench"},
     "waterside-play": {"aquarium", "holoca", "word-generator"},
 }
 
@@ -32,6 +32,7 @@ EXPECTED_ROUTES = {
     "maze-maker": "/MAZE_MAKER/maze_maker.html",
     "anagram": "/ANAGRAM/anagram.html",
     "mindmap-maker": "/MINDMAP_MAKER/",
+    "ai-creation-workbench": "/AI_CREATION_WORKBENCH/",
     "aquarium": "/AQUARIUM/aquarium.php",
     "holoca": "/HOLOCA/holoca.html",
     "word-generator": "/WORD_GENERATOR/word_generator.html",
@@ -82,8 +83,8 @@ def main() -> int:
 
     projects = project_payload.get("projects")
     districts = district_payload.get("districts")
-    if not isinstance(projects, list) or len(projects) != 15:
-        fail("exactly 15 projects are required")
+    if not isinstance(projects, list) or len(projects) != 16:
+        fail("exactly 16 projects are required")
     if not isinstance(districts, list) or len(districts) != 4:
         fail("exactly 4 districts are required")
 
@@ -93,7 +94,7 @@ def main() -> int:
 
     project_ids = [item.get("id") for item in projects if isinstance(item, dict)]
     if len(project_ids) != len(set(project_ids)) or set(project_ids) != set(EXPECTED_ROUTES):
-        fail("project IDs differ from the locked 15-work inventory")
+        fail("project IDs differ from the locked 16-work inventory")
 
     for project_id in EXPECTED_ROUTES:
         svg_path = CITY / "assets/buildings" / f"{project_id}.svg"
@@ -124,7 +125,7 @@ def main() -> int:
         if route != EXPECTED_ROUTES[project_id]:
             fail(f"route changed for {project_id}: {route}")
         if route.startswith("/SECRET/"):
-            fail("SECRET must not be part of the 15-work city inventory")
+            fail("SECRET must not be part of the 16-work city inventory")
         for required in ("title", "building", "type", "summary", "order"):
             if project.get(required) in (None, ""):
                 fail(f"{project_id} is missing {required}")
@@ -149,11 +150,11 @@ def main() -> int:
         if not image or not (CITY / image).is_file():
             fail(f"missing registered terrain asset for chunk {chunk.get('id')}: {image}")
     placements = layout_payload.get("projectPlacements")
-    if not isinstance(placements, list) or len(placements) != 15:
+    if not isinstance(placements, list) or len(placements) != 16:
         fail("map-layout must contain exactly one placement per current project")
     placement_ids = [item.get("projectId") for item in placements if isinstance(item, dict)]
     if set(placement_ids) != set(EXPECTED_ROUTES) or len(placement_ids) != len(set(placement_ids)):
-        fail("map-layout placements must match the locked 15-work inventory exactly once")
+        fail("map-layout placements must match the locked 16-work inventory exactly once")
     if any(item.get("anchor") != "bottom-center" for item in placements):
         fail("all Phase 3.5 project placements must use bottom-center anchors")
     regions = layout_payload.get("districtRegions")

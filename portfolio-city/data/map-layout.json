@@ -253,6 +253,13 @@
       "y": 1390,
       "width": 260,
       "anchor": "bottom-center"
+    },
+    {
+      "projectId": "mkpdf-studio",
+      "x": -320,
+      "y": 1020,
+      "width": 260,
+      "anchor": "bottom-center"
     }
   ]
 }

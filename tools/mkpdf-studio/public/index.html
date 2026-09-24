@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mkPDF Studio</title>
+  <meta name="description" content="画像入りアーカイブを安全に検査し、ページを確認・編集してPDF化するローカルファーストのWindowsデスクトップツール。">
+  <meta property="og:title" content="mkPDF Studio">
+  <meta property="og:description" content="安全検査、ページ編集、完成検証までを1つにまとめたArchive → PDFデスクトップツール。">
+  <meta property="og:image" content="assets/og-preview.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">Python / Desktop / PDF</p>
+        <h1>mkPDF Studio</h1>
+      </div>
+      <p class="version">v1.0.0</p>
+    </header>
+
+    <figure class="app-shot">
+      <img src="assets/app-screenshot.png" alt="mkPDF Studioのページ一覧とPDF設定を表示したデスクトップ画面">
+    </figure>
+
+    <section class="intro" aria-labelledby="about-heading">
+      <h2 id="about-heading">このツールについて</h2>
+      <p>画像入りアーカイブを展開前に検査し、ページの順番・回転・除外を確認してからPDFへまとめるWindowsデスクトップツールです。元アーカイブを削除せず、変換後のPDFもページ数まで検証してから完成ファイルとして保存します。</p>
+    </section>
+
+    <section class="grid" aria-label="主な機能">
+      <article>
+        <h2>Archive inspection</h2>
+        <p>ZIP / CBZ / 7z / RAR / CBR / CB7に対応。危険なパス、リンク、異常サイズや圧縮率を変換前に検査します。</p>
+      </article>
+      <article>
+        <h2>Page editing</h2>
+        <p>サムネイルを見ながら並べ替え、複数選択、90°回転、含む・除外、Undo / Redoを操作できます。</p>
+      </article>
+      <article>
+        <h2>PDF settings</h2>
+        <p>JPEG品質、原寸、A4縦・横を選択。Balanced / Compact / Print A4のPresetに加えて独自Presetも保存できます。</p>
+      </article>
+      <article>
+        <h2>Local-first</h2>
+        <p>アーカイブ内容や生成PDFを外部サービスへ送信しません。設定には表示状態やPresetだけを保存します。</p>
+      </article>
+    </section>
+
+    <section class="safety" aria-labelledby="safety-heading">
+      <h2 id="safety-heading">安全設計</h2>
+      <ul>
+        <li>元アーカイブを削除・変更する機能なし</li>
+        <li>パストラバーサル、絶対パス、リンク類を拒否</li>
+        <li>展開サイズ、圧縮率、画像枚数、総ピクセル数に上限</li>
+        <li>失敗した一時PDFは自動削除</li>
+        <li>PDF header / EOF / ページ数を完成前に検証</li>
+      </ul>
+    </section>
+
+    <section class="download" aria-labelledby="download-heading">
+      <div>
+        <h2 id="download-heading">Download</h2>
+        <p>Windows向けソースリリースです。Python 3.11以上と7-Zipを使用します。</p>
+      </div>
+      <a class="download-button" href="downloads/mkPDF_Studio-v1.0.0.zip" download>v1.0.0 ZIP</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Release</dt><dd>2026-09-24</dd></div>
+      <div><dt>SHA-256</dt><dd><code>bdd62f2c686a213e9c0afa755f058ed94f3cd051e50ea234dea16ec3b00fb1da</code></dd></div>
+      <div><dt>Network</dt><dd>Core workflow does not require network access</dd></div>
+    </dl>
+
+    <footer>
+      <a href="../portfolio-city/" class="back-link">Portfolio Cityへ戻る</a>
+    </footer>
+  </main>
+</body>
+</html>

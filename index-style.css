@@ -292,6 +292,19 @@ button:focus-visible {
   background: rgba(255, 255, 255, .24);
 }
 
+.featured-work__main,
+.featured-work__aside {
+  min-width: 0;
+}
+
+.featured-work__main,
+.featured-work__aside,
+.project-row,
+.about-row,
+.contact-links {
+  overflow-wrap: anywhere;
+}
+
 .featured-work__number {
   color: var(--vermilion);
   font-family: var(--serif-en);
@@ -647,7 +660,25 @@ button:focus-visible {
 
   .featured-work__aside {
     grid-column: 1 / -1;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
     padding-left: 3.05rem;
+  }
+
+  .featured-work__aside strong {
+    width: auto;
+  }
+
+  .featured-work__main,
+  .featured-work__main p,
+  .featured-work__main h3,
+  .featured-work__type {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   .featured-work__main > p:last-child {
@@ -659,9 +690,16 @@ button:focus-visible {
   }
 
   .project-row {
-    grid-template-columns: 2.5rem 1fr auto;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
     gap: .75rem;
+    min-width: 0;
     padding-block: 1rem;
+  }
+
+  .project-row strong,
+  .project-row em {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .project-row em {

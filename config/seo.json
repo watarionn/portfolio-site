@@ -17,6 +17,7 @@
     "/ANAGRAM/anagram.html",
     "/MINDMAP_MAKER/",
     "/AI_CREATION_WORKBENCH/",
-    "/MKPDF_STUDIO/"
+    "/MKPDF_STUDIO/",
+    "/S3_UPLOAD_AUDIT/"
   ]
 }

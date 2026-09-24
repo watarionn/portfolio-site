@@ -260,6 +260,13 @@
       "y": 1020,
       "width": 260,
       "anchor": "bottom-center"
+    },
+    {
+      "projectId": "s3-upload-audit",
+      "x": -320,
+      "y": 1390,
+      "width": 260,
+      "anchor": "bottom-center"
     }
   ]
 }

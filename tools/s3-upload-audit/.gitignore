@@ -1,0 +1,10 @@
+config.json
+targets.txt
+audit-result.tsv
+audit-result.json
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/

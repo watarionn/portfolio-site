@@ -172,6 +172,11 @@
       "id": "mkpdf-studio",
       "sourceRoot": "tools/mkpdf-studio/public",
       "productionRoot": "MKPDF_STUDIO"
+    },
+    {
+      "id": "s3-upload-audit",
+      "sourceRoot": "tools/s3-upload-audit/public",
+      "productionRoot": "S3_UPLOAD_AUDIT"
     }
   ],
   "aliases": [

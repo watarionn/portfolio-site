@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "s3-upload-audit"
+version = "1.0.0"
+description = "Local-first read-only S3 upload audit dashboard"
+requires-python = ">=3.11"
+
+[project.scripts]
+s3-upload-audit = "s3_upload_audit.cli:main"
+s3-upload-audit-gui = "s3_upload_audit.gui:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+s3_upload_audit = ["assets/*.png", "assets/*.json"]

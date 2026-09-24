@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>S3 Upload Audit</title>
+  <meta name="description" content="S3上の対象フォルダを読み取り専用で監査し、最新アップロード、経過日数、欠損、前回との差分を確認するWindowsデスクトップツール。">
+  <meta property="og:title" content="S3 Upload Audit">
+  <meta property="og:description" content="Credentialを持たず、既存CLI profileを使ってS3のアップロード状態を監査するローカルファーストDashboard。">
+  <meta property="og:image" content="assets/og-preview.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">Python / Desktop / S3</p>
+        <h1>S3 Upload Audit</h1>
+      </div>
+      <p class="version">v1.0.0</p>
+    </header>
+
+    <figure class="app-shot">
+      <img src="assets/app-screenshot.png" alt="S3 Upload Auditの監査Dashboard画面">
+    </figure>
+
+    <section class="intro" aria-labelledby="about-heading">
+      <h2 id="about-heading">このツールについて</h2>
+      <p>対象名リストとS3上のフォルダ・ファイルを読み取り専用で照合し、最新アップロード、経過日数、欠損、前回との差分をDashboardで確認するWindowsデスクトップツールです。認証情報はアプリに保存せず、既存のAWS CLIまたはS3 Browser profileへ委譲します。</p>
+    </section>
+
+    <section class="grid" aria-label="主な機能">
+      <article>
+        <h2>Read-only audit</h2>
+        <p>AWS CLIでは<code>s3api list-objects-v2</code>、S3 Browserではlist操作だけを内部生成します。任意クラウドコマンドは受け付けません。</p>
+      </article>
+      <article>
+        <h2>Audit states</h2>
+        <p>Healthy / Stale / Undated / Missing folder / No files / Provider errorを明示し、経過日数も確認できます。</p>
+      </article>
+      <article>
+        <h2>Changes & History</h2>
+        <p>同じ監査元の前回実行と比較し、New problem / Recovered / Changedなどを表示。履歴はローカルに最大50回保存します。</p>
+      </article>
+      <article>
+        <h2>Offline Demo</h2>
+        <p>実S3へ接続せず、Dashboard・検索・filter・stale判定・差分表示を固定fixtureで確認できます。</p>
+      </article>
+    </section>
+
+    <section class="safety" aria-labelledby="safety-heading">
+      <h2 id="safety-heading">安全境界</h2>
+      <ul>
+        <li>Access Key / Secret Access Key / Session Tokenをconfigへ保存不可</li>
+        <li>認証は既存CLI profileへ委譲</li>
+        <li>クラウド操作は一覧取得のみ</li>
+        <li><code>subprocess</code>は<code>shell=False</code>、timeout必須</li>
+        <li>実bucket名・実target list・実監査結果を配布物へ含めない</li>
+      </ul>
+    </section>
+
+    <section class="download" aria-labelledby="download-heading">
+      <div>
+        <h2 id="download-heading">Download</h2>
+        <p>Windows向けソースリリースです。Offline Demoは追加ソフト不要。実監査にはAWS CLIまたはS3 Browser CLIを使用します。</p>
+      </div>
+      <a class="download-button" href="downloads/S3_Upload_Audit-v1.0.0.zip" download>v1.0.0 ZIP</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Release</dt><dd>2026-09-24</dd></div>
+      <div><dt>SHA-256</dt><dd><code>f449027e89acdabe1a55b706130f501dd29d487ff970072d70384c9fc19d55bd</code></dd></div>
+      <div><dt>Live S3 QA</dt><dd>Not performed on the development PC. Provider behavior is fixture-tested.</dd></div>
+    </dl>
+
+    <footer>
+      <a href="../portfolio-city/" class="back-link">Portfolio Cityへ戻る</a>
+    </footer>
+  </main>
+</body>
+</html>

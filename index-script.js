@@ -5,6 +5,35 @@
   if (year) year.textContent = new Date().getFullYear();
 })();
 
+(function initProjectFilters() {
+  const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+  const rows = Array.from(document.querySelectorAll('.project-row[data-categories]'));
+  const count = document.getElementById('projectCount');
+
+  if (!buttons.length || !rows.length) return;
+
+  const applyFilter = (filter) => {
+    let visibleCount = 0;
+
+    rows.forEach((row) => {
+      const categories = (row.dataset.categories || '').split(/\s+/).filter(Boolean);
+      const visible = filter === 'all' || categories.includes(filter);
+      row.hidden = !visible;
+      if (visible) visibleCount += 1;
+    });
+
+    buttons.forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
+    });
+
+    if (count) count.textContent = String(visibleCount);
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+  });
+})();
+
 (function initSectionNavigation() {
   const links = Array.from(document.querySelectorAll('.section-nav a[href^="#"]'));
   const pageNumber = document.getElementById('pageNum');

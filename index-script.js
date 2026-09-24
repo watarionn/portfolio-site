@@ -29,9 +29,14 @@
     if (count) count.textContent = String(visibleCount);
   };
 
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+  const filterBar = document.querySelector('.project-filters');
+  filterBar?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-filter]');
+    if (!button || !filterBar.contains(button)) return;
+    applyFilter(button.dataset.filter || 'all');
   });
+
+  applyFilter('all');
 })();
 
 (function initSectionNavigation() {

@@ -120,7 +120,7 @@
   ],
   "cameraPresets": {
     "desktop": {
-      "zoom": 1.0,
+      "zoom": 1,
       "startX": 1600,
       "startY": 640
     },
@@ -237,6 +237,13 @@
       "projectId": "word-generator",
       "x": 2440,
       "y": 1880,
+      "width": 260,
+      "anchor": "bottom-center"
+    },
+    {
+      "projectId": "mindmap-maker",
+      "x": 3520,
+      "y": 1020,
       "width": 260,
       "anchor": "bottom-center"
     }

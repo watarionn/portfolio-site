@@ -1,0 +1,134 @@
+{
+  "format": "mindmap-maker",
+  "version": 5,
+  "title": "プロダクト公開プラン",
+  "nodes": [
+    {
+      "id": "n1",
+      "x": 0,
+      "y": 0,
+      "w": 170,
+      "h": 68,
+      "text": "MindMap Maker\nv1.0公開",
+      "shape": "rect",
+      "style": {
+        "bg": "#6b5f3f",
+        "fg": "#fffaf0",
+        "bc": "#6b5f3f",
+        "bw": 0,
+        "fs": 17,
+        "overflow": "visible",
+        "halign": "center"
+      }
+    },
+    {
+      "id": "n2",
+      "x": 260,
+      "y": -180,
+      "w": 150,
+      "h": 82,
+      "text": "コンセプト",
+      "shape": "cloud",
+      "style": {
+        "bg": "#fff4df",
+        "fg": "#3a3020",
+        "bc": "#925924",
+        "bw": 2,
+        "fs": 14,
+        "overflow": "visible",
+        "halign": "center"
+      }
+    },
+    {
+      "id": "n3",
+      "x": 260,
+      "y": -55,
+      "w": 130,
+      "h": 50,
+      "text": "UX / 操作性",
+      "shape": "rect",
+      "style": {
+        "bg": "#f4ead7",
+        "fg": "#3a3020",
+        "bc": "#9a8a62",
+        "bw": 2,
+        "fs": 14,
+        "overflow": "visible",
+        "halign": "center"
+      }
+    },
+    {
+      "id": "n4",
+      "x": 260,
+      "y": 80,
+      "w": 130,
+      "h": 94,
+      "text": "リリース準備",
+      "shape": "diamond",
+      "style": {
+        "bg": "#f0e6d4",
+        "fg": "#3a3020",
+        "bc": "#9a8a62",
+        "bw": 2,
+        "fs": 14,
+        "overflow": "visible",
+        "halign": "center"
+      }
+    },
+    {
+      "id": "n5",
+      "x": 260,
+      "y": 215,
+      "w": 112,
+      "h": 112,
+      "text": "ポートフォリオ",
+      "shape": "circle",
+      "style": {
+        "bg": "#efe4d0",
+        "fg": "#3a3020",
+        "bc": "#9a8a62",
+        "bw": 2,
+        "fs": 14,
+        "overflow": "visible",
+        "halign": "center"
+      }
+    }
+  ],
+  "conns": [
+    {
+      "id": "c6",
+      "from": "n1",
+      "to": "n2",
+      "type": "curve"
+    },
+    {
+      "id": "c7",
+      "from": "n1",
+      "to": "n3",
+      "type": "curve"
+    },
+    {
+      "id": "c8",
+      "from": "n1",
+      "to": "n4",
+      "type": "curve"
+    },
+    {
+      "id": "c9",
+      "from": "n1",
+      "to": "n5",
+      "type": "curve"
+    }
+  ],
+  "groups": [],
+  "view": {
+    "x": 0,
+    "y": 0,
+    "scale": 1
+  },
+  "idSeq": 9,
+  "viewport": {
+    "w": 1280,
+    "h": 628
+  }
+}

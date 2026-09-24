@@ -140,6 +140,16 @@
       "type": "Dataset / Random Deck",
       "summary": "お題デッキを引き、制限時間と履歴を使って遊べるテーブルゲーム向け単語ツール。",
       "order": 3
+    },
+    {
+      "id": "mindmap-maker",
+      "title": "MindMap Maker",
+      "district": "workshop-alley",
+      "building": "思考設計室",
+      "route": "/MINDMAP_MAKER/",
+      "type": "SVG / Local-first",
+      "summary": "ノードを置き、つなぎ、検索・整列しながら思考を育てるローカルファーストのマインドマップエディタ。",
+      "order": 5
     }
   ]
 }

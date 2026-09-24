@@ -145,6 +145,11 @@
       "id": "sphere",
       "sourceRoot": "works/sphere",
       "productionRoot": "SPHERE"
+    },
+    {
+      "id": "mindmap-maker",
+      "sourceRoot": "tools/mindmap-maker",
+      "productionRoot": "MINDMAP_MAKER"
     }
   ],
   "aliases": [

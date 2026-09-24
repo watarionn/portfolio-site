@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MindMap Maker</title>
+  <meta name="description" content="„Éñ„É©„Ç¶„Ç∂„Å†„Åë„Åß‰Ωø„Åà„Çã„ÄÅËªΩÈáè„Å™SVG„Éû„Ç§„É≥„Éâ„Éû„ÉÉ„Éó„Ç®„Éá„Ç£„Çø„ÄÇ„Éé„Éº„ÉâÁ∑®ÈõÜ„ÉªÊé•Á∂ö„ÉªÊ§úÁ¥¢„ÉªËá™ÂãïÊï¥Âàó„ÉªJSON‰øùÂ≠ò„ÉªÁîªÂÉèÂá∫Âäõ„Å´ÂØæÂøú„ÄÇ">
+  <meta name="theme-color" content="#ede7d9">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MindMap Maker">
+  <meta property="og:description" content="ÊÄùËÄÉ„Çí„ÄÅËªΩ„Åè„ÄÅËá™Áî±„Å´„Å§„Å™„Åê„ÄÇ„Éñ„É©„Ç¶„Ç∂„Å†„Åë„ÅßÂãï„ÅèSVG„Éû„Ç§„É≥„Éâ„Éû„ÉÉ„Éó„Ç®„Éá„Ç£„Çø„ÄÇ">
+  <meta property="og:image" content="og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- „Éò„ÉÉ„ÉÄ„Éº -->
+<header id="header">
+  <div class="hdr-group">
+    <button class="icon-btn" id="btn-undo" title="ÂÖÉ„Å´Êàª„Åô" aria-label="ÂÖÉ„Å´Êàª„Åô" disabled>
+      <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05 1-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-redo" title="„ÇÑ„ÇäÁõ¥„Åô" aria-label="„ÇÑ„ÇäÁõ¥„Åô" disabled>
+      <svg viewBox="0 0 24 24"><path d="M18.4 10.6C16.55 9 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 15.7c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 15.5h9V6.5l-3.6 4.1z"/></svg>
+    </button>
+  </div>
+  <div class="hdr-center">
+    <button class="hdr-title" id="map-title-btn" title="„Éû„ÉÉ„ÉóÂêç„ÇíÂ§âÊõ¥">Untitled Mind Map</button>
+    <div id="save-status" class="save-status" aria-live="polite">Ëá™Âãï‰øùÂ≠ò</div>
+  </div>
+  <div class="hdr-group">
+    <button class="icon-btn" id="btn-search" title="„Éé„Éº„Éâ„ÇíÊ§úÁ¥¢ (Ctrl/‚åò+F)" aria-label="„Éé„Éº„Éâ„ÇíÊ§úÁ¥¢">
+      <svg viewBox="0 0 24 24"><path d="M9.5 3a6.5 6.5 0 104.03 11.6L19.93 21 21 19.93l-6.4-6.4A6.5 6.5 0 009.5 3zm0 2a4.5 4.5 0 110 9 4.5 4.5 0 010-9z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-layout" title="Ëá™ÂãïÊï¥Âàó" aria-label="Ëá™ÂãïÊï¥Âàó">
+      <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm9-2h7v7h-7v-7zm2 2v3h3v-3h-3z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-file-open" title="„Éï„Ç°„Ç§„É´" aria-label="„Éï„Ç°„Ç§„É´„É°„Éã„É•„Éº">
+      <svg viewBox="0 0 24 24"><path d="M10 4H2v16h20V6H12l-2-2zm10 14H4V8h16v10z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-fit" title="ÂÖ®‰Ωì„ÇíË°®Á§∫" aria-label="„Éû„ÉÉ„ÉóÂÖ®‰Ωì„ÇíË°®Á§∫">
+      <svg viewBox="0 0 24 24"><path d="M4 9V4h5V2H2v7h2zm11-7v2h5v5h2V2h-7zM4 15H2v7h7v-2H4v-5zm16 5h-5v2h7v-7h-2v5z"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-export-open" title="Âá∫Âäõ" aria-label="Âá∫Âäõ„É°„Éã„É•„Éº">
+      <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5v-2z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- „É¢„Éº„Éâ„Éê„Éº + Êé•Á∂öÁ®ÆÂà• -->
+<div id="toolbar">
+  <div id="mode-bar">
+    <button class="mode-btn active" data-mode="add">
+      <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>ËøΩÂä†
+    </button>
+    <button class="mode-btn" data-mode="edit">
+      <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 000-1.42l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.82z"/></svg>Á∑®ÈõÜ
+    </button>
+    <button class="mode-btn" data-mode="connect">
+      <svg viewBox="0 0 24 24"><path d="M17 7a5 5 0 00-4.584 3H8a3 3 0 000 6h.416A5 5 0 1017 7zM8 14a1 1 0 110-2h4.126A5.015 5.015 0 0012 13a5 5 0 00.874 2H8zm9 1a3 3 0 110-6 3 3 0 010 6z"/></svg>Êé•Á∂ö
+    </button>
+    <button class="mode-btn" data-mode="multi">
+      <svg viewBox="0 0 24 24"><path d="M3 5h2V3C3.9 3 3 3.9 3 5zm0 8h2v-2H3v2zm4 8h2v-2H7v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2c0-1.1-.9-2-2-2zM5 21v-2H3c0 1.1.9 2 2 2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2zm0-4h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2zm4 8h2v-2h-2v2z"/></svg>Ë§áÊï∞
+    </button>
+  </div>
+  <div id="conn-type-bar" class="hidden">
+    <button class="conn-btn active" data-conn="curve">ÔΩû Êõ≤Á∑ö</button>
+    <button class="conn-btn" data-conn="line">‚Äî Áõ¥Á∑ö</button>
+  </div>
+</div>
+
+<!-- SVG„Ç≠„É£„É≥„Éê„Çπ -->
+<div id="canvas-wrapper">
+  <svg id="main-svg" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dot-grid" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+        <circle cx="0" cy="0" r="0.9" fill="rgba(140,120,80,0.35)"/>
+      </pattern>
+      <marker id="arr-end" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#9a8a62"/>
+      </marker>
+      <marker id="arr-end-sel" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#c0874a"/>
+      </marker>
+    </defs>
+    <rect id="bg-rect" width="100%" height="100%" fill="url(#dot-grid)"/>
+    <g id="viewport">
+      <g id="group-layer"></g>
+      <g id="conn-layer"></g>
+      <g id="node-layer"></g>
+      <line id="conn-preview" stroke="#c0874a" stroke-width="2" stroke-dasharray="7,4" display="none" pointer-events="none"/>
+    </g>
+    <rect id="rubber-band" fill="rgba(124,111,74,0.10)" stroke="#7c6f4a" stroke-width="1.5" stroke-dasharray="5,3" display="none" pointer-events="none"/>
+  </svg>
+</div>
+
+<!-- „Éü„Éã„Éû„ÉÉ„Éó -->
+<div id="minimap" class="minimap" aria-label="„Éü„Éã„Éû„ÉÉ„Éó„ÄÇ„ÇØ„É™„ÉÉ„ÇØ„Åô„Çã„Å®Ë°®Á§∫‰ΩçÁΩÆ„ÇíÁßªÂãï„Åó„Åæ„Åô" tabindex="0">
+  <svg id="minimap-svg" viewBox="0 0 180 110">
+    <rect class="minimap-bg" x="0" y="0" width="180" height="110" rx="9"/>
+    <g id="minimap-content"></g>
+    <rect id="minimap-viewport" class="minimap-viewport" x="0" y="0" width="20" height="20" rx="2"/>
+  </svg>
+</div>
+
+<!-- ÂΩ¢Áä∂ÈÅ∏Êäû„Éë„Éç„É´ -->
+<div id="shape-panel">
+  <span class="panel-label">ÂΩ¢Áä∂</span>
+  <div class="shape-scroll">
+    <button class="shape-btn active" data-shape="rect" aria-label="Èï∑ÊñπÂΩ¢„Éé„Éº„Éâ">
+      <svg viewBox="0 0 44 30"><rect x="2" y="2" width="40" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="circle" aria-label="ÂÜÜÂΩ¢„Éé„Éº„Éâ">
+      <svg viewBox="0 0 44 30"><ellipse cx="22" cy="15" rx="20" ry="13" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="cloud" title="Èõ≤ÂΩ¢" aria-label="Èõ≤ÂΩ¢„Éé„Éº„Éâ">
+      <svg viewBox="0 0 44 30"><path d="M11 24h23a7 7 0 0 0 1-13.9A10 10 0 0 0 16.5 8 7 7 0 0 0 11 24z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="diamond" aria-label="Ëè±ÂΩ¢„Éé„Éº„Éâ">
+      <svg viewBox="0 0 44 30"><polygon points="22,2 42,15 22,28 2,15" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <button class="shape-btn" data-shape="triangle" aria-label="‰∏âËßíÂΩ¢„Éé„Éº„Éâ">
+      <svg viewBox="0 0 44 30"><polygon points="22,2 42,28 2,28" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <button class="shape-scroll">
+      <svg viewBox="0 0 44 30"><path d="M3 22h38" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- „Çπ„Çø„Ç§„É´„É¢„Éº„ÉÄ„É´ -->
+<div id="style-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="style-title">
+  <div class="modal-box">
+    <div class="modal-hdr"><span id="style-title">„Çπ„Çø„Ç§„É´</span><button class="modal-x" id="style-close" aria-label="Èñâ„Åò„Çã">‚úï</button></div>
+    <div class="modal-body">
+      <div class="opt-row"><span>ËÉåÊôØËâ≤</span><input type="color" id="opt-bg" value="#fffbf2"></div>
+      <div class="opt-row"><span>ÊñáÂ≠óÁâ≤Êñá</span><input type="color" id="opt-fg" value="#3a3020"></div>
+      <div class="opt-row"><span>Êûñ„ÇÆ„É©„Éº</span><input type="color" id="opt-border-c" value="#9a8a62"></div>
+      <div class="opt-row"><span>Êû´Á∑öÂπÖ</span><input type="range" id="opt-bw" min="0" max="12" value="2" step="1"><span id="opt-bw-val" class="value-badge">2</span></div>
+      <div class="opt-row"><span>ÊñáÂ≠ó„Çµ„Ç§„Ç∫</span><input type="range" id="opt-fs" min="10" max="36" value="14" step="1"><span8YHõ‹YúÀ]ò[à€\‹œHùò[YKXòYŸHèåM‹‹[èèŸ]èÇà]à€\‹œHõ‹\õ›»èè‹[è∏‡k»‡o˘aÓ∏‡c‹‹[èè]à€\‹œHùŸÀY‹õ›\à]KZŸ^OHõ›ô\ôõ›»èèù]€à€\‹œHùŸ»X›]ôHà]K]ò[Hùö\⁄XõHèπh©˘È.èÿù]€èèù]€à€\‹œHùŸ»à]K]ò[HöY[àè∫fd9b-èÿù]€èèŸ]èèŸ]èÇà]à€\‹œHõ‹\õ›»èè‹[èπ•°˘ke˘£‡¯‡b‹‹[èè]à€\‹œHùŸÀY‹õ›\à]KZŸ^OHö[Y€àèèù]€à€\‹œHùŸ»à]K]ò[HõYùèπmÈèÿù]€èèù]€à€\‹œHùŸ»X›]ôHà]K]ò[HòŸ[ù\àèπ.+yi*Oÿù]€èèù]€à€\‹œHùŸ»à]K]ò[HúöY⁄èπcÏœÿù]€èèŸ]èèŸ]èÇàŸ]èÇà]à€\‹œHõ[Ÿ[Yùàèèù]€à€\‹œHõXùàŸX€€ô\ûHàYHú›[KXÿ[òŸ[è∏‡´x‡Ë¯‡Ï¯‡Æ¯‡Íœÿù]€èèù]€à€\‹œHõXùààYHú›[KX\Hè∫`o˘Â*ÿù]€èèŸ]èÇàŸ]èÇèŸ]èÇÇèKKH8‡·∏‡´x‡Æx‡‚9ÌÍ:f·∏‡Ë∏‡Ô8‡‡8‡Í»KOÇè]àYHôY][[Ÿ[à€\‹œHõ[Ÿ[[›ô\õ^HY[ààõ€OHôX[Ÿ»à\öXK[[Ÿ[HùùYHà\öXK[Xô[YûOHôY]]]HèÇà]à€\‹œHõ[Ÿ[XõﬁèÇà]à€\‹œHõ[Ÿ[Zàèè‹[àYHôY]]]Hè∏‡·∏‡´x‡Æx‡‚9ÌÍ:f·è‹‹[èèù]€à€\‹œHõ[Ÿ[^àYHôY]X€‹ŸHà\öXK[Xô[H∫e¢x‡f8‡¢»è∏ß%Oÿù]€èèŸ]èÇà]à€\‹œHõ[Ÿ[XõŸHèè^\ôXHYHôY]]HàXŸZ€\èHπ•°˘ke¯‡§πaiyb¶¯†)àèè›^\ôXOèŸ]èÇà]à€\‹œHõ[Ÿ[Yùàèèù]€à€\‹œHõXùàŸX€€ô\ûHàYHôY]Xÿ[òŸ[è∏‡´x‡Ë¯‡Ï¯‡Æ¯‡Íœÿù]€èèù]€à€\‹œHõXùààYHôY][⁄»èπ¶Ì9•¨ÿù]€èèŸ]èÇàŸ]èÇèŸ]èÇ

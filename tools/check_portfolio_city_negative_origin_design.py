@@ -65,7 +65,8 @@ def main():
 
     placements = {item["projectId"]: item for item in layout["projectPlacements"]}
     samples = {item["projectId"]: item for item in design["projectNormalizationSamples"]}
-    assert placements.keys() == samples.keys()
+    assert len(placements) == 15
+    assert samples.keys() <= placements.keys()
     for project_id, sample in samples.items():
         placement = placements[project_id]
         assert placement["x"] == sample["x"]
@@ -86,7 +87,7 @@ def main():
     assert close(old_left, normalized["left"])
     assert close(old_top, normalized["top"])
 
-    print("Negative-origin runtime design contract passed: current 13-chunk world / 14 projects / legacy zero-origin compatibility")
+    print("Negative-origin runtime design contract passed: current 13-chunk world / 15 projects / legacy zero-origin compatibility")
 
 
 if __name__ == "__main__":

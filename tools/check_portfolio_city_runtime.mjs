@@ -248,16 +248,16 @@ await new Promise((resolve) => setTimeout(resolve, 0));
 await new Promise((resolve) => setTimeout(resolve, 0));
 
 assert.equal(consoleErrors.length, 0, `city.js logged errors: ${consoleErrors.join(' | ')}`);
-assert.equal(projectCount.textContent, '14');
+assert.equal(projectCount.textContent, '15');
 assert.equal(districtCount.textContent, '4');
 assert.equal(visitedCount.textContent, '0');
-assert.equal(visitedTotal.textContent, '14');
+assert.equal(visitedTotal.textContent, '15');
 
 const districts = documentMock.querySelectorAll('.district');
 const buildings = documentMock.querySelectorAll('.building-button');
 const workRows = documentMock.querySelectorAll('.work-row');
 assert.equal(districts.length, 4, 'map must render four districts');
-assert.equal(buildings.length, 14, 'map must render fourteen buildings');
+assert.equal(buildings.length, 15, 'map must render fifteen buildings');
 assert.equal(documentMock.querySelectorAll('.world-chunk').length, 13, 'map must register thirteen world chunks');
 assert.equal(cityMap.dataset.worldLayout, 'v1');
 assert.equal(cityMap.dataset.worldMinX, '-1024');
@@ -280,8 +280,8 @@ assert.equal(currentIllustrated.style.getPropertyValue('--chunk-left'), '40%');
 assert.equal(currentIllustrated.style.getPropertyValue('--chunk-top'), '20%');
 assert.equal(currentIllustrated.style.getPropertyValue('--chunk-width'), '20%');
 assert.equal(currentIllustrated.style.getPropertyValue('--chunk-height'), '20%');
-assert.equal(buildings.filter((button) => button.dataset.worldAnchor === 'bottom-center').length, 14, 'every building must expose world placement data');
-assert.equal(documentMock.querySelectorAll('.building-visual').length, 14, 'every building must render a handcrafted visual');
+assert.equal(buildings.filter((button) => button.dataset.worldAnchor === 'bottom-center').length, 15, 'every building must expose world placement data');
+assert.equal(documentMock.querySelectorAll('.building-visual').length, 15, 'every building must render a handcrafted visual');
 assert.equal(documentMock.querySelectorAll('.district-landmark').length, 4, 'every district must render one landmark');
 assert.equal(documentMock.querySelectorAll('.district-scene').length, 4, 'every district must render one environment scene');
 assert.equal(documentMock.querySelectorAll('.district-scene__prop').length, 12, 'district scenes must render twelve environment props');
@@ -294,7 +294,7 @@ assert.equal(documentMock.querySelectorAll('.city-map__infrastructure').length, 
 assert.equal(documentMock.querySelectorAll('.city-map__street-label').length, 4, 'map must render four street labels');
 assert.equal(documentMock.querySelectorAll('[data-district-progress]').length, 4, 'map must render four district progress labels');
 assert.equal(documentMock.querySelectorAll('[data-district-complete]').length, 4, 'map must render four district completion badges');
-assert.equal(workRows.length, 14, 'works directory must render fourteen rows');
+assert.equal(workRows.length, 15, 'works directory must render fifteen rows');
 
 assert.equal(inspector.querySelector('h3').textContent, 'HoloScope');
 assert.equal(enter.href, '/holoscope/');
@@ -359,4 +359,4 @@ for (const project of projectsPayload.projects) {
   assert.equal(row.href, project.route, `route mismatch for ${project.id}`);
 }
 
-console.log('Portfolio City Phase 3.6 R5 runtime contract passed: 13 chunks / 4 districts / 14 world placements / negative origin / navigation / keyboard / visited state');
+console.log('Portfolio City Phase 3.6 R5 runtime contract passed: 13 chunks / 4 districts / 15 world placements / negative origin / navigation / keyboard / visited state');

@@ -182,6 +182,11 @@
       "id": "video-workbench",
       "sourceRoot": "tools/video-workbench/public",
       "productionRoot": "VIDEO_WORKBENCH"
+    },
+    {
+      "id": "project-snapshot-generator",
+      "sourceRoot": "tools/project-snapshot-generator/public",
+      "productionRoot": "PROJECT_SNAPSHOT_GENERATOR"
     }
   ],
   "aliases": [

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Snapshot Generator</title>
+  <meta name="description" content="プロジェクトフォルダを安全に走査し、構成・容量・拡張子・巨大ファイル・除外候補をMarkdownへまとめるWindowsデスクトップツール。">
+  <meta property="og:title" content="Project Snapshot Generator">
+  <meta property="og:description" content="プロジェクト全体を1回の走査で把握し、レビューや引継ぎに使えるMarkdownスナップショットを生成するツール。">
+  <meta property="og:image" content="assets/og-preview.png">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">Python / Desktop / Project Analysis</p>
+        <h1>Project Snapshot Generator</h1>
+      </div>
+      <p class="version">v0.4.0 RC</p>
+    </header>
+
+    <figure class="app-shot">
+      <img src="assets/app-screenshot.png" alt="Project Snapshot Generatorで実際のプロジェクト構成を解析している画面">
+    </figure>
+
+    <section class="intro" aria-labelledby="about-heading">
+      <h2 id="about-heading">このツールについて</h2>
+      <p>以前使っていたDirTreeMakerを作り直し、プロジェクトの構成・規模・ファイル傾向を1枚のMarkdownへまとめるWindowsデスクトップツールにしました。レビュー、引継ぎ、整理前の現状確認に使えます。</p>
+    </section>
+
+    <section class="grid" aria-label="主な機能">
+      <article>
+        <h2>Project snapshot</h2>
+        <p>フォルダツリー、ファイル数、ディレクトリ数、総容量を1回の走査からまとめて取得します。</p>
+      </article>
+      <article>
+        <h2>Full / Compact tree</h2>
+        <p>小規模案件では全ファイルを表示し、大規模案件では個別ファイルを省いたCompact表示へ自動で切り替えます。</p>
+      </article>
+      <article>
+        <h2>Project analysis</h2>
+        <p>拡張子別の構成比、巨大ファイル、Git除外候補、スキップしたパス、走査エラーを確認できます。</p>
+      </article>
+      <article>
+        <h2>Markdown workflow</h2>
+        <p>GUIで確認した同じ解析結果からMarkdownを保存・コピーできるため、レビューや引継ぎへそのまま持ち出せます。</p>
+      </article>
+    </section>
+
+    <section class="safety" aria-labelledby="safety-heading">
+      <h2 id="safety-heading">安全設計</h2>
+      <ul>
+        <li>対象プロジェクトは読み取り専用で走査し、内部のファイルを書き換えない</li>
+        <li>.git、node_modules、仮想環境、キャッシュ類を既定で除外</li>
+        <li>シンボリックリンクを追跡せず、意図しない別領域への走査を防止</li>
+        <li>出力ファイルの上書きは明示確認がある場合のみ許可</li>
+        <li>走査できなかった項目やスキップ項目も結果に残して確認可能</li>
+      </ul>
+    </section>
+
+    <section class="download" aria-labelledby="download-heading">
+      <div>
+        <h2 id="download-heading">Download</h2>
+        <p>Windows向けソースリリースです。Python 3.10以上とTkinterを使用し、追加パッケージは不要です。</p>
+      </div>
+      <a class="download-button" href="downloads/ProjectSnapshotGenerator-0.4.0-source.zip" download>v0.4.0 ZIP</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Release</dt><dd>2026-09-24</dd></div>
+      <div><dt>SHA-256</dt><dd><code>4da1b212ff1841db570c3bbd7ba71379298555bc581f258365cb97e2ea1d8491</code></dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/watarionn/project-snapshot-generator">GitHub / watarionn/project-snapshot-generator</a></dd></div>
+      <div><dt>Network</dt><dd>Core workflow does not require network access</dd></div>
+    </dl>
+
+    <footer>
+      <a href="/" class="back-link">作品一覧へ戻る</a>
+    </footer>
+  </main>
+</body>
+</html>

@@ -15,6 +15,18 @@
       "destination": "index-script.js"
     },
     {
+      "source": "assets/featured/yorei.webp",
+      "destination": "assets/featured/yorei.webp"
+    },
+    {
+      "source": "assets/featured/holoscope.webp",
+      "destination": "assets/featured/holoscope.webp"
+    },
+    {
+      "source": "assets/featured/shisha.webp",
+      "destination": "assets/featured/shisha.webp"
+    },
+    {
       "source": "404.html",
       "destination": "404.html"
     },

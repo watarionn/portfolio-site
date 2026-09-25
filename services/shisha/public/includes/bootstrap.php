@@ -16,6 +16,108 @@ const SHISHA_HOURS_FIELDS = [
     'hours_verified_at',
 ];
 
+
+function shisha_prefecture_codes(): array
+{
+    return [
+        '北海道' => 1, '青森県' => 2, '岩手県' => 3, '宮城県' => 4, '秋田県' => 5,
+        '山形県' => 6, '福島県' => 7, '茨城県' => 8, '栃木県' => 9, '群馬県' => 10,
+        '埼玉県' => 11, '千葉県' => 12, '東京都' => 13, '神奈川県' => 14, '新潟県' => 15,
+        '富山県' => 16, '石川県' => 17, '福井県' => 18, '山梨県' => 19, '長野県' => 20,
+        '岐阜県' => 21, '静岡県' => 22, '愛知県' => 23, '三重県' => 24, '滋賀県' => 25,
+        '京都府' => 26, '大阪府' => 27, '兵庫県' => 28, '奈良県' => 29, '和歌山県' => 30,
+        '鳥取県' => 31, '島根県' => 32, '岡山県' => 33, '広島県' => 34, '山口県' => 35,
+        '徳島県' => 36, '香川県' => 37, '愛媛県' => 38, '高知県' => 39, '福岡県' => 40,
+        '佐賀県' => 41, '長崎県' => 42, '熊本県' => 43, '大分県' => 44, '宮崎県' => 45,
+        '鹿児島県' => 46, '沖縄県' => 47,
+    ];
+}
+
+function prefecture_code(string $prefecture): int
+{
+    return shisha_prefecture_codes()[$prefecture] ?? PHP_INT_MAX;
+}
+
+function postal_location_map(): array
+{
+    static $map = null;
+    if (is_array($map)) {
+        return $map;
+    }
+    $path = __DIR__ . '/postal-location-map.php';
+    $loaded = is_file($path) ? require $path : [];
+    $map = is_array($loaded) ? $loaded : [];
+    return $map;
+}
+
+function extract_postal_code(string $address): string
+{
+    if (preg_match('/〒?\s*(\d{3})[-‐‑‒–—ー−]?\s*(\d{4})/u', $address, $m)) {
+        return $m[1] . $m[2];
+    }
+    return '';
+}
+
+function normalize_display_shop_name(string $value): string
+{
+    if (function_exists('mb_convert_kana')) {
+        $value = mb_convert_kana($value, 'asKV', 'UTF-8');
+    }
+    $value = preg_replace('/[\s　\x{00A0}]+/u', ' ', trim($value)) ?? trim($value);
+    $value = preg_replace('/\s*（\s*/u', '（', $value) ?? $value;
+    $value = preg_replace('/\s*）\s*/u', '）', $value) ?? $value;
+    return trim($value);
+}
+
+function normalize_shop_location(array $shop, string $address): array
+{
+    $rawPrefecture = trim((string)($shop['prefecture'] ?? ''));
+    $rawMunicipality = trim((string)($shop['municipality'] ?? ''));
+    $postalCode = extract_postal_code($address);
+    $postalMap = postal_location_map();
+
+    $prefecture = '';
+    $municipality = '';
+    $source = 'review';
+
+    if ($postalCode !== '' && isset($postalMap[$postalCode]) && is_array($postalMap[$postalCode])) {
+        $prefecture = trim((string)($postalMap[$postalCode][0] ?? ''));
+        $municipality = trim((string)($postalMap[$postalCode][1] ?? ''));
+        $source = 'postal';
+    } else {
+        $addressPrefecture = extract_prefecture($address);
+        $addressMunicipality = extract_municipality($address);
+        if ($addressPrefecture !== '') {
+            $prefecture = $addressPrefecture;
+            $source = 'address';
+        } elseif ($rawPrefecture !== '' && isset(shisha_prefecture_codes()[$rawPrefecture])) {
+            $prefecture = $rawPrefecture;
+            $source = 'source';
+        }
+        if ($addressMunicipality !== '' && !preg_match('/[A-Za-z]/', $addressMunicipality)) {
+            $municipality = $addressMunicipality;
+        } elseif ($rawMunicipality !== '' && !preg_match('/[A-Za-z]/', $rawMunicipality)) {
+            $municipality = $rawMunicipality;
+        }
+    }
+
+    if ($rawPrefecture !== '' && $rawPrefecture !== $prefecture) {
+        $shop['prefecture_raw'] = $rawPrefecture;
+    }
+    if ($rawMunicipality !== '' && $rawMunicipality !== $municipality) {
+        $shop['municipality_raw'] = $rawMunicipality;
+    }
+
+    $shop['prefecture'] = $prefecture;
+    $shop['municipality'] = $municipality;
+    $shop['postal_code'] = $postalCode;
+    $shop['location_normalization_status'] = $municipality !== ''
+        ? 'normalized_' . $source
+        : 'review';
+
+    return $shop;
+}
+
 function json_response(array $data, int $status = 200): never
 {
     http_response_code($status);
@@ -169,16 +271,18 @@ function normalize_hours_entries(mixed $entries): array
 
 function normalize_shop_record(array $shop): array
 {
-    $name = trim((string)($shop['name'] ?? $shop['shop_name'] ?? ''));
+    $sourceName = trim((string)($shop['name'] ?? $shop['shop_name'] ?? ''));
     $address = trim((string)($shop['address'] ?? ''));
     if (!isset($shop['id']) || trim((string)$shop['id']) === '') {
         $shop['id'] = trim((string)($shop['shop_id'] ?? ''));
     }
-    if (trim((string)($shop['id'] ?? '')) === '' && $name !== '') {
-        $shop['id'] = deterministic_shop_id($name, $address);
+    if (trim((string)($shop['id'] ?? '')) === '' && $sourceName !== '') {
+        $shop['id'] = deterministic_shop_id($sourceName, $address);
     }
-    $shop['name'] = $name;
+    $shop['name'] = $sourceName;
+    $shop['display_name'] = normalize_display_shop_name($sourceName);
     $shop['address'] = $address;
+    $shop = normalize_shop_location($shop, $address);
     $shop['hours'] = normalize_hours_entries($shop['hours'] ?? []);
     $shop['hours_text'] = trim((string)($shop['hours_text'] ?? ''));
     $shop['hours_status'] = trim((string)($shop['hours_status'] ?? 'unknown')) ?: 'unknown';

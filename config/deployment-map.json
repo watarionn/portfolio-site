@@ -197,6 +197,11 @@
       "id": "download-workbench",
       "sourceRoot": "tools/download-workbench/public",
       "productionRoot": "DOWNLOAD_WORKBENCH"
+    },
+    {
+      "id": "web-extraction-recipes",
+      "sourceRoot": "tools/web-extraction-recipes/public",
+      "productionRoot": "WEB_EXTRACTION_RECIPES"
     }
   ],
   "aliases": [

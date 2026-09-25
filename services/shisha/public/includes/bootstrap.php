@@ -16,6 +16,115 @@ const SHISHA_HOURS_FIELDS = [
     'hours_verified_at',
 ];
 
+
+function shisha_prefecture_codes(): array
+{
+    return [
+        '北海道' => 1, '青森県' => 2, '岩手県' => 3, '宮城県' => 4, '秋田県' => 5,
+        '山形県' => 6, '福島県' => 7, '茨城県' => 8, '栃木県' => 9, '群馬県' => 10,
+        '埼玉県' => 11, '千葉県' => 12, '東京都' => 13, '神奈川県' => 14, '新潟県' => 15,
+        '富山県' => 16, '石川県' => 17, '福井県' => 18, '山梨県' => 19, '長野県' => 20,
+        '岐阜県' => 21, '静岡県' => 22, '愛知県' => 23, '三重県' => 24, '滋賀県' => 25,
+        '京都府' => 26, '大阪府' => 27, '兵庫県' => 28, '奈良県' => 29, '和歌山県' => 30,
+        '鳥取県' => 31, '島根県' => 32, '岡山県' => 33, '広島県' => 34, '山口県' => 35,
+        '徳島県' => 36, '香川県' => 37, '愛媛県' => 38, '高知県' => 39, '福岡県' => 40,
+        '佐賀県' => 41, '長崎県' => 42, '熊本県' => 43, '大分県' => 44, '宮崎県' => 45,
+        '鹿児島県' => 46, '沖縄県' => 47,
+    ];
+}
+
+function prefecture_code(string $prefecture): int
+{
+    return shisha_prefecture_codes()[$prefecture] ?? PHP_INT_MAX;
+}
+
+function postal_location_map(): array
+{
+    static $map = null;
+    if (is_array($map)) {
+        return $map;
+    }
+    $path = __DIR__ . '/postal-location-map.php';
+    $loaded = is_file($path) ? require $path : [];
+    $map = is_array($loaded) ? $loaded : [];
+    return $map;
+}
+
+function extract_postal_code(string $address): string
+{
+    if (preg_match('/〒?\s*(\d{3})[-‐‑‒–—ー−]?\s*(\d{4})/u', $address, $m)) {
+        return $m[1] . $m[2];
+    }
+    return '';
+}
+
+function normalize_display_shop_name(string $value): string
+{
+    if (function_exists('mb_convert_kana')) {
+        $value = mb_convert_kana($value, 'asKV', 'UTF-8');
+    }
+    $value = preg_replace('/[\s　\x{00A0}]+/u', ' ', trim($value)) ?? trim($value);
+    $value = preg_replace('/\s*（\s*/u', '（', $value) ?? $value;
+    $value = preg_replace('/\s*）\s*/u', '）', $value) ?? $value;
+    return trim($value);
+}
+
+function normalize_shop_location(array $shop, string $address): array
+{
+    $rawPrefecture = trim((string)($shop['prefecture'] ?? ''));
+    $rawMunicipality = trim((string)($shop['municipality'] ?? ''));
+    $postalCode = extract_postal_code($address);
+    $postalMap = postal_location_map();
+
+    $prefecture = '';
+    $municipality = '';
+    $source = 'review';
+
+    if ($postalCode !== '' && isset($postalMap[$postalCode]) && is_array($postalMap[$postalCode])) {
+        $prefecture = trim((string)($postalMap[$postalCode][0] ?? ''));
+        $municipality = trim((string)($postalMap[$postalCode][1] ?? ''));
+        $canonicalPostalCode = trim((string)($postalMap[$postalCode][2] ?? $postalCode));
+        if ($canonicalPostalCode !== '' && $canonicalPostalCode !== $postalCode) {
+            $shop['postal_code_raw'] = $postalCode;
+            $postalCode = $canonicalPostalCode;
+            $source = 'postal_corrected';
+        } else {
+            $source = 'postal';
+        }
+    } else {
+        $addressPrefecture = extract_prefecture($address);
+        $addressMunicipality = extract_municipality($address);
+        if ($addressPrefecture !== '') {
+            $prefecture = $addressPrefecture;
+            $source = 'address';
+        } elseif ($rawPrefecture !== '' && isset(shisha_prefecture_codes()[$rawPrefecture])) {
+            $prefecture = $rawPrefecture;
+            $source = 'source';
+        }
+        if ($addressMunicipality !== '' && !preg_match('/[A-Za-z]/', $addressMunicipality)) {
+            $municipality = $addressMunicipality;
+        } elseif ($rawMunicipality !== '' && !preg_match('/[A-Za-z]/', $rawMunicipality)) {
+            $municipality = $rawMunicipality;
+        }
+    }
+
+    if ($rawPrefecture !== '' && $rawPrefecture !== $prefecture) {
+        $shop['prefecture_raw'] = $rawPrefecture;
+    }
+    if ($rawMunicipality !== '' && $rawMunicipality !== $municipality) {
+        $shop['municipality_raw'] = $rawMunicipality;
+    }
+
+    $shop['prefecture'] = $prefecture;
+    $shop['municipality'] = $municipality;
+    $shop['postal_code'] = $postalCode;
+    $shop['location_normalization_status'] = $municipality !== ''
+        ? 'normalized_' . $source
+        : 'review';
+
+    return $shop;
+}
+
 function json_response(array $data, int $status = 200): never
 {
     http_response_code($status);
@@ -167,23 +276,70 @@ function normalize_hours_entries(mixed $entries): array
     return array_values($unique);
 }
 
+function clean_hours_text_for_display(string $text, array $structuredHours): string
+{
+    $text = trim($text);
+    if ($text === '' || in_array(lower_text($text), ['unknown', 'n/a', 'na', 'none', '-'], true)) {
+        return '';
+    }
+    if ($structuredHours !== []) {
+        return '';
+    }
+
+    $text = preg_split('/(?:住所|所在地|電話番号|TEL|アクセス|予約|料金|メニュー|席数)/u', $text, 2)[0] ?? $text;
+    $text = preg_replace('/[\x{00A0}\t\r\n ]+/u', ' ', trim($text)) ?? trim($text);
+    $hasRange = preg_match('/\d{1,2}[：:][0-5]\d.{0,16}?[〜～~\-－—–].{0,16}?(?:翌\s*)?\d{1,2}[：:][0-5]\d/u', $text) === 1;
+    if (!$hasRange) {
+        return '';
+    }
+    if (function_exists('mb_strlen') && mb_strlen($text, 'UTF-8') > 160) {
+        return mb_substr($text, 0, 160, 'UTF-8');
+    }
+    return strlen($text) > 240 ? substr($text, 0, 240) : $text;
+}
+
 function normalize_shop_record(array $shop): array
 {
-    $name = trim((string)($shop['name'] ?? $shop['shop_name'] ?? ''));
+    $sourceName = trim((string)($shop['name'] ?? $shop['shop_name'] ?? ''));
     $address = trim((string)($shop['address'] ?? ''));
     if (!isset($shop['id']) || trim((string)$shop['id']) === '') {
         $shop['id'] = trim((string)($shop['shop_id'] ?? ''));
     }
-    if (trim((string)($shop['id'] ?? '')) === '' && $name !== '') {
-        $shop['id'] = deterministic_shop_id($name, $address);
+    if (trim((string)($shop['id'] ?? '')) === '' && $sourceName !== '') {
+        $shop['id'] = deterministic_shop_id($sourceName, $address);
     }
-    $shop['name'] = $name;
+    $shop['name'] = $sourceName;
+    $shop['display_name'] = normalize_display_shop_name($sourceName);
     $shop['address'] = $address;
+    $shop = normalize_shop_location($shop, $address);
     $shop['hours'] = normalize_hours_entries($shop['hours'] ?? []);
-    $shop['hours_text'] = trim((string)($shop['hours_text'] ?? ''));
+    $sourceHoursText = trim((string)($shop['hours_text'] ?? ''));
+    $cleanHoursText = clean_hours_text_for_display($sourceHoursText, $shop['hours']);
+    if ($sourceHoursText !== '' && $sourceHoursText !== $cleanHoursText) {
+        $shop['hours_text_raw'] = $sourceHoursText;
+    }
+    $shop['hours_text'] = $cleanHoursText;
+    $shop['hours_quality'] = $shop['hours'] !== []
+        ? 'CLEAN'
+        : ($cleanHoursText !== '' ? 'REVIEW' : 'MISSING');
     $shop['hours_status'] = trim((string)($shop['hours_status'] ?? 'unknown')) ?: 'unknown';
     $shop['hours_source_url'] = trim((string)($shop['hours_source_url'] ?? ''));
     $shop['hours_verified_at'] = trim((string)($shop['hours_verified_at'] ?? ''));
+
+    $flags = [];
+    if ($shop['display_name'] !== $sourceName) {
+        $flags[] = 'name_format_normalized';
+    }
+    if (isset($shop['prefecture_raw']) || isset($shop['municipality_raw'])) {
+        $flags[] = 'location_normalized';
+    }
+    if (($shop['location_normalization_status'] ?? '') === 'review') {
+        $flags[] = 'location_review';
+    }
+    if (isset($shop['hours_text_raw']) && $shop['hours_text_raw'] !== $shop['hours_text']) {
+        $flags[] = 'hours_text_sanitized';
+    }
+    $shop['normalization_flags'] = array_values(array_unique($flags));
     return $shop;
 }
 
@@ -246,7 +402,7 @@ function read_shops(): array
             }
         }
 
-        $runtime[$index] = $normalized;
+        $runtime[$index] = normalize_shop_record($normalized);
     }
 
     return array_values($runtime);
@@ -254,17 +410,36 @@ function read_shops(): array
 
 function extract_prefecture(string $address): string
 {
-    if (preg_match('/(北海道|東京都|京都府|大阪府|.{2,3}県)/u', $address, $m)) {
-        return $m[1];
+    foreach (array_keys(shisha_prefecture_codes()) as $prefecture) {
+        if (str_contains($address, $prefecture)) {
+            return $prefecture;
+        }
     }
     return '';
 }
 
 function extract_municipality(string $address): string
 {
-    $rest = preg_replace('/^.*?(?:北海道|東京都|京都府|大阪府|.{2,3}県)/u', '', $address, 1) ?? $address;
-    if (preg_match('/^\s*([^\s,]+?(?:市|区|町|村|郡))/u', $rest, $m)) {
-        return trim($m[1]);
+    $prefecture = extract_prefecture($address);
+    $rest = $address;
+    if ($prefecture !== '') {
+        $position = strpos($address, $prefecture);
+        if ($position !== false) {
+            $rest = substr($address, $position + strlen($prefecture));
+        }
+    }
+    $rest = preg_replace('/^[\s,，]+/u', '', $rest) ?? $rest;
+
+    $patterns = [
+        '/^([^\s,，]+?市[^\s,，]+?区)/u',
+        '/^([^\s,，]+?郡[^\s,，]+?(?:町|村))/u',
+        '/^([^\s,，]+?(?:市|区|町|村))/u',
+    ];
+    foreach ($patterns as $pattern) {
+        if (preg_match($pattern, $rest, $m)) {
+            $candidate = trim($m[1]);
+            return preg_match('/[A-Za-z]/', $candidate) ? '' : $candidate;
+        }
     }
     return '';
 }
@@ -716,31 +891,32 @@ function is_social_url(string $url): bool
 
 function hours_summary(array $shop): string
 {
-    $text = trim((string)($shop['hours_text'] ?? ''));
-    if ($text !== '') {
-        if (function_exists('mb_strlen') && mb_strlen($text, 'UTF-8') > 120) {
-            return mb_substr($text, 0, 117, 'UTF-8') . '…';
-        }
-        return strlen($text) > 180 ? substr($text, 0, 177) . '…' : $text;
-    }
     $entries = normalize_hours_entries($shop['hours'] ?? []);
-    if ($entries === []) {
+    if ($entries !== []) {
+        $dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+        $parts = [];
+        foreach ($entries as $entry) {
+            if ($entry['is_closed']) {
+                continue;
+            }
+            $closePrefix = $entry['closes_next_day'] ? '翌' : '';
+            $parts[] = $dayNames[$entry['day_of_week']] . ' '
+                . $entry['open_time'] . '〜' . $closePrefix . $entry['close_time'];
+            if (count($parts) >= 4) {
+                break;
+            }
+        }
+        return implode(' / ', $parts) . (count($entries) > 4 ? ' ほか' : '');
+    }
+
+    $text = trim((string)($shop['hours_text'] ?? ''));
+    if ($text === '') {
         return '';
     }
-    $dayNames = ['日', '月', '火', '水', '木', '金', '土'];
-    $parts = [];
-    foreach ($entries as $entry) {
-        if ($entry['is_closed']) {
-            continue;
-        }
-        $closePrefix = $entry['closes_next_day'] ? '翌' : '';
-        $parts[] = $dayNames[$entry['day_of_week']] . ' '
-            . $entry['open_time'] . '〜' . $closePrefix . $entry['close_time'];
-        if (count($parts) >= 4) {
-            break;
-        }
+    if (function_exists('mb_strlen') && mb_strlen($text, 'UTF-8') > 120) {
+        return mb_substr($text, 0, 117, 'UTF-8') . '…';
     }
-    return implode(' / ', $parts) . (count($entries) > 4 ? ' ほか' : '');
+    return strlen($text) > 180 ? substr($text, 0, 177) . '…' : $text;
 }
 
 function weekly_open_minutes(array $shop): int

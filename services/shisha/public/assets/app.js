@@ -17,7 +17,7 @@ function formatVerified(value){if(!value)return'';const date=new Date(value);ret
 
 async function init(){
     facets=await requestJson('/api/facets.php');
-    Object.keys(facets.prefectures).forEach(prefecture=>$('#pref').insertAdjacentHTML('beforeend',`<option>${escapeHtml(prefecture)}</option>`));
+    (facets.prefecture_order||Object.keys(facets.prefectures)).forEach(prefecture=>$('#pref').insertAdjacentHTML('beforeend',`<option>${escapeHtml(prefecture)}</option>`));
     $('#pref').onchange=()=>{city='';renderCities();loadLines()};
     $('#line').onchange=loadStations;
     $('#station').onchange=()=>{const option=$('#station').selectedOptions[0];stationCoords=option?.dataset.x?{lng:+option.dataset.x,lat:+option.dataset.y}:null};
@@ -62,12 +62,13 @@ function locate(){
 function buildCard(shop){
     const official=safeUrl(shop.official_url);
     const hoursSource=safeUrl(shop.hours_source_url);
-    const mapUrl='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(shop.address||shop.name);
+    const displayName=shop.display_name||shop.name;
+    const mapUrl='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(shop.address||displayName);
     const openBadge=shop.is_open_at===true?'<span class="badge open">営業中</span>':shop.is_open_at===false?'<span class="badge closed">営業時間外</span>':'';
     const hours=shop.hours_summary?`<p class="hours"><strong>営業時間</strong><br>${escapeHtml(shop.hours_summary)}</p>`:'<p class="hours unknown">営業時間未確認</p>';
     const verified=formatVerified(shop.hours_verified_at);
     const sourceLink=hoursSource?`<a href="${escapeHtml(hoursSource)}" target="_blank" rel="noopener">営業時間の出典</a>`:'';
-    return `<article class="card"><div class="badges"><span class="badge">${escapeHtml(shop.prefecture||'地域未設定')}</span>${openBadge}</div><h2>${escapeHtml(shop.name)}</h2><p class="meta">${escapeHtml(shop.address||'住所未登録')}</p>${hours}${verified?`<p class="verified">営業時間確認: ${escapeHtml(verified)}</p>`:''}${shop.distance_km!=null?`<p><strong>${Number(shop.distance_km).toFixed(2)} km</strong></p>`:''}<div class="actions">${official?`<a href="${escapeHtml(official)}" target="_blank" rel="noopener">公式情報</a>`:''}${sourceLink}<a href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener">地図・経路</a></div></article>`;
+    return `<article class="card"><div class="badges"><span class="badge">${escapeHtml(shop.prefecture||'地域未設定')}</span>${openBadge}</div><h2>${escapeHtml(displayName)}</h2><p class="meta">${escapeHtml(shop.address||'住所未登録')}</p>${hours}${verified?`<p class="verified">営業時間確認: ${escapeHtml(verified)}</p>`:''}${shop.distance_km!=null?`<p><strong>${Number(shop.distance_km).toFixed(2)} km</strong></p>`:''}<div class="actions">${official?`<a href="${escapeHtml(official)}" target="_blank" rel="noopener">公式情報</a>`:''}${sourceLink}<a href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener">地図・経路</a></div></article>`;
 }
 async function search(reset){
     if(loading)return;

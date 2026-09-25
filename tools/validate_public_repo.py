@@ -1,7 +1,4 @@
 from __future__ import annotations
-    if 'class="project-intro"' in shisha_html:
-        raise SystemExit("SHISHA HTML must not contain project-intro sections")
-
 import re
 import subprocess
 from pathlib import Path
@@ -50,8 +47,8 @@ EXPECTED_STAGE9_CHEATSHEET_TREE = "9af9ecef421fcbf7329a9a9c1e23d8a1bae30d9a"
 EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT = 9
 SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
-EXPECTED_STAGE6_SHISHA_TREE = "91979092aa1da3c980ac56fc3bbc95ec1f5bf3af"
-EXPECTED_STAGE6_SHISHA_FILE_COUNT = 13
+EXPECTED_STAGE6_SHISHA_TREE = "23de5a1270d26521d089125cafb806d30cb12b5e"
+EXPECTED_STAGE6_SHISHA_FILE_COUNT = 14
 SECRET_ROOM_ROOT = "apps/secret-room/"
 SECRET_ROOM_PUBLIC_ROOT = "apps/secret-room/public/"
 EXPECTED_STAGE7_SECRET_TREE = "c778ee30cac4737b1a4dcf0aec65241ece41ea20"
@@ -139,23 +136,25 @@ REQUIRED_STAGE6_SHISHA_FILES = {
     "services/shisha/public/advisor/terms.html",
     "services/shisha/public/config.example.php",
     "services/shisha/public/includes/bootstrap.php",
+    "services/shisha/public/includes/postal-location-map.php",
     "services/shisha/public/index.php",
 }
 
 EXPECTED_STAGE6_SHISHA_BLOBS = {
     "services/shisha/public/.htaccess": "6408a95cff1909367a920ad45d4619aafc102641",
-    "services/shisha/public/api/facets.php": "f44c9653fa0ea444af0063f8798dc18dbde65fe3",
-    "services/shisha/public/api/shops.php": "75a58f0ccd33b1f2a38cae1391c8098391d9a5f0",
+    "services/shisha/public/api/facets.php": "47226ce3db95252efbe7031e3a3d8184cf474fda",
+    "services/shisha/public/api/shops.php": "457f0bb7b0e02226a97a5c7635848b40e4c7ccc8",
     "services/shisha/public/api/stations.php": "a8b44997cdcf948d3a2c9f53eff7589ec8ca3199",
     "services/shisha/public/assets/app.css": "6b10095a157c302059c22244a1c22f2ab87091b2",
-    "services/shisha/public/assets/app.js": "155c1fe2d3d79dae11a6c324ff9010ae587e32c0",
+    "services/shisha/public/assets/app.js": "ff3a9afa1a18ffe644648ebfe33ebb65b404630e",
     "services/shisha/public/advisor/advisor.css": "9c5c03343110e75b22a648ea35d418d2161d2068",
     "services/shisha/public/advisor/index.html": "6c9f0b5777751bda689fbcff80e31c93a4e62feb",
     "services/shisha/public/advisor/privacy.html": "fdfff1d200dcab72885442ee87d2afaba2e10500",
     "services/shisha/public/advisor/terms.html": "1362890a443662f7132e205c2b20ced9bf549524",
     "services/shisha/public/config.example.php": "a45bee891e8ea336b414ab415ddf27b22b4faef8",
-    "services/shisha/public/includes/bootstrap.php": "3b2355a4b0f6f3c2a919a0edf42387d6780008d5",
-    "services/shisha/public/index.php": "71c5e564f8a93399dac197cb95d0aa53096c5dbf",
+    "services/shisha/public/includes/bootstrap.php": "d9aa0bbc46216fc3925388cc2c74b50e70e7bf7a",
+    "services/shisha/public/includes/postal-location-map.php": "3d7dc7b3244d0d82bdd4d5bf9ee74c86befb6134",
+    "services/shisha/public/index.php": "0e0b7b5d4e0da13f36c0ee43be87390d4a57eef7",
 }
 
 REQUIRED_STAGE7_SECRET_FILES = {
@@ -429,9 +428,10 @@ def main() -> None:
     ):
         if marker not in shisha_html:
             fail(f"SHISHA Stage 9 presentation/interaction marker missing: {marker}")
+    if 'class="project-intro"' in shisha_html:
+        fail("SHISHA HTML must not contain project-intro sections")
     for marker in (
-        ".site-hero", ".capability-grid", ".workflow-strip",
-        ".live-interface", "@media(max-width:720px)",
+        ".site-hero", ".live-interface", "@media(max-width:720px)",
     ):
         if marker not in shisha_css:
             fail(f"SHISHA Stage 9 responsive marker missing: {marker}")

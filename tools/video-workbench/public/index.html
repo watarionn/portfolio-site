@@ -15,11 +15,25 @@
   <main class="page">
     <header class="title-row">
       <div>
-        <p class="eyebrow">Video Workbench · Python / Desktop / FFmpeg</p>
+        <p class="eyebrow">Video Workbench · Browser + Python / FFmpeg</p>
         <h1>動画ワークベンチ</h1>
       </div>
-      <p class="version">v0.4.0 RC</p>
+      <p class="version">Browser Lab + v0.4.0 RC</p>
     </header>
+
+    <section class="browser-lab" aria-labelledby="browser-heading">
+      <div class="lab-head"><div><p class="eyebrow">BROWSER LAB · LOCAL-FIRST</p><h2 id="browser-heading">ブラウザで動画を切り出す</h2><p>動画を外部へ送信せず、開始・終了位置をプレビューしながら指定できます。第一段階ではブラウザ標準機能で範囲を設計し、書き出し処理は次段階で接続します。</p></div><span class="lab-badge">NEW</span></div>
+      <label class="video-drop" for="videoFile"><input id="videoFile" type="file" accept="video/*"><strong>動画を選ぶ</strong><span>MP4 / WebM / MOV など、ブラウザが再生できる形式</span></label>
+      <div id="browserWorkspace" class="browser-workspace" hidden>
+        <video id="videoPreview" controls playsinline></video>
+        <div class="trim-controls">
+          <label>開始 <input id="trimStart" type="number" min="0" step="0.01" value="0"> 秒 <button type="button" data-mark="start">現在位置</button></label>
+          <label>終了 <input id="trimEnd" type="number" min="0" step="0.01"> 秒 <button type="button" data-mark="end">現在位置</button></label>
+          <div class="range-summary"><span id="videoMeta"></span><strong id="trimSummary"></strong></div>
+          <button id="previewRange" class="lab-button" type="button">指定範囲をプレビュー</button>
+        </div>
+      </div>
+    </section>
 
     <figure class="app-shot">
       <img src="assets/app-screenshot.png" alt="Video Workbenchで範囲カットとフレーム書き出しを設定している画面">
@@ -27,7 +41,7 @@
 
     <section class="intro" aria-labelledby="about-heading">
       <h2 id="about-heading">このツールについて</h2>
-      <p>以前使っていた動画カット用ツールとフレーム書き出し用ツールを、1つのWindowsデスクトップアプリとして再構成しました。動画情報の確認、指定範囲の切り出し、PNG / JPGのフレーム書き出しを同じ画面から操作できます。</p>
+      <p>Windowsデスクトップ版に加えて、Notebookで使っていた動画トリミング処理をブラウザから扱える形へ拡張しています。デスクトップ版は動画情報の確認、指定範囲の切り出し、PNG / JPGのフレーム書き出しを同じ画面から操作できます。</p>
     </section>
 
     <section class="grid" aria-label="主な機能">
@@ -79,5 +93,6 @@
       <a href="/" class="back-link">作品一覧へ戻る</a>
     </footer>
   </main>
+  <script src="browser.js"></script>
 </body>
 </html>

@@ -18,13 +18,17 @@ foreach ($shops as $shop) {
     }
 }
 
-ksort($prefectures, SORT_NATURAL);
+uksort($prefectures, static function (string $a, string $b): int {
+    $codeCompare = prefecture_code($a) <=> prefecture_code($b);
+    return $codeCompare !== 0 ? $codeCompare : strnatcasecmp($a, $b);
+});
 foreach ($municipalities as &$items) {
-    ksort($items, SORT_NATURAL);
+    uksort($items, static fn(string $a, string $b): int => strnatcasecmp($a, $b));
 }
 unset($items);
 
 json_response([
     'prefectures' => $prefectures,
+    'prefecture_order' => array_keys($prefectures),
     'municipalities' => $municipalities,
 ]);

@@ -34,43 +34,6 @@ $base = rtrim((string)($config['base_path'] ?? '/SHISHA'), '/');
 </header>
 
 <main>
-    <section class="project-intro" aria-labelledby="projectTitle">
-        <div class="intro-heading">
-            <p class="section-kicker">WHAT THIS APP DOES</p>
-            <h2 id="projectTitle">探す条件と、情報の確かさを同じ画面で扱う</h2>
-            <p>店舗検索は条件を増やすほど便利になりますが、営業時間のような変化する情報を「未確認」と「閉店中」で混同しないことも重要です。SHISHAでは検索条件と情報の確認状態を分けて扱います。</p>
-        </div>
-        <div class="capability-grid">
-            <article class="capability-card">
-                <span>01</span>
-                <h3>Area &amp; Station</h3>
-                <p>都道府県、市区町村、沿線、駅を組み合わせて段階的に絞り込みます。</p>
-            </article>
-            <article class="capability-card">
-                <span>02</span>
-                <h3>Near Me</h3>
-                <p>ブラウザの現在地、または選択した駅を起点に距離で比較できます。</p>
-            </article>
-            <article class="capability-card">
-                <span>03</span>
-                <h3>Opening Hours</h3>
-                <p>指定日時や「現在営業中」で、確認済み営業時間をもつ店舗だけを判定します。</p>
-            </article>
-            <article class="capability-card">
-                <span>04</span>
-                <h3>Source Tracking</h3>
-                <p>営業時間の確認日と出典を結果に残し、情報の鮮度を追える形にしています。</p>
-            </article>
-        </div>
-        <div class="workflow-strip" aria-label="検索の流れ">
-            <div><small>STEP 1</small><strong>場所を選ぶ</strong><span>地域 / 駅 / 現在地</span></div>
-            <i aria-hidden="true">→</i>
-            <div><small>STEP 2</small><strong>条件を重ねる</strong><span>店名 / 日時 / 半径</span></div>
-            <i aria-hidden="true">→</i>
-            <div><small>STEP 3</small><strong>根拠ごと比較</strong><span>距離 / 営業時間 / 更新日</span></div>
-        </div>
-    </section>
-
     <section class="live-interface" id="collector" aria-labelledby="liveTitle">
         <div class="live-heading">
             <div>

@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "policy": "Japanese primary display name; English/technical secondary name. Routes and internal IDs remain unchanged.",
+  "works": [
+    {
+      "number": "000",
+      "projectId": "yorei",
+      "japaneseName": "用例採集",
+      "englishName": "Corpus Collector",
+      "route": "/YOREI/yorei.html"
+    },
+    {
+      "number": "001",
+      "projectId": "holoscope",
+      "japaneseName": "ホロライブEN観測所",
+      "englishName": "HoloScope",
+      "route": "/holoscope/"
+    },
+    {
+      "number": "002",
+      "projectId": "shisha",
+      "japaneseName": "シーシャ店舗検索",
+      "englishName": "SHISHA Search",
+      "route": "/SHISHA/"
+    },
+    {
+      "number": "003",
+      "projectId": "aquarium",
+      "japaneseName": "水族館",
+      "englishName": "AQUARIUM",
+      "route": "/AQUARIUM/aquarium.php"
+    },
+    {
+      "number": "004",
+      "projectId": "dqb2",
+      "japaneseName": "DQB2 部屋レシピ図鑑",
+      "englishName": "DQB2 Room Recipe Field Guide",
+      "route": "/DQB2/dqb2.html"
+    },
+    {
+      "number": "005",
+      "projectId": "holoca",
+      "japaneseName": "ホロカ デッキラボ",
+      "englishName": "HOLOCA Deck Lab",
+      "route": "/HOLOCA/holoca.html"
+    },
+    {
+      "number": "006",
+      "projectId": "sphere",
+      "japaneseName": "天球儀",
+      "englishName": "Sphere Blueprint Generator",
+      "route": "/SPHERE/sphere.html"
+    },
+    {
+      "number": "007",
+      "projectId": "prime-dot-art",
+      "japaneseName": "素数点画",
+      "englishName": "Prime Dot Art",
+      "route": "/PRIME_DOT_ART/prime_dot_art.html"
+    },
+    {
+      "number": "008",
+      "projectId": "madori",
+      "japaneseName": "間取図メーカー",
+      "englishName": "Floor Plan Maker",
+      "route": "/MADORI/madori.html"
+    },
+    {
+      "number": "009",
+      "projectId": "actress-finder",
+      "japaneseName": "人物索引",
+      "englishName": "Person Index",
+      "route": "/OTHER/actress_finder.html"
+    },
+    {
+      "number": "010",
+      "projectId": "word-generator",
+      "japaneseName": "ボードゲーム単語集",
+      "englishName": "Word Draw Table",
+      "route": "/WORD_GENERATOR/word_generator.html"
+    },
+    {
+      "number": "011",
+      "projectId": "maze-maker",
+      "japaneseName": "迷路作成補助器",
+      "englishName": "Maze Draft Board",
+      "route": "/MAZE_MAKER/maze_maker.html"
+    },
+    {
+      "number": "012",
+      "projectId": "anagram",
+      "japaneseName": "アナグラム補助器",
+      "englishName": "Letter Workbench",
+      "route": "/ANAGRAM/anagram.html"
+    },
+    {
+      "number": "013",
+      "projectId": "cheatsheet",
+      "japaneseName": "技術早見表",
+      "englishName": "Cheat Sheet Tables",
+      "route": "/CHEATSHEET/"
+    },
+    {
+      "number": "014",
+      "projectId": "mindmap-maker",
+      "japaneseName": "マインドマップメーカー",
+      "englishName": "MindMap Maker",
+      "route": "/MINDMAP_MAKER/"
+    },
+    {
+      "number": "015",
+      "projectId": "ai-creation-workbench",
+      "japaneseName": "AI制作ワークベンチ",
+      "englishName": "AI Creation Workbench",
+      "route": "/AI_CREATION_WORKBENCH/"
+    },
+    {
+      "number": "016",
+      "projectId": "video-workbench",
+      "japaneseName": "動画ワークベンチ",
+      "englishName": "Video Workbench",
+      "route": "/VIDEO_WORKBENCH/"
+    },
+    {
+      "number": "017",
+      "projectId": "mkpdf-studio",
+      "japaneseName": "PDF制作スタジオ",
+      "englishName": "mkPDF Studio",
+      "route": "/MKPDF_STUDIO/"
+    },
+    {
+      "number": "018",
+      "projectId": "s3-upload-audit",
+      "japaneseName": "S3アップロード監査",
+      "englishName": "S3 Upload Audit",
+      "route": "/S3_UPLOAD_AUDIT/"
+    },
+    {
+      "number": "019",
+      "projectId": "project-snapshot-generator",
+      "japaneseName": "プロジェクトスナップショット生成ツール",
+      "englishName": "Project Snapshot Generator",
+      "route": "/PROJECT_SNAPSHOT_GENERATOR/"
+    },
+    {
+      "number": "020",
+      "projectId": "media-collector",
+      "japaneseName": "メディア収集ツール",
+      "englishName": "Media Collector",
+      "route": "/MEDIA_COLLECTOR/"
+    },
+    {
+      "number": "021",
+      "projectId": "download-workbench",
+      "japaneseName": "ダウンロードワークベンチ",
+      "englishName": "Download Workbench",
+      "route": "/DOWNLOAD_WORKBENCH/"
+    },
+    {
+      "number": "022",
+      "projectId": "web-extraction-recipes",
+      "japaneseName": "Web抽出レシピ",
+      "englishName": "Web Extraction Recipes",
+      "route": "/WEB_EXTRACTION_RECIPES/"
+    },
+    {
+      "number": "023",
+      "projectId": "shisha-advisor",
+      "japaneseName": "シーシャアドバイザー",
+      "englishName": "Shisha Advisor",
+      "route": "/SHISHA/advisor/index.html"
+    },
+    {
+      "number": "024",
+      "projectId": "legal-knowledge-base",
+      "japaneseName": "法令ナレッジベース",
+      "englishName": "Legal Knowledge Base",
+      "route": "/LEGAL_KNOWLEDGE_BASE/"
+    },
+    {
+      "number": "025",
+      "projectId": "pose-library-manager",
+      "japaneseName": "ポーズライブラリ管理",
+      "englishName": "Pose Library Manager",
+      "route": "/POSE_LIBRARY_MANAGER/"
+    },
+    {
+      "number": "026",
+      "projectId": "python-music-lab",
+      "japaneseName": "Python作曲研究所",
+      "englishName": "Non-Generative Composer",
+      "route": "/PYTHON_MUSIC_LAB/"
+    }
+  ]
+}

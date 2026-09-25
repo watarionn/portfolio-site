@@ -28,8 +28,8 @@ require_once __DIR__ . '/helpers.php';
 <header class="site-header">
     <div class="shell header-inner">
         <a class="brand brand-lockup" href="/holoscope/">
-            <span class="brand-lockup__name">HoloScope</span>
-            <span class="brand-lockup__sub">ホロライブEN観測所</span>
+            <span class="brand-lockup__name">ホロライブEN観測所</span>
+            <span class="brand-lockup__sub">HoloScope</span>
         </a>
         <nav class="site-primary-nav" aria-label="主要ナビゲーション">
             <a href="/holoscope/streams/">配信</a>

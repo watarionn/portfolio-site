@@ -24,8 +24,8 @@ foreach ($countDefinitions as $key => $label) {
 <section class="home-hero-v2">
     <div class="home-hero-v2__identity">
         <p class="eyebrow">HOLOLIVE EN OBSERVATORY</p>
-        <h1>HoloScope</h1>
-        <p class="home-hero-v2__label">ホロライブEN観測所</p>
+        <h1>ホロライブEN観測所</h1>
+        <p class="home-hero-v2__label">HoloScope</p>
         <p class="home-hero-v2__description">配信の要点、見どころ、関連する人物・ゲーム・企画を記録しています。</p>
         <div class="actions">
             <a class="button" href="/holoscope/streams/">配信記事を見る</a>

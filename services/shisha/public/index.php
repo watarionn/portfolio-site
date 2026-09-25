@@ -10,14 +10,14 @@ $base = rtrim((string)($config['base_path'] ?? '/SHISHA'), '/');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="地域・駅・現在地・営業日時から全国のシーシャ店舗を探せる、検索とデータ整備を組み合わせた店舗検索ツール。">
-    <title>SHISHA 店舗検索 — Search & Data Maintenance</title>
+    <title>シーシャ店舗検索 | SHISHA Search</title>
     <link rel="stylesheet" href="<?=htmlspecialchars($base, ENT_QUOTES, 'UTF-8')?>/assets/app.css">
 </head>
 <body>
 <header class="site-hero">
     <div class="hero-shell">
         <div class="hero-copy">
-            <p class="eyebrow">STAGE 9 / SHISHA STORE FINDER</p>
+            <p class="eyebrow">SHISHA Search / STAGE 9 STORE FINDER</p>
             <h1>シーシャ店舗検索</h1>
             <p class="hero-lead">地域・駅・現在地・営業日時という複数の入口から、目的に合う店舗へ辿り着くための検索ツールです。検索画面だけでなく、営業時間の確認日や出典を扱うデータ整備の考え方まで含めて設計しています。</p>
             <div class="hero-actions">

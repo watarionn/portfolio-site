@@ -20,7 +20,7 @@ def forbid(text: str, source: str, label: str) -> None:
         errors.append(f"forbidden {label}: {text!r}")
 
 
-require("<title>素数点画 — 風花理珠</title>", HTML, "public work title")
+require("<title>素数点画 | Prime Dot Art</title>", HTML, "public work title")
 require('id="settingsToggle"', HTML, "mobile settings disclosure")
 require('aria-controls="settings"', HTML, "settings disclosure target")
 require('id="savePngBtn"', HTML, "PNG export control")

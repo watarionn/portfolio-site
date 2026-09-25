@@ -1,4 +1,5 @@
 from __future__ import annotations
+import json
 import re
 import subprocess
 from pathlib import Path
@@ -6,6 +7,7 @@ from pathlib import Path
 from validate_holoscope_release import validate_holoscope_release
 
 ROOT = Path(__file__).resolve().parents[1]
+DISPLAY_NAME_CONFIG = ROOT / "config/portfolio-display-names.json"
 
 FORBIDDEN_EXACT = {
     ".env",
@@ -40,14 +42,14 @@ HOLOCA_PUBLIC_ROOT = "services/holoca/public/"
 HOLOSCOPE_ROOT = "services/holoscope/"
 HOLOSCOPE_PUBLIC_ROOT = "services/holoscope/public/"
 HOLOSCOPE_RELEASE_ROOT = "services/holoscope/release/"
-EXPECTED_STAGE5_HOLOSCOPE_TREE = "91ad6e1661ecc4136dcc1a682c337b83e543b3f5"
+EXPECTED_STAGE5_HOLOSCOPE_TREE = "144ed236221e74ded0d1d7f3176039c4cbf61e3a"
 EXPECTED_STAGE5_HOLOSCOPE_FILE_COUNT = 86
 CHEATSHEET_ROOT = "tools/cheatsheet/"
 EXPECTED_STAGE9_CHEATSHEET_TREE = "9af9ecef421fcbf7329a9a9c1e23d8a1bae30d9a"
 EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT = 9
 SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
-EXPECTED_STAGE6_SHISHA_TREE = "4faa8608c6f80a0a314c6d80a7f2f955fb6740ce"
+EXPECTED_STAGE6_SHISHA_TREE = "26a7508f532842ab7a355b501d1c26a89937e200"
 EXPECTED_STAGE6_SHISHA_FILE_COUNT = 14
 SECRET_ROOM_ROOT = "apps/secret-room/"
 SECRET_ROOM_PUBLIC_ROOT = "apps/secret-room/public/"
@@ -118,9 +120,9 @@ REQUIRED_STAGE4_HOLOCA_FILES = {
 EXPECTED_STAGE4_HOLOCA_BLOBS = {
     "services/holoca/public/card_search_api.php": "ac4194259e1bfdec98f25ba8a4c904fbd073cb2e",
     "services/holoca/public/holoca.css": "0020d0bf35b18ea9946f7c90ec7db4a0df604002",
-    "services/holoca/public/holoca.html": "9f84e1d6889192605066fde21c09eb8d9e5f85d2",
+    "services/holoca/public/holoca.html": "02eb47013930b19da91af62e0a665dec8c4a3be2",
     "services/holoca/public/holoca.js": "0ca68949ebbea99ff676bf764f8d9a8e73c1a575",
-    "services/holoca/public/index.html": "9f84e1d6889192605066fde21c09eb8d9e5f85d2",
+    "services/holoca/public/index.html": "02eb47013930b19da91af62e0a665dec8c4a3be2",
 }
 
 REQUIRED_STAGE6_SHISHA_FILES = {
@@ -148,13 +150,13 @@ EXPECTED_STAGE6_SHISHA_BLOBS = {
     "services/shisha/public/assets/app.css": "6b10095a157c302059c22244a1c22f2ab87091b2",
     "services/shisha/public/assets/app.js": "ff3a9afa1a18ffe644648ebfe33ebb65b404630e",
     "services/shisha/public/advisor/advisor.css": "9c5c03343110e75b22a648ea35d418d2161d2068",
-    "services/shisha/public/advisor/index.html": "6c9f0b5777751bda689fbcff80e31c93a4e62feb",
+    "services/shisha/public/advisor/index.html": "ccc8c4f58d3a6738734ec936c4758049178bdb18",
     "services/shisha/public/advisor/privacy.html": "fdfff1d200dcab72885442ee87d2afaba2e10500",
     "services/shisha/public/advisor/terms.html": "1362890a443662f7132e205c2b20ced9bf549524",
     "services/shisha/public/config.example.php": "a45bee891e8ea336b414ab415ddf27b22b4faef8",
     "services/shisha/public/includes/bootstrap.php": "b022d49bf3d156a5c00931a6fcfa85457e6d2397",
     "services/shisha/public/includes/postal-location-map.php": "dd058d818928bc73bac1ea90bcbdb97ddea41703",
-    "services/shisha/public/index.php": "0e0b7b5d4e0da13f36c0ee43be87390d4a57eef7",
+    "services/shisha/public/index.php": "21bb2ce12b53b895e8eeb5811c3d0f787122adf6",
 }
 
 REQUIRED_STAGE7_SECRET_FILES = {
@@ -238,6 +240,39 @@ def git_tree_sha(rel_path: str) -> str:
 
 
 def main() -> None:
+    display_name_config = json.loads(DISPLAY_NAME_CONFIG.read_text(encoding="utf-8"))
+    display_works = display_name_config.get("works", [])
+    if display_name_config.get("schemaVersion") != 1 or not isinstance(display_works, list):
+        fail("portfolio display-name config schema is invalid")
+    seen_numbers: set[str] = set()
+    seen_ids: set[str] = set()
+    seen_routes: set[str] = set()
+    portfolio_index = (ROOT / "index.html").read_text(encoding="utf-8")
+    expected_count_marker = f'<span id="projectCount">{len(display_works)}</span>'
+    if expected_count_marker not in portfolio_index:
+        fail(f"portfolio projectCount does not match display-name config: expected {len(display_works)}")
+    for work in display_works:
+        if not isinstance(work, dict):
+            fail("portfolio display-name entry must be an object")
+        number = str(work.get("number", ""))
+        project_id = str(work.get("projectId", ""))
+        japanese_name = str(work.get("japaneseName", ""))
+        english_name = str(work.get("englishName", ""))
+        route = str(work.get("route", ""))
+        if not all((number, project_id, japanese_name, english_name, route)):
+            fail(f"portfolio display-name entry has blank fields: {work!r}")
+        if number in seen_numbers or project_id in seen_ids or route in seen_routes:
+            fail(f"portfolio display-name entry is duplicated: {work!r}")
+        seen_numbers.add(number)
+        seen_ids.add(project_id)
+        seen_routes.add(route)
+        row_marker = f'href="{route}" role="listitem"><span>{number}</span><strong>{japanese_name}</strong>'
+        if row_marker not in portfolio_index:
+            fail(
+                "portfolio index display-name mismatch: "
+                f"{number} {japanese_name} ({project_id})"
+            )
+
     tracked = tracked_paths()
     tracked_rel = {path.relative_to(ROOT).as_posix() for path in tracked}
 
@@ -609,7 +644,7 @@ def main() -> None:
     actress_html = (ROOT / "tools/actress-finder/index.html").read_text(encoding="utf-8")
     actress_js = (ROOT / "tools/actress-finder/actress_finder.js").read_text(encoding="utf-8")
     actress_css = (ROOT / "tools/actress-finder/actress_finder.css").read_text(encoding="utf-8")
-    for marker in ("ACTRESS INDEX / RECOMMENDATION BRIEF", 'id="build-brief"', 'id="result-json"'):
+    for marker in ("Person Index / Recommendation Brief", 'id="build-brief"', 'id="result-json"'):
         if marker not in actress_html:
             fail(f"Actress Finder Stage 9 presentation marker missing: {marker}")
     for marker in ("function buildPrompt()", "function parseSuggestions(value)", "resultList.replaceChildren", "new URLSearchParams"):

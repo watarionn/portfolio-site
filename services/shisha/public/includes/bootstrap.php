@@ -227,6 +227,178 @@ function deterministic_shop_id(string $name, string $address): string
     );
 }
 
+function normalize_shop_identity(array $shop): array
+{
+    $name = trim((string)($shop['name'] ?? ''));
+    $url = strtolower(trim((string)($shop['official_url'] ?? '')));
+    $host = strtolower((string)parse_url($url, PHP_URL_HOST));
+    $host = preg_replace('/^www\\./', '', $host) ?? $host;
+    $prefecture = trim((string)($shop['prefecture'] ?? ''));
+    $municipality = trim((string)($shop['municipality'] ?? ''));
+    $canonical = $name;
+    $branch = '';
+
+    $branchFromUrl = static function (string $url, array $patterns): string {
+        foreach ($patterns as $needle => $label) {
+            if ($url !== '' && str_contains($url, $needle)) {
+                return $label;
+            }
+        }
+        return '';
+    };
+
+    if ($host === 'c-stand-shisha.com') {
+        $canonical = 'C.STAND';
+        $branch = $branchFromUrl($url, [
+            '/sapporo-susukino/' => '札幌すすきの店',
+            '/kawaguchi/' => '川口店',
+            '/ueno/en_us/' => '上野店',
+            '/ebisu/' => '恵比寿店',
+            '/naha-matsuyama/' => '那覇松山店',
+            '/yamato/' => '大和店',
+            '/kagoshima/' => '鹿児島店',
+            '/ueno-ameyoko/' => '上野アメ横店',
+            '/blog/post-0/923/' => 'なんば道頓堀店',
+            '/ueno-okachimachi/' => '上野御徒町店',
+            '/sakae-hanare/' => '栄はなれ店',
+            '/umeda-chayamachi/' => '梅田茶屋町店',
+            '/machida/' => '町田店',
+            '/tenjin-daimyo/' => '天神大名店',
+            '/akihabara/' => '秋葉原店',
+            '/sendai-kokubuncho/' => '仙台国分町店',
+            '/nagoya-sakae/' => '名古屋栄店',
+            '/yokohama/' => '横浜西口店',
+            '/chiba/' => '千葉店',
+            '/kanda/' => '神田北口店',
+            '/nagoya-meieki/' => '名古屋駅東口店',
+            '/namba/' => '難波店',
+            '/shibuya-markcity/' => '渋谷マークシティ横店',
+            '/shibuya/' => '渋谷センター街店',
+            '/umeda/' => '梅田東通り商店街店',
+            '/kyoto-kawaramachi/' => '京都河原町店',
+            '/shinsaibashi/' => '心斎橋店',
+            '/koriyama/' => '郡山店',
+            '/omiya/' => '大宮南銀座通り店',
+            '/kumamoto/' => '熊本下通店',
+        ]);
+        if ($branch === '' && str_contains($url, '/kyushu-area/')
+            && $prefecture === '福岡県' && str_contains($municipality, '博多')) {
+            $branch = '中洲店';
+        } elseif ($branch === '' && str_contains($url, '/koushinetsu-area/')
+            && $prefecture === '新潟県') {
+            $branch = '新潟店';
+        }
+    } elseif ($host === 'museshisha.jp') {
+        $canonical = 'muse';
+        foreach ([
+            '札幌店' => '札幌店',
+            '横浜桜木町店' => '横浜桜木町店',
+            '三宮店' => '三宮店',
+            '下北沢店' => '下北沢店',
+            '名古屋店' => '名古屋店',
+            '梅田店' => '梅田店',
+            '静岡店' => '静岡店',
+            '渋谷道玄坂店' => '渋谷道玄坂店',
+            'Shibuya Shoto Branch' => '渋谷松濤店',
+            'Roppongi store' => '六本木店',
+        ] as $needle => $label) {
+            if (stripos($name, $needle) !== false) {
+                $branch = $label;
+                break;
+            }
+        }
+        if ($branch === '' && strcasecmp($name, 'Muse') === 0
+            && $prefecture === '大阪府' && str_contains($municipality, '阿倍野')) {
+            $branch = '天王寺店';
+        } elseif ($branch === '' && strcasecmp($name, 'Muse') === 0
+            && $prefecture === '広島県' && str_contains($municipality, '中区')) {
+            $branch = '広島店';
+        }
+    } elseif ($host === 'musch.jp') {
+        $canonical = 'musch';
+        foreach ([
+            '札幌すすきの中央店' => '札幌すすきの中央店',
+            '札幌すすきの店' => '札幌すすきの店',
+            'Osaka Shinsaibashi' => '心斎橋店',
+            '博多中洲店' => '博多中洲店',
+            '天神大名店' => '天神大名店',
+            '梅田HEP前店' => '梅田HEP前店',
+            'Miyashita Park' => '宮下パーク店',
+            'shibuya dogenzaka' => '渋谷道玄坂店',
+            '梅田曽根崎店' => '梅田曽根崎店',
+        ] as $needle => $label) {
+            if (stripos($name, $needle) !== false) {
+                $branch = $label;
+                break;
+            }
+        }
+    } elseif ($host === 'cxs-bar.com') {
+        $canonical = 'C.S.B';
+        $branch = $branchFromUrl($url, [
+            '/namba/' => '難波店',
+            '/ohatsutenjin/' => 'お初天神店',
+            '/shinsaibashi/' => '心斎橋店',
+            '/tennouji/' => '天王寺店',
+        ]);
+    } elseif ($host === 'enma-shisha.com') {
+        $canonical = '煙間 -ENMA-';
+        $branch = $branchFromUrl($url, [
+            '/ebisu/' => '恵比寿店',
+            '/shibuya-center/' => '渋谷店',
+            '/dotonbori/' => '難波店',
+            '/yaesu/' => '東京駅八重洲店',
+            '/fukuoka-tenjin/' => '天神大名店',
+            '/shinjuku-nishi/' => '新宿西口店',
+        ]);
+    } elseif ($host === 'appareshisha.jp') {
+        $canonical = 'Appare Shisha';
+        $branch = $branchFromUrl($url, [
+            '/amemura.html' => 'アメ村店',
+            '/kyobashi.html' => '京橋店',
+            '/umeda.html' => '梅田店',
+        ]);
+        if ($branch === '' && str_contains($name, '札幌1号店')) {
+            $branch = '札幌1号店';
+        }
+    } elseif ($host === 'shisha-ras.com') {
+        $canonical = 'Shisha Cafe RAS';
+        $branch = $branchFromUrl($url, [
+            '/shops/daimyo/' => '博多・大名店',
+            '/shops/hokkaido-sapporo/' => '札幌店',
+            '/shops/umeda-annex/' => '梅田ANNEX',
+        ]);
+        if ($branch === '' && str_contains($name, '難波店')) {
+            $branch = '難波店';
+        }
+    } elseif ($host === 'shisha.tokyo' && stripos($name, 'NORTH') !== false) {
+        $canonical = 'NORTH VILLAGE';
+        foreach ([
+            'DROPOUT渋谷店' => 'DROPOUT渋谷店',
+            'Dōgenzaka' => '道玄坂店',
+            'VIP渋谷店' => 'VIP渋谷店',
+            '渋谷道玄坂小路店' => '渋谷道玄坂小路店',
+            'Dotonbori' => '道頓堀店',
+            '京都本店' => '京都本店',
+            'Shibuya UDA River City' => '渋谷UDA River City店',
+        ] as $needle => $label) {
+            if (stripos($name, $needle) !== false) {
+                $branch = $label;
+                break;
+            }
+        }
+    } elseif (preg_match('/^(.+?)[（(]([^()（）]*店)[）)]$/u', $name, $m)) {
+        $canonical = trim($m[1]);
+        $branch = trim($m[2]);
+    }
+
+    $shop['canonical_name'] = $canonical;
+    $shop['branch_name'] = $branch;
+    $shop['display_name'] = $branch !== ''
+        ? $canonical . '（' . $branch . '）'
+        : normalize_display_shop_name($name);
+    return $shop;
+}
+
 function normalize_hours_entries(mixed $entries): array
 {
     if (!is_array($entries)) {
@@ -309,9 +481,9 @@ function normalize_shop_record(array $shop): array
         $shop['id'] = deterministic_shop_id($sourceName, $address);
     }
     $shop['name'] = $sourceName;
-    $shop['display_name'] = normalize_display_shop_name($sourceName);
     $shop['address'] = $address;
     $shop = normalize_shop_location($shop, $address);
+    $shop = normalize_shop_identity($shop);
     $shop['hours'] = normalize_hours_entries($shop['hours'] ?? []);
     $sourceHoursText = trim((string)($shop['hours_text'] ?? ''));
     $cleanHoursText = clean_hours_text_for_display($sourceHoursText, $shop['hours']);

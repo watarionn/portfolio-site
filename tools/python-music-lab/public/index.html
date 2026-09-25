@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python作曲研究所 | Non-Generative Composer</title>
+  <meta name="description" content="Pythonでルールベース作曲、候補生成・評価、自作Synth、Filter・Delay・Reverb・Mixまでを一貫して行う作曲研究プロジェクト。">
+  <meta property="og:title" content="Python作曲研究所">
+  <meta property="og:description" content="生成AIを使わず、Pythonのルールと音響処理から47.4秒の完成音源まで生成するNon-Generative Composer v1.0。">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="english-name">Non-Generative Composer v1.0</p>
+        <h1>Python作曲研究所</h1>
+        <p class="lead">音楽理論とルール、Seed、候補評価、自作Synthを組み合わせ、MIDIから完成音源までPythonで組み立てる作曲研究プロジェクトです。</p>
+      </div>
+      <div class="status">
+        <span>Completed baseline</span>
+        <strong>Non-Generative Composer v1.0</strong>
+      </div>
+    </header>
+
+    <section class="player-panel" aria-labelledby="sample-title">
+      <div class="player-copy">
+        <p class="kicker">LISTEN / PHASE 03B</p>
+        <h2 id="sample-title">完成音源を聴く</h2>
+        <p>ルールベースで生成したMIDIを、自作SynthとFilter / Delay / Reverb / Track Mixでレンダリングした完成サンプルです。この掲載音源には生成AIを使用していません。</p>
+      </div>
+      <div class="player">
+        <audio id="compositionAudio" controls preload="metadata">
+          <source src="assets/best_candidate_preview.ogg" type="audio/ogg">
+          お使いのブラウザはaudio要素に対応していません。
+        </audio>
+        <div class="section-jumps" aria-label="曲構成へ移動">
+          <button type="button" data-seek="0"><span>A</span><small>0:00</small></button>
+          <button type="button" data-seek="15"><span>B</span><small>0:15</small></button>
+          <button type="button" data-seek="30"><span>Chorus</span><small>0:30</small></button>
+        </div>
+        <div class="song-timeline" aria-hidden="true">
+          <span class="section-a">A</span>
+          <span class="section-b">B</span>
+          <span class="section-chorus">Chorus</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="完成音源の実データ">
+      <article><strong>128</strong><span>BPM</span></article>
+      <article><strong>47.4</strong><span>seconds</span></article>
+      <article><strong>614</strong><span>notes</span></article>
+      <article><strong>44.1k</strong><span>Hz / Stereo</span></article>
+    </section>
+
+    <section class="process-section" aria-labelledby="process-title">
+      <div class="section-heading">
+        <p>COMPOSITION PIPELINE</p>
+        <h2 id="process-title">曲ができるまで</h2>
+      </div>
+      <ol class="pipeline">
+        <li><span>01</span><strong>Seed</strong><p>同じSeedなら同じ曲を再現できる状態から開始。</p></li>
+        <li><span>02</span><strong>Compose</strong><p>モチーフ、A/B/Chorus、調性、和音、リズム文法からMIDIを構成。</p></li>
+        <li><span>03</span><strong>Evaluate</strong><p>複数候補を自動評価し、人間が最終候補を選択。</p></li>
+        <li><span>04</span><strong>Synth</strong><p>Python自作SynthでBass / Chords / Drums / Melodyを実音源化。</p></li>
+        <li><span>05</span><strong>Mix &amp; FX</strong><p>Filter、Delay、Reverb、Track Mix、normalizationを適用。</p></li>
+        <li><span>06</span><strong>Export</strong><p>WAV / OGG / 静的JSONとして書き出し、Webでも再生可能に。</p></li>
+      </ol>
+    </section>
+
+    <section class="analysis-grid" aria-label="曲の構造とトラック">
+      <article class="track-card">
+        <p class="kicker">TRACK NOTE DISTRIBUTION</p>
+        <h2>4トラック / 614ノート</h2>
+        <div class="track-row"><span>Bass</span><div><i style="width:31%"></i></div><b>96</b></div>
+        <div class="track-row"><span>Chords</span><div><i style="width:23%"></i></div><b>72</b></div>
+        <div class="track-row"><span>Drums</span><div><i style="width:100%"></i></div><b>311</b></div>
+        <div class="track-row"><span>Melody</span><div><i style="width:43%"></i></div><b>135</b></div>
+      </article>
+      <article class="structure-card">
+        <p class="kicker">MUSICAL STRUCTURE</p>
+        <h2>ルールで「曲らしさ」を作る</h2>
+        <ul>
+          <li>Major / Minorとカデンツ</li>
+          <li>モチーフの反復と変化</li>
+          <li>A / B / Chorusのセクション構造</li>
+          <li>非和声音を含むメロディ生成</li>
+          <li>候補生成とスコアリング</li>
+          <li>人間による最終採用</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="boundary" aria-labelledby="boundary-title">
+      <div>
+        <p class="kicker">PROJECT BOUNDARY</p>
+        <h2 id="boundary-title">完成系統と研究中の系統を分ける</h2>
+      </div>
+      <div class="boundary-copy">
+        <p><strong>完成済み:</strong> Non-Generative Composer v1.0。生成AIなしで、ルール作曲からMIDI、自作Synth、実音源まで独立して動作します。</p>
+        <p><strong>研究中:</strong> 別経路として生成AIレンダリング連携も検証中です。既存の作曲ロジックを置き換えず、演奏・音色・アレンジ候補を追加する研究として分離しています。</p>
+      </div>
+    </section>
+
+    <section class="download" aria-labelledby="download-title">
+      <div>
+        <p class="kicker">ARCHIVE / v0.6.0</p>
+        <h2 id="download-title">完成ベースライン</h2>
+        <p>ソース、テスト、MIDI、WAV、OGG、manifestを含むNon-Generative Composer v1.0完成時点のアーカイブです。</p>
+        <code>SHA-256: 5f58f4424a242a27ceb8c5e9309c9c3fb02f01c7f46fd06b24157ed4b3181442</code>
+      </div>
+      <a class="download-button" href="downloads/python-music-lab_v0.6.0.zip" download>v0.6.0 ZIP</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Japanese name</dt><dd>Python作曲研究所</dd></div>
+      <div><dt>English name</dt><dd>Non-Generative Composer</dd></div>
+      <div><dt>v1 completed</dt><dd>2026-09-18</dd></div>
+      <div><dt>Stack</dt><dd>Python / MIDI / custom Synth / DSP / FFmpeg</dd></div>
+      <div><dt>Audio</dt><dd>44.1 kHz stereo / 47.4 sec / OGG + WAV</dd></div>
+    </dl>
+
+    <footer><a href="/" class="back-link">作品一覧へ戻る</a></footer>
+  </main>
+</body>
+</html>

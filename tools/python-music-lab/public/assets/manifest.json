@@ -1,0 +1,248 @@
+{
+  "schema_version": 2,
+  "generator": "Python Music Lab Phase 03B",
+  "source_midi": "output/phase02b/best_candidate.mid",
+  "source_midi_sha256": "32605a3e39c7e6a5dee2a3beb3e164bc6094818a6cb7e1569974356a3d0cef5e",
+  "wav_file": "best_candidate_master.wav",
+  "wav_sha256": "50bbb0fbed18633a51bfe996ad4ceb5891ad09fb6edbefb0a1baca46f2461d3d",
+  "wav_size_bytes": 8361404,
+  "ogg_file": "best_candidate_preview.ogg",
+  "ogg": {
+    "available": true,
+    "created": true,
+    "encoder": "ffmpeg/libvorbis",
+    "quality": 4.0,
+    "sha256": "16406a33e6c9fc447cee577ae1c5b0c8aea759fc5c891f717c4fe5e68acd8e75",
+    "size_bytes": 659221,
+    "error": null
+  },
+  "bpm": 128.0,
+  "ticks_per_beat": 480,
+  "section_markers": [
+    {
+      "tick": 0,
+      "start_seconds": 0.0,
+      "label": "A"
+    },
+    {
+      "tick": 15360,
+      "start_seconds": 15.0,
+      "label": "B"
+    },
+    {
+      "tick": 30720,
+      "start_seconds": 30.0,
+      "label": "Chorus"
+    }
+  ],
+  "render": {
+    "sample_rate": 44100,
+    "channels": 2,
+    "frames": 2090340,
+    "duration_seconds": 47.4,
+    "source_peak": 0.74504672,
+    "output_peak": 0.92,
+    "rms": 0.14407636,
+    "normalization_gain": 1.23482189,
+    "note_count": 614,
+    "crest_factor_db": 16.103902
+  },
+  "track_stats": {
+    "Bass": {
+      "notes": 96,
+      "peak_pre_master": 0.18922795,
+      "rms_pre_master": 0.05730737,
+      "gain": 0.96
+    },
+    "Chords": {
+      "notes": 72,
+      "peak_pre_master": 0.14368451,
+      "rms_pre_master": 0.01974809,
+      "gain": 0.88
+    },
+    "Drums": {
+      "notes": 311,
+      "peak_pre_master": 0.52465954,
+      "rms_pre_master": 0.05380238,
+      "gain": 0.82
+    },
+    "Melody": {
+      "notes": 135,
+      "peak_pre_master": 0.09994982,
+      "rms_pre_master": 0.02249713,
+      "gain": 1.0
+    }
+  },
+  "track_note_counts": {
+    "Bass": 96,
+    "Chords": 72,
+    "Drums": 311,
+    "Melody": 135
+  },
+  "synthesis": {
+    "voices": {
+      "Melody": {
+        "gain": 0.2,
+        "pan": 0.12,
+        "adsr": {
+          "attack": 0.01,
+          "decay": 0.09,
+          "sustain": 0.66,
+          "release": 0.22
+        },
+        "layers": [
+          {
+            "waveform": "saw",
+            "amplitude": 0.74,
+            "octave": 0,
+            "detune_cents": -3.5
+          },
+          {
+            "waveform": "saw",
+            "amplitude": 0.74,
+            "octave": 0,
+            "detune_cents": 3.5
+          },
+          {
+            "waveform": "sine",
+            "amplitude": 0.32,
+            "octave": 1,
+            "detune_cents": 0.0
+          }
+        ],
+        "lowpass_hz": 5600.0,
+        "lowpass_stages": 2
+      },
+      "Chords": {
+        "gain": 0.14,
+        "pan": -0.18,
+        "adsr": {
+          "attack": 0.05,
+          "decay": 0.18,
+          "sustain": 0.52,
+          "release": 0.38
+        },
+        "layers": [
+          {
+            "waveform": "triangle",
+            "amplitude": 1.0,
+            "octave": 0,
+            "detune_cents": 0.0
+          },
+          {
+            "waveform": "sine",
+            "amplitude": 0.36,
+            "octave": 1,
+            "detune_cents": 0.0
+          }
+        ],
+        "lowpass_hz": 3300.0,
+        "lowpass_stages": 2
+      },
+      "Bass": {
+        "gain": 0.24,
+        "pan": 0.0,
+        "adsr": {
+          "attack": 0.006,
+          "decay": 0.11,
+          "sustain": 0.7,
+          "release": 0.15
+        },
+        "layers": [
+          {
+            "waveform": "square",
+            "amplitude": 0.42,
+            "octave": 0,
+            "detune_cents": 0.0
+          },
+          {
+            "waveform": "sine",
+            "amplitude": 1.0,
+            "octave": 0,
+            "detune_cents": 0.0
+          },
+          {
+            "waveform": "sine",
+            "amplitude": 0.18,
+            "octave": -1,
+            "detune_cents": 0.0
+          }
+        ],
+        "lowpass_hz": 1450.0,
+        "lowpass_stages": 2
+      }
+    },
+    "track_gain": {
+      "Melody": 1.0,
+      "Chords": 0.88,
+      "Bass": 0.96,
+      "Drums": 0.82
+    },
+    "filter": "deterministic moving-average low-pass",
+    "delay": {
+      "enabled": true,
+      "tracks": [
+        "Melody"
+      ],
+      "taps": [
+        {
+          "delay_ms": 180,
+          "gain": 0.12,
+          "crossfeed": true
+        },
+        {
+          "delay_ms": 360,
+          "gain": 0.065,
+          "crossfeed": false
+        }
+      ]
+    },
+    "reverb": {
+      "enabled": true,
+      "tracks": [
+        "Melody",
+        "Chords",
+        "Drums"
+      ],
+      "taps": [
+        {
+          "delay_ms": 43,
+          "gain": 0.07,
+          "crossfeed": true
+        },
+        {
+          "delay_ms": 71,
+          "gain": 0.055,
+          "crossfeed": false
+        },
+        {
+          "delay_ms": 113,
+          "gain": 0.045,
+          "crossfeed": true
+        },
+        {
+          "delay_ms": 181,
+          "gain": 0.032,
+          "crossfeed": false
+        },
+        {
+          "delay_ms": 293,
+          "gain": 0.022,
+          "crossfeed": true
+        }
+      ]
+    },
+    "master_saturation_drive": 1.15,
+    "normalization": "peak normalization"
+  },
+  "portfolio_ready": true,
+  "browser_playback": [
+    "OGG/Vorbis",
+    "WAV"
+  ],
+  "portfolio_preferred_audio": "best_candidate_preview.ogg",
+  "reproducibility": {
+    "wav": "byte-level deterministic for identical input/config/runtime",
+    "ogg": "encoder-dependent; manifest records exact artifact hash"
+  }
+}

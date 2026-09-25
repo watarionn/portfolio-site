@@ -22,7 +22,7 @@
     </header>
 
     <section class="browser-lab" aria-labelledby="browser-heading">
-      <div class="lab-head"><div><p class="eyebrow">BROWSER LAB · LOCAL-FIRST</p><h2 id="browser-heading">ブラウザで動画を切り出す</h2><p>動画を外部へ送信せず、開始・終了位置をプレビューしながら指定できます。第一段階ではブラウザ標準機能で範囲を設計し、書き出し処理は次段階で接続します。</p></div><span class="lab-badge">NEW</span></div>
+      <div class="lab-head"><div><p class="eyebrow">BROWSER LAB · LOCAL-FIRST</p><h2 id="browser-heading">ブラウザで動画を切り出す</h2><p>動画を外部へ送信せず、開始・終了位置をプレビューしながら指定して、その範囲をWebMとして書き出せます。ブラウザが再生・記録できる形式を利用します。</p></div><span class="lab-badge">NEW</span></div>
       <label class="video-drop" for="videoFile"><input id="videoFile" type="file" accept="video/*"><strong>動画を選ぶ</strong><span>MP4 / WebM / MOV など、ブラウザが再生できる形式</span></label>
       <div id="browserWorkspace" class="browser-workspace" hidden>
         <video id="videoPreview" controls playsinline></video>
@@ -30,8 +30,16 @@
           <label>開始 <input id="trimStart" type="number" min="0" step="0.01" value="0"> 秒 <button type="button" data-mark="start">現在位置</button></label>
           <label>終了 <input id="trimEnd" type="number" min="0" step="0.01"> 秒 <button type="button" data-mark="end">現在位置</button></label>
           <div class="range-summary"><span id="videoMeta"></span><strong id="trimSummary"></strong></div>
-          <button id="previewRange" class="lab-button" type="button">指定範囲をプレビュー</button>
+          <button id="previewRange" class="lab-button" type="button">指定範囲をプレビュー</button><button id="exportRange" class="lab-button" type="button">指定範囲を書き出す</button><p id="exportStatus" class="export-status" aria-live="polite"></p>
         </div>
+      </div>
+      <div class="combine-lab">
+        <h3>動画を結合</h3>
+        <p>複数の動画を順番に並べ、ひとつのWebMへ録画します。各クリップはブラウザ内だけで処理されます。</p>
+        <label class="video-drop compact" for="combineFiles"><input id="combineFiles" type="file" accept="video/*" multiple><strong>結合する動画を選ぶ</strong><span>複数選択可</span></label>
+        <ol id="combineList" class="combine-list"></ol>
+        <button id="combineExport" class="lab-button" type="button" disabled>この順番で結合して書き出す</button>
+        <p id="combineStatus" class="export-status" aria-live="polite"></p>
       </div>
     </section>
 

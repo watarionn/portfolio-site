@@ -190,6 +190,13 @@
       "japaneseName": "Python作曲研究所",
       "englishName": "Non-Generative Composer",
       "route": "/PYTHON_MUSIC_LAB/"
+    },
+    {
+      "number": "027",
+      "projectId": "image-studio",
+      "japaneseName": "画像仕立て室",
+      "englishName": "Image Studio",
+      "route": "/IMAGE_STUDIO/"
     }
   ]
 }

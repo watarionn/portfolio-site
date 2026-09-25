@@ -134,6 +134,11 @@
       "productionRoot": "WORD_GENERATOR"
     },
     {
+      "id": "image-studio",
+      "sourceRoot": "tools/image-studio",
+      "productionRoot": "IMAGE_STUDIO"
+    },
+    {
       "id": "dqb2",
       "sourceRoot": "works/dqb2",
       "productionRoot": "DQB2"

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web Extraction Recipes</title>
+  <meta name="description" content="HTMLから必要な情報をJSON Recipeで抽出し、ローカルHTMLや公開ページへ再利用できるWindows向け抽出ツール。">
+  <meta property="og:title" content="Web Extraction Recipes">
+  <meta property="og:description" content="抽出規則とHTTP取得ポリシーを分離した、再利用可能なHTML Extraction Workbench。">
+  <meta property="og:image" content="assets/og-preview.png">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">Python / Tkinter / HTML / HTTP</p>
+        <h1>Web Extraction Recipes</h1>
+      </div>
+      <p class="version">v0.4.0 RC</p>
+    </header>
+
+    <figure class="app-shot">
+      <img src="assets/app-screenshot.png" alt="Web Extraction RecipesでローカルHTML抽出とHTTP Crawlの設定を表示している実アプリ画面">
+    </figure>
+
+    <section class="intro" aria-labelledby="about-heading">
+      <h2 id="about-heading">このツールについて</h2>
+      <p>以前使っていたサイト別の抽出スクリプトを、抽出規則をJSON Recipeとして保存する方式へ作り直したWindows向けツールです。ローカルHTMLの解析を基本にしつつ、許可のある公開ページでは一覧ページから詳細ページへ巡回し、同じRecipeを再利用できます。</p>
+    </section>
+
+    <section class="grid" aria-label="主な機能">
+      <article>
+        <h2>Recipe-based extraction</h2>
+        <p>繰り返し要素、text、attribute、相対URL、正規表現などの抽出規則をJSONとして保存し、別HTMLへ再利用できます。</p>
+      </article>
+      <article>
+        <h2>Offline first</h2>
+        <p>保存済みHTMLだけで抽出・Preview・TSV / CSV / JSON出力まで完結します。UTF-8とCP932入力にも対応します。</p>
+      </article>
+      <article>
+        <h2>List → Detail Crawl</h2>
+        <p>一覧ページからdetail URLを収集し、詳細HTMLへ既存Recipeを適用します。source_url / detail_urlも結果へ残します。</p>
+      </article>
+      <article>
+        <h2>Reusable Workbench</h2>
+        <p>GUIでRecipeの編集・検証・保存、抽出Preview、HTTP Crawl、結果保存を一つの画面から扱えます。</p>
+      </article>
+    </section>
+
+    <section class="safety" aria-labelledby="safety-heading">
+      <h2 id="safety-heading">HTTP取得の境界</h2>
+      <ul>
+        <li>HTTP / HTTPSのみを対象にし、URLへ埋め込まれたusername / passwordを拒否</li>
+        <li>robots.txtを尊重し、same-origin・1秒間隔・retry・max_pagesを既定で有効化</li>
+        <li>localhost、private IP、link-localなどは既定でブロック</li>
+        <li>HTML / XHTMLのみ、1レスポンス最大4 MiB</li>
+        <li>CookieやAuthorizationを付与せず、ブラウザプロファイルやログイン状態を読み込まない</li>
+        <li>CAPTCHA、paywall、DRM、access-controlの回避を実装しない</li>
+      </ul>
+    </section>
+
+    <section class="download" aria-labelledby="download-heading">
+      <div>
+        <h2 id="download-heading">Download</h2>
+        <p>Windows向けソースRelease Candidateです。Python 3.10以上とTkinterを使用し、抽出・HTTP取得コアはPython標準ライブラリだけで動作します。</p>
+      </div>
+      <a class="download-button" href="downloads/web-extraction-recipes-0.4.0-rc.1-source.zip" download>v0.4.0 RC ZIP</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Release</dt><dd>2026-09-25</dd></div>
+      <div><dt>SHA-256</dt><dd><code>aee4ef8a20881fce177ed07439779e7baaa6f4397db253f032714eb7647f937f</code></dd></div>
+      <div><dt>Checksum</dt><dd><a href="downloads/SHA256.txt">SHA256.txt</a></dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/watarionn/web-extraction-recipes">GitHub / watarionn/web-extraction-recipes</a></dd></div>
+      <div><dt>Runtime</dt><dd>Python / Tkinter / standard-library HTTP</dd></div>
+    </dl>
+
+    <footer>
+      <a href="/" class="back-link">作品一覧へ戻る</a>
+    </footer>
+  </main>
+</body>
+</html>

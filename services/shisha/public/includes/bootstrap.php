@@ -318,6 +318,21 @@ function normalize_shop_record(array $shop): array
     $shop['hours_status'] = trim((string)($shop['hours_status'] ?? 'unknown')) ?: 'unknown';
     $shop['hours_source_url'] = trim((string)($shop['hours_source_url'] ?? ''));
     $shop['hours_verified_at'] = trim((string)($shop['hours_verified_at'] ?? ''));
+
+    $flags = [];
+    if ($shop['display_name'] !== $sourceName) {
+        $flags[] = 'name_format_normalized';
+    }
+    if (isset($shop['prefecture_raw']) || isset($shop['municipality_raw'])) {
+        $flags[] = 'location_normalized';
+    }
+    if (($shop['location_normalization_status'] ?? '') === 'review') {
+        $flags[] = 'location_review';
+    }
+    if (isset($shop['hours_text_raw']) && $shop['hours_text_raw'] !== $shop['hours_text']) {
+        $flags[] = 'hours_text_sanitized';
+    }
+    $shop['normalization_flags'] = array_values(array_unique($flags));
     return $shop;
 }
 

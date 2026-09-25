@@ -83,7 +83,14 @@ function normalize_shop_location(array $shop, string $address): array
     if ($postalCode !== '' && isset($postalMap[$postalCode]) && is_array($postalMap[$postalCode])) {
         $prefecture = trim((string)($postalMap[$postalCode][0] ?? ''));
         $municipality = trim((string)($postalMap[$postalCode][1] ?? ''));
-        $source = 'postal';
+        $canonicalPostalCode = trim((string)($postalMap[$postalCode][2] ?? $postalCode));
+        if ($canonicalPostalCode !== '' && $canonicalPostalCode !== $postalCode) {
+            $shop['postal_code_raw'] = $postalCode;
+            $postalCode = $canonicalPostalCode;
+            $source = 'postal_corrected';
+        } else {
+            $source = 'postal';
+        }
     } else {
         $addressPrefecture = extract_prefecture($address);
         $addressMunicipality = extract_municipality($address);

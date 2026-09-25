@@ -263,6 +263,8 @@
   ],
   "retiredRemotePaths": [
     "CHARACTER",
-    "public_html"
+    "public_html",
+    "HOLOCA/scraper_runner.php",
+    "HOLOCA/ability_repair.php"
   ]
 }

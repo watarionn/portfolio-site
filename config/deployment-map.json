@@ -212,6 +212,11 @@
       "id": "pose-library-manager",
       "sourceRoot": "tools/pose-library-manager/public",
       "productionRoot": "POSE_LIBRARY_MANAGER"
+    },
+    {
+      "id": "python-music-lab",
+      "sourceRoot": "tools/python-music-lab/public",
+      "productionRoot": "PYTHON_MUSIC_LAB"
     }
   ],
   "aliases": [

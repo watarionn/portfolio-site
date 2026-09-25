@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "project": "Python作曲研究所",
+  "phase": "03B",
+  "title": "Phase 03B Best Candidate",
+  "duration_seconds": 47.4,
+  "sources": [
+    {
+      "src": "best_candidate_preview.ogg",
+      "type": "audio/ogg",
+      "role": "preferred"
+    },
+    {
+      "src": "best_candidate_master.wav",
+      "type": "audio/wav",
+      "role": "fallback"
+    }
+  ],
+  "sections": [
+    {
+      "tick": 0,
+      "start_seconds": 0.0,
+      "label": "A"
+    },
+    {
+      "tick": 15360,
+      "start_seconds": 15.0,
+      "label": "B"
+    },
+    {
+      "tick": 30720,
+      "start_seconds": 30.0,
+      "label": "Chorus"
+    }
+  ],
+  "metadata": {
+    "bpm": 128.0,
+    "source_midi_sha256": "32605a3e39c7e6a5dee2a3beb3e164bc6094818a6cb7e1569974356a3d0cef5e",
+    "audio_manifest": "manifest.json"
+  }
+}

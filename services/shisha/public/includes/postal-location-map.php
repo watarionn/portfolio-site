@@ -688,4 +688,12 @@ return [
     '9940025' => ['山形県', '天童市'],
     '9970034' => ['山形県', '鶴岡市'],
     '9980044' => ['山形県', '酒田市'],
+    '2220072' => ['神奈川県', '横浜市西区', '2200072'], // source postal typo corrected
+    '2920138' => ['千葉県', '市川市', '2720138'], // source postal typo corrected
+    '3140172' => ['茨城県', '神栖市', '3140127'], // source postal typo corrected
+    '3340016' => ['埼玉県', '川口市', '3320016'], // source postal typo corrected
+    '5320083' => ['大阪府', '大阪市中央区', '5420083'], // source postal typo corrected
+    '5420804' => ['大阪府', '大阪市中央区', '5420084'], // source postal typo corrected
+    '5731006' => ['大阪府', '枚方市', '5731106'], // source postal typo corrected
+    '8408024' => ['佐賀県', '佐賀市', '8400824'], // source postal typo corrected
 ];

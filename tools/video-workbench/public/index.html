@@ -35,10 +35,10 @@
       </div>
       <div class="combine-lab">
         <h3>動画を結合</h3>
-        <p>複数動画の結合は、コンテナを壊さず再エンコードできるブラウザ処理エンジンを接続してから有効化します。現在は入力順の確認まで実装しています。</p>
+        <p>複数動画をブラウザ版FFmpegで同じ映像・音声形式へ正規化してから連結します。処理エンジンは必要なときだけ読み込み、動画自体は外部へ送信しません。</p>
         <label class="video-drop compact" for="combineFiles"><input id="combineFiles" type="file" accept="video/*" multiple><strong>結合する動画を選ぶ</strong><span>複数選択可</span></label>
         <ol id="combineList" class="combine-list"></ol>
-        <button id="combineExport" class="lab-button" type="button" disabled>結合書き出し（準備中）</button>
+        <button id="loadFfmpeg" class="lab-button" type="button">結合エンジンを読み込む（約31MB）</button><button id="combineExport" class="lab-button" type="button" disabled>この順番で結合してMP4を書き出す</button>
         <p id="combineStatus" class="export-status" aria-live="polite"></p>
       </div>
     </section>
@@ -101,6 +101,8 @@
       <a href="/" class="back-link">作品一覧へ戻る</a>
     </footer>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.15/dist/umd/ffmpeg.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.2/dist/umd/index.js"></script>
   <script src="browser.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 from __future__ import annotations
+    if 'class="project-intro"' in shisha_html:
+        raise SystemExit("SHISHA HTML must not contain project-intro sections")
 
 import re
 import subprocess
@@ -419,7 +421,7 @@ def main() -> None:
     shisha_html = (ROOT / "services/shisha/public/index.php").read_text(encoding="utf-8")
     shisha_css = (ROOT / "services/shisha/public/assets/app.css").read_text(encoding="utf-8")
     for marker in (
-        'class="project-intro"', 'id="collector"', 'id="liveTitle"',
+        'id="collector"', 'id="liveTitle"',
         'id="pref"', 'id="cities"', 'id="line"', 'id="station"',
         'id="query"', 'id="openAt"', 'id="openNow"', 'id="near"',
         'id="radius"', 'id="search"', 'id="count"', 'id="sort"',

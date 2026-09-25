@@ -26,7 +26,7 @@ $totalFish = count($fishRows);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AQUARIUM — 魚の名前を読む</title>
+  <title>水族館 | AQUARIUM</title>
   <meta name="description" content="魚の漢字名と読みを、検索しながらめくって確かめるフィールドインデックス。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@ $totalFish = count($fishRows);
     <div class="hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">AQUARIUM / FISH NAME ARCHIVE</p>
-        <h1><span class="title-en">AQUARIUM</span></h1>
+        <h1>水族館</h1>
         <p class="hero-lead">漢字で出会って、読みをめくる。魚名と読みを往復しながら探せる、小さな水中フィールドインデックスです。</p>
       </div>
 

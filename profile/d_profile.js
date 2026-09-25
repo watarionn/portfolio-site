@@ -1,43 +1,48 @@
 'use strict';
 
-/* ─── ノイズキャンバス ─── */
-(function initNoise() {
-  const canvas = document.getElementById('noiseCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const img  = ctx.createImageData(canvas.width, canvas.height);
-    const data = img.data;
-    for (let i = 0; i < data.length; i += 4) {
-      const v = (Math.random() * 255) | 0;
-      data[i] = data[i+1] = data[i+2] = v;
-      data[i+3] = 255;
-    }
-    ctx.putImageData(img, 0, 0);
-  }
-  window.addEventListener('resize', resize);
-  resize();
+(function setCurrentYear() {
+  const node = document.getElementById('currentYear');
+  if (node) node.textContent = String(new Date().getFullYear());
 })();
 
-/* ─── スクロールアニメーション ─── */
-(function initScrollReveal() {
-  if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.entry').forEach(function(el) {
-      el.classList.add('is-visible');
-    });
-    return;
-  }
-  const obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      obs.unobserve(entry.target);
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+(function initSectionNavigation() {
+  const links = Array.from(document.querySelectorAll('.profile-nav a[href^="#"]'));
+  if (!links.length || !('IntersectionObserver' in window)) return;
 
-  document.querySelectorAll('.entry').forEach(function(el) {
-    obs.observe(el);
+  const byId = new Map(
+    links.map(function(link) {
+      return [link.getAttribute('href').slice(1), link];
+    })
+  );
+
+  const sections = Array.from(byId.keys())
+    .map(function(id) { return document.getElementById(id); })
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  function setCurrent(id) {
+    links.forEach(function(link) {
+      if (link === byId.get(id)) {
+        link.setAttribute('aria-current', 'true');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver(function(entries) {
+    const visible = entries
+      .filter(function(entry) { return entry.isIntersecting; })
+      .sort(function(a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+
+    if (visible.length) setCurrent(visible[0].target.id);
+  }, {
+    rootMargin: '-18% 0px -68% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(function(section) {
+    observer.observe(section);
   });
 })();

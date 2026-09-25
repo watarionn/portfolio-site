@@ -3,377 +3,359 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>詳細自己紹介 — 風花理珠</title>
+  <meta name="description" content="Web、データ、自動化、検索、表現を横断して制作するシステムエンジニア watarionn のプロフィール。">
+  <title>プロフィール | 個人大辞典</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="d_profile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="d_profile.css?v=20260925-profile-refresh">
 </head>
 <body>
+  <a class="skip-link" href="#main">本文へ移動</a>
 
-  <div class="paper-lines" aria-hidden="true"></div>
-  <canvas class="noise-canvas" id="noiseCanvas" aria-hidden="true"></canvas>
-
-  <div class="top-band" aria-hidden="true">
-    <span class="band-text">ふ</span>
-    <span class="band-rule"></span>
-    <span class="band-text-en">FU</span>
+  <div class="edition-rail" aria-hidden="true">
+    <span>個人大辞典</span>
+    <span class="edition-rail__rule"></span>
+    <span>PERSONAL ENCYCLOPEDIA</span>
   </div>
 
-  <header role="banner">
-    <a href="/" class="home-btn" aria-label="ホームへ戻る">← ホーム</a>
-    <div class="header-center">
-      <div class="edition-label">詳細自己紹介 / Personal Encyclopedia</div>
-      <h1>
-        <ruby><rb>風花　理珠</rb><rt>ふうか　りず</rt></ruby>
-      </h1>
-      <p class="header-sub">Liz Hookah — Frontend Engineer</p>
+  <header class="masthead" id="top">
+    <div class="masthead__bar page-shell">
+      <a class="wordmark" href="/" aria-label="個人大辞典のトップページへ戻る">
+        <span class="wordmark__jp">個人大辞典</span>
+        <span class="wordmark__en">Personal Encyclopedia</span>
+      </a>
+      <p class="masthead__edition">Profile / Revised 2026</p>
     </div>
-    <div aria-hidden="true"></div>
   </header>
 
-  <main role="main">
+  <nav class="profile-nav" aria-label="プロフィール内の主要セクション">
+    <div class="page-shell profile-nav__inner">
+      <a href="#what">What I Make</a>
+      <a href="#skills">Works & Skills</a>
+      <a href="#now">Now</a>
+      <a href="#background">Background</a>
+      <a href="#values">Values</a>
+      <a href="#links">Links</a>
+      <span class="profile-nav__page" aria-hidden="true">PROFILE</span>
+    </div>
+  </nav>
 
-    <!-- ===== 好：好みの事物 ===== -->
-    <section class="dict-section" id="sec-like" aria-labelledby="sec-like-heading">
-      <div class="section-header">
-        <div class="section-kana" aria-hidden="true">好</div>
-        <div class="section-title-wrap">
-          <h2 class="section-title" id="sec-like-heading">好みの事物</h2>
-          <span class="section-title-en">Preferences</span>
-        </div>
-        <div class="section-rule" aria-hidden="true"></div>
+  <main id="main">
+    <section class="profile-intro page-shell" aria-labelledby="profile-title">
+      <div class="profile-intro__label">
+        <span>PROFILE</span>
+        <span>00</span>
       </div>
-
-      <!-- 音楽 -->
-      <article class="entry" id="entry-music">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">好-001</span>
-          <div class="entry-yomi">
-            <ruby><rb>音楽</rb><rt>おんがく</rt></ruby>
-          </div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition">好みの歌手として<em>EXILE</em>を挙ぐ。特に好きな楽曲は『DIAMOND』</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition">サンリオのキャラクターとしては<em>エスプレッソ</em>を愛す。自信家にしておちゃめなその性格に親しみを覚える由。</p>
-          </div>
+      <div class="profile-intro__body">
+        <div>
+          <p class="profile-intro__eyebrow">System Engineer / Developer</p>
+          <h1 id="profile-title">watarionn</h1>
         </div>
-      </article>
-
-      <!-- 映像作品 -->
-      <article class="entry" id="entry-drama">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">好-002</span>
-          <div class="entry-yomi">
-            <ruby><rb>映像作品</rb><rt>えいぞうさくひん</rt></ruby>
-          </div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition">邦ドラマの好みは<em>「流星の絆」「ライアーゲーム」</em>。いずれも謀略と知略が絡まる作品であり、謎解き好きの性質と符合する。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition">洋ドラとしては米国の青春音楽ドラマ<em>「VICTORIOUS」</em>を好む。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❸</span>
-            <p class="definition">英国BBCドラマ<em>「SHERLOCK」</em>（ベネディクト・カンバーバッチ主演）は繰り返し視聴。シャーロック・ホームズ作品全般を愛す。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❹</span>
-            <p class="definition"><em>「ハリー・ポッター」</em>シリーズを偏愛す。とりわけ「秘密の部屋」「アズカバンの囚人」「炎のゴブレット」を愛し、劇中の<em>「必要の部屋」</em>に入室を望む。</p>
-          </div>
+        <div class="profile-intro__copy">
+          <p class="profile-intro__lead">システムエンジニア 4年。Web、データ、自動化、検索、表現をまたぎながら、自分で使いたい仕組みを実際に使える形まで作っています。</p>
+          <p>個人開発では、情報を集める・整理する・探せるようにする仕組みや、制作そのものを助ける道具を中心に制作。完成品だけでなく、その裏側の運用や改善まで含めて育てていくことが多いです。</p>
         </div>
-      </article>
-
-      <!-- ゲーム -->
-      <article class="entry" id="entry-game">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">好-003</span>
-          <div class="entry-yomi">遊戯</div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition">好むゲームを列挙すれば枚挙に暇なし。以下に主要なものを記す。</p>
-          </div>
-          <ul class="entry-list">
-            <li><em>ポケモンコロシアム</em>、ポケットモンスターシリーズ</li>
-            <li><em>スローンとマクヘールの謎の物語</em></li>
-            <li><em>逆転裁判</em>シリーズ</li>
-            <li><em>レイトン教授</em>シリーズ</li>
-            <li><em>グランド・セフト・オートV</em></li>
-            <li><em>龍が如く</em>シリーズ</li>
-            <li><em>リトルビッグプラネット</em></li>
-            <li><em>サルゲッチュ</em></li>
-          </ul>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition">手持ちポケモンとして、<em>カイリュー・ブラッキー・エーフィ・サーナイト・メタグロス・ダークライ</em>を挙ぐ。いずれも一廉の理由あり。</p>
-          </div>
+      </div>
+      <dl class="profile-facts">
+        <div>
+          <dt>ROLE</dt>
+          <dd>System Engineer</dd>
         </div>
-      </article>
-
-      <!-- 漫画・アニメ -->
-      <article class="entry" id="entry-anime">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">好-004</span>
-          <div class="entry-yomi">
-            <ruby><rb>漫画・動画</rb><rt>まんが・アニメ</rt></ruby>
-          </div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition"><em>「鋼の錬金術師」</em>を好む。とりわけ<em>オリヴィエ・ミラ・アームストロング</em>に傾倒す。その芯の強さと格好よさを称える。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition"><em>BLEACH</em>では<em>朽木ルキア</em>を好む。始解「袖白雪（そでのしらゆき）」、卍解「白霞罸（はっかのとがめ）」にも深い愛着あり。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❸</span>
-            <p class="definition"><em>NARUTO</em>では<em>山中いの</em>を好む。友情の熱さを高く評価す。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❹</span>
-            <p class="definition"><em>ドラゴンボール</em>では<em>孫悟飯・グレートサイヤマン・ヤジロベー</em>を好む。ヒーロー的憧れをそこに見出す。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❺</span>
-            <p class="definition"><em>僕のヒーローアカデミア</em>では<em>八百万百</em>を好む。自信のなさを克服し強くなる姿に共鳴す。</p>
-          </div>
+        <div>
+          <dt>FOCUS</dt>
+          <dd>Web / Data / Automation / Creative</dd>
         </div>
-      </article>
-
-      <!-- 料理 -->
-      <article class="entry" id="entry-food">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">好-005</span>
-          <div class="entry-yomi">
-            <ruby><rb>食</rb><rt>しょく</rt></ruby>
-          </div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition">好む料理は<em>中華料理</em>。なかでも<em>春巻き・餃子・小籠包</em>を特に愛す。</p>
-          </div>
+        <div>
+          <dt>STYLE</dt>
+          <dd>Build, use, refine.</dd>
         </div>
-      </article>
-
-      <!-- 動画 -->
-      <article class="entry" id="entry-youtube">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">好-006</span>
-          <div class="entry-yomi">
-            <ruby><rb>動画配信</rb><rt>どうがはいしん</rt></ruby>
-          </div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition">好むYouTuberとして<em>QuizKnock</em>・<em>ゆる言語学ラジオ</em>を挙ぐ。知的好奇心との親和性高し。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition">好むVTuberを以下に列挙す。</p>
-          </div>
-          <ul class="entry-list entry-list--vtuber">
-            <li>儒烏風亭らでん</li>
-            <li>轟はじめ</li>
-            <li>音乃瀬奏</li>
-            <li>一条莉々華</li>
-            <li>大空スバル</li>
-            <li>白銀ノエル</li>
-            <li>Nerissa Ravencroft</li>
-            <li>でびでび・でびる</li>
-            <li>ルンルン</li>
-            <li>司賀りこ</li>
-            <li>町田ちま</li>
-            <li>ジョー・力一</li>
-            <li>佐伯イッテツ</li>
-          </ul>
-        </div>
-      </article>
+      </dl>
     </section>
 
-    <!-- ===== 歴：来歴 ===== -->
-    <section class="dict-section" id="sec-history" aria-labelledby="sec-history-heading">
-      <div class="section-header">
-        <div class="section-kana" aria-hidden="true">歴</div>
-        <div class="section-title-wrap">
-          <h2 class="section-title" id="sec-history-heading">来　歴</h2>
-          <span class="section-title-en">History</span>
+    <section class="profile-section page-shell" id="what" aria-labelledby="what-title">
+      <header class="section-heading">
+        <div class="section-heading__number">01</div>
+        <div>
+          <p class="section-heading__kana">WHAT I MAKE</p>
+          <h2 id="what-title">何を作っているか</h2>
         </div>
-        <div class="section-rule" aria-hidden="true"></div>
-      </div>
+        <p class="section-heading__note">4 fields</p>
+      </header>
 
-      <article class="entry" id="entry-school">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">歴-001</span>
-          <div class="entry-yomi">
-            <ruby><rb>学歴</rb><rt>がくれき</rt></ruby>
+      <div class="make-grid">
+        <article class="make-card">
+          <p class="make-card__code">WEB</p>
+          <h3>Web Applications</h3>
+          <p>ブラウザ上で触って使えるアプリや、情報へ自然に辿り着けるインターフェース。</p>
+          <div class="make-card__examples">
+            <a href="/YOREI/yorei.html">用例採集 ↗</a>
+            <a href="/holoscope/">HoloScope ↗</a>
           </div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition">出身高校は<em>六甲アイランド</em>（神戸市の人工島）所在の公立単位制高校。服装規定は上衣自由・下衣指定という変則的制度を採る。授業構成を自ら設計できる自由度の高い学校環境にあった。</p>
+        </article>
+
+        <article class="make-card">
+          <p class="make-card__code">DATA</p>
+          <h3>Data & Search</h3>
+          <p>集めた情報を構造化し、検索・比較・探索できる形にするデータベースや検索基盤。</p>
+          <div class="make-card__examples">
+            <a href="/SHISHA/">シーシャ店舗検索 ↗</a>
+            <a href="/LEGAL_KNOWLEDGE_BASE/">法令ナレッジベース ↗</a>
           </div>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition">中学・高校時代は<em>吹奏楽部</em>に所属し、<em>ユーフォニアム・トロンボーン・ホルン</em>の三種を経験。高校途中より<em>コンピューター部</em>に転部し、のちに部長を務む。</p>
+        </article>
+
+        <article class="make-card">
+          <p class="make-card__code">AUTO</p>
+          <h3>Automation</h3>
+          <p>収集、変換、監査、整理など、繰り返し作業を安全に省力化するための道具。</p>
+          <div class="make-card__examples">
+            <a href="/PROJECT_SNAPSHOT_GENERATOR/">Project Snapshot ↗</a>
+            <a href="/WEB_EXTRACTION_RECIPES/">Web抽出レシピ ↗</a>
           </div>
-          <div class="def-block">
-            <span class="def-mark">❸</span>
-            <p class="definition">最初の制作物は<em>VisualBasic</em>にて作成した脱出ゲーム。フロントエンドエンジニアとしての原点はここに発す。</p>
+        </article>
+
+        <article class="make-card">
+          <p class="make-card__code">CREATE</p>
+          <h3>Creative Tools</h3>
+          <p>描く、組む、鳴らす、考えるといった制作工程を補助する実験的なツール。</p>
+          <div class="make-card__examples">
+            <a href="/MINDMAP_MAKER/">MindMap Maker ↗</a>
+            <a href="/PYTHON_MUSIC_LAB/">Python作曲研究所 ↗</a>
           </div>
-          <div class="def-block">
-            <span class="def-mark">❹</span>
-            <p class="definition">放課後は<em>ミスタードーナツ</em>での談笑・ウィンドウショッピング・カラオケ・アルバイトを常とす。</p>
-          </div>
-          <div class="example-block">
-            <span class="example-label">〔旧姓〕</span>
-            <p class="example-text">坂本（さかもと）</p>
-          </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </section>
 
-    <!-- ===== 体：身体的特徴 ===== -->
-    <section class="dict-section" id="sec-body" aria-labelledby="sec-body-heading">
-      <div class="section-header">
-        <div class="section-kana" aria-hidden="true">体</div>
-        <div class="section-title-wrap">
-          <h2 class="section-title" id="sec-body-heading">身体的特徴</h2>
-          <span class="section-title-en">Physical Traits</span>
+    <section class="profile-section page-shell" id="skills" aria-labelledby="skills-title">
+      <header class="section-heading">
+        <div class="section-heading__number">02</div>
+        <div>
+          <p class="section-heading__kana">WORKS &amp; SKILLS</p>
+          <h2 id="skills-title">実作品と技術</h2>
         </div>
-        <div class="section-rule" aria-hidden="true"></div>
-      </div>
+        <p class="section-heading__note">Tools in use</p>
+      </header>
 
-      <article class="entry" id="entry-body">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">体-001</span>
-          <div class="entry-yomi">
-            <ruby><rb>持病・体質</rb><rt>じびょう・たいしつ</rt></ruby>
+      <div class="skill-list">
+        <article class="skill-row">
+          <div class="skill-row__title">
+            <span>01</span>
+            <h3>Python</h3>
           </div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition"><em>扁桃腺</em>の慢性的腫脹を抱う。</p>
+          <p>自動化、データ処理、画像・動画・音声処理、デスクトップツール。</p>
+          <div class="skill-row__stack">
+            <span>Python</span><span>OpenCV</span><span>FFmpeg</span><span>Tkinter</span>
           </div>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition"><em>睡眠時無呼吸症候群</em>を患う。仕事中・授業中に不随意の居眠りを来すことあり。</p>
+          <div class="skill-row__works">
+            <a href="/VIDEO_WORKBENCH/">Video Workbench ↗</a>
+            <a href="/PYTHON_MUSIC_LAB/">Python作曲研究所 ↗</a>
           </div>
-          <div class="def-block">
-            <span class="def-mark">❸</span>
-            <p class="definition">発汗過多の体質にして、とりわけ<em>手掌</em>に著明な発汗を認む。</p>
+        </article>
+
+        <article class="skill-row">
+          <div class="skill-row__title">
+            <span>02</span>
+            <h3>JavaScript</h3>
           </div>
-        </div>
-      </article>
+          <p>Web UI、検索、インタラクション、Canvas / SVGを使った制作ツール。</p>
+          <div class="skill-row__stack">
+            <span>JavaScript</span><span>Canvas</span><span>SVG</span><span>Local-first</span>
+          </div>
+          <div class="skill-row__works">
+            <a href="/YOREI/yorei.html">用例採集 ↗</a>
+            <a href="/MINDMAP_MAKER/">MindMap Maker ↗</a>
+          </div>
+        </article>
+
+        <article class="skill-row">
+          <div class="skill-row__title">
+            <span>03</span>
+            <h3>Web / Backend</h3>
+          </div>
+          <p>データを扱うWebサービス、検索API、運用画面、サーバー側の処理。</p>
+          <div class="skill-row__stack">
+            <span>PHP</span><span>SQL</span><span>REST API</span><span>Supabase</span>
+          </div>
+          <div class="skill-row__works">
+            <a href="/holoscope/">HoloScope ↗</a>
+            <a href="/SHISHA/">シーシャ店舗検索 ↗</a>
+          </div>
+        </article>
+
+        <article class="skill-row">
+          <div class="skill-row__title">
+            <span>04</span>
+            <h3>Data</h3>
+          </div>
+          <p>情報設計、データベース、JSON、検索しやすい構造への整理と変換。</p>
+          <div class="skill-row__stack">
+            <span>PostgreSQL</span><span>MySQL</span><span>JSON</span><span>Data Modeling</span>
+          </div>
+          <div class="skill-row__works">
+            <a href="/LEGAL_KNOWLEDGE_BASE/">法令ナレッジベース ↗</a>
+            <a href="/AQUARIUM/aquarium.php">水族館 ↗</a>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <!-- ===== 癖：嗜好・性癖 ===== -->
-    <section class="dict-section" id="sec-habit" aria-labelledby="sec-habit-heading">
-      <div class="section-header">
-        <div class="section-kana" aria-hidden="true">癖</div>
-        <div class="section-title-wrap">
-          <h2 class="section-title" id="sec-habit-heading">嗜　好</h2>
-          <span class="section-title-en">Inclinations</span>
-        </div>
-        <div class="section-rule" aria-hidden="true"></div>
-      </div>
-
-      <article class="entry" id="entry-habit">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">癖-001</span>
-          <div class="entry-yomi">
-            <ruby><rb>嗜好・性癖</rb><rt>しこう・せいへき</rt></ruby>
+    <section class="profile-section profile-section--dark" id="now" aria-labelledby="now-title">
+      <div class="page-shell">
+        <header class="section-heading section-heading--inverse">
+          <div class="section-heading__number">03</div>
+          <div>
+            <p class="section-heading__kana">NOW</p>
+            <h2 id="now-title">最近取り組んでいること</h2>
           </div>
-          <span class="entry-pos">名</span>
+          <p class="section-heading__note">2026.09</p>
         </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition"><em>謎解き</em>を好む。論理的推理と閃きの両立を要する問題を特に好む傾向あり。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition">性癖として<em>洗脳・催眠</em>の概念に強い関心を覚ゆ。</p>
-          </div>
+
+        <div class="now-list">
+          <article class="now-item">
+            <div class="now-item__meta">
+              <span>OPERATING</span>
+              <b>01</b>
+            </div>
+            <h3>HoloScope</h3>
+            <p>配信データを記事へ変換する運用を、自動化・監査・品質管理まで含めて育てています。</p>
+            <a href="/holoscope/">公開ページを見る ↗</a>
+          </article>
+
+          <article class="now-item">
+            <div class="now-item__meta">
+              <span>DEVELOPING</span>
+              <b>02</b>
+            </div>
+            <h3>Minimalizer</h3>
+            <p>画像を幾何的に単純化する処理を、領域分割や構造解析を使いながら改善しています。</p>
+          </article>
+
+          <article class="now-item">
+            <div class="now-item__meta">
+              <span>RESEARCH</span>
+              <b>03</b>
+            </div>
+            <h3>Python作曲研究所</h3>
+            <p>生成モデルではなく、ルール・評価・自作Synth・音響処理を組み合わせた作曲環境を研究中です。</p>
+            <a href="/PYTHON_MUSIC_LAB/">作品を見る ↗</a>
+          </article>
         </div>
-      </article>
+      </div>
     </section>
 
-    <!-- ===== 縁：ゆかりの人物 ===== -->
-    <section class="dict-section" id="sec-relation" aria-labelledby="sec-relation-heading">
-      <div class="section-header">
-        <div class="section-kana" aria-hidden="true">縁</div>
-        <div class="section-title-wrap">
-          <h2 class="section-title" id="sec-relation-heading">ゆかりの人物</h2>
-          <span class="section-title-en">Notable Figures</span>
+    <section class="profile-section page-shell" id="background" aria-labelledby="background-title">
+      <header class="section-heading">
+        <div class="section-heading__number">04</div>
+        <div>
+          <p class="section-heading__kana">BACKGROUND</p>
+          <h2 id="background-title">短い経歴</h2>
         </div>
-        <div class="section-rule" aria-hidden="true"></div>
-      </div>
+        <p class="section-heading__note">From first build to now</p>
+      </header>
 
-      <article class="entry" id="entry-figure">
-        <header class="entry-header">
-          <span class="entry-num" aria-hidden="true">縁-001</span>
-          <div class="entry-yomi">
-            <ruby><rb>敬愛する人物</rb><rt>けいあいするじんぶつ</rt></ruby>
-          </div>
-          <span class="entry-pos">名</span>
-        </header>
-        <div class="entry-body">
-          <div class="def-block">
-            <span class="def-mark">❶</span>
-            <p class="definition">架空の人物として<em>シャーロック・ホームズ</em>（Sherlock Holmes）を最も敬愛す。論理の極致を体現する名探偵。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❷</span>
-            <p class="definition"><em>オリヴィエ・ミラ・アームストロング</em>（鋼の錬金術師）。北の将軍。その揺るぎなき信念と指導力を称う。</p>
-          </div>
-          <div class="def-block">
-            <span class="def-mark">❸</span>
-            <p class="definition"><em>八百万百</em>（僕のヒーローアカデミア）。知性と誠実さを兼ね備え、自信の欠如を克服する姿に強い共鳴を覚ゆ。</p>
-          </div>
-        </div>
-      </article>
+      <div class="timeline">
+        <article class="timeline-item">
+          <p class="timeline-item__label">START</p>
+          <h3>最初の制作物は、Visual Basicの脱出ゲーム。</h3>
+          <p>中学・高校では吹奏楽部を経験し、高校途中からコンピューター部へ。そこで初めて、自分で遊べるものをコードで作りました。</p>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-item__label">WORK</p>
+          <h3>現在はシステムエンジニア。</h3>
+          <p>仕事ではシステム開発・運用に携わりながら、個人ではWebアプリ、データベース、検索、制作支援ツールを継続して作っています。</p>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-item__label">NOW</p>
+          <h3>「アプリ」だけでなく、仕組みそのものへ。</h3>
+          <p>最近は画面を作るだけでなく、収集・整理・自動化・検証・改善まで含めた制作基盤を設計することが増えています。</p>
+        </article>
+      </div>
     </section>
 
+    <section class="profile-section page-shell" id="values" aria-labelledby="values-title">
+      <header class="section-heading">
+        <div class="section-heading__number">05</div>
+        <div>
+          <p class="section-heading__kana">VALUES</p>
+          <h2 id="values-title">制作で大事にしていること</h2>
+        </div>
+        <p class="section-heading__note">4 principles</p>
+      </header>
+
+      <div class="value-list">
+        <article class="value-item">
+          <span>01</span>
+          <div>
+            <h3>自分が使いたいものを作る</h3>
+            <p>「これがあったら便利」を出発点にして、実際に使えるところまで持っていく。</p>
+          </div>
+        </article>
+        <article class="value-item">
+          <span>02</span>
+          <div>
+            <h3>情報を構造化する</h3>
+            <p>情報量が増えても迷わないように、検索・分類・関係性を先に設計する。</p>
+          </div>
+        </article>
+        <article class="value-item">
+          <span>03</span>
+          <div>
+            <h3>小さく試して、使いながら直す</h3>
+            <p>完成を待つより、まず動かす。失敗やログも次の改善材料として残す。</p>
+          </div>
+        </article>
+        <article class="value-item">
+          <span>04</span>
+          <div>
+            <h3>領域をまたぐ</h3>
+            <p>Web、データ、自動化、表現を分けすぎず、目的に必要な技術を拾って組み合わせる。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="profile-section page-shell" id="links" aria-labelledby="links-title">
+      <header class="section-heading">
+        <div class="section-heading__number">06</div>
+        <div>
+          <p class="section-heading__kana">LINKS</p>
+          <h2 id="links-title">リンク</h2>
+        </div>
+        <p class="section-heading__note">Find more</p>
+      </header>
+
+      <div class="link-list">
+        <a href="/">
+          <span>HOME</span>
+          <strong>個人大辞典</strong>
+          <b>↗</b>
+        </a>
+        <a href="/#index">
+          <span>WORKS</span>
+          <strong>作品索引</strong>
+          <b>↗</b>
+        </a>
+        <a href="https://github.com/watarionn">
+          <span>GITHUB</span>
+          <strong>@watarionn</strong>
+          <b>↗</b>
+        </a>
+        <a href="mailto:sakawatainfo@gmail.com">
+          <span>EMAIL</span>
+          <strong>sakawatainfo@gmail.com</strong>
+          <b>↗</b>
+        </a>
+      </div>
+    </section>
   </main>
 
-  <footer role="contentinfo">
-    <div class="footer-inner">
-      <div class="colophon">
-        <p class="colophon-title">奥付</p>
-        <p class="colophon-line">著者　風花　理珠</p>
-        <p class="colophon-line">無断複製・転載を禁ず</p>
-      </div>
-      <div class="footer-motto" aria-hidden="true">
-        <span class="footer-kana">め　ざ　せ　万　能　人</span>
-      </div>
+  <footer class="site-footer">
+    <div class="page-shell site-footer__inner">
+      <p>個人大辞典 / Personal Encyclopedia</p>
+      <p>© <span id="currentYear"></span> watarionn</p>
     </div>
   </footer>
 
-  <script src="profile.js" defer></script>
+  <script src="d_profile.js" defer></script>
 </body>
 </html>

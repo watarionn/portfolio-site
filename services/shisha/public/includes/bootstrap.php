@@ -380,7 +380,7 @@ function read_shops(): array
             }
         }
 
-        $runtime[$index] = $normalized;
+        $runtime[$index] = normalize_shop_record($normalized);
     }
 
     return array_values($runtime);

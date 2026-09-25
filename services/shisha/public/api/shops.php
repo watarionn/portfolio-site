@@ -82,11 +82,17 @@ if ($sort === 'distance') {
         $minutes = (int)($b['weekly_open_minutes'] ?? 0) <=> (int)($a['weekly_open_minutes'] ?? 0);
         return $minutes !== 0
             ? $minutes
-            : strnatcasecmp((string)($a['name'] ?? ''), (string)($b['name'] ?? ''));
+            : strnatcasecmp(
+                (string)($a['display_name'] ?? $a['name'] ?? ''),
+                (string)($b['display_name'] ?? $b['name'] ?? '')
+            );
     });
 } else {
     usort($items, static fn(array $a, array $b): int =>
-        strnatcasecmp((string)($a['name'] ?? ''), (string)($b['name'] ?? '')));
+        strnatcasecmp(
+            (string)($a['display_name'] ?? $a['name'] ?? ''),
+            (string)($b['display_name'] ?? $b['name'] ?? '')
+        ));
 }
 
 $total = count($items);

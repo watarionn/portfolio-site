@@ -14,6 +14,16 @@ async function requestJson(url,options){
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))}
 function safeUrl(value){try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:''}catch{return ''}}
 function formatVerified(value){if(!value)return'';const date=new Date(value);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('ja-JP')}
+function optionKey(value){return String(value??'').normalize('NFKC').replace(/[\\s　]+/g,'').toLocaleLowerCase('ja-JP')}
+function uniqueOptions(items,getLabel){
+    const seen=new Set();
+    return items.filter(item=>{
+        const key=optionKey(getLabel(item));
+        if(!key||seen.has(key))return false;
+        seen.add(key);
+        return true;
+    });
+}
 
 async function init(){
     facets=await requestJson('/api/facets.php');
@@ -44,7 +54,9 @@ async function loadLines(){
     stationCoords=null;
     if(!prefecture)return;
     const data=await requestJson('/api/stations.php?method=getLines&prefecture='+encodeURIComponent(prefecture));
-    (data.response?.line||[]).forEach(line=>$('#line').insertAdjacentHTML('beforeend',`<option>${escapeHtml(line)}</option>`));
+    uniqueOptions(data.response?.line||[],line=>line)
+        .sort((a,b)=>String(a).localeCompare(String(b),'ja',{numeric:true}))
+        .forEach(line=>$('#line').insertAdjacentHTML('beforeend',`<option>${escapeHtml(line)}</option>`));
 }
 async function loadStations(){
     const line=$('#line').value;
@@ -52,7 +64,9 @@ async function loadStations(){
     stationCoords=null;
     if(!line)return;
     const data=await requestJson('/api/stations.php?method=getStations&line='+encodeURIComponent(line));
-    (data.response?.station||[]).forEach(station=>$('#station').insertAdjacentHTML('beforeend',`<option data-x="${station.x}" data-y="${station.y}">${escapeHtml(station.name)}</option>`));
+    uniqueOptions(data.response?.station||[],station=>station.name)
+        .sort((a,b)=>String(a.name).localeCompare(String(b.name),'ja',{numeric:true}))
+        .forEach(station=>$('#station').insertAdjacentHTML('beforeend',`<option data-x="${station.x}" data-y="${station.y}">${escapeHtml(station.name)}</option>`));
 }
 function locate(){
     if(!$('#near').checked){coords=null;return}

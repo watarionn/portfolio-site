@@ -269,6 +269,28 @@ function normalize_hours_entries(mixed $entries): array
     return array_values($unique);
 }
 
+function clean_hours_text_for_display(string $text, array $structuredHours): string
+{
+    $text = trim($text);
+    if ($text === '' || in_array(lower_text($text), ['unknown', 'n/a', 'na', 'none', '-'], true)) {
+        return '';
+    }
+    if ($structuredHours !== []) {
+        return '';
+    }
+
+    $text = preg_split('/(?:住所|所在地|電話番号|TEL|アクセス|予約|料金|メニュー|席数)/u', $text, 2)[0] ?? $text;
+    $text = preg_replace('/[\x{00A0}\t\r\n ]+/u', ' ', trim($text)) ?? trim($text);
+    $hasRange = preg_match('/\d{1,2}[：:][0-5]\d.{0,16}?[〜～~\-－—–].{0,16}?(?:翌\s*)?\d{1,2}[：:][0-5]\d/u', $text) === 1;
+    if (!$hasRange) {
+        return '';
+    }
+    if (function_exists('mb_strlen') && mb_strlen($text, 'UTF-8') > 160) {
+        return mb_substr($text, 0, 160, 'UTF-8');
+    }
+    return strlen($text) > 240 ? substr($text, 0, 240) : $text;
+}
+
 function normalize_shop_record(array $shop): array
 {
     $sourceName = trim((string)($shop['name'] ?? $shop['shop_name'] ?? ''));
@@ -284,7 +306,15 @@ function normalize_shop_record(array $shop): array
     $shop['address'] = $address;
     $shop = normalize_shop_location($shop, $address);
     $shop['hours'] = normalize_hours_entries($shop['hours'] ?? []);
-    $shop['hours_text'] = trim((string)($shop['hours_text'] ?? ''));
+    $sourceHoursText = trim((string)($shop['hours_text'] ?? ''));
+    $cleanHoursText = clean_hours_text_for_display($sourceHoursText, $shop['hours']);
+    if ($sourceHoursText !== '' && $sourceHoursText !== $cleanHoursText) {
+        $shop['hours_text_raw'] = $sourceHoursText;
+    }
+    $shop['hours_text'] = $cleanHoursText;
+    $shop['hours_quality'] = $shop['hours'] !== []
+        ? 'CLEAN'
+        : ($cleanHoursText !== '' ? 'REVIEW' : 'MISSING');
     $shop['hours_status'] = trim((string)($shop['hours_status'] ?? 'unknown')) ?: 'unknown';
     $shop['hours_source_url'] = trim((string)($shop['hours_source_url'] ?? ''));
     $shop['hours_verified_at'] = trim((string)($shop['hours_verified_at'] ?? ''));
@@ -820,31 +850,32 @@ function is_social_url(string $url): bool
 
 function hours_summary(array $shop): string
 {
-    $text = trim((string)($shop['hours_text'] ?? ''));
-    if ($text !== '') {
-        if (function_exists('mb_strlen') && mb_strlen($text, 'UTF-8') > 120) {
-            return mb_substr($text, 0, 117, 'UTF-8') . '…';
-        }
-        return strlen($text) > 180 ? substr($text, 0, 177) . '…' : $text;
-    }
     $entries = normalize_hours_entries($shop['hours'] ?? []);
-    if ($entries === []) {
+    if ($entries !== []) {
+        $dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+        $parts = [];
+        foreach ($entries as $entry) {
+            if ($entry['is_closed']) {
+                continue;
+            }
+            $closePrefix = $entry['closes_next_day'] ? '翌' : '';
+            $parts[] = $dayNames[$entry['day_of_week']] . ' '
+                . $entry['open_time'] . '〜' . $closePrefix . $entry['close_time'];
+            if (count($parts) >= 4) {
+                break;
+            }
+        }
+        return implode(' / ', $parts) . (count($entries) > 4 ? ' ほか' : '');
+    }
+
+    $text = trim((string)($shop['hours_text'] ?? ''));
+    if ($text === '') {
         return '';
     }
-    $dayNames = ['日', '月', '火', '水', '木', '金', '土'];
-    $parts = [];
-    foreach ($entries as $entry) {
-        if ($entry['is_closed']) {
-            continue;
-        }
-        $closePrefix = $entry['closes_next_day'] ? '翌' : '';
-        $parts[] = $dayNames[$entry['day_of_week']] . ' '
-            . $entry['open_time'] . '〜' . $closePrefix . $entry['close_time'];
-        if (count($parts) >= 4) {
-            break;
-        }
+    if (function_exists('mb_strlen') && mb_strlen($text, 'UTF-8') > 120) {
+        return mb_substr($text, 0, 117, 'UTF-8') . '…';
     }
-    return implode(' / ', $parts) . (count($entries) > 4 ? ' ほか' : '');
+    return strlen($text) > 180 ? substr($text, 0, 177) . '…' : $text;
 }
 
 function weekly_open_minutes(array $shop): int

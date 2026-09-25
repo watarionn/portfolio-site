@@ -35,10 +35,10 @@
       </div>
       <div class="combine-lab">
         <h3>動画を結合</h3>
-        <p>複数の動画を順番に並べ、ひとつのWebMへ録画します。各クリップはブラウザ内だけで処理されます。</p>
+        <p>複数動画の結合は、コンテナを壊さず再エンコードできるブラウザ処理エンジンを接続してから有効化します。現在は入力順の確認まで実装しています。</p>
         <label class="video-drop compact" for="combineFiles"><input id="combineFiles" type="file" accept="video/*" multiple><strong>結合する動画を選ぶ</strong><span>複数選択可</span></label>
         <ol id="combineList" class="combine-list"></ol>
-        <button id="combineExport" class="lab-button" type="button" disabled>この順番で結合して書き出す</button>
+        <button id="combineExport" class="lab-button" type="button" disabled>結合書き出し（準備中）</button>
         <p id="combineStatus" class="export-status" aria-live="polite"></p>
       </div>
     </section>

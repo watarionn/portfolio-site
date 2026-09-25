@@ -49,7 +49,7 @@ EXPECTED_STAGE9_CHEATSHEET_TREE = "9af9ecef421fcbf7329a9a9c1e23d8a1bae30d9a"
 EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT = 9
 SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
-EXPECTED_STAGE6_SHISHA_TREE = "26a7508f532842ab7a355b501d1c26a89937e200"
+EXPECTED_STAGE6_SHISHA_TREE = "82818315f5ab62572cf88c5cbad4b762ebdbcdee"
 EXPECTED_STAGE6_SHISHA_FILE_COUNT = 14
 SECRET_ROOM_ROOT = "apps/secret-room/"
 SECRET_ROOM_PUBLIC_ROOT = "apps/secret-room/public/"
@@ -145,16 +145,16 @@ REQUIRED_STAGE6_SHISHA_FILES = {
 EXPECTED_STAGE6_SHISHA_BLOBS = {
     "services/shisha/public/.htaccess": "6408a95cff1909367a920ad45d4619aafc102641",
     "services/shisha/public/api/facets.php": "47226ce3db95252efbe7031e3a3d8184cf474fda",
-    "services/shisha/public/api/shops.php": "457f0bb7b0e02226a97a5c7635848b40e4c7ccc8",
-    "services/shisha/public/api/stations.php": "a8b44997cdcf948d3a2c9f53eff7589ec8ca3199",
+    "services/shisha/public/api/shops.php": "ffb63f1b7e59805d6508e90035d877d611f5982d",
+    "services/shisha/public/api/stations.php": "a1dcb038ec12426eea6436a4d25df614b485b92a",
     "services/shisha/public/assets/app.css": "6b10095a157c302059c22244a1c22f2ab87091b2",
-    "services/shisha/public/assets/app.js": "ff3a9afa1a18ffe644648ebfe33ebb65b404630e",
+    "services/shisha/public/assets/app.js": "2d32d955124ae589610b41bc336c7010815892bb",
     "services/shisha/public/advisor/advisor.css": "9c5c03343110e75b22a648ea35d418d2161d2068",
     "services/shisha/public/advisor/index.html": "ccc8c4f58d3a6738734ec936c4758049178bdb18",
     "services/shisha/public/advisor/privacy.html": "fdfff1d200dcab72885442ee87d2afaba2e10500",
     "services/shisha/public/advisor/terms.html": "1362890a443662f7132e205c2b20ced9bf549524",
     "services/shisha/public/config.example.php": "a45bee891e8ea336b414ab415ddf27b22b4faef8",
-    "services/shisha/public/includes/bootstrap.php": "b022d49bf3d156a5c00931a6fcfa85457e6d2397",
+    "services/shisha/public/includes/bootstrap.php": "922d9948617b7f0cc3561c4c96686363c868fe8f",
     "services/shisha/public/includes/postal-location-map.php": "dd058d818928bc73bac1ea90bcbdb97ddea41703",
     "services/shisha/public/index.php": "21bb2ce12b53b895e8eeb5811c3d0f787122adf6",
 }

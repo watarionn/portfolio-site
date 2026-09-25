@@ -388,17 +388,36 @@ function read_shops(): array
 
 function extract_prefecture(string $address): string
 {
-    if (preg_match('/(北海道|東京都|京都府|大阪府|.{2,3}県)/u', $address, $m)) {
-        return $m[1];
+    foreach (array_keys(shisha_prefecture_codes()) as $prefecture) {
+        if (str_contains($address, $prefecture)) {
+            return $prefecture;
+        }
     }
     return '';
 }
 
 function extract_municipality(string $address): string
 {
-    $rest = preg_replace('/^.*?(?:北海道|東京都|京都府|大阪府|.{2,3}県)/u', '', $address, 1) ?? $address;
-    if (preg_match('/^\s*([^\s,]+?(?:市|区|町|村|郡))/u', $rest, $m)) {
-        return trim($m[1]);
+    $prefecture = extract_prefecture($address);
+    $rest = $address;
+    if ($prefecture !== '') {
+        $position = strpos($address, $prefecture);
+        if ($position !== false) {
+            $rest = substr($address, $position + strlen($prefecture));
+        }
+    }
+    $rest = preg_replace('/^[\s,，]+/u', '', $rest) ?? $rest;
+
+    $patterns = [
+        '/^([^\s,，]+?市[^\s,，]+?区)/u',
+        '/^([^\s,，]+?郡[^\s,，]+?(?:町|村))/u',
+        '/^([^\s,，]+?(?:市|区|町|村))/u',
+    ];
+    foreach ($patterns as $pattern) {
+        if (preg_match($pattern, $rest, $m)) {
+            $candidate = trim($m[1]);
+            return preg_match('/[A-Za-z]/', $candidate) ? '' : $candidate;
+        }
     }
     return '';
 }

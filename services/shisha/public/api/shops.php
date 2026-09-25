@@ -39,7 +39,7 @@ foreach ($shops as $shop) {
     }
     if ($query !== '') {
         $haystack = lower_text(
-            (string)($shop['name'] ?? '') . ' ' . (string)($shop['address'] ?? '')
+            (string)($shop['display_name'] ?? $shop['name'] ?? '') . ' ' . (string)($shop['name'] ?? '') . ' ' . (string)($shop['address'] ?? '')
         );
         if (!str_contains($haystack, $query)) {
             continue;

@@ -207,6 +207,11 @@
       "id": "legal-knowledge-base",
       "sourceRoot": "tools/legal-knowledge-base/public",
       "productionRoot": "LEGAL_KNOWLEDGE_BASE"
+    },
+    {
+      "id": "pose-library-manager",
+      "sourceRoot": "tools/pose-library-manager/public",
+      "productionRoot": "POSE_LIBRARY_MANAGER"
     }
   ],
   "aliases": [

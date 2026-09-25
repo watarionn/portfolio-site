@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ポーズライブラリ管理 | Pose Library Manager</title>
+  <meta name="description" content="ポーズ・衣装リファレンスをID、台帳、manifest、安全ルールとともに管理する制作支援ライブラリ。">
+  <meta property="og:title" content="ポーズライブラリ管理">
+  <meta property="og:description" content="ポーズと衣装の参照素材を、人物同一性を混ぜずに安全に再利用するための管理基盤。">
+  <meta property="og:image" content="assets/pose-0021.webp">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="english-name">Pose Library Manager</p>
+        <h1>ポーズライブラリ管理</h1>
+        <p class="lead">ポーズや衣装の「使ってよい要素」と「引き継いではいけない要素」を台帳化し、制作時に安全に再利用するためのリファレンス管理基盤です。</p>
+      </div>
+      <div class="status">
+        <span>v1.0 initial complete</span>
+        <strong>31 poses / 54 clothing refs</strong>
+      </div>
+    </header>
+
+    <section class="metrics" aria-label="登録状況">
+      <article><strong>31</strong><span>採用済みポーズ</span></article>
+      <article><strong>54</strong><span>衣装リファレンス</span></article>
+      <article><strong>1</strong><span>Pose Mannequin Master</span></article>
+      <article><strong>86</strong><span>台帳レコード</span></article>
+    </section>
+
+    <section class="gallery-section" aria-labelledby="gallery-title">
+      <div class="section-heading">
+        <p>APPROVED REFERENCES</p>
+        <h2 id="gallery-title">実際に管理している素材</h2>
+      </div>
+      <div class="gallery">
+        <figure>
+          <img src="assets/pose-0001.webp" alt="POSE_0001 自然な正面立ち">
+          <figcaption><span>POSE_0001</span>自然な正面立ち</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/pose-0009.webp" alt="POSE_0009 脚を組んで座る">
+          <figcaption><span>POSE_0009</span>脚を組んで座る</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/pose-0019.webp" alt="POSE_0019 立ってスマホを操作する">
+          <figcaption><span>POSE_0019</span>立ってスマホを操作する</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/pose-0021.webp" alt="POSE_0021 走り出す瞬間">
+          <figcaption><span>POSE_0021</span>走り出す瞬間</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/clothing-0001.webp" alt="CLOTHING_0001 スーツ通常">
+          <figcaption><span>CLOTHING_0001</span>スーツ（通常）</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature-grid" aria-label="主な仕組み">
+      <article>
+        <p class="kicker">01 / LEDGER</p>
+        <h2>ID付き台帳</h2>
+        <p>POSE_0001、CLOTHING_0001のような固定IDで、ファイル名、分類、タグ、保存先、参照範囲、禁止継承要素、状態を一元管理します。</p>
+      </article>
+      <article>
+        <p class="kicker">02 / SAFE TRANSFER</p>
+        <h2>継承範囲を分離</h2>
+        <p>ポーズ素材からは関節角度や接触関係だけ、衣装素材からはシルエットや構造だけを参照し、顔・人物同一性・体型などを混ぜません。</p>
+      </article>
+      <article>
+        <p class="kicker">03 / MANIFEST</p>
+        <h2>制作側へ受け渡す</h2>
+        <p>CharacterProjectなど別工程へ渡す際は、台帳とmanifestを正本にして「何を参照したか」を追跡できる状態を保ちます。</p>
+      </article>
+      <article>
+        <p class="kicker">04 / STORAGE SPLIT</p>
+        <h2>GitHubとDriveを役割分担</h2>
+        <p>文章・ルール・台帳・manifestはGitHub、画像バイナリはGoogle Driveに分離し、履歴管理と大容量素材管理を両立しています。</p>
+      </article>
+    </section>
+
+    <section class="rules" aria-labelledby="rules-title">
+      <div>
+        <p class="kicker">REFERENCE SAFETY</p>
+        <h2 id="rules-title">人物をコピーするためのライブラリにしない</h2>
+      </div>
+      <ul>
+        <li>人物同一性・顔・髪・年齢・体型・肌などはポーズ素材から継承しない</li>
+        <li>ポーズ画像は無個性のPose Mannequin Masterを基準にする</li>
+        <li>衣装は構造・レイヤリング・素材感・配色・スタイリングだけを参照する</li>
+        <li>人間が明示採用した素材だけを本番台帳へ登録する</li>
+        <li>既存IDやDrive file IDを再採番・置換しない</li>
+      </ul>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Japanese name</dt><dd>ポーズライブラリ管理</dd></div>
+      <div><dt>English name</dt><dd>Pose Library Manager</dd></div>
+      <div><dt>Initial completion</dt><dd>2026-09-07</dd></div>
+      <div><dt>Canonical data</dt><dd>GitHub ledger / manifest + Google Drive image binaries</dd></div>
+      <div><dt>Use case</dt><dd>Character reference management / production handoff</dd></div>
+    </dl>
+
+    <footer><a href="/" class="back-link">作品一覧へ戻る</a></footer>
+  </main>
+</body>
+</html>

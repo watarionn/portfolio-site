@@ -202,6 +202,11 @@
       "id": "web-extraction-recipes",
       "sourceRoot": "tools/web-extraction-recipes/public",
       "productionRoot": "WEB_EXTRACTION_RECIPES"
+    },
+    {
+      "id": "legal-knowledge-base",
+      "sourceRoot": "tools/legal-knowledge-base/public",
+      "productionRoot": "LEGAL_KNOWLEDGE_BASE"
     }
   ],
   "aliases": [

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>法令ナレッジベース</title>
+  <meta name="description" content="e-Gov法令API・法令XMLを基盤に、改正履歴、時点指定、XML構造、出典追跡、検索/RAGを一貫して扱う法令知識基盤。">
+  <meta property="og:title" content="法令ナレッジベース">
+  <meta property="og:description" content="改正履歴と時点指定を厳密に扱い、一次情報まで辿れる法令知識基盤。">
+  <meta property="og:image" content="assets/og-preview.png">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">Python / PostgreSQL / e-Gov / Search &amp; RAG</p>
+        <h1>法令ナレッジベース</h1>
+      </div>
+      <p class="version">Phase 1–8 Complete</p>
+    </header>
+
+    <figure class="app-shot">
+      <img src="assets/app-screenshot.png" alt="法令ナレッジベース Public Demoで法令質問と根拠確認を行う画面">
+    </figure>
+    <section class="intro" aria-labelledby="about-heading">
+      <h2 id="about-heading">この作品について</h2>
+      <p>日本の法令について、e-Gov法令APIと法令XMLなどの一次情報を基盤に、改正履歴、時点指定、XML構造、出典追跡、検索/RAGを一つの流れで扱えるようにした知識基盤です。単に最新条文を探すのではなく、「ある日付ではどのrevisionが対象か」「その回答はどの原文に由来するか」まで辿れることを重視しています。</p>
+    </section>
+
+    <section class="grid" aria-label="主な機能">
+      <article>
+        <h2>Point-in-time Resolution</h2>
+        <p>法令IDと対象日からrevision候補を解決し、same-day複数revisionなどで一意に確定できない場合は曖昧なまま返します。</p>
+      </article>
+      <article>
+        <h2>Evidence &amp; Provenance</h2>
+        <p>検索結果から根拠条文、revision、XML path、RAW provenanceへ戻れるEvidence経路を持ち、AI生成文だけを根拠にしません。</p>
+      </article>
+      <article>
+        <h2>Revision Compare</h2>
+        <p>2つの時点を別々に解決し、本則・附則の文脈を保ちながら条文の追加、削除、変更を比較できます。</p>
+      </article>
+      <article>
+        <h2>External Materials</h2>
+        <p>官報、国会会議録、帝国議会会議録、NDL資料を外部資料層として扱い、確認済みrelationだけを引用可能にします。</p>
+      </article>
+    </section>
+    <section class="safety" aria-labelledby="design-heading">
+      <h2 id="design-heading">公開デモの設計境界</h2>
+      <ul>
+        <li>Public Demoはread-only surfaceとして個人用runtimeから分離</li>
+        <li>AIを法令の正本や変更判定のsource of truthとして扱わない</li>
+        <li>時点解決が曖昧な場合に別revisionへ勝手に丸めない</li>
+        <li>根拠原文、revision、XML path、取得元まで追跡できる構造</li>
+        <li>個人機能、更新操作、法令ウォッチの書き込み機能は公開面で無効化</li>
+        <li>表示内容は調査支援用であり、個別案件の法的助言を目的としない</li>
+      </ul>
+    </section>
+
+    <section class="download" aria-labelledby="demo-heading">
+      <div>
+        <h2 id="demo-heading">Public Demo</h2>
+        <p>匿名利用者向けのread-onlyデモです。PC上の分離runtimeをTailscale Funnel経由で公開しているため、実行環境が停止している時間帯はアクセスできない場合があります。</p>
+      </div>
+      <a class="download-button" href="https://ywshtmr.tail8fd68c.ts.net:8443/" target="_blank" rel="noopener">デモを開く</a>
+    </section>
+
+    <dl class="meta">
+      <div><dt>Completed</dt><dd>2026-09-17</dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/watarionn/legal-knowledge-base">GitHub / watarionn/legal-knowledge-base</a></dd></div>
+      <div><dt>Data Sources</dt><dd>e-Gov法令API / 法令XML / 官報 / 国会・帝国議会会議録 / NDL</dd></div>
+      <div><dt>Runtime</dt><dd>Python / PostgreSQL / read-only Public Demo</dd></div>
+    </dl>
+    <footer>
+      <a href="/" class="back-link">作品一覧へ戻る</a>
+    </footer>
+  </main>
+</body>
+</html>

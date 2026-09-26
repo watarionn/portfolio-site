@@ -25,6 +25,26 @@
       </div>
     </header>
 
+    <section class="playground" aria-labelledby="playground-title">
+      <div class="playground-heading">
+        <div><p class="kicker">PLAYGROUND / BROWSER COMPOSER</p><h2 id="playground-title">ページの中で作曲する</h2><p>16ステップに音を置き、Seedからメロディを作り、その場で再生できます。処理と発音はブラウザ内だけで完結します。</p></div>
+        <div class="playground-status" id="playgroundStatus">Ready</div>
+      </div>
+      <div class="composer-controls">
+        <label>BPM <input id="composerBpm" type="number" min="60" max="200" value="120"></label>
+        <label>Key <select id="composerKey"><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>A</option><option>B</option></select></label>
+        <label>Scale <select id="composerScale"><option value="major">Major</option><option value="minor">Minor</option></select></label>
+        <label>Seed <input id="composerSeed" type="number" value="260927"></label>
+        <button type="button" id="generateMelody">Seed生成</button>
+        <button type="button" id="clearMelody">クリア</button>
+        <button type="button" id="playMelody">▶ 再生</button>
+        <button type="button" id="stopMelody">■ 停止</button>
+      </div>
+      <div class="chord-strip" id="chordStrip" aria-label="コード進行"></div>
+      <div class="piano-roll-wrap"><div class="piano-roll" id="pianoRoll" role="grid" aria-label="16ステップ ピアノロール"></div></div>
+      <p class="playground-note">マスをクリックすると音符を置いたり消したりできます。Seed生成は同じ設定なら同じパターンを再現します。</p>
+    </section>
+
     <section class="player-panel" aria-labelledby="sample-title">
       <div class="player-copy">
         <p class="kicker">LISTEN / PHASE 03B</p>

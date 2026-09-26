@@ -101,7 +101,7 @@
   function updateChords(){
     chordStrip.replaceChildren(...chordDegrees.map((degree,index)=>{
       const b=document.createElement('button'); b.type='button'; b.textContent=chordName(degree); b.title='クリックで次のダイアトニックコード';
-      b.addEventListener('click',()=>{chordDegrees[index]=(chordDegrees[index]+1)%7;updateChords();}); return b;
+      b.addEventListener('click',()=>{chordDegrees[index]=(chordDegrees[index]+1)%7;updateChords();buildSong();}); return b;
     }));
   }
   function tone(midi,type='sine',level=.06,duration=.18){
@@ -126,7 +126,9 @@
     context ||= new AudioCtor(); context.resume(); if(!songBars.length) buildSong();
     const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
     const stepMs=60000/safeBpm/4, totalSteps=songBars.length*16;
-    for(let absolute=0;absolute<totalSteps;absolute++) timers.push(setTimeout(()=>{
+    let absolute=0;
+    function tick(){
+      if(absolute>=totalSteps){stop();return;}
       const step=absolute%16, bar=Math.floor(absolute/16), info=songBars[bar];
       cells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step)); drumCells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));
       if(trackMelody.checked) cells.filter(c=>c.classList.contains('active')&&+c.dataset.step===step).forEach(c=>{
@@ -137,8 +139,10 @@
       if(trackBass.checked && step%4===0)tone(scaleMidi(info.degree,2),'square',.04,Math.max(.18,stepMs/1000*1.6));
       if(trackDrums.checked && drumCells[step].classList.contains('active'))drum();
       status.textContent=info.section+' · '+(bar+1)+'/'+songBars.length+' bars';
-    },absolute*stepMs));
-    timers.push(setTimeout(stop,totalSteps*stepMs+80));
+      absolute++;
+      timers=[setTimeout(tick,stepMs)];
+    }
+    tick();
   }
   buildRoll(); buildDrums(); updateChords(); buildSong();
   document.getElementById('generateMelody').addEventListener('click',generate);

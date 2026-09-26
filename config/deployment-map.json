@@ -222,6 +222,11 @@
       "id": "python-music-lab",
       "sourceRoot": "tools/python-music-lab/public",
       "productionRoot": "PYTHON_MUSIC_LAB"
+    },
+    {
+      "id": "ai-judgement-lab",
+      "sourceRoot": "tools/ai-judgement-lab",
+      "productionRoot": "AI_JUDGEMENT_LAB"
     }
   ],
   "aliases": [

@@ -24,7 +24,12 @@
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
   const sectionGrammar={A:{density:.66,shift:0,energy:.56,style:'sparse',nct:.20,cadence:'half'},B:{density:.78,shift:2,energy:.74,style:'flowing',nct:.28,cadence:'half'},Chorus:{density:.92,shift:9,energy:.96,style:'driving',nct:.32,cadence:'authentic'},Interlude:{density:.58,shift:0,energy:.64,style:'sparse',nct:.18,cadence:'none'},Final:{density:.90,shift:7,energy:.92,style:'driving',nct:.24,cadence:'authentic'},Intro:{density:.48,shift:-2,energy:.42,style:'sparse',nct:.14,cadence:'none'},A2:{density:.72,shift:2,energy:.68,style:'flowing',nct:.22,cadence:'half'},B2:{density:.84,shift:4,energy:.82,style:'flowing',nct:.28,cadence:'half'}};
   const scales = {major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10]};
-  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [];
+  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], audioGraph=null;
+  const voiceConfig={
+    Melody:{gain:.20,pan:.12,adsr:[.010,.090,.66,.22],cutoff:5600,layers:[['sawtooth',.74,0,-3.5],['sawtooth',.74,0,3.5],['sine',.32,1,0]]},
+    Chords:{gain:.14,pan:-.18,adsr:[.050,.180,.52,.38],cutoff:3300,layers:[['triangle',1,0,0],['sine',.36,1,0]]},
+    Bass:{gain:.24,pan:0,adsr:[.006,.110,.70,.15],cutoff:1450,layers:[['square',.42,0,0],['sine',1,0,0],['sine',.18,-1,0]]}
+  };
 
   function midiFor(name){
     const m=name.match(/^([A-G])(\d)$/); return 12*(Number(m[2])+1)+semitone[m[1]];
@@ -106,15 +111,39 @@
       b.addEventListener('click',()=>{chordDegrees[index]=(chordDegrees[index]+1)%7;updateChords();buildSong();}); return b;
     }));
   }
+  function ensureAudioGraph(){
+    if(audioGraph)return;
+    const master=context.createGain(); master.gain.value=.72; master.connect(context.destination);
+    const makeBus=(pan,delaySend,reverbSend)=>{
+      const input=context.createGain(), p=context.createStereoPanner?context.createStereoPanner():context.createGain(); if(p.pan)p.pan.value=pan;
+      input.connect(p); p.connect(master);
+      if(delaySend){
+        [[.180,.12],[.360,.065]].forEach(([seconds,g])=>{const d=context.createDelay(.5),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);d.connect(x);x.connect(master);});
+      }
+      if(reverbSend){
+        [[.043,.070],[.071,.055],[.113,.045],[.181,.032],[.293,.022]].forEach(([seconds,g])=>{const d=context.createDelay(.4),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);d.connect(x);x.connect(master);});
+      }
+      return input;
+    };
+    audioGraph={master,buses:{Melody:makeBus(.12,true,true),Chords:makeBus(-.18,false,true),Bass:makeBus(0,false,false),Drums:makeBus(0,false,true)}};
+  }
+  function voice(midi,name,duration=.18,velocity=1){
+    ensureAudioGraph(); const cfg=voiceConfig[name], now=context.currentTime, filter=context.createBiquadFilter(), amp=context.createGain();
+    filter.type='lowpass';filter.frequency.value=cfg.cutoff;filter.Q.value=.35;filter.connect(amp);amp.connect(audioGraph.buses[name]);
+    const [attack,decay,sustain,release]=cfg.adsr, peak=Math.max(.0001,cfg.gain*velocity);
+    amp.gain.setValueAtTime(.0001,now);amp.gain.exponentialRampToValueAtTime(peak,now+attack);amp.gain.exponentialRampToValueAtTime(Math.max(.0001,peak*sustain),now+attack+decay);
+    amp.gain.setValueAtTime(Math.max(.0001,peak*sustain),now+duration);amp.gain.exponentialRampToValueAtTime(.0001,now+duration+release);
+    cfg.layers.forEach(([type,level,octave,detune])=>{const osc=context.createOscillator(),layer=context.createGain();osc.type=type;osc.frequency.value=hz(midi+12*octave);osc.detune.value=detune;layer.gain.value=level;osc.connect(layer).connect(filter);osc.start(now);osc.stop(now+duration+release+.03);activeNodes.push(osc);osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};});
+  }
   function tone(midi,type='sine',level=.06,duration=.18){
-    const osc=context.createOscillator(), gain=context.createGain(), now=context.currentTime;
+    ensureAudioGraph(); const osc=context.createOscillator(), gain=context.createGain(), now=context.currentTime;
     osc.type=type; osc.frequency.value=hz(midi); gain.gain.setValueAtTime(.0001,now); gain.gain.exponentialRampToValueAtTime(level,now+.012); gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
-    osc.connect(gain).connect(context.destination); osc.start(now); osc.stop(now+duration+.02); activeNodes.push(osc);
+    osc.connect(gain).connect(audioGraph.buses.Drums); osc.start(now); osc.stop(now+duration+.02); activeNodes.push(osc);osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};
   }
   function drum(){
     const osc=context.createOscillator(), gain=context.createGain(), now=context.currentTime;
     osc.type='sine'; osc.frequency.setValueAtTime(115,now); osc.frequency.exponentialRampToValueAtTime(48,now+.09); gain.gain.setValueAtTime(.13,now); gain.gain.exponentialRampToValueAtTime(.0001,now+.11);
-    osc.connect(gain).connect(context.destination); osc.start(now); osc.stop(now+.12); activeNodes.push(osc);
+    ensureAudioGraph(); osc.connect(gain).connect(audioGraph.buses.Drums); osc.start(now); osc.stop(now+.12); activeNodes.push(osc); osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};
   }
   function stop(){
     timers.forEach(clearTimeout); timers=[];
@@ -139,14 +168,14 @@
         let midi=midiFor(noteNames[+c.dataset.row])+info.shift;
         if(info.section.includes('Chorus'))midi+=Math.round((midi-67)*.18);
         if((info.cadence==='authentic'||info.cadence==='half')&&info.localBar===info.sectionBars-1&&step>=12)midi=scaleMidi(info.cadence==='authentic'?0:4,5);
-        tone(midi,'triangle',.055+.045*info.energy,Math.max(.08,stepMs/1000*(info.style==='sparse'?1.7:.8)));
+        voice(midi,'Melody',Math.max(.08,stepMs/1000*(info.style==='sparse'?1.7:.8)),.72+.28*info.energy);
       });
-      if(trackChords.checked && step===0)[0,2,4].forEach(d=>tone(scaleMidi(info.degree+d,4),'sine',.022+.014*info.energy,Math.max(.25,stepMs/1000*12)));
+      if(trackChords.checked && step===0)[0,2,4].forEach(d=>voice(scaleMidi(info.degree+d,4),'Chords',Math.max(.25,stepMs/1000*12),.65+.35*info.energy));
       if(trackBass.checked && step%4===0){
         const beat=step/4, bassDegree=beat===2?info.degree+4:info.degree;
         let bassMidi=scaleMidi(bassDegree,2)+(beat===1||beat===3?12:0);
         const next=songBars[bar+1]; if(beat===3&&next&&next.energy>info.energy)bassMidi=scaleMidi(next.degree,2)-1;
-        tone(bassMidi,'square',.03+.02*info.energy,Math.max(.18,stepMs/1000*1.6));
+        voice(bassMidi,'Bass',Math.max(.18,stepMs/1000*1.6),.72+.28*info.energy);
       }
       if(trackDrums.checked){
         if(step%2===0)tone(info.energy>.9&&step===14?82:78,'square',.008+.008*info.energy,.035);

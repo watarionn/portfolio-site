@@ -19,6 +19,7 @@
   const chordStrip = document.getElementById('chordStrip');
   const drumStrip = document.getElementById('drumStrip');
   const songOverview = document.getElementById('songOverview');
+  const candidateRanking=document.getElementById('candidateRanking'), candidateSummary=document.getElementById('candidateSummary');
   const trackMelody = document.getElementById('trackMelody'), trackChords = document.getElementById('trackChords'), trackBass = document.getElementById('trackBass'), trackDrums = document.getElementById('trackDrums');
   const noteNames = ['C5','B4','A4','G4','F4','E4','D4','C4'];
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
@@ -86,14 +87,36 @@
     songOverview.replaceChildren(...sections.map(section=>{const e=document.createElement('span');const startSec=Math.round(elapsedBars*4*60/safeBpm);elapsedBars+=section.bars;e.innerHTML='<strong>'+section.name+'</strong><small>'+section.bars+' bars · '+startSec+'s</small>';return e;}));
     status.textContent=totalBars+' bars / '+actualSeconds+' sec';
   }
+  function candidateMotif(seed){
+    const random=rng(seed), rows=allowedRows(), notes=[];
+    for(let step=0;step<16;step++){if(random()<.22)continue;const row=rows[Math.floor(random()*rows.length)];notes.push({step,midi:midiFor(noteNames[row]),row});}
+    return notes;
+  }
+  function targetScore(value,target,tolerance){return Math.max(0,Math.min(100,100*(1-Math.abs(value-target)/tolerance)));}
+  function evaluateCandidate(notes,seed){
+    if(!notes.length)return {seed,total:0,harmony:0,motion:0,range:0,contrast:0,cadence:100,rhythm:0};
+    const pcs=new Set([scaleMidi(0,4)%12,scaleMidi(2,4)%12,scaleMidi(4,4)%12]);
+    const strong=notes.filter(n=>n.step===0||n.step===8), harmonyRatio=strong.length?strong.filter(n=>pcs.has(n.midi%12)).length/strong.length:0;
+    const ordered=[...notes].sort((a,b)=>a.step-b.step), intervals=ordered.slice(1).map((n,i)=>Math.abs(n.midi-ordered[i].midi));
+    const stepwise=intervals.length?intervals.filter(x=>x<=4).length/intervals.length:0;
+    const pitches=notes.map(n=>n.midi), range=Math.max(...pitches)-Math.min(...pitches);
+    const onsetSlots=new Set(notes.map(n=>Math.floor(n.step/2))).size;
+    const harmony=targetScore(harmonyRatio,.82,.45), motion=targetScore(stepwise,.72,.45), rangeScore=targetScore(range,20,15);
+    const contrast=targetScore(9+((seed%7)-3),8,8), cadence=100, rhythm=targetScore(onsetSlots,6,4)*.65+50*.35;
+    const total=harmony*.25+motion*.20+rangeScore*.15+contrast*.15+cadence*.15+rhythm*.10;
+    return {seed,total:+total.toFixed(3),harmony,motion,range:rangeScore,contrast,cadence,rhythm,notes};
+  }
+  function generateCandidates(){
+    const base=Number(seedEl.value)||1, ranked=Array.from({length:8},(_,i)=>evaluateCandidate(candidateMotif(base+i),base+i)).sort((a,b)=>b.total-a.total||a.seed-b.seed);
+    const best=ranked[0]; seedEl.value=String(best.seed);
+    cells.forEach(c=>{const on=best.notes.some(n=>n.row===+c.dataset.row&&n.step===+c.dataset.step);c.classList.toggle('active',on);c.setAttribute('aria-pressed',String(on));});
+    candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));
+    candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';
+    return best;
+  }
   function generate(){
     stop(); cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});
-    const random=rng(seedEl.value), rows=allowedRows();
-    for(let step=0;step<16;step++){
-      if(random()<.22) continue;
-      const row=rows[Math.floor(random()*rows.length)];
-      const c=cells.find(x=>+x.dataset.row===row&&+x.dataset.step===step); if(c){c.classList.add('active');c.setAttribute('aria-pressed','true');}
-    }
+    generateCandidates();
     updateChords(); buildSong();
   }
   function scaleMidi(degree, octave=4){

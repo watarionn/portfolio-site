@@ -17,11 +17,12 @@
   const status = document.getElementById('playgroundStatus');
   const chordStrip = document.getElementById('chordStrip');
   const drumStrip = document.getElementById('drumStrip');
+  const songOverview = document.getElementById('songOverview');
   const trackMelody = document.getElementById('trackMelody'), trackChords = document.getElementById('trackChords'), trackBass = document.getElementById('trackBass'), trackDrums = document.getElementById('trackDrums');
   const noteNames = ['C5','B4','A4','G4','F4','E4','D4','C4'];
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
   const scales = {major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10]};
-  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4];
+  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [];
 
   function midiFor(name){
     const m=name.match(/^([A-G])(\d)$/); return 12*(Number(m[2])+1)+semitone[m[1]];
@@ -55,6 +56,17 @@
     const root=semitone[keyEl.value], ints=scales[scaleEl.value];
     return noteNames.map((n,i)=>({i,m:midiFor(n)})).filter(x=>ints.includes(((x.m-root)%12+12)%12)).map(x=>x.i);
   }
+  function buildSong(){
+    const random=rng((Number(seedEl.value)||1)+97), sections=['A','B','Chorus','Final'];
+    songBars=Array.from({length:32},(_,bar)=>{
+      const section=Math.floor(bar/8), local=bar%8, base=chordDegrees[local%4];
+      const degree=section===0?base:section===1?(local%4===3?4:base):section===2?(local%4===2?5:base):(local>=6?4:base);
+      return {section:sections[section],degree,variation:random()};
+    });
+    const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)), seconds=Math.round(32*4*60/safeBpm);
+    songOverview.replaceChildren(...sections.map((name,i)=>{const e=document.createElement('span');e.innerHTML='<strong>'+name+'</strong><small>8 bars · '+Math.round(i*8*4*60/safeBpm)+'s</small>';return e;}));
+    status.textContent='32 bars / '+seconds+' sec';
+  }
   function generate(){
     stop(); cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});
     const random=rng(seedEl.value), rows=allowedRows();
@@ -63,7 +75,7 @@
       const row=rows[Math.floor(random()*rows.length)];
       const c=cells.find(x=>+x.dataset.row===row&&+x.dataset.step===step); if(c){c.classList.add('active');c.setAttribute('aria-pressed','true');}
     }
-    updateChords(); status.textContent='Generated';
+    updateChords(); buildSong();
   }
   function scaleMidi(degree, octave=4){
     const root=60+semitone[keyEl.value], ints=scales[scaleEl.value];
@@ -99,24 +111,27 @@
     stop();
     const AudioCtor=window.AudioContext||window.webkitAudioContext;
     if(!AudioCtor){status.textContent='Audio unsupported';return;}
-    context ||= new AudioCtor(); context.resume();
+    context ||= new AudioCtor(); context.resume(); if(!songBars.length) buildSong();
     const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
-    const stepMs=60000/safeBpm/4;
-    for(let step=0;step<16;step++) timers.push(setTimeout(()=>{
+    const stepMs=60000/safeBpm/4, totalSteps=32*16;
+    for(let absolute=0;absolute<totalSteps;absolute++) timers.push(setTimeout(()=>{
+      const step=absolute%16, bar=Math.floor(absolute/16), info=songBars[bar];
       cells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step)); drumCells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));
-      if(trackMelody.checked) cells.filter(c=>c.classList.contains('active')&&+c.dataset.step===step).forEach(c=>tone(midiFor(noteNames[+c.dataset.row]),'triangle',.09,Math.max(.08,stepMs/1000*.8)));
-      const degree=chordDegrees[Math.floor(step/4)];
-      if(trackChords.checked && step%4===0){[0,2,4].forEach(d=>tone(scaleMidi(degree+d,4),'sine',.035,Math.max(.25,stepMs/1000*3.5)));}
-      if(trackBass.checked && step%4===0) tone(scaleMidi(degree,2),'square',.045,Math.max(.18,stepMs/1000*1.6));
-      if(trackDrums.checked && drumCells[step].classList.contains('active')) drum();
-      status.textContent='Playing '+(step+1)+'/16';
-    },step*stepMs));
-    timers.push(setTimeout(stop,16*stepMs+40));
+      if(trackMelody.checked) cells.filter(c=>c.classList.contains('active')&&+c.dataset.step===step).forEach(c=>{
+        let midi=midiFor(noteNames[+c.dataset.row]); if(info.section==='Chorus'&&info.variation>.35)midi+=12; if(info.section==='B'&&info.variation>.72)midi-=2;
+        tone(midi,'triangle',info.section==='Chorus'?.105:.075,Math.max(.08,stepMs/1000*.8));
+      });
+      if(trackChords.checked && step===0)[0,2,4].forEach(d=>tone(scaleMidi(info.degree+d,4),'sine',.03,Math.max(.25,stepMs/1000*12)));
+      if(trackBass.checked && step%4===0)tone(scaleMidi(info.degree,2),'square',.04,Math.max(.18,stepMs/1000*1.6));
+      if(trackDrums.checked && drumCells[step].classList.contains('active'))drum();
+      status.textContent=info.section+' · '+(bar+1)+'/32 bars';
+    },absolute*stepMs));
+    timers.push(setTimeout(stop,totalSteps*stepMs+80));
   }
-  buildRoll(); buildDrums(); updateChords();
+  buildRoll(); buildDrums(); updateChords(); buildSong();
   document.getElementById('generateMelody').addEventListener('click',generate);
   document.getElementById('clearMelody').addEventListener('click',()=>{stop();cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});});
   document.getElementById('playMelody').addEventListener('click',play);
   document.getElementById('stopMelody').addEventListener('click',stop);
-  keyEl.addEventListener('change',updateChords); scaleEl.addEventListener('change',updateChords);
+  keyEl.addEventListener('change',()=>{updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{updateChords();buildSong();}); bpm.addEventListener('change',buildSong);
 })();

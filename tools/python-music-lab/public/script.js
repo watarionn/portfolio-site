@@ -43,12 +43,12 @@
     return noteNames.map((n,i)=>({i,m:midiFor(n)})).filter(x=>ints.includes(((x.m-root)%12+12)%12)).map(x=>x.i);
   }
   function generate(){
-    stop(); cells.forEach(c=>c.classList.remove('active'));
+    stop(); cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});
     const random=rng(seedEl.value), rows=allowedRows();
     for(let step=0;step<16;step++){
       if(random()<.22) continue;
       const row=rows[Math.floor(random()*rows.length)];
-      const c=cells.find(x=>+x.dataset.row===row&&+x.dataset.step===step); if(c)c.classList.add('active');
+      const c=cells.find(x=>+x.dataset.row===row&&+x.dataset.step===step); if(c){c.classList.add('active');c.setAttribute('aria-pressed','true');}
     }
     updateChords(); status.textContent='Generated';
   }
@@ -79,7 +79,7 @@
   }
   buildRoll(); updateChords();
   document.getElementById('generateMelody').addEventListener('click',generate);
-  document.getElementById('clearMelody').addEventListener('click',()=>{stop();cells.forEach(c=>c.classList.remove('active'));});
+  document.getElementById('clearMelody').addEventListener('click',()=>{stop();cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});});
   document.getElementById('playMelody').addEventListener('click',play);
   document.getElementById('stopMelody').addEventListener('click',stop);
   keyEl.addEventListener('change',updateChords); scaleEl.addEventListener('change',updateChords);

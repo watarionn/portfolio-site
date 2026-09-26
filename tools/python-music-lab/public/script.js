@@ -66,8 +66,9 @@
     updateChords(); status.textContent='Generated';
   }
   function scaleMidi(degree, octave=4){
-    const root=60+semitone[keyEl.value], ints=scales[scaleEl.value], d=((degree%7)+7)%7;
-    return root+ints[d]+12*(octave-4);
+    const root=60+semitone[keyEl.value], ints=scales[scaleEl.value];
+    const normalized=((degree%7)+7)%7, octaveShift=Math.floor(degree/7);
+    return root+ints[normalized]+12*(octave-4+octaveShift);
   }
   function chordName(degree){
     const names=scaleEl.value==='major'?['I','ii','iii','IV','V','vi','vii°']:['i','ii°','III','iv','v','VI','VII'];
@@ -96,7 +97,8 @@
   }
   function play(){
     stop(); context ||= new (window.AudioContext||window.webkitAudioContext)(); context.resume();
-    const stepMs=60000/Math.max(60,Math.min(200,+bpm.value||120))/4;
+    const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
+    const stepMs=60000/safeBpm/4;
     for(let step=0;step<16;step++) timers.push(setTimeout(()=>{
       cells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step)); drumCells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));
       if(trackMelody.checked) cells.filter(c=>c.classList.contains('active')&&+c.dataset.step===step).forEach(c=>tone(midiFor(noteNames[+c.dataset.row]),'triangle',.09,Math.max(.08,stepMs/1000*.8)));

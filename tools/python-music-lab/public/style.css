@@ -41,3 +41,8 @@ footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}.back-l
 @media(max-width:620px){.composer-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.composer-controls label,.composer-controls button{width:100%;min-width:0}.composer-controls input,.composer-controls select{min-width:0;width:100%;max-width:none}.track-mixer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.track-mixer label{min-width:0}.chord-strip{grid-template-columns:repeat(2,1fr)}.song-overview{grid-template-columns:repeat(2,1fr)}}
 
 @media(max-width:420px){.page{width:calc(100% - 16px)}.playground{padding:14px}.composer-controls{grid-template-columns:1fr 1fr}.composer-controls label{padding:7px 6px}.composer-controls button{padding:9px 6px}.song-overview span{min-width:0}.song-overview strong,.song-overview small{overflow-wrap:anywhere}}
+
+.candidate-panel{margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+.candidate-heading{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}.candidate-heading span,.candidate-note{font-size:.78rem;color:var(--muted)}
+.candidate-ranking{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:9px}.candidate-card{padding:8px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.02)}.candidate-card.best{border-color:var(--accent)}.candidate-card strong,.candidate-card small{display:block}.candidate-card small{color:var(--muted);font-size:.72rem}.candidate-note{margin:9px 0 0}
+@media(max-width:620px){.candidate-ranking{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -48,6 +48,11 @@
         <label><input type="checkbox" id="trackDrums" checked> Drums</label>
       </div>
       <div class="song-overview" id="songOverview" aria-label="曲構成"></div>
+      <div class="candidate-panel" aria-live="polite">
+        <div class="candidate-heading"><strong>Candidate Evaluation</strong><span id="candidateSummary">曲を生成すると8候補を比較します</span></div>
+        <div class="candidate-ranking" id="candidateRanking"></div>
+        <p class="candidate-note">スコアは候補を絞るための作曲ヒューリスティックです。最終的な好みは、実際に聴いて選びます。</p>
+      </div>
       <div class="chord-strip" id="chordStrip" aria-label="モチーフのコード進行"></div>
       <div class="drum-strip-wrap"><div class="drum-strip" id="drumStrip" aria-label="16ステップ ドラムパターン"></div></div>
       <div class="piano-roll-wrap"><div class="piano-roll" id="pianoRoll" role="grid" aria-label="16ステップ ピアノロール"></div></div>

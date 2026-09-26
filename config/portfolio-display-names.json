@@ -197,6 +197,13 @@
       "japaneseName": "画像仕立て室",
       "englishName": "Image Studio",
       "route": "/IMAGE_STUDIO/"
+    },
+    {
+      "number": "028",
+      "projectId": "ai-judgement-lab",
+      "japaneseName": "AI判断・予測実験室",
+      "englishName": "AI Judgement & Prediction Lab",
+      "route": "/AI_JUDGEMENT_LAB/"
     }
   ]
 }

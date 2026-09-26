@@ -22,7 +22,7 @@ $base = rtrim((string)($config['base_path'] ?? '/SHISHA'), '/');
             <p class="hero-lead">地域・駅・現在地・営業日時という複数の入口から、目的に合う店舗へ辿り着くための検索ツールです。検索画面だけでなく、営業時間の確認日や出典を扱うデータ整備の考え方まで含めて設計しています。</p>
             <div class="hero-actions">
                 <a class="primary-link" href="#collector">検索を使う</a>
-                <a class="secondary-link" href="<?=htmlspecialchars($base, ENT_QUOTES, 'UTF-8')?>/advisor/">Shisha Advisor</a>
+                <a class="secondary-link" href="https://advisor-production-production.up.railway.app/">Shisha Advisor</a>
                 <a class="secondary-link" href="https://github.com/watarionn/portfolio-site/tree/main/services/shisha/public" target="_blank" rel="noopener">公開ソースを見る</a>
             </div>
         </div>

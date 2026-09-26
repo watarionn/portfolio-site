@@ -168,7 +168,7 @@
       "projectId": "shisha-advisor",
       "japaneseName": "シーシャアドバイザー",
       "englishName": "Shisha Advisor",
-      "route": "/SHISHA/advisor/index.html"
+      "route": "https://advisor-production-production.up.railway.app/"
     },
     {
       "number": "024",

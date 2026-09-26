@@ -22,6 +22,7 @@
   const trackMelody = document.getElementById('trackMelody'), trackChords = document.getElementById('trackChords'), trackBass = document.getElementById('trackBass'), trackDrums = document.getElementById('trackDrums');
   const noteNames = ['C5','B4','A4','G4','F4','E4','D4','C4'];
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+  const sectionGrammar={A:{density:.66,shift:0,energy:.56,style:'sparse',nct:.20,cadence:'half'},B:{density:.78,shift:2,energy:.74,style:'flowing',nct:.28,cadence:'half'},Chorus:{density:.92,shift:9,energy:.96,style:'driving',nct:.32,cadence:'authentic'},Interlude:{density:.58,shift:0,energy:.64,style:'sparse',nct:.18,cadence:'none'},Final:{density:.90,shift:7,energy:.92,style:'driving',nct:.24,cadence:'authentic'},Intro:{density:.48,shift:-2,energy:.42,style:'sparse',nct:.14,cadence:'none'},A2:{density:.72,shift:2,energy:.68,style:'flowing',nct:.22,cadence:'half'},B2:{density:.84,shift:4,energy:.82,style:'flowing',nct:.28,cadence:'half'}};
   const scales = {major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10]};
   let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [];
 
@@ -72,7 +73,8 @@
         else if(section.name==='B'&&local%4===3)degree=4;
         else if(section.name==='Interlude'&&local%4===1)degree=3;
         else if(section.name==='Final'&&local>=section.bars-2)degree=local===section.bars-1?0:4;
-        songBars.push({section:section.name,degree,variation:random(),sectionIndex});
+        const grammar=sectionGrammar[section.name]||sectionGrammar.A;
+        songBars.push({section:section.name,degree,variation:random(),sectionIndex,localBar:local,sectionBars:section.bars,...grammar});
       }
     });
     const actualSeconds=Math.round(totalBars*4*60/safeBpm); let elapsedBars=0;
@@ -132,12 +134,26 @@
       const step=absolute%16, bar=Math.floor(absolute/16), info=songBars[bar];
       cells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step)); drumCells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));
       if(trackMelody.checked) cells.filter(c=>c.classList.contains('active')&&+c.dataset.step===step).forEach(c=>{
-        let midi=midiFor(noteNames[+c.dataset.row]); if(info.section==='Chorus'&&info.variation>.35)midi+=12; if(info.section==='B'&&info.variation>.72)midi-=2;
-        tone(midi,'triangle',info.section==='Chorus'?.105:.075,Math.max(.08,stepMs/1000*.8));
+        const phraseRandom=rng((Number(seedEl.value)||1)+bar*131+step*17+97)();
+        if(step!==0&&step!==8&&phraseRandom>info.density)return;
+        let midi=midiFor(noteNames[+c.dataset.row])+info.shift;
+        if(info.section.includes('Chorus'))midi+=Math.round((midi-67)*.18);
+        if((info.cadence==='authentic'||info.cadence==='half')&&info.localBar===info.sectionBars-1&&step>=12)midi=scaleMidi(info.cadence==='authentic'?0:4,5);
+        tone(midi,'triangle',.055+.045*info.energy,Math.max(.08,stepMs/1000*(info.style==='sparse'?1.7:.8)));
       });
-      if(trackChords.checked && step===0)[0,2,4].forEach(d=>tone(scaleMidi(info.degree+d,4),'sine',.03,Math.max(.25,stepMs/1000*12)));
-      if(trackBass.checked && step%4===0)tone(scaleMidi(info.degree,2),'square',.04,Math.max(.18,stepMs/1000*1.6));
-      if(trackDrums.checked && drumCells[step].classList.contains('active'))drum();
+      if(trackChords.checked && step===0)[0,2,4].forEach(d=>tone(scaleMidi(info.degree+d,4),'sine',.022+.014*info.energy,Math.max(.25,stepMs/1000*12)));
+      if(trackBass.checked && step%4===0){
+        const beat=step/4, bassDegree=beat===2?info.degree+4:info.degree;
+        let bassMidi=scaleMidi(bassDegree,2)+(beat===1||beat===3?12:0);
+        const next=songBars[bar+1]; if(beat===3&&next&&next.energy>info.energy)bassMidi=scaleMidi(next.degree,2)-1;
+        tone(bassMidi,'square',.03+.02*info.energy,Math.max(.18,stepMs/1000*1.6));
+      }
+      if(trackDrums.checked){
+        if(step%2===0)tone(info.energy>.9&&step===14?82:78,'square',.008+.008*info.energy,.035);
+        if(step===0||step===8||(info.energy>=.75&&step===12))drum();
+        if(step===4||step===12)tone(50,'triangle',.035,.07);
+        const next=songBars[bar+1]; if(step>=10&&info.localBar===info.sectionBars-1&&next&&next.energy>info.energy)tone(45+(step-10), 'triangle',.025,.06);
+      }
       status.textContent=info.section+' · '+(bar+1)+'/'+songBars.length+' bars';
       absolute++;
       timers=[setTimeout(tick,stepMs)];

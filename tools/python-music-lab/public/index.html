@@ -27,7 +27,7 @@
 
     <section class="playground" aria-labelledby="playground-title">
       <div class="playground-heading">
-        <div><p class="kicker">PLAYGROUND / BROWSER COMPOSER</p><h2 id="playground-title">ページの中で作曲する</h2><p>1小節のモチーフを編集し、Seedとルールから32小節の曲へ展開します。A / B / Chorusを持つ30秒以上の構成を、ブラウザ内だけで作曲・再生できます。</p></div>
+        <div><p class="kicker">PLAYGROUND / BROWSER COMPOSER</p><h2 id="playground-title">ページの中で作曲する</h2><p>1小節のモチーフを編集し、Seedとルールから30秒〜1分30秒の曲へ展開します。A / B / Chorusなどの構成を、ブラウザ内だけで作曲・再生できます。</p></div>
         <div class="playground-status" id="playgroundStatus">Ready</div>
       </div>
       <div class="composer-controls">
@@ -35,6 +35,7 @@
         <label>Key <select id="composerKey"><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>A</option><option>B</option></select></label>
         <label>Scale <select id="composerScale"><option value="major">Major</option><option value="minor">Minor</option></select></label>
         <label>Seed <input id="composerSeed" type="number" value="260927"></label>
+        <label>Length <select id="composerLength"><option value="30">Short ≈30s</option><option value="60" selected>Standard ≈1min</option><option value="90">Long ≈1m30s</option></select></label>
         <button type="button" id="generateMelody">曲を生成</button>
         <button type="button" id="clearMelody">クリア</button>
         <button type="button" id="playMelody">▶ 曲を再生</button>
@@ -50,7 +51,7 @@
       <div class="chord-strip" id="chordStrip" aria-label="モチーフのコード進行"></div>
       <div class="drum-strip-wrap"><div class="drum-strip" id="drumStrip" aria-label="16ステップ ドラムパターン"></div></div>
       <div class="piano-roll-wrap"><div class="piano-roll" id="pianoRoll" role="grid" aria-label="16ステップ ピアノロール"></div></div>
-      <p class="playground-note">下の16ステップは曲全体の素材になる1小節モチーフです。曲を生成すると、モチーフを反復・変化させながら A 8小節 → B 8小節 → Chorus 8小節 → Final 8小節の全32小節へ展開します。同じSeedと設定なら同じ曲を再現します。</p>
+      <p class="playground-note">下の16ステップは曲全体の素材になる1小節モチーフです。曲を生成すると、選んだ長さに合わせて必要な小節数を計算し、モチーフを反復・変化させながら複数セクションへ展開します。同じSeed・設定・長さなら同じ曲を再現します。</p>
     </section>
 
     <section class="player-panel" aria-labelledby="sample-title">

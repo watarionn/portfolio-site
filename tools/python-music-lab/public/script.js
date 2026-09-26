@@ -14,6 +14,7 @@
   const keyEl = document.getElementById('composerKey');
   const scaleEl = document.getElementById('composerScale');
   const seedEl = document.getElementById('composerSeed');
+  const lengthEl = document.getElementById('composerLength');
   const status = document.getElementById('playgroundStatus');
   const chordStrip = document.getElementById('chordStrip');
   const drumStrip = document.getElementById('drumStrip');
@@ -57,15 +58,26 @@
     return noteNames.map((n,i)=>({i,m:midiFor(n)})).filter(x=>ints.includes(((x.m-root)%12+12)%12)).map(x=>x.i);
   }
   function buildSong(){
-    const random=rng((Number(seedEl.value)||1)+97), sections=['A','B','Chorus','Final'];
-    songBars=Array.from({length:32},(_,bar)=>{
-      const section=Math.floor(bar/8), local=bar%8, base=chordDegrees[local%4];
-      const degree=section===0?base:section===1?(local%4===3?4:base):section===2?(local%4===2?5:base):(local>=6?4:base);
-      return {section:sections[section],degree,variation:random()};
+    const random=rng((Number(seedEl.value)||1)+97), safeBpm=Math.max(60,Math.min(200,+bpm.value||120));
+    const targetSeconds=Number(lengthEl.value)||60;
+    const totalBars=Math.max(8,Math.round(targetSeconds*safeBpm/240));
+    const templates=targetSeconds<=35?['A','B','Chorus','Final']:targetSeconds<=70?['A','B','Chorus','Interlude','Chorus','Final']:['Intro','A','B','Chorus','Interlude','A2','B2','Chorus','Final'];
+    const base=Math.floor(totalBars/templates.length), extra=totalBars%templates.length;
+    const sections=templates.map((name,i)=>({name,bars:base+(i<extra?1:0)}));
+    songBars=[]; let absoluteBar=0;
+    sections.forEach((section,sectionIndex)=>{
+      for(let local=0;local<section.bars;local++,absoluteBar++){
+        const baseDegree=chordDegrees[local%4]; let degree=baseDegree;
+        if(section.name.includes('Chorus')&&local%4===2)degree=5;
+        else if(section.name==='B'&&local%4===3)degree=4;
+        else if(section.name==='Interlude'&&local%4===1)degree=3;
+        else if(section.name==='Final'&&local>=section.bars-2)degree=local===section.bars-1?0:4;
+        songBars.push({section:section.name,degree,variation:random(),sectionIndex});
+      }
     });
-    const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)), seconds=Math.round(32*4*60/safeBpm);
-    songOverview.replaceChildren(...sections.map((name,i)=>{const e=document.createElement('span');e.innerHTML='<strong>'+name+'</strong><small>8 bars · '+Math.round(i*8*4*60/safeBpm)+'s</small>';return e;}));
-    status.textContent='32 bars / '+seconds+' sec';
+    const actualSeconds=Math.round(totalBars*4*60/safeBpm); let elapsedBars=0;
+    songOverview.replaceChildren(...sections.map(section=>{const e=document.createElement('span');const startSec=Math.round(elapsedBars*4*60/safeBpm);elapsedBars+=section.bars;e.innerHTML='<strong>'+section.name+'</strong><small>'+section.bars+' bars · '+startSec+'s</small>';return e;}));
+    status.textContent=totalBars+' bars / '+actualSeconds+' sec';
   }
   function generate(){
     stop(); cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});
@@ -113,7 +125,7 @@
     if(!AudioCtor){status.textContent='Audio unsupported';return;}
     context ||= new AudioCtor(); context.resume(); if(!songBars.length) buildSong();
     const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
-    const stepMs=60000/safeBpm/4, totalSteps=32*16;
+    const stepMs=60000/safeBpm/4, totalSteps=songBars.length*16;
     for(let absolute=0;absolute<totalSteps;absolute++) timers.push(setTimeout(()=>{
       const step=absolute%16, bar=Math.floor(absolute/16), info=songBars[bar];
       cells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step)); drumCells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));
@@ -124,7 +136,7 @@
       if(trackChords.checked && step===0)[0,2,4].forEach(d=>tone(scaleMidi(info.degree+d,4),'sine',.03,Math.max(.25,stepMs/1000*12)));
       if(trackBass.checked && step%4===0)tone(scaleMidi(info.degree,2),'square',.04,Math.max(.18,stepMs/1000*1.6));
       if(trackDrums.checked && drumCells[step].classList.contains('active'))drum();
-      status.textContent=info.section+' · '+(bar+1)+'/32 bars';
+      status.textContent=info.section+' · '+(bar+1)+'/'+songBars.length+' bars';
     },absolute*stepMs));
     timers.push(setTimeout(stop,totalSteps*stepMs+80));
   }
@@ -133,5 +145,5 @@
   document.getElementById('clearMelody').addEventListener('click',()=>{stop();cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});});
   document.getElementById('playMelody').addEventListener('click',play);
   document.getElementById('stopMelody').addEventListener('click',stop);
-  keyEl.addEventListener('change',()=>{updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{updateChords();buildSong();}); bpm.addEventListener('change',buildSong);
+  keyEl.addEventListener('change',()=>{updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{updateChords();buildSong();}); bpm.addEventListener('change',buildSong); lengthEl.addEventListener('change',buildSong);
 })();

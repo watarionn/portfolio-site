@@ -3,7 +3,7 @@
   document.querySelectorAll('[data-seek]').forEach((button) => {
     button.addEventListener('click', () => {
       if (!audio) return;
-      audio.currentTime = Number(button.dataset.seek || 0);
+      stop(); audio.currentTime = Number(button.dataset.seek || 0);
       audio.play().catch(() => {});
     });
   });
@@ -147,14 +147,14 @@
   }
   function stop(){
     timers.forEach(clearTimeout); timers=[];
-    activeNodes.forEach(n=>{try{n.stop();}catch{}}); activeNodes=[];
+    activeNodes.forEach(n=>{try{n.onended=null;n.stop();n.disconnect();}catch{}}); activeNodes=[];
     cells.forEach(c=>c.classList.remove('playing')); drumCells.forEach(c=>c.classList.remove('playing')); status.textContent='Ready';
   }
   function play(){
     stop();
     const AudioCtor=window.AudioContext||window.webkitAudioContext;
     if(!AudioCtor){status.textContent='Audio unsupported';return;}
-    context ||= new AudioCtor(); context.resume(); if(!songBars.length) buildSong();
+    context ||= new AudioCtor(); context.resume(); ensureAudioGraph(); if(audio&&!audio.paused)audio.pause(); if(!songBars.length) buildSong();
     const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
     const stepMs=60000/safeBpm/4, totalSteps=songBars.length*16;
     let absolute=0;

@@ -96,7 +96,10 @@
     cells.forEach(c=>c.classList.remove('playing')); drumCells.forEach(c=>c.classList.remove('playing')); status.textContent='Ready';
   }
   function play(){
-    stop(); context ||= new (window.AudioContext||window.webkitAudioContext)(); context.resume();
+    stop();
+    const AudioCtor=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtor){status.textContent='Audio unsupported';return;}
+    context ||= new AudioCtor(); context.resume();
     const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
     const stepMs=60000/safeBpm/4;
     for(let step=0;step<16;step++) timers.push(setTimeout(()=>{

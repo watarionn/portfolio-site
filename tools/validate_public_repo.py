@@ -49,7 +49,7 @@ EXPECTED_STAGE9_CHEATSHEET_TREE = "9af9ecef421fcbf7329a9a9c1e23d8a1bae30d9a"
 EXPECTED_STAGE9_CHEATSHEET_FILE_COUNT = 9
 SHISHA_ROOT = "services/shisha/"
 SHISHA_PUBLIC_ROOT = "services/shisha/public/"
-EXPECTED_STAGE6_SHISHA_TREE = "82818315f5ab62572cf88c5cbad4b762ebdbcdee"
+EXPECTED_STAGE6_SHISHA_TREE = "ec559d63c9a5b1ce8588a2c7719ebfb940efab05"
 EXPECTED_STAGE6_SHISHA_FILE_COUNT = 14
 SECRET_ROOM_ROOT = "apps/secret-room/"
 SECRET_ROOM_PUBLIC_ROOT = "apps/secret-room/public/"
@@ -156,7 +156,7 @@ EXPECTED_STAGE6_SHISHA_BLOBS = {
     "services/shisha/public/config.example.php": "a45bee891e8ea336b414ab415ddf27b22b4faef8",
     "services/shisha/public/includes/bootstrap.php": "922d9948617b7f0cc3561c4c96686363c868fe8f",
     "services/shisha/public/includes/postal-location-map.php": "dd058d818928bc73bac1ea90bcbdb97ddea41703",
-    "services/shisha/public/index.php": "21bb2ce12b53b895e8eeb5811c3d0f787122adf6",
+    "services/shisha/public/index.php": "f1c8857225d90324685c709c39b6b0ab582b7348",
 }
 
 REQUIRED_STAGE7_SECRET_FILES = {

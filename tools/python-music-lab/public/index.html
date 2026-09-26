@@ -27,7 +27,7 @@
 
     <section class="playground" aria-labelledby="playground-title">
       <div class="playground-heading">
-        <div><p class="kicker">PLAYGROUND / BROWSER COMPOSER</p><h2 id="playground-title">ページの中で作曲する</h2><p>16ステップに音を置き、Seedからメロディを作り、その場で再生できます。処理と発音はブラウザ内だけで完結します。</p></div>
+        <div><p class="kicker">PLAYGROUND / BROWSER COMPOSER</p><h2 id="playground-title">ページの中で作曲する</h2><p>16ステップに音を置き、Seedからメロディを作り、コード・ベース・ドラムと一緒にその場で再生できます。処理と発音はブラウザ内だけで完結します。</p></div>
         <div class="playground-status" id="playgroundStatus">Ready</div>
       </div>
       <div class="composer-controls">
@@ -40,9 +40,16 @@
         <button type="button" id="playMelody">▶ 再生</button>
         <button type="button" id="stopMelody">■ 停止</button>
       </div>
+      <div class="track-mixer" aria-label="トラックミキサー">
+        <label><input type="checkbox" id="trackMelody" checked> Melody</label>
+        <label><input type="checkbox" id="trackChords" checked> Chords</label>
+        <label><input type="checkbox" id="trackBass" checked> Bass</label>
+        <label><input type="checkbox" id="trackDrums" checked> Drums</label>
+      </div>
       <div class="chord-strip" id="chordStrip" aria-label="コード進行"></div>
+      <div class="drum-strip" id="drumStrip" aria-label="16ステップ ドラムパターン"></div>
       <div class="piano-roll-wrap"><div class="piano-roll" id="pianoRoll" role="grid" aria-label="16ステップ ピアノロール"></div></div>
-      <p class="playground-note">マスをクリックすると音符を置いたり消したりできます。Seed生成は同じ設定なら同じパターンを再現します。</p>
+      <p class="playground-note">ピアノロールはクリック編集できます。コードは4小節、ドラムは16ステップで鳴り、各トラックは個別にON/OFFできます。Seed生成は同じ設定なら同じパターンを再現します。</p>
     </section>
 
     <section class="player-panel" aria-labelledby="sample-title">

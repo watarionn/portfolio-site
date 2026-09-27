@@ -196,7 +196,7 @@
     audioGraph={mix,saturator,master,buses:{Melody:makeBus('Melody',.12,true,true),Chords:makeBus('Chords',-.18,false,true),Bass:makeBus('Bass',0,false,false),Drums:makeBus('Drums',0,false,true)}};
   }
   function movingAverageStage(cutoff){
-    const window=Math.max(1,Math.min(512,Math.round(context.sampleRate/(2*cutoff))));
+    const referenceRate=44100,window=Math.max(1,Math.min(512,Math.round(referenceRate/(2*cutoff))));
     if(window<=1)return context.createGain();
     if(context.createIIRFilter){const feedforward=Array(window).fill(1/window);return context.createIIRFilter(feedforward,[1]);}
     const filter=context.createBiquadFilter();filter.type='lowpass';filter.frequency.value=cutoff;filter.Q.value=.35;return filter;

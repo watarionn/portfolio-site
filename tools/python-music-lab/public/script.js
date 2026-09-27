@@ -136,7 +136,7 @@
     return {seed,total:+total.toFixed(3),harmony,motion,range:rangeScore,contrast,cadence,rhythm,notes:motif,events};
   }
   function generateCandidates(){
-    buildSong();const base=Number(seedEl.value)||1,ranked=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed),best=ranked[0];seedEl.value=String(best.seed);
+    buildSong();const base=Number(seedEl.value)||1,ranked=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed),best=ranked[0];
     cells.forEach(c=>{const step=Math.floor(+c.dataset.step/2),event=best.events.find(e=>e.bar===0&&e.step===step),on=event&&midiFor(noteNames[+c.dataset.row])===event.midi;c.classList.toggle('active',!!on);c.setAttribute('aria-pressed',String(!!on));});
     candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';selectedSongEvents=best.events;selectedTrackEvents=parityTrackEvents();selectedSeed=best.seed;return best;
   }
@@ -222,6 +222,25 @@
     for(let i=0;i<count;i++){const t=i/rate;let sample=0;if(note===36){const phase=2*Math.PI*(105*t-42*t*t);sample=Math.sin(phase)*Math.exp(-t*13)*.72*v;}else if(note===38){sample=(.72*noise[i]+.28*Math.sin(2*Math.PI*185*t))*Math.exp(-t*17)*.46*v;}else if(note===42||note===46){sample=noise[i]*Math.exp(-t*(note===42?46:22))*.22*v;}else if(note===49){sample=(noise[i]+Math.sin(2*Math.PI*4600*t)*.15)*Math.exp(-t*5.2)*.26*v;}else sample=noise[i]*Math.exp(-t*30)*.15*v;data[i]=sample;}
     const panValue=note===38?.05:note===42?-.25:note===46?.25:note===49?.30:0,angle=(panValue+1)*Math.PI/4,stereo=context.createBuffer(2,count,rate),left=stereo.getChannelData(0),right=stereo.getChannelData(1);for(let i=0;i<count;i++){left[i]=data[i]*Math.cos(angle);right[i]=data[i]*Math.sin(angle);}
     const source=context.createBufferSource();source.buffer=stereo;source.connect(audioGraph.buses.Drums);source.start();activeNodes.push(source);source.onended=()=>{activeNodes=activeNodes.filter(n=>n!==source);};
+  }
+  function movingAverageFloat64(stereo,window){
+    const out=[new Float64Array(stereo[0].length),new Float64Array(stereo[1].length)];
+    for(let ch=0;ch<2;ch++){let sum=0;const csum=new Float64Array(stereo[ch].length);for(let i=0;i<stereo[ch].length;i++){sum+=stereo[ch][i];csum[i]=sum;out[ch][i]=i<window-1?sum/(i+1):(sum-(i>=window?csum[i-window]:0))/window;}}return out;
+  }
+  function renderTonalFloat64(midi,name,duration,velocity){
+    const cfg=voiceConfig[name],rate=44100,[attack,decay,sustain,release]=cfg.adsr,noteSamples=Math.max(1,Math.round(duration*rate)),releaseSamples=Math.max(0,Math.round(release*rate)),count=noteSamples+releaseSamples,attackSamples=Math.min(noteSamples,Math.max(0,Math.round(attack*rate))),decaySamples=Math.min(noteSamples-attackSamples,Math.max(0,Math.round(decay*rate))),sustainSamples=noteSamples-attackSamples-decaySamples,envelope=new Float64Array(count);
+    for(let i=0;i<attackSamples;i++)envelope[i]=i/attackSamples;for(let i=0;i<decaySamples;i++)envelope[attackSamples+i]=1+(sustain-1)*(i/decaySamples);for(let i=0;i<sustainSamples;i++)envelope[attackSamples+decaySamples+i]=sustain;if(releaseSamples){const level=envelope[noteSamples-1]||sustain;for(let i=0;i<releaseSamples;i++)envelope[noteSamples+i]=releaseSamples===1?0:level*(1-i/(releaseSamples-1));}
+    const left=new Float64Array(count),right=new Float64Array(count),base=hz(midi),amplitudeSum=cfg.layers.reduce((sum,l)=>sum+Math.abs(l[1]),0)||1,angle=(cfg.pan+1)*Math.PI/4,panL=Math.cos(angle),panR=Math.sin(angle);
+    for(let i=0;i<count;i++){const t=i/rate;let mono=0;for(const [type,level,octave,detune] of cfg.layers){const frequency=base*Math.pow(2,octave)*Math.pow(2,detune/1200),cycles=frequency*t,wrapped=cycles-Math.floor(cycles),phase=2*Math.PI*wrapped,kind=type==='sawtooth'?'saw':type;const wave=kind==='sine'?Math.sin(phase):kind==='square'?(wrapped<.5?1:-1):kind==='triangle'?1-4*Math.abs(wrapped-.5):2*wrapped-1;mono+=level*wave;}mono=mono/amplitudeSum*envelope[i]*velocity*cfg.gain;left[i]=mono*panL;right[i]=mono*panR;}return [left,right];
+  }
+  function renderSongTracksFloat64(){
+    const rate=44100,safeBpm=Math.max(60,Math.min(200,+bpm.value||120)),beatSeconds=60/safeBpm,eighthSeconds=beatSeconds/2,releaseMax=Math.max(...Object.values(voiceConfig).map(v=>v.adsr[3])),frames=Math.ceil((songBars.length*4*beatSeconds+Math.max(2.4,releaseMax+.4))*rate),tracks={Melody:[new Float64Array(frames),new Float64Array(frames)],Chords:[new Float64Array(frames),new Float64Array(frames)],Bass:[new Float64Array(frames),new Float64Array(frames)],Drums:[new Float64Array(frames),new Float64Array(frames)]};
+    const add=(name,start,pcm)=>{const offset=Math.round(start*rate);for(let ch=0;ch<2;ch++)for(let i=0;i<pcm[ch].length&&offset+i<frames;i++)tracks[name][ch][offset+i]+=pcm[ch][i];};
+    if(trackMelody.checked)selectedSongEvents.forEach(e=>add('Melody',(e.bar*4+e.step*.5)*beatSeconds,renderTonalFloat64(e.midi,'Melody',e.duration*eighthSeconds,e.velocity/127)));
+    if(trackChords.checked)selectedTrackEvents.chords.forEach(e=>add('Chords',(e.bar*4+e.beat)*beatSeconds,renderTonalFloat64(e.note,'Chords',e.duration*beatSeconds,e.velocity/127)));
+    if(trackBass.checked)selectedTrackEvents.bass.forEach(e=>add('Bass',(e.bar*4+e.beat)*beatSeconds,renderTonalFloat64(e.note,'Bass',e.duration*beatSeconds,e.velocity/127)));
+    for(const name of ['Melody','Chords','Bass']){const window=Math.max(1,Math.min(512,Math.round(rate/(2*voiceConfig[name].cutoff))));tracks[name]=movingAverageFloat64(movingAverageFloat64(tracks[name],window),window);}
+    return {rate,frames,tracks};
   }
   function stop(){
     timers.forEach(clearTimeout); timers=[];

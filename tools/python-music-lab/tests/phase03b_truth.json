@@ -1,0 +1,19 @@
+{
+  "fixture": "phase02b-selected-candidate-04",
+  "seed": 2026091805,
+  "bpm": 128,
+  "sample_rate": 44100,
+  "frames": 2090340,
+  "duration_seconds": 47.4,
+  "source_peak": 0.745046722373536,
+  "normalization_gain": 1.234821887504056,
+  "rms": 0.14407635522121617,
+  "sha256": {
+    "events_json": "e9c48f84e9bbbe3cfb099258d481ebf0d8dc7a319806397fa617680f2de02080",
+    "track_melody_float32_le": "fd210e72f25c86ad8052fd8e9ede41f70acfe6b89b55eb6caf9fcb89ff5bd93a",
+    "track_chords_float32_le": "4869adb670778456131482bd46869c80e749fbb1c6ea5df84aa38cf32dd65311",
+    "track_bass_float32_le": "98e95d510c13867a30fc0df5fb8c7bf871d8052499addb0ca52185f582e7452f",
+    "track_drums_float32_le": "94e035004f82d157b9c345c7a8860e5c72950f01f15bb681172437f9d2a52b83",
+    "final_mix_float32_le": "235b0979ec1d249fbf54444295b339f58701bf9110a2ace77f84f9e389ab1be0"
+  }
+}

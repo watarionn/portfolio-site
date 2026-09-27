@@ -120,8 +120,8 @@
       else if(random.random()<info.nct){const pcs=new Set(chord.map(n=>n%12)),cand=ext.filter(n=>!pcs.has(n%12)&&Math.abs(n-note)>0&&Math.abs(n-note)<=4);if(cand.length){const dist=Math.min(...cand.map(n=>Math.abs(n-note))),near=cand.filter(n=>Math.abs(n-note)===dist);note=random.choice(near);}}
       if(info.localBar%4===3&&m.step>=6)note=nearest([baseScale[0],baseScale[0]+12,baseScale[0]+24],note);
       if(info.localBar===info.sectionBars-1&&m.step>=6&&info.cadence!=='none')note=nearest([scaleMidi(info.cadence==='authentic'?0:4,4),scaleMidi(info.cadence==='authentic'?0:4,5)],note);
-      note=Math.max(52,Math.min(91,note));let duration=info.style==='driving'?1:m.duration;if(info.style==='sparse'&&m.step!==0&&m.step!==4&&random.random()<.35)duration=Math.min(2,duration+1);duration=Math.min(duration,8-m.step);
-      if(events.length&&bar*8+m.step<events.at(-1).bar*8+events.at(-1).step+events.at(-1).duration)return;events.push({bar,step:m.step,midi:note,duration,section:info.section});
+      note=Math.max(52,Math.min(91,note));const velocity=Math.max(45,Math.min(118,Math.trunc(70+28*info.energy+random.randint(-5,5))));let duration=info.style==='driving'?1:m.duration;if(info.style==='sparse'&&m.step!==0&&m.step!==4&&random.random()<.35)duration=Math.min(2,duration+1);duration=Math.min(duration,8-m.step);
+      if(events.length&&bar*8+m.step<events.at(-1).bar*8+events.at(-1).step+events.at(-1).duration)return;events.push({bar,step:m.step,midi:note,duration,velocity,section:info.section});
     }));
     return events;
   }
@@ -228,7 +228,7 @@
       cells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step)); drumCells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));
       if(trackMelody.checked && step%2===0){
         const eighthStep=step/2, ev=selectedSongEvents.find(e=>e.bar===bar&&e.step===eighthStep);
-        if(ev)voice(ev.midi,'Melody',Math.max(.08,stepMs/1000*2*ev.duration),.72+.28*info.energy);
+        if(ev)voice(ev.midi,'Melody',Math.max(.08,stepMs/1000*2*ev.duration),ev.velocity/100);
       }
       if(trackChords.checked&&step===0)selectedTrackEvents.chords.filter(e=>e.bar===bar).forEach(e=>voice(e.note,'Chords',Math.max(.25,stepMs/1000*16),e.velocity/100));
       if(trackBass.checked&&step%4===0){const beat=step/4,e=selectedTrackEvents.bass.find(x=>x.bar===bar&&x.beat===beat);if(e)voice(e.note,'Bass',Math.max(.18,stepMs/1000*4),e.velocity/100);}

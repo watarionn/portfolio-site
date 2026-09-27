@@ -123,6 +123,7 @@
       note=Math.max(52,Math.min(91,note));let duration=info.style==='driving'?1:m.duration;if(info.style==='sparse'&&m.step!==0&&m.step!==4&&random.random()<.35)duration=Math.min(2,duration+1);duration=Math.min(duration,8-m.step);const velocity=Math.max(45,Math.min(118,Math.trunc(70+28*info.energy+random.randint(-5,5))));
       if(events.length&&bar*8+m.step<events.at(-1).bar*8+events.at(-1).step+events.at(-1).duration)return;events.push({bar,step:m.step,midi:note,duration,velocity,section:info.section});
     }));
+    songBars.forEach((info,bar)=>{if(info.localBar!==info.sectionBars-1||info.cadence==='none')return;const barEvents=events.filter(e=>e.bar===bar);if(!barEvents.length)return;const last=barEvents.reduce((a,b)=>b.step>a.step?b:a),scale=scales[scaleEl.value],root=semitone[keyEl.value],base=60+root+scale[info.cadence==='authentic'?0:4],targets=[base,base+12,base+24].filter(n=>n>=52&&n<=91);last.midi=nearest(targets,last.midi);});
     return events;
   }
   function evaluateCandidate(motif,seed){

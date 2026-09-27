@@ -136,6 +136,22 @@
     cells.forEach(c=>{const step=Math.floor(+c.dataset.step/2),event=best.events.find(e=>e.bar===0&&e.step===step),on=event&&midiFor(noteNames[+c.dataset.row])===event.midi;c.classList.toggle('active',!!on);c.setAttribute('aria-pressed',String(!!on));});
     candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';selectedSongEvents=best.events;return best;
   }
+  function parityTrackEvents(){
+    const chords=[],bass=[],drums=[];
+    songBars.forEach((info,bar)=>{
+      const chord=[0,2,4].map(d=>scaleMidi(info.degree+d,4)),energy=info.energy;
+      chord.forEach(note=>chords.push({bar,beat:0,duration:4,note,velocity:Math.trunc(52+25*energy)}));
+      const root=scaleMidi(info.degree,2),fifth=scaleMidi(info.degree+4,2),notes=[root,root+12,fifth,root+12],next=songBars[bar+1];
+      if(energy>=.85)notes[1]=fifth;
+      if(info.localBar===info.sectionBars-1&&next&&next.energy>energy)notes[3]=scaleMidi(next.degree,2)-1;
+      notes.forEach((note,beat)=>bass.push({bar,beat,duration:1,note,velocity:Math.trunc(68+24*energy+((beat===0||beat===2)?6:0))}));
+      if(info.localBar===0&&energy>=.78)drums.push({bar,eighth:0,duration:2,note:49,velocity:108});
+      for(let step=0;step<8;step++)drums.push({bar,eighth:step,duration:.5,note:(energy>=.90&&step===7)?46:42,velocity:Math.trunc(42+30*energy+(step%2===0?5:0))});
+      const kicks=[0,2];if(energy>=.75)kicks.push(3);if(energy>=.90)drums.push({bar,eighth:3,duration:.5,note:36,velocity:86});
+      kicks.forEach(beat=>drums.push({bar,eighth:beat*2,duration:1,note:36,velocity:96}));[1,3].forEach(beat=>drums.push({bar,eighth:beat*2,duration:1,note:38,velocity:92}));
+      if(info.localBar===info.sectionBars-1&&next&&next.energy>energy)[[5,45],[6,47],[7,50]].forEach(([step,note])=>drums.push({bar,eighth:step,duration:.5,note,velocity:88+step}));
+    });return {chords,bass,drums};
+  }
   function generate(){
     stop(); cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});
     generateCandidates();
@@ -211,19 +227,10 @@
         const eighthStep=step/2, ev=selectedSongEvents.find(e=>e.bar===bar&&e.step===eighthStep);
         if(ev)voice(ev.midi,'Melody',Math.max(.08,stepMs/1000*2*ev.duration),.72+.28*info.energy);
       }
-      if(trackChords.checked && step===0)[0,2,4].forEach(d=>voice(scaleMidi(info.degree+d,4),'Chords',Math.max(.25,stepMs/1000*12),.65+.35*info.energy));
-      if(trackBass.checked && step%4===0){
-        const beat=step/4, bassDegree=beat===2?info.degree+4:info.degree;
-        let bassMidi=scaleMidi(bassDegree,2)+(beat===1||beat===3?12:0);
-        const next=songBars[bar+1]; if(beat===3&&next&&next.energy>info.energy)bassMidi=scaleMidi(next.degree,2)-1;
-        voice(bassMidi,'Bass',Math.max(.18,stepMs/1000*1.6),.72+.28*info.energy);
-      }
-      if(trackDrums.checked){
-        if(step%2===0)tone(info.energy>.9&&step===14?82:78,'square',.008+.008*info.energy,.035);
-        if(step===0||step===8||(info.energy>=.75&&step===12))drum();
-        if(step===4||step===12)tone(50,'triangle',.035,.07);
-        const next=songBars[bar+1]; if(step>=10&&info.localBar===info.sectionBars-1&&next&&next.energy>info.energy)tone(45+(step-10), 'triangle',.025,.06);
-      }
+      const parity=parityTrackEvents();
+      if(trackChords.checked&&step===0)parity.chords.filter(e=>e.bar===bar).forEach(e=>voice(e.note,'Chords',Math.max(.25,stepMs/1000*16),e.velocity/100));
+      if(trackBass.checked&&step%4===0){const beat=step/4,e=parity.bass.find(x=>x.bar===bar&&x.beat===beat);if(e)voice(e.note,'Bass',Math.max(.18,stepMs/1000*4),e.velocity/100);}
+      if(trackDrums.checked&&step%2===0){const eighth=step/2;parity.drums.filter(e=>e.bar===bar&&e.eighth===eighth).forEach(e=>{if(e.note===36)drum();else tone(e.note<40?50:e.note,'triangle',Math.max(.012,e.velocity/3500),Math.max(.035,stepMs/1000*e.duration*2));});}
       status.textContent=info.section+' · '+(bar+1)+'/'+songBars.length+' bars';
       absolute++;
       timers=[setTimeout(tick,stepMs)];

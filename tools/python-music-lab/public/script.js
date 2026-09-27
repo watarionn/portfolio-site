@@ -87,41 +87,41 @@
     songOverview.replaceChildren(...sections.map(section=>{const e=document.createElement('span');const startSec=Math.round(elapsedBars*4*60/safeBpm);elapsedBars+=section.bars;e.innerHTML='<strong>'+section.name+'</strong><small>'+section.bars+' bars · '+startSec+'s</small>';return e;}));
     status.textContent=totalBars+' bars / '+actualSeconds+' sec';
   }
+  function weightedMove(random){const bag=[-2,-1,-1,-1,-1,0,0,1,1,1,1,2];return bag[Math.floor(random()*bag.length)];}
   function candidateMotif(seed){
-    const random=rng(seed), rows=allowedRows(), notes=[];
-    for(let step=0;step<16;step++){if(random()<.22)continue;const row=rows[Math.floor(random()*rows.length)];notes.push({step,midi:midiFor(noteNames[row]),row});}
-    return notes;
+    const random=rng(seed), contour=[0];for(let i=1;i<8;i++)contour.push(Math.max(-4,Math.min(5,contour[i-1]+weightedMove(random))));
+    return contour.map((offset,step)=>({step,scaleOffset:(step!==0&&step!==4&&random()<.18)?null:offset,duration:(step===2||step===6)&&random()<.40?2:1}));
   }
+  function nearest(values,target){return values.reduce((a,b)=>Math.abs(b-target)<Math.abs(a-target)?b:a);}
   function targetScore(value,target,tolerance){return Math.max(0,Math.min(100,100*(1-Math.abs(value-target)/tolerance)));}
   function expandedMelody(motif,seed){
-    const events=[];
-    songBars.forEach((info,bar)=>motif.forEach(n=>{
-      const phraseRandom=rng(seed+bar*131+n.step*17+97)(); if(n.step!==0&&n.step!==8&&phraseRandom>info.density)return;
-      let midi=n.midi+info.shift;if(info.section.includes('Chorus'))midi+=Math.round((midi-67)*.18);
-      if((info.cadence==='authentic'||info.cadence==='half')&&info.localBar===info.sectionBars-1&&n.step>=12)midi=scaleMidi(info.cadence==='authentic'?0:4,5);
-      events.push({bar,step:n.step,midi,section:info.section});
-    }));return events;
+    const events=[], random=rng(seed+101), scale=scales[scaleEl.value], root=semitone[keyEl.value], baseScale=scale.map(x=>60+root+x), ext=[...baseScale.map(x=>x-12),...baseScale,...baseScale.map(x=>x+12),...baseScale.map(x=>x+24)];
+    songBars.forEach((info,bar)=>motif.forEach(m=>{
+      if(m.scaleOffset===null)return;let density=info.density;if(info.style==='sparse')density*=m.step%2?.74:.88;else if(info.style==='driving')density=Math.min(1,density+(m.step%2?.12:.06));if(m.step!==0&&m.step!==4&&random()>density)return;
+      let offset=m.scaleOffset;if(info.section.toLowerCase().includes('b'))offset+=Math.floor((info.localBar%4)/2);else if(info.section.toLowerCase().includes('chorus'))offset=Math.round(offset*1.35)+2;
+      let note=nearest(ext,baseScale[3]+offset*2+info.shift), chord=[0,2,4].map(d=>scaleMidi(info.degree+d,4)), chordExt=[...chord,...chord.map(n=>n+12)];
+      if(m.step===0||m.step===4)note=nearest(chordExt,note);
+      else if(random()<info.nct){const pcs=new Set(chord.map(n=>n%12)),cand=ext.filter(n=>!pcs.has(n%12)&&Math.abs(n-note)>0&&Math.abs(n-note)<=4);if(cand.length)note=nearest(cand,note);}
+      if(info.localBar%4===3&&m.step>=6)note=nearest([baseScale[0],baseScale[0]+12,baseScale[0]+24],note);
+      if(info.localBar===info.sectionBars-1&&m.step>=6&&info.cadence!=='none')note=nearest([scaleMidi(info.cadence==='authentic'?0:4,4),scaleMidi(info.cadence==='authentic'?0:4,5)],note);
+      note=Math.max(52,Math.min(91,note));let duration=info.style==='driving'?1:m.duration;if(info.style==='sparse'&&m.step!==0&&m.step!==4&&random()<.35)duration=Math.min(2,duration+1);duration=Math.min(duration,8-m.step);
+      if(events.length&&bar*8+m.step<events.at(-1).bar*8+events.at(-1).step+events.at(-1).duration)return;events.push({bar,step:m.step,midi:note,duration,section:info.section});
+    }));
+    return events;
   }
   function evaluateCandidate(motif,seed){
-    const events=expandedMelody(motif,seed); if(!events.length)return {seed,total:0,notes:motif};
-    let strong=0,chordTones=0;events.forEach(e=>{if(e.step===0||e.step===8){strong++;const info=songBars[e.bar],pcs=new Set([0,2,4].map(d=>scaleMidi(info.degree+d,4)%12));if(pcs.has(e.midi%12))chordTones++;}});
-    const ordered=[...events].sort((a,b)=>a.bar-b.bar||a.step-b.step),intervals=ordered.slice(1).map((n,i)=>Math.abs(n.midi-ordered[i].midi));
-    const harmonyRatio=strong?chordTones/strong:0,stepwise=intervals.length?intervals.filter(x=>x<=4).length/intervals.length:0,pitches=events.map(e=>e.midi),melRange=Math.max(...pitches)-Math.min(...pitches);
-    const firstName=songBars[0].section,lastName=songBars.at(-1).section,first=events.filter(e=>e.section===firstName),last=events.filter(e=>e.section===lastName);
-    const avg=x=>x.reduce((a,e)=>a+e.midi,0)/Math.max(1,x.length),lift=avg(last)-avg(first),firstBars=songBars.filter(b=>b.section===firstName).length,lastBars=songBars.filter(b=>b.section===lastName).length,densityRatio=(last.length/Math.max(1,lastBars))/Math.max(.01,first.length/Math.max(1,firstBars));
-    const contrast=targetScore(lift,8,8)*.65+targetScore(densityRatio,1.30,.80)*.35;
-    const cadenceBars=songBars.map((x,i)=>({x,i})).filter(({x,i})=>x.cadence!=='none'&&(i===songBars.length-1||songBars[i+1].section!==x.section));let resolved=0;
-    cadenceBars.forEach(({x,i})=>{const ev=events.filter(e=>e.bar===i).at(-1);if(ev&&ev.midi%12===scaleMidi(x.cadence==='authentic'?0:4,4)%12)resolved++;});const cadenceRatio=cadenceBars.length?resolved/cadenceBars.length:1;
-    const onsetSlots=new Set(events.map(e=>e.step)).size,harmony=targetScore(harmonyRatio,.82,.45),motion=targetScore(stepwise,.72,.45),rangeScore=targetScore(melRange,20,15),cadence=cadenceRatio*100,rhythm=targetScore(onsetSlots/2,6,4)*.65+50*.35;
-    const total=harmony*.25+motion*.20+rangeScore*.15+contrast*.15+cadence*.15+rhythm*.10;
-    return {seed,total:+total.toFixed(3),harmony,motion,range:rangeScore,contrast,cadence,rhythm,notes:motif};
+    const events=expandedMelody(motif,seed);if(!events.length)return {seed,total:0,notes:motif,events};
+    let strong=0,chordTones=0;events.forEach(e=>{if(e.step===0||e.step===4){strong++;const info=songBars[e.bar],pcs=new Set([0,2,4].map(d=>scaleMidi(info.degree+d,4)%12));if(pcs.has(e.midi%12))chordTones++;}});
+    const intervals=events.slice(1).map((n,i)=>Math.abs(n.midi-events[i].midi)),harmonyRatio=strong?chordTones/strong:0,stepwise=intervals.length?intervals.filter(x=>x<=4).length/intervals.length:0,pitches=events.map(e=>e.midi),melRange=Math.max(...pitches)-Math.min(...pitches);
+    const firstName=songBars[0].section,lastName=songBars.at(-1).section,first=events.filter(e=>e.section===firstName),last=events.filter(e=>e.section===lastName),avg=x=>x.reduce((a,e)=>a+e.midi,0)/Math.max(1,x.length),lift=avg(last)-avg(first),firstBars=songBars.filter(b=>b.section===firstName).length,lastBars=songBars.filter(b=>b.section===lastName).length,densityRatio=(last.length/Math.max(1,lastBars))/Math.max(.01,first.length/Math.max(1,firstBars));
+    const contrast=targetScore(lift,8,8)*.65+targetScore(densityRatio,1.30,.80)*.35,cadenceBars=songBars.map((x,i)=>({x,i})).filter(({x,i})=>x.cadence!=='none'&&(i===songBars.length-1||songBars[i+1].section!==x.section));let resolved=0;
+    cadenceBars.forEach(({x,i})=>{const ev=events.filter(e=>e.bar===i).at(-1);if(ev&&ev.midi%12===scaleMidi(x.cadence==='authentic'?0:4,4)%12)resolved++;});const cadenceRatio=cadenceBars.length?resolved/cadenceBars.length:1,onsets=new Set(events.map(e=>e.step)).size,harmony=targetScore(harmonyRatio,.82,.45),motion=targetScore(stepwise,.72,.45),rangeScore=targetScore(melRange,20,15),cadence=cadenceRatio*100,rhythm=targetScore(onsets,6,4)*.65+50*.35,total=harmony*.25+motion*.20+rangeScore*.15+contrast*.15+cadence*.15+rhythm*.10;
+    return {seed,total:+total.toFixed(3),harmony,motion,range:rangeScore,contrast,cadence,rhythm,notes:motif,events};
   }
   function generateCandidates(){
-    buildSong();const base=Number(seedEl.value)||1, ranked=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed);
-    const best=ranked[0];seedEl.value=String(best.seed);
-    cells.forEach(c=>{const on=best.notes.some(n=>n.row===+c.dataset.row&&n.step===+c.dataset.step);c.classList.toggle('active',on);c.setAttribute('aria-pressed',String(on));});
-    candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));
-    candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';return best;
+    buildSong();const base=Number(seedEl.value)||1,ranked=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed),best=ranked[0];seedEl.value=String(best.seed);
+    cells.forEach(c=>{const step=Math.floor(+c.dataset.step/2),event=best.events.find(e=>e.bar===0&&e.step===step),on=event&&midiFor(noteNames[+c.dataset.row])===event.midi;c.classList.toggle('active',!!on);c.setAttribute('aria-pressed',String(!!on));});
+    candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';return best;
   }
   function generate(){
     stop(); cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});

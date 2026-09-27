@@ -215,10 +215,13 @@
     osc.type=type; osc.frequency.value=hz(midi); gain.gain.setValueAtTime(.0001,now); gain.gain.exponentialRampToValueAtTime(level,now+.012); gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
     osc.connect(gain).connect(audioGraph.buses.Drums); osc.start(now); osc.stop(now+duration+.02); activeNodes.push(osc);osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};
   }
-  function drum(){
-    const osc=context.createOscillator(), gain=context.createGain(), now=context.currentTime;
-    osc.type='sine'; osc.frequency.setValueAtTime(115,now); osc.frequency.exponentialRampToValueAtTime(48,now+.09); gain.gain.setValueAtTime(.13,now); gain.gain.exponentialRampToValueAtTime(.0001,now+.11);
-    ensureAudioGraph(); osc.connect(gain).connect(audioGraph.buses.Drums); osc.start(now); osc.stop(now+.12); activeNodes.push(osc); osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};
+  function drumNoise(length,seed){
+    let x=(seed>>>0)||1,out=new Float32Array(length);for(let i=0;i<length;i++){x^=x<<13;x^=x>>>17;x^=x<<5;out[i]=((x>>>0)/4294967296)*2-1;}return out;
+  }
+  function drum(note,velocity,startSeconds){
+    ensureAudioGraph();const rate=44100,v=velocity/127,duration=note===36?.34:note===38?.24:note===42?.09:note===46?.20:note===49?.72:.12,count=Math.max(1,Math.round(duration*rate)),buffer=context.createBuffer(1,count,rate),data=buffer.getChannelData(0),seed=((note*1000003)^Math.round(startSeconds*1000000))>>>0,noise=drumNoise(count,seed);
+    for(let i=0;i<count;i++){const t=i/rate;let sample=0;if(note===36){const phase=2*Math.PI*(105*t-42*t*t);sample=Math.sin(phase)*Math.exp(-t*13)*.72*v;}else if(note===38){sample=(.72*noise[i]+.28*Math.sin(2*Math.PI*185*t))*Math.exp(-t*17)*.46*v;}else if(note===42||note===46){sample=noise[i]*Math.exp(-t*(note===42?46:22))*.22*v;}else if(note===49){sample=(noise[i]+Math.sin(2*Math.PI*4600*t)*.15)*Math.exp(-t*5.2)*.26*v;}else sample=noise[i]*Math.exp(-t*30)*.15*v;data[i]=sample;}
+    const source=context.createBufferSource(),pan=context.createStereoPanner?context.createStereoPanner():context.createGain();source.buffer=buffer;if(pan.pan)pan.pan.value=note===38?.05:note===42?-.25:note===46?.25:note===49?.30:0;source.connect(pan).connect(audioGraph.buses.Drums);source.start();activeNodes.push(source);source.onended=()=>{activeNodes=activeNodes.filter(n=>n!==source);};
   }
   function stop(){
     timers.forEach(clearTimeout); timers=[];
@@ -243,7 +246,7 @@
       }
       if(trackChords.checked&&step===0)selectedTrackEvents.chords.filter(e=>e.bar===bar).forEach(e=>voice(e.note,'Chords',Math.max(.25,stepMs/1000*16),e.velocity/100));
       if(trackBass.checked&&step%4===0){const beat=step/4,e=selectedTrackEvents.bass.find(x=>x.bar===bar&&x.beat===beat);if(e)voice(e.note,'Bass',Math.max(.18,stepMs/1000*4),e.velocity/100);}
-      if(trackDrums.checked&&step%2===0){const eighth=step/2;selectedTrackEvents.drums.filter(e=>e.bar===bar&&e.eighth===eighth).forEach(e=>{if(e.note===36)drum();else tone(e.note<40?50:e.note,'triangle',Math.max(.012,e.velocity/3500),Math.max(.035,stepMs/1000*e.duration*2));});}
+      if(trackDrums.checked&&step%2===0){const eighth=step/2;selectedTrackEvents.drums.filter(e=>e.bar===bar&&e.eighth===eighth).forEach(e=>drum(e.note,e.velocity,(bar*8+e.eighth)*stepMs/1000));}
       status.textContent=info.section+' · '+(bar+1)+'/'+songBars.length+' bars';
       absolute++;
       timers=[setTimeout(tick,stepMs)];

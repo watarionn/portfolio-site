@@ -38,13 +38,25 @@
   function taps(source,frames,specs){const wet=[new Float64Array(frames),new Float64Array(frames)];for(const [ms,gain,cross] of specs){const delay=pyRound(ms*RATE/1000);for(let i=delay;i<frames;i++){wet[0][i]+=source[cross?1:0][i-delay]*gain;wet[1][i]+=source[cross?0:1][i-delay]*gain;}}return wet;}
   function addWet(dry,wet){for(let ch=0;ch<2;ch++)for(let i=0;i<dry[ch].length;i++)dry[ch][i]+=wet[ch][i];}
   function render(input){
-    const bpm=Math.max(60,Math.min(200,+input.bpm||120)),beat=60/bpm,eighth=beat/2,enabled=Object.assign({Melody:true,Chords:true,Bass:true,Drums:true},input.enabled||{}),m=input.melody||[],c=input.chords||[],b=input.bass||[],d=input.drums||[];
-    const melodyEnd=Math.max(0,...m.map(e=>(e.bar*4+(e.step+e.duration)*.5)*beat)),chordEnd=Math.max(0,...c.map(e=>(e.bar*4+e.beat+e.duration)*beat)),bassEnd=Math.max(0,...b.map(e=>(e.bar*4+e.beat+e.duration)*beat)),drumEnd=Math.max(0,...d.map(e=>(e.bar*4+(e.eighth+e.duration)*.5)*beat)),frames=Math.max(1,Math.ceil((Math.max(melodyEnd,chordEnd,bassEnd,drumEnd)+2.4)*RATE)),tracks={Melody:[new Float64Array(frames),new Float64Array(frames)],Chords:[new Float64Array(frames),new Float64Array(frames)],Bass:[new Float64Array(frames),new Float64Array(frames)],Drums:[new Float64Array(frames),new Float64Array(frames)]};
-    const add=(name,start,pcm)=>{const offset=pyRound(start*RATE);for(let ch=0;ch<2;ch++)for(let i=0;i<pcm[ch].length&&offset+i<frames;i++)tracks[name][ch][offset+i]+=pcm[ch][i];};
-    if(enabled.Melody)m.forEach(e=>add('Melody',(e.bar*4+e.step*.5)*beat,tonal(e.midi,'Melody',e.duration*eighth,e.velocity/127)));if(enabled.Chords)c.forEach(e=>add('Chords',(e.bar*4+e.beat)*beat,tonal(e.note,'Chords',e.duration*beat,e.velocity/127)));if(enabled.Bass)b.forEach(e=>add('Bass',(e.bar*4+e.beat)*beat,tonal(e.note,'Bass',e.duration*beat,e.velocity/127)));if(enabled.Drums)d.forEach(e=>{const start=(e.bar*4+e.eighth*.5)*beat;add('Drums',start,drum(e.note,e.velocity,start));});
-    for(const name of ['Melody','Chords','Bass']){const w=Math.max(1,Math.min(512,pyRound(RATE/(2*VOICES[name].cutoff))));tracks[name]=movingAverage(movingAverage(tracks[name],w),w);}for(const [name,gain] of Object.entries({Melody:1,Chords:.88,Bass:.96,Drums:.82}))for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)tracks[name][ch][i]*=gain;
-    const rv=[[43,.070,true],[71,.055,false],[113,.045,true],[181,.032,false],[293,.022,true]];if(enabled.Melody){addWet(tracks.Melody,taps(tracks.Melody,frames,[[180,.12,true],[360,.065,false]]));addWet(tracks.Melody,taps(tracks.Melody,frames,rv));}if(enabled.Chords)addWet(tracks.Chords,taps(tracks.Chords,frames,rv));if(enabled.Drums)addWet(tracks.Drums,taps(tracks.Drums,frames,rv));
-    const mix=[new Float64Array(frames),new Float64Array(frames)],den=Math.tanh(1.15);let peak=0;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++){let v=0;for(const name of ['Melody','Chords','Bass','Drums'])v+=tracks[name][ch][i];v=Math.tanh(v*1.15)/den;mix[ch][i]=v;peak=Math.max(peak,Math.abs(v));}const normalization=peak>0?.92/peak:1;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)mix[ch][i]*=normalization;return{rate:RATE,frames,tracks,mix,sourcePeak:peak,normalization};
+    const bpm=Math.max(60,Math.min(200,+input.bpm||120)),beat=60/bpm,eighth=beat/2,enabled=Object.assign({Melody:true,Chords:true,Bass:true,Drums:true},input.enabled||{}),retainTracks=!!input.retainTracks,m=input.melody||[],c=input.chords||[],b=input.bass||[],d=input.drums||[];
+    const melodyEnd=Math.max(0,...m.map(e=>(e.bar*4+(e.step+e.duration)*.5)*beat)),chordEnd=Math.max(0,...c.map(e=>(e.bar*4+e.beat+e.duration)*beat)),bassEnd=Math.max(0,...b.map(e=>(e.bar*4+e.beat+e.duration)*beat)),drumEnd=Math.max(0,...d.map(e=>(e.bar*4+(e.eighth+e.duration)*.5)*beat)),frames=Math.max(1,Math.ceil((Math.max(melodyEnd,chordEnd,bassEnd,drumEnd)+2.4)*RATE)),preMix=[new Float64Array(frames),new Float64Array(frames)],tracks=retainTracks?{}:null;
+    const rv=[[43,.070,true],[71,.055,false],[113,.045,true],[181,.032,false],[293,.022,true]],gains={Melody:1,Chords:.88,Bass:.96,Drums:.82};
+    const finish=(name,events,addEvent)=>{
+      let track=[new Float64Array(frames),new Float64Array(frames)];
+      if(enabled[name])for(const e of events){const [start,pcm]=addEvent(e);const offset=pyRound(start*RATE);for(let ch=0;ch<2;ch++)for(let i=0;i<pcm[ch].length&&offset+i<frames;i++)track[ch][offset+i]+=pcm[ch][i];}
+      if(name!=='Drums'){const w=Math.max(1,Math.min(512,pyRound(RATE/(2*VOICES[name].cutoff))));track=movingAverage(movingAverage(track,w),w);}
+      const gain=gains[name];for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)track[ch][i]*=gain;
+      if(enabled[name]&&name==='Melody'){addWet(track,taps(track,frames,[[180,.12,true],[360,.065,false]]));addWet(track,taps(track,frames,rv));}
+      else if(enabled[name]&&(name==='Chords'||name==='Drums'))addWet(track,taps(track,frames,rv));
+      for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)preMix[ch][i]+=track[ch][i];
+      if(retainTracks)tracks[name]=track;
+    };
+    finish('Melody',m,e=>[(e.bar*4+e.step*.5)*beat,tonal(e.midi,'Melody',e.duration*eighth,e.velocity/127)]);
+    finish('Chords',c,e=>[(e.bar*4+e.beat)*beat,tonal(e.note,'Chords',e.duration*beat,e.velocity/127)]);
+    finish('Bass',b,e=>[(e.bar*4+e.beat)*beat,tonal(e.note,'Bass',e.duration*beat,e.velocity/127)]);
+    finish('Drums',d,e=>{const start=(e.bar*4+e.eighth*.5)*beat;return[start,drum(e.note,e.velocity,start)];});
+    const mix=[new Float64Array(frames),new Float64Array(frames)],den=Math.tanh(1.15);let peak=0;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++){const v=Math.tanh(preMix[ch][i]*1.15)/den;mix[ch][i]=v;peak=Math.max(peak,Math.abs(v));}const normalization=peak>0?.92/peak:1;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)mix[ch][i]*=normalization;
+    return{rate:RATE,frames,tracks,mix,sourcePeak:peak,normalization};
   }
   return{RATE,VOICES,pyRound,drumNoise,movingAverage,tonal,drum,render};
 });

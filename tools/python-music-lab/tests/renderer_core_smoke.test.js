@@ -3,6 +3,10 @@ const assert=require('node:assert/strict');
 const core=require('../public/renderer-core.js');
 
 assert.equal(core.RATE,44100);
+assert.equal(core.pyRound(248062.5),248062);
+assert.equal(core.pyRound(248063.5),248064);
+assert.equal(core.pyRound(2.5),2);
+assert.equal(core.pyRound(3.5),4);
 
 const melody=core.tonal(72,'Melody',0.234375,87/127);
 assert.equal(melody[0].length,20038);

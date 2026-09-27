@@ -46,5 +46,5 @@
     const rv=[[43,.070,true],[71,.055,false],[113,.045,true],[181,.032,false],[293,.022,true]];if(enabled.Melody){addWet(tracks.Melody,taps(tracks.Melody,frames,[[180,.12,true],[360,.065,false]]));addWet(tracks.Melody,taps(tracks.Melody,frames,rv));}if(enabled.Chords)addWet(tracks.Chords,taps(tracks.Chords,frames,rv));if(enabled.Drums)addWet(tracks.Drums,taps(tracks.Drums,frames,rv));
     const mix=[new Float64Array(frames),new Float64Array(frames)],den=Math.tanh(1.15);let peak=0;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++){let v=0;for(const name of ['Melody','Chords','Bass','Drums'])v+=tracks[name][ch][i];v=Math.tanh(v*1.15)/den;mix[ch][i]=v;peak=Math.max(peak,Math.abs(v));}const normalization=peak>0?.92/peak:1;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)mix[ch][i]*=normalization;return{rate:RATE,frames,tracks,mix,sourcePeak:peak,normalization};
   }
-  return{RATE,VOICES,drumNoise,movingAverage,tonal,drum,render};
+  return{RATE,VOICES,pyRound,drumNoise,movingAverage,tonal,drum,render};
 });

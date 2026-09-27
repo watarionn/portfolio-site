@@ -271,5 +271,6 @@
   document.getElementById('clearMelody').addEventListener('click',()=>{stop();cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});});
   document.getElementById('playMelody').addEventListener('click',play);
   document.getElementById('stopMelody').addEventListener('click',stop);
-  keyEl.addEventListener('change',()=>{updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{updateChords();buildSong();}); bpm.addEventListener('change',buildSong); lengthEl.addEventListener('change',buildSong);
+  if(audio)audio.addEventListener('play',stop);
+  keyEl.addEventListener('change',()=>{stop();updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{stop();updateChords();buildSong();}); bpm.addEventListener('change',()=>{stop();buildSong();}); lengthEl.addEventListener('change',()=>{stop();buildSong();});
 })();

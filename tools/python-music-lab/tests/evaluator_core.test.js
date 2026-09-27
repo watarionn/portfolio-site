@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict');
+const evaluator=require('../public/evaluator-core.js');
+const fixture=require('./phase02b_selected_614.json');
+const melody=fixture.tracks.Melody.map(([start,duration,note,velocity])=>({start,duration,note,velocity}));
+const config={ticksPerBeat:480,barTicks:1920,tonicPc:9,dominantPc:4,sections:[{name:'A',bars:8,cadence:'half'},{name:'B',bars:8,cadence:'half'},{name:'Chorus',bars:8,cadence:'authentic'}]};
+const progressions=[['i','VI','III','VII'],['iv','VI','III','V'],['VI','VII','i','V']];
+const pcs={i:[9,0,4],VI:[5,9,0],III:[0,4,7],VII:[7,11,2],iv:[2,5,9],V:[4,8,11]};
+const chordForBar=bar=>{const section=bar<8?0:bar<16?1:2,local=bar%8;let symbol=progressions[section][local%4];if(local===7)symbol=section===2?'i':'V';else if(local===6&&section===2)symbol='V';return pcs[symbol];};
+const actual=evaluator.evaluate(config,melody,chordForBar);
+assert.deepEqual(actual,{total_score:86.329,harmony_score:78.519,motion_score:99.138,range_score:93.333,section_contrast_score:63.313,cadence_score:100,rhythm_score:83.75,strong_beat_chord_tone_ratio:.9167,stepwise_motion_ratio:.7239,melodic_range_semitones:19,cadence_resolution_ratio:1});
+console.log('Python Music Lab evaluator canonical parity passed.');

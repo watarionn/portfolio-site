@@ -128,12 +128,12 @@
   }
   function evaluateCandidate(motif,seed){
     const events=expandedMelody(motif,seed);if(!events.length)return {seed,total:0,notes:motif,events};
-    let strong=0,chordTones=0;events.forEach(e=>{if(e.step===0||e.step===4){strong++;const info=songBars[e.bar],pcs=new Set([0,2,4].map(d=>scaleMidi(info.degree+d,4)%12));if(pcs.has(e.midi%12))chordTones++;}});
-    const intervals=events.slice(1).map((n,i)=>Math.abs(n.midi-events[i].midi)),harmonyRatio=strong?chordTones/strong:0,stepwise=intervals.length?intervals.filter(x=>x<=4).length/intervals.length:0,pitches=events.map(e=>e.midi),melRange=Math.max(...pitches)-Math.min(...pitches);
-    const firstName=songBars[0].section,lastName=songBars.at(-1).section,first=events.filter(e=>e.section===firstName),last=events.filter(e=>e.section===lastName),avg=x=>x.reduce((a,e)=>a+e.midi,0)/Math.max(1,x.length),lift=avg(last)-avg(first),firstBars=songBars.filter(b=>b.section===firstName).length,lastBars=songBars.filter(b=>b.section===lastName).length,densityRatio=(last.length/Math.max(1,lastBars))/Math.max(.01,first.length/Math.max(1,firstBars));
-    const contrast=targetScore(lift,8,8)*.65+targetScore(densityRatio,1.30,.80)*.35,cadenceBars=songBars.map((x,i)=>({x,i})).filter(({x,i})=>x.cadence!=='none'&&(i===songBars.length-1||songBars[i+1].section!==x.section));let resolved=0;
-    cadenceBars.forEach(({x,i})=>{const ev=events.filter(e=>e.bar===i).at(-1);if(ev&&ev.midi%12===scaleMidi(x.cadence==='authentic'?0:4,4)%12)resolved++;});const cadenceRatio=cadenceBars.length?resolved/cadenceBars.length:1,onsets=new Set(events.map(e=>e.step)).size,harmony=targetScore(harmonyRatio,.82,.45),motion=targetScore(stepwise,.72,.45),rangeScore=targetScore(melRange,20,15),cadence=cadenceRatio*100,rhythm=targetScore(onsets,6,4)*.65+50*.35,total=harmony*.25+motion*.20+rangeScore*.15+contrast*.15+cadence*.15+rhythm*.10;
-    return {seed,total:+total.toFixed(3),harmony,motion,range:rangeScore,contrast,cadence,rhythm,notes:motif,events};
+    const tpb=480,barTicks=tpb*4,scale=scales[scaleEl.value],root=semitone[keyEl.value],tonicPc=(root+scale[0])%12,dominantPc=(root+scale[4])%12,sections=[];
+    songBars.forEach(info=>{const last=sections.at(-1);if(last&&last.name===info.section)last.bars++;else sections.push({name:info.section,bars:1,cadence:info.cadence});});
+    const melody=events.map(e=>({start:e.bar*barTicks+e.step*(tpb/2),duration:e.duration*(tpb/2),note:e.midi,velocity:e.velocity}));
+    const chordForBar=bar=>triadFor(songBars[bar].degreeSymbol,4);
+    const score=PMLEvaluatorCore.evaluate({ticksPerBeat:tpb,barTicks,tonicPc,dominantPc,sections},melody,chordForBar);
+    return {seed,total:score.total_score,harmony:score.harmony_score,motion:score.motion_score,range:score.range_score,contrast:score.section_contrast_score,cadence:score.cadence_score,rhythm:score.rhythm_score,metrics:score,notes:motif,events};
   }
   function generateCandidates(){
     buildSong();const base=Number(seedEl.value)||1,ranked=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed),best=ranked[0];

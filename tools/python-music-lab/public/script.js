@@ -89,7 +89,10 @@
   }
   function pyRandom(seed){
     const N=624,M=397,MATRIX_A=0x9908b0df,UPPER_MASK=0x80000000,LOWER_MASK=0x7fffffff,mt=new Uint32Array(N);let index=N;
-    mt[0]=seed>>>0;for(let i=1;i<N;i++){const x=mt[i-1]^(mt[i-1]>>>30);mt[i]=(Math.imul(1812433253,x)+i)>>>0;}
+    function initGenrand(x){mt[0]=x>>>0;for(let i=1;i<N;i++){const v=mt[i-1]^(mt[i-1]>>>30);mt[i]=(Math.imul(1812433253,v)+i)>>>0;}}
+    initGenrand(19650218);const key=[seed>>>0];let i=1,j=0,k=Math.max(N,key.length);
+    for(;k;k--){const x=mt[i-1]^(mt[i-1]>>>30);mt[i]=(mt[i]^(Math.imul(x,1664525)))+key[j]+j>>>0;i++;j++;if(i>=N){mt[0]=mt[N-1];i=1;}if(j>=key.length)j=0;}
+    for(k=N-1;k;k--){const x=mt[i-1]^(mt[i-1]>>>30);mt[i]=(mt[i]^(Math.imul(x,1566083941)))-i>>>0;i++;if(i>=N){mt[0]=mt[N-1];i=1;}}mt[0]=0x80000000;
     function twist(){for(let i=0;i<N;i++){const y=(mt[i]&UPPER_MASK)|(mt[(i+1)%N]&LOWER_MASK);mt[i]=mt[(i+M)%N]^(y>>>1)^((y&1)?MATRIX_A:0);}index=0;}
     function uint32(){if(index>=N)twist();let y=mt[index++];y^=y>>>11;y^=(y<<7)&0x9d2c5680;y^=(y<<15)&0xefc60000;y^=y>>>18;return y>>>0;}
     function random(){const a=uint32()>>>5,b=uint32()>>>6;return (a*67108864+b)/9007199254740992;}

@@ -173,86 +173,8 @@
   function updateChords(){
     chordStrip.replaceChildren(...chordDegrees.map((degree,index)=>{
       const b=document.createElement('button'); b.type='button'; b.textContent=chordName(degree); b.title='クリックで次のダイアトニックコード';
-      b.addEventListener('click',()=>{chordDegrees[index]=(chordDegrees[index]+1)%7;updateChords();buildSong();}); return b;
+      b.addEventListener('click',()=>{stop();chordDegrees[index]=(chordDegrees[index]+1)%7;updateChords();buildSong();}); return b;
     }));
-  }
-  function ensureAudioGraph(){
-    if(audioGraph)return;
-    const mix=context.createGain(), saturator=context.createWaveShaper(), master=context.createGain(),drive=1.15,curve=new Float32Array(65537),den=Math.tanh(drive);
-    for(let i=0;i<curve.length;i++){const x=i/(curve.length-1)*2-1;curve[i]=Math.tanh(x*drive)/den;}
-    saturator.curve=curve;saturator.oversample='2x';master.gain.value=.72;mix.connect(saturator);saturator.connect(master);master.connect(context.destination);
-    const trackGain={Melody:1,Chords:.88,Bass:.96,Drums:.82};
-    const makeBus=(name,pan,delaySend,reverbSend)=>{
-      const input=context.createGain(), gain=context.createGain(), p=context.createStereoPanner?context.createStereoPanner():context.createGain();gain.gain.value=trackGain[name]??1;if(p.pan)p.pan.value=pan;
-      input.connect(gain);gain.connect(p); p.connect(mix);
-      const tap=(seconds,g,crossfeed,maxDelay)=>{
-        const d=context.createDelay(maxDelay),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);
-        if(crossfeed&&context.createChannelSplitter&&context.createChannelMerger){const split=context.createChannelSplitter(2),merge=context.createChannelMerger(2);d.connect(split);split.connect(merge,0,1);split.connect(merge,1,0);merge.connect(x);}else d.connect(x);
-        x.connect(mix);
-      };
-      if(delaySend)[[.180,.12,true],[.360,.065,false]].forEach(([seconds,g,cross])=>tap(seconds,g,cross,.5));
-      if(reverbSend)[[.043,.070,true],[.071,.055,false],[.113,.045,true],[.181,.032,false],[.293,.022,true]].forEach(([seconds,g,cross])=>tap(seconds,g,cross,.4));
-      return input;
-    };
-    audioGraph={mix,saturator,master,buses:{Melody:makeBus('Melody',.12,true,true),Chords:makeBus('Chords',-.18,false,true),Bass:makeBus('Bass',0,false,false),Drums:makeBus('Drums',0,false,true)}};
-  }
-  function voice(midi,name,duration=.18,velocity=1){
-    ensureAudioGraph();const cfg=voiceConfig[name],rate=44100,[attack,decay,sustain,release]=cfg.adsr,noteSamples=Math.max(1,Math.round(duration*rate)),releaseSamples=Math.max(0,Math.round(release*rate)),count=noteSamples+releaseSamples,attackSamples=Math.min(noteSamples,Math.max(0,Math.round(attack*rate))),decaySamples=Math.min(noteSamples-attackSamples,Math.max(0,Math.round(decay*rate))),sustainSamples=noteSamples-attackSamples-decaySamples,envelope=new Float64Array(count);
-    for(let i=0;i<attackSamples;i++)envelope[i]=i/attackSamples;for(let i=0;i<decaySamples;i++)envelope[attackSamples+i]=1+(sustain-1)*(i/decaySamples);for(let i=0;i<sustainSamples;i++)envelope[attackSamples+decaySamples+i]=sustain;if(releaseSamples){const level=envelope[noteSamples-1]||sustain;for(let i=0;i<releaseSamples;i++)envelope[noteSamples+i]=releaseSamples===1?0:level*(1-i/(releaseSamples-1));}
-    const stereo=context.createBuffer(2,count,rate),left=stereo.getChannelData(0),right=stereo.getChannelData(1),base=hz(midi),amplitudeSum=cfg.layers.reduce((sum,l)=>sum+Math.abs(l[1]),0)||1,angle=(cfg.pan+1)*Math.PI/4,panL=Math.cos(angle),panR=Math.sin(angle);
-    const oscillator=(type,cycles)=>{const wrapped=cycles-Math.floor(cycles),phase=2*Math.PI*wrapped;if(type==='sine')return Math.sin(phase);if(type==='square')return wrapped<.5?1:-1;if(type==='triangle')return 1-4*Math.abs(wrapped-.5);return 2*wrapped-1;};
-    for(let i=0;i<count;i++){const t=i/rate;let mono=0;for(const [type,level,octave,detune] of cfg.layers){const frequency=base*Math.pow(2,octave)*Math.pow(2,detune/1200);mono+=level*oscillator(type,frequency*t);}mono=mono/amplitudeSum*envelope[i]*velocity*cfg.gain;left[i]=mono*panL;right[i]=mono*panR;}
-    const source=context.createBufferSource();source.buffer=stereo;source.connect(audioGraph.buses[name]);source.start();activeNodes.push(source);source.onended=()=>{activeNodes=activeNodes.filter(n=>n!==source);};
-  }
-  function tone(midi,type='sine',level=.06,duration=.18){
-    ensureAudioGraph(); const osc=context.createOscillator(), gain=context.createGain(), now=context.currentTime;
-    osc.type=type; osc.frequency.value=hz(midi); gain.gain.setValueAtTime(.0001,now); gain.gain.exponentialRampToValueAtTime(level,now+.012); gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
-    osc.connect(gain).connect(audioGraph.buses.Drums); osc.start(now); osc.stop(now+duration+.02); activeNodes.push(osc);osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};
-  }
-  function drumNoise(length,seed){
-    const MASK128=(1n<<128n)-1n,MASK64=(1n<<64n)-1n,M=(2549297995355413924n<<64n)|4865540595714422341n,IA=0x43b0d7e5,MA=0x931e8875,IB=0x8b51f9dd,MB=0x58f38ded,ML=0xca01f9dd,MR=0x4973f715;
-    let hc=IA>>>0;const hash=v=>{let x=(v^hc)>>>0;hc=Math.imul(hc,MA)>>>0;x=Math.imul(x,hc)>>>0;return(x^(x>>>16))>>>0},mix=(x,y)=>{let z=(Math.imul(ML,x)-Math.imul(MR,y))>>>0;return(z^(z>>>16))>>>0};
-    let entropy=[],n=BigInt(seed>>>0);if(n===0n)entropy=[0];while(n){entropy.push(Number(n&0xffffffffn));n>>=32n;}const pool=new Uint32Array(4);for(let i=0;i<4;i++)pool[i]=hash(i<entropy.length?entropy[i]:0);for(let src=0;src<4;src++)for(let dst=0;dst<4;dst++)if(src!==dst)pool[dst]=mix(pool[dst],hash(pool[src]));
-    hc=IB>>>0;const words=[];for(let i=0;i<8;i++){let v=pool[i%4]^hc;hc=Math.imul(hc,MB)>>>0;v=Math.imul(v,hc)>>>0;words.push((v^(v>>>16))>>>0);}const u64=[];for(let i=0;i<8;i+=2)u64.push((BigInt(words[i+1])<<32n)|BigInt(words[i]));
-    const init=(u64[0]<<64n)|u64[1],seq=(u64[2]<<64n)|u64[3];let inc=((seq<<1n)|1n)&MASK128,state=0n;state=(state*M+inc)&MASK128;state=(state+init)&MASK128;state=(state*M+inc)&MASK128;
-    const raw=()=>{state=(state*M+inc)&MASK128;const x=((state>>64n)^(state&MASK64))&MASK64,r=state>>122n;return((x>>r)|(x<<((64n-r)&63n)))&MASK64;},out=new Float64Array(length);for(let i=0;i<length;i++)out[i]=2*(Number(raw()>>11n)/9007199254740992)-1;return out;
-  }
-  function drum(note,velocity,startSeconds){
-    ensureAudioGraph();const rate=44100,v=velocity/127,duration=note===36?.34:note===38?.24:note===42?.09:note===46?.20:note===49?.72:.12,count=Math.max(1,Math.round(duration*rate)),buffer=context.createBuffer(1,count,rate),data=buffer.getChannelData(0),seed=((note*1000003)^Math.round(startSeconds*1000000))>>>0,noise=drumNoise(count,seed);
-    for(let i=0;i<count;i++){const t=i/rate;let sample=0;if(note===36){const phase=2*Math.PI*(105*t-42*t*t);sample=Math.sin(phase)*Math.exp(-t*13)*.72*v;}else if(note===38){sample=(.72*noise[i]+.28*Math.sin(2*Math.PI*185*t))*Math.exp(-t*17)*.46*v;}else if(note===42||note===46){sample=noise[i]*Math.exp(-t*(note===42?46:22))*.22*v;}else if(note===49){sample=(noise[i]+Math.sin(2*Math.PI*4600*t)*.15)*Math.exp(-t*5.2)*.26*v;}else sample=noise[i]*Math.exp(-t*30)*.15*v;data[i]=sample;}
-    const panValue=note===38?.05:note===42?-.25:note===46?.25:note===49?.30:0,angle=(panValue+1)*Math.PI/4,stereo=context.createBuffer(2,count,rate),left=stereo.getChannelData(0),right=stereo.getChannelData(1);for(let i=0;i<count;i++){left[i]=data[i]*Math.cos(angle);right[i]=data[i]*Math.sin(angle);}
-    const source=context.createBufferSource();source.buffer=stereo;source.connect(audioGraph.buses.Drums);source.start();activeNodes.push(source);source.onended=()=>{activeNodes=activeNodes.filter(n=>n!==source);};
-  }
-  function movingAverageFloat64(stereo,window){
-    const out=[new Float64Array(stereo[0].length),new Float64Array(stereo[1].length)];
-    for(let ch=0;ch<2;ch++){let sum=0;const csum=new Float64Array(stereo[ch].length);for(let i=0;i<stereo[ch].length;i++){sum+=stereo[ch][i];csum[i]=sum;out[ch][i]=i<window-1?sum/(i+1):(sum-(i>=window?csum[i-window]:0))/window;}}return out;
-  }
-  function renderTonalFloat64(midi,name,duration,velocity){
-    const cfg=voiceConfig[name],rate=44100,[attack,decay,sustain,release]=cfg.adsr,noteSamples=Math.max(1,Math.round(duration*rate)),releaseSamples=Math.max(0,Math.round(release*rate)),count=noteSamples+releaseSamples,attackSamples=Math.min(noteSamples,Math.max(0,Math.round(attack*rate))),decaySamples=Math.min(noteSamples-attackSamples,Math.max(0,Math.round(decay*rate))),sustainSamples=noteSamples-attackSamples-decaySamples,envelope=new Float64Array(count);
-    for(let i=0;i<attackSamples;i++)envelope[i]=i/attackSamples;for(let i=0;i<decaySamples;i++)envelope[attackSamples+i]=1+(sustain-1)*(i/decaySamples);for(let i=0;i<sustainSamples;i++)envelope[attackSamples+decaySamples+i]=sustain;if(releaseSamples){const level=envelope[noteSamples-1]||sustain;for(let i=0;i<releaseSamples;i++)envelope[noteSamples+i]=releaseSamples===1?0:level*(1-i/(releaseSamples-1));}
-    const left=new Float64Array(count),right=new Float64Array(count),base=hz(midi),amplitudeSum=cfg.layers.reduce((sum,l)=>sum+Math.abs(l[1]),0)||1,angle=(cfg.pan+1)*Math.PI/4,panL=Math.cos(angle),panR=Math.sin(angle);
-    for(let i=0;i<count;i++){const t=i/rate;let mono=0;for(const [type,level,octave,detune] of cfg.layers){const frequency=base*Math.pow(2,octave)*Math.pow(2,detune/1200),cycles=frequency*t,wrapped=cycles-Math.floor(cycles),phase=2*Math.PI*wrapped,kind=type==='sawtooth'?'saw':type;const wave=kind==='sine'?Math.sin(phase):kind==='square'?(wrapped<.5?1:-1):kind==='triangle'?1-4*Math.abs(wrapped-.5):2*wrapped-1;mono+=level*wave;}mono=mono/amplitudeSum*envelope[i]*velocity*cfg.gain;left[i]=mono*panL;right[i]=mono*panR;}return [left,right];
-  }
-  function renderDrumFloat64(note,velocity,startSeconds){
-    const rate=44100,v=velocity/127,duration=note===36?.34:note===38?.24:note===42?.09:note===46?.20:note===49?.72:.12,count=Math.max(1,Math.round(duration*rate)),seed=((note*1000003)^Math.round(startSeconds*1000000))>>>0,noise=drumNoise(count,seed),mono=new Float64Array(count);
-    for(let i=0;i<count;i++){const t=i/rate;if(note===36)mono[i]=Math.sin(2*Math.PI*(105*t-42*t*t))*Math.exp(-t*13)*.72*v;else if(note===38)mono[i]=(.72*noise[i]+.28*Math.sin(2*Math.PI*185*t))*Math.exp(-t*17)*.46*v;else if(note===42||note===46)mono[i]=noise[i]*Math.exp(-t*(note===42?46:22))*.22*v;else if(note===49)mono[i]=(noise[i]+Math.sin(2*Math.PI*4600*t)*.15)*Math.exp(-t*5.2)*.26*v;else mono[i]=noise[i]*Math.exp(-t*30)*.15*v;}
-    const pan=note===38?.05:note===42?-.25:note===46?.25:note===49?.30:0,angle=(pan+1)*Math.PI/4,left=new Float64Array(count),right=new Float64Array(count),pl=Math.cos(angle),pr=Math.sin(angle);for(let i=0;i<count;i++){left[i]=mono[i]*pl;right[i]=mono[i]*pr;}return [left,right];
-  }
-  function renderSongTracksFloat64(){
-    const rate=44100,safeBpm=Math.max(60,Math.min(200,+bpm.value||120)),beatSeconds=60/safeBpm,eighthSeconds=beatSeconds/2,melodyEnd=Math.max(0,...selectedSongEvents.map(e=>(e.bar*4+(e.step+e.duration)*.5)*beatSeconds)),chordEnd=Math.max(0,...selectedTrackEvents.chords.map(e=>(e.bar*4+e.beat+e.duration)*beatSeconds)),bassEnd=Math.max(0,...selectedTrackEvents.bass.map(e=>(e.bar*4+e.beat+e.duration)*beatSeconds)),drumEnd=Math.max(0,...selectedTrackEvents.drums.map(e=>(e.bar*4+(e.eighth+e.duration)*.5)*beatSeconds)),finalNoteEnd=Math.max(melodyEnd,chordEnd,bassEnd,drumEnd),frames=Math.max(1,Math.ceil((finalNoteEnd+2.4)*rate)),tracks={Melody:[new Float64Array(frames),new Float64Array(frames)],Chords:[new Float64Array(frames),new Float64Array(frames)],Bass:[new Float64Array(frames),new Float64Array(frames)],Drums:[new Float64Array(frames),new Float64Array(frames)]};
-    const add=(name,start,pcm)=>{const offset=Math.round(start*rate);for(let ch=0;ch<2;ch++)for(let i=0;i<pcm[ch].length&&offset+i<frames;i++)tracks[name][ch][offset+i]+=pcm[ch][i];};
-    if(trackMelody.checked)selectedSongEvents.forEach(e=>add('Melody',(e.bar*4+e.step*.5)*beatSeconds,renderTonalFloat64(e.midi,'Melody',e.duration*eighthSeconds,e.velocity/127)));
-    if(trackChords.checked)selectedTrackEvents.chords.forEach(e=>add('Chords',(e.bar*4+e.beat)*beatSeconds,renderTonalFloat64(e.note,'Chords',e.duration*beatSeconds,e.velocity/127)));
-    if(trackBass.checked)selectedTrackEvents.bass.forEach(e=>add('Bass',(e.bar*4+e.beat)*beatSeconds,renderTonalFloat64(e.note,'Bass',e.duration*beatSeconds,e.velocity/127)));
-    if(trackDrums.checked)selectedTrackEvents.drums.forEach(e=>{const start=(e.bar*4+e.eighth*.5)*beatSeconds;add('Drums',start,renderDrumFloat64(e.note,e.velocity,start));});
-    for(const name of ['Melody','Chords','Bass']){const window=Math.max(1,Math.min(512,Math.round(rate/(2*voiceConfig[name].cutoff))));tracks[name]=movingAverageFloat64(movingAverageFloat64(tracks[name],window),window);}
-    const gains={Melody:1,Chords:.88,Bass:.96,Drums:.82};for(const [name,gain] of Object.entries(gains))for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)tracks[name][ch][i]*=gain;
-    const taps=(source,specs)=>{const wet=[new Float64Array(frames),new Float64Array(frames)];for(const [ms,gain,cross] of specs){const delay=Math.round(ms*rate/1000);for(let i=delay;i<frames;i++){wet[0][i]+=source[cross?1:0][i-delay]*gain;wet[1][i]+=source[cross?0:1][i-delay]*gain;}}return wet;},addWet=(dry,wet)=>{for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)dry[ch][i]+=wet[ch][i];};
-    const delaySpecs=[[.180,.12,true],[.360,.065,false]].map(([seconds,g,c])=>[seconds*1000,g,c]),reverbSpecs=[[43,.070,true],[71,.055,false],[113,.045,true],[181,.032,false],[293,.022,true]];
-    if(trackMelody.checked){addWet(tracks.Melody,taps(tracks.Melody,delaySpecs));addWet(tracks.Melody,taps(tracks.Melody,reverbSpecs));}
-    if(trackChords.checked)addWet(tracks.Chords,taps(tracks.Chords,reverbSpecs));if(trackDrums.checked)addWet(tracks.Drums,taps(tracks.Drums,reverbSpecs));
-    const mix=[new Float64Array(frames),new Float64Array(frames)],den=Math.tanh(1.15);let peak=0;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++){let v=0;for(const name of ['Melody','Chords','Bass','Drums'])v+=tracks[name][ch][i];v=Math.tanh(v*1.15)/den;mix[ch][i]=v;peak=Math.max(peak,Math.abs(v));}const normalization=peak>0?.92/peak:1;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)mix[ch][i]*=normalization;
-    return {rate,frames,tracks,mix,sourcePeak:peak,normalization};
   }
   function stop(){
     timers.forEach(clearTimeout); timers=[];

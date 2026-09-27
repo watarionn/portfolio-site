@@ -226,7 +226,8 @@
   function drum(note,velocity,startSeconds){
     ensureAudioGraph();const rate=44100,v=velocity/127,duration=note===36?.34:note===38?.24:note===42?.09:note===46?.20:note===49?.72:.12,count=Math.max(1,Math.round(duration*rate)),buffer=context.createBuffer(1,count,rate),data=buffer.getChannelData(0),seed=((note*1000003)^Math.round(startSeconds*1000000))>>>0,noise=drumNoise(count,seed);
     for(let i=0;i<count;i++){const t=i/rate;let sample=0;if(note===36){const phase=2*Math.PI*(105*t-42*t*t);sample=Math.sin(phase)*Math.exp(-t*13)*.72*v;}else if(note===38){sample=(.72*noise[i]+.28*Math.sin(2*Math.PI*185*t))*Math.exp(-t*17)*.46*v;}else if(note===42||note===46){sample=noise[i]*Math.exp(-t*(note===42?46:22))*.22*v;}else if(note===49){sample=(noise[i]+Math.sin(2*Math.PI*4600*t)*.15)*Math.exp(-t*5.2)*.26*v;}else sample=noise[i]*Math.exp(-t*30)*.15*v;data[i]=sample;}
-    const source=context.createBufferSource(),pan=context.createStereoPanner?context.createStereoPanner():context.createGain();source.buffer=buffer;if(pan.pan)pan.pan.value=note===38?.05:note===42?-.25:note===46?.25:note===49?.30:0;source.connect(pan).connect(audioGraph.buses.Drums);source.start();activeNodes.push(source);source.onended=()=>{activeNodes=activeNodes.filter(n=>n!==source);};
+    const panValue=note===38?.05:note===42?-.25:note===46?.25:note===49?.30:0,angle=(panValue+1)*Math.PI/4,stereo=context.createBuffer(2,count,rate),left=stereo.getChannelData(0),right=stereo.getChannelData(1);for(let i=0;i<count;i++){left[i]=data[i]*Math.cos(angle);right[i]=data[i]*Math.sin(angle);}
+    const source=context.createBufferSource();source.buffer=stereo;source.connect(audioGraph.buses.Drums);source.start();activeNodes.push(source);source.onended=()=>{activeNodes=activeNodes.filter(n=>n!==source);};
   }
   function stop(){
     timers.forEach(clearTimeout); timers=[];

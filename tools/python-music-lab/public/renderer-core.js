@@ -10,7 +10,8 @@
     Chords:{gain:.14,pan:-.18,adsr:[.050,.180,.52,.38],layers:[['triangle',1,0,0],['sine',.36,1,0]],cutoff:3300},
     Bass:{gain:.24,pan:0,adsr:[.006,.110,.70,.15],layers:[['square',.42,0,0],['sine',1,0,0],['sine',.18,-1,0]],cutoff:1450}
   };
-  const hz=midi=>440*Math.pow(2,(midi-69)/12);\n  const pyRound=value=>{const floor=Math.floor(value),fraction=value-floor;if(fraction<.5)return floor;if(fraction>.5)return floor+1;return floor%2===0?floor:floor+1;};
+  const hz=midi=>440*Math.pow(2,(midi-69)/12);
+  const pyRound=value=>{const floor=Math.floor(value),fraction=value-floor;if(fraction<.5)return floor;if(fraction>.5)return floor+1;return floor%2===0?floor:floor+1;};
   function drumNoise(length,seed){
     const MASK128=(1n<<128n)-1n,MASK64=(1n<<64n)-1n,M=(2549297995355413924n<<64n)|4865540595714422341n,IA=0x43b0d7e5,MA=0x931e8875,IB=0x8b51f9dd,MB=0x58f38ded,ML=0xca01f9dd,MR=0x4973f715;
     let hc=IA>>>0;const hash=v=>{let x=(v^hc)>>>0;hc=Math.imul(hc,MA)>>>0;x=Math.imul(x,hc)>>>0;return(x^(x>>>16))>>>0},mix=(x,y)=>{let z=(Math.imul(ML,x)-Math.imul(MR,y))>>>0;return(z^(z>>>16))>>>0};

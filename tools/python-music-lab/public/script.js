@@ -246,7 +246,13 @@
     if(trackBass.checked)selectedTrackEvents.bass.forEach(e=>add('Bass',(e.bar*4+e.beat)*beatSeconds,renderTonalFloat64(e.note,'Bass',e.duration*beatSeconds,e.velocity/127)));
     if(trackDrums.checked)selectedTrackEvents.drums.forEach(e=>{const start=(e.bar*4+e.eighth*.5)*beatSeconds;add('Drums',start,renderDrumFloat64(e.note,e.velocity,start));});
     for(const name of ['Melody','Chords','Bass']){const window=Math.max(1,Math.min(512,Math.round(rate/(2*voiceConfig[name].cutoff))));tracks[name]=movingAverageFloat64(movingAverageFloat64(tracks[name],window),window);}
-    return {rate,frames,tracks};
+    const gains={Melody:1,Chords:.88,Bass:.96,Drums:.82};for(const [name,gain] of Object.entries(gains))for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)tracks[name][ch][i]*=gain;
+    const taps=(source,specs)=>{const wet=[new Float64Array(frames),new Float64Array(frames)];for(const [ms,gain,cross] of specs){const delay=Math.round(ms*rate/1000);for(let i=delay;i<frames;i++){wet[0][i]+=source[cross?1:0][i-delay]*gain;wet[1][i]+=source[cross?0:1][i-delay]*gain;}}return wet;},addWet=(dry,wet)=>{for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)dry[ch][i]+=wet[ch][i];};
+    const delaySpecs=[[.180,.12,true],[.360,.065,false]].map(([seconds,g,c])=>[seconds*1000,g,c]),reverbSpecs=[[43,.070,true],[71,.055,false],[113,.045,true],[181,.032,false],[293,.022,true]];
+    if(trackMelody.checked){addWet(tracks.Melody,taps(tracks.Melody,delaySpecs));addWet(tracks.Melody,taps(tracks.Melody,reverbSpecs));}
+    if(trackChords.checked)addWet(tracks.Chords,taps(tracks.Chords,reverbSpecs));if(trackDrums.checked)addWet(tracks.Drums,taps(tracks.Drums,reverbSpecs));
+    const mix=[new Float64Array(frames),new Float64Array(frames)],den=Math.tanh(1.15);let peak=0;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++){let v=0;for(const name of ['Melody','Chords','Bass','Drums'])v+=tracks[name][ch][i];v=Math.tanh(v*1.15)/den;mix[ch][i]=v;peak=Math.max(peak,Math.abs(v));}const normalization=peak>0?.92/peak:1;for(let ch=0;ch<2;ch++)for(let i=0;i<frames;i++)mix[ch][i]*=normalization;
+    return {rate,frames,tracks,mix,sourcePeak:peak,normalization};
   }
   function stop(){
     timers.forEach(clearTimeout); timers=[];

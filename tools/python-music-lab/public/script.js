@@ -23,7 +23,7 @@
   const trackMelody = document.getElementById('trackMelody'), trackChords = document.getElementById('trackChords'), trackBass = document.getElementById('trackBass'), trackDrums = document.getElementById('trackDrums');
   const noteNames = ['C5','B4','A4','G4','F4','E4','D4','C4'];
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
-  const sectionGrammar={A:{density:.66,shift:0,energy:.56,style:'sparse',nct:.20,cadence:'half'},B:{density:.78,shift:2,energy:.74,style:'flowing',nct:.28,cadence:'half'},Chorus:{density:.92,shift:9,energy:.96,style:'driving',nct:.32,cadence:'authentic'},Interlude:{density:.58,shift:0,energy:.64,style:'sparse',nct:.18,cadence:'none'},Final:{density:.90,shift:7,energy:.92,style:'driving',nct:.24,cadence:'authentic'},Intro:{density:.48,shift:-2,energy:.42,style:'sparse',nct:.14,cadence:'none'},A2:{density:.72,shift:2,energy:.68,style:'flowing',nct:.22,cadence:'half'},B2:{density:.84,shift:4,energy:.82,style:'flowing',nct:.28,cadence:'half'}};
+  const sectionGrammar={A:{density:.66,shift:0,energy:.56,style:'sparse',nct:.20,cadence:'half',progression:['i','VI','III','VII']},B:{density:.78,shift:2,energy:.74,style:'flowing',nct:.28,cadence:'half',progression:['iv','VI','III','V']},Chorus:{density:.92,shift:9,energy:.96,style:'driving',nct:.32,cadence:'authentic',progression:['VI','VII','i','V']},Interlude:{density:.58,shift:0,energy:.64,style:'sparse',nct:.18,cadence:'none'},Final:{density:.90,shift:7,energy:.92,style:'driving',nct:.24,cadence:'authentic'},Intro:{density:.48,shift:-2,energy:.42,style:'sparse',nct:.14,cadence:'none'},A2:{density:.72,shift:2,energy:.68,style:'flowing',nct:.22,cadence:'half'},B2:{density:.84,shift:4,energy:.82,style:'flowing',nct:.28,cadence:'half'}};
   const scales = {major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10]};
   let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], audioGraph=null, selectedSongEvents=[], selectedTrackEvents={chords:[],bass:[],drums:[]};
   const voiceConfig={
@@ -64,6 +64,8 @@
     const root=semitone[keyEl.value], ints=scales[scaleEl.value];
     return noteNames.map((n,i)=>({i,m:midiFor(n)})).filter(x=>ints.includes(((x.m-root)%12+12)%12)).map(x=>x.i);
   }
+  function degreeIndex(symbol){const major={I:0,ii:1,iii:2,IV:3,V:4,vi:5,'vii°':6},minor={i:0,'ii°':1,III:2,iv:3,v:4,V:4,VI:5,VII:6};return (scaleEl.value==='Minor'?minor:major)[symbol];}
+  function triadFor(symbol,octave=4){const degree=degreeIndex(symbol);if(degree===undefined)return [0,2,4].map(d=>scaleMidi(d,octave));const tri=[0,2,4].map(d=>scaleMidi(degree+d,octave));if(scaleEl.value==='Minor'&&symbol==='V')tri[1]+=1;return tri;}
   function buildSong(){
     const random=rng((Number(seedEl.value)||1)+97), safeBpm=Math.max(60,Math.min(200,+bpm.value||120));
     const targetSeconds=Number(lengthEl.value)||60;
@@ -74,13 +76,14 @@
     songBars=[]; let absoluteBar=0;
     sections.forEach((section,sectionIndex)=>{
       for(let local=0;local<section.bars;local++,absoluteBar++){
-        const baseDegree=chordDegrees[local%4]; let degree=baseDegree;
-        if(section.name.includes('Chorus')&&local%4===2)degree=5;
-        else if(section.name==='B'&&local%4===3)degree=4;
-        else if(section.name==='Interlude'&&local%4===1)degree=3;
-        else if(section.name==='Final'&&local>=section.bars-2)degree=local===section.bars-1?0:4;
-        const grammar=sectionGrammar[section.name]||sectionGrammar.A;
-        songBars.push({section:section.name,degree,variation:random(),sectionIndex,localBar:local,sectionBars:section.bars,...grammar});
+        const grammar=sectionGrammar[section.name]||sectionGrammar.A;let degreeSymbol;
+        if(grammar.progression)degreeSymbol=grammar.progression[local%grammar.progression.length];
+        else degreeSymbol=(scaleEl.value==='Minor'?['i','VI','III','VII']:['I','vi','IV','V'])[local%4];
+        if(grammar.cadence==='authentic'&&section.bars>=2&&local===section.bars-2)degreeSymbol='V';
+        if(grammar.cadence==='authentic'&&local===section.bars-1)degreeSymbol=scaleEl.value==='Minor'?'i':'I';
+        if(grammar.cadence==='half'&&local===section.bars-1)degreeSymbol='V';
+        const degree=degreeIndex(degreeSymbol);
+        songBars.push({section:section.name,degree,degreeSymbol,variation:random(),sectionIndex,localBar:local,sectionBars:section.bars,...grammar});
       }
     });
     const actualSeconds=Math.round(totalBars*4*60/safeBpm); let elapsedBars=0;
@@ -112,7 +115,7 @@
     songBars.forEach((info,bar)=>motif.forEach(m=>{
       if(m.scaleOffset===null)return;let density=info.density;if(info.style==='sparse')density*=m.step%2?.74:.88;else if(info.style==='driving')density=Math.min(1,density+(m.step%2?.12:.06));if(m.step!==0&&m.step!==4&&random.random()>density)return;
       let offset=m.scaleOffset;if(info.section.toLowerCase().includes('b'))offset+=Math.floor((info.localBar%4)/2);else if(info.section.toLowerCase().includes('chorus'))offset=Math.round(offset*1.35)+2;
-      let note=nearest(ext,baseScale[3]+offset*2+info.shift), chord=[0,2,4].map(d=>scaleMidi(info.degree+d,4)), chordExt=[...chord,...chord.map(n=>n+12)];
+      let note=nearest(ext,baseScale[3]+offset*2+info.shift), chord=triadFor(info.degreeSymbol,4), chordExt=[...chord,...chord.map(n=>n+12)];
       if(m.step===0||m.step===4)note=nearest(chordExt,note);
       else if(random.random()<info.nct){const pcs=new Set(chord.map(n=>n%12)),cand=ext.filter(n=>!pcs.has(n%12)&&Math.abs(n-note)>0&&Math.abs(n-note)<=4);if(cand.length){const dist=Math.min(...cand.map(n=>Math.abs(n-note))),near=cand.filter(n=>Math.abs(n-note)===dist);note=random.choice(near);}}
       if(info.localBar%4===3&&m.step>=6)note=nearest([baseScale[0],baseScale[0]+12,baseScale[0]+24],note);
@@ -139,11 +142,11 @@
   function parityTrackEvents(){
     const chords=[],bass=[],drums=[];
     songBars.forEach((info,bar)=>{
-      const chord=[0,2,4].map(d=>scaleMidi(info.degree+d,4)),energy=info.energy;
+      const chord=triadFor(info.degreeSymbol,4),energy=info.energy;
       chord.forEach(note=>chords.push({bar,beat:0,duration:4,note,velocity:Math.trunc(52+25*energy)}));
-      const root=scaleMidi(info.degree,2),fifth=scaleMidi(info.degree+4,2),notes=[root,root+12,fifth,root+12],next=songBars[bar+1];
+      const bassChord=triadFor(info.degreeSymbol,3),root=bassChord[0]-12,fifth=bassChord[2]-12,notes=[root,root+12,fifth,root+12],next=songBars[bar+1];
       if(energy>=.85)notes[1]=fifth;
-      if(info.localBar===info.sectionBars-1&&next&&next.energy>energy)notes[3]=scaleMidi(next.degree,2)-1;
+      if(info.localBar===info.sectionBars-1&&next&&next.energy>energy)notes[3]=triadFor(next.degreeSymbol,3)[0]-13;
       notes.forEach((note,beat)=>bass.push({bar,beat,duration:1,note,velocity:Math.trunc(68+24*energy+((beat===0||beat===2)?6:0))}));
       if(info.localBar===0&&energy>=.78)drums.push({bar,eighth:0,duration:2,note:49,velocity:108});
       for(let step=0;step<8;step++)drums.push({bar,eighth:step,duration:.5,note:(energy>=.90&&step===7)?46:42,velocity:Math.trunc(42+30*energy+(step%2===0?5:0))});

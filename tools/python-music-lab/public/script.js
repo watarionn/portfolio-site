@@ -25,7 +25,7 @@
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
   const sectionGrammar={A:{density:.66,shift:0,energy:.56,style:'sparse',nct:.20,cadence:'half',progression:['i','VI','III','VII']},B:{density:.78,shift:2,energy:.74,style:'flowing',nct:.28,cadence:'half',progression:['iv','VI','III','V']},Chorus:{density:.92,shift:9,energy:.96,style:'driving',nct:.32,cadence:'authentic',progression:['VI','VII','i','V']},Interlude:{density:.58,shift:0,energy:.64,style:'sparse',nct:.18,cadence:'none'},Final:{density:.90,shift:7,energy:.92,style:'driving',nct:.24,cadence:'authentic'},Intro:{density:.48,shift:-2,energy:.42,style:'sparse',nct:.14,cadence:'none'},A2:{density:.72,shift:2,energy:.68,style:'flowing',nct:.22,cadence:'half'},B2:{density:.84,shift:4,energy:.82,style:'flowing',nct:.28,cadence:'half'}};
   const scales = {major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10]};
-  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], audioGraph=null, selectedSongEvents=[], selectedTrackEvents={chords:[],bass:[],drums:[]};
+  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], audioGraph=null, selectedSongEvents=[], selectedTrackEvents={chords:[],bass:[],drums:[]}, selectedSeed=null;
   const voiceConfig={
     Melody:{gain:.20,pan:.12,adsr:[.010,.090,.66,.22],cutoff:5600,layers:[['sawtooth',.74,0,-3.5],['sawtooth',.74,0,3.5],['sine',.32,1,0]]},
     Chords:{gain:.14,pan:-.18,adsr:[.050,.180,.52,.38],cutoff:3300,layers:[['triangle',1,0,0],['sine',.36,1,0]]},
@@ -218,7 +218,7 @@
     stop();
     const AudioCtor=window.AudioContext||window.webkitAudioContext;
     if(!AudioCtor){status.textContent='Audio unsupported';return;}
-    context ||= new AudioCtor(); context.resume(); ensureAudioGraph(); if(audio&&!audio.paused)audio.pause(); if(!songBars.length) buildSong(); if(!selectedSongEvents.length){const motif=candidateMotif(Number(seedEl.value)||1);selectedSongEvents=expandedMelody(motif,Number(seedEl.value)||1);selectedTrackEvents=parityTrackEvents();}
+    context ||= new AudioCtor(); context.resume(); ensureAudioGraph(); if(audio&&!audio.paused)audio.pause(); if(!songBars.length) buildSong(); if(!selectedSongEvents.length){const fallbackSeed=selectedSeed??(Number(seedEl.value)||1),motif=candidateMotif(fallbackSeed);selectedSongEvents=expandedMelody(motif,fallbackSeed);selectedTrackEvents=parityTrackEvents();}
     const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
     const stepMs=60000/safeBpm/4, totalSteps=songBars.length*16;
     let absolute=0;

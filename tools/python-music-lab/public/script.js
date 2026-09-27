@@ -60,7 +60,7 @@
       selectedTrackEvents.drums=selectedTrackEvents.drums.filter(e=>!(e.bar===bar&&e.note===36&&Math.abs(e.eighth-eighth)<1e-9));
       if(on)selectedTrackEvents.drums.push({bar,eighth,duration:.5,note:36,velocity:96});
     }
-    selectedTrackEvents.drums.sort((a,b)=>a.bar-b.bar||a.eighth-b.eighth||a.note-b.note);humanEdited=true;const current=rankedCandidates.find(x=>x.seed===selectedSeed);candidateSummary.textContent='Human edited · Seed '+selectedSeed+(current?' · '+current.total.toFixed(1)+'/100':'');status.textContent='Human-edited kick pattern';
+    selectedTrackEvents.drums.sort((a,b)=>a.bar-b.bar||a.eighth-b.eighth||a.note-b.note);humanEdited=true;const current=selectedMotif?evaluateCandidate(selectedMotif,selectedSeed):rankedCandidates.find(x=>x.seed===selectedSeed);candidateSummary.textContent='Human edited · Seed '+selectedSeed+(current?' · '+current.total.toFixed(1)+'/100':'');status.textContent='Human-edited kick pattern';
   }
   function rng(seed){let x=(Number(seed)||1)>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296;};}
   function allowedRows(){

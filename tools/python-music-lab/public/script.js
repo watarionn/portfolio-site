@@ -25,7 +25,7 @@
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
   const sectionGrammar={A:{density:.66,shift:0,energy:.56,style:'sparse',nct:.20,cadence:'half'},B:{density:.78,shift:2,energy:.74,style:'flowing',nct:.28,cadence:'half'},Chorus:{density:.92,shift:9,energy:.96,style:'driving',nct:.32,cadence:'authentic'},Interlude:{density:.58,shift:0,energy:.64,style:'sparse',nct:.18,cadence:'none'},Final:{density:.90,shift:7,energy:.92,style:'driving',nct:.24,cadence:'authentic'},Intro:{density:.48,shift:-2,energy:.42,style:'sparse',nct:.14,cadence:'none'},A2:{density:.72,shift:2,energy:.68,style:'flowing',nct:.22,cadence:'half'},B2:{density:.84,shift:4,energy:.82,style:'flowing',nct:.28,cadence:'half'}};
   const scales = {major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10]};
-  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], audioGraph=null, selectedSongEvents=[];
+  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], audioGraph=null, selectedSongEvents=[], selectedTrackEvents={chords:[],bass:[],drums:[]};
   const voiceConfig={
     Melody:{gain:.20,pan:.12,adsr:[.010,.090,.66,.22],cutoff:5600,layers:[['sawtooth',.74,0,-3.5],['sawtooth',.74,0,3.5],['sine',.32,1,0]]},
     Chords:{gain:.14,pan:-.18,adsr:[.050,.180,.52,.38],cutoff:3300,layers:[['triangle',1,0,0],['sine',.36,1,0]]},
@@ -134,7 +134,7 @@
   function generateCandidates(){
     buildSong();const base=Number(seedEl.value)||1,ranked=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed),best=ranked[0];seedEl.value=String(best.seed);
     cells.forEach(c=>{const step=Math.floor(+c.dataset.step/2),event=best.events.find(e=>e.bar===0&&e.step===step),on=event&&midiFor(noteNames[+c.dataset.row])===event.midi;c.classList.toggle('active',!!on);c.setAttribute('aria-pressed',String(!!on));});
-    candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';selectedSongEvents=best.events;return best;
+    candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';selectedSongEvents=best.events;selectedTrackEvents=parityTrackEvents();return best;
   }
   function parityTrackEvents(){
     const chords=[],bass=[],drums=[];
@@ -215,7 +215,7 @@
     stop();
     const AudioCtor=window.AudioContext||window.webkitAudioContext;
     if(!AudioCtor){status.textContent='Audio unsupported';return;}
-    context ||= new AudioCtor(); context.resume(); ensureAudioGraph(); if(audio&&!audio.paused)audio.pause(); if(!songBars.length) buildSong(); if(!selectedSongEvents.length){const motif=candidateMotif(Number(seedEl.value)||1);selectedSongEvents=expandedMelody(motif,Number(seedEl.value)||1);}
+    context ||= new AudioCtor(); context.resume(); ensureAudioGraph(); if(audio&&!audio.paused)audio.pause(); if(!songBars.length) buildSong(); if(!selectedSongEvents.length){const motif=candidateMotif(Number(seedEl.value)||1);selectedSongEvents=expandedMelody(motif,Number(seedEl.value)||1);selectedTrackEvents=parityTrackEvents();}
     const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
     const stepMs=60000/safeBpm/4, totalSteps=songBars.length*16;
     let absolute=0;
@@ -227,10 +227,9 @@
         const eighthStep=step/2, ev=selectedSongEvents.find(e=>e.bar===bar&&e.step===eighthStep);
         if(ev)voice(ev.midi,'Melody',Math.max(.08,stepMs/1000*2*ev.duration),.72+.28*info.energy);
       }
-      const parity=parityTrackEvents();
-      if(trackChords.checked&&step===0)parity.chords.filter(e=>e.bar===bar).forEach(e=>voice(e.note,'Chords',Math.max(.25,stepMs/1000*16),e.velocity/100));
-      if(trackBass.checked&&step%4===0){const beat=step/4,e=parity.bass.find(x=>x.bar===bar&&x.beat===beat);if(e)voice(e.note,'Bass',Math.max(.18,stepMs/1000*4),e.velocity/100);}
-      if(trackDrums.checked&&step%2===0){const eighth=step/2;parity.drums.filter(e=>e.bar===bar&&e.eighth===eighth).forEach(e=>{if(e.note===36)drum();else tone(e.note<40?50:e.note,'triangle',Math.max(.012,e.velocity/3500),Math.max(.035,stepMs/1000*e.duration*2));});}
+      if(trackChords.checked&&step===0)selectedTrackEvents.chords.filter(e=>e.bar===bar).forEach(e=>voice(e.note,'Chords',Math.max(.25,stepMs/1000*16),e.velocity/100));
+      if(trackBass.checked&&step%4===0){const beat=step/4,e=selectedTrackEvents.bass.find(x=>x.bar===bar&&x.beat===beat);if(e)voice(e.note,'Bass',Math.max(.18,stepMs/1000*4),e.velocity/100);}
+      if(trackDrums.checked&&step%2===0){const eighth=step/2;selectedTrackEvents.drums.filter(e=>e.bar===bar&&e.eighth===eighth).forEach(e=>{if(e.note===36)drum();else tone(e.note<40?50:e.note,'triangle',Math.max(.012,e.velocity/3500),Math.max(.035,stepMs/1000*e.duration*2));});}
       status.textContent=info.section+' · '+(bar+1)+'/'+songBars.length+' bars';
       absolute++;
       timers=[setTimeout(tick,stepMs)];

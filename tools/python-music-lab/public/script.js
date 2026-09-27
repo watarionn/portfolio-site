@@ -87,24 +87,34 @@
     songOverview.replaceChildren(...sections.map(section=>{const e=document.createElement('span');const startSec=Math.round(elapsedBars*4*60/safeBpm);elapsedBars+=section.bars;e.innerHTML='<strong>'+section.name+'</strong><small>'+section.bars+' bars · '+startSec+'s</small>';return e;}));
     status.textContent=totalBars+' bars / '+actualSeconds+' sec';
   }
-  function weightedMove(random){const bag=[-2,-1,-1,-1,-1,0,0,1,1,1,1,2];return bag[Math.floor(random()*bag.length)];}
+  function pyRandom(seed){
+    const N=624,M=397,MATRIX_A=0x9908b0df,UPPER_MASK=0x80000000,LOWER_MASK=0x7fffffff,mt=new Uint32Array(N);let index=N;
+    mt[0]=seed>>>0;for(let i=1;i<N;i++){const x=mt[i-1]^(mt[i-1]>>>30);mt[i]=(Math.imul(1812433253,x)+i)>>>0;}
+    function twist(){for(let i=0;i<N;i++){const y=(mt[i]&UPPER_MASK)|(mt[(i+1)%N]&LOWER_MASK);mt[i]=mt[(i+M)%N]^(y>>>1)^((y&1)?MATRIX_A:0);}index=0;}
+    function uint32(){if(index>=N)twist();let y=mt[index++];y^=y>>>11;y^=(y<<7)&0x9d2c5680;y^=(y<<15)&0xefc60000;y^=y>>>18;return y>>>0;}
+    function random(){const a=uint32()>>>5,b=uint32()>>>6;return (a*67108864+b)/9007199254740992;}
+    function getrandbits(k){if(k<=32)return uint32()>>>(32-k);throw new Error('getrandbits >32 unsupported');}
+    function randbelow(n){const k=32-Math.clz32(n);let r;do{r=getrandbits(k);}while(r>=n);return r;}
+    return {random,randint:(a,b)=>a+randbelow(b-a+1),choice:a=>a[randbelow(a.length)],choices:(values,weights)=>{const total=weights.reduce((a,b)=>a+b,0),x=random()*total;let acc=0;for(let i=0;i<values.length;i++){acc+=weights[i];if(x<acc)return values[i];}return values.at(-1);}};
+  }
+  function weightedMove(random){return random.choices([-2,-1,0,1,2],[1,4,2,4,1]);}
   function candidateMotif(seed){
-    const random=rng(seed), contour=[0];for(let i=1;i<8;i++)contour.push(Math.max(-4,Math.min(5,contour[i-1]+weightedMove(random))));
-    return contour.map((offset,step)=>({step,scaleOffset:(step!==0&&step!==4&&random()<.18)?null:offset,duration:(step===2||step===6)&&random()<.40?2:1}));
+    const random=pyRandom(seed), contour=[0];for(let i=1;i<8;i++)contour.push(Math.max(-4,Math.min(5,contour[i-1]+weightedMove(random))));
+    return contour.map((offset,step)=>({step,scaleOffset:(step!==0&&step!==4&&random.random()<.18)?null:offset,duration:(step===2||step===6)&&random.random()<.40?2:1}));
   }
   function nearest(values,target){return values.reduce((a,b)=>Math.abs(b-target)<Math.abs(a-target)?b:a);}
   function targetScore(value,target,tolerance){return Math.max(0,Math.min(100,100*(1-Math.abs(value-target)/tolerance)));}
   function expandedMelody(motif,seed){
-    const events=[], random=rng(seed+101), scale=scales[scaleEl.value], root=semitone[keyEl.value], baseScale=scale.map(x=>60+root+x), ext=[...baseScale.map(x=>x-12),...baseScale,...baseScale.map(x=>x+12),...baseScale.map(x=>x+24)];
+    const events=[], random=pyRandom(seed+101), scale=scales[scaleEl.value], root=semitone[keyEl.value], baseScale=scale.map(x=>60+root+x), ext=[...baseScale.map(x=>x-12),...baseScale,...baseScale.map(x=>x+12),...baseScale.map(x=>x+24)];
     songBars.forEach((info,bar)=>motif.forEach(m=>{
-      if(m.scaleOffset===null)return;let density=info.density;if(info.style==='sparse')density*=m.step%2?.74:.88;else if(info.style==='driving')density=Math.min(1,density+(m.step%2?.12:.06));if(m.step!==0&&m.step!==4&&random()>density)return;
+      if(m.scaleOffset===null)return;let density=info.density;if(info.style==='sparse')density*=m.step%2?.74:.88;else if(info.style==='driving')density=Math.min(1,density+(m.step%2?.12:.06));if(m.step!==0&&m.step!==4&&random.random()>density)return;
       let offset=m.scaleOffset;if(info.section.toLowerCase().includes('b'))offset+=Math.floor((info.localBar%4)/2);else if(info.section.toLowerCase().includes('chorus'))offset=Math.round(offset*1.35)+2;
       let note=nearest(ext,baseScale[3]+offset*2+info.shift), chord=[0,2,4].map(d=>scaleMidi(info.degree+d,4)), chordExt=[...chord,...chord.map(n=>n+12)];
       if(m.step===0||m.step===4)note=nearest(chordExt,note);
-      else if(random()<info.nct){const pcs=new Set(chord.map(n=>n%12)),cand=ext.filter(n=>!pcs.has(n%12)&&Math.abs(n-note)>0&&Math.abs(n-note)<=4);if(cand.length)note=nearest(cand,note);}
+      else if(random.random()<info.nct){const pcs=new Set(chord.map(n=>n%12)),cand=ext.filter(n=>!pcs.has(n%12)&&Math.abs(n-note)>0&&Math.abs(n-note)<=4);if(cand.length){const dist=Math.min(...cand.map(n=>Math.abs(n-note))),near=cand.filter(n=>Math.abs(n-note)===dist);note=random.choice(near);}}
       if(info.localBar%4===3&&m.step>=6)note=nearest([baseScale[0],baseScale[0]+12,baseScale[0]+24],note);
       if(info.localBar===info.sectionBars-1&&m.step>=6&&info.cadence!=='none')note=nearest([scaleMidi(info.cadence==='authentic'?0:4,4),scaleMidi(info.cadence==='authentic'?0:4,5)],note);
-      note=Math.max(52,Math.min(91,note));let duration=info.style==='driving'?1:m.duration;if(info.style==='sparse'&&m.step!==0&&m.step!==4&&random()<.35)duration=Math.min(2,duration+1);duration=Math.min(duration,8-m.step);
+      note=Math.max(52,Math.min(91,note));let duration=info.style==='driving'?1:m.duration;if(info.style==='sparse'&&m.step!==0&&m.step!==4&&random.random()<.35)duration=Math.min(2,duration+1);duration=Math.min(duration,8-m.step);
       if(events.length&&bar*8+m.step<events.at(-1).bar*8+events.at(-1).step+events.at(-1).duration)return;events.push({bar,step:m.step,midi:note,duration,section:info.section});
     }));
     return events;

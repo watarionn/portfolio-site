@@ -9,7 +9,8 @@
   <meta property="og:description" content="生成AIを使わず、Pythonのルールと音響処理から47.4秒の完成音源まで生成するNon-Generative Composer v1.0。">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <script src="renderer-core.js" defer></script>
+  <script src="evaluator-core.js" defer></script>\n  <script src="script.js" defer></script>
 </head>
 <body>
   <main class="page">
@@ -48,6 +49,11 @@
         <label><input type="checkbox" id="trackDrums" checked> Drums</label>
       </div>
       <div class="song-overview" id="songOverview" aria-label="曲構成"></div>
+      <div class="candidate-panel" aria-live="polite">
+        <div class="candidate-heading"><strong>Candidate Evaluation</strong><span id="candidateSummary">曲を生成すると8候補を比較します</span></div>
+        <div class="candidate-ranking" id="candidateRanking"></div>
+        <p class="candidate-note">スコアは候補を絞るための作曲ヒューリスティックです。候補カードから実際に採用する曲を選べます。候補を切り替えると、その後に加えたHuman Editはリセットされます。</p>
+      </div>
       <div class="chord-strip" id="chordStrip" aria-label="モチーフのコード進行"></div>
       <div class="drum-strip-wrap"><div class="drum-strip" id="drumStrip" aria-label="16ステップ ドラムパターン"></div></div>
       <div class="piano-roll-wrap"><div class="piano-roll" id="pianoRoll" role="grid" aria-label="16ステップ ピアノロール"></div></div>

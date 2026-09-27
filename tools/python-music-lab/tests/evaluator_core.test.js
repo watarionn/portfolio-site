@@ -1,0 +1,21 @@
+'use strict';
+const assert=require('node:assert/strict');
+const evaluator=require('../public/evaluator-core.js');
+const fixture=require('./phase02b_8candidate_melodies.json');
+const truth=require('./phase02b_evaluator_truth.json');
+const config={ticksPerBeat:480,barTicks:1920,tonicPc:9,dominantPc:4,sections:[{name:'A',bars:8,cadence:'half'},{name:'B',bars:8,cadence:'half'},{name:'Chorus',bars:8,cadence:'authentic'}]};
+const progressions=[['i','VI','III','VII'],['iv','VI','III','V'],['VI','VII','i','V']];
+const pcs={i:[9,0,4],VI:[5,9,0],III:[0,4,7],VII:[7,11,2],iv:[2,5,9],V:[4,8,11]};
+const chordForBar=bar=>{const section=bar<8?0:bar<16?1:2,local=bar%8;let symbol=progressions[section][local%4];if(local===7)symbol=section===2?'i':'V';else if(local===6&&section===2)symbol='V';return pcs[symbol];};
+const ranked=[];
+fixture.candidates.forEach((candidate,index)=>{
+  const melody=candidate.melody.map(([start,duration,note,velocity])=>({start,duration,note,velocity}));
+  const actual=evaluator.evaluate(config,melody,chordForBar),expectedTruth=truth.candidates[index],expected={};
+  Object.keys(actual).forEach(key=>expected[key]=expectedTruth[key]);
+  assert.deepEqual(actual,expected,'evaluator parity seed '+candidate.seed);
+  assert.equal(melody.length,expectedTruth.melody_events,'melody event count seed '+candidate.seed);
+  ranked.push([candidate.seed,actual.total_score]);
+});
+ranked.sort((a,b)=>b[1]-a[1]||a[0]-b[0]);
+assert.deepEqual(ranked.map(row=>row[0]),truth.ranking_by_total_then_seed);
+console.log('Python Music Lab evaluator eight-candidate parity passed.');

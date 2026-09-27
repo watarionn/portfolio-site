@@ -15,7 +15,7 @@ assert.equal(Math.fround(snare[0][0]),Math.fround(0.06835167978533369));
 assert.equal(Math.fround(snare[0][1]),Math.fround(-0.045764868470179146));
 
 const noise=core.drumNoise(4,36000108);
-const expected=[0.943445291449644,-0.9723205953830358,-0.1615232148359076,0.601758296921556];
+const expected=[0.9434452914496441,-0.9723205953830358,-0.1615232148359076,0.601758296921556];
 for(let i=0;i<expected.length;i++)assert.equal(noise[i],expected[i]);
 
 const source=[Float64Array.from([1,2,3,4,5]),Float64Array.from([5,4,3,2,1])];

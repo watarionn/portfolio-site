@@ -138,7 +138,7 @@
   function generateCandidates(){
     buildSong();const base=Number(seedEl.value)||1,ranked=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed),best=ranked[0];seedEl.value=String(best.seed);
     cells.forEach(c=>{const step=Math.floor(+c.dataset.step/2),event=best.events.find(e=>e.bar===0&&e.step===step),on=event&&midiFor(noteNames[+c.dataset.row])===event.midi;c.classList.toggle('active',!!on);c.setAttribute('aria-pressed',String(!!on));});
-    candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';selectedSongEvents=best.events;selectedTrackEvents=parityTrackEvents();return best;
+    candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';selectedSongEvents=best.events;selectedTrackEvents=parityTrackEvents();selectedSeed=best.seed;return best;
   }
   function parityTrackEvents(){
     const chords=[],bass=[],drums=[];
@@ -178,19 +178,22 @@
   }
   function ensureAudioGraph(){
     if(audioGraph)return;
-    const master=context.createGain(); master.gain.value=.72; master.connect(context.destination);
-    const makeBus=(pan,delaySend,reverbSend)=>{
-      const input=context.createGain(), p=context.createStereoPanner?context.createStereoPanner():context.createGain(); if(p.pan)p.pan.value=pan;
-      input.connect(p); p.connect(master);
+    const mix=context.createGain(), saturator=context.createWaveShaper(), master=context.createGain(),drive=1.15,curve=new Float32Array(65537),den=Math.tanh(drive);
+    for(let i=0;i<curve.length;i++){const x=i/(curve.length-1)*2-1;curve[i]=Math.tanh(x*drive)/den;}
+    saturator.curve=curve;saturator.oversample='2x';master.gain.value=.72;mix.connect(saturator);saturator.connect(master);master.connect(context.destination);
+    const trackGain={Melody:1,Chords:.88,Bass:.96,Drums:.82};
+    const makeBus=(name,pan,delaySend,reverbSend)=>{
+      const input=context.createGain(), gain=context.createGain(), p=context.createStereoPanner?context.createStereoPanner():context.createGain();gain.gain.value=trackGain[name]??1;if(p.pan)p.pan.value=pan;
+      input.connect(gain);gain.connect(p); p.connect(mix);
       if(delaySend){
-        [[.180,.12],[.360,.065]].forEach(([seconds,g])=>{const d=context.createDelay(.5),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);d.connect(x);x.connect(master);});
+        [[.180,.12],[.360,.065]].forEach(([seconds,g])=>{const d=context.createDelay(.5),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);d.connect(x);x.connect(mix);});
       }
       if(reverbSend){
-        [[.043,.070],[.071,.055],[.113,.045],[.181,.032],[.293,.022]].forEach(([seconds,g])=>{const d=context.createDelay(.4),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);d.connect(x);x.connect(master);});
+        [[.043,.070],[.071,.055],[.113,.045],[.181,.032],[.293,.022]].forEach(([seconds,g])=>{const d=context.createDelay(.4),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);d.connect(x);x.connect(mix);});
       }
       return input;
     };
-    audioGraph={master,buses:{Melody:makeBus(.12,true,true),Chords:makeBus(-.18,false,true),Bass:makeBus(0,false,false),Drums:makeBus(0,false,true)}};
+    audioGraph={mix,saturator,master,buses:{Melody:makeBus('Melody',.12,true,true),Chords:makeBus('Chords',-.18,false,true),Bass:makeBus('Bass',0,false,false),Drums:makeBus('Drums',0,false,true)}};
   }
   function voice(midi,name,duration=.18,velocity=1){
     ensureAudioGraph(); const cfg=voiceConfig[name], now=context.currentTime, filter=context.createBiquadFilter(), amp=context.createGain();

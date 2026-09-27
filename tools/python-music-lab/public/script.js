@@ -25,17 +25,10 @@
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
   const sectionGrammar={A:{density:.66,shift:0,energy:.56,style:'sparse',nct:.20,cadence:'half',progression:['i','VI','III','VII']},B:{density:.78,shift:2,energy:.74,style:'flowing',nct:.28,cadence:'half',progression:['iv','VI','III','V']},Chorus:{density:.92,shift:9,energy:.96,style:'driving',nct:.32,cadence:'authentic',progression:['VI','VII','i','V']},Interlude:{density:.58,shift:0,energy:.64,style:'sparse',nct:.18,cadence:'none'},Final:{density:.90,shift:7,energy:.92,style:'driving',nct:.24,cadence:'authentic'},Intro:{density:.48,shift:-2,energy:.42,style:'sparse',nct:.14,cadence:'none'},A2:{density:.72,shift:2,energy:.68,style:'flowing',nct:.22,cadence:'half'},B2:{density:.84,shift:4,energy:.82,style:'flowing',nct:.28,cadence:'half'}};
   const scales = {major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10]};
-  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], audioGraph=null, selectedSongEvents=[], selectedTrackEvents={chords:[],bass:[],drums:[]}, selectedSeed=null;
-  const voiceConfig={
-    Melody:{gain:.20,pan:.12,adsr:[.010,.090,.66,.22],cutoff:5600,layers:[['sawtooth',.74,0,-3.5],['sawtooth',.74,0,3.5],['sine',.32,1,0]]},
-    Chords:{gain:.14,pan:-.18,adsr:[.050,.180,.52,.38],cutoff:3300,layers:[['triangle',1,0,0],['sine',.36,1,0]]},
-    Bass:{gain:.24,pan:0,adsr:[.006,.110,.70,.15],cutoff:1450,layers:[['square',.42,0,0],['sine',1,0,0],['sine',.18,-1,0]]}
-  };
-
+  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], selectedSongEvents=[], selectedTrackEvents={chords:[],bass:[],drums:[]}, selectedSeed=null;
   function midiFor(name){
     const m=name.match(/^([A-G])(\d)$/); return 12*(Number(m[2])+1)+semitone[m[1]];
   }
-  function hz(midi){ return 440*Math.pow(2,(midi-69)/12); }
   function buildRoll(){
     roll.replaceChildren(); cells=[];
     noteNames.forEach((name,row)=>{

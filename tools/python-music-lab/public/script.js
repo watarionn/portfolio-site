@@ -185,12 +185,13 @@
     const makeBus=(name,pan,delaySend,reverbSend)=>{
       const input=context.createGain(), gain=context.createGain(), p=context.createStereoPanner?context.createStereoPanner():context.createGain();gain.gain.value=trackGain[name]??1;if(p.pan)p.pan.value=pan;
       input.connect(gain);gain.connect(p); p.connect(mix);
-      if(delaySend){
-        [[.180,.12],[.360,.065]].forEach(([seconds,g])=>{const d=context.createDelay(.5),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);d.connect(x);x.connect(mix);});
-      }
-      if(reverbSend){
-        [[.043,.070],[.071,.055],[.113,.045],[.181,.032],[.293,.022]].forEach(([seconds,g])=>{const d=context.createDelay(.4),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);d.connect(x);x.connect(mix);});
-      }
+      const tap=(seconds,g,crossfeed,maxDelay)=>{
+        const d=context.createDelay(maxDelay),x=context.createGain();d.delayTime.value=seconds;x.gain.value=g;p.connect(d);
+        if(crossfeed&&context.createChannelSplitter&&context.createChannelMerger){const split=context.createChannelSplitter(2),merge=context.createChannelMerger(2);d.connect(split);split.connect(merge,0,1);split.connect(merge,1,0);merge.connect(x);}else d.connect(x);
+        x.connect(mix);
+      };
+      if(delaySend)[[.180,.12,true],[.360,.065,false]].forEach(([seconds,g,cross])=>tap(seconds,g,cross,.5));
+      if(reverbSend)[[.043,.070,true],[.071,.055,false],[.113,.045,true],[.181,.032,false],[.293,.022,true]].forEach(([seconds,g,cross])=>tap(seconds,g,cross,.4));
       return input;
     };
     audioGraph={mix,saturator,master,buses:{Melody:makeBus('Melody',.12,true,true),Chords:makeBus('Chords',-.18,false,true),Bass:makeBus('Bass',0,false,false),Drums:makeBus('Drums',0,false,true)}};

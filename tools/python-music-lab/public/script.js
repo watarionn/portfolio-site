@@ -195,13 +195,19 @@
     };
     audioGraph={mix,saturator,master,buses:{Melody:makeBus('Melody',.12,true,true),Chords:makeBus('Chords',-.18,false,true),Bass:makeBus('Bass',0,false,false),Drums:makeBus('Drums',0,false,true)}};
   }
+  function movingAverageStage(cutoff){
+    const window=Math.max(1,Math.min(512,Math.round(context.sampleRate/(2*cutoff))));
+    if(window<=1)return context.createGain();
+    if(context.createIIRFilter){const feedforward=Array(window).fill(1/window);return context.createIIRFilter(feedforward,[1]);}
+    const filter=context.createBiquadFilter();filter.type='lowpass';filter.frequency.value=cutoff;filter.Q.value=.35;return filter;
+  }
   function voice(midi,name,duration=.18,velocity=1){
-    ensureAudioGraph(); const cfg=voiceConfig[name], now=context.currentTime, filter=context.createBiquadFilter(), amp=context.createGain();
-    filter.type='lowpass';filter.frequency.value=cfg.cutoff;filter.Q.value=.35;filter.connect(amp);amp.connect(audioGraph.buses[name]);
+    ensureAudioGraph(); const cfg=voiceConfig[name], now=context.currentTime, filter1=movingAverageStage(cfg.cutoff),filter2=movingAverageStage(cfg.cutoff), amp=context.createGain();
+    filter1.connect(filter2);filter2.connect(amp);amp.connect(audioGraph.buses[name]);
     const [attack,decay,sustain,release]=cfg.adsr, peak=Math.max(.0001,cfg.gain*velocity);
     amp.gain.setValueAtTime(.0001,now);amp.gain.exponentialRampToValueAtTime(peak,now+attack);amp.gain.exponentialRampToValueAtTime(Math.max(.0001,peak*sustain),now+attack+decay);
     amp.gain.setValueAtTime(Math.max(.0001,peak*sustain),now+duration);amp.gain.exponentialRampToValueAtTime(.0001,now+duration+release);
-    cfg.layers.forEach(([type,level,octave,detune])=>{const osc=context.createOscillator(),layer=context.createGain();osc.type=type;osc.frequency.value=hz(midi+12*octave);osc.detune.value=detune;layer.gain.value=level;osc.connect(layer).connect(filter);osc.start(now);osc.stop(now+duration+release+.03);activeNodes.push(osc);osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};});
+    cfg.layers.forEach(([type,level,octave,detune])=>{const osc=context.createOscillator(),layer=context.createGain();osc.type=type;osc.frequency.value=hz(midi+12*octave);osc.detune.value=detune;layer.gain.value=level;osc.connect(layer).connect(filter1);osc.start(now);osc.stop(now+duration+release+.03);activeNodes.push(osc);osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};});
   }
   function tone(midi,type='sine',level=.06,duration=.18){
     ensureAudioGraph(); const osc=context.createOscillator(), gain=context.createGain(), now=context.currentTime;

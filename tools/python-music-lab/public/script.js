@@ -25,7 +25,7 @@
   const semitone = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
   const sectionGrammar={A:{density:.66,shift:0,energy:.56,style:'sparse',nct:.20,cadence:'half',progression:['i','VI','III','VII']},B:{density:.78,shift:2,energy:.74,style:'flowing',nct:.28,cadence:'half',progression:['iv','VI','III','V']},Chorus:{density:.92,shift:9,energy:.96,style:'driving',nct:.32,cadence:'authentic',progression:['VI','VII','i','V']},Interlude:{density:.58,shift:0,energy:.64,style:'sparse',nct:.18,cadence:'none'},Final:{density:.90,shift:7,energy:.92,style:'driving',nct:.24,cadence:'authentic'},Intro:{density:.48,shift:-2,energy:.42,style:'sparse',nct:.14,cadence:'none'},A2:{density:.72,shift:2,energy:.68,style:'flowing',nct:.22,cadence:'half'},B2:{density:.84,shift:4,energy:.82,style:'flowing',nct:.28,cadence:'half'}};
   const scales = {major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10]};
-  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], selectedSongEvents=[], selectedTrackEvents={chords:[],bass:[],drums:[]}, selectedSeed=null, selectedMotif=null;
+  let cells = [], drumCells = [], timers = [], context = null, activeNodes = [], chordDegrees = [0,5,3,4], songBars = [], selectedSongEvents=[], selectedTrackEvents={chords:[],bass:[],drums:[]}, selectedSeed=null, selectedMotif=null, rankedCandidates=[], humanSelectedSeed=null, humanEdited=false;
   function midiFor(name){
     const m=name.match(/^([A-G])(\d)$/); return 12*(Number(m[2])+1)+semitone[m[1]];
   }
@@ -120,7 +120,7 @@
   function applyHumanMotifEdit(row,step){
     if(!selectedMotif||selectedSeed===null)return;stop();const midi=midiFor(noteNames[row]),item=selectedMotif.find(m=>m.step===step);if(!item)return;
     const current=item.scaleOffset===null?null:motifMidi(item.scaleOffset);item.scaleOffset=current===midi?null:scaleOffsetForMidi(midi);
-    const evaluated=evaluateCandidate(selectedMotif,selectedSeed);selectedSongEvents=evaluated.events;selectedTrackEvents=parityTrackEvents();syncMotifRoll();candidateSummary.textContent='Human edit · Seed '+selectedSeed+' · '+evaluated.total.toFixed(1)+'/100';status.textContent='Human-edited motif';
+    const evaluated=evaluateCandidate(selectedMotif,selectedSeed);selectedSongEvents=evaluated.events;selectedTrackEvents=parityTrackEvents();syncMotifRoll();humanEdited=true;candidateSummary.textContent='Human edited · Seed '+selectedSeed+' · '+evaluated.total.toFixed(1)+'/100';status.textContent='Human-edited motif';
   }
   function candidateMotif(seed){
     const random=pyRandom(seed), contour=[0];for(let i=1;i<8;i++)contour.push(Math.max(-4,Math.min(5,contour[i-1]+weightedMove(random))));
@@ -153,10 +153,15 @@
     const score=PMLEvaluatorCore.evaluate({ticksPerBeat:tpb,barTicks,tonicPc,dominantPc,sections},melody,chordForBar);
     return {seed,total:score.total_score,harmony:score.harmony_score,motion:score.motion_score,range:score.range_score,contrast:score.section_contrast_score,cadence:score.cadence_score,rhythm:score.rhythm_score,metrics:score,notes:motif,events};
   }
+  function selectBrowserCandidate(candidate,human=false){
+    stop();selectedSeed=candidate.seed;selectedMotif=candidate.notes.map(m=>({...m}));selectedSongEvents=candidate.events.map(e=>({...e}));selectedTrackEvents=parityTrackEvents();humanSelectedSeed=human?candidate.seed:null;humanEdited=false;syncMotifRoll();
+    candidateRanking.querySelectorAll('.candidate-card').forEach(card=>card.classList.toggle('selected',+card.dataset.seed===candidate.seed));
+    candidateSummary.textContent=(human?'Human selected ':'Algorithm selected ')+'Seed '+candidate.seed+' · '+candidate.total.toFixed(1)+'/100';
+  }
   function generateCandidates(){
-    buildSong();const base=Number(seedEl.value)||1,ranked=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed),best=ranked[0];
-    selectedMotif=best.notes.map(m=>({...m}));syncMotifRoll();
-    candidateRanking.replaceChildren(...ranked.map((x,i)=>{const e=document.createElement('div');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);return e;}));candidateSummary.textContent='Algorithm selected Seed '+best.seed+' · '+best.total.toFixed(1)+'/100';selectedSongEvents=best.events;selectedTrackEvents=parityTrackEvents();selectedSeed=best.seed;return best;
+    buildSong();const base=Number(seedEl.value)||1;rankedCandidates=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed);const best=rankedCandidates[0];
+    candidateRanking.replaceChildren(...rankedCandidates.map((x,i)=>{const e=document.createElement('button');e.type='button';e.dataset.seed=x.seed;e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);e.addEventListener('click',()=>selectBrowserCandidate(x,true));return e;}));
+    selectBrowserCandidate(best,false);return best;
   }
   function parityTrackEvents(){
     const chords=[],bass=[],drums=[];
@@ -205,9 +210,9 @@
   }
   buildRoll(); buildDrums(); updateChords(); buildSong();
   document.getElementById('generateMelody').addEventListener('click',generate);
-  document.getElementById('clearMelody').addEventListener('click',()=>{stop();if(selectedMotif&&selectedSeed!==null){selectedMotif.forEach(m=>m.scaleOffset=null);const evaluated=evaluateCandidate(selectedMotif,selectedSeed);selectedSongEvents=evaluated.events;selectedTrackEvents=parityTrackEvents();syncMotifRoll();candidateSummary.textContent='Human edit · Seed '+selectedSeed+' · '+evaluated.total.toFixed(1)+'/100';status.textContent='Melody cleared';}else cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});});
+  document.getElementById('clearMelody').addEventListener('click',()=>{stop();if(selectedMotif&&selectedSeed!==null){selectedMotif.forEach(m=>m.scaleOffset=null);const evaluated=evaluateCandidate(selectedMotif,selectedSeed);selectedSongEvents=evaluated.events;selectedTrackEvents=parityTrackEvents();syncMotifRoll();humanEdited=true;candidateSummary.textContent='Human edited · Seed '+selectedSeed+' · '+evaluated.total.toFixed(1)+'/100';status.textContent='Melody cleared';}else cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});});
   document.getElementById('playMelody').addEventListener('click',play);
   document.getElementById('stopMelody').addEventListener('click',stop);
   if(audio)audio.addEventListener('play',stop);
-  const invalidateComposition=()=>{selectedSongEvents=[];selectedTrackEvents={chords:[],bass:[],drums:[]};selectedSeed=null;selectedMotif=null;candidateSummary.textContent='曲を生成すると8候補を評価します';}; keyEl.addEventListener('change',()=>{stop();invalidateComposition();updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{stop();invalidateComposition();updateChords();buildSong();}); bpm.addEventListener('change',()=>{stop();invalidateComposition();buildSong();}); lengthEl.addEventListener('change',()=>{stop();invalidateComposition();buildSong();});
+  const invalidateComposition=()=>{selectedSongEvents=[];selectedTrackEvents={chords:[],bass:[],drums:[]};selectedSeed=null;selectedMotif=null;rankedCandidates=[];humanSelectedSeed=null;humanEdited=false;candidateRanking.replaceChildren();candidateSummary.textContent='曲を生成すると8候補を評価します';}; keyEl.addEventListener('change',()=>{stop();invalidateComposition();updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{stop();invalidateComposition();updateChords();buildSong();}); bpm.addEventListener('change',()=>{stop();invalidateComposition();buildSong();}); lengthEl.addEventListener('change',()=>{stop();invalidateComposition();buildSong();});
 })();

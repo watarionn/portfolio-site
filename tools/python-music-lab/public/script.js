@@ -216,7 +216,12 @@
     osc.connect(gain).connect(audioGraph.buses.Drums); osc.start(now); osc.stop(now+duration+.02); activeNodes.push(osc);osc.onended=()=>{activeNodes=activeNodes.filter(n=>n!==osc);};
   }
   function drumNoise(length,seed){
-    let x=(seed>>>0)||1,out=new Float32Array(length);for(let i=0;i<length;i++){x^=x<<13;x^=x>>>17;x^=x<<5;out[i]=((x>>>0)/4294967296)*2-1;}return out;
+    const MASK128=(1n<<128n)-1n,MASK64=(1n<<64n)-1n,M=(2549297995355413924n<<64n)|4865540595714422341n,IA=0x43b0d7e5,MA=0x931e8875,IB=0x8b51f9dd,MB=0x58f38ded,ML=0xca01f9dd,MR=0x4973f715;
+    let hc=IA>>>0;const hash=v=>{let x=(v^hc)>>>0;hc=Math.imul(hc,MA)>>>0;x=Math.imul(x,hc)>>>0;return(x^(x>>>16))>>>0},mix=(x,y)=>{let z=(Math.imul(ML,x)-Math.imul(MR,y))>>>0;return(z^(z>>>16))>>>0};
+    let entropy=[],n=BigInt(seed>>>0);if(n===0n)entropy=[0];while(n){entropy.push(Number(n&0xffffffffn));n>>=32n;}const pool=new Uint32Array(4);for(let i=0;i<4;i++)pool[i]=hash(i<entropy.length?entropy[i]:0);for(let src=0;src<4;src++)for(let dst=0;dst<4;dst++)if(src!==dst)pool[dst]=mix(pool[dst],hash(pool[src]));
+    hc=IB>>>0;const words=[];for(let i=0;i<8;i++){let v=pool[i%4]^hc;hc=Math.imul(hc,MB)>>>0;v=Math.imul(v,hc)>>>0;words.push((v^(v>>>16))>>>0);}const u64=[];for(let i=0;i<8;i+=2)u64.push((BigInt(words[i+1])<<32n)|BigInt(words[i]));
+    const init=(u64[0]<<64n)|u64[1],seq=(u64[2]<<64n)|u64[3];let inc=((seq<<1n)|1n)&MASK128,state=0n;state=(state*M+inc)&MASK128;state=(state+init)&MASK128;state=(state*M+inc)&MASK128;
+    const raw=()=>{state=(state*M+inc)&MASK128;const x=((state>>64n)^(state&MASK64))&MASK64,r=state>>122n;return((x>>r)|(x<<((64n-r)&63n)))&MASK64;},out=new Float32Array(length);for(let i=0;i<length;i++)out[i]=2*(Number(raw()>>11n)/9007199254740992)-1;return out;
   }
   function drum(note,velocity,startSeconds){
     ensureAudioGraph();const rate=44100,v=velocity/127,duration=note===36?.34:note===38?.24:note===42?.09:note===46?.20:note===49?.72:.12,count=Math.max(1,Math.round(duration*rate)),buffer=context.createBuffer(1,count,rate),data=buffer.getChannelData(0),seed=((note*1000003)^Math.round(startSeconds*1000000))>>>0,noise=drumNoise(count,seed);

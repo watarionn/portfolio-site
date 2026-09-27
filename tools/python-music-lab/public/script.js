@@ -60,7 +60,7 @@
       selectedTrackEvents.drums=selectedTrackEvents.drums.filter(e=>!(e.bar===bar&&e.note===36&&Math.abs(e.eighth-eighth)<1e-9));
       if(on)selectedTrackEvents.drums.push({bar,eighth,duration:.5,note:36,velocity:96});
     }
-    selectedTrackEvents.drums.sort((a,b)=>a.bar-b.bar||a.eighth-b.eighth||a.note-b.note);status.textContent='Human-edited kick pattern';
+    selectedTrackEvents.drums.sort((a,b)=>a.bar-b.bar||a.eighth-b.eighth||a.note-b.note);humanEdited=true;const current=rankedCandidates.find(x=>x.seed===selectedSeed);candidateSummary.textContent='Human edited · Seed '+selectedSeed+(current?' · '+current.total.toFixed(1)+'/100':'');status.textContent='Human-edited kick pattern';
   }
   function rng(seed){let x=(Number(seed)||1)>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296;};}
   function allowedRows(){
@@ -214,5 +214,6 @@
   document.getElementById('playMelody').addEventListener('click',play);
   document.getElementById('stopMelody').addEventListener('click',stop);
   if(audio)audio.addEventListener('play',stop);
+  [trackMelody,trackChords,trackBass,trackDrums].forEach(track=>track.addEventListener('change',stop));
   const invalidateComposition=()=>{selectedSongEvents=[];selectedTrackEvents={chords:[],bass:[],drums:[]};selectedSeed=null;selectedMotif=null;rankedCandidates=[];humanSelectedSeed=null;humanEdited=false;candidateRanking.replaceChildren();candidateSummary.textContent='曲を生成すると8候補を評価します';}; keyEl.addEventListener('change',()=>{stop();invalidateComposition();updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{stop();invalidateComposition();updateChords();buildSong();}); bpm.addEventListener('change',()=>{stop();invalidateComposition();buildSong();}); lengthEl.addEventListener('change',()=>{stop();invalidateComposition();buildSong();});
 })();

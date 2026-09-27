@@ -260,29 +260,11 @@
     cells.forEach(c=>c.classList.remove('playing')); drumCells.forEach(c=>c.classList.remove('playing')); status.textContent='Ready';
   }
   function play(){
-    stop();
-    const AudioCtor=window.AudioContext||window.webkitAudioContext;
-    if(!AudioCtor){status.textContent='Audio unsupported';return;}
-    context ||= new AudioCtor(); context.resume(); ensureAudioGraph(); if(audio&&!audio.paused)audio.pause(); if(!songBars.length) buildSong(); if(!selectedSongEvents.length){const fallbackSeed=selectedSeed??(Number(seedEl.value)||1),motif=candidateMotif(fallbackSeed);selectedSongEvents=expandedMelody(motif,fallbackSeed);selectedTrackEvents=parityTrackEvents();}
-    const safeBpm=Math.max(60,Math.min(200,+bpm.value||120)); bpm.value=String(safeBpm);
-    const stepMs=60000/safeBpm/4, totalSteps=songBars.length*16;
-    let absolute=0;
-    function tick(){
-      if(absolute>=totalSteps){stop();return;}
-      const step=absolute%16, bar=Math.floor(absolute/16), info=songBars[bar];
-      cells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step)); drumCells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));
-      if(trackMelody.checked && step%2===0){
-        const eighthStep=step/2, ev=selectedSongEvents.find(e=>e.bar===bar&&e.step===eighthStep);
-        if(ev)voice(ev.midi,'Melody',Math.max(.08,stepMs/1000*2*ev.duration),ev.velocity/100);
-      }
-      if(trackChords.checked&&step===0)selectedTrackEvents.chords.filter(e=>e.bar===bar).forEach(e=>voice(e.note,'Chords',Math.max(.25,stepMs/1000*16),e.velocity/100));
-      if(trackBass.checked&&step%4===0){const beat=step/4,e=selectedTrackEvents.bass.find(x=>x.bar===bar&&x.beat===beat);if(e)voice(e.note,'Bass',Math.max(.18,stepMs/1000*4),e.velocity/100);}
-      if(trackDrums.checked&&step%2===0){const eighth=step/2;selectedTrackEvents.drums.filter(e=>e.bar===bar&&e.eighth===eighth).forEach(e=>drum(e.note,e.velocity,(bar*8+e.eighth)*stepMs/1000));}
-      status.textContent=info.section+' · '+(bar+1)+'/'+songBars.length+' bars';
-      absolute++;
-      timers=[setTimeout(tick,stepMs)];
-    }
-    tick();
+    stop();const AudioCtor=window.AudioContext||window.webkitAudioContext;if(!AudioCtor){status.textContent='Audio unsupported';return;}context ||= new AudioCtor();context.resume();if(audio&&!audio.paused)audio.pause();if(!songBars.length)buildSong();if(!selectedSongEvents.length){const fallbackSeed=selectedSeed??(Number(seedEl.value)||1),motif=candidateMotif(fallbackSeed);selectedSongEvents=expandedMelody(motif,fallbackSeed);selectedTrackEvents=parityTrackEvents();}
+    const safeBpm=Math.max(60,Math.min(200,+bpm.value||120));bpm.value=String(safeBpm);status.textContent='Rendering…';
+    const rendered=renderSongTracksFloat64(),buffer=context.createBuffer(2,rendered.frames,rendered.rate);for(let ch=0;ch<2;ch++)buffer.getChannelData(ch).set(rendered.mix[ch]);const source=context.createBufferSource();source.buffer=buffer;source.connect(context.destination);source.start();activeNodes.push(source);
+    const stepMs=60000/safeBpm/4,totalSteps=songBars.length*16,started=performance.now();function visualTick(){const absolute=Math.floor((performance.now()-started)/stepMs);if(absolute>=totalSteps){cells.forEach(c=>c.classList.remove('playing'));drumCells.forEach(c=>c.classList.remove('playing'));status.textContent='Ready';return;}const step=absolute%16,bar=Math.floor(absolute/16),info=songBars[bar];cells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));drumCells.forEach(c=>c.classList.toggle('playing',+c.dataset.step===step));status.textContent=info.section+' · '+(bar+1)+'/'+songBars.length+' bars';timers=[setTimeout(visualTick,Math.max(16,stepMs/2))];}visualTick();
+    source.onended=()=>{activeNodes=activeNodes.filter(n=>n!==source);timers.forEach(clearTimeout);timers=[];cells.forEach(c=>c.classList.remove('playing'));drumCells.forEach(c=>c.classList.remove('playing'));status.textContent='Ready';};
   }
   buildRoll(); buildDrums(); updateChords(); buildSong();
   document.getElementById('generateMelody').addEventListener('click',generate);

@@ -15,3 +15,9 @@ The canonical candidate_04 render has been compared end-to-end against the archi
 The renderer must use Python-compatible round-half-to-even when converting times and DSP parameters to integer sample positions. JavaScript `Math.round()` is not equivalent at half-sample boundaries and previously caused a one-sample displacement beginning at 5.625 seconds in the canonical render.
 
 Canonical final mix SHA-256: `235b0979ec1d249fbf54444295b339f58701bf9110a2ace77f84f9e389ab1be0`.
+
+## Browser renderer memory hardening
+
+The browser playback path renders one completed track at a time into the pre-master mix and does not retain full-length track PCM. Delay and reverb use bounded delay-history rings instead of full-length wet buffers. The canonical Phase 03B track hashes and final mix hash remain exact after these changes.
+
+A development-machine proxy using two concatenated canonical songs (1,228 events, 4,074,841 frames, about 92.4 seconds at 44.1 kHz stereo) reduced observed RSS growth from about 379 MB in the original all-tracks renderer, to about 256 MB after sequential track accumulation, and then to about 131 MB after bounded FX history. These are diagnostic measurements on the development machine, not browser/device guarantees.

@@ -43,14 +43,24 @@
   }
   function buildDrums(){
     drumStrip.replaceChildren(); drumCells=[];
-    const label=document.createElement('div'); label.className='drum-label'; label.textContent='Beat'; drumStrip.appendChild(label);
+    const label=document.createElement('div'); label.className='drum-label'; label.textContent='Kick'; drumStrip.appendChild(label);
     for(let step=0;step<16;step++){
       const b=document.createElement('button'); b.type='button'; b.className='drum-cell'; b.dataset.step=step; b.setAttribute('aria-label','Drum step '+(step+1));
       if([0,4,8,12].includes(step)) b.classList.add('active');
       b.setAttribute('aria-pressed',String(b.classList.contains('active')));
-      b.addEventListener('click',()=>{b.classList.toggle('active');b.setAttribute('aria-pressed',String(b.classList.contains('active')));});
+      b.addEventListener('click',()=>applyHumanDrumEdit(+b.dataset.step));
       drumStrip.appendChild(b); drumCells.push(b);
     }
+  }
+  function applyHumanDrumEdit(step){
+    if(selectedSeed===null)return;stop();const on=!drumCells[step].classList.contains('active');drumCells[step].classList.toggle('active',on);drumCells[step].setAttribute('aria-pressed',String(on));
+    if(!selectedTrackEvents.drums.length)selectedTrackEvents=parityTrackEvents();
+    const eighth=step/2;
+    for(let bar=0;bar<songBars.length;bar++){
+      selectedTrackEvents.drums=selectedTrackEvents.drums.filter(e=>!(e.bar===bar&&e.note===36&&Math.abs(e.eighth-eighth)<1e-9));
+      if(on)selectedTrackEvents.drums.push({bar,eighth,duration:.5,note:36,velocity:96});
+    }
+    selectedTrackEvents.drums.sort((a,b)=>a.bar-b.bar||a.eighth-b.eighth||a.note-b.note);status.textContent='Human-edited kick pattern';
   }
   function rng(seed){let x=(Number(seed)||1)>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296;};}
   function allowedRows(){

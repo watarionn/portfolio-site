@@ -198,9 +198,9 @@
   }
   buildRoll(); buildDrums(); updateChords(); buildSong();
   document.getElementById('generateMelody').addEventListener('click',generate);
-  document.getElementById('clearMelody').addEventListener('click',()=>{stop();cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});});
+  document.getElementById('clearMelody').addEventListener('click',()=>{stop();if(selectedMotif&&selectedSeed!==null){selectedMotif.forEach(m=>m.scaleOffset=null);const evaluated=evaluateCandidate(selectedMotif,selectedSeed);selectedSongEvents=evaluated.events;selectedTrackEvents=parityTrackEvents();syncMotifRoll();candidateSummary.textContent='Human edit · Seed '+selectedSeed+' · '+evaluated.total.toFixed(1)+'/100';status.textContent='Melody cleared';}else cells.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-pressed','false');});});
   document.getElementById('playMelody').addEventListener('click',play);
   document.getElementById('stopMelody').addEventListener('click',stop);
   if(audio)audio.addEventListener('play',stop);
-  keyEl.addEventListener('change',()=>{stop();updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{stop();updateChords();buildSong();}); bpm.addEventListener('change',()=>{stop();buildSong();}); lengthEl.addEventListener('change',()=>{stop();buildSong();});
+  const invalidateComposition=()=>{selectedSongEvents=[];selectedTrackEvents={chords:[],bass:[],drums:[]};selectedSeed=null;selectedMotif=null;candidateSummary.textContent='曲を生成すると8候補を評価します';}; keyEl.addEventListener('change',()=>{stop();invalidateComposition();updateChords();buildSong();}); scaleEl.addEventListener('change',()=>{stop();invalidateComposition();updateChords();buildSong();}); bpm.addEventListener('change',()=>{stop();invalidateComposition();buildSong();}); lengthEl.addEventListener('change',()=>{stop();invalidateComposition();buildSong();});
 })();

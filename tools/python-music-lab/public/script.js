@@ -215,7 +215,7 @@
     let entropy=[],n=BigInt(seed>>>0);if(n===0n)entropy=[0];while(n){entropy.push(Number(n&0xffffffffn));n>>=32n;}const pool=new Uint32Array(4);for(let i=0;i<4;i++)pool[i]=hash(i<entropy.length?entropy[i]:0);for(let src=0;src<4;src++)for(let dst=0;dst<4;dst++)if(src!==dst)pool[dst]=mix(pool[dst],hash(pool[src]));
     hc=IB>>>0;const words=[];for(let i=0;i<8;i++){let v=pool[i%4]^hc;hc=Math.imul(hc,MB)>>>0;v=Math.imul(v,hc)>>>0;words.push((v^(v>>>16))>>>0);}const u64=[];for(let i=0;i<8;i+=2)u64.push((BigInt(words[i+1])<<32n)|BigInt(words[i]));
     const init=(u64[0]<<64n)|u64[1],seq=(u64[2]<<64n)|u64[3];let inc=((seq<<1n)|1n)&MASK128,state=0n;state=(state*M+inc)&MASK128;state=(state+init)&MASK128;state=(state*M+inc)&MASK128;
-    const raw=()=>{state=(state*M+inc)&MASK128;const x=((state>>64n)^(state&MASK64))&MASK64,r=state>>122n;return((x>>r)|(x<<((64n-r)&63n)))&MASK64;},out=new Float32Array(length);for(let i=0;i<length;i++)out[i]=2*(Number(raw()>>11n)/9007199254740992)-1;return out;
+    const raw=()=>{state=(state*M+inc)&MASK128;const x=((state>>64n)^(state&MASK64))&MASK64,r=state>>122n;return((x>>r)|(x<<((64n-r)&63n)))&MASK64;},out=new Float64Array(length);for(let i=0;i<length;i++)out[i]=2*(Number(raw()>>11n)/9007199254740992)-1;return out;
   }
   function drum(note,velocity,startSeconds){
     ensureAudioGraph();const rate=44100,v=velocity/127,duration=note===36?.34:note===38?.24:note===42?.09:note===46?.20:note===49?.72:.12,count=Math.max(1,Math.round(duration*rate)),buffer=context.createBuffer(1,count,rate),data=buffer.getChannelData(0),seed=((note*1000003)^Math.round(startSeconds*1000000))>>>0,noise=drumNoise(count,seed);
@@ -233,12 +233,18 @@
     const left=new Float64Array(count),right=new Float64Array(count),base=hz(midi),amplitudeSum=cfg.layers.reduce((sum,l)=>sum+Math.abs(l[1]),0)||1,angle=(cfg.pan+1)*Math.PI/4,panL=Math.cos(angle),panR=Math.sin(angle);
     for(let i=0;i<count;i++){const t=i/rate;let mono=0;for(const [type,level,octave,detune] of cfg.layers){const frequency=base*Math.pow(2,octave)*Math.pow(2,detune/1200),cycles=frequency*t,wrapped=cycles-Math.floor(cycles),phase=2*Math.PI*wrapped,kind=type==='sawtooth'?'saw':type;const wave=kind==='sine'?Math.sin(phase):kind==='square'?(wrapped<.5?1:-1):kind==='triangle'?1-4*Math.abs(wrapped-.5):2*wrapped-1;mono+=level*wave;}mono=mono/amplitudeSum*envelope[i]*velocity*cfg.gain;left[i]=mono*panL;right[i]=mono*panR;}return [left,right];
   }
+  function renderDrumFloat64(note,velocity,startSeconds){
+    const rate=44100,v=velocity/127,duration=note===36?.34:note===38?.24:note===42?.09:note===46?.20:note===49?.72:.12,count=Math.max(1,Math.round(duration*rate)),seed=((note*1000003)^Math.round(startSeconds*1000000))>>>0,noise=drumNoise(count,seed),mono=new Float64Array(count);
+    for(let i=0;i<count;i++){const t=i/rate;if(note===36)mono[i]=Math.sin(2*Math.PI*(105*t-42*t*t))*Math.exp(-t*13)*.72*v;else if(note===38)mono[i]=(.72*noise[i]+.28*Math.sin(2*Math.PI*185*t))*Math.exp(-t*17)*.46*v;else if(note===42||note===46)mono[i]=noise[i]*Math.exp(-t*(note===42?46:22))*.22*v;else if(note===49)mono[i]=(noise[i]+Math.sin(2*Math.PI*4600*t)*.15)*Math.exp(-t*5.2)*.26*v;else mono[i]=noise[i]*Math.exp(-t*30)*.15*v;}
+    const pan=note===38?.05:note===42?-.25:note===46?.25:note===49?.30:0,angle=(pan+1)*Math.PI/4,left=new Float64Array(count),right=new Float64Array(count),pl=Math.cos(angle),pr=Math.sin(angle);for(let i=0;i<count;i++){left[i]=mono[i]*pl;right[i]=mono[i]*pr;}return [left,right];
+  }
   function renderSongTracksFloat64(){
     const rate=44100,safeBpm=Math.max(60,Math.min(200,+bpm.value||120)),beatSeconds=60/safeBpm,eighthSeconds=beatSeconds/2,releaseMax=Math.max(...Object.values(voiceConfig).map(v=>v.adsr[3])),frames=Math.ceil((songBars.length*4*beatSeconds+Math.max(2.4,releaseMax+.4))*rate),tracks={Melody:[new Float64Array(frames),new Float64Array(frames)],Chords:[new Float64Array(frames),new Float64Array(frames)],Bass:[new Float64Array(frames),new Float64Array(frames)],Drums:[new Float64Array(frames),new Float64Array(frames)]};
     const add=(name,start,pcm)=>{const offset=Math.round(start*rate);for(let ch=0;ch<2;ch++)for(let i=0;i<pcm[ch].length&&offset+i<frames;i++)tracks[name][ch][offset+i]+=pcm[ch][i];};
     if(trackMelody.checked)selectedSongEvents.forEach(e=>add('Melody',(e.bar*4+e.step*.5)*beatSeconds,renderTonalFloat64(e.midi,'Melody',e.duration*eighthSeconds,e.velocity/127)));
     if(trackChords.checked)selectedTrackEvents.chords.forEach(e=>add('Chords',(e.bar*4+e.beat)*beatSeconds,renderTonalFloat64(e.note,'Chords',e.duration*beatSeconds,e.velocity/127)));
     if(trackBass.checked)selectedTrackEvents.bass.forEach(e=>add('Bass',(e.bar*4+e.beat)*beatSeconds,renderTonalFloat64(e.note,'Bass',e.duration*beatSeconds,e.velocity/127)));
+    if(trackDrums.checked)selectedTrackEvents.drums.forEach(e=>{const start=(e.bar*4+e.eighth*.5)*beatSeconds;add('Drums',start,renderDrumFloat64(e.note,e.velocity,start));});
     for(const name of ['Melody','Chords','Bass']){const window=Math.max(1,Math.min(512,Math.round(rate/(2*voiceConfig[name].cutoff))));tracks[name]=movingAverageFloat64(movingAverageFloat64(tracks[name],window),window);}
     return {rate,frames,tracks};
   }

@@ -155,12 +155,12 @@
   }
   function selectBrowserCandidate(candidate,human=false){
     stop();selectedSeed=candidate.seed;selectedMotif=candidate.notes.map(m=>({...m}));selectedSongEvents=candidate.events.map(e=>({...e}));selectedTrackEvents=parityTrackEvents();humanSelectedSeed=human?candidate.seed:null;humanEdited=false;syncMotifRoll();
-    candidateRanking.querySelectorAll('.candidate-card').forEach(card=>card.classList.toggle('selected',+card.dataset.seed===candidate.seed));
+    candidateRanking.querySelectorAll('.candidate-card').forEach(card=>{const selected=+card.dataset.seed===candidate.seed;card.classList.toggle('selected',selected);card.setAttribute('aria-pressed',String(selected));});
     candidateSummary.textContent=(human?'Human selected ':'Algorithm selected ')+'Seed '+candidate.seed+' · '+candidate.total.toFixed(1)+'/100';
   }
   function generateCandidates(){
     buildSong();const base=Number(seedEl.value)||1;rankedCandidates=Array.from({length:8},(_,i)=>{const seed=base+i,motif=candidateMotif(seed);return evaluateCandidate(motif,seed);}).sort((a,b)=>b.total-a.total||a.seed-b.seed);const best=rankedCandidates[0];
-    candidateRanking.replaceChildren(...rankedCandidates.map((x,i)=>{const e=document.createElement('button');e.type='button';e.dataset.seed=x.seed;e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);e.addEventListener('click',()=>selectBrowserCandidate(x,true));return e;}));
+    candidateRanking.replaceChildren(...rankedCandidates.map((x,i)=>{const e=document.createElement('button');e.type='button';e.dataset.seed=x.seed;e.setAttribute('aria-pressed','false');e.className='candidate-card'+(i===0?' best':'');e.innerHTML='<strong>#'+(i+1)+' · '+x.total.toFixed(1)+'</strong><small>Seed '+x.seed+'</small>';e.title='Harmony '+x.harmony.toFixed(1)+' / Motion '+x.motion.toFixed(1)+' / Range '+x.range.toFixed(1)+' / Contrast '+x.contrast.toFixed(1)+' / Cadence '+x.cadence.toFixed(1)+' / Rhythm '+x.rhythm.toFixed(1);e.addEventListener('click',()=>selectBrowserCandidate(x,true));return e;}));
     selectBrowserCandidate(best,false);return best;
   }
   function parityTrackEvents(){

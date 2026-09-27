@@ -189,10 +189,7 @@
     return keyEl.value+' '+names[degree];
   }
   function updateChords(){
-    chordStrip.replaceChildren(...chordDegrees.map((degree,index)=>{
-      const b=document.createElement('button'); b.type='button'; b.textContent=chordName(degree); b.title='クリックで次のダイアトニックコード';
-      b.addEventListener('click',()=>{stop();chordDegrees[index]=(chordDegrees[index]+1)%7;updateChords();buildSong();}); return b;
-    }));
+    chordStrip.replaceChildren(...chordDegrees.map(degree=>{const e=document.createElement('span');e.className='chord-preview';e.textContent=chordName(degree);return e;}));
   }
   function stop(){
     timers.forEach(clearTimeout); timers=[];

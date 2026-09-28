@@ -5,8 +5,10 @@ import ftplib
 import json
 import os
 import posixpath
+import socket
 import ssl
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path, PurePosixPath
@@ -16,6 +18,15 @@ BUILD_ROOT = ROOT / "build" / "public_html"
 MAPPING_PATH = ROOT / "config" / "deployment-map.json"
 REQUIRED_ENV = ("FTP_HOST", "FTP_USER", "FTP_PASSWORD", "FTP_PATH", "SITE_URL")
 EXCLUDED_NAMES = {"config.php", "user.ini", "admin.local.php"}
+RETRYABLE_FTP_ERRORS = (
+    ConnectionResetError,
+    ConnectionAbortedError,
+    BrokenPipeError,
+    TimeoutError,
+    socket.timeout,
+    ssl.SSLError,
+    ftplib.error_temp,
+)
 
 
 def clean_env(name: str) -> str:
@@ -23,6 +34,63 @@ def clean_env(name: str) -> str:
     if "\n" in value or "\r" in value:
         raise SystemExit(f"{name} must be a single line")
     return value
+
+
+def read_windows_generic_credential(target: str) -> tuple[str, str]:
+    if os.name != "nt":
+        raise SystemExit("Windows Credential Manager is only available on Windows")
+
+    import ctypes
+    from ctypes import wintypes
+
+    class FileTime(ctypes.Structure):
+        _fields_ = [("dwLowDateTime", wintypes.DWORD), ("dwHighDateTime", wintypes.DWORD)]
+
+    class Credential(ctypes.Structure):
+        _fields_ = [
+            ("Flags", wintypes.DWORD),
+            ("Type", wintypes.DWORD),
+            ("TargetName", wintypes.LPWSTR),
+            ("Comment", wintypes.LPWSTR),
+            ("LastWritten", FileTime),
+            ("CredentialBlobSize", wintypes.DWORD),
+            ("CredentialBlob", ctypes.POINTER(ctypes.c_ubyte)),
+            ("Persist", wintypes.DWORD),
+            ("AttributeCount", wintypes.DWORD),
+            ("Attributes", ctypes.c_void_p),
+            ("TargetAlias", wintypes.LPWSTR),
+            ("UserName", wintypes.LPWSTR),
+        ]
+
+    pcredential = ctypes.POINTER(Credential)
+    credential = pcredential()
+    advapi = ctypes.WinDLL("Advapi32.dll")
+    advapi.CredReadW.argtypes = [
+        wintypes.LPCWSTR,
+        wintypes.DWORD,
+        wintypes.DWORD,
+        ctypes.POINTER(pcredential),
+    ]
+    advapi.CredReadW.restype = wintypes.BOOL
+    advapi.CredFree.argtypes = [ctypes.c_void_p]
+
+    if not advapi.CredReadW(target, 1, 0, ctypes.byref(credential)):
+        raise SystemExit(f"Windows credential target is unavailable: {target}")
+
+    try:
+        item = credential.contents
+        username = item.UserName or ""
+        blob = ctypes.string_at(item.CredentialBlob, item.CredentialBlobSize)
+        try:
+            password = blob.decode("utf-16-le").rstrip("\x00")
+        except UnicodeDecodeError:
+            password = blob.decode("utf-8").rstrip("\x00")
+    finally:
+        advapi.CredFree(credential)
+
+    if not username or not password:
+        raise SystemExit(f"Windows credential target is incomplete: {target}")
+    return username, password
 
 
 def normalize_host(value: str) -> str:
@@ -68,20 +136,28 @@ def preflight(require_credentials: bool = False) -> None:
     print("LOCAL_DEPLOY_PREFLIGHT_PASS")
 
 
-def ensure_remote_dir(ftp: ftplib.FTP_TLS, remote_dir: str) -> None:
+def ensure_remote_dir(
+    ftp: ftplib.FTP_TLS,
+    remote_dir: str,
+    known_dirs: set[str] | None = None,
+) -> None:
     if remote_dir in ("", "/"):
         return
+    known_dirs = known_dirs if known_dirs is not None else set()
     current = ""
     for part in PurePosixPath(remote_dir).parts:
         if part == "/":
             current = "/"
             continue
         current = posixpath.join(current, part)
+        if current in known_dirs:
+            continue
         try:
             ftp.mkd(current)
         except ftplib.error_perm as exc:
             if not str(exc).startswith("550"):
                 raise
+        known_dirs.add(current)
 
 
 def remote_join(root: str, relative: str) -> str:
@@ -90,17 +166,70 @@ def remote_join(root: str, relative: str) -> str:
     return root.rstrip("/") + "/" + relative.lstrip("/")
 
 
-def upload_tree(ftp: ftplib.FTP_TLS, remote_root: str) -> int:
+def connect_ftps(host: str, user: str, password: str) -> ftplib.FTP_TLS:
+    ftp = ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=45)
+    ftp.connect(host)
+    ftp.login(user, password)
+    ftp.prot_p()
+    ftp.set_pasv(True)
+    return ftp
+
+
+def close_ftp(ftp: ftplib.FTP_TLS | None) -> None:
+    if ftp is None:
+        return
+    try:
+        ftp.quit()
+    except Exception:
+        try:
+            ftp.close()
+        except Exception:
+            pass
+
+
+def upload_tree(
+    host: str,
+    user: str,
+    password: str,
+    remote_root: str,
+    *,
+    reconnect_every: int = 40,
+    max_attempts: int = 8,
+) -> int:
+    files = [
+        local
+        for local in sorted(BUILD_ROOT.rglob("*"))
+        if local.is_file() and local.name not in EXCLUDED_NAMES
+    ]
     uploaded = 0
-    for local in sorted(BUILD_ROOT.rglob("*")):
-        if not local.is_file() or local.name in EXCLUDED_NAMES:
-            continue
-        relative = local.relative_to(BUILD_ROOT).as_posix()
-        remote = remote_join(remote_root, relative)
-        ensure_remote_dir(ftp, posixpath.dirname(remote))
-        with local.open("rb") as handle:
-            ftp.storbinary(f"STOR {remote}", handle)
-        uploaded += 1
+    ftp: ftplib.FTP_TLS | None = None
+    known_dirs: set[str] = set()
+
+    try:
+        for local in files:
+            relative = local.relative_to(BUILD_ROOT).as_posix()
+            remote = remote_join(remote_root, relative)
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    if ftp is None:
+                        ftp = connect_ftps(host, user, password)
+                    ensure_remote_dir(ftp, posixpath.dirname(remote), known_dirs)
+                    with local.open("rb") as handle:
+                        ftp.storbinary(f"STOR {remote}", handle, blocksize=262144)
+                    uploaded += 1
+                    if reconnect_every > 0 and uploaded % reconnect_every == 0:
+                        close_ftp(ftp)
+                        ftp = None
+                    break
+                except RETRYABLE_FTP_ERRORS:
+                    close_ftp(ftp)
+                    ftp = None
+                    if attempt >= max_attempts:
+                        raise
+                    time.sleep(min(2 * attempt, 10))
+    finally:
+        close_ftp(ftp)
+
     return uploaded
 
 
@@ -166,24 +295,47 @@ def verify_site(site_url: str) -> None:
             raise SystemExit(f"Retired path remains reachable: {path} HTTP {status}")
 
 
-def deploy() -> None:
-    preflight(require_credentials=True)
-    host = normalize_host(clean_env("FTP_HOST"))
+def deploy(args: argparse.Namespace) -> None:
+    preflight(require_credentials=False)
+
+    host = normalize_host(args.ftp_host or clean_env("FTP_HOST"))
+    remote_root = normalize_remote_root(args.ftp_path or clean_env("FTP_PATH"))
+    site_url = args.site_url or clean_env("SITE_URL")
     user = clean_env("FTP_USER")
     password = clean_env("FTP_PASSWORD")
-    remote_root = normalize_remote_root(clean_env("FTP_PATH"))
-    site_url = clean_env("SITE_URL")
 
-    context = ssl.create_default_context()
-    with ftplib.FTP_TLS(context=context, timeout=45) as ftp:
-        ftp.connect(host)
-        ftp.login(user, password)
-        ftp.prot_p()
-        ftp.set_pasv(True)
-        uploaded = upload_tree(ftp, remote_root)
+    if (not user or not password) and args.credential_target:
+        user, password = read_windows_generic_credential(args.credential_target)
+
+    missing: list[str] = []
+    if not host:
+        missing.append("FTP host")
+    if not user:
+        missing.append("FTP user")
+    if not password:
+        missing.append("FTP password")
+    if not remote_root:
+        missing.append("FTP path")
+    if not site_url:
+        missing.append("site URL")
+    if missing:
+        raise SystemExit("Missing local deployment settings: " + ", ".join(missing))
+
+    uploaded = upload_tree(
+        host,
+        user,
+        password,
+        remote_root,
+        reconnect_every=args.reconnect_every,
+        max_attempts=args.max_attempts,
+    )
+
+    ftp = connect_ftps(host, user, password)
+    try:
         for relative in load_retired_paths():
             remove_remote_tree(ftp, remote_join(remote_root, relative))
-        ftp.quit()
+    finally:
+        close_ftp(ftp)
 
     verify_site(site_url)
     print(f"LOCAL_PRODUCTION_DEPLOY_PASS uploaded={uploaded}")
@@ -192,11 +344,17 @@ def deploy() -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--preflight", action="store_true")
+    parser.add_argument("--credential-target", default="")
+    parser.add_argument("--ftp-host", default="")
+    parser.add_argument("--ftp-path", default="")
+    parser.add_argument("--site-url", default="")
+    parser.add_argument("--reconnect-every", type=int, default=40)
+    parser.add_argument("--max-attempts", type=int, default=8)
     args = parser.parse_args()
     if args.preflight:
         preflight(require_credentials=False)
     else:
-        deploy()
+        deploy(args)
     return 0
 
 

@@ -207,9 +207,9 @@ def main() -> int:
     if matches != [{"id": "portfolio-city", "sourceRoot": "portfolio-city", "productionRoot": "portfolio-city"}]:
         fail("deployment map must contain exactly one portfolio-city entry")
 
-    validation_workflow = (ROOT / ".github/workflows/validate-public.yml").read_text(encoding="utf-8")
-    if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
-        fail("validate-public workflow must run the Portfolio City runtime contract")
+    local_gate = (ROOT / "scripts/Test-MergeReadiness.ps1").read_text(encoding="utf-8-sig")
+    if "node tools/check_portfolio_city_runtime.mjs" not in local_gate:
+        fail("local merge gate must run the Portfolio City runtime contract")
 
     print("Portfolio City Phase 4 P4-F contract passed: release-candidate world UI / district flow / mobile bottom sheet")
     return 0

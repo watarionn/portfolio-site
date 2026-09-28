@@ -180,6 +180,16 @@
       "type": "Python / Desktop / S3",
       "summary": "対象名リストとS3上のフォルダ・ファイルを読み取り専用で照合し、最新アップロード、経過日数、欠損、前回との差分をDashboardで確認するローカルファーストの運用監査ツール。",
       "order": 6
+    },
+    {
+      "id": "python-music-lab",
+      "title": "Python作曲研究所",
+      "district": "workshop-alley",
+      "building": "音響研究室",
+      "route": "/PYTHON_MUSIC_LAB/",
+      "type": "Python / MIDI / DSP",
+      "summary": "Seed固定のルール作曲、候補比較、自作Synth、音響処理を一つの再現可能な制作環境へまとめた作曲研究所。",
+      "order": 7
     }
   ]
 }

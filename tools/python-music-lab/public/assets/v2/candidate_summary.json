@@ -1,0 +1,95 @@
+{
+  "auto_selected_candidate": null,
+  "candidates": [
+    {
+      "candidate_id": "candidate-00-baseline",
+      "note_counts": {
+        "Bass": 96,
+        "Chords": 72,
+        "Drums": 311,
+        "Melody": 136
+      },
+      "scope": null,
+      "total_score": 79.758
+    },
+    {
+      "candidate_id": "candidate-01-section-0-A-melody-r1",
+      "note_counts": {
+        "Bass": 96,
+        "Chords": 72,
+        "Drums": 311,
+        "Melody": 135
+      },
+      "scope": "section/0:A/melody",
+      "total_score": 81.837
+    },
+    {
+      "candidate_id": "candidate-02-section-0-A-rhythm-r1",
+      "note_counts": {
+        "Bass": 96,
+        "Chords": 72,
+        "Drums": 311,
+        "Melody": 134
+      },
+      "scope": "section/0:A/rhythm",
+      "total_score": 77.96
+    },
+    {
+      "candidate_id": "candidate-03-section-1-B-melody-r1",
+      "note_counts": {
+        "Bass": 96,
+        "Chords": 72,
+        "Drums": 311,
+        "Melody": 139
+      },
+      "scope": "section/1:B/melody",
+      "total_score": 79.296
+    },
+    {
+      "candidate_id": "candidate-04-section-1-B-rhythm-r1",
+      "note_counts": {
+        "Bass": 96,
+        "Chords": 72,
+        "Drums": 311,
+        "Melody": 135
+      },
+      "scope": "section/1:B/rhythm",
+      "total_score": 79.652
+    },
+    {
+      "candidate_id": "candidate-05-section-2-Chorus-melody-r1",
+      "note_counts": {
+        "Bass": 96,
+        "Chords": 72,
+        "Drums": 311,
+        "Melody": 136
+      },
+      "scope": "section/2:Chorus/melody",
+      "total_score": 78.566
+    },
+    {
+      "candidate_id": "candidate-06-section-2-Chorus-rhythm-r1",
+      "note_counts": {
+        "Bass": 96,
+        "Chords": 72,
+        "Drums": 311,
+        "Melody": 135
+      },
+      "scope": "section/2:Chorus/rhythm",
+      "total_score": 79.313
+    }
+  ],
+  "human_final_choice_required": true,
+  "schema_version": "python-music-lab/portfolio-candidate-summary/1",
+  "score_order": [
+    "candidate-01-section-0-A-melody-r1",
+    "candidate-00-baseline",
+    "candidate-04-section-1-B-rhythm-r1",
+    "candidate-06-section-2-Chorus-rhythm-r1",
+    "candidate-03-section-1-B-melody-r1",
+    "candidate-05-section-2-Chorus-melody-r1",
+    "candidate-02-section-0-A-rhythm-r1"
+  ],
+  "session_id": "candidate-lab-001",
+  "source_candidate_id": "baseline"
+}

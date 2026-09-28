@@ -267,6 +267,13 @@
       "y": 1390,
       "width": 260,
       "anchor": "bottom-center"
+    },
+    {
+      "projectId": "python-music-lab",
+      "x": 3520,
+      "y": 1760,
+      "width": 260,
+      "anchor": "bottom-center"
     }
   ]
 }

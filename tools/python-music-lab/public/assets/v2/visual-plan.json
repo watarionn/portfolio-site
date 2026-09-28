@@ -1,0 +1,1090 @@
+{
+  "accents": [
+    {
+      "kind": "section_start",
+      "seconds": 0.0,
+      "section_id": "section/0:A",
+      "strength": 0.56,
+      "tick": 0
+    },
+    {
+      "bar_index": 0,
+      "kind": "melody_peak",
+      "pitch": 77,
+      "seconds": 0.703125,
+      "section_id": "section/0:A",
+      "strength": 0.7008,
+      "tick": 720
+    },
+    {
+      "bar_index": 1,
+      "kind": "melody_peak",
+      "pitch": 77,
+      "seconds": 2.8125,
+      "section_id": "section/0:A",
+      "strength": 0.7008,
+      "tick": 2880
+    },
+    {
+      "bar_index": 2,
+      "kind": "melody_peak",
+      "pitch": 72,
+      "seconds": 4.6875,
+      "section_id": "section/0:A",
+      "strength": 0.6693,
+      "tick": 4800
+    },
+    {
+      "bar_index": 3,
+      "kind": "melody_peak",
+      "pitch": 79,
+      "seconds": 5.625,
+      "section_id": "section/0:A",
+      "strength": 0.7087,
+      "tick": 5760
+    },
+    {
+      "bar_index": 4,
+      "kind": "melody_peak",
+      "pitch": 72,
+      "seconds": 8.4375,
+      "section_id": "section/0:A",
+      "strength": 0.7008,
+      "tick": 8640
+    },
+    {
+      "bar_index": 5,
+      "kind": "melody_peak",
+      "pitch": 76,
+      "seconds": 10.546875,
+      "section_id": "section/0:A",
+      "strength": 0.685,
+      "tick": 10800
+    },
+    {
+      "bar_index": 6,
+      "kind": "melody_peak",
+      "pitch": 72,
+      "seconds": 11.71875,
+      "section_id": "section/0:A",
+      "strength": 0.6929,
+      "tick": 12000
+    },
+    {
+      "bar_index": 7,
+      "kind": "melody_peak",
+      "pitch": 74,
+      "seconds": 13.828125,
+      "section_id": "section/0:A",
+      "strength": 0.7087,
+      "tick": 14160
+    },
+    {
+      "kind": "section_start",
+      "seconds": 15.0,
+      "section_id": "section/1:B",
+      "strength": 0.74,
+      "tick": 15360
+    },
+    {
+      "bar_index": 8,
+      "kind": "melody_peak",
+      "pitch": 79,
+      "seconds": 16.40625,
+      "section_id": "section/1:B",
+      "strength": 0.748,
+      "tick": 16800
+    },
+    {
+      "bar_index": 9,
+      "kind": "melody_peak",
+      "pitch": 79,
+      "seconds": 18.28125,
+      "section_id": "section/1:B",
+      "strength": 0.748,
+      "tick": 18720
+    },
+    {
+      "bar_index": 10,
+      "kind": "melody_peak",
+      "pitch": 77,
+      "seconds": 19.453125,
+      "section_id": "section/1:B",
+      "strength": 0.7402,
+      "tick": 19920
+    },
+    {
+      "bar_index": 11,
+      "kind": "melody_peak",
+      "pitch": 76,
+      "seconds": 21.5625,
+      "section_id": "section/1:B",
+      "strength": 0.748,
+      "tick": 22080
+    },
+    {
+      "bar_index": 12,
+      "kind": "melody_peak",
+      "pitch": 76,
+      "seconds": 22.734375,
+      "section_id": "section/1:B",
+      "strength": 0.748,
+      "tick": 23280
+    },
+    {
+      "bar_index": 13,
+      "kind": "melody_peak",
+      "pitch": 79,
+      "seconds": 25.78125,
+      "section_id": "section/1:B",
+      "strength": 0.748,
+      "tick": 26400
+    },
+    {
+      "bar_index": 14,
+      "kind": "melody_peak",
+      "pitch": 77,
+      "seconds": 26.484375,
+      "section_id": "section/1:B",
+      "strength": 0.7402,
+      "tick": 27120
+    },
+    {
+      "bar_index": 15,
+      "kind": "melody_peak",
+      "pitch": 79,
+      "seconds": 28.828125,
+      "section_id": "section/1:B",
+      "strength": 0.7323,
+      "tick": 29520
+    },
+    {
+      "bar_index": 16,
+      "kind": "melody_peak",
+      "pitch": 84,
+      "seconds": 30.0,
+      "section_id": "section/2:Chorus",
+      "strength": 0.7874,
+      "tick": 30720
+    },
+    {
+      "kind": "section_start",
+      "seconds": 30.0,
+      "section_id": "section/2:Chorus",
+      "strength": 0.96,
+      "tick": 30720
+    },
+    {
+      "bar_index": 17,
+      "kind": "melody_peak",
+      "pitch": 86,
+      "seconds": 32.578125,
+      "section_id": "section/2:Chorus",
+      "strength": 0.7874,
+      "tick": 33360
+    },
+    {
+      "bar_index": 18,
+      "kind": "melody_peak",
+      "pitch": 89,
+      "seconds": 34.921875,
+      "section_id": "section/2:Chorus",
+      "strength": 0.7874,
+      "tick": 35760
+    },
+    {
+      "bar_index": 19,
+      "kind": "melody_peak",
+      "pitch": 84,
+      "seconds": 36.09375,
+      "section_id": "section/2:Chorus",
+      "strength": 0.7795,
+      "tick": 36960
+    },
+    {
+      "bar_index": 20,
+      "kind": "melody_peak",
+      "pitch": 86,
+      "seconds": 37.734375,
+      "section_id": "section/2:Chorus",
+      "strength": 0.7795,
+      "tick": 38640
+    },
+    {
+      "bar_index": 21,
+      "kind": "melody_peak",
+      "pitch": 86,
+      "seconds": 39.609375,
+      "section_id": "section/2:Chorus",
+      "strength": 0.7795,
+      "tick": 40560
+    },
+    {
+      "bar_index": 22,
+      "kind": "melody_peak",
+      "pitch": 91,
+      "seconds": 42.65625,
+      "section_id": "section/2:Chorus",
+      "strength": 0.7953,
+      "tick": 43680
+    },
+    {
+      "bar_index": 23,
+      "kind": "melody_peak",
+      "pitch": 84,
+      "seconds": 43.59375,
+      "section_id": "section/2:Chorus",
+      "strength": 0.7953,
+      "tick": 44640
+    }
+  ],
+  "beats": [
+    {
+      "downbeat": true,
+      "energy": 0.56,
+      "index": 0,
+      "seconds": 0.0,
+      "section_id": "section/0:A",
+      "tick": 0
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 1,
+      "seconds": 0.46875,
+      "section_id": "section/0:A",
+      "tick": 480
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 2,
+      "seconds": 0.9375,
+      "section_id": "section/0:A",
+      "tick": 960
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 3,
+      "seconds": 1.40625,
+      "section_id": "section/0:A",
+      "tick": 1440
+    },
+    {
+      "downbeat": true,
+      "energy": 0.56,
+      "index": 4,
+      "seconds": 1.875,
+      "section_id": "section/0:A",
+      "tick": 1920
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 5,
+      "seconds": 2.34375,
+      "section_id": "section/0:A",
+      "tick": 2400
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 6,
+      "seconds": 2.8125,
+      "section_id": "section/0:A",
+      "tick": 2880
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 7,
+      "seconds": 3.28125,
+      "section_id": "section/0:A",
+      "tick": 3360
+    },
+    {
+      "downbeat": true,
+      "energy": 0.56,
+      "index": 8,
+      "seconds": 3.75,
+      "section_id": "section/0:A",
+      "tick": 3840
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 9,
+      "seconds": 4.21875,
+      "section_id": "section/0:A",
+      "tick": 4320
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 10,
+      "seconds": 4.6875,
+      "section_id": "section/0:A",
+      "tick": 4800
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 11,
+      "seconds": 5.15625,
+      "section_id": "section/0:A",
+      "tick": 5280
+    },
+    {
+      "downbeat": true,
+      "energy": 0.56,
+      "index": 12,
+      "seconds": 5.625,
+      "section_id": "section/0:A",
+      "tick": 5760
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 13,
+      "seconds": 6.09375,
+      "section_id": "section/0:A",
+      "tick": 6240
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 14,
+      "seconds": 6.5625,
+      "section_id": "section/0:A",
+      "tick": 6720
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 15,
+      "seconds": 7.03125,
+      "section_id": "section/0:A",
+      "tick": 7200
+    },
+    {
+      "downbeat": true,
+      "energy": 0.56,
+      "index": 16,
+      "seconds": 7.5,
+      "section_id": "section/0:A",
+      "tick": 7680
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 17,
+      "seconds": 7.96875,
+      "section_id": "section/0:A",
+      "tick": 8160
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 18,
+      "seconds": 8.4375,
+      "section_id": "section/0:A",
+      "tick": 8640
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 19,
+      "seconds": 8.90625,
+      "section_id": "section/0:A",
+      "tick": 9120
+    },
+    {
+      "downbeat": true,
+      "energy": 0.56,
+      "index": 20,
+      "seconds": 9.375,
+      "section_id": "section/0:A",
+      "tick": 9600
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 21,
+      "seconds": 9.84375,
+      "section_id": "section/0:A",
+      "tick": 10080
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 22,
+      "seconds": 10.3125,
+      "section_id": "section/0:A",
+      "tick": 10560
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 23,
+      "seconds": 10.78125,
+      "section_id": "section/0:A",
+      "tick": 11040
+    },
+    {
+      "downbeat": true,
+      "energy": 0.56,
+      "index": 24,
+      "seconds": 11.25,
+      "section_id": "section/0:A",
+      "tick": 11520
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 25,
+      "seconds": 11.71875,
+      "section_id": "section/0:A",
+      "tick": 12000
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 26,
+      "seconds": 12.1875,
+      "section_id": "section/0:A",
+      "tick": 12480
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 27,
+      "seconds": 12.65625,
+      "section_id": "section/0:A",
+      "tick": 12960
+    },
+    {
+      "downbeat": true,
+      "energy": 0.56,
+      "index": 28,
+      "seconds": 13.125,
+      "section_id": "section/0:A",
+      "tick": 13440
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 29,
+      "seconds": 13.59375,
+      "section_id": "section/0:A",
+      "tick": 13920
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 30,
+      "seconds": 14.0625,
+      "section_id": "section/0:A",
+      "tick": 14400
+    },
+    {
+      "downbeat": false,
+      "energy": 0.56,
+      "index": 31,
+      "seconds": 14.53125,
+      "section_id": "section/0:A",
+      "tick": 14880
+    },
+    {
+      "downbeat": true,
+      "energy": 0.74,
+      "index": 32,
+      "seconds": 15.0,
+      "section_id": "section/1:B",
+      "tick": 15360
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 33,
+      "seconds": 15.46875,
+      "section_id": "section/1:B",
+      "tick": 15840
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 34,
+      "seconds": 15.9375,
+      "section_id": "section/1:B",
+      "tick": 16320
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 35,
+      "seconds": 16.40625,
+      "section_id": "section/1:B",
+      "tick": 16800
+    },
+    {
+      "downbeat": true,
+      "energy": 0.74,
+      "index": 36,
+      "seconds": 16.875,
+      "section_id": "section/1:B",
+      "tick": 17280
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 37,
+      "seconds": 17.34375,
+      "section_id": "section/1:B",
+      "tick": 17760
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 38,
+      "seconds": 17.8125,
+      "section_id": "section/1:B",
+      "tick": 18240
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 39,
+      "seconds": 18.28125,
+      "section_id": "section/1:B",
+      "tick": 18720
+    },
+    {
+      "downbeat": true,
+      "energy": 0.74,
+      "index": 40,
+      "seconds": 18.75,
+      "section_id": "section/1:B",
+      "tick": 19200
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 41,
+      "seconds": 19.21875,
+      "section_id": "section/1:B",
+      "tick": 19680
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 42,
+      "seconds": 19.6875,
+      "section_id": "section/1:B",
+      "tick": 20160
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 43,
+      "seconds": 20.15625,
+      "section_id": "section/1:B",
+      "tick": 20640
+    },
+    {
+      "downbeat": true,
+      "energy": 0.74,
+      "index": 44,
+      "seconds": 20.625,
+      "section_id": "section/1:B",
+      "tick": 21120
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 45,
+      "seconds": 21.09375,
+      "section_id": "section/1:B",
+      "tick": 21600
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 46,
+      "seconds": 21.5625,
+      "section_id": "section/1:B",
+      "tick": 22080
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 47,
+      "seconds": 22.03125,
+      "section_id": "section/1:B",
+      "tick": 22560
+    },
+    {
+      "downbeat": true,
+      "energy": 0.74,
+      "index": 48,
+      "seconds": 22.5,
+      "section_id": "section/1:B",
+      "tick": 23040
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 49,
+      "seconds": 22.96875,
+      "section_id": "section/1:B",
+      "tick": 23520
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 50,
+      "seconds": 23.4375,
+      "section_id": "section/1:B",
+      "tick": 24000
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 51,
+      "seconds": 23.90625,
+      "section_id": "section/1:B",
+      "tick": 24480
+    },
+    {
+      "downbeat": true,
+      "energy": 0.74,
+      "index": 52,
+      "seconds": 24.375,
+      "section_id": "section/1:B",
+      "tick": 24960
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 53,
+      "seconds": 24.84375,
+      "section_id": "section/1:B",
+      "tick": 25440
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 54,
+      "seconds": 25.3125,
+      "section_id": "section/1:B",
+      "tick": 25920
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 55,
+      "seconds": 25.78125,
+      "section_id": "section/1:B",
+      "tick": 26400
+    },
+    {
+      "downbeat": true,
+      "energy": 0.74,
+      "index": 56,
+      "seconds": 26.25,
+      "section_id": "section/1:B",
+      "tick": 26880
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 57,
+      "seconds": 26.71875,
+      "section_id": "section/1:B",
+      "tick": 27360
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 58,
+      "seconds": 27.1875,
+      "section_id": "section/1:B",
+      "tick": 27840
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 59,
+      "seconds": 27.65625,
+      "section_id": "section/1:B",
+      "tick": 28320
+    },
+    {
+      "downbeat": true,
+      "energy": 0.74,
+      "index": 60,
+      "seconds": 28.125,
+      "section_id": "section/1:B",
+      "tick": 28800
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 61,
+      "seconds": 28.59375,
+      "section_id": "section/1:B",
+      "tick": 29280
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 62,
+      "seconds": 29.0625,
+      "section_id": "section/1:B",
+      "tick": 29760
+    },
+    {
+      "downbeat": false,
+      "energy": 0.74,
+      "index": 63,
+      "seconds": 29.53125,
+      "section_id": "section/1:B",
+      "tick": 30240
+    },
+    {
+      "downbeat": true,
+      "energy": 0.96,
+      "index": 64,
+      "seconds": 30.0,
+      "section_id": "section/2:Chorus",
+      "tick": 30720
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 65,
+      "seconds": 30.46875,
+      "section_id": "section/2:Chorus",
+      "tick": 31200
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 66,
+      "seconds": 30.9375,
+      "section_id": "section/2:Chorus",
+      "tick": 31680
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 67,
+      "seconds": 31.40625,
+      "section_id": "section/2:Chorus",
+      "tick": 32160
+    },
+    {
+      "downbeat": true,
+      "energy": 0.96,
+      "index": 68,
+      "seconds": 31.875,
+      "section_id": "section/2:Chorus",
+      "tick": 32640
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 69,
+      "seconds": 32.34375,
+      "section_id": "section/2:Chorus",
+      "tick": 33120
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 70,
+      "seconds": 32.8125,
+      "section_id": "section/2:Chorus",
+      "tick": 33600
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 71,
+      "seconds": 33.28125,
+      "section_id": "section/2:Chorus",
+      "tick": 34080
+    },
+    {
+      "downbeat": true,
+      "energy": 0.96,
+      "index": 72,
+      "seconds": 33.75,
+      "section_id": "section/2:Chorus",
+      "tick": 34560
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 73,
+      "seconds": 34.21875,
+      "section_id": "section/2:Chorus",
+      "tick": 35040
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 74,
+      "seconds": 34.6875,
+      "section_id": "section/2:Chorus",
+      "tick": 35520
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 75,
+      "seconds": 35.15625,
+      "section_id": "section/2:Chorus",
+      "tick": 36000
+    },
+    {
+      "downbeat": true,
+      "energy": 0.96,
+      "index": 76,
+      "seconds": 35.625,
+      "section_id": "section/2:Chorus",
+      "tick": 36480
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 77,
+      "seconds": 36.09375,
+      "section_id": "section/2:Chorus",
+      "tick": 36960
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 78,
+      "seconds": 36.5625,
+      "section_id": "section/2:Chorus",
+      "tick": 37440
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 79,
+      "seconds": 37.03125,
+      "section_id": "section/2:Chorus",
+      "tick": 37920
+    },
+    {
+      "downbeat": true,
+      "energy": 0.96,
+      "index": 80,
+      "seconds": 37.5,
+      "section_id": "section/2:Chorus",
+      "tick": 38400
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 81,
+      "seconds": 37.96875,
+      "section_id": "section/2:Chorus",
+      "tick": 38880
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 82,
+      "seconds": 38.4375,
+      "section_id": "section/2:Chorus",
+      "tick": 39360
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 83,
+      "seconds": 38.90625,
+      "section_id": "section/2:Chorus",
+      "tick": 39840
+    },
+    {
+      "downbeat": true,
+      "energy": 0.96,
+      "index": 84,
+      "seconds": 39.375,
+      "section_id": "section/2:Chorus",
+      "tick": 40320
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 85,
+      "seconds": 39.84375,
+      "section_id": "section/2:Chorus",
+      "tick": 40800
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 86,
+      "seconds": 40.3125,
+      "section_id": "section/2:Chorus",
+      "tick": 41280
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 87,
+      "seconds": 40.78125,
+      "section_id": "section/2:Chorus",
+      "tick": 41760
+    },
+    {
+      "downbeat": true,
+      "energy": 0.96,
+      "index": 88,
+      "seconds": 41.25,
+      "section_id": "section/2:Chorus",
+      "tick": 42240
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 89,
+      "seconds": 41.71875,
+      "section_id": "section/2:Chorus",
+      "tick": 42720
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 90,
+      "seconds": 42.1875,
+      "section_id": "section/2:Chorus",
+      "tick": 43200
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 91,
+      "seconds": 42.65625,
+      "section_id": "section/2:Chorus",
+      "tick": 43680
+    },
+    {
+      "downbeat": true,
+      "energy": 0.96,
+      "index": 92,
+      "seconds": 43.125,
+      "section_id": "section/2:Chorus",
+      "tick": 44160
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 93,
+      "seconds": 43.59375,
+      "section_id": "section/2:Chorus",
+      "tick": 44640
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 94,
+      "seconds": 44.0625,
+      "section_id": "section/2:Chorus",
+      "tick": 45120
+    },
+    {
+      "downbeat": false,
+      "energy": 0.96,
+      "index": 95,
+      "seconds": 44.53125,
+      "section_id": "section/2:Chorus",
+      "tick": 45600
+    }
+  ],
+  "schema_version": "python-music-lab/visual-plan/1",
+  "sections": [
+    {
+      "bars": 8,
+      "end_seconds": 15.0,
+      "end_tick": 15360,
+      "energy": 0.56,
+      "name": "A",
+      "recipe_ids": {
+        "bass": "bass.root_fifth_with_approach",
+        "drums": "drums.section_energy_pop",
+        "harmony": "harmony.diatonic_section_cadence",
+        "melody": "melody.motif_development",
+        "rhythm": "rhythm.sparse"
+      },
+      "role": "verse",
+      "section_id": "section/0:A",
+      "start_seconds": 0.0,
+      "start_tick": 0
+    },
+    {
+      "bars": 8,
+      "end_seconds": 30.0,
+      "end_tick": 30720,
+      "energy": 0.74,
+      "name": "B",
+      "recipe_ids": {
+        "bass": "bass.root_fifth_with_approach",
+        "drums": "drums.section_energy_pop",
+        "harmony": "harmony.diatonic_section_cadence",
+        "melody": "melody.motif_development",
+        "rhythm": "rhythm.flowing"
+      },
+      "role": "build",
+      "section_id": "section/1:B",
+      "start_seconds": 15.0,
+      "start_tick": 15360
+    },
+    {
+      "bars": 8,
+      "end_seconds": 45.0,
+      "end_tick": 46080,
+      "energy": 0.96,
+      "name": "Chorus",
+      "recipe_ids": {
+        "bass": "bass.root_fifth_with_approach",
+        "drums": "drums.section_energy_pop",
+        "harmony": "harmony.diatonic_section_cadence",
+        "melody": "melody.motif_development",
+        "rhythm": "rhythm.driving"
+      },
+      "role": "chorus",
+      "section_id": "section/2:Chorus",
+      "start_seconds": 30.0,
+      "start_tick": 30720
+    }
+  ],
+  "semantics": {
+    "music_lab_owns_timing_and_energy": true,
+    "raw_note_events_included": false,
+    "visual_consumer_should_choose_expression": true
+  },
+  "source": {
+    "candidate_id": "baseline",
+    "event_bundle_version": "pml-event-bundle/1",
+    "global_seed": 2026091802,
+    "music_plan_version": "2.0-draft",
+    "title": "Phase 02B Minor Evaluation Lab"
+  },
+  "timing": {
+    "bpm": 128,
+    "duration_seconds": 45.0,
+    "duration_ticks": 46080,
+    "meter": [
+      4,
+      4
+    ],
+    "ticks_per_beat": 480
+  }
+}

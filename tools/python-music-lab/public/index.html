@@ -10,7 +10,9 @@
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="style.css">
   <script src="renderer-core.js" defer></script>
-  <script src="evaluator-core.js" defer></script>\n  <script src="script.js" defer></script>
+  <script src="evaluator-core.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="v2-static.js" defer></script>
 </head>
 <body>
   <main class="page">
@@ -58,6 +60,61 @@
       <div class="drum-strip-wrap"><div class="drum-strip" id="drumStrip" aria-label="16ステップ ドラムパターン"></div></div>
       <div class="piano-roll-wrap"><div class="piano-roll" id="pianoRoll" role="grid" aria-label="16ステップ ピアノロール"></div></div>
       <p class="playground-note">下の16ステップは曲全体の素材になる1小節モチーフです。曲を生成すると、選んだ長さに合わせて必要な小節数を計算し、モチーフを反復・変化させながら複数セクションへ展開します。同じSeed・設定・長さなら同じ曲を再現します。</p>
+    </section>
+
+
+    <section class="v2-lab" id="v2Runtime" aria-labelledby="v2-title">
+      <div class="section-heading">
+        <p>V2 / INTEGRATION 4</p>
+        <h2 id="v2-title">再現できる候補比較と静的ランタイム</h2>
+      </div>
+      <div class="v2-summary">
+        <div>
+          <p class="kicker">CURRENT RUNTIME</p>
+          <strong id="v2Status">v0.4.0 / loading</strong>
+          <p>MusicPlan、階層Seed、局所Reroll、Enhanced Renderer、Candidate Labを同じprojectから再現します。</p>
+        </div>
+        <dl>
+          <div><dt>Project schema</dt><dd id="v2Schema">loading</dd></div>
+          <div><dt>Candidate session</dt><dd id="v2Session">loading</dd></div>
+          <div><dt>Selection policy</dt><dd id="v2Adoption">loading</dd></div>
+          <div><dt>JIZURA bridge</dt><dd id="v2Jizura">loading</dd></div>
+        </dl>
+      </div>
+
+      <div class="v2-audio">
+        <div>
+          <p class="kicker">STATIC ENHANCED RENDER</p>
+          <h3>v2 baselineを聴く</h3>
+          <p>Portfolio側ではPythonを実行せず、v2が書き出した静的OGGとJSONだけを読み込みます。</p>
+        </div>
+        <div>
+          <audio id="v2Audio" controls preload="metadata">
+            <source src="assets/v2/music.ogg" type="audio/ogg">
+          </audio>
+          <div class="section-jumps">
+            <button type="button" data-v2-seek="0"><span>A</span><small>0:00</small></button>
+            <button type="button" data-v2-seek="15"><span>B</span><small>0:15</small></button>
+            <button type="button" data-v2-seek="30"><span>Chorus</span><small>0:30</small></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="v2-candidate-panel">
+        <div>
+          <p class="kicker">CANDIDATE LAB / SESSION 001</p>
+          <h3>7候補を比較しても、自動採用しない</h3>
+          <p>Evaluatorの順序は比較材料です。最終採用はPreviewを聴いた人間の明示操作だけに限定しています。</p>
+        </div>
+        <div class="v2-candidates" id="v2Candidates" aria-live="polite"></div>
+      </div>
+
+      <div class="v2-links" aria-label="v2 static artifacts">
+        <a href="assets/v2/music.mid">MIDI</a>
+        <a href="assets/v2/visual-plan.json">Visual Plan</a>
+        <a href="assets/v2/portfolio_project.json">Portfolio Project JSON</a>
+        <a href="assets/v2/candidate_summary.json">Candidate Summary</a>
+      </div>
     </section>
 
     <section class="player-panel" aria-labelledby="sample-title">

@@ -1,0 +1,17 @@
+{
+  "candidate_adoptions": 0,
+  "candidate_lab_schema": "python-music-lab/candidate-lab/2",
+  "candidate_session": "candidate-lab-001",
+  "jizura_roundtrip": {
+    "bpm_match": true,
+    "candidate_id": "baseline",
+    "line_count_match": true,
+    "music_timing_authoritative": true,
+    "schema_version": "python-music-lab/jizura-roundtrip/1",
+    "text_cue_count": 1,
+    "timing_change_count": 1,
+    "timing_changes_auto_applied": false
+  },
+  "project_schema": "python-music-lab/project/2",
+  "runtime_version": "0.4.0"
+}

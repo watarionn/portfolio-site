@@ -1,0 +1,58 @@
+{
+  "bars": 24,
+  "bpm": 128,
+  "key": "A minor",
+  "python_runtime_required": false,
+  "recipes": {
+    "section/0:A": {
+      "bass": "bass.root_fifth_with_approach",
+      "drums": "drums.section_energy_pop",
+      "harmony": "harmony.diatonic_section_cadence",
+      "melody": "melody.motif_development",
+      "rhythm": "rhythm.sparse"
+    },
+    "section/1:B": {
+      "bass": "bass.root_fifth_with_approach",
+      "drums": "drums.section_energy_pop",
+      "harmony": "harmony.diatonic_section_cadence",
+      "melody": "melody.motif_development",
+      "rhythm": "rhythm.flowing"
+    },
+    "section/2:Chorus": {
+      "bass": "bass.root_fifth_with_approach",
+      "drums": "drums.section_energy_pop",
+      "harmony": "harmony.diatonic_section_cadence",
+      "melody": "melody.motif_development",
+      "rhythm": "rhythm.driving"
+    }
+  },
+  "schema_version": "python-music-lab/portfolio-project/1",
+  "sections": [
+    {
+      "bars": 8,
+      "energy": 0.56,
+      "label": "A",
+      "role": "verse",
+      "section_id": "section/0:A",
+      "start_seconds": 0.0
+    },
+    {
+      "bars": 8,
+      "energy": 0.74,
+      "label": "B",
+      "role": "build",
+      "section_id": "section/1:B",
+      "start_seconds": 15.0
+    },
+    {
+      "bars": 8,
+      "energy": 0.96,
+      "label": "Chorus",
+      "role": "chorus",
+      "section_id": "section/2:Chorus",
+      "start_seconds": 30.0
+    }
+  ],
+  "static_only": true,
+  "title": "Phase 02B Minor Evaluation Lab"
+}

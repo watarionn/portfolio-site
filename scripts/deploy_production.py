@@ -233,14 +233,25 @@ def upload_tree(
     return uploaded
 
 
+def is_missing_remote_path_error(exc: BaseException) -> bool:
+    message = str(exc).lower()
+    missing_markers = ("no such file", "not found", "does not exist")
+    return message.startswith(("450", "550")) and any(
+        marker in message for marker in missing_markers
+    )
+
+
 def remove_remote_tree(ftp: ftplib.FTP_TLS, remote_path: str) -> None:
     try:
         entries = ftp.nlst(remote_path)
-    except ftplib.error_perm:
+    except (ftplib.error_perm, ftplib.error_temp) as exc:
+        if not is_missing_remote_path_error(exc):
+            raise
         try:
             ftp.delete(remote_path)
-        except ftplib.error_perm:
-            pass
+        except (ftplib.error_perm, ftplib.error_temp) as delete_exc:
+            if not is_missing_remote_path_error(delete_exc):
+                raise
         return
 
     children = [item for item in entries if item.rstrip("/") != remote_path.rstrip("/")]
@@ -248,22 +259,28 @@ def remove_remote_tree(ftp: ftplib.FTP_TLS, remote_path: str) -> None:
         try:
             ftp.delete(remote_path)
             return
-        except ftplib.error_perm:
+        except (ftplib.error_perm, ftplib.error_temp) as delete_exc:
+            if is_missing_remote_path_error(delete_exc):
+                return
             try:
                 ftp.rmd(remote_path)
-            except ftplib.error_perm:
-                pass
+            except (ftplib.error_perm, ftplib.error_temp) as rmdir_exc:
+                if not is_missing_remote_path_error(rmdir_exc):
+                    raise
             return
 
     for child in children:
         try:
             ftp.delete(child)
-        except ftplib.error_perm:
+        except (ftplib.error_perm, ftplib.error_temp) as delete_exc:
+            if is_missing_remote_path_error(delete_exc):
+                continue
             remove_remote_tree(ftp, child)
     try:
         ftp.rmd(remote_path)
-    except ftplib.error_perm:
-        pass
+    except (ftplib.error_perm, ftplib.error_temp) as rmdir_exc:
+        if not is_missing_remote_path_error(rmdir_exc):
+            raise
 
 
 def http_get(url: str) -> tuple[int, bytes]:

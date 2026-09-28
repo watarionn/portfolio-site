@@ -1,0 +1,246 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_2axo-tp-5so",
+  "slug": "mori-calliope-2axo-tp-5so",
+  "videoId": "2Axo-TP-5So",
+  "title": "River City Girls 2をMonarchと協力プレイ　「basically…punch everyone」",
+  "originalTitle": "【RIVER CITY GIRLS 2】Punching Literally Everyone with Monarch!",
+  "originalUrl": "https://www.youtube.com/watch?v=2Axo-TP-5So",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 3760,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_mori_calliope",
+    "slug": "mori-calliope",
+    "displayName": "Mori Calliope"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Mori CalliopeとMonarchはRiver City Girls 2を一緒にプレイし、操作を確かめながら街の敵を次々に倒していった。ピンチになっても軽口を交わし、戦闘そのものを笑いに変えていくテンポの速いコラボだ。",
+  "summaryOneLine": "約1時間のコラボから、ゲーム理解、戦闘の勢い、ピンチでの掛け合いという見どころを短く把握できる",
+  "keyPoints": [
+    "まずは「punch everyone」",
+    "強い敵にもリアクション全開",
+    "AIの動きに翻弄されながら"
+  ],
+  "articleBodyHtml": "<p>Mori CalliopeとMonarchはRiver City Girls 2を一緒にプレイし、操作を確かめながら街の敵を次々に倒していった。ピンチになっても軽口を交わし、戦闘そのものを笑いに変えていくテンポの速いコラボだ。</p>\n<h2>まずは「punch everyone」</h2>\n<p>00:03:10ごろ、できるだけゲームを進めようと話し、まだunlockされていないcharacterを確認しながらプレイを開始する。</p>\n<p>00:08:19ごろ、操作をつかみ始めると「basically in this game you just punch everyone」とゲームを大胆に要約。敵との戦闘へ勢いよく飛び込んでいった。</p>\n<h2>強い敵にもリアクション全開</h2>\n<p>00:24:22ごろには敵のtornado attackを見て驚き、続けて「That&#x27;s not fair」と反応する。00:35:40ごろには進む道を探している最中にnew moveを発見し、戦い方も少しずつ広がっていく。</p>\n<p>00:41:47ごろには「one HP」の厳しい状況になりながら、knocked outになるのはこのゲームではpretty normalだと笑い混じりに受け止めた。</p>\n<h2>AIの動きに翻弄されながら</h2>\n<p>00:47:08ごろ、敵が攻撃をかわすような動きを見せると「not a smart AI」と反応。思い通りに殴らせてくれない相手にも、その場の驚きを掛け合いへ変えていく。</p>\n<p>00:56:58ごろには「I&#x27;m better than these guys」と敵へ強気な一言。操作を覚えるところから始まり、苦戦や発見を二人で共有しながら進む協力プレイが、この回の軸になっていた。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=2Axo-TP-5So)</li><li>配信公開日: 未確認</li><li>記事公開日: 2026年9月28日</li><li>記事最終更新日: 2026年9月27日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 190,
+      "text": "できるだけゲームを進めようと話し、未unlockのcharacterを確認する"
+    },
+    {
+      "timestampSeconds": 499,
+      "text": "ゲームの基本をつかみbasically in this game you just punch everyoneとまとめる"
+    },
+    {
+      "timestampSeconds": 1462,
+      "text": "敵のtornado attackに驚きThat's not fairと反応する"
+    },
+    {
+      "timestampSeconds": 2140,
+      "text": "進路を見つけた直後にnew moveを発見する"
+    },
+    {
+      "timestampSeconds": 2507,
+      "text": "one HPの状況でknocked outはpretty normalだと話す"
+    },
+    {
+      "timestampSeconds": 2828,
+      "text": "敵AIの動きにsmart AIは困ると反応する"
+    },
+    {
+      "timestampSeconds": 3418,
+      "text": "I'm better than these guysと敵への強気な反応を見せる"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=2Axo-TP-5So",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-27T23:47:31Z",
+    "articleUpdatedAt": "2026-09-27T23:47:31Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-ps5pxgjneq",
+      "slug": "mori-calliope-ps5pxgjneq",
+      "videoId": "-Ps5pxGJNEQ",
+      "title": "「遊びたい」は映像のどこから生まれる？　CalliopeとBijouのState of Play観察軸",
+      "summaryOneLine": "発表タイトルの一覧ではなく、二人が映像のどこを見て『遊びたい』へ判断を進めたかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-06-02T20:56:36.000Z",
+      "durationSeconds": 4836,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0eghejywaey",
+      "slug": "mori-calliope-0eghejywaey",
+      "videoId": "0eghejYwaeY",
+      "title": "100万再生祝いはゲームから音楽の夢へ　Calliope×syudouの対談配信",
+      "summaryOneLine": "ゲームを遊びながら100万再生を祝うだけでなく、音楽家同士が次の目標を言葉にしていく配信でした。",
+      "streamType": "event",
+      "publishedAt": "2025-05-23T11:19:20Z",
+      "durationSeconds": 4467,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0eghejYwaeY/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0fqfi9ntle4",
+      "slug": "mori-calliope-0fqfi9ntle4",
+      "videoId": "0fQfi9ntlE4",
+      "title": "リズムゲーム苦手から音楽に乗るまで　Calliopeがつかんだ遊び方",
+      "summaryOneLine": "この配信で面白いのは、Calliopeが苦手意識を消してから遊ぶのではなく、苦手なまま音楽へ乗り、失敗を笑い、物語にも興味を広げていくところです。",
+      "streamType": "game",
+      "publishedAt": "2020-11-05T16:50:57Z",
+      "durationSeconds": 6031,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fQfi9ntlE4/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ocnd2nc9qo",
+      "slug": "mori-calliope-ocnd2nc9qo",
+      "videoId": "-OcnD2Nc9qo",
+      "title": "知らない言葉を自分の記憶へ変える　Mori Calliopeのドイツ語学習3つの足場",
+      "summaryOneLine": "単語の列挙ではなく、未知の言語を覚えるためにCalliopeが使った仮説、語呂、利用場面という三つの足場が分かる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 7073,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-usdgcbosog",
+      "slug": "mori-calliope-usdgcbosog",
+      "videoId": "-UsdGcBoSog",
+      "title": "「もっと武器にできる」が止まらない　Calliopeのゴリラ実況は即席ゲーム設計会議",
+      "summaryOneLine": "笑いの多い短編実況の中で、Calliopeが何に迷い、どの余白を『もっと遊べる』と評価したのかが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 5325,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-yyr5tv3hpe",
+      "slug": "mori-calliope-yyr5tv3hpe",
+      "videoId": "-YyR5TV3hpE",
+      "title": "目標を達成した後、どう休むか　Calliopeが語った創作と努力の距離",
+      "summaryOneLine": "成果を出す努力と、達成を味わう余白をどう両立するか、Calliope本人の振り返りから読める",
+      "streamType": "chatting",
+      "publishedAt": null,
+      "durationSeconds": 7666,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

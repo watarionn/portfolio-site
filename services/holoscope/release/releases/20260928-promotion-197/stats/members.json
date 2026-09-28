@@ -1,0 +1,367 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-09-28T01:20:19Z",
+  "note": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
+  "count": 13,
+  "items": [
+    {
+      "uid": "mem_cecilia_immergreen",
+      "slug": "cecilia-immergreen",
+      "displayName": "Cecilia Immergreen",
+      "activityStatus": "active",
+      "streamCount": 17,
+      "totalDurationSeconds": 181529,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2026-05-20T20:09:48.000Z",
+      "streamSharePercent": 8.6,
+      "streamTypes": [
+        {
+          "value": "chatting",
+          "count": 1
+        },
+        {
+          "value": "event",
+          "count": 3
+        },
+        {
+          "value": "game",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "uid": "mem_elizabeth_rose_bloodflame",
+      "slug": "elizabeth-rose-bloodflame",
+      "displayName": "Elizabeth Rose Bloodflame",
+      "activityStatus": "active",
+      "streamCount": 6,
+      "totalDurationSeconds": 66761,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2025-01-01T19:00:00Z",
+      "streamSharePercent": 3.0,
+      "streamTypes": [
+        {
+          "value": "event",
+          "count": 2
+        },
+        {
+          "value": "game",
+          "count": 3
+        },
+        {
+          "value": "other",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "uid": "mem_fuwamoco",
+      "slug": "fuwamoco",
+      "displayName": "FUWAMOCO",
+      "activityStatus": "active",
+      "streamCount": 35,
+      "totalDurationSeconds": 312847,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2026-05-27T00:56:24.000Z",
+      "streamSharePercent": 17.8,
+      "streamTypes": [
+        {
+          "value": "chatting",
+          "count": 6
+        },
+        {
+          "value": "event",
+          "count": 11
+        },
+        {
+          "value": "game",
+          "count": 14
+        },
+        {
+          "value": "other",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "uid": "mem_gigi_murin",
+      "slug": "gigi-murin",
+      "displayName": "Gigi Murin",
+      "activityStatus": "active",
+      "streamCount": 16,
+      "totalDurationSeconds": 207541,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2026-05-30T04:02:15Z",
+      "streamSharePercent": 8.1,
+      "streamTypes": [
+        {
+          "value": "event",
+          "count": 1
+        },
+        {
+          "value": "game",
+          "count": 13
+        },
+        {
+          "value": "other",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "uid": "mem_hakos_baelz",
+      "slug": "hakos-baelz",
+      "displayName": "Hakos Baelz",
+      "activityStatus": "active",
+      "streamCount": 3,
+      "totalDurationSeconds": 6277,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2024-07-02T02:32:00Z",
+      "streamSharePercent": 1.5,
+      "streamTypes": [
+        {
+          "value": "chatting",
+          "count": 1
+        },
+        {
+          "value": "event",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "uid": "mem_irys",
+      "slug": "irys",
+      "displayName": "IRyS",
+      "activityStatus": "active",
+      "streamCount": 10,
+      "totalDurationSeconds": 129047,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2026-05-03T03:00:41.000Z",
+      "streamSharePercent": 5.1,
+      "streamTypes": [
+        {
+          "value": "event",
+          "count": 2
+        },
+        {
+          "value": "game",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "uid": "mem_koseki_bijou",
+      "slug": "koseki-bijou",
+      "displayName": "Koseki Bijou",
+      "activityStatus": "active",
+      "streamCount": 15,
+      "totalDurationSeconds": 172727,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2026-06-07T18:55:43.000Z",
+      "streamSharePercent": 7.6,
+      "streamTypes": [
+        {
+          "value": "event",
+          "count": 5
+        },
+        {
+          "value": "game",
+          "count": 8
+        },
+        {
+          "value": "other",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "uid": "mem_mori_calliope",
+      "slug": "mori-calliope",
+      "displayName": "Mori Calliope",
+      "activityStatus": "active",
+      "streamCount": 29,
+      "totalDurationSeconds": 306131,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2026-06-02T20:56:36.000Z",
+      "streamSharePercent": 14.7,
+      "streamTypes": [
+        {
+          "value": "chatting",
+          "count": 3
+        },
+        {
+          "value": "event",
+          "count": 7
+        },
+        {
+          "value": "game",
+          "count": 15
+        },
+        {
+          "value": "other",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "uid": "mem_nerissa_ravencroft",
+      "slug": "nerissa-ravencroft",
+      "displayName": "Nerissa Ravencroft",
+      "activityStatus": "active",
+      "streamCount": 12,
+      "totalDurationSeconds": 81008,
+      "collaborationCount": 1,
+      "gameCount": 0,
+      "latestStreamAt": "2026-04-03T02:55:22.000Z",
+      "streamSharePercent": 6.1,
+      "streamTypes": [
+        {
+          "value": "chatting",
+          "count": 2
+        },
+        {
+          "value": "event",
+          "count": 1
+        },
+        {
+          "value": "game",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "uid": "mem_ninomae_inanis",
+      "slug": "ninomae-inanis",
+      "displayName": "Ninomae Ina'nis",
+      "activityStatus": "active",
+      "streamCount": 19,
+      "totalDurationSeconds": 230738,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2026-06-10T23:00:00Z",
+      "streamSharePercent": 9.6,
+      "streamTypes": [
+        {
+          "value": "chatting",
+          "count": 1
+        },
+        {
+          "value": "event",
+          "count": 2
+        },
+        {
+          "value": "game",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "uid": "mem_raora_panthera",
+      "slug": "raora-panthera",
+      "displayName": "Raora Panthera",
+      "activityStatus": "active",
+      "streamCount": 16,
+      "totalDurationSeconds": 149830,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2026-06-11T02:05:13.000Z",
+      "streamSharePercent": 8.1,
+      "streamTypes": [
+        {
+          "value": "chatting",
+          "count": 4
+        },
+        {
+          "value": "event",
+          "count": 3
+        },
+        {
+          "value": "game",
+          "count": 8
+        },
+        {
+          "value": "other",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "uid": "mem_shiori_novella",
+      "slug": "shiori-novella",
+      "displayName": "Shiori Novella",
+      "activityStatus": "active",
+      "streamCount": 11,
+      "totalDurationSeconds": 121171,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2024-02-10T02:31:02Z",
+      "streamSharePercent": 5.6,
+      "streamTypes": [
+        {
+          "value": "event",
+          "count": 2
+        },
+        {
+          "value": "game",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "uid": "mem_takanashi_kiara",
+      "slug": "takanashi-kiara",
+      "displayName": "Takanashi Kiara",
+      "activityStatus": "active",
+      "streamCount": 8,
+      "totalDurationSeconds": 66720,
+      "collaborationCount": 0,
+      "gameCount": 0,
+      "latestStreamAt": "2024-09-13T19:00:00Z",
+      "streamSharePercent": 4.1,
+      "streamTypes": [
+        {
+          "value": "event",
+          "count": 4
+        },
+        {
+          "value": "game",
+          "count": 2
+        },
+        {
+          "value": "other",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "methodology": {
+    "scope": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
+    "thresholds": {
+      "count": "1件以上で表示",
+      "percentage": "母数10件以上で表示",
+      "comparison": "各対象10件以上、比較対象3件以上、欠損率20%未満",
+      "learning": "評価済み5件以上で集計値を表示"
+    },
+    "missingValues": [
+      "0",
+      "null",
+      "unrated",
+      "unknown",
+      "not_applicable"
+    ],
+    "excludedRankings": [
+      "人物能力",
+      "人気",
+      "私的関係"
+    ]
+  }
+}

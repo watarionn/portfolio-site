@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_takanashi_kiara",
+  "slug": "takanashi-kiara",
+  "displayName": "Takanashi Kiara",
+  "nameJa": "小鳥遊キアラ",
+  "channelId": "UCHsx4Hqa-1ORjQTh9TYDhww",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCHsx4Hqa-1ORjQTh9TYDhww",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_s15lgzzk_ek",
+      "slug": "takanashi-kiara-s15lgzzk-ek",
+      "videoId": "S15LgZZk_ek",
+      "title": "Kiaraが新宿で8つのミッションに挑戦　ガチャ、限定アイス、Exit 8探しを完遂",
+      "summaryOneLine": "Kiaraが新宿を歩き回り、ランダムに選んだ8つの課題をすべて達成して最後の告知へつなげる街歩きVlogです。",
+      "streamType": "event",
+      "publishedAt": "2024-09-13T19:00:00Z",
+      "durationSeconds": 1128,
+      "thumbnailUrl": "https://i.ytimg.com/vi/S15LgZZk_ek/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-09",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "Vlog",
+        "日本"
+      ]
+    },
+    {
+      "uid": "str_v-lpb9x8f9cy",
+      "slug": "takanashi-kiara-lpb9x8f9cy",
+      "videoId": "-Lpb9X8F9CY",
+      "title": "カニ姿のKiaraが“新デビュー”　Crabby Wawaがクイズと装備で作った一夜の世界",
+      "summaryOneLine": "単なる衣装披露ではなく、見た目の特徴と言葉遊び、参加型クイズ、小道具がキャラクターの世界観を支えたことが分かる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 3742,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0msmz4rk4k4",
+      "slug": "takanashi-kiara-0msmz4rk4k4",
+      "videoId": "0msmZ4rK4k4",
+      "title": "秒差をそろえ、熱を言葉にする　KiaraとEssieが並走した決勝ウォッチアロング",
+      "summaryOneLine": "この配信の中心は、どちらの予想が正しかったかではありません。",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 13633,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_1bxdzm_uqsa",
+      "slug": "takanashi-kiara-1bxdzm-uqsa",
+      "videoId": "1BXDZM_UQSA",
+      "title": "声を休めながら遊ぶ　Kiaraのサウンドボード通話ゲーム",
+      "summaryOneLine": "勝敗やゲームの手順より、声の制約を配信の掛け合いへ変えた方法と、KoboからCalliope、後半の参加者へ移る空気を読める",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 6854,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_1dpqs8wotys",
+      "slug": "takanashi-kiara-1dpqs8wotys",
+      "videoId": "1Dpqs8WoTYs",
+      "title": "おやつとペンライトで集まる　Calliope公演のオフコラボ同時視聴",
+      "summaryOneLine": "コンサートの演目を再現せず、離れた場所から一緒に応援するオフコラボがどう作られ、終演後にどんな言葉へ着地したかを読める",
+      "streamType": "other",
+      "publishedAt": null,
+      "durationSeconds": 8749,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_1gevceukjx0",
+      "slug": "takanashi-kiara-1gevceukjx0",
+      "videoId": "1GeVceukJX0",
+      "title": "FROGIWAWAが二つの事件へ　KiaraのFrog Detective 1・2",
+      "summaryOneLine": "2作品の筋書きを追う代わりに、役柄を保つKiaraが作品のゆるいユーモアにどう反応し、予想外の結末をどう受け止めたかが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 14720,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 8,
+    "soloCount": 8,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 4
+      },
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 2
+      },
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 2
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/takanashi-kiara/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCHsx4Hqa-1ORjQTh9TYDhww",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

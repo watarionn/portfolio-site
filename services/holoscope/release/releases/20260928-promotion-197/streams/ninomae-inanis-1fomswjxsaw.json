@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_1fomswjxsaw",
+  "slug": "ninomae-inanis-1fomswjxsaw",
+  "videoId": "1fOMSWjxsAw",
+  "title": "テレポートの癖を読む　Inaが『Ender Lilies』のボス戦で重ねた試行錯誤",
+  "originalTitle": "【Ender Lilies】 Begin! 【#1】",
+  "originalUrl": "https://www.youtube.com/watch?v=1fOMSWjxsAw",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 14494,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_ninomae_inanis",
+    "slug": "ninomae-inanis",
+    "displayName": "Ninomae Ina'nis"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "『Ender Lilies』配信の終盤、Ninomae Ina'nisはDark Witch Elaineとのボス戦に挑んだ。初見で押し切ろうとするのではなく、失敗するたびに使うスキルと回避のタイミングを見直していく。",
+  "summaryOneLine": "約4時間の配信から、初見ボスに対して装備を調整し、失敗を重ねながら行動パターンを言語化していくInaの試行錯誤を短く追える",
+  "keyPoints": [
+    "初見の手応えからスキル調整へ",
+    "「あと少し」からパターンを読む",
+    "音楽が消えたことでボス戦を察し、飛行する相手への苦手意識を口にしながら初見の戦闘に入る"
+  ],
+  "articleBodyHtml": "<p>『Ender Lilies』配信の終盤、Ninomae Ina&#x27;nisはDark Witch Elaineとのボス戦に挑んだ。初見で押し切ろうとするのではなく、失敗するたびに使うスキルと回避のタイミングを見直していく。</p>\n<h2>初見の手応えからスキル調整へ</h2>\n<p>03:31:15ごろ、音楽が消えたことからボス戦を察したInaは、相手が飛行しているのを見て苦手意識を口にしながら戦闘へ入る。</p>\n<p>03:34:37ごろには最初の挑戦を振り返り、「悪くなかった」という手応えを見せる一方で、使っているスキルを変更。相手が動き回るため、攻撃を当てやすい構成を探しながら再挑戦していく。</p>\n<h2>「あと少し」からパターンを読む</h2>\n<p>03:45:30ごろには、撃破まであと少しというところまで追い込む。Inaは現在のスキル構成ならいけそうだと判断し、そのまま挑戦を継続する。</p>\n<p>そして03:52:26ごろ、相手がテレポートする流れを声に出して追い始める。「この後にテレポート」と次の動きを予測しながら回避を続け、最後には「I have learned」と手応えを示した。</p>\n<p>その直後、配信は戦闘後の場面へ進み、03:55:08ごろにはDark Witch Elaineのスキル説明が表示される。何度も失敗しながら、装備と相手の動きを一つずつ整理して攻略へつなげたボス戦だった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=1fOMSWjxsAw)</li><li>配信公開日: 未確認</li><li>記事公開日: 2026年9月28日</li><li>記事最終更新日: 2026年9月24日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 12675,
+      "text": "音楽が消えたことでボス戦を察し、飛行する相手への苦手意識を口にしながら初見の戦闘に入る"
+    },
+    {
+      "timestampSeconds": 12877,
+      "text": "最初の挑戦を振り返って手応えを示し、使うスキルを入れ替えて再挑戦する"
+    },
+    {
+      "timestampSeconds": 13530,
+      "text": "あと少しまで追い込み、現在のスキル構成でいけると判断して再挑戦を続ける"
+    },
+    {
+      "timestampSeconds": 13946,
+      "text": "テレポートのタイミングを声に出して追いながら攻撃をかわし、『I have learned』と手応えを示す"
+    },
+    {
+      "timestampSeconds": 14108,
+      "text": "戦闘後にDark Witch Elaineのスキル説明へ移り、ボス戦が決着したことを確認できる"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=1fOMSWjxsAw",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-27T23:47:31Z",
+    "articleUpdatedAt": "2026-09-27T23:47:31Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_xqhkhs2hhxm",
+      "slug": "ninomae-inanis-xqhkhs2hhxm",
+      "videoId": "XQHKHS2hHxM",
+      "title": "Inaの休暇前雑談　Kingdom Hearts IVへの驚きから音楽、食事、Bibooとの外出まで",
+      "summaryOneLine": "Inaが最近気になったゲームと音楽、生活の工夫、Bibooとの外出を落ち着いたテンポで振り返る休暇前雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2026-06-10T23:00:00Z",
+      "durationSeconds": 3831,
+      "thumbnailUrl": "https://i.ytimg.com/vi/XQHKHS2hHxM/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1zxbowmsl_w",
+      "slug": "ninomae-inanis-1zxbowmsl-w",
+      "videoId": "1zXbOwmSL_w",
+      "title": "InaのFilm of the Year予想は「Reze」　Anime of the YearはMy Hero Academiaへ",
+      "summaryOneLine": "3時間超の同時視聴から、最後の大きな2部門を前にInaがどの作品へ心が傾いていたか、その理由とともに短く追える",
+      "streamType": "event",
+      "publishedAt": "2026-05-23T08:03:12.000Z",
+      "durationSeconds": 11010,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0fmux6izsvw",
+      "slug": "ninomae-inanis-0fmux6izsvw",
+      "videoId": "0fmuX6IZsVw",
+      "title": "「自分の好み」だけで決めない　InaがFashion Dreamerで作ったコーデの考え方",
+      "summaryOneLine": "この配信は、かわいい服を次々と選ぶだけの時間ではありません。",
+      "streamType": "game",
+      "publishedAt": "2023-11-17T00:29:46Z",
+      "durationSeconds": 8458,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fmuX6IZsVw/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0h5a1xkuofa",
+      "slug": "ninomae-inanis-0h5a1xkuofa",
+      "videoId": "0h5A1xkuofA",
+      "title": "「分かった」を二人で積み重ねる　InaとAmeliaのPortal 2協力プレイ",
+      "summaryOneLine": "InaとAmeliaの協力プレイは、答えを知っている人が引っ張る配信ではありません。",
+      "streamType": "game",
+      "publishedAt": "2020-12-05T00:47:45Z",
+      "durationSeconds": 5667,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0h5A1xkuofA/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-12",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-idinb_iwu4",
+      "slug": "ninomae-inanis-idinb-iwu4",
+      "videoId": "-IDinB_IWU4",
+      "title": "面接から四天王、チャンピオン戦へ　Inaが『Pokémon Violet』でVictory Roadを完走",
+      "summaryOneLine": "長時間RPG配信で、物語の筋書きではなく、目標設定、戦闘前の準備、節目での判断、視聴者参加へ切り替える時間配分が分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11534,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-xdyw0trtva",
+      "slug": "ninomae-inanis-xdyw0trtva",
+      "videoId": "-XdYW0TRTvA",
+      "title": "思い出す武器と、初めての操作を往復する　InaのMonster Hunter Rise復帰術",
+      "summaryOneLine": "長時間配信を狩猟結果の列挙にせず、復帰プレイヤーが『思い出す』『新しく学ぶ』『比較して選ぶ』をどう切り替えたかが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 22543,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

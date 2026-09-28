@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_1v_vgctvkjm",
+  "slug": "irys-1v-vgctvkjm",
+  "videoId": "1v_vgctvKjM",
+  "title": "「GOYより完走できそう」IRyS、長時間の登山で指が痛くても手応え",
+  "originalTitle": "【A Difficult Game About Climbing】Use Them Hands",
+  "originalUrl": "https://www.youtube.com/watch?v=1v_vgctvKjM",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 24512,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_irys",
+    "slug": "irys",
+    "displayName": "IRyS"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "『A Difficult Game About Climbing』に長時間挑んだIRySは、同じ場所で足止めされながらも、ゲームそのものへの楽しさは失っていなかった。終盤には別の登山ゲームと比べながら、完走への手応えも口にしている。",
+  "summaryOneLine": "6時間超の配信から、停滞と身体的な疲れがあっても挑戦への手応えを失わず、最後は進捗保存を気にしながら区切りをつけるIRySの終盤の心境を追える",
+  "keyPoints": [
+    "詰まっていても「楽しんでる」",
+    "指は痛い、それでも「keep climbing」",
+    "IRySが同じ場所でかなり詰まっているもののゲーム自体は楽しんでいると話す"
+  ],
+  "articleBodyHtml": "<p>『A Difficult Game About Climbing』に長時間挑んだIRySは、同じ場所で足止めされながらも、ゲームそのものへの楽しさは失っていなかった。終盤には別の登山ゲームと比べながら、完走への手応えも口にしている。</p>\n<h2>詰まっていても「楽しんでる」</h2>\n<p>04:59:38ごろ、IRySは「ものすごくこの場所で詰まっている」と認めつつ、それでもゲームを楽しんでいると話した。</p>\n<p>05:00:12ごろには、GOYの方が難しく感じると振り返り、こちらのゲームの方が「finish」できる可能性は高そうだという感触を示す。</p>\n<h2>指は痛い、それでも「keep climbing」</h2>\n<p>05:07:13ごろ、IRySは指が痛く、翌日は手のひらも痛くなりそうだと話す。それでも「Let&#x27;s keep climbing」と言葉を続け、長時間の挑戦を前向きに振り返った。</p>\n<p>05:09:38ごろ、配信を終えるためゲームを閉じる段階になると、今度はオートセーブが気になり始める。「もし全部リセットされたら枕を殴りたい」と冗談を飛ばしながら、保存を信じてゲームを閉じた。</p>\n<p>進めない時間が長くても、最後まで「次は行けそう」という感触を残した登山配信だった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=1v_vgctvKjM)</li><li>配信公開日: 未確認</li><li>記事公開日: 2026年9月28日</li><li>記事最終更新日: 2026年9月24日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 17978,
+      "text": "IRySが同じ場所でかなり詰まっているもののゲーム自体は楽しんでいると話す"
+    },
+    {
+      "timestampSeconds": 18012,
+      "text": "GOYの方が難しく感じ、自分はこちらの方が完走できる可能性が高いと比較する"
+    },
+    {
+      "timestampSeconds": 18433,
+      "text": "指が痛く、翌日は手のひらも痛くなりそうだと話しつつ『keep climbing』と続ける"
+    },
+    {
+      "timestampSeconds": 18578,
+      "text": "ゲームが自動保存されるか確認し、進捗が消えたら枕に当たりたいと冗談を言いながらゲームを閉じる"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=1v_vgctvKjM",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-27T23:47:31Z",
+    "articleUpdatedAt": "2026-09-27T23:47:31Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-whoqyb8dyo",
+      "slug": "irys-whoqyb8dyo",
+      "videoId": "-WHOqyb8dyo",
+      "title": "説明された「力」を走って調整する　IRySのRS50スポンサー配信",
+      "summaryOneLine": "製品仕様の要約ではなく、IRySが説明された機能を実際の運転でどう認識し、自分に合う強さへ調整したかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-05-03T03:00:41.000Z",
+      "durationSeconds": 11825,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v7jnn0ybwd0",
+      "slug": "irys-v7jnn0ybwd0",
+      "videoId": "v7JnN0YBWD0",
+      "title": "IRySのホロお正月CUP2022　直前練習と緊張の中で挑んだMario Kart大会",
+      "summaryOneLine": "ロビー待機から始まり、直前練習で得た感触を頼りに、アイテムが飛び交う大会レースへ挑んだ配信です。",
+      "streamType": "event",
+      "publishedAt": "2022-01-07T04:30:00Z",
+      "durationSeconds": 2237,
+      "thumbnailUrl": "https://i.ytimg.com/vi/v7JnN0YBWD0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2022-01",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "ホロお正月CUP2022",
+        "Mario Kart 8 Deluxe"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-r21ksug8og",
+      "slug": "irys-r21ksug8og",
+      "videoId": "-R21KSUg8Og",
+      "title": "馬小屋から始まる生存圏　IRySがRustで「失わない工夫」を増やした4時間",
+      "summaryOneLine": "4時間を超える配信を、危険を避けるだけでなく損失を小さくしながら次の選択肢を増やすプレイとして理解できる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 15625,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-k2v7odjick",
+      "slug": "irys-k2v7odjick",
+      "videoId": "-k2v7ODJIck",
+      "title": "10分交代が恐怖の引き継ぎになる　IRySとCeciliaの『Amnesia: The Bunker』",
+      "summaryOneLine": "オフコラボの協力が同時操作ではなく、限られた弾薬、経路、セーブ、危険箇所を交代時に共有する引き継ぎとして機能したことが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 8511,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-kchjd4u28a",
+      "slug": "irys-kchjd4u28a",
+      "videoId": "-kchjD4u28A",
+      "title": "「ステルスで行く」が即興へ広がる　IRySが『Dishonored』で見つけた複数の道",
+      "summaryOneLine": "ステルスゲームの選択が、最初の方針を守ることではなく、体力、地形、能力、敵の配置を見て経路を作り直す過程だと分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 17900,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1xcpfgmqbi4",
+      "slug": "irys-1xcpfgmqbi4",
+      "videoId": "1XCpFGMqBI4",
+      "title": "名前とテントから始まる無人島生活　Animal Crossing初回配信の序盤",
+      "summaryOneLine": "長時間の初回配信を、島の名前決め、地形選択、到着後のテント設置、島開きの準備という序盤の節目で追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 18310,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

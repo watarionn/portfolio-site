@@ -204,6 +204,13 @@
       "japaneseName": "AI判断・予測実験室",
       "englishName": "AI Judgement & Prediction Lab",
       "route": "/AI_JUDGEMENT_LAB/"
+    },
+    {
+      "number": "029",
+      "projectId": "osaka-subway-sevens",
+      "japaneseName": "大阪地下鉄七並べ",
+      "englishName": "Subway Sevens",
+      "route": "/OSAKA_SUBWAY_SEVENS/"
     }
   ]
 }

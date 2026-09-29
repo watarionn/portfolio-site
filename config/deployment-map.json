@@ -227,6 +227,11 @@
       "id": "ai-judgement-lab",
       "sourceRoot": "tools/ai-judgement-lab",
       "productionRoot": "AI_JUDGEMENT_LAB"
+    },
+    {
+      "id": "osaka-subway-sevens",
+      "sourceRoot": "works/osaka-subway-sevens",
+      "productionRoot": "OSAKA_SUBWAY_SEVENS"
     }
   ],
   "aliases": [

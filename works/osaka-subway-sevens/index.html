@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="大阪メトロ9路線・109駅のネットワークを七並べのルールへ落とし込んだボードゲーム「大阪地下鉄七並べ」の制作記録。">
+  <title>大阪地下鉄七並べ | 個人大辞典</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Noto+Sans+JP:wght@400;500;600&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="shell masthead__inner">
+      <a href="/">← 個人大辞典</a>
+      <span>WORK 029 / BOARD GAME</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <div class="intro__meta">
+        <p>NETWORK GAME / 2026.09 / v1.2</p>
+        <span>制作実績</span>
+      </div>
+      <div class="intro__body">
+        <div>
+          <h1><span>大阪地下鉄</span><span>七並べ</span></h1>
+          <p class="lead">大阪の地下鉄路線網そのものを盤面にして、「隣の駅へつなぐ」だけで遊べる七並べへ再設計したボードゲーム。</p>
+        </div>
+        <dl class="facts">
+          <div><dt>STATIONS</dt><dd>109駅</dd></div>
+          <div><dt>LINES</dt><dd>9路線</dd></div>
+          <div><dt>PLAYERS</dt><dd>4〜5人</dd></div>
+          <div><dt>START</dt><dd>9駅</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="network shell" aria-labelledby="network-title">
+      <div class="section-label"><span>01</span><h2 id="network-title">路線網が、そのままルールになる</h2></div>
+      <div class="network-board" aria-label="大阪地下鉄七並べの路線接続イメージ">
+        <div class="station station--m start"><b>M17</b><strong>淀屋橋</strong><small>START</small></div>
+        <i class="line line--m line--h"></i>
+        <div class="station station--transfer"><b>M18 / Y13 / C16</b><strong>本町</strong><small>乗換 3</small></div>
+        <i class="line line--m line--h"></i>
+        <div class="station station--m"><b>M19 / N15</b><strong>心斎橋</strong><small>乗換 2</small></div>
+        <i class="line line--c line--v"></i>
+        <div class="station station--c"><b>C17 / K15</b><strong>堺筋本町</strong><small>乗換 2</small></div>
+        <i class="line line--y line--diag"></i>
+        <div class="station station--y"><b>Y12</b><strong>肥後橋</strong><small>四つ橋線</small></div>
+      </div>
+      <p class="caption">START駅から隣接駅へ伸ばし、乗換駅が出ると別路線側にも新しい置き場所が生まれる。カード固有の特殊効果を足すのではなく、実在のネットワーク構造自体をゲーム効果にした。</p>
+    </section>
+
+    <section class="rules shell" aria-labelledby="rules-title">
+      <div class="section-label"><span>02</span><h2 id="rules-title">遊び方</h2></div>
+      <ol class="rule-list">
+        <li><b>9枚のSTART駅</b><p>各路線のSTART駅は開始時から開通済み。残り100枚を4人なら25枚、5人なら20枚ずつ配る。</p></li>
+        <li><b>隣の駅だけ出せる</b><p>手札から、すでに開通している駅に路線上で隣接する駅を1枚出す。出した場所には開通マーカーを置く。</p></li>
+        <li><b>乗換で枝が増える</b><p>乗換駅はどれか1路線から接続できれば出せる。出た瞬間、カードに書かれた全路線側が同時に開通する。</p></li>
+        <li><b>出せない時だけ運休</b><p>任意パスはなし。合法手が1枚もない時だけ「運休」。最初に手札を0枚にしたプレイヤーが勝ち。</p></li>
+      </ol>
+    </section>
+
+    <section class="design shell" aria-labelledby="design-title">
+      <div class="section-label"><span>03</span><h2 id="design-title">設計したもの</h2></div>
+      <div class="design-grid">
+        <article><span>01</span><h3>駅カード 109枚</h3><p>各駅に駅番号、隣接駅、所属路線を持たせ、乗換駅は1枚へ統合。STARTカード9枚を含む全駅をカード化した。</p></article>
+        <article><span>02</span><h3>A2 / A3 ゲームマップ</h3><p>109駅と9路線を一枚の盤面へ配置。駅タイル同士が重ならず、開通マーカーを置いて追跡できるレイアウトを作成。</p></article>
+        <article><span>03</span><h3>ルール＆マップガイド</h3><p>準備、合法手、乗換、運休、勝敗までを2ページに整理。異名駅間を接続しないなど、ゲーム上の境界も明文化した。</p></article>
+        <article><span>04</span><h3>プレイ例と検証</h3><p>4人戦のサンプル対局を作り、40手時点の開通状況を盤面へ反映。乗換分岐や端札の進み方を確認した。</p></article>
+      </div>
+    </section>
+
+    <section class="cards shell" aria-labelledby="cards-title">
+      <div class="section-label"><span>04</span><h2 id="cards-title">カードの情報設計</h2></div>
+      <div class="card-demo">
+        <article class="game-card game-card--start"><span>START</span><p>M17</p><h3>淀屋橋</h3><small>梅田 ← ● → 本町</small><footer>御堂筋線</footer></article>
+        <article class="game-card game-card--transfer"><span>乗換 3</span><p>M18 / Y13 / C16</p><h3>本町</h3><small>3路線を1枚へ統合</small><footer>御堂筋線 / 四つ橋線 / 中央線</footer></article>
+        <article class="game-card"><span>STATION</span><p>C14</p><h3>九条</h3><small>弁天町 ← ● → 阿波座</small><footer>中央線</footer></article>
+      </div>
+      <p class="caption">プレイヤーが「いま出せるか」をカード単体でも判断できるよう、駅番号・前後駅・路線・START/乗換を一枚に集約している。</p>
+    </section>
+
+    <section class="verification">
+      <div class="shell verification__inner">
+        <div class="section-label section-label--light"><span>05</span><h2>v1.2 検証</h2></div>
+        <div class="verification__copy">
+          <p>全109駅・9路線・9STARTをカードマスターと1対1で照合。A2 / A3の盤面では駅タイル同士の重なりを除去し、サンプル対局で開通済み表示と乗換分岐の判別を確認した。</p>
+          <p>次の実物プレイでは、1ゲーム時間、駅を探す時間、端札の重さ、乗換駅の温存が強すぎないかを観察対象にしている。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="archive shell">
+      <p>PRODUCTION NOTE</p>
+      <h2>カード・マップ・ルール・プレイ例まで、遊べる一式として制作。</h2>
+      <p>制作元データは非公開の制作資料として管理し、このページではゲーム設計と制作実績を紹介している。</p>
+      <a href="/#index">作品索引へ戻る ↗</a>
+    </section>
+  </main>
+</body>
+</html>

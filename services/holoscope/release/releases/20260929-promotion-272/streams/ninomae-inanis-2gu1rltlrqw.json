@@ -1,0 +1,236 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_2gu1rltlrqw",
+  "slug": "ninomae-inanis-2gu1rltlrqw",
+  "videoId": "2Gu1RLtLRQw",
+  "title": "カエルはどこ？　InaのMinecraft探索が“frog-strating”になるまで",
+  "originalTitle": "【Minecraft】Find Frog Yes",
+  "originalUrl": "https://www.youtube.com/watch?v=2Gu1RLtLRQw",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 10306,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_ninomae_inanis",
+    "slug": "ninomae-inanis",
+    "displayName": "Ninomae Ina'nis"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Ninomae Ina'nisがMinecraftでカエルを探しに出発。Takodomeを眺め直すところから始まり、目的地を求めて移動するうちに、探索は次第に迷子と寄り道を含む長い旅へ変わっていった。",
+  "summaryOneLine": "拠点への愛着、resource serverを目指す探索、茶色いカエル探しが“frog-strating”になるまでの流れを代表場面で追える",
+  "keyPoints": [
+    "Takodomeから出発",
+    "カエルを求めてresource serverへ",
+    "“frog-strating”"
+  ],
+  "articleBodyHtml": "<p>Ninomae Ina&#x27;nisがMinecraftでカエルを探しに出発。Takodomeを眺め直すところから始まり、目的地を求めて移動するうちに、探索は次第に迷子と寄り道を含む長い旅へ変わっていった。</p>\n<h2>Takodomeから出発</h2>\n<p>00:14:19ごろ、Takodome内部の“brain sakura tree”を見ながら、自分でもかなりうまく作れたと振り返る。火事の心配がなく、見た目も気に入っていると話し、拠点への愛着を見せた。</p>\n<h2>カエルを求めてresource serverへ</h2>\n<p>01:32:50ごろ、更新された場所やfresh chunksを探すため、resource serverへ行く案を口にする。目的はあくまでカエル探しだが、そもそも行き方が分からず、探索そのものがひとつの課題になる。</p>\n<p>01:40:45ごろには動物の多い場所で「Have you seen a brown frog anywhere?」と呼びかけるものの、見つかるのは羊や豚ばかり。カエルが陸上に出現することを聞き、探し方を調整していく。</p>\n<h2>“frog-strating”</h2>\n<p>01:44:32ごろ、なかなか手掛かりが得られず「This is getting frog-strating」と一言。字幕を使って周囲の音を探したり、別の場所へ向かったりと工夫するが、旅はさらに広がっていく。</p>\n<p>目的は単純な「カエル探し」なのに、道中では建築を懐かしみ、ゲームの予定を話し、迷子になり、別の発見にも足を止める。目標へ一直線に進まないところまで含めて、InaらしいMinecraft探索回になった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=2Gu1RLtLRQw)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月28日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 859,
+      "text": "Takodome内部を見ながらbrain sakura treeなどの建築を気に入っていると振り返る"
+    },
+    {
+      "timestampSeconds": 5570,
+      "text": "更新された場所を探すためresource serverへ向かう案を話す"
+    },
+    {
+      "timestampSeconds": 6045,
+      "text": "周囲に茶色いカエルがいないか探し続ける"
+    },
+    {
+      "timestampSeconds": 6272,
+      "text": "探索が難航し“This is getting frog-strating”とこぼす"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=2Gu1RLtLRQw",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-29T09:57:28Z",
+    "articleUpdatedAt": "2026-09-29T09:58:21Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_xqhkhs2hhxm",
+      "slug": "ninomae-inanis-xqhkhs2hhxm",
+      "videoId": "XQHKHS2hHxM",
+      "title": "Inaの休暇前雑談　Kingdom Hearts IVへの驚きから音楽、食事、Bibooとの外出まで",
+      "summaryOneLine": "Inaが最近気になったゲームと音楽、生活の工夫、Bibooとの外出を落ち着いたテンポで振り返る休暇前雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2026-06-10T23:00:00Z",
+      "durationSeconds": 3831,
+      "thumbnailUrl": "https://i.ytimg.com/vi/XQHKHS2hHxM/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1zxbowmsl_w",
+      "slug": "ninomae-inanis-1zxbowmsl-w",
+      "videoId": "1zXbOwmSL_w",
+      "title": "InaのFilm of the Year予想は「Reze」　Anime of the YearはMy Hero Academiaへ",
+      "summaryOneLine": "3時間超の同時視聴から、最後の大きな2部門を前にInaがどの作品へ心が傾いていたか、その理由とともに短く追える",
+      "streamType": "event",
+      "publishedAt": "2026-05-23T08:03:12.000Z",
+      "durationSeconds": 11010,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0fmux6izsvw",
+      "slug": "ninomae-inanis-0fmux6izsvw",
+      "videoId": "0fmuX6IZsVw",
+      "title": "「自分の好み」だけで決めない　InaがFashion Dreamerで作ったコーデの考え方",
+      "summaryOneLine": "この配信は、かわいい服を次々と選ぶだけの時間ではありません。",
+      "streamType": "game",
+      "publishedAt": "2023-11-17T00:29:46Z",
+      "durationSeconds": 8458,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fmuX6IZsVw/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0h5a1xkuofa",
+      "slug": "ninomae-inanis-0h5a1xkuofa",
+      "videoId": "0h5A1xkuofA",
+      "title": "「分かった」を二人で積み重ねる　InaとAmeliaのPortal 2協力プレイ",
+      "summaryOneLine": "InaとAmeliaの協力プレイは、答えを知っている人が引っ張る配信ではありません。",
+      "streamType": "game",
+      "publishedAt": "2020-12-05T00:47:45Z",
+      "durationSeconds": 5667,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0h5A1xkuofA/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-12",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ebnwntfnne",
+      "slug": "ninomae-inanis-ebnwntfnne",
+      "videoId": "-EBNWntFNNE",
+      "title": "「また手に入る」がAwakeningにつながる　InaとKiaraの『Valkyrie Connect』発表",
+      "summaryOneLine": "PR発表の項目列挙ではなく、前回参加者、取り逃した人、新規player、出演者それぞれに次の接点が用意された構造を把握できる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 3097,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-idinb_iwu4",
+      "slug": "ninomae-inanis-idinb-iwu4",
+      "videoId": "-IDinB_IWU4",
+      "title": "面接から四天王、チャンピオン戦へ　Inaが『Pokémon Violet』でVictory Roadを完走",
+      "summaryOneLine": "長時間RPG配信で、物語の筋書きではなく、目標設定、戦闘前の準備、節目での判断、視聴者参加へ切り替える時間配分が分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11534,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

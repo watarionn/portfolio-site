@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://cf278796.cloudfree.jp/holoscope/sitemaps/articles.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://cf278796.cloudfree.jp/holoscope/sitemaps/members.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://cf278796.cloudfree.jp/holoscope/sitemaps/static.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://cf278796.cloudfree.jp/holoscope/sitemaps/streams.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://cf278796.cloudfree.jp/holoscope/sitemaps/topics.xml</loc>
+  </sitemap>
+</sitemapindex>

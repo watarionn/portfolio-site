@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_shiori_novella",
+  "slug": "shiori-novella",
+  "displayName": "Shiori Novella",
+  "nameJa": null,
+  "channelId": "UCgnfPPb9JI3e9A4cXHnWbyg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCgnfPPb9JI3e9A4cXHnWbyg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0xpelt3nfy0",
+      "slug": "shiori-novella-0xpelt3nfy0",
+      "videoId": "0XPeLT3nfy0",
+      "title": "﻿# 拠点巡りからタワー攻略へ　Advent再会のPalworldで広がった一日",
+      "summaryOneLine": "この日のPalworldは、Adventの再会を祝う拠点巡りから始まりました。",
+      "streamType": "game",
+      "publishedAt": "2024-02-10T02:31:02Z",
+      "durationSeconds": 8798,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0XPeLT3nfy0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-02",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-uwgyah6fq0",
+      "slug": "shiori-novella-uwgyah6fq0",
+      "videoId": "-UwgYAh6FQ0",
+      "title": "恐怖より先に「記録」が追いつかない　ShioriがWorld of Horrorで学んだ情報管理",
+      "summaryOneLine": "長時間の物語を短縮せず、Shioriが何を記憶し、何を捨て、いつ戦闘を避けるようになったかという攻略思考が分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 13135,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-eup_sxh20y",
+      "slug": "shiori-novella-eup-sxh20y",
+      "videoId": "-eUP_SxH20Y",
+      "title": "勝てる編成と残したい仲間のあいだで　ShioriのDigimonパーティ再設計",
+      "summaryOneLine": "編成判断が単なる強さ順ではなく、属性の重複、行動順、回復制限、育成待ち、仲間への愛着を状況ごとに調整する作業だと分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 18952,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-huogbqsrxe",
+      "slug": "shiori-novella-huogbqsrxe",
+      "videoId": "-hUOgBQSRXE",
+      "title": "弾丸を撃つか、足場にするか　Shioriの『Squirrel with a Gun』",
+      "summaryOneLine": "同じ道具の意味が戦闘、跳躍、脱出、資源管理へ変わり、プレイヤーが失敗から操作体系を読み解く様子が分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 10331,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-pwzzyrr4us",
+      "slug": "shiori-novella-pwzzyrr4us",
+      "videoId": "-pwzzYrR4us",
+      "title": "「一緒に動く」を3Dで組み立てる　Shioriのイースターフィットネス企画",
+      "summaryOneLine": "3D配信の見栄えだけでなく、視聴者が安全に一緒に動ける声かけ、時間、画面構成、再利用可能なキャラクターが企画を支えると分かる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 6258,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0l5x0tzyykw",
+      "slug": "shiori-novella-0l5x0tzyykw",
+      "videoId": "0L5X0TZYyKw",
+      "title": "戻れる道を先に作る　Shioriの『Cronos: The New Dawn』資源管理",
+      "summaryOneLine": "恐怖への反応ではなく、戻れる状態を先に作ることで探索の損失を抑える判断の連鎖を読める",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 16803,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 14,
+    "soloCount": 14,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 11
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 3
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/shiori-novella/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCgnfPPb9JI3e9A4cXHnWbyg",
+      "checkedAt": "2026-09-13T04:51:44Z"
+    }
+  ],
+  "createdAt": "2026-09-13T04:51:44Z",
+  "updatedAt": "2026-09-13T04:51:44Z"
+}

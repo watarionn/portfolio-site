@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_1eome6dujk0",
+  "slug": "mori-calliope-1eome6dujk0",
+  "videoId": "1eOME6DuJK0",
+  "title": "「離婚無料」のダイナー？『ENigmatic Recollection』で膨らんだ結婚ジョーク",
+  "originalTitle": "【ENigmatic Recollection】death! diner! divorce! #calliolive",
+  "originalUrl": "https://www.youtube.com/watch?v=1eOME6DuJK0",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 12791,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_mori_calliope",
+    "slug": "mori-calliope",
+    "displayName": "Mori Calliope"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "『ENigmatic Recollection』配信では、ゲーム内の人間関係をめぐる会話から「離婚」が繰り返し登場し、ついにはダイナーのサービスのように扱われるほど話が膨らんでいった。この記事では、約2分半にわたって連鎖した結婚・離婚ネタを追う。",
+  "summaryOneLine": "長時間配信から、結婚・離婚ネタが約2分半にわたり連鎖した場面を短く追える",
+  "keyPoints": [
+    "「離婚したくないなら」の提案から始まる",
+    "食事に「無料の離婚」が付いてくる",
+    "最後は「離婚の先触れ」"
+  ],
+  "articleBodyHtml": "<p>『ENigmatic Recollection』配信では、ゲーム内の人間関係をめぐる会話から「離婚」が繰り返し登場し、ついにはダイナーのサービスのように扱われるほど話が膨らんでいった。この記事では、約2分半にわたって連鎖した結婚・離婚ネタを追う。</p>\n<h2>「離婚したくないなら」の提案から始まる</h2>\n<p>00:34:57ごろ、「離婚したくないなら」という前置きから、相手にも同じことをして仕返しすればいいという冗談めいた提案が出る。そこから「互いに許さなければ」という流れになり、会話はゲーム内の関係性を巻き込みながら転がっていった。</p>\n<h2>食事に「無料の離婚」が付いてくる</h2>\n<p>00:35:37ごろには、ダイナーへ来れば食事と一緒に「free divorce」が付くという話にまで発展する。直後にも「無料の離婚を用意している」と繰り返され、離婚が店の売り文句のように扱われる。</p>\n<p>00:36:09ごろには「離婚ビジネスは最近かなり落ち込んでいる」という言葉まで登場。結婚相手を探す話と離婚を勧める話が同時進行し、設定の整理そのものが笑いの種になっていく。</p>\n<h2>最後は「離婚の先触れ」</h2>\n<p>00:37:09ごろ、「私は離婚の先触れだ」という趣旨の宣言が飛び出し、自分が結婚するのは不可能だという話へ着地する。その直後には「私たちは家族みたい」という言葉も続き、結婚、離婚、家族という関係性が次々に組み替えられていった。</p>\n<p>ひとつの冗談を終わらせず、ゲーム内の人物関係へ次々につなげていく。この場面は、長時間配信の中で会話そのものが即興の小ネタへ育っていく様子がよく表れた一幕だった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=1eOME6DuJK0)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月23日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 2097,
+      "text": "離婚したくないなら相手にも同じことをして仕返しするという提案が出る"
+    },
+    {
+      "timestampSeconds": 2137,
+      "text": "ダイナーでは食事にfree divorceが付くという冗談が出る"
+    },
+    {
+      "timestampSeconds": 2169,
+      "text": "divorce businessは最近落ち込んでいるという言葉が出る"
+    },
+    {
+      "timestampSeconds": 2229,
+      "text": "自分をharbinger of divorceと表現する発言が出る"
+    },
+    {
+      "timestampSeconds": 2235,
+      "text": "私たちは家族のようだという言葉が続く"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=1eOME6DuJK0",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-27T23:33:32Z",
+    "articleUpdatedAt": "2026-09-29T09:35:13Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-ps5pxgjneq",
+      "slug": "mori-calliope-ps5pxgjneq",
+      "videoId": "-Ps5pxGJNEQ",
+      "title": "「遊びたい」は映像のどこから生まれる？　CalliopeとBijouのState of Play観察軸",
+      "summaryOneLine": "発表タイトルの一覧ではなく、二人が映像のどこを見て『遊びたい』へ判断を進めたかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-06-02T20:56:36.000Z",
+      "durationSeconds": 4836,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0eghejywaey",
+      "slug": "mori-calliope-0eghejywaey",
+      "videoId": "0eghejYwaeY",
+      "title": "100万再生祝いはゲームから音楽の夢へ　Calliope×syudouの対談配信",
+      "summaryOneLine": "ゲームを遊びながら100万再生を祝うだけでなく、音楽家同士が次の目標を言葉にしていく配信でした。",
+      "streamType": "event",
+      "publishedAt": "2025-05-23T11:19:20Z",
+      "durationSeconds": 4467,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0eghejYwaeY/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0fqfi9ntle4",
+      "slug": "mori-calliope-0fqfi9ntle4",
+      "videoId": "0fQfi9ntlE4",
+      "title": "リズムゲーム苦手から音楽に乗るまで　Calliopeがつかんだ遊び方",
+      "summaryOneLine": "この配信で面白いのは、Calliopeが苦手意識を消してから遊ぶのではなく、苦手なまま音楽へ乗り、失敗を笑い、物語にも興味を広げていくところです。",
+      "streamType": "game",
+      "publishedAt": "2020-11-05T16:50:57Z",
+      "durationSeconds": 6031,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fQfi9ntlE4/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-e3x1jaebdo",
+      "slug": "mori-calliope-e3x1jaebdo",
+      "videoId": "-E3x1JAEbdo",
+      "title": "別々のtutorialが「4人で遊びたい」に変わる　CalliopeとIRySの『Warframe』初日",
+      "summaryOneLine": "長く続くgameの情報量を網羅せず、初心者二人が何を一緒に学び、協力playへどう移ったかを追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11690,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ocnd2nc9qo",
+      "slug": "mori-calliope-ocnd2nc9qo",
+      "videoId": "-OcnD2Nc9qo",
+      "title": "知らない言葉を自分の記憶へ変える　Mori Calliopeのドイツ語学習3つの足場",
+      "summaryOneLine": "単語の列挙ではなく、未知の言語を覚えるためにCalliopeが使った仮説、語呂、利用場面という三つの足場が分かる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 7073,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-usdgcbosog",
+      "slug": "mori-calliope-usdgcbosog",
+      "videoId": "-UsdGcBoSog",
+      "title": "「もっと武器にできる」が止まらない　Calliopeのゴリラ実況は即席ゲーム設計会議",
+      "summaryOneLine": "笑いの多い短編実況の中で、Calliopeが何に迷い、どの余白を『もっと遊べる』と評価したのかが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 5325,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

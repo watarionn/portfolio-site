@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_2jhj35ka-oy",
+  "slug": "nerissa-ravencroft-2jhj35ka-oy",
+  "videoId": "2Jhj35kA-OY",
+  "title": "1万歩を目指してWalk & Talk　NerissaがMocopiを試した夜",
+  "originalTitle": "We're walking on the beach~ | Walk & Talk",
+  "originalUrl": "https://www.youtube.com/watch?v=2Jhj35kA-OY",
+  "streamType": "chatting",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 7494,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_nerissa_ravencroft",
+    "slug": "nerissa-ravencroft",
+    "displayName": "Nerissa Ravencroft"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Nerissa Ravencroftがwalking padで歩きながら雑談。新しい衣装モデルを見せ、Mocopiの動きを試し、家族との今後の配信まで話題が広がっていく。歩くこと自体が雑談のリズムになった回だ。",
+  "summaryOneLine": "歩きながらのモデル披露、Mocopiの試行錯誤、父とのQ&A配信予告、歩数確認までを代表場面で追える",
+  "keyPoints": [
+    "1万歩を目標に歩く",
+    "父とのQ&A配信を予告",
+    "Mocopiは「試した」で一区切り"
+  ],
+  "articleBodyHtml": "<p>Nerissa Ravencroftがwalking padで歩きながら雑談。新しい衣装モデルを見せ、Mocopiの動きを試し、家族との今後の配信まで話題が広がっていく。歩くこと自体が雑談のリズムになった回だ。</p>\n<h2>1万歩を目標に歩く</h2>\n<p>00:17:47ごろ、「10,000 steps」を目指しながら衣装の見え方を説明。歩き続ける動きとモデル披露がひとつになり、通常の座った雑談とは違う見せ方になっていた。</p>\n<h2>父とのQ&amp;A配信を予告</h2>\n<p>00:20:41ごろ、今月どこかで父が自分の配信に来る予定だと話す。900K到達にも触れつつ、内容はシンプルなQ&amp;Aにする考えで、視聴者から父への質問を募る予定だと説明した。</p>\n<h2>Mocopiは「試した」で一区切り</h2>\n<p>00:23:22ごろには、それまで使っていたMocopiについて「we tried」と振り返る。少しは動いたものの、その時点ではうまく協調しなくなったため使用を止める判断に。動きが崩れる様子まで含めて、試行そのものが雑談の一部になった。</p>\n<h2>2,300歩まで進行</h2>\n<p>00:28:16ごろに歩数を確認すると2,300 steps。配信前にも動いていたため厳密な開始時点の歩数ではないとしつつ、そのままwalking padで話を続けていく。</p>\n<p>衣装を見せるだけでも、運動だけでもない。歩きながらモデルを試し、機材の挙動に笑い、次の家族配信まで話が枝分かれしていくところに、このWalk &amp; Talkらしいゆるい広がりがあった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=2Jhj35kA-OY)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月28日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 1067,
+      "text": "walking padで10,000 stepsを目指しつつ衣装について説明する"
+    },
+    {
+      "timestampSeconds": 1241,
+      "text": "今月どこかで父が配信に来る予定でQ&Aを考えていると話す"
+    },
+    {
+      "timestampSeconds": 1402,
+      "text": "Mocopiを試したが安定しないためこの時点で使用を止める"
+    },
+    {
+      "timestampSeconds": 1696,
+      "text": "歩数を確認し2,300 stepsまで進んだと話す"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=2Jhj35kA-OY",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-29T09:57:28Z",
+    "articleUpdatedAt": "2026-09-29T09:58:21Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_1p-b4c7twsu",
+      "slug": "nerissa-ravencroft-1p-b4c7twsu",
+      "videoId": "1p-b4c7TwsU",
+      "title": "1回でSSR3人、それでも持ち帰れない　NerissaがStarSaviorで「ガチャを回す喜び」を満喫",
+      "summaryOneLine": "約1時間の案件配信から、Nerissaの大当たりガチャと、自分のアカウントではないことへの惜しさ、ゲームへの興味までをまとめて追える",
+      "streamType": "game",
+      "publishedAt": "2026-04-03T02:55:22.000Z",
+      "durationSeconds": 3935,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_vomhneyv_m",
+      "slug": "nerissa-ravencroft-vomhneyv-m",
+      "videoId": "_vOMhneYv_M",
+      "title": "NerissaとInaがAmiAmiでクリスマスギフト探し　店内を巡って見つけた「相手らしい一品」",
+      "summaryOneLine": "AmiAmiの豊富な商品を見ながら、二人が相手や仲間を思い浮かべてクリスマスギフトを選ぶ買い物企画です。",
+      "streamType": "event",
+      "publishedAt": "2025-12-25T02:30:00Z",
+      "durationSeconds": 759,
+      "thumbnailUrl": "https://i.ytimg.com/vi/_vOMhneYv_M/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [
+        {
+          "uid": "mem_ninomae_inanis",
+          "slug": "ninomae-inanis",
+          "displayName": "Ninomae Ina'nis"
+        }
+      ],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "collab",
+      "month": "2025-12",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "PR",
+        "AmiAmi",
+        "クリスマス"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-bff3e6yjwy",
+      "slug": "nerissa-ravencroft-bff3e6yjwy",
+      "videoId": "-BFf3e6YJwY",
+      "title": "「witch」は仮面か記憶か　NerissaのENRecoで呼び名の意味が変わるまで",
+      "summaryOneLine": "長いENReco配信のquest羅列ではなく、『witch』という一語の意味がroleplayと物語情報の両側から変化する構造を追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 16468,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-fyftew0lwm",
+      "slug": "nerissa-ravencroft-fyftew0lwm",
+      "videoId": "-FyFTEw0lwM",
+      "title": "「Charが気になる」から宇宙世紀へ　Nerissaの『Gundam The Origin』watchalong",
+      "summaryOneLine": "作品の筋書き要約ではなく、知識がない状態からシリーズへ入るときに、人物への関心、分からない用語への質問、感情の追跡をどう足場にできるかが分かる",
+      "streamType": "other",
+      "publishedAt": null,
+      "durationSeconds": 27709,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-itmhasmfay",
+      "slug": "nerissa-ravencroft-itmhasmfay",
+      "videoId": "-ITmHaSMFAY",
+      "title": "『NARUTO』が居場所への道を作った　Nerissaが雑談の最後に語った原点",
+      "summaryOneLine": "感想の羅列ではなく、Nerissaにとって一つの作品がどのように他者とつながる足場になったのかが分かる",
+      "streamType": "chatting",
+      "publishedAt": null,
+      "durationSeconds": 9032,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-p05eg6in4e",
+      "slug": "nerissa-ravencroft-p05eg6in4e",
+      "videoId": "-P05eG6iN4E",
+      "title": "怖いから走る、分からないから見直す　Nerissaの初『Resident Evil』が変えた探索",
+      "summaryOneLine": "筋書きの短縮ではなく、初見プレイヤーが恐怖、操作不足、観察をどう往復して前進したかが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 9214,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

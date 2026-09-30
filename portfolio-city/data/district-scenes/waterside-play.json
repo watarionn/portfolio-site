@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "districtId": "waterside-play",
+  "source": {
+    "driveFileId": "1hABwB5mAHumsUMjQnw6WgOTnj831A5xJ",
+    "fileName": "waterside-play-production-art-accepted-20260930.png",
+    "width": 1536,
+    "height": 1024,
+    "coordinateSpace": "source-pixels"
+  },
+  "slots": [
+    {
+      "slotId": "WP-01",
+      "state": "active",
+      "projectId": "aquarium",
+      "label": "市立水族館",
+      "polygon": [
+        [
+          486,
+          188
+        ],
+        [
+          763,
+          183
+        ],
+        [
+          886,
+          291
+        ],
+        [
+          892,
+          506
+        ],
+        [
+          822,
+          565
+        ],
+        [
+          535,
+          566
+        ],
+        [
+          457,
+          497
+        ],
+        [
+          459,
+          302
+        ]
+      ],
+      "focus": [
+        674,
+        380
+      ]
+    },
+    {
+      "slotId": "WP-02",
+      "state": "active",
+      "projectId": "holoca",
+      "label": "カードショップ",
+      "polygon": [
+        [
+          65,
+          420
+        ],
+        [
+          345,
+          411
+        ],
+        [
+          450,
+          544
+        ],
+        [
+          449,
+          713
+        ],
+        [
+          341,
+          754
+        ],
+        [
+          82,
+          731
+        ],
+        [
+          37,
+          645
+        ]
+      ],
+      "focus": [
+        250,
+        586
+      ]
+    },
+    {
+      "slotId": "WP-03",
+      "state": "active",
+      "projectId": "word-generator",
+      "label": "ゲームショップ",
+      "polygon": [
+        [
+          1190,
+          505
+        ],
+        [
+          1447,
+          501
+        ],
+        [
+          1518,
+          613
+        ],
+        [
+          1517,
+          797
+        ],
+        [
+          1433,
+          838
+        ],
+        [
+          1180,
+          816
+        ],
+        [
+          1139,
+          692
+        ]
+      ],
+      "focus": [
+        1334,
+        674
+      ]
+    },
+    {
+      "slotId": "WP-04",
+      "state": "reserved",
+      "projectId": null,
+      "label": null,
+      "polygon": [
+        [
+          77,
+          65
+        ],
+        [
+          304,
+          65
+        ],
+        [
+          343,
+          174
+        ],
+        [
+          324,
+          292
+        ],
+        [
+          229,
+          317
+        ],
+        [
+          83,
+          288
+        ],
+        [
+          50,
+          191
+        ]
+      ],
+      "focus": [
+        190,
+        188
+      ]
+    },
+    {
+      "slotId": "WP-05",
+      "state": "reserved",
+      "projectId": null,
+      "label": null,
+      "polygon": [
+        [
+          1085,
+          345
+        ],
+        [
+          1254,
+          342
+        ],
+        [
+          1325,
+          417
+        ],
+        [
+          1309,
+          551
+        ],
+        [
+          1195,
+          576
+        ],
+        [
+          1081,
+          534
+        ],
+        [
+          1045,
+          438
+        ]
+      ],
+      "focus": [
+        1185,
+        455
+      ]
+    },
+    {
+      "slotId": "WP-06",
+      "state": "reserved",
+      "projectId": null,
+      "label": null,
+      "polygon": [
+        [
+          1245,
+          119
+        ],
+        [
+          1387,
+          126
+        ],
+        [
+          1430,
+          223
+        ],
+        [
+          1410,
+          339
+        ],
+        [
+          1330,
+          368
+        ],
+        [
+          1243,
+          328
+        ],
+        [
+          1208,
+          224
+        ]
+      ],
+      "focus": [
+        1320,
+        239
+      ]
+    }
+  ],
+  "interaction": {
+    "reservedInteractive": false,
+    "labelsBakedIntoArt": false
+  }
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio City - Waterside Single-Scene S4</title>
+  <link rel="stylesheet" href="./prototype.css">
+</head>
+<body>
+  <main class="s4-shell">
+    <header class="s4-header">
+      <p class="eyebrow">Phase 4 / District Single-Scene S4</p>
+      <h1>Waterside Play</h1>
+      <p>完成した地区絵を一枚のsceneとして表示し、作品建物の意味だけをsemantic hotspotとして重ねる。</p>
+    </header>
+
+    <section class="district-frame" aria-labelledby="district-heading">
+      <div class="district-frame__heading">
+        <div>
+          <p class="eyebrow">Finished illustration + semantic project layer</p>
+          <h2 id="district-heading">水辺・遊び地区</h2>
+        </div>
+        <p>Aquarium S1 Production LockをSingle-Sceneへflattenした技術・画質検証。</p>
+      </div>
+
+      <div class="district-viewport" id="district-viewport" tabindex="0" aria-label="Waterside Play 地区シーン">
+        <div class="district-scene" id="district-scene">
+          <img id="district-image" class="district-scene__image" alt="" width="1672" height="941" decoding="async">
+          <svg id="project-hotspots" class="project-hotspots" viewBox="0 0 1672 941" aria-label="作品建物"></svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-preview" id="project-preview" hidden aria-labelledby="project-title">
+      <p class="eyebrow">Project preview</p>
+      <h2 id="project-title" tabindex="-1"></h2>
+      <p class="project-preview__building" id="project-building"></p>
+      <p id="project-summary"></p>
+      <dl>
+        <div><dt>TYPE</dt><dd id="project-type"></dd></div>
+        <div><dt>DISTRICT</dt><dd>Waterside Play</dd></div>
+      </dl>
+      <div class="project-preview__actions">
+        <a id="project-route" href="#">作品を見る</a>
+        <button type="button" id="close-preview">閉じる</button>
+      </div>
+    </section>
+
+    <aside class="debug-panel" aria-label="S4 debug information">
+      <strong>S4 debug</strong>
+      <span>scene: <b id="debug-scene">loading</b></span>
+      <span>images: <b id="debug-images">-</b></span>
+      <span>hotspots: <b id="debug-hotspots">-</b></span>
+      <span>project: <b id="debug-project">none</b></span>
+    </aside>
+
+    <p class="sr-only" id="status" aria-live="polite"></p>
+  </main>
+  <script src="./prototype.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "checkpoint": "World Reveal / Cloud Prototype S3",
+  "date": "2026-09-30",
+  "status": "PASS",
+  "canonicalReveal": {
+    "publishedCells": [
+      "H05",
+      "G06",
+      "I06",
+      "H07"
+    ],
+    "publishedHotspotCount": 4,
+    "states": [
+      "PUBLISHED",
+      "NEAR_FRONTIER",
+      "UNPUBLISHED",
+      "UNRESOLVED"
+    ]
+  },
+  "rendering": {
+    "baseWorldImageCount": 1,
+    "tileNodeCount": 0,
+    "logicalCellUiCount": 0,
+    "unresolvedCloudBankCount": 5,
+    "atmosphereAriaHidden": true,
+    "atmospherePointerEvents": "none",
+    "geometryCrossesLogicalCellBoundaries": true
+  },
+  "revealPreview": {
+    "cell": "J05",
+    "canonicalPublicationChanged": false,
+    "hotspotAdded": false,
+    "baseImageChanged": false,
+    "cameraChanged": false,
+    "hotspotGeometryChanged": false,
+    "publishedCountChanged": false
+  },
+  "viewports": {
+    "390": {
+      "breakpoint": "mobile",
+      "entryCamera": [
+        0.47,
+        0.46
+      ],
+      "pass": true,
+      "revealChangedPixelRatio": 0.0352,
+      "revealDiffBboxNorm": [
+        0.623,
+        0,
+        0.997,
+        0.334
+      ],
+      "revealDiffCentroidNorm": [
+        0.903,
+        0.168
+      ]
+    },
+    "820": {
+      "breakpoint": "tablet",
+      "entryCamera": [
+        0.475,
+        0.47
+      ],
+      "pass": true,
+      "revealChangedPixelRatio": 0.182,
+      "revealDiffBboxNorm": [
+        0.541,
+        0,
+        0.999,
+        0.886
+      ],
+      "revealDiffCentroidNorm": [
+        0.843,
+        0.327
+      ]
+    },
+    "1440": {
+      "breakpoint": "desktop",
+      "entryCamera": [
+        0.475,
+        0.465
+      ],
+      "pass": true,
+      "revealChangedPixelRatio": 0.1974,
+      "revealDiffBboxNorm": [
+        0.551,
+        0,
+        0.999,
+        0.912
+      ],
+      "revealDiffCentroidNorm": [
+        0.825,
+        0.339
+      ]
+    }
+  },
+  "interaction": {
+    "desktopPointerPan": {
+      "before": [
+        0.475,
+        0.465
+      ],
+      "panned": [
+        0.5073,
+        0.4506
+      ],
+      "afterRevealSwitch": [
+        0.5073,
+        0.4506
+      ],
+      "pass": true
+    },
+    "mobileTouchPan": {
+      "note": "Final probe begins in the visible upper portion of the map. The earlier lower probe was outside the 390px viewport after S3 controls increased page offset.",
+      "before": [
+        0.47,
+        0.46
+      ],
+      "after": [
+        0.4415,
+        0.4793
+      ],
+      "pass": true
+    },
+    "keyboardDistrictSelection": true,
+    "returnFocusRestoration": true
+  },
+  "decision": {
+    "atmosphereIndependentFromWorldImage": true,
+    "renderCellsAsFog": false,
+    "currentW0ProfileAcceptedForTechnicalPrototype": true,
+    "J05LocalRevealMechanismAccepted": true,
+    "finalCloudArtApproved": false,
+    "productionCutoverApproved": false,
+    "nextCheckpoint": "Phase 4 - District Single-Scene formalization"
+  }
+}

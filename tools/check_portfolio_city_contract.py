@@ -9,12 +9,10 @@ CITY = ROOT / "portfolio-city"
 
 EXPECTED_DISTRICTS = {
     "observatory-hill": {"holoscope", "sphere", "prime-dot-art"},
-    "archive-street": {"yorei", "actress-finder", "cheatsheet", "shisha", "mkpdf-studio", "s3-upload-audit"},
-    "workshop-alley": {"dqb2", "madori", "maze-maker", "anagram", "mindmap-maker", "ai-creation-workbench", "python-music-lab"},
+    "archive-street": {"yorei", "actress-finder", "cheatsheet", "shisha"},
+    "workshop-alley": {"dqb2", "madori", "maze-maker", "anagram"},
     "waterside-play": {"aquarium", "holoca", "word-generator"},
 }
-
-FALLBACK_BUILDINGS = {"python-music-lab"}
 
 ENVIRONMENT_ASSETS = {
     "mountains.svg", "cloud.svg", "tree-cluster.svg", "fountain.svg",
@@ -29,15 +27,10 @@ EXPECTED_ROUTES = {
     "actress-finder": "/OTHER/actress_finder.html",
     "cheatsheet": "/CHEATSHEET/",
     "shisha": "/SHISHA/",
-    "mkpdf-studio": "/MKPDF_STUDIO/",
-    "s3-upload-audit": "/S3_UPLOAD_AUDIT/",
     "dqb2": "/DQB2/dqb2.html",
     "madori": "/MADORI/madori.html",
     "maze-maker": "/MAZE_MAKER/maze_maker.html",
     "anagram": "/ANAGRAM/anagram.html",
-    "mindmap-maker": "/MINDMAP_MAKER/",
-    "ai-creation-workbench": "/AI_CREATION_WORKBENCH/",
-    "python-music-lab": "/PYTHON_MUSIC_LAB/",
     "aquarium": "/AQUARIUM/aquarium.php",
     "holoca": "/HOLOCA/holoca.html",
     "word-generator": "/WORD_GENERATOR/word_generator.html",
@@ -88,8 +81,8 @@ def main() -> int:
 
     projects = project_payload.get("projects")
     districts = district_payload.get("districts")
-    if not isinstance(projects, list) or len(projects) != 19:
-        fail("exactly 19 projects are required")
+    if not isinstance(projects, list) or len(projects) != 14:
+        fail("exactly 14 projects are required")
     if not isinstance(districts, list) or len(districts) != 4:
         fail("exactly 4 districts are required")
 
@@ -99,11 +92,9 @@ def main() -> int:
 
     project_ids = [item.get("id") for item in projects if isinstance(item, dict)]
     if len(project_ids) != len(set(project_ids)) or set(project_ids) != set(EXPECTED_ROUTES):
-        fail("project IDs differ from the current 19-work inventory")
+        fail("project IDs differ from the locked 14-work inventory")
 
     for project_id in EXPECTED_ROUTES:
-        if project_id in FALLBACK_BUILDINGS:
-            continue
         svg_path = CITY / "assets/buildings" / f"{project_id}.svg"
         if not svg_path.is_file():
             fail(f"missing illustrated building asset: {project_id}.svg")
@@ -132,7 +123,7 @@ def main() -> int:
         if route != EXPECTED_ROUTES[project_id]:
             fail(f"route changed for {project_id}: {route}")
         if route.startswith("/SECRET/"):
-            fail("SECRET must not be part of the 19-work city inventory")
+            fail("SECRET must not be part of the 14-work city inventory")
         for required in ("title", "building", "type", "summary", "order"):
             if project.get(required) in (None, ""):
                 fail(f"{project_id} is missing {required}")
@@ -157,11 +148,11 @@ def main() -> int:
         if not image or not (CITY / image).is_file():
             fail(f"missing registered terrain asset for chunk {chunk.get('id')}: {image}")
     placements = layout_payload.get("projectPlacements")
-    if not isinstance(placements, list) or len(placements) != 19:
+    if not isinstance(placements, list) or len(placements) != 14:
         fail("map-layout must contain exactly one placement per current project")
     placement_ids = [item.get("projectId") for item in placements if isinstance(item, dict)]
     if set(placement_ids) != set(EXPECTED_ROUTES) or len(placement_ids) != len(set(placement_ids)):
-        fail("map-layout placements must match the current 19-work inventory exactly once")
+        fail("map-layout placements must match the locked 14-work inventory exactly once")
     if any(item.get("anchor") != "bottom-center" for item in placements):
         fail("all Phase 3.5 project placements must use bottom-center anchors")
     regions = layout_payload.get("districtRegions")
@@ -180,7 +171,7 @@ def main() -> int:
         fail("Portfolio City HERO/status block must remain removed")
 
     world_js = (CITY / "world-hierarchy-shell.js").read_text(encoding="utf-8")
-    for marker in ("terrainManifest", "world-master-tile", "world-h2-viewport", "world-map-frame", "world-map-frame__matte", "world-map-frame__corner", "world-district-card", "openDistrictCard", "closeDistrictCard", "bindDistrictCardAccessibility", "districtCardOpen", "aria-haspopup", "aria-expanded", "preventScroll", "--district-card-mobile-top", "enabled: true"):
+    for marker in ("terrainManifest", "world-master-tile", "world-h2-viewport", "world-map-frame", "world-map-frame__matte", "world-map-frame__corner", "world-district-card", "openDistrictCard", "closeDistrictCard", "bindDistrictCardAccessibility", "districtCardOpen", "district-page", "district-project-card", "district-page__nav", "DISTRICT PROJECTS", "作品を見る", "aria-haspopup", "aria-expanded", "preventScroll", "--district-card-mobile-top", "enabled: true"):
         if marker not in world_js:
             fail(f"world-hierarchy-shell.js is missing canonical world behavior: {marker}")
     if "world39" in world_js:
@@ -197,13 +188,11 @@ def main() -> int:
             fail(f"city.js must not use inline mobile image variable: {forbidden}")
 
     css = (CITY / "city.css").read_text(encoding="utf-8")
-    for marker in ("@media (max-width: 680px)", "@media (prefers-reduced-motion: reduce)", ".panel-heading--map", ".city-panel--map", ".world-map-frame", ".world-map-frame__matte", ".world-map-frame__corner", ".world-district-card", ".world-district-card__actions", "position: sticky", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark", ".district-scene", ".is-active-district", ".city-map__street-label", ".district__progress", ".map-legend", ".district__complete", ".is-complete-district", "@media (min-width: 981px)", ".city-map__path", ".city-map__shoreline", ".district-scene__tree", ".project-inspector.is-open", ".project-inspector__close", "pointer-events: none", ".city-art__mountains", ".city-art__tree-cluster", ".city-art__person", "Phase 3.4 / Checkpoint 2", "--project-image", ".project-inspector__visual", ".work-row__thumb"):
+    for marker in ("@media (max-width: 680px)", "@media (max-width: 900px)", "@media (prefers-reduced-motion: reduce)", ".panel-heading--map", ".city-panel--map", ".world-map-frame", ".world-map-frame__matte", ".world-map-frame__corner", ".world-district-card", ".world-district-card__actions", ".district-page", ".district-page__hero", ".district-project-grid", ".district-project-card", ".district-page__nav", "position: sticky", ".district--north", ".district--south", ".city-map__road--spine", ".city-map__bridge", ".district-landmark", ".district-scene", ".is-active-district", ".city-map__street-label", ".district__progress", ".map-legend", ".district__complete", ".is-complete-district", "@media (min-width: 981px)", ".city-map__path", ".city-map__shoreline", ".district-scene__tree", ".project-inspector.is-open", ".project-inspector__close", "pointer-events: none", ".city-art__mountains", ".city-art__tree-cluster", ".city-art__person", "Phase 3.4 / Checkpoint 2", "--project-image", ".project-inspector__visual", ".work-row__thumb"):
         if marker not in css:
             fail(f"city.css is missing required responsive/map rule: {marker}")
 
     for project_id in EXPECTED_ROUTES:
-        if project_id in FALLBACK_BUILDINGS:
-            continue
         if f'data-project-id="{project_id}"' not in css:
             fail(f"city.css is missing a distinct building rule for {project_id}")
         if f'assets/buildings/{project_id}.svg' not in css:
@@ -214,11 +203,11 @@ def main() -> int:
     if matches != [{"id": "portfolio-city", "sourceRoot": "portfolio-city", "productionRoot": "portfolio-city"}]:
         fail("deployment map must contain exactly one portfolio-city entry")
 
-    local_gate = (ROOT / "scripts/Test-MergeReadiness.ps1").read_text(encoding="utf-8-sig")
-    if "node tools/check_portfolio_city_runtime.mjs" not in local_gate:
-        fail("local merge gate must run the Portfolio City runtime contract")
+    validation_workflow = (ROOT / ".github/workflows/validate-public.yml").read_text(encoding="utf-8")
+    if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
+        fail("validate-public workflow must run the Portfolio City runtime contract")
 
-    print("Portfolio City Phase 4 P4-F contract passed: release-candidate world UI / district flow / mobile bottom sheet")
+    print("Portfolio City Phase 5 P5-A contract passed: district-page foundation / project cards / named district navigation")
     return 0
 
 

@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "checkpoint": "World Single-Image vs Tile measurement S2",
+  "date": "2026-09-30",
+  "networkProfile": {
+    "latencyMs": 30,
+    "downloadBytesPerSec": 2500000,
+    "uploadBytesPerSec": 1250000,
+    "note": "Edge headless, cache disabled for cold network runs"
+  },
+  "sourceAssets": {
+    "masterJpeg8192": {
+      "width": 8192,
+      "height": 6144,
+      "fileBytes": 14278125,
+      "decodedRgbaMiB": 192
+    },
+    "tileSet": {
+      "count": 192,
+      "tileWidth": 512,
+      "tileHeight": 512,
+      "totalFileBytes": 3833926,
+      "decodedRgbaMiB": 192
+    },
+    "webp": {
+      "4096x3072": {
+        "quality": 84,
+        "fileBytes": 1273750,
+        "decodedRgbaMiB": 48
+      },
+      "3072x2304": {
+        "quality": 84,
+        "fileBytes": 914144,
+        "decodedRgbaMiB": 27
+      },
+      "2048x1536": {
+        "quality": 84,
+        "fileBytes": 579518,
+        "decodedRgbaMiB": 12
+      }
+    },
+    "avif": {
+      "4096x3072": {
+        "quality": 62,
+        "fileBytes": 822682,
+        "decodedRgbaMiB": 48
+      },
+      "3072x2304": {
+        "quality": 62,
+        "fileBytes": 610913,
+        "decodedRgbaMiB": 27
+      },
+      "2048x1536": {
+        "quality": 62,
+        "fileBytes": 396445,
+        "decodedRgbaMiB": 12
+      }
+    }
+  },
+  "browserBenchmarkAverageAcross1440_820_390": {
+    "tile192": {
+      "imageMiB": 3.601,
+      "imageRequests": 188,
+      "decodedRgbaMiB": 188,
+      "domNodes": 273,
+      "interactionReadyMs": 172.4,
+      "lastImageResponseEndMs": 2581.9,
+      "panP95Ms": 16.87
+    },
+    "masterJpeg8192": {
+      "imageMiB": 13.617,
+      "imageRequests": 1,
+      "decodedRgbaMiB": 192,
+      "domNodes": 59,
+      "interactionReadyMs": 228.4,
+      "lastImageResponseEndMs": 6450,
+      "panP95Ms": 16.81
+    },
+    "webp4096": {
+      "imageMiB": 1.215,
+      "imageRequests": 1,
+      "decodedRgbaMiB": 48,
+      "domNodes": 59,
+      "interactionReadyMs": 199.8,
+      "lastImageResponseEndMs": 795,
+      "panP95Ms": 16.8
+    },
+    "webp3072": {
+      "imageMiB": 0.872,
+      "imageRequests": 1,
+      "decodedRgbaMiB": 27,
+      "domNodes": 59,
+      "interactionReadyMs": 196.8,
+      "lastImageResponseEndMs": 639,
+      "panP95Ms": 16.81
+    },
+    "webp2048": {
+      "imageMiB": 0.553,
+      "imageRequests": 1,
+      "decodedRgbaMiB": 12,
+      "domNodes": 59,
+      "interactionReadyMs": 201.1,
+      "lastImageResponseEndMs": 515.7,
+      "panP95Ms": 16.85
+    },
+    "avif4096": {
+      "imageMiB": 0.785,
+      "imageRequests": 1,
+      "decodedRgbaMiB": 48,
+      "domNodes": 59,
+      "interactionReadyMs": 200.8,
+      "lastImageResponseEndMs": 607.9,
+      "panP95Ms": 16.81
+    },
+    "avif3072": {
+      "imageMiB": 0.583,
+      "imageRequests": 1,
+      "decodedRgbaMiB": 27,
+      "domNodes": 59,
+      "interactionReadyMs": 193.2,
+      "lastImageResponseEndMs": 506.5,
+      "panP95Ms": 16.84
+    },
+    "avif2048": {
+      "imageMiB": 0.378,
+      "imageRequests": 1,
+      "decodedRgbaMiB": 12,
+      "domNodes": 59,
+      "interactionReadyMs": 195.2,
+      "lastImageResponseEndMs": 415,
+      "panP95Ms": 16.83
+    }
+  },
+  "coldLoadDecodeMedian": {
+    "tile192": {
+      "totalMs": 3125.3,
+      "lastResponseFromStartMs": 3123.7,
+      "postLastResponseDecodeMs": 1.6
+    },
+    "masterJpeg8192": {
+      "totalMs": 7603.9,
+      "lastResponseFromStartMs": 7432.8,
+      "postLastResponseDecodeMs": 171.1
+    },
+    "webp4096": {
+      "totalMs": 697.9,
+      "lastResponseFromStartMs": 591.2,
+      "postLastResponseDecodeMs": 106.7
+    },
+    "webp3072": {
+      "totalMs": 502.4,
+      "lastResponseFromStartMs": 438.9,
+      "postLastResponseDecodeMs": 63.5
+    },
+    "avif4096": {
+      "totalMs": 453.5,
+      "lastResponseFromStartMs": 400,
+      "postLastResponseDecodeMs": 53.5
+    },
+    "avif3072": {
+      "totalMs": 334.6,
+      "lastResponseFromStartMs": 304.4,
+      "postLastResponseDecodeMs": 30.2
+    }
+  },
+  "visualQualityAgainstMaster": {
+    "overall": {
+      "webp4096": {
+        "meanSSIM": 0.96402,
+        "minSSIM": 0.95043,
+        "meanEdgeCorrelation": 0.97849
+      },
+      "webp3072": {
+        "meanSSIM": 0.94637,
+        "minSSIM": 0.91512,
+        "meanEdgeCorrelation": 0.96183
+      },
+      "webp2048": {
+        "meanSSIM": 0.92639,
+        "minSSIM": 0.91475,
+        "meanEdgeCorrelation": 0.95667
+      },
+      "avif4096": {
+        "meanSSIM": 0.97262,
+        "minSSIM": 0.96451,
+        "meanEdgeCorrelation": 0.98173
+      },
+      "avif3072": {
+        "meanSSIM": 0.95539,
+        "minSSIM": 0.92863,
+        "meanEdgeCorrelation": 0.96454
+      },
+      "avif2048": {
+        "meanSSIM": 0.92845,
+        "minSSIM": 0.9181,
+        "meanEdgeCorrelation": 0.95299
+      }
+    },
+    "avifByBreakpoint": {
+      "desktop": {
+        "avif4096": {
+          "meanSSIM": 0.96649,
+          "minSSIM": 0.96451
+        },
+        "avif3072": {
+          "meanSSIM": 0.94349,
+          "minSSIM": 0.92863
+        },
+        "avif2048": {
+          "meanSSIM": 0.92353,
+          "minSSIM": 0.9181
+        }
+      },
+      "tablet": {
+        "avif4096": {
+          "meanSSIM": 0.97612,
+          "minSSIM": 0.97534
+        },
+        "avif3072": {
+          "meanSSIM": 0.95668,
+          "minSSIM": 0.93947
+        },
+        "avif2048": {
+          "meanSSIM": 0.92236,
+          "minSSIM": 0.91369
+        }
+      },
+      "mobile": {
+        "avif4096": {
+          "meanSSIM": 0.97783,
+          "minSSIM": 0.97317
+        },
+        "avif3072": {
+          "meanSSIM": 0.96345,
+          "minSSIM": 0.96034
+        },
+        "avif2048": {
+          "meanSSIM": 0.93247,
+          "minSSIM": 0.92534
+        }
+      }
+    }
+  },
+  "interaction": {
+    "tileMobileTouchPan": true,
+    "singleImageMobileTouchPan": true,
+    "singleImageSafeZoneCameraBefore": [
+      0.47,
+      0.46
+    ],
+    "singleImageSafeZoneCameraAfter": [
+      0.4415,
+      0.4793
+    ],
+    "panSmoothness": "No material regression; p95 stayed approximately 16.8ms across all measured architectures."
+  },
+  "resize": {
+    "singleImage": {
+      "sequence": [
+        "1440x1000",
+        "820x900",
+        "390x844",
+        "1440x1000"
+      ],
+      "noHorizontalOverflow": true,
+      "hotspotCount": 4,
+      "centerPreserved": true
+    },
+    "tile": {
+      "sequence": [
+        "1440x1000",
+        "820x900",
+        "390x844",
+        "1440x1000"
+      ],
+      "noHorizontalOverflow": true,
+      "tileNodeCount": 192,
+      "districtCount": 4,
+      "returnsToDesktopCamera": true
+    }
+  },
+  "decision": {
+    "architecture": "single-continuous-world-image",
+    "primaryFormat": "avif",
+    "fallbackFormat": "webp",
+    "desktop": "4096x3072",
+    "tablet": "3072x2304",
+    "mobile": "3072x2304",
+    "keep2048AsPrimary": false,
+    "keepLogicalGrid": true,
+    "keepTileRuntimeForRollbackUntilCutover": true
+  }
+}

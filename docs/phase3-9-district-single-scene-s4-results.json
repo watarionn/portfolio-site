@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "checkpoint": "District Single-Scene Formalization S4 - Waterside Aquarium",
+  "date": "2026-09-30",
+  "status": "PASS",
+  "sourceLock": {
+    "commit": "fa398ce5db39cdcce242b0fa7bb9881c99d5f02a",
+    "background": {
+      "path": "portfolio-city/assets/districts/waterside-play/background-approved.png",
+      "sha256": "838797151c9c557af97ffb84e30940f1afee3e1603208a3ec9620d1bb2f95789",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    "aquarium": {
+      "path": "portfolio-city/assets/districts/waterside-play/aquarium-s1-final.png",
+      "sha256": "228fbc8366d6e5cbdd9ef02a2a948bd5cb24cc9b5bf658f951a68d0eadef9ea1",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "lockedPlacement": {
+        "anchor": "bottom-center",
+        "xFraction": 0.199606,
+        "yFraction": 0.571039,
+        "widthFraction": 0.25,
+        "rotationDegrees": 0
+      }
+    }
+  },
+  "output": {
+    "asset": "prototype/phase3-9-district-single-scene-s4/assets/waterside-s4-aquarium-scene.webp",
+    "width": 1672,
+    "height": 941,
+    "format": "webp",
+    "lossless": true,
+    "fileBytes": 1925540,
+    "sha256": "79c1593cfa31decf5074a830829a7e8b5ddea5853a03327ed5db9fea3920053c",
+    "browserImageCount": 1,
+    "independentBuildingImageCount": 0
+  },
+  "placement": {
+    "rasterPlacement": {
+      "left": 125,
+      "top": 258,
+      "width": 418,
+      "height": 279
+    },
+    "visibleAlphaBBox": [
+      180,
+      259,
+      501,
+      537
+    ],
+    "hotspotBBox": [
+      168,
+      247,
+      513,
+      549
+    ],
+    "hotspotProjectId": "aquarium"
+  },
+  "canonicalProject": {
+    "id": "aquarium",
+    "title": "水族館",
+    "building": "市立水族館",
+    "district": "waterside-play",
+    "type": "PHP / MySQL / Search",
+    "route": "/AQUARIUM/aquarium.php"
+  },
+  "deferredWatersideProjects": [
+    {
+      "id": "holoca",
+      "reason": "building art is not Production Locked in the recovered accepted workflow"
+    },
+    {
+      "id": "word-generator",
+      "reason": "building art is not Production Locked in the recovered accepted workflow"
+    }
+  ],
+  "browserQA": {
+    "viewports": {
+      "390": {
+        "imageCount": 1,
+        "hotspotCount": 1,
+        "hotspotWidthPx": 140.3,
+        "projectedHotspotErrorPx": 0,
+        "hotspotFullyVisible": true,
+        "internalHorizontalScroll": true,
+        "documentHorizontalOverflow": false,
+        "pass": true
+      },
+      "820": {
+        "imageCount": 1,
+        "hotspotCount": 1,
+        "hotspotWidthPx": 158.6,
+        "projectedHotspotErrorPx": 0.011,
+        "hotspotFullyVisible": true,
+        "internalHorizontalScroll": false,
+        "documentHorizontalOverflow": false,
+        "pass": true
+      },
+      "1440": {
+        "imageCount": 1,
+        "hotspotCount": 1,
+        "hotspotWidthPx": 230.7,
+        "projectedHotspotErrorPx": 0.004,
+        "hotspotFullyVisible": true,
+        "internalHorizontalScroll": false,
+        "documentHorizontalOverflow": false,
+        "pass": true
+      }
+    },
+    "keyboardPreview": {
+      "openByEnter": true,
+      "canonicalMetadata": true,
+      "canonicalRoute": true,
+      "titleFocus": true,
+      "closeByEscape": true,
+      "focusRestoration": true,
+      "pass": true
+    },
+    "mobileInternalScroll": {
+      "maxScrollPx": 312,
+      "testedScrollPx": 120,
+      "documentOverflowPx": 0,
+      "projectPreviewWhileScrolled": true,
+      "pass": true
+    },
+    "reducedMotion": {
+      "matches": true,
+      "hotspotTransitionDuration": "0s",
+      "pass": true
+    },
+    "overallPass": true
+  },
+  "decision": {
+    "districtSingleSceneArchitecture": "PASS",
+    "pixelsCarryAppearance": true,
+    "svgCarriesProjectMeaning": true,
+    "currentS4ProjectScope": [
+      "aquarium"
+    ],
+    "productionCutoverApproved": false,
+    "nextCheckpoint": "Phase 5 - Production automation"
+  }
+}

@@ -264,6 +264,10 @@ The visitor should perceive "the world opened up", not "a new tile appeared".
 
 # Phase 4 - District Single-Scene formalization
 
+**Status: PASS / 2026-09-30**
+
+Evidence: `docs/phase3-9-district-single-scene-s4.md`
+
 ## Goal
 
 Apply the same architectural principle to District Views.
@@ -484,6 +488,6 @@ Use canonical project metadata for navigation.
 
 # Next checkpoint
 
-**Phase 3 reveal prototype PASS -> Phase 4 District Single-Scene formalization**
+**Phase 4 District Single-Scene PASS -> Phase 5 Production automation**
 
-S3 proved publication-driven atmosphere without visible grid-shaped fog. Continue by formalizing the same finished-illustration + semantic-hotspot architecture for District Views, starting with Waterside Play.
+S4 proved the District-side architecture with accepted Waterside visual material: one finished scene image, one semantic Aquarium hotspot, canonical project preview, and canonical Work navigation. Continue by generalizing the repeated asset/manifest/validation work into reusable tooling.

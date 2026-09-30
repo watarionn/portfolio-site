@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio City - World Single-Image Prototype S1</title>
+  <link rel="stylesheet" href="./prototype.css">
+</head>
+<body>
+  <main class="prototype-shell">
+    <header class="prototype-header">
+      <p class="eyebrow">Phase 3.9 / World Single-Image Prototype S1</p>
+      <h1>Portfolio City World Viewer</h1>
+      <p>既存Master Worldを一枚絵として扱い、カメラ・雲・地区hotspotを別レイヤーで検証する隔離プロトタイプ。</p>
+    </header>
+
+    <section class="world-stage" aria-labelledby="world-heading">
+      <div class="world-stage__heading">
+        <div>
+          <p class="eyebrow">Single image + semantic overlay</p>
+          <h2 id="world-heading">Published cluster</h2>
+        </div>
+        <p class="world-stage__hint">ドラッグ / スワイプ / 矢印キーで移動。地区はTabでも選べる。</p>
+      </div>
+
+      <div class="world-viewport" id="world-viewport" tabindex="0" aria-label="Portfolio City 世界地図。ドラッグまたは矢印キーで移動できます。">
+        <div class="world-plane" id="world-plane">
+          <img id="world-image" class="world-base" alt="" width="8192" height="6144" decoding="async">
+          <div class="world-atmosphere" aria-hidden="true"></div>
+          <svg id="world-hotspots" class="world-hotspots" viewBox="0 0 8192 6144" aria-label="公開地区"></svg>
+        </div>
+        <div class="viewport-vignette" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="district-sheet" id="district-sheet" hidden aria-labelledby="district-sheet-title">
+      <p class="eyebrow">District selected</p>
+      <h2 id="district-sheet-title" tabindex="-1"></h2>
+      <p id="district-sheet-meta"></p>
+      <p>このS1では地区そのものへ遷移せず、World側の選択・focus・camera restoreだけを検証する。</p>
+      <button type="button" id="return-world">世界地図へ戻る</button>
+    </section>
+
+    <aside class="debug-panel" aria-label="S1 debug information">
+      <strong>S1 debug</strong>
+      <span>breakpoint: <b id="debug-breakpoint">-</b></span>
+      <span>camera: <b id="debug-camera">-</b></span>
+      <span>scale: <b id="debug-scale">-</b></span>
+      <span>selected: <b id="debug-selected">none</b></span>
+      <span>image: <b id="debug-image">loading</b></span>
+    </aside>
+
+    <p class="sr-only" id="world-status" aria-live="polite"></p>
+  </main>
+  <script src="./prototype.js"></script>
+</body>
+</html>

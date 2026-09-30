@@ -3374,3 +3374,62 @@ button { font: inherit; }
     justify-self: stretch;
   }
 }
+
+/* Phase 6 single-scene district runtime */
+.district-single-scene {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+.district-single-scene__title {
+  margin: 0;
+  font-family: var(--mincho);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 500;
+}
+.district-single-scene__title:focus { outline: none; }
+.district-single-scene__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 1px solid rgba(48,39,29,.24);
+  border-radius: .75rem;
+  background: #d8d2c2;
+  box-shadow: 0 .55rem 1.4rem rgba(30,24,18,.1);
+}
+.district-single-scene__picture,
+.district-single-scene__picture img,
+.district-single-scene__hotspots {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.district-single-scene__picture img { object-fit: contain; }
+.district-single-scene__hotspots { z-index: 2; }
+.district-single-scene__hotspot polygon {
+  fill: rgba(255,255,255,0);
+  stroke: rgba(255,255,255,0);
+  stroke-width: 6;
+  cursor: pointer;
+  transition: fill .16s ease, stroke .16s ease;
+}
+.district-single-scene__hotspot:hover polygon {
+  fill: rgba(255,250,224,.12);
+  stroke: rgba(255,250,224,.72);
+}
+.district-single-scene__hotspot:focus { outline: none; }
+.district-single-scene__hotspot:focus-visible polygon {
+  fill: rgba(255,250,224,.16);
+  stroke: var(--cobalt);
+  stroke-width: 8;
+}
+@media (max-width: 680px) {
+  .district-single-scene { padding-inline: var(--gutter); }
+  .district-single-scene__stage { border-radius: .5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .district-single-scene__hotspot polygon { transition: none; }
+}

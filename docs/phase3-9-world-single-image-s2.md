@@ -1,6 +1,7 @@
 # Phase 3.9 - World Single-Image vs Tile Measurement S2
 
-Updated: 2026-09-30  
+Updated: 2026-09-30
+
 Status: **PASS / architecture selected / no production cutover**
 
 ## Goal

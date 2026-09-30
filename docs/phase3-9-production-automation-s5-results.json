@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "checkpoint": "Production Automation S5",
+  "date": "2026-09-30",
+  "status": "PASS",
+  "commonPipeline": {
+    "path": "tools/portfolio_asset_pipeline.py",
+    "capabilities": [
+      "source identity validation",
+      "file or immutable Git source loading",
+      "image dimensions/format/hash inspection",
+      "WebP/AVIF responsive derivatives",
+      "decoded RGBA memory estimates",
+      "deterministic single-scene compositing",
+      "alpha-derived semantic hotspots",
+      "manifest generation and re-validation",
+      "explicit deployment-package preparation"
+    ],
+    "directDeployment": false,
+    "packageOutputMustBeEmpty": true
+  },
+  "regression": {
+    "unitTests": {
+      "count": 4,
+      "pass": true
+    },
+    "s4ContractPass": true,
+    "s5ContractPass": true,
+    "gitDiffCheckPass": true
+  },
+  "worldProof": {
+    "config": "tools/portfolio_asset_pipeline_configs/world-runtime-v1.json",
+    "source": {
+      "path": "portfolio-city/assets/world/v1/master/portfolio-city-master-world-v1.jpg",
+      "width": 8192,
+      "height": 6144,
+      "fileBytes": 14278125,
+      "sha256": "1b63fd1b7439e7498a827cfb368d4eb2ee0b4bd06948eac82f5803f2e61a1c25"
+    },
+    "validationPass": true,
+    "outputs": [
+      {
+        "file": "portfolio-city-master-world-4096x3072-q62.avif",
+        "format": "avif",
+        "quality": 62,
+        "width": 4096,
+        "height": 3072,
+        "fileBytes": 822682,
+        "decodedRgbaMiB": 48,
+        "sha256": "3bed5257661943e9ff2a6ca7833bab93e43a82a7409095a64410303aa3396196"
+      },
+      {
+        "file": "portfolio-city-master-world-3072x2304-q62.avif",
+        "format": "avif",
+        "quality": 62,
+        "width": 3072,
+        "height": 2304,
+        "fileBytes": 610913,
+        "decodedRgbaMiB": 27,
+        "sha256": "6a85bc8328a194e663ff36d4cdf4e780c1771a3ade28faed779cb7f706a91a90"
+      },
+      {
+        "file": "portfolio-city-master-world-4096x3072-q84.webp",
+        "format": "webp",
+        "quality": 84,
+        "width": 4096,
+        "height": 3072,
+        "fileBytes": 1273750,
+        "decodedRgbaMiB": 48,
+        "sha256": "272b4d8042dc9ff0dc4ddd2e31807c01ec1e927045b07e76eaba528782952dd0"
+      },
+      {
+        "file": "portfolio-city-master-world-3072x2304-q84.webp",
+        "format": "webp",
+        "quality": 84,
+        "width": 3072,
+        "height": 2304,
+        "fileBytes": 914144,
+        "decodedRgbaMiB": 27,
+        "sha256": "6f3a9415df465769da88a65b65e539513521f10d7da157cbbc8ac59e27512604"
+      }
+    ],
+    "matchesS2SelectedByteSizes": true
+  },
+  "watersideProof": {
+    "config": "tools/portfolio_asset_pipeline_configs/waterside-s4.json",
+    "validationPass": true,
+    "exactMatchToCommittedS4": true,
+    "output": {
+      "file": "waterside-s4-aquarium-scene.webp",
+      "width": 1672,
+      "height": 941,
+      "format": "webp",
+      "lossless": true,
+      "fileBytes": 1925540,
+      "decodedRgbaMiB": 6,
+      "sha256": "79c1593cfa31decf5074a830829a7e8b5ddea5853a03327ed5db9fea3920053c"
+    },
+    "hotspot": {
+      "id": "aquarium",
+      "paddingPx": 12,
+      "bbox": [
+        168,
+        247,
+        513,
+        549
+      ]
+    }
+  },
+  "compatibility": {
+    "worldLegacyToolUsesSharedPrimitives": true,
+    "watersideLegacyToolUsesSharedPrimitives": true,
+    "watersideLegacyOutputExactMatch": true
+  },
+  "packageProof": {
+    "config": "tools/portfolio_asset_pipeline_configs/waterside-s4-proof-package.json",
+    "totalFiles": 5,
+    "totalBytes": 1940759,
+    "paths": [
+      "prototype/phase3-9-district-single-scene-s4/index.html",
+      "prototype/phase3-9-district-single-scene-s4/prototype.css",
+      "prototype/phase3-9-district-single-scene-s4/prototype.js",
+      "prototype/phase3-9-district-single-scene-s4/waterside-s4-aquarium-scene.json",
+      "prototype/phase3-9-district-single-scene-s4/assets/waterside-s4-aquarium-scene.webp"
+    ]
+  },
+  "decision": {
+    "productionAutomationPhase": "PASS",
+    "browserQaRemainsSeparate": true,
+    "deploymentRemainsExplicitGate": true,
+    "nextCheckpoint": "Phase 6 - Production art"
+  }
+}

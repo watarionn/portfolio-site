@@ -220,6 +220,10 @@ The visitor experience must not become tile-shaped merely because asset delivery
 
 # Phase 3 - World Reveal / Cloud prototype
 
+**Status: PASS / 2026-09-30**
+
+Evidence: `docs/phase3-9-world-reveal-s3.md`
+
 ## Goal
 
 Turn publication state into atmosphere rather than UI locking.
@@ -480,6 +484,6 @@ Use canonical project metadata for navigation.
 
 # Next checkpoint
 
-**Phase 2 measurement PASS -> Phase 3 World Reveal / Cloud prototype**
+**Phase 3 reveal prototype PASS -> Phase 4 District Single-Scene formalization**
 
-S2 selected Single-Image delivery from measured evidence. Continue with independent reveal/cloud atmosphere while keeping the logical grid as authoring metadata and leaving production cutover for a later migration checkpoint.
+S3 proved publication-driven atmosphere without visible grid-shaped fog. Continue by formalizing the same finished-illustration + semantic-hotspot architecture for District Views, starting with Waterside Play.

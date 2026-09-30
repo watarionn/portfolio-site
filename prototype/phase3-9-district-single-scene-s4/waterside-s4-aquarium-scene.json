@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "district": {
+    "id": "waterside-play",
+    "name": "Waterside Play",
+    "sourceSize": {
+      "width": 1672,
+      "height": 941
+    }
+  },
+  "scene": {
+    "asset": "./assets/waterside-s4-aquarium-scene.webp",
+    "width": 1672,
+    "height": 941,
+    "format": "webp",
+    "lossless": true,
+    "sha256": "79c1593cfa31decf5074a830829a7e8b5ddea5853a03327ed5db9fea3920053c",
+    "fileBytes": 1925540
+  },
+  "sourceLock": {
+    "commit": "fa398ce5db39cdcce242b0fa7bb9881c99d5f02a",
+    "background": {
+      "path": "portfolio-city/assets/districts/waterside-play/background-approved.png",
+      "sha256": "838797151c9c557af97ffb84e30940f1afee3e1603208a3ec9620d1bb2f95789"
+    },
+    "aquarium": {
+      "path": "portfolio-city/assets/districts/waterside-play/aquarium-s1-final.png",
+      "sha256": "228fbc8366d6e5cbdd9ef02a2a948bd5cb24cc9b5bf658f951a68d0eadef9ea1"
+    },
+    "placement": {
+      "anchor": "bottom-center",
+      "xFraction": 0.199606,
+      "yFraction": 0.571039,
+      "widthFraction": 0.25,
+      "rotationDegrees": 0,
+      "rasterPlacement": {
+        "left": 125,
+        "top": 258,
+        "width": 418,
+        "height": 279
+      },
+      "visibleAlphaBBox": [
+        180,
+        259,
+        501,
+        537
+      ]
+    }
+  },
+  "projects": [
+    {
+      "id": "aquarium",
+      "hotspot": [
+        [
+          168,
+          247
+        ],
+        [
+          513,
+          247
+        ],
+        [
+          513,
+          549
+        ],
+        [
+          168,
+          549
+        ]
+      ],
+      "hotspotBBox": [
+        168,
+        247,
+        513,
+        549
+      ]
+    }
+  ],
+  "build": {
+    "method": "deterministic locked-source alpha composite",
+    "pillowVersion": "12.2.0",
+    "hotspotPaddingPx": 12
+  }
+}

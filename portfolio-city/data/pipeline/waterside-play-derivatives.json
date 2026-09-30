@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "job": "derivatives",
+  "id": "waterside-play",
+  "manifestFile": "waterside-play.manifest.json",
+  "source": {
+    "type": "file",
+    "path": "portfolio-city/assets/production/waterside-play/waterside-play-production-art-accepted-20260930.png",
+    "expectedSize": [
+      1536,
+      1024
+    ]
+  },
+  "filenamePrefix": "waterside-play",
+  "derivatives": [
+    {
+      "format": "webp",
+      "quality": 86,
+      "sizes": [
+        [
+          1536,
+          1024
+        ],
+        [
+          1152,
+          768
+        ],
+        [
+          768,
+          512
+        ]
+      ]
+    }
+  ]
+}

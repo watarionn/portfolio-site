@@ -211,14 +211,25 @@
         selectDistrict(district.id, polygon);
       });
 
-      const offset = district.labelOffset || { x: 0, y: -245 };
+      const offset = district.labelOffset || { x: 0, y: 18 };
+      const labelX = district.anchor.x + offset.x;
+      const labelY = district.anchor.y + offset.y;
       const label = svg("text", {
         class: "world-hotspot-label",
-        x: district.anchor.x + offset.x,
-        y: district.anchor.y + offset.y,
+        x: labelX,
+        y: labelY,
         "aria-hidden": "true"
       });
-      label.textContent = district.name;
+      const words = district.name.split(" ");
+      if (words.length > 1) {
+        const firstLine = svg("tspan", { x: labelX, dy: "-0.42em" });
+        firstLine.textContent = words[0];
+        const secondLine = svg("tspan", { x: labelX, dy: "1.05em" });
+        secondLine.textContent = words.slice(1).join(" ");
+        label.append(firstLine, secondLine);
+      } else {
+        label.textContent = district.name;
+      }
       group.append(polygon, label);
       hotspotSvg.append(group);
     });

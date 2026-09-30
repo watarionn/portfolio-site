@@ -118,7 +118,7 @@ button { font: inherit; }
   stroke: rgba(249, 242, 221, .95);
   stroke-width: 18;
   paint-order: stroke fill;
-  font-size: 78px;
+  font-size: 58px;
   font-weight: 800;
   text-anchor: middle;
   opacity: .94;
@@ -178,7 +178,7 @@ button { font: inherit; }
   .world-stage__heading { align-items: flex-start; flex-direction: column; }
   .world-stage__hint { text-align: left; }
   .world-viewport { height: clamp(520px, 72svh, 680px); }
-  .world-hotspot-label { font-size: 82px; }
+  .world-hotspot-label { font-size: 62px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

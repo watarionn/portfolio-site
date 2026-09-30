@@ -147,6 +147,8 @@ class PortfolioAssetPipelineTests(unittest.TestCase):
             manifest["files"][0]["sha256"],
             pipeline.sha256_file(output / manifest["files"][0]["path"]),
         )
+        with self.assertRaises(pipeline.PipelineError):
+            pipeline.build_package(config_path, self.repo, output)
 
 
 if __name__ == "__main__":

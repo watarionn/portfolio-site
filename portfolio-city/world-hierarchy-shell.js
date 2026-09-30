@@ -55,6 +55,7 @@
   function setLevel(level) {
     if (!state.enabled || !['world', 'district', 'preview'].includes(level)) return false;
     state.level = level;
+    document.body.dataset.worldLevel = level;
     for (const panel of shell?.querySelectorAll('[data-world-level]') ?? []) {
       panel.hidden = panel.dataset.worldLevel !== level;
     }

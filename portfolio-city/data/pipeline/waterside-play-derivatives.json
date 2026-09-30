@@ -9,7 +9,8 @@
     "expectedSize": [
       1536,
       1024
-    ]
+    ],
+    "expectedSha256": "397e50598be8c5bc6310042c3c014a22473074b029c614f925639397c6e45e79"
   },
   "filenamePrefix": "waterside-play",
   "derivatives": [

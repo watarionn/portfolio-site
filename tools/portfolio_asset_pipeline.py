@@ -532,9 +532,9 @@ def build_package(config_path: Path, repo: Path, output_dir: Path) -> Path:
     if not isinstance(files, list) or not files:
         raise PipelineError("package config requires files")
 
-    if output_dir.exists():
-        shutil.rmtree(output_dir)
-    output_dir.mkdir(parents=True)
+    if output_dir.exists() and any(output_dir.iterdir()):
+        raise PipelineError(f"package output directory must be empty: {output_dir}")
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     manifest_files: list[dict[str, Any]] = []
     repo_resolved = repo.resolve()

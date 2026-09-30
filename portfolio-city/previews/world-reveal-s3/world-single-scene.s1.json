@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "prototype": "World Single-Image Prototype S1",
+  "source": {
+    "width": 8192,
+    "height": 6144,
+    "asset": "../../assets/world/v1/master/portfolio-city-master-world-v1.jpg"
+  },
+  "entryCameras": {
+    "desktop": {
+      "center": {
+        "x": 0.475,
+        "y": 0.465
+      },
+      "viewportWorldFraction": {
+        "width": 0.42,
+        "height": 0.42
+      }
+    },
+    "tablet": {
+      "center": {
+        "x": 0.475,
+        "y": 0.47
+      },
+      "viewportWorldFraction": {
+        "width": 0.38,
+        "height": 0.46
+      }
+    },
+    "mobile": {
+      "center": {
+        "x": 0.47,
+        "y": 0.46
+      },
+      "viewportWorldFraction": {
+        "width": 0.27,
+        "height": 0.42
+      }
+    }
+  },
+  "districtFocusWorldFraction": {
+    "desktop": {
+      "width": 0.25,
+      "height": 0.3
+    },
+    "tablet": {
+      "width": 0.25,
+      "height": 0.32
+    },
+    "mobile": {
+      "width": 0.23,
+      "height": 0.34
+    }
+  },
+  "panBounds": {
+    "desktop": {
+      "minX": 0.27,
+      "maxX": 0.69,
+      "minY": 0.25,
+      "maxY": 0.69
+    },
+    "tablet": {
+      "minX": 0.29,
+      "maxX": 0.67,
+      "minY": 0.23,
+      "maxY": 0.71
+    },
+    "mobile": {
+      "minX": 0.32,
+      "maxX": 0.63,
+      "minY": 0.24,
+      "maxY": 0.7
+    }
+  },
+  "districts": [
+    {
+      "id": "observatory",
+      "name": "Observatory Hill",
+      "homeCell": "H05",
+      "anchor": {
+        "x": 3922,
+        "y": 2243
+      },
+      "labelOffset": {
+        "x": 0,
+        "y": -100
+      },
+      "hotspot": [
+        [
+          3700,
+          2080
+        ],
+        [
+          3845,
+          2015
+        ],
+        [
+          4015,
+          2070
+        ],
+        [
+          4145,
+          2210
+        ],
+        [
+          4090,
+          2395
+        ],
+        [
+          3930,
+          2470
+        ],
+        [
+          3740,
+          2400
+        ],
+        [
+          3645,
+          2240
+        ]
+      ]
+    },
+    {
+      "id": "archive",
+      "name": "Archive Street",
+      "homeCell": "G06",
+      "anchor": {
+        "x": 3236,
+        "y": 2857
+      },
+      "labelOffset": {
+        "x": 160,
+        "y": -145
+      },
+      "hotspot": [
+        [
+          3005,
+          2700
+        ],
+        [
+          3160,
+          2630
+        ],
+        [
+          3340,
+          2675
+        ],
+        [
+          3465,
+          2825
+        ],
+        [
+          3410,
+          3000
+        ],
+        [
+          3235,
+          3070
+        ],
+        [
+          3065,
+          3015
+        ],
+        [
+          2970,
+          2870
+        ]
+      ]
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop Alley",
+      "homeCell": "I06",
+      "anchor": {
+        "x": 4444,
+        "y": 2796
+      },
+      "labelOffset": {
+        "x": -500,
+        "y": -245
+      },
+      "hotspot": [
+        [
+          4215,
+          2640
+        ],
+        [
+          4380,
+          2575
+        ],
+        [
+          4560,
+          2620
+        ],
+        [
+          4680,
+          2760
+        ],
+        [
+          4625,
+          2940
+        ],
+        [
+          4460,
+          3010
+        ],
+        [
+          4285,
+          2955
+        ],
+        [
+          4185,
+          2815
+        ]
+      ]
+    },
+    {
+      "id": "waterside",
+      "name": "Waterside Play",
+      "homeCell": "H07",
+      "anchor": {
+        "x": 3912,
+        "y": 3400
+      },
+      "labelOffset": {
+        "x": 0,
+        "y": -245
+      },
+      "hotspot": [
+        [
+          3680,
+          3235
+        ],
+        [
+          3840,
+          3175
+        ],
+        [
+          4030,
+          3225
+        ],
+        [
+          4150,
+          3385
+        ],
+        [
+          4090,
+          3565
+        ],
+        [
+          3910,
+          3635
+        ],
+        [
+          3730,
+          3570
+        ],
+        [
+          3635,
+          3410
+        ]
+      ]
+    }
+  ]
+}

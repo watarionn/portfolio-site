@@ -9,13 +9,13 @@ immutable Git commit and placed with the locked S1 geometry.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import io
 import json
-import subprocess
 from pathlib import Path
 
 from PIL import Image, __version__ as pillow_version
+
+from portfolio_asset_pipeline import git_show_bytes, sha256_bytes, sha256_file
 
 SOURCE_COMMIT = "fa398ce5db39cdcce242b0fa7bb9881c99d5f02a"
 BACKGROUND_PATH = "portfolio-city/assets/districts/waterside-play/background-approved.png"
@@ -31,36 +31,13 @@ LOCKED_WIDTH = 0.25
 HOTSPOT_PADDING = 12
 
 
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
-def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def git_show(repo: Path, commit: str, path: str) -> bytes:
-    try:
-        return subprocess.check_output(
-            ["git", "-C", str(repo), "show", f"{commit}:{path}"],
-            stderr=subprocess.PIPE,
-        )
-    except subprocess.CalledProcessError as exc:
-        message = exc.stderr.decode("utf-8", errors="replace").strip()
-        raise RuntimeError(
-            f"Could not read {path} from {commit}. "
-            f"Fetch the historical commit first: git fetch --depth=1 origin {commit}. "
-            f"Git said: {message}"
-        ) from exc
-
-
 def clamp(value: int, low: int, high: int) -> int:
     return max(low, min(high, value))
 
 
 def build(repo: Path, output_dir: Path) -> tuple[Path, Path]:
-    background_bytes = git_show(repo, SOURCE_COMMIT, BACKGROUND_PATH)
-    aquarium_bytes = git_show(repo, SOURCE_COMMIT, AQUARIUM_PATH)
+    background_bytes = git_show_bytes(repo, SOURCE_COMMIT, BACKGROUND_PATH)
+    aquarium_bytes = git_show_bytes(repo, SOURCE_COMMIT, AQUARIUM_PATH)
 
     if sha256_bytes(background_bytes) != EXPECTED_BACKGROUND_SHA256:
         raise RuntimeError("Locked Waterside background hash mismatch")

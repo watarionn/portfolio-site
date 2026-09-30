@@ -695,6 +695,12 @@
 
       scene.append(picture, svg);
 
+      const projectNote = document.createElement('aside');
+      projectNote.className = 'district-single-scene__project-note';
+      projectNote.dataset.inlineProjectPreview = '';
+      projectNote.hidden = true;
+      projectNote.setAttribute('aria-live', 'polite');
+
       const controls = document.createElement('nav');
       controls.className = 'district-page__nav';
       controls.dataset.districtNavigation = '';
@@ -708,7 +714,7 @@
         controls.append(button);
       }
 
-      page.append(heading, scene, controls);
+      page.append(heading, scene, projectNote, controls);
       panel.replaceChildren(page);
       queueMicrotask(() => heading.focus({ preventScroll: true }));
       return true;
@@ -941,7 +947,47 @@
 
     districtPanel.addEventListener('click', (event) => {
       const projectButton = event.target.closest('[data-project-id]');
-      if (projectButton) renderBuildingPreview(projectButton.dataset.projectId);
+      if (!projectButton) return;
+      event.preventDefault();
+
+      const inlinePreview = districtPanel.querySelector('[data-inline-project-preview]');
+      if (inlinePreview) {
+        const project = state.projects.find((item) => item.id === projectButton.dataset.projectId);
+        if (!project) return;
+
+        state.activeProjectId = project.id;
+        inlinePreview.hidden = false;
+        inlinePreview.replaceChildren();
+
+        const identity = document.createElement('div');
+        identity.className = 'district-single-scene__project-note-identity';
+
+        const building = document.createElement('p');
+        building.className = 'district-single-scene__project-note-building';
+        building.textContent = project.building;
+
+        const title = document.createElement('h3');
+        title.className = 'district-single-scene__project-note-title';
+        title.textContent = project.title;
+
+        const summary = document.createElement('p');
+        summary.className = 'district-single-scene__project-note-summary';
+        summary.textContent = project.summary;
+
+        identity.append(building, title, summary);
+
+        const open = document.createElement('a');
+        open.className = 'district-single-scene__project-note-open';
+        open.href = project.route;
+        open.textContent = '作品を見る ↗';
+        open.setAttribute('aria-label', `${project.title}を開く`);
+
+        inlinePreview.append(identity, open);
+        inlinePreview.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        return;
+      }
+
+      renderBuildingPreview(projectButton.dataset.projectId);
     });
 
     previewPanel.addEventListener('click', (event) => {

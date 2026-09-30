@@ -632,71 +632,77 @@
 
     const projects = state.projects.filter((project) => project.district === district.id).sort(byOrder);
 
-    // Waterside Play production pilot: background and building share one 1672x941
-    // coordinate system. The whole scene scales responsively as a single unit.
+    // Phase 6 Waterside Play: one finished illustration + semantic SVG overlay.
     if (district.id === 'waterside-play') {
       const page = document.createElement('section');
-      page.className = 'district-production-pilot';
+      page.className = 'district-single-scene';
       page.dataset.districtPage = district.id;
 
       const heading = document.createElement('h2');
-      heading.className = 'district-production-pilot__title';
+      heading.className = 'district-single-scene__title';
+      heading.id = 'district-page-title-waterside-play';
+      heading.tabIndex = -1;
       heading.textContent = district.name;
 
       const scene = document.createElement('div');
-      scene.className = 'district-scene district-scene--waterside';
-      scene.setAttribute('aria-label', '水辺・遊び地区');
-      // Inline critical geometry makes the production pilot test independent
-      // from stylesheet cache/deploy skew. Remove after the scene renderer is locked.
-      scene.style.position = 'relative';
-      scene.style.width = '100%';
-      scene.style.aspectRatio = '1672 / 941';
-      scene.style.overflow = 'hidden';
-      scene.style.background = '#d9d1bf';
+      scene.className = 'district-single-scene__stage';
+      scene.setAttribute('aria-labelledby', heading.id);
 
-      const background = document.createElement('img');
-      background.className = 'district-scene__background';
-      background.src = 'assets/districts/waterside-play/background-approved.png';
-      background.alt = '';
-      background.style.position = 'absolute';
-      background.style.inset = '0';
-      background.style.width = '100%';
-      background.style.height = '100%';
-      background.style.display = 'block';
+      const picture = document.createElement('picture');
+      picture.className = 'district-single-scene__picture';
+      for (const [media, src] of [
+        ['(max-width: 680px)', 'assets/districts/waterside-play/waterside-play-768x512-q86.webp'],
+        ['(max-width: 1100px)', 'assets/districts/waterside-play/waterside-play-1152x768-q86.webp']
+      ]) {
+        const source = document.createElement('source');
+        source.media = media;
+        source.srcset = src;
+        picture.append(source);
+      }
+      const image = document.createElement('img');
+      image.src = 'assets/districts/waterside-play/waterside-play-1536x1024-q86.webp';
+      image.alt = '';
+      image.width = 1536;
+      image.height = 1024;
+      image.decoding = 'async';
+      picture.append(image);
 
-      const aquarium = document.createElement('button');
-      aquarium.type = 'button';
-      aquarium.className = 'district-scene__building district-scene__building--aquarium';
-      aquarium.dataset.projectId = 'aquarium';
-      aquarium.setAttribute('aria-label', '水族館、詳細を見る');
-      aquarium.style.position = 'absolute';
-      aquarium.style.left = '19.9606%';
-      aquarium.style.top = '57.1039%';
-      aquarium.style.width = '25%';
-      aquarium.style.margin = '0';
-      aquarium.style.padding = '0';
-      aquarium.style.border = '0';
-      aquarium.style.background = 'transparent';
-      aquarium.style.transform = 'translate(-50%, -100%)';
-      aquarium.style.transformOrigin = '50% 100%';
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.classList.add('district-single-scene__hotspots');
+      svg.setAttribute('viewBox', '0 0 1536 1024');
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.setAttribute('aria-label', '作品の建物');
 
-      const aquariumImage = document.createElement('img');
-      aquariumImage.src = 'assets/districts/waterside-play/aquarium-s1-final.png';
-      aquariumImage.alt = '';
-      aquariumImage.setAttribute('aria-hidden', 'true');
-      aquariumImage.style.display = 'block';
-      aquariumImage.style.width = '100%';
-      aquariumImage.style.height = 'auto';
-      aquarium.append(aquariumImage);
+      const activeSlots = [
+        ['WP-01', 'aquarium', '市立水族館', '486,188 763,183 886,291 892,506 822,565 535,566 457,497 459,302'],
+        ['WP-02', 'holoca', 'カードショップ', '65,420 345,411 450,544 449,713 341,754 82,731 37,645'],
+        ['WP-03', 'word-generator', 'ゲームショップ', '1190,505 1447,501 1518,613 1517,797 1433,838 1180,816 1139,692']
+      ];
+      for (const [slotId, projectId, label, points] of activeSlots) {
+        const link = document.createElementNS('http://www.w3.org/2000/svg', 'a');
+        link.classList.add('district-single-scene__hotspot');
+        link.dataset.slotId = slotId;
+        link.dataset.projectId = projectId;
+        link.setAttribute('href', '#');
+        link.setAttribute('aria-label', `${label}、詳細を見る`);
 
-      scene.append(background, aquarium);
+        const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        polygon.setAttribute('points', points);
+        polygon.setAttribute('vector-effect', 'non-scaling-stroke');
+        link.append(polygon);
+        svg.append(link);
+      }
 
-      const controls = document.createElement('div');
+      scene.append(picture, svg);
+
+      const controls = document.createElement('nav');
+      controls.className = 'district-page__nav';
       controls.dataset.districtNavigation = '';
-      controls.className = 'district-production-pilot__nav';
-      for (const [action, label] of [['previous', '前の地区'], ['world', '世界地図へ戻る'], ['next', '次の地区']]) {
+      controls.setAttribute('aria-label', '地区ナビゲーション');
+      for (const [action, label] of [['previous', '← 前の地区'], ['world', '世界地図へ戻る'], ['next', '次の地区 →']]) {
         const button = document.createElement('button');
         button.type = 'button';
+        button.className = `district-page__nav-button district-page__nav-button--${action}`;
         button.dataset.districtAction = action;
         button.textContent = label;
         controls.append(button);
@@ -704,6 +710,7 @@
 
       page.append(heading, scene, controls);
       panel.replaceChildren(page);
+      queueMicrotask(() => heading.focus({ preventScroll: true }));
       return true;
     }
 

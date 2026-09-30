@@ -168,7 +168,8 @@ S1 is a functional isolated prototype with no production cutover.
 
 # Phase 2 - Single-Image vs Tile measurement
 
-**Status: PASS / 2026-09-30**  
+**Status: PASS / 2026-09-30**
+
 Evidence: `docs/phase3-9-world-single-image-s2.md`
 
 ## Goal

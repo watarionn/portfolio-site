@@ -30,19 +30,19 @@
   overflow: visible;
   pointer-events: none;
 }
-.reveal-veil { fill: #eee9d8; opacity: .42; }
+.reveal-veil { fill: #eee9d8; opacity: .54; }
 .reveal-frontier {
   fill: none;
   stroke: #f3eee0;
   stroke-width: 430;
   stroke-linejoin: round;
-  opacity: .21;
+  opacity: .30;
   filter: url(#s3-frontier-soften);
 }
 .reveal-bank { fill: #f5f2e6; filter: url(#s3-cloud-soften); }
 .reveal-drift {
   fill: #fbf8ed;
-  opacity: .32;
+  opacity: .42;
   filter: url(#s3-cloud-soften);
 }
 .world-hotspots { z-index: 3; }

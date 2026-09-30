@@ -122,6 +122,9 @@ Make the new direction understandable and reproducible before additional art pro
 
 # Phase 1 - World Single-Image Prototype S1
 
+**Status: PASS / 2026-09-30**  
+Evidence: `docs/phase3-9-world-single-image-s1.md`
+
 ## Goal
 
 Prove the viewing architecture using artwork already owned.
@@ -473,6 +476,6 @@ Use canonical project metadata for navigation.
 
 # Next checkpoint
 
-**Phase 0 completion -> World Single-Image Prototype S1**
+**World Single-Image Prototype S1 PASS -> Phase 2 Single-Image vs Tile measurement**
 
-Before new World art production, finish canonical documentation and then prove the Single-Image viewer against the existing real Master World.
+S1 proved the viewing architecture against the existing real Master World. Continue with measured comparison before any production cutover or new World art production.

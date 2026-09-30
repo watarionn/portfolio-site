@@ -87,11 +87,32 @@ def ensure_size(actual: tuple[int, int], expected: list[int] | tuple[int, int] |
         raise PipelineError(f"{label} dimensions mismatch: expected {expected_tuple}, got {actual}")
 
 
-def load_source_bytes(repo: Path, spec: dict[str, Any], label: str) -> tuple[bytes, dict[str, Any]]:
+def load_source_bytes(
+    repo: Path,
+    spec: dict[str, Any],
+    label: str,
+    external_input: Path | None = None,
+) -> tuple[bytes, dict[str, Any]]:
     source_type = spec.get("type", "file")
     expected_sha = spec.get("expectedSha256")
 
-    if source_type == "file":
+    if source_type == "external":
+        if external_input is None:
+            raise PipelineError(
+                f"{label}: external source requires --external-input; "
+                "the pipeline does not fetch or authenticate external storage itself"
+            )
+        path = external_input.resolve()
+        if not path.is_file():
+            raise PipelineError(f"{label}: external input does not exist: {path}")
+        data = path.read_bytes()
+        resolved = {
+            "type": "external",
+            "canonicalId": spec.get("canonicalId"),
+            "canonicalProvider": spec.get("canonicalProvider"),
+            "inputFileName": path.name,
+        }
+    elif source_type == "file":
         rel = spec.get("path")
         if not rel:
             raise PipelineError(f"{label}: file source requires path")
@@ -126,8 +147,9 @@ def open_source_image(
     label: str,
     *,
     mode: str | None = None,
+    external_input: Path | None = None,
 ) -> tuple[Image.Image, dict[str, Any]]:
-    data, resolved = load_source_bytes(repo, spec, label)
+    data, resolved = load_source_bytes(repo, spec, label, external_input)
     with Image.open(io.BytesIO(data)) as opened:
         image = ImageOps.exif_transpose(opened)
         ensure_size(image.size, spec.get("expectedSize"), label)
@@ -189,12 +211,12 @@ def validate_encoder(fmt: str) -> None:
         raise PipelineError(f"unsupported format: {fmt}")
 
 
-def run_derivatives(config: dict[str, Any], repo: Path, output_dir: Path) -> dict[str, Any]:
+def run_derivatives(config: dict[str, Any], repo: Path, output_dir: Path, external_input: Path | None = None) -> dict[str, Any]:
     source_spec = config.get("source")
     if not isinstance(source_spec, dict):
         raise PipelineError("derivatives job requires source")
 
-    source, source_info = open_source_image(repo, source_spec, "derivative source", mode="RGB")
+    source, source_info = open_source_image(repo, source_spec, "derivative source", mode="RGB", external_input=external_input)
     prefix = config.get("filenamePrefix", "portfolio-city-asset")
     sets = config.get("derivatives")
     if not isinstance(sets, list) or not sets:
@@ -415,7 +437,7 @@ def run_composite(config: dict[str, Any], repo: Path, output_dir: Path) -> dict[
     }
 
 
-def run_job(config_path: Path, repo: Path, output_dir: Path) -> Path:
+def run_job(config_path: Path, repo: Path, output_dir: Path, external_input: Path | None = None) -> Path:
     config = json.loads(config_path.read_text(encoding="utf-8"))
     if config.get("schemaVersion") != 1:
         raise PipelineError("pipeline config schemaVersion must be 1")
@@ -423,7 +445,7 @@ def run_job(config_path: Path, repo: Path, output_dir: Path) -> Path:
     job = config.get("job")
     output_dir.mkdir(parents=True, exist_ok=True)
     if job == "derivatives":
-        manifest = run_derivatives(config, repo, output_dir)
+        manifest = run_derivatives(config, repo, output_dir, external_input)
     elif job == "composite":
         manifest = run_composite(config, repo, output_dir)
     else:
@@ -586,7 +608,7 @@ def command_inspect(args: argparse.Namespace) -> int:
 
 
 def command_run(args: argparse.Namespace) -> int:
-    path = run_job(args.config.resolve(), args.repo.resolve(), args.output_dir.resolve())
+    path = run_job(args.config.resolve(), args.repo.resolve(), args.output_dir.resolve(), args.external_input.resolve() if args.external_input else None)
     print(path)
     return 0
 
@@ -625,6 +647,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--config", type=Path, required=True)
     run.add_argument("--repo", type=Path, default=Path.cwd())
     run.add_argument("--output-dir", type=Path, required=True)
+    run.add_argument("--external-input", type=Path, help="Pre-fetched external source; verified by config SHA/dimensions")
     run.set_defaults(func=command_run)
 
     validate = sub.add_parser("validate", help="Re-validate files described by a pipeline manifest")

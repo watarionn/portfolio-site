@@ -267,3 +267,23 @@ Next resume point:
 4. only explicitly approved assets may move into accepted/runtime state
 
 PR #105 remains Draft and must not be merged yet.
+
+## Experiment — single-scene + semantic hotspot architecture (2026-09-30)
+
+The user identified repeated production failures in the background + separately generated building workflow: camera angle mismatch, lighting drift, style drift, and repeated compositing effort. A non-destructive prototype now exists at `prototype/district-single-scene/`.
+
+Prototype rule:
+- visual layer: one completed district scene image containing the buildings
+- interaction layer: SVG polygons only; no independent project-building images are required at runtime
+- hover/focus highlight reuses the exact same completed scene image through SVG clipping, so no visual mismatch can be introduced
+- click behavior resolves project metadata from `portfolio-city/data/projects.json`
+
+Migration sample:
+- source: existing Observatory terrain + three existing Observatory building assets
+- baked scene: `prototype/district-single-scene/observatory-single-scene.webp`
+- semantic regions: `prototype/district-single-scene/hotspots.json`
+- runtime demo: `prototype/district-single-scene/index.html`
+- alpha-derived building contours were used only to validate the architecture; future all-in-one generated scenes can define the polygon directly from the finished scene
+
+Status: **PROTOTYPE PASS / NOT YET ADOPTED AS PRODUCTION ARCHITECTURE**.
+The six-slot Waterside workflow remains preserved until the single-scene approach is visually approved and a replacement production workflow is locked.

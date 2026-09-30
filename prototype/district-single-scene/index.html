@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio City Single Scene Prototype</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#171512;color:#efe9dc;font-family:"Yu Gothic",system-ui,sans-serif}
+body{padding:24px;overflow-x:hidden}.prototype{width:100%;max-width:1180px;min-width:0;margin:0 auto}.prototype__head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:12px}
+h1{font-size:clamp(20px,3vw,34px);margin:0;font-weight:700}.note{margin:0;color:#bbb09c;font-size:13px}.scene{position:relative;width:100%;border:1px solid #5e5549;border-radius:18px;overflow:hidden;background:#2d2923;box-shadow:0 22px 60px #0008}
+.scene>img{display:block;width:100%;height:auto}.scene svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}.hotspot{cursor:pointer;outline:none}.hotspot__hit{fill:rgba(255,255,255,.001);stroke:transparent;stroke-width:4;vector-effect:non-scaling-stroke}
+.hotspot__highlight{opacity:0;filter:brightness(1.12) saturate(1.08);transition:opacity .16s ease}.hotspot:hover .hotspot__highlight,.hotspot:focus .hotspot__highlight,.hotspot.is-active .hotspot__highlight{opacity:1}
+.hotspot:hover .hotspot__hit,.hotspot:focus .hotspot__hit,.hotspot.is-active .hotspot__hit{stroke:#fff9;stroke-dasharray:6 5}
+.panel{position:absolute;z-index:2;left:18px;bottom:18px;width:min(360px,calc(100% - 36px));padding:16px 17px;border-radius:14px;background:rgba(31,27,22,.9);backdrop-filter:blur(10px);border:1px solid #e7dac433;box-shadow:0 16px 36px #0007;transform:translateY(8px);opacity:0;pointer-events:none;transition:.16s ease}
+.panel.is-open{transform:none;opacity:1;pointer-events:auto}.panel__eyebrow{margin:0 0 4px;color:#cdbf9e;font-size:11px;letter-spacing:.14em}.panel h2{margin:0 0 7px;font-size:22px}.panel p{margin:0 0 12px;line-height:1.65;font-size:13px}
+.panel a{display:inline-block;padding:9px 12px;border-radius:999px;color:#1c1813;background:#efe2c7;text-decoration:none;font-weight:700;font-size:13px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;color:#a89c8c;font-size:12px}.legend strong{color:#e9dfcd}
+@media(max-width:600px){body{padding:10px}.prototype__head{align-items:start;flex-direction:column}.scene{border-radius:12px}.panel{left:10px;right:10px;bottom:10px;width:auto}.note{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.hotspot__highlight,.panel{transition:none}}
+</style>
+</head><body>
+<main class="prototype">
+  <header class="prototype__head">
+    <div><h1>Single Scene + Semantic Hotspots</h1><p class="note">建物画像はDOMに置かず、完成街並み1枚とSVG判定だけで操作する実験。</p></div>
+    <p class="note">Observatory migration sample</p>
+  </header>
+  <section class="scene" id="scene" aria-label="観測丘の作品街並み">
+    <img id="sceneImage" src="observatory-single-scene.webp" alt="観測丘の街並み">
+    <svg id="hotspotSvg" aria-label="作品建物の操作領域"></svg>
+    <aside class="panel" id="panel" aria-live="polite">
+      <p class="panel__eyebrow" id="panelMeta">PROJECT</p>
+      <h2 id="panelTitle"></h2>
+      <p id="panelSummary"></p>
+      <a id="panelLink" href="#">作品ページへ</a>
+    </aside>
+  </section>
+  <div class="legend"><span><strong>通常:</strong> 一枚絵のみ</span><span><strong>hover/focus:</strong> 同じ一枚絵を建物形状だけ再表示</span><span><strong>click:</strong> 作品情報</span></div>
+</main>
+<script>
+'use strict';
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('hotspotSvg'),panel=document.getElementById('panel');
+const $=id=>document.getElementById(id);
+function el(name,attrs={}){const n=document.createElementNS(NS,name);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,v);return n}
+function pointsText(points){return points.map(p=>p.join(',')).join(' ')}
+function showProject(project,group){document.querySelectorAll('.hotspot').forEach(n=>n.classList.toggle('is-active',n===group));$('panelMeta').textContent=project.building||'PROJECT';$('panelTitle').textContent=project.title;$('panelSummary').textContent=project.summary||'';$('panelLink').href=project.route;panel.classList.add('is-open')}
+async function init(){
+  const [sceneData,projectData]=await Promise.all([fetch('hotspots.json').then(r=>r.json()),fetch('../../portfolio-city/data/projects.json').then(r=>r.json())]);
+  const projects=new Map(projectData.projects.map(p=>[p.id,p]));
+  const {width,height}=sceneData.canvas;svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.setAttribute('preserveAspectRatio','none');
+  const defs=el('defs'),echo=el('image',{id:'sceneEcho',href:sceneData.scene,x:0,y:0,width,height,preserveAspectRatio:'none'});defs.append(echo);
+  for(const spot of sceneData.hotspots){const clip=el('clipPath',{id:`clip-${spot.projectId}`}),shape=el('polygon',{points:pointsText(spot.points)});clip.append(shape);defs.append(clip)}
+  svg.append(defs);
+  for(const spot of sceneData.hotspots){
+    const project=projects.get(spot.projectId)||spot,group=el('g',{class:'hotspot',tabindex:'0',role:'button','aria-label':`${project.building||''} ${project.title}`});
+    const hi=el('use',{href:'#sceneEcho',class:'hotspot__highlight','clip-path':`url(#clip-${spot.projectId})`});
+    const hit=el('polygon',{points:pointsText(spot.points),class:'hotspot__hit'});
+    group.append(hi,hit);group.addEventListener('click',()=>showProject(project,group));
+    group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showProject(project,group)}});
+    svg.append(group);
+  }
+  if(new URLSearchParams(location.search).get('demo')==='1') svg.querySelector('.hotspot')?.dispatchEvent(new MouseEvent('click',{bubbles:true}));
+}
+init().catch(err=>{console.error(err);$('panelTitle').textContent='Prototype load error';$('panelSummary').textContent=String(err);panel.classList.add('is-open')});
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+{
+  "schema": "portfolio-city-single-scene/v1",
+  "canvas": {
+    "width": 768,
+    "height": 506
+  },
+  "scene": "observatory-single-scene.webp",
+  "hotspots": [
+    {
+      "projectId": "prime-dot-art",
+      "title": "素数点画",
+      "route": "/PRIME_DOT_ART/prime_dot_art.html",
+      "points": [
+        [
+          149,
+          260
+        ],
+        [
+          184,
+          212
+        ],
+        [
+          247,
+          233
+        ],
+        [
+          265,
+          253
+        ],
+        [
+          264,
+          305
+        ],
+        [
+          159,
+          309
+        ],
+        [
+          146,
+          301
+        ]
+      ]
+    },
+    {
+      "projectId": "sphere",
+      "title": "天球儀",
+      "route": "/SPHERE/sphere.html",
+      "points": [
+        [
+          395,
+          112
+        ],
+        [
+          420,
+          135
+        ],
+        [
+          448,
+          225
+        ],
+        [
+          331,
+          229
+        ],
+        [
+          331,
+          189
+        ]
+      ]
+    },
+    {
+      "projectId": "holoscope",
+      "title": "HoloScope",
+      "route": "/holoscope/",
+      "points": [
+        [
+          601,
+          175
+        ],
+        [
+          617,
+          299
+        ],
+        [
+          541,
+          319
+        ],
+        [
+          489,
+          298
+        ],
+        [
+          491,
+          252
+        ],
+        [
+          526,
+          204
+        ]
+      ]
+    }
+  ]
+}

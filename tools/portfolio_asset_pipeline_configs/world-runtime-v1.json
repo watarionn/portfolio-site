@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "job": "derivatives",
+  "id": "portfolio-city-world-runtime-v1",
+  "manifestFile": "portfolio-city-world-runtime-v1.manifest.json",
+  "filenamePrefix": "portfolio-city-master-world",
+  "source": {
+    "type": "file",
+    "path": "portfolio-city/assets/world/v1/master/portfolio-city-master-world-v1.jpg",
+    "expectedSize": [
+      8192,
+      6144
+    ]
+  },
+  "derivatives": [
+    {
+      "format": "avif",
+      "quality": 62,
+      "lossless": false,
+      "sizes": [
+        [
+          4096,
+          3072
+        ],
+        [
+          3072,
+          2304
+        ]
+      ]
+    },
+    {
+      "format": "webp",
+      "quality": 84,
+      "lossless": false,
+      "sizes": [
+        [
+          4096,
+          3072
+        ],
+        [
+          3072,
+          2304
+        ]
+      ]
+    }
+  ]
+}

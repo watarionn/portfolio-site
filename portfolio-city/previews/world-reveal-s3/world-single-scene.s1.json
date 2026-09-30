@@ -13,8 +13,8 @@
         "y": 0.465
       },
       "viewportWorldFraction": {
-        "width": 0.36,
-        "height": 0.36
+        "width": 0.42,
+        "height": 0.42
       }
     },
     "tablet": {
@@ -23,8 +23,8 @@
         "y": 0.47
       },
       "viewportWorldFraction": {
-        "width": 0.34,
-        "height": 0.4
+        "width": 0.38,
+        "height": 0.46
       }
     },
     "mobile": {
@@ -33,8 +33,8 @@
         "y": 0.46
       },
       "viewportWorldFraction": {
-        "width": 0.24,
-        "height": 0.36
+        "width": 0.27,
+        "height": 0.42
       }
     }
   },

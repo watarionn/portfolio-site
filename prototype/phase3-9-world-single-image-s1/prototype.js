@@ -202,8 +202,9 @@
 
       const label = document.createElementNS(namespace, "text");
       label.classList.add("world-hotspot-label");
-      label.setAttribute("x", String(district.anchor.x));
-      label.setAttribute("y", String(district.anchor.y - 245));
+      const labelOffset = district.labelOffset || { x: 0, y: -245 };
+      label.setAttribute("x", String(district.anchor.x + labelOffset.x));
+      label.setAttribute("y", String(district.anchor.y + labelOffset.y));
       label.setAttribute("aria-hidden", "true");
       label.textContent = district.name;
 

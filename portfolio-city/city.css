@@ -3561,3 +3561,75 @@ button { font: inherit; }
     padding: .48rem .35rem;
   }
 }
+
+
+/* District focus mode: keep the city scene above the fold on phones. */
+@media (max-width: 680px) {
+  body[data-world-level="district"] .city-header {
+    min-height: 0;
+  }
+  body[data-world-level="district"] .city-header__bar {
+    min-height: 2.45rem;
+    padding-block: .3rem;
+  }
+  body[data-world-level="district"] .city-wordmark {
+    gap: 0;
+    font-size: .72rem;
+    letter-spacing: .09em;
+  }
+  body[data-world-level="district"] .city-wordmark small,
+  body[data-world-level="district"] .back-link,
+  body[data-world-level="district"] .city-nav,
+  body[data-world-level="district"] .mobile-primary-switch,
+  body[data-world-level="district"] .city-footer,
+  body[data-world-level="district"] .panel-heading--map > p,
+  body[data-world-level="district"] .panel-heading--map p {
+    display: none;
+  }
+  body[data-world-level="district"] .city-panel {
+    padding-top: .25rem;
+    padding-bottom: .35rem;
+  }
+  body[data-world-level="district"] .panel-heading--map {
+    min-height: 0;
+    margin-bottom: .12rem;
+    padding-block: .12rem .2rem;
+    border-bottom: 0;
+  }
+  body[data-world-level="district"] .panel-heading--map h2 {
+    font-size: .72rem;
+    line-height: 1.15;
+    letter-spacing: .02em;
+    color: var(--ink-muted);
+  }
+  body[data-world-level="district"] .district-single-scene {
+    gap: .25rem;
+  }
+  body[data-world-level="district"] .district-single-scene__title {
+    margin: .05rem 0 .12rem;
+    font-size: 1.08rem;
+    line-height: 1.15;
+  }
+  body[data-world-level="district"] .district-single-scene__stage {
+    width: 100%;
+    max-height: min(66vh, 34rem);
+  }
+  body[data-world-level="district"] .district-page__nav {
+    position: absolute;
+    inset: auto .45rem .42rem;
+    z-index: 4;
+    grid-template-columns: auto 1fr auto;
+    pointer-events: none;
+  }
+  body[data-world-level="district"] .district-page__nav-button {
+    pointer-events: auto;
+    min-height: 1.9rem;
+    padding: .25rem .38rem;
+    background: rgba(247,242,228,.82);
+    backdrop-filter: blur(4px);
+    font-size: .6rem;
+  }
+  body[data-world-level="district"] .district-page__nav-button--world {
+    justify-self: center;
+  }
+}

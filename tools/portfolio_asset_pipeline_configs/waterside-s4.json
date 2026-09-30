@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "job": "composite",
+  "id": "waterside-s4-aquarium",
+  "manifestFile": "waterside-s4-pipeline.manifest.json",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "background": {
+    "type": "git",
+    "ref": "fa398ce5db39cdcce242b0fa7bb9881c99d5f02a",
+    "path": "portfolio-city/assets/districts/waterside-play/background-approved.png",
+    "expectedSha256": "838797151c9c557af97ffb84e30940f1afee3e1603208a3ec9620d1bb2f95789",
+    "expectedSize": [
+      1672,
+      941
+    ]
+  },
+  "layers": [
+    {
+      "id": "aquarium",
+      "source": {
+        "type": "git",
+        "ref": "fa398ce5db39cdcce242b0fa7bb9881c99d5f02a",
+        "path": "portfolio-city/assets/districts/waterside-play/aquarium-s1-final.png",
+        "expectedSha256": "228fbc8366d6e5cbdd9ef02a2a948bd5cb24cc9b5bf658f951a68d0eadef9ea1",
+        "expectedSize": [
+          1536,
+          1024
+        ]
+      },
+      "placement": {
+        "anchor": "bottom-center",
+        "xFraction": 0.199606,
+        "yFraction": 0.571039,
+        "widthFraction": 0.25,
+        "rotationDegrees": 0
+      },
+      "hotspot": {
+        "id": "aquarium",
+        "paddingPx": 12
+      }
+    }
+  ],
+  "output": {
+    "file": "waterside-s4-aquarium-scene.webp",
+    "format": "webp",
+    "quality": 80,
+    "lossless": true
+  }
+}

@@ -54,6 +54,55 @@
         "word-generator"
       ],
       "acceptance": "human-review-required"
+    },
+    {
+      "id": "C3",
+      "status": "rejected-visual-reference",
+      "retained": [
+        "Portfolio Storybook City palette direction",
+        "left dominant / mid-right secondary / upper-right deeper hierarchy",
+        "right-side elevation and partially hidden continuation"
+      ],
+      "rejectedFor": [
+        "whole-scene regeneration",
+        "Production Locked Aquarium not preserved",
+        "accepted Waterside bridge/canal/skyline replaced"
+      ]
+    },
+    {
+      "id": "C4",
+      "status": "asset-production",
+      "base": "accepted Waterside S4",
+      "generationScope": "right-side transparent addition layer only",
+      "editableRegionNorm": [
+        0.6,
+        0.2,
+        0.94,
+        0.68
+      ],
+      "additions": [
+        {
+          "id": "holoca",
+          "role": "secondary-midground-card-shop"
+        },
+        {
+          "id": "word-generator",
+          "role": "deeper-curiosity-game-shop"
+        }
+      ],
+      "protected": [
+        "Production Locked Aquarium",
+        "left waterfront",
+        "central canal",
+        "stone bridge",
+        "distant skyline"
+      ],
+      "finalization": [
+        "composite right-side addition layer onto accepted S4",
+        "restore exact Production Locked Aquarium pixels",
+        "browser-scale visual review",
+        "human acceptance gate"
+      ]
     }
   ]
 }

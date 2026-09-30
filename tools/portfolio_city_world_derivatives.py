@@ -8,11 +8,12 @@ to an explicitly supplied output directory and records a deterministic manifest.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from pathlib import Path
 
 from PIL import Image, ImageOps, features
+
+from portfolio_asset_pipeline import save_derivative, sha256_file
 
 
 DEFAULT_SIZES = ((4096, 3072), (3072, 2304), (2048, 1536))
@@ -38,24 +39,6 @@ def parse_sizes(raw: str) -> list[tuple[int, int]]:
     if not result:
         raise argparse.ArgumentTypeError("at least one size is required")
     return result
-
-
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def save_candidate(image: Image.Image, target: Path, fmt: str, quality: int) -> None:
-    if fmt == "webp":
-        image.save(target, "WEBP", quality=quality, method=6, lossless=False)
-        return
-    if fmt == "avif":
-        image.save(target, "AVIF", quality=quality, speed=6)
-        return
-    raise ValueError(f"unsupported format: {fmt}")
 
 
 def main() -> int:
@@ -99,7 +82,7 @@ def main() -> int:
                 "width": image.width,
                 "height": image.height,
                 "fileBytes": source.stat().st_size,
-                "sha256": sha256(source),
+                "sha256": sha256_file(source),
             },
             "encoder": {
                 "format": args.format,
@@ -115,7 +98,7 @@ def main() -> int:
             resized = image.resize((width, height), Image.Resampling.LANCZOS)
             filename = f"portfolio-city-master-world-{width}x{height}-q{quality}.{args.format}"
             target = output / filename
-            save_candidate(resized, target, args.format, quality)
+            save_derivative(resized, target, args.format, quality, False)
             file_bytes = target.stat().st_size
             manifest["candidates"].append(
                 {
@@ -126,7 +109,7 @@ def main() -> int:
                     "fileMiB": round(file_bytes / 1024 / 1024, 3),
                     "decodedRgbaBytes": width * height * 4,
                     "decodedRgbaMiB": round(width * height * 4 / 1024 / 1024, 2),
-                    "sha256": sha256(target),
+                    "sha256": sha256_file(target),
                 }
             )
 

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "job": "package",
+  "id": "waterside-s4-proof-package",
+  "files": [
+    "prototype/phase3-9-district-single-scene-s4/index.html",
+    "prototype/phase3-9-district-single-scene-s4/prototype.css",
+    "prototype/phase3-9-district-single-scene-s4/prototype.js",
+    "prototype/phase3-9-district-single-scene-s4/waterside-s4-aquarium-scene.json",
+    "prototype/phase3-9-district-single-scene-s4/assets/waterside-s4-aquarium-scene.webp"
+  ]
+}

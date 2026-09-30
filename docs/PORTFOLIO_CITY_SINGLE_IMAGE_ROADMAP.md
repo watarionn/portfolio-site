@@ -315,6 +315,12 @@ Waterside Play is the preferred first art-quality candidate.
 
 # Phase 5 - Production automation
 
+**Status: PASS / 2026-09-30**
+
+Evidence: `docs/phase3-9-production-automation-s5.md`
+
+Canonical runbook: `docs/PORTFOLIO_CITY_ASSET_PIPELINE.md`
+
 ## Goal
 
 Remove repeated manual asset handling.
@@ -488,6 +494,6 @@ Use canonical project metadata for navigation.
 
 # Next checkpoint
 
-**Phase 4 District Single-Scene PASS -> Phase 5 Production automation**
+**Phase 5 Production automation PASS -> Phase 6 Production art**
 
-S4 proved the District-side architecture with accepted Waterside visual material: one finished scene image, one semantic Aquarium hotspot, canonical project preview, and canonical Work navigation. Continue by generalizing the repeated asset/manifest/validation work into reusable tooling.
+S5 consolidated World and District asset preparation into a shared, config-driven pipeline with source identity checks, derivative/composite generation, hotspot derivation, manifest validation, decoded-memory estimates, and safe deployment-package preparation. Continue with accepted production art using these stable contracts.

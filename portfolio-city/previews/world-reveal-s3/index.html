@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <meta name="robots" content="noindex,nofollow">
+  <title>Portfolio City - World Reveal S3 Production Preview</title>
+  <link rel="stylesheet" href="./preview-base.css">
+  <link rel="stylesheet" href="./reveal.css">
+</head>
+<body>
+  <main class="prototype-shell">
+    <header class="prototype-header">
+      <p class="eyebrow">Phase 3.9 / World Reveal Prototype S3</p>
+      <h1>Portfolio City World Reveal</h1>
+      <p>公開状態は地理画像ではなく、大きな有機的な atmosphere layer で表現する。論理セルは意味のデータとして残し、霧の形にはしない。</p>
+    </header>
+
+    <section class="reveal-controls" aria-label="Reveal prototype controls">
+      <div>
+        <p class="eyebrow">Atmosphere profile</p>
+        <strong id="profile-title">Current published world</strong>
+      </div>
+      <div class="reveal-controls__buttons">
+        <button type="button" data-reveal-profile="current" aria-pressed="true">Current W0</button>
+        <button type="button" data-reveal-profile="previewJ05" aria-pressed="false">Preview J05 reveal</button>
+      </div>
+      <p class="reveal-controls__note">J05は将来公開の仕組みを試す技術プレビュー。hotspotやpublication dataは追加しない。</p>
+    </section>
+
+    <section class="world-stage" aria-labelledby="world-heading">
+      <div class="world-stage__heading">
+        <div>
+          <p class="eyebrow">Single image + independent reveal atmosphere</p>
+          <h2 id="world-heading">Published cluster</h2>
+        </div>
+        <p class="world-stage__hint">ドラッグ / スワイプ / 矢印キーで移動。地区はTabでも選べる。</p>
+      </div>
+
+      <div class="world-viewport" id="world-viewport" tabindex="0" aria-label="Portfolio City 世界地図。ドラッグまたは矢印キーで移動できます。">
+        <div class="world-plane" id="world-plane">
+          <img id="world-image" class="world-base" alt="" width="8192" height="6144" decoding="async">
+          <svg id="world-reveal" class="world-reveal" viewBox="0 0 8192 6144" aria-hidden="true"></svg>
+          <svg id="world-hotspots" class="world-hotspots" viewBox="0 0 8192 6144" aria-label="公開地区"></svg>
+        </div>
+        <div class="viewport-vignette" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="district-sheet" id="district-sheet" hidden aria-labelledby="district-sheet-title">
+      <p class="eyebrow">District selected</p>
+      <h2 id="district-sheet-title" tabindex="-1"></h2>
+      <p id="district-sheet-meta"></p>
+      <p>Atmosphereは操作レイヤーではない。地区選択とcamera restoreはS1と同じsemantic hotspotで動く。</p>
+      <button type="button" id="return-world">世界地図へ戻る</button>
+    </section>
+
+    <aside class="debug-panel" aria-label="S3 debug information">
+      <strong>S3 debug</strong>
+      <span>breakpoint: <b id="debug-breakpoint">-</b></span>
+      <span>camera: <b id="debug-camera">-</b></span>
+      <span>scale: <b id="debug-scale">-</b></span>
+      <span>profile: <b id="debug-profile">current</b></span>
+      <span>published: <b id="debug-published">-</b></span>
+      <span>hotspots: <b id="debug-hotspots">-</b></span>
+      <span>image: <b id="debug-image">loading</b></span>
+    </aside>
+
+    <p class="sr-only" id="world-status" aria-live="polite"></p>
+  </main>
+  <script src="./reveal.js"></script>
+</body>
+</html>

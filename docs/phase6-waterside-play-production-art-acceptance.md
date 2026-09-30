@@ -60,3 +60,13 @@ GitHub remains canonical for this acceptance record, slot semantics, hotspot geo
 5. keep WP-04..06 reserved and non-interactive
 6. run the Phase 5 asset pipeline to create runtime derivatives and QA evidence
 7. integrate the resulting Single-Scene district behind the reversible production gate
+
+## Accepted master identity
+
+- Drive file ID: `1hABwB5mAHumsUMjQnw6WgOTnj831A5xJ`
+- Filename: `waterside-play-production-art-accepted-20260930.png`
+- MIME: `image/png`
+- Drive parent: `05_Phase6_ProductionArt`
+- Source: accepted ChatGPT-generated Phase 6 production candidate, user-approved 2026-09-30
+
+This Drive object is the canonical accepted high-resolution Waterside Play art for the next hotspot / derivative stage.

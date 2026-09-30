@@ -10,7 +10,8 @@
     "expectedSize": [
       8192,
       6144
-    ]
+    ],
+    "expectedSha256": "1b63fd1b7439e7498a827cfb368d4eb2ee0b4bd06948eac82f5803f2e61a1c25"
   },
   "derivatives": [
     {

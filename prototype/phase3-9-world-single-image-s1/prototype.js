@@ -97,19 +97,22 @@
   function resetForBreakpoint(options) {
     const opts = options || {};
     state.breakpoint = getBreakpoint();
-    if (!opts.preserveCenter && !state.selectedId) {
-      const entry = entryCameraForBreakpoint();
-      state.centerX = entry.center.x;
-      state.centerY = entry.center.y;
-      state.viewFraction = copyFraction(entry.viewportWorldFraction);
-    } else if (state.selectedId) {
+    if (state.selectedId) {
       state.viewFraction = copyFraction(state.config.districtFocusWorldFraction[state.breakpoint]);
+    } else {
+      const entry = entryCameraForBreakpoint();
+      state.viewFraction = copyFraction(entry.viewportWorldFraction);
+      if (!opts.preserveCenter) {
+        state.centerX = entry.center.x;
+        state.centerY = entry.center.y;
+      }
     }
     renderCamera();
   }
 
   function snapshotCamera() {
     state.savedCamera = {
+      breakpoint: state.breakpoint,
       centerX: state.centerX,
       centerY: state.centerY,
       viewFraction: copyFraction(state.viewFraction)
@@ -120,7 +123,9 @@
     if (!state.savedCamera) return;
     state.centerX = state.savedCamera.centerX;
     state.centerY = state.savedCamera.centerY;
-    state.viewFraction = copyFraction(state.savedCamera.viewFraction);
+    state.viewFraction = state.savedCamera.breakpoint === state.breakpoint
+      ? copyFraction(state.savedCamera.viewFraction)
+      : copyFraction(entryCameraForBreakpoint().viewportWorldFraction);
     animateCameraOnce();
     renderCamera();
   }
@@ -137,8 +142,8 @@
 
   function selectDistrict(id, trigger) {
     const district = districtById(id);
-    if (!district) return;
-    snapshotCamera();
+    if (!district || state.selectedId === id) return;
+    if (!state.selectedId) snapshotCamera();
     state.selectedId = id;
     state.lastTrigger = trigger || null;
     state.centerX = district.anchor.x / state.config.source.width;
@@ -164,6 +169,7 @@
     districtSheet.hidden = true;
     debugSelected.textContent = "none";
     restoreCamera();
+    state.savedCamera = null;
     status.textContent = "世界地図へ戻りました。";
     state.lastTrigger = null;
     if (previousTrigger && previousTrigger.isConnected) previousTrigger.focus({ preventScroll: true });

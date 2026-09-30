@@ -4,8 +4,9 @@
   "id": "waterside-play",
   "manifestFile": "waterside-play.manifest.json",
   "source": {
-    "type": "file",
-    "path": "portfolio-city/assets/production/waterside-play/waterside-play-production-art-accepted-20260930.png",
+    "type": "external",
+    "canonicalProvider": "google-drive",
+    "canonicalId": "1hABwB5mAHumsUMjQnw6WgOTnj831A5xJ",
     "expectedSize": [
       1536,
       1024

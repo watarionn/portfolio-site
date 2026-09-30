@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "district": "waterside-play",
+  "phase": "S6",
+  "candidates": [
+    {
+      "id": "C0",
+      "status": "rejected-study",
+      "retained": [
+        "dominant-midground-deep hierarchy"
+      ],
+      "rejectedFor": [
+        "presentation board instead of district scene",
+        "regenerated locked Aquarium",
+        "regenerated Waterside geography",
+        "invented Cafe",
+        "generated text dependency",
+        "excess detail and saturation"
+      ]
+    },
+    {
+      "id": "C1",
+      "status": "rejected-study",
+      "retained": [
+        "left dominant Aquarium / mid-right secondary / upper-right deeper hierarchy"
+      ],
+      "rejectedFor": [
+        "whole-scene regeneration",
+        "locked Aquarium not preserved",
+        "detail hierarchy too flat",
+        "saturation and edge strength too high",
+        "HoloCa and Word Generator silhouettes insufficiently distinct"
+      ]
+    },
+    {
+      "id": "C2",
+      "status": "planned-candidate",
+      "base": "accepted Waterside S4",
+      "editableRegionNorm": [
+        0.6,
+        0.2,
+        0.94,
+        0.68
+      ],
+      "protected": [
+        "Aquarium",
+        "left waterfront",
+        "central canal",
+        "stone bridge",
+        "distant skyline"
+      ],
+      "additions": [
+        "holoca",
+        "word-generator"
+      ],
+      "acceptance": "human-review-required"
+    }
+  ]
+}

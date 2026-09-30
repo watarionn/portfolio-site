@@ -1,0 +1,31 @@
+name: Portfolio City Asset Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      config:
+        description: Repository-relative pipeline config
+        required: true
+        default: portfolio-city/data/pipeline/waterside-play-derivatives.json
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check pillow
+      - name: Run deterministic asset pipeline
+        run: |
+          mkdir -p .asset-output
+          python tools/portfolio_asset_pipeline.py run --config "${{ inputs.config }}" --repo . --output-dir .asset-output
+          python tools/portfolio_asset_pipeline.py validate --manifest ".asset-output/waterside-play.manifest.json" --root .asset-output
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-city-asset-output
+          path: .asset-output/

@@ -3526,14 +3526,16 @@ button { font: inherit; }
 
 @media (max-width: 680px) {
   .district-single-scene {
-    width: auto;
-    margin-inline: calc(-1 * var(--gutter));
-    padding-inline: .35rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin-inline: 0;
+    padding-inline: .22rem;
+    overflow-x: clip;
   }
   .district-single-scene__title,
   .district-single-scene__project-note,
   .district-page__nav {
-    margin-inline: calc(var(--gutter) - .35rem);
+    margin-inline: 0;
   }
   .district-single-scene__stage {
     width: 100%;

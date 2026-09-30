@@ -67,6 +67,8 @@ if world_cfg.get("job") != "derivatives":
     fail("World config must be derivatives")
 if world_cfg.get("source", {}).get("expectedSize") != [8192, 6144]:
     fail("World config source geometry changed")
+if world_cfg.get("source", {}).get("expectedSha256") != "1b63fd1b7439e7498a827cfb368d4eb2ee0b4bd06948eac82f5803f2e61a1c25":
+    fail("World config source SHA-256 changed")
 expected_world = {
     ("avif", 62, 4096, 3072),
     ("avif", 62, 3072, 2304),

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "district": "waterside-play",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "sourceLocks": {
+    "background": {
+      "driveFileId": "1j3_NnnrXExcqu3wMU2AHMAk6EqPqMUVM",
+      "sha256": "838797151c9c557af97ffb84e30940f1afee3e1603208a3ec9620d1bb2f95789"
+    },
+    "aquarium": {
+      "driveFileId": "1wb_47raKcnDRM1emyVN0gBT1dYpIxUvt",
+      "sha256": "228fbc8366d5cbdd9ef02a2a948bd5cb24cc9b5bf658f951a68d0eadef9ea1",
+      "placement": {
+        "anchor": "bottom-center",
+        "xFraction": 0.199606,
+        "yFraction": 0.571039,
+        "widthFraction": 0.25,
+        "rotationDegrees": 0
+      }
+    }
+  },
+  "projectArtPlan": [
+    {
+      "id": "aquarium",
+      "role": "dominant-landmark",
+      "status": "production-locked",
+      "zoneNorm": [
+        0.1,
+        0.27,
+        0.3,
+        0.58
+      ]
+    },
+    {
+      "id": "holoca",
+      "role": "secondary-midground",
+      "status": "new-production-art",
+      "preferredZoneNorm": [
+        0.68,
+        0.38,
+        0.86,
+        0.63
+      ]
+    },
+    {
+      "id": "word-generator",
+      "role": "deeper-curiosity",
+      "status": "new-production-art",
+      "preferredZoneNorm": [
+        0.77,
+        0.24,
+        0.91,
+        0.47
+      ]
+    }
+  ],
+  "preserve": [
+    "central-canal",
+    "stone-bridge",
+    "distant-town",
+    "aqueduct",
+    "right-climbing-terrain",
+    "foreground-promenade",
+    "daylight-color-grade"
+  ],
+  "acceptance": "human-visual-review-required"
+}

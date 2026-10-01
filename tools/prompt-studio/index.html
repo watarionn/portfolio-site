@@ -49,6 +49,28 @@
             <p id="profileNote" class="section-note"></p>
           </section>
 
+          <section class="panel-section slot-composer">
+            <div class="section-heading-row">
+              <div>
+                <h2>Slot Composer</h2>
+                <p class="section-note">PromptDBのConceptをmanual / weighted random / sequentialでSemantic fieldへ流し込む。</p>
+              </div>
+              <button id="addSlotButton" class="quiet-button" type="button">Slotを追加</button>
+            </div>
+            <div class="slot-column-head" aria-hidden="true">
+              <span></span><span></span><span>Field</span><span>Source</span><span>Mode</span><span>Value</span><span></span>
+            </div>
+            <div id="slotList" class="slot-list"></div>
+            <div class="slot-footer">
+              <button id="resolveSlotsButton" class="primary-button" type="button">Resolve slots</button>
+              <span id="slotResultNote">Slotを解決すると下のSemantic fieldsへ反映される。</span>
+            </div>
+            <div class="recipe-save-row">
+              <label>Recipe name<input id="recipeTitle" type="text" placeholder="例: 夜カフェ人物撮影"></label>
+              <button id="saveRecipeButton" type="button">Recipeを保存</button>
+            </div>
+          </section>
+
           <section class="panel-section semantic-fields">
             <div class="section-heading-row">
               <h2>Scene meaning</h2>
@@ -132,11 +154,48 @@
         </aside>
 
         <section class="database-main">
-          <div class="database-main-head">
-            <h2>Library</h2>
-            <button id="newFromDbButton">Composeへ戻る</button>
+          <div class="db-section-tabs" role="tablist" aria-label="PromptDB sections">
+            <button class="db-section-tab active" data-db-section="library" role="tab" aria-selected="true">Library</button>
+            <button class="db-section-tab" data-db-section="concepts" role="tab" aria-selected="false">Concepts</button>
+            <button class="db-section-tab" data-db-section="recipes" role="tab" aria-selected="false">Recipes</button>
           </div>
-          <div id="libraryList" class="library-list"></div>
+
+          <section id="libraryPanel" class="db-panel active">
+            <div class="database-main-head">
+              <div><h2>Library</h2><p>完成したPromptとSemantic sourceを保存。</p></div>
+              <button id="newFromDbButton">Composeへ戻る</button>
+            </div>
+            <div id="libraryList" class="library-list"></div>
+          </section>
+
+          <section id="conceptsPanel" class="db-panel" hidden>
+            <div class="database-main-head">
+              <div><h2>Concepts</h2><p>モデルに依存しない意味資産。weightはweighted randomの抽選比率。</p></div>
+              <span><b id="conceptCountForCategory">0</b> items</span>
+            </div>
+            <div class="concept-editor">
+              <label>Category
+                <input id="conceptCategoryInput" type="text" list="conceptCategoryOptions" placeholder="pose / lighting / custom_category">
+                <datalist id="conceptCategoryOptions"></datalist>
+              </label>
+              <label>Value<input id="conceptValue" type="text" placeholder="reading a book"></label>
+              <label>日本語ラベル <span class="optional">optional</span><input id="conceptLabelJa" type="text" placeholder="本を読む"></label>
+              <label>Tags <span class="optional">optional</span><input id="conceptTags" type="text" placeholder="reading, book"></label>
+              <label>Weight<input id="conceptWeight" type="number" min="0.01" step="0.1" value="1"></label>
+              <div class="concept-form-actions">
+                <button id="conceptCancelButton" type="button" hidden>Cancel</button>
+                <button id="conceptSaveButton" class="primary-button" type="button">Conceptを追加</button>
+              </div>
+            </div>
+            <div id="conceptList" class="concept-list"></div>
+          </section>
+
+          <section id="recipesPanel" class="db-panel" hidden>
+            <div class="database-main-head">
+              <div><h2>Recipes</h2><p>Slotの並びと抽出方式を再利用する。旧PromptDB templateもここに残る。</p></div>
+            </div>
+            <div id="recipeList" class="recipe-list"></div>
+          </section>
         </section>
       </div>
     </section>
@@ -147,5 +206,7 @@
   <script src="engine.js"></script>
   <script src="store.js"></script>
   <script src="app.js"></script>
+  <script src="slots.js"></script>
+  <script src="db-editor.js"></script>
 </body>
 </html>

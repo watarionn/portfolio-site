@@ -75,6 +75,7 @@
   const material = (color) => new THREE.MeshLambertMaterial({color,side:THREE.DoubleSide});
   const joints={};
   const markers=[];
+  const pickTargets=[];
   const root=new THREE.Group();
   scene.add(root);
 
@@ -98,7 +99,17 @@
     marker.userData.joint=name;
     group.add(marker);
     markers.push(marker);
-    joints[name]={g:group,label,marker};
+
+    const hitTarget=new THREE.Mesh(
+      new THREE.SphereGeometry(r*4.8,10,8),
+      new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,depthTest:false})
+    );
+    hitTarget.userData.joint=name;
+    hitTarget.renderOrder=11;
+    group.add(hitTarget);
+    pickTargets.push(hitTarget);
+
+    joints[name]={g:group,label,marker,hitTarget};
     return group;
   }
 
@@ -300,9 +311,19 @@
   });
   $('resetAll3dButton').addEventListener('click',()=>applyPreset('直立'));
 
+  const DIRECT_CHAINS={
+    wrL:['elL','shL'], elL:['shL'], shL:['chest','spine'],
+    wrR:['elR','shR'], elR:['shR'], shR:['chest','spine'],
+    anL:['knL','hipL'], knL:['hipL'], hipL:['hips'],
+    anR:['knR','hipR'], knR:['hipR'], hipR:['hips'],
+    head:['neck','chest'], neck:['chest','spine'], chest:['spine','hips'], spine:['hips']
+  };
+
   const pointers=new Map();
   const ray=new THREE.Raycaster();
   const ndc=new THREE.Vector2();
+  const dragPlane=new THREE.Plane();
+  const dragTarget=new THREE.Vector3();
   let drag=null;
   let pinch=0;
 
@@ -311,15 +332,113 @@
     return Math.hypot(values[0].x-values[1].x,values[0].y-values[1].y)||1;
   }
 
-  function pick(event){
+  function setNdc(clientX,clientY){
     const rect=canvas.getBoundingClientRect();
     ndc.set(
-      ((event.clientX-rect.left)/rect.width)*2-1,
-      -((event.clientY-rect.top)/rect.height)*2+1
+      ((clientX-rect.left)/rect.width)*2-1,
+      -((clientY-rect.top)/rect.height)*2+1
     );
+  }
+
+  function pick(event){
+    setNdc(event.clientX,event.clientY);
     ray.setFromCamera(ndc,camera);
-    const hit=ray.intersectObjects(markers,false)[0];
+    const hit=ray.intersectObjects(pickTargets,false)[0];
     return hit?hit.object.userData.joint:null;
+  }
+
+  function worldPosition(name){
+    const out=new THREE.Vector3();
+    joints[name].g.getWorldPosition(out);
+    return out;
+  }
+
+  function rememberPoseFromGroup(name){
+    const r=joints[name].g.rotation;
+    const toDeg=(value)=>{
+      let d=value/D;
+      while(d>180)d-=360;
+      while(d<-180)d+=360;
+      return clamp(d,-180,180);
+    };
+    pose[name]=[toDeg(r.x),toDeg(r.y),toDeg(r.z)];
+  }
+
+  function targetOnDragPlane(name,clientX,clientY){
+    scene.updateMatrixWorld(true);
+    const effector=worldPosition(name);
+    const normal=new THREE.Vector3();
+    camera.getWorldDirection(normal);
+    dragPlane.setFromNormalAndCoplanarPoint(normal,effector);
+    setNdc(clientX,clientY);
+    ray.setFromCamera(ndc,camera);
+    return ray.ray.intersectPlane(dragPlane,dragTarget)?dragTarget.clone():effector;
+  }
+
+  function solveIk(name,targetWorld){
+    const chain=DIRECT_CHAINS[name]||[];
+    if(!chain.length) return false;
+
+    for(let iteration=0;iteration<7;iteration++){
+      for(const jointName of chain){
+        scene.updateMatrixWorld(true);
+        const effector=worldPosition(name);
+        const pivot=worldPosition(jointName);
+        const from=effector.clone().sub(pivot);
+        const to=targetWorld.clone().sub(pivot);
+        if(from.lengthSq()<1e-8||to.lengthSq()<1e-8) continue;
+
+        const delta=new THREE.Quaternion().setFromUnitVectors(from.normalize(),to.normalize());
+        const worldQuat=new THREE.Quaternion();
+        joints[jointName].g.getWorldQuaternion(worldQuat);
+        const desiredWorld=delta.multiply(worldQuat);
+
+        const parentWorld=new THREE.Quaternion();
+        joints[jointName].g.parent.getWorldQuaternion(parentWorld);
+        const local=parentWorld.invert().multiply(desiredWorld).normalize();
+        joints[jointName].g.quaternion.copy(local);
+        joints[jointName].g.rotation.setFromQuaternion(local,'XYZ');
+        rememberPoseFromGroup(jointName);
+        scene.updateMatrixWorld(true);
+      }
+      if(worldPosition(name).distanceToSquared(targetWorld)<0.00002) break;
+    }
+    return true;
+  }
+
+  function moveJointOnScreen(name,clientX,clientY){
+    if(!joints[name]) return false;
+    if(name==='hips'){
+      const rect=canvas.getBoundingClientRect();
+      const current=worldPosition('hips').clone().project(camera);
+      const targetY=-((clientY-rect.top)/rect.height)*2+1;
+      oy=clamp(oy+(targetY-current.y)*.9,-.6,.6);
+      apply();
+      return true;
+    }
+    const targetWorld=targetOnDragPlane(name,clientX,clientY);
+    const moved=solveIk(name,targetWorld);
+    if(moved){
+      scene.updateMatrixWorld(true);
+      draw();
+    }
+    return moved;
+  }
+
+  function moveJointToNormalizedScreen(name,x,y){
+    const rect=canvas.getBoundingClientRect();
+    return moveJointOnScreen(name,rect.left+clamp(x,0,1)*rect.width,rect.top+clamp(y,0,1)*rect.height);
+  }
+
+  function worldBoneLengths(){
+    scene.updateMatrixWorld(true);
+    const pairs={
+      upperArmL:['shL','elL'],forearmL:['elL','wrL'],
+      upperArmR:['shR','elR'],forearmR:['elR','wrR'],
+      thighL:['hipL','knL'],shinL:['knL','anL'],
+      thighR:['hipR','knR'],shinR:['knR','anR']
+    };
+    return Object.fromEntries(Object.entries(pairs).map(([key,[a,b]])=>[key,worldPosition(a).distanceTo(worldPosition(b))]));
   }
 
   canvas.addEventListener('pointerdown',(event)=>{
@@ -327,8 +446,14 @@
     pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
     if(pointers.size===2){drag=null;pinch=pointerDistance();return;}
     const name=pick(event);
-    if(name){selected=name;syncUi();drag={joint:true};}
-    else drag={joint:false};
+    if(name){
+      selected=name;
+      syncUi();
+      drag={joint:true,name};
+      say(`${joints[name].label}を指で移動できます`);
+    }else{
+      drag={joint:false};
+    }
   });
 
   canvas.addEventListener('pointermove',(event)=>{
@@ -345,10 +470,8 @@
     }
     if(!drag) return;
     if(drag.joint){
-      const r=pose[selected];
-      r[0]=clamp(r[0]+dy*.6,-180,180);
-      r[1]=clamp(r[1]+dx*.6,-180,180);
-      apply();syncUi();
+      moveJointOnScreen(drag.name,event.clientX,event.clientY);
+      syncUi();
     }else{
       cam.az-=dx*.008;
       cam.el=clamp(cam.el+dy*.006,-1.2,1.2);
@@ -619,6 +742,8 @@
     setState,
     projectTo2D,
     applyPreset,
+    moveJointToNormalizedScreen,
+    getWorldBoneLengths:worldBoneLengths,
     getPresetNames:()=>Object.keys(PRESETS)
   });
 })();

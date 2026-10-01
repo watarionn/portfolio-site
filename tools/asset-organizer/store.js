@@ -159,10 +159,43 @@
     persist();
   }
 
+  function legacyRecord(raw = {}) {
+    const stem = E.clean(raw.stem);
+    const png = E.clean(raw.png);
+    const jsonName = E.clean(raw.json);
+    const hasImage = Boolean(png);
+    const hasJson = Boolean(jsonName);
+    return {
+      stem,
+      base_stem:E.basenameStem(stem),
+      status:hasImage && hasJson ? 'PAIR' : hasImage ? 'IMAGE_ONLY' : 'JSON_ONLY',
+      image:hasImage ? {
+        name:png,
+        path:png,
+        bytes:Number(raw.png_bytes) || 0,
+        type:'image/png',
+        width:0,
+        height:0,
+        extension:'png'
+      } : null,
+      json:hasJson ? {
+        name:jsonName,
+        path:jsonName,
+        bytes:Number(raw.json_bytes) || 0,
+        type:'application/json',
+        extension:'json',
+        valid:true,
+        error:'',
+        keys:[]
+      } : null,
+      collect_stem:E.basenameStem(stem)
+    };
+  }
+
   async function importDb(file) {
     const data = JSON.parse(await file.text());
     if (data?.format === 'ai-creation-workbench-assets') {
-      merge({format:'asset-db',entries:data.records || []});
+      merge({format:'asset-db',entries:(data.records || []).map(legacyRecord)});
       return;
     }
     if (data?.format !== 'asset-db' && data?.format !== 'asset-organizer-manifest') {

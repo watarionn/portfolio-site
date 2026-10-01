@@ -9,12 +9,11 @@ expected=spec['world']
 assert world['minX']==expected['minX'] and world['minY']==expected['minY']
 assert world['width']==expected['width'] and world['height']==expected['height']
 assert len(layout['chunks'])==expected['chunks']==13
-assert len(layout['projectPlacements'])==19
+assert len(layout['projectPlacements'])==18
 widths={p['projectId']:p['width'] for p in layout['projectPlacements']}
 assert widths['holoscope']==270
 assert widths['sphere']==250 and widths['prime-dot-art']==250
 assert widths['mindmap-maker']==260
-assert widths['ai-creation-workbench']==260
 assert widths['mkpdf-studio']==260
 assert widths['s3-upload-audit']==260
 assert widths['aquarium']==260 and widths['holoca']==260 and widths['word-generator']==260
@@ -24,4 +23,4 @@ for token in ['world-projects','--project-world-left','--project-world-width','-
     assert token in js, token
 for token in ['.world-projects','--project-world-left','--project-world-width','--project-world-height']:
     assert token in css, token
-print('Portfolio City R6 scale recalibration contract passed: 13 chunks / 19 authored project widths / world-project layer')
+print('Portfolio City R6 scale recalibration contract passed: 13 chunks / 18 authored project widths / world-project layer')

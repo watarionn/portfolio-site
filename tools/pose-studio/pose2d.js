@@ -32,6 +32,25 @@
     l_hip:'r_hip', l_knee:'r_knee', l_ankle:'r_ankle', l_eye:'r_eye', l_ear:'r_ear'
   };
 
+  const FIXED_PARENT = {
+    r_shoulder:'neck', r_elbow:'r_shoulder', r_wrist:'r_elbow',
+    l_shoulder:'neck', l_elbow:'l_shoulder', l_wrist:'l_elbow',
+    r_knee:'r_hip', r_ankle:'r_knee',
+    l_knee:'l_hip', l_ankle:'l_knee',
+    nose:'neck', r_eye:'nose', l_eye:'nose', r_ear:'r_eye', l_ear:'l_eye'
+  };
+
+  const FOLLOWERS = {
+    r_shoulder:['r_elbow','r_wrist'], r_elbow:['r_wrist'],
+    l_shoulder:['l_elbow','l_wrist'], l_elbow:['l_wrist'],
+    r_hip:['r_knee','r_ankle'], r_knee:['r_ankle'],
+    l_hip:['l_knee','l_ankle'], l_knee:['l_ankle'],
+    nose:['r_eye','l_eye','r_ear','l_ear'],
+    r_eye:['r_ear'], l_eye:['l_ear']
+  };
+
+  let boneLengths = {};
+
   const n = (x,y) => ({x,y});
   const PRESETS = {
     standing_front:{
@@ -102,7 +121,7 @@
     settings:{
       width:1024, height:1024, drawMode:'openpose', background:'black',
       lineWidth:10, jointSize:13, showGrid:true, showJoints:true, showLabels:false,
-      mirror:false, chairGuide:false, keepInside:true, referenceOpacity:.35, referenceFit:'contain'
+      mirror:false, lockBoneLengths:true, chairGuide:false, keepInside:true, referenceOpacity:.35, referenceFit:'contain'
     }
   };
 
@@ -118,6 +137,60 @@
       points[joint.id]={x:p.x*canvas.width,y:p.y*canvas.height};
     });
     return points;
+  }
+
+  function captureBoneLengths(){
+    const next={};
+    Object.entries(FIXED_PARENT).forEach(([child,parent])=>{
+      const a=state.points[parent],b=state.points[child];
+      if(a&&b) next[child]=Math.hypot(b.x-a.x,b.y-a.y);
+    });
+    boneLengths=next;
+  }
+
+  function translateFollowers(id,dx,dy){
+    (FOLLOWERS[id]||[]).forEach((child)=>{
+      const p=state.points[child];
+      if(!p) return;
+      p.x+=dx;
+      p.y+=dy;
+    });
+  }
+
+  function constrainedTarget(id,x,y){
+    let tx=x,ty=y;
+    if(state.settings.keepInside){
+      tx=clamp(tx,0,canvas.width);
+      ty=clamp(ty,0,canvas.height);
+    }
+    if(!state.settings.lockBoneLengths) return {x:tx,y:ty};
+    const parentId=FIXED_PARENT[id];
+    const parent=parentId&&state.points[parentId];
+    const length=boneLengths[id];
+    if(!parent||!Number.isFinite(length)||length<=0) return {x:tx,y:ty};
+    let dx=tx-parent.x,dy=ty-parent.y;
+    let dist=Math.hypot(dx,dy);
+    if(dist<.0001){
+      const current=state.points[id];
+      dx=current.x-parent.x;
+      dy=current.y-parent.y;
+      dist=Math.hypot(dx,dy)||1;
+    }
+    return {
+      x:parent.x+dx/dist*length,
+      y:parent.y+dy/dist*length
+    };
+  }
+
+  function moveSingleJoint(id,x,y,translateChildren=true){
+    const p=state.points[id];
+    if(!p) return;
+    const before={x:p.x,y:p.y};
+    const target=constrainedTarget(id,x,y);
+    p.x=target.x;
+    p.y=target.y;
+    const dx=p.x-before.x,dy=p.y-before.y;
+    if(state.settings.lockBoneLengths&&translateChildren) translateFollowers(id,dx,dy);
   }
 
   function backgroundColor(){
@@ -279,6 +352,7 @@
         y:normalized?p.y*canvas.height:p.y
       };
     });
+    captureBoneLengths();
     syncControls();
     fitCanvasCss();
     render();
@@ -296,6 +370,7 @@
 
   function applyPreset(key){
     state.points=clonePreset(key);
+    captureBoneLengths();
     state.selected=null;
     render();
     say('プリセットを適用しました');
@@ -308,6 +383,7 @@
     const sx=canvas.width/oldW,sy=canvas.height/oldH;
     Object.values(state.points).forEach((p)=>{p.x*=sx;p.y*=sy;});
     state.settings.width=canvas.width;state.settings.height=canvas.height;
+    captureBoneLengths();
     fitCanvasCss();render();
   }
 
@@ -346,12 +422,11 @@
   }
 
   function moveJoint(id,x,y){
-    const p=state.points[id];
-    if(!p) return;
-    p.x=x;p.y=y;clampPoint(p);
+    moveSingleJoint(id,x,y,true);
     if(state.settings.mirror&&MIRROR_PAIRS[id]){
-      const other=state.points[MIRROR_PAIRS[id]];
-      other.x=canvas.width-p.x;other.y=p.y;clampPoint(other);
+      const mirrorId=MIRROR_PAIRS[id];
+      const source=state.points[id];
+      moveSingleJoint(mirrorId,canvas.width-source.x,source.y,true);
     }
   }
 
@@ -393,6 +468,7 @@
     state.settings.showJoints=$('showJoints2d').checked;
     state.settings.showLabels=$('showLabels2d').checked;
     state.settings.mirror=$('mirror2d').checked;
+    state.settings.lockBoneLengths=$('lockBoneLengths2d').checked;
     state.settings.chairGuide=$('chairGuide2d').checked;
     state.settings.keepInside=$('keepInside2d').checked;
     state.settings.referenceOpacity=Number($('referenceOpacity2d').value)/100;
@@ -406,6 +482,7 @@
     $('lineWidth2d').value=state.settings.lineWidth;$('jointSize2d').value=state.settings.jointSize;
     $('showGrid2d').checked=state.settings.showGrid;$('showJoints2d').checked=state.settings.showJoints;
     $('showLabels2d').checked=state.settings.showLabels;$('mirror2d').checked=state.settings.mirror;
+    $('lockBoneLengths2d').checked=state.settings.lockBoneLengths!==false;
     $('chairGuide2d').checked=state.settings.chairGuide;$('keepInside2d').checked=state.settings.keepInside;
     $('referenceOpacity2d').value=Math.round(state.settings.referenceOpacity*100);
     $('referenceFit2d').value=state.settings.referenceFit;
@@ -505,7 +582,7 @@
     $('applyPreset2dButton').addEventListener('click',()=>applyPreset($('preset2dSelect').value));
     $('canvas2dWidth').addEventListener('change',()=>setCanvasSize($('canvas2dWidth').value,canvas.height));
     $('canvas2dHeight').addEventListener('change',()=>setCanvasSize(canvas.width,$('canvas2dHeight').value));
-    ['drawMode2d','background2d','lineWidth2d','jointSize2d','showGrid2d','showJoints2d','showLabels2d','mirror2d','chairGuide2d','keepInside2d','referenceOpacity2d','referenceFit2d'].forEach((id)=>{
+    ['drawMode2d','background2d','lineWidth2d','jointSize2d','showGrid2d','showJoints2d','showLabels2d','mirror2d','lockBoneLengths2d','chairGuide2d','keepInside2d','referenceOpacity2d','referenceFit2d'].forEach((id)=>{
       $(id).addEventListener('input',syncFromControls);$(id).addEventListener('change',syncFromControls);
     });
     $('center2dButton').addEventListener('click',centerPose);
@@ -537,6 +614,7 @@
   }
 
   state.points=clonePreset('standing_front');
+  captureBoneLengths();
   syncControls();
   bind();
   fitCanvasCss();

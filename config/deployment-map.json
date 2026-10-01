@@ -169,11 +169,6 @@
       "productionRoot": "MINDMAP_MAKER"
     },
     {
-      "id": "ai-creation-workbench",
-      "sourceRoot": "tools/ai-creation-workbench",
-      "productionRoot": "AI_CREATION_WORKBENCH"
-    },
-    {
       "id": "prompt-studio",
       "sourceRoot": "tools/prompt-studio",
       "productionRoot": "prompt-studio"
@@ -300,6 +295,7 @@
     "CHARACTER",
     "public_html",
     "HOLOCA/scraper_runner.php",
-    "HOLOCA/ability_repair.php"
+    "HOLOCA/ability_repair.php",
+    "AI_CREATION_WORKBENCH"
   ]
 }

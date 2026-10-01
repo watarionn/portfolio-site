@@ -189,6 +189,11 @@
       "productionRoot": "model-inspector"
     },
     {
+      "id": "asset-organizer",
+      "sourceRoot": "tools/asset-organizer",
+      "productionRoot": "asset-organizer"
+    },
+    {
       "id": "mkpdf-studio",
       "sourceRoot": "tools/mkpdf-studio/public",
       "productionRoot": "MKPDF_STUDIO"

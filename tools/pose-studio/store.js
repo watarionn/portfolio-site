@@ -9,7 +9,7 @@
   const DEFAULT_DB = {
     format: 'pose-db',
     schema_version: 1,
-    app_version: '1.0.0',
+    app_version: '1.1.0',
     updated_at: now(),
     entries: []
   };
@@ -43,7 +43,7 @@
     return {
       format: 'pose-db',
       schema_version: 1,
-      app_version: '1.0.0',
+      app_version: '1.1.0',
       updated_at: input.updated_at || now(),
       entries
     };
@@ -122,7 +122,7 @@
       ...clone(db),
       format: 'pose-db',
       schema_version: 1,
-      app_version: '1.0.0',
+      app_version: '1.1.0',
       updated_at: now()
     };
   }

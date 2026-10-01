@@ -336,7 +336,39 @@
     };
   }
 
-  function setState(data={}){
+  const HISTORY_LIMIT=50;
+  let historyPast=[];
+  let historyFuture=[];
+  let gestureBefore=null;
+
+  function stateKey(value){
+    return JSON.stringify(value);
+  }
+
+  function emitHistory(){
+    window.dispatchEvent(new CustomEvent('posestudio:historychange',{
+      detail:{mode:'2d',canUndo:historyPast.length>0,canRedo:historyFuture.length>0}
+    }));
+  }
+
+  function resetHistory(){
+    historyPast=[];
+    historyFuture=[];
+    gestureBefore=null;
+    emitHistory();
+  }
+
+  function commitBefore(before){
+    const after=getState();
+    if(!before||stateKey(before)===stateKey(after)) return false;
+    historyPast.push(before);
+    if(historyPast.length>HISTORY_LIMIT) historyPast.shift();
+    historyFuture=[];
+    emitHistory();
+    return true;
+  }
+
+  function restoreState(data={}){
     const width=Number(data.settings?.width||data.width||canvas.width);
     const height=Number(data.settings?.height||data.height||canvas.height);
     canvas.width=clamp(width,256,2048);
@@ -358,6 +390,33 @@
     render();
   }
 
+  function setState(data={},options={}){
+    restoreState(data);
+    if(options.resetHistory!==false) resetHistory();
+  }
+
+  function undo(){
+    if(!historyPast.length) return false;
+    const current=getState();
+    const previous=historyPast.pop();
+    historyFuture.push(current);
+    restoreState(previous);
+    emitHistory();
+    say('元に戻しました');
+    return true;
+  }
+
+  function redo(){
+    if(!historyFuture.length) return false;
+    const current=getState();
+    const next=historyFuture.pop();
+    historyPast.push(current);
+    restoreState(next);
+    emitHistory();
+    say('やり直しました');
+    return true;
+  }
+
   function loadProjected(points){
     const data={};
     JOINTS.forEach((joint)=>{
@@ -368,15 +427,18 @@
     say('3Dの現在視点を2Dへ反映しました。ここから関節を微調整できます。');
   }
 
-  function applyPreset(key){
+  function applyPreset(key,options={}){
+    const before=options.record===false?null:getState();
     state.points=clonePreset(key);
     captureBoneLengths();
     state.selected=null;
     render();
+    if(before) commitBefore(before);
     say('プリセットを適用しました');
   }
 
   function setCanvasSize(w,h){
+    const before=getState();
     const oldW=canvas.width,oldH=canvas.height;
     canvas.width=clamp(Number(w)||1024,256,2048);
     canvas.height=clamp(Number(h)||1024,256,2048);
@@ -385,6 +447,7 @@
     state.settings.width=canvas.width;state.settings.height=canvas.height;
     captureBoneLengths();
     fitCanvasCss();render();
+    commitBefore(before);
   }
 
   function fitCanvasCss(){
@@ -435,6 +498,7 @@
     const point=canvasPoint(evt);
     state.selected=nearestJoint(point);
     state.dragging=!!state.selected;
+    gestureBefore=state.dragging?getState():null;
     render();
   }
 
@@ -446,7 +510,11 @@
     render();
   }
 
-  function pointerUp(){state.dragging=false;}
+  function pointerUp(){
+    if(state.dragging&&gestureBefore) commitBefore(gestureBefore);
+    gestureBefore=null;
+    state.dragging=false;
+  }
 
   function syncSelectedControls(){
     const joint=JOINTS.find((item)=>item.id===state.selected);
@@ -489,19 +557,23 @@
   }
 
   function centerPose(){
+    const before=getState();
     const values=Object.values(state.points);
     const xs=values.map(p=>p.x),ys=values.map(p=>p.y);
     const dx=canvas.width/2-(Math.min(...xs)+Math.max(...xs))/2;
     const dy=canvas.height/2-(Math.min(...ys)+Math.max(...ys))/2;
     values.forEach((p)=>{p.x+=dx;p.y+=dy;clampPoint(p);});
     render();
+    commitBefore(before);
   }
 
   function flipPose(){
+    const historyBefore=getState();
     Object.values(state.points).forEach((p)=>{p.x=canvas.width-p.x;});
     const before=clone(state.points);
     Object.entries(MIRROR_PAIRS).forEach(([a,b])=>{state.points[a]=clone(before[b]);});
     render();
+    commitBefore(historyBefore);
   }
 
   function download(blob,name){
@@ -568,7 +640,11 @@
 
   function nudge(dx,dy){
     if(!state.selected) return;
-    const p=state.points[state.selected];moveJoint(state.selected,p.x+dx,p.y+dy);render();
+    const before=getState();
+    const p=state.points[state.selected];
+    moveJoint(state.selected,p.x+dx,p.y+dy);
+    render();
+    commitBefore(before);
   }
 
   function bind(){
@@ -589,7 +665,13 @@
     $('flip2dButton').addEventListener('click',flipPose);
     $('reset2dButton').addEventListener('click',()=>applyPreset('standing_front'));
     $('clearSelection2dButton').addEventListener('click',()=>{state.selected=null;render();});
-    $('applyJoint2dButton').addEventListener('click',()=>{if(!state.selected)return;moveJoint(state.selected,Number($('joint2dX').value),Number($('joint2dY').value));render();});
+    $('applyJoint2dButton').addEventListener('click',()=>{
+      if(!state.selected)return;
+      const before=getState();
+      moveJoint(state.selected,Number($('joint2dX').value),Number($('joint2dY').value));
+      render();
+      commitBefore(before);
+    });
     $('reference2dInput').addEventListener('change',(e)=>{const file=e.target.files?.[0];if(file)loadReference(file);});
     $('toggleReference2dButton').addEventListener('click',()=>{state.referenceVisible=!state.referenceVisible;render();});
     $('clearReference2dButton').addEventListener('click',()=>{state.referenceImage=null;state.referenceName='';$('reference2dInput').value='';render();});
@@ -619,6 +701,7 @@
   bind();
   fitCanvasCss();
   render();
+  resetHistory();
 
   function currentBoneLengths(){
     const pairs={
@@ -638,6 +721,10 @@
     setState,
     loadProjected,
     moveJoint,
+    undo,
+    redo,
+    canUndo:()=>historyPast.length>0,
+    canRedo:()=>historyFuture.length>0,
     getBoneLengths:currentBoneLengths,
     renderPreview(targetCanvas,poseState){
       const c=targetCanvas,x=c.getContext('2d'),data=poseState?.points||{};

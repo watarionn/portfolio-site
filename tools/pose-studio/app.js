@@ -8,7 +8,7 @@
   const HELP={
     quickstart:{
       title:'Pose Studio の使い方',
-      body:'1. まず「3Dポーズ」で大まかな姿勢を作ります。\n2. 「現在視点を2Dへ送る」で、その見え方を2D骨格へ変換できます。\n3. 「2Dポーズ」でControlNet向けに関節位置を細かく調整します。\n4. 気に入ったポーズは「DBに登録」で保存します。\n5. OpenPose画像・JSON、通常PNG、SVGなど必要な形式で書き出します。\n\n最初から2Dだけを使うこともできます。'
+      body:'1. まず「3Dポーズ」で大まかな姿勢を作ります。\n2. 「現在視点を2Dへ送る」で、その見え方を2D骨格へ変換できます。\n3. 「2Dポーズ」でControlNet向けに関節位置を細かく調整します。\n4. 気に入ったポーズは「DBに登録」で保存します。\n5. OpenPose画像・JSON、通常PNG、SVGなど必要な形式で書き出します。\n\n最初から2Dだけを使うこともできます。\n\n関節を動かしすぎたときは、作業面上部の「元に戻す / やり直す」を使えます。PCでは Ctrl/Cmd + Z、Ctrl/Cmd + Shift + Z でも操作できます。'
     },
     'preset-view':{
       title:'プリセットと視点',
@@ -93,7 +93,33 @@
       section.hidden=!active;
     });
     if(name==='database') renderDb();
-    if(name==='pose2d') requestAnimationFrame(()=>window.PoseStudio2D?.setState(window.PoseStudio2D.getState()));
+    if(name==='pose2d') requestAnimationFrame(()=>window.PoseStudio2D?.setState(window.PoseStudio2D.getState(),{resetHistory:false}));
+    updateHistoryButtons();
+  }
+
+  function updateHistoryButtons(){
+    const p3=window.PoseStudio3D;
+    const p2=window.PoseStudio2D;
+    $('undo3dButton').disabled=!p3?.canUndo?.();
+    $('redo3dButton').disabled=!p3?.canRedo?.();
+    $('undo2dButton').disabled=!p2?.canUndo?.();
+    $('redo2dButton').disabled=!p2?.canRedo?.();
+  }
+
+  function activeEditor(){
+    if(!$('pose3dView').hidden) return window.PoseStudio3D;
+    if(!$('pose2dView').hidden) return window.PoseStudio2D;
+    return null;
+  }
+
+  function undoActive(){
+    const editor=activeEditor();
+    if(editor?.undo?.()) updateHistoryButtons();
+  }
+
+  function redoActive(){
+    const editor=activeEditor();
+    if(editor?.redo?.()) updateHistoryButtons();
   }
 
   function splitTags(value){
@@ -255,6 +281,10 @@
   $('helpDialogClose').addEventListener('click',closeHelp);
   $('helpDialog').addEventListener('click',(event)=>{if(event.target===$('helpDialog'))closeHelp();});
 
+  $('undo3dButton').addEventListener('click',()=>{window.PoseStudio3D?.undo?.();updateHistoryButtons();});
+  $('redo3dButton').addEventListener('click',()=>{window.PoseStudio3D?.redo?.();updateHistoryButtons();});
+  $('undo2dButton').addEventListener('click',()=>{window.PoseStudio2D?.undo?.();updateHistoryButtons();});
+  $('redo2dButton').addEventListener('click',()=>{window.PoseStudio2D?.redo?.();updateHistoryButtons();});
   $('to2dButton').addEventListener('click',transfer3dTo2d);
   $('save3dToDbButton').addEventListener('click',save3d);
   $('save2dToDbButton').addEventListener('click',save2d);
@@ -262,6 +292,23 @@
   $('poseDbSearch').addEventListener('input',renderDb);
   $('poseDbSourceFilter').addEventListener('change',renderDb);
   window.addEventListener('posestudio:dbchange',renderDb);
+  window.addEventListener('posestudio:historychange',updateHistoryButtons);
+
+  document.addEventListener('keydown',(event)=>{
+    const tag=event.target?.tagName?.toLowerCase();
+    if(tag==='input'||tag==='textarea'||tag==='select'||event.target?.isContentEditable) return;
+    const command=event.ctrlKey||event.metaKey;
+    if(!command) return;
+    const key=event.key.toLowerCase();
+    if(key==='z'){
+      event.preventDefault();
+      if(event.shiftKey) redoActive();
+      else undoActive();
+    }else if(key==='y'){
+      event.preventDefault();
+      redoActive();
+    }
+  });
 
   $('exportDbButton').addEventListener('click',()=>{
     download('pose-db.json',JSON.stringify(Store.exportObject(),null,2));
@@ -282,9 +329,10 @@
   });
 
   renderDb();
+  updateHistoryButtons();
 
   window.PoseStudio=Object.freeze({
-    version:'1.1.0',
+    version:'1.2.0',
     setView,
     getDb:Store.getDb,
     save3d,

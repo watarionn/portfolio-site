@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#25231f">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=1.1.0">
+  <link rel="stylesheet" href="style.css?v=1.2.0">
 </head>
 <body>
   <header class="app-header">
@@ -42,6 +42,8 @@
               <span>背景ドラッグで視点回転 / ホイール・ピンチでズーム / 関節マーカーをドラッグ</span>
             </div>
             <div class="toolbar-actions">
+              <button id="undo3dButton" type="button" disabled>元に戻す</button>
+              <button id="redo3dButton" type="button" disabled>やり直す</button>
               <button id="to2dButton" class="primary-button" type="button">現在視点を2Dへ送る</button>
               <button id="save3dToDbButton" type="button">DBに登録</button>
             </div>
@@ -156,6 +158,8 @@
               <span>関節をドラッグして微調整。下絵の上からトレースすることもできます。</span>
             </div>
             <div class="toolbar-actions">
+              <button id="undo2dButton" type="button" disabled>元に戻す</button>
+              <button id="redo2dButton" type="button" disabled>やり直す</button>
               <button id="save2dToDbButton" class="primary-button" type="button">DBに登録</button>
             </div>
           </div>
@@ -334,10 +338,10 @@
   <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="gif.js?v=1.1.0"></script>
-  <script src="store.js?v=1.1.0"></script>
-  <script src="pose2d.js?v=1.1.0"></script>
-  <script src="pose3d.js?v=1.1.0"></script>
-  <script src="app.js?v=1.1.0"></script>
+  <script src="gif.js?v=1.2.0"></script>
+  <script src="store.js?v=1.2.0"></script>
+  <script src="pose2d.js?v=1.2.0"></script>
+  <script src="pose3d.js?v=1.2.0"></script>
+  <script src="app.js?v=1.2.0"></script>
 </body>
 </html>

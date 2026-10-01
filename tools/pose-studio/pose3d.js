@@ -213,17 +213,44 @@
     };
   }
 
-  function apply(){
-    NAMES.forEach((name)=>{
-      const r=pose[name];
-      joints[name].g.rotation.set(r[0]*D,r[1]*D,r[2]*D);
-    });
-    joints.hips.g.position.y=.90+oy;
-    scene.updateMatrixWorld(true);
-    draw();
+  function poseSnapshot(){
+    return {
+      pose:Object.fromEntries(NAMES.map((name)=>[name,pose[name].slice()])),
+      oy
+    };
   }
 
-  function setState(state){
+  const HISTORY_LIMIT=50;
+  let historyPast=[];
+  let historyFuture=[];
+
+  function stateKey(value){
+    return JSON.stringify(value);
+  }
+
+  function emitHistory(){
+    window.dispatchEvent(new CustomEvent('posestudio:historychange',{
+      detail:{mode:'3d',canUndo:historyPast.length>0,canRedo:historyFuture.length>0}
+    }));
+  }
+
+  function resetHistory(){
+    historyPast=[];
+    historyFuture=[];
+    emitHistory();
+  }
+
+  function commitBefore(before){
+    const after=poseSnapshot();
+    if(!before||stateKey(before)===stateKey(after)) return false;
+    historyPast.push(before);
+    if(historyPast.length>HISTORY_LIMIT) historyPast.shift();
+    historyFuture=[];
+    emitHistory();
+    return true;
+  }
+
+  function restorePoseState(state){
     const source=state||{};
     const next=blank();
     NAMES.forEach((name)=>{
@@ -234,19 +261,60 @@
     });
     pose=next;
     oy=clamp(Number(source.oy)||0,-.6,.6);
+    apply();
+    syncUi();
+  }
+
+  function undo(){
+    if(!historyPast.length) return false;
+    const current=poseSnapshot();
+    const previous=historyPast.pop();
+    historyFuture.push(current);
+    restorePoseState(previous);
+    emitHistory();
+    say('元に戻しました');
+    return true;
+  }
+
+  function redo(){
+    if(!historyFuture.length) return false;
+    const current=poseSnapshot();
+    const next=historyFuture.pop();
+    historyPast.push(current);
+    restorePoseState(next);
+    emitHistory();
+    say('やり直しました');
+    return true;
+  }
+
+  function apply(){
+    NAMES.forEach((name)=>{
+      const r=pose[name];
+      joints[name].g.rotation.set(r[0]*D,r[1]*D,r[2]*D);
+    });
+    joints.hips.g.position.y=.90+oy;
+    scene.updateMatrixWorld(true);
+    draw();
+  }
+
+  function setState(state,options={}){
+    const source=state||{};
+    restorePoseState(source);
     if(source.camera){
       cam.az=Number.isFinite(source.camera.az)?source.camera.az:cam.az;
       cam.el=Number.isFinite(source.camera.el)?clamp(source.camera.el,-1.2,1.2):cam.el;
       cam.dist=Number.isFinite(source.camera.dist)?clamp(source.camera.dist,1.5,9):cam.dist;
       placeCamera();
+      draw();
     }
-    apply();
-    syncUi();
+    if(options.resetHistory!==false) resetHistory();
   }
 
-  function applyPreset(name){
+  function applyPreset(name,options={}){
     stopAnimation();
-    setState(build(PRESETS[name]||PRESETS['直立']));
+    const before=options.record===false?null:poseSnapshot();
+    restorePoseState(build(PRESETS[name]||PRESETS['直立']));
+    if(before) commitBefore(before);
     say(`「${name}」を適用しました`);
   }
 
@@ -295,19 +363,35 @@
   });
 
   $('joint3dSelect').addEventListener('change',(event)=>{selected=event.target.value;syncUi();});
-  sliders.forEach((slider,index)=>slider.addEventListener('input',()=>{
-    pose[selected][index]=Number(slider.value);
-    apply();
-    syncUi();
-  }));
+  let sliderBefore=null;
+  sliders.forEach((slider,index)=>{
+    slider.addEventListener('input',()=>{
+      if(!sliderBefore) sliderBefore=poseSnapshot();
+      pose[selected][index]=Number(slider.value);
+      apply();
+      syncUi();
+    });
+    slider.addEventListener('change',()=>{
+      if(sliderBefore) commitBefore(sliderBefore);
+      sliderBefore=null;
+    });
+  });
+  let rootBefore=null;
   $('rootHeight').addEventListener('input',()=>{
+    if(!rootBefore) rootBefore=poseSnapshot();
     oy=Number($('rootHeight').value);
     apply();
     syncUi();
   });
+  $('rootHeight').addEventListener('change',()=>{
+    if(rootBefore) commitBefore(rootBefore);
+    rootBefore=null;
+  });
   $('resetJoint3dButton').addEventListener('click',()=>{
+    const before=poseSnapshot();
     pose[selected]=DEFAULTS[selected]?DEFAULTS[selected].slice():[0,0,0];
     apply();syncUi();
+    commitBefore(before);
   });
   $('resetAll3dButton').addEventListener('click',()=>applyPreset('直立'));
 
@@ -456,7 +540,7 @@
     if(name){
       selected=name;
       syncUi();
-      drag={joint:true,name};
+      drag={joint:true,name,before:poseSnapshot()};
       say(`${joints[name].label}を指で移動できます`);
     }else{
       drag={joint:false};
@@ -489,6 +573,7 @@
   function pointerUp(event){
     pointers.delete(event.pointerId);
     if(pointers.size<2) pinch=0;
+    if(drag?.joint&&drag.before) commitBefore(drag.before);
     drag=null;
   }
   canvas.addEventListener('pointerup',pointerUp);
@@ -702,7 +787,7 @@
       download(new Blob([gif],{type:'image/gif'}),'pose.gif');
       say('GIFを保存しました');
     }finally{
-      setState(keep);
+      setState(keep,{resetHistory:false});
     }
   }));
 
@@ -734,7 +819,7 @@
       say('動画を保存しました');
     }finally{
       setHelpers(true);
-      setState(keep);
+      setState(keep,{resetHistory:false});
     }
   }));
 
@@ -750,6 +835,10 @@
     projectTo2D,
     applyPreset,
     moveJointToNormalizedScreen,
+    undo,
+    redo,
+    canUndo:()=>historyPast.length>0,
+    canRedo:()=>historyFuture.length>0,
     getJointScreenPosition:jointScreenPosition,
     getWorldBoneLengths:worldBoneLengths,
     getPresetNames:()=>Object.keys(PRESETS)

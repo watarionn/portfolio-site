@@ -620,11 +620,25 @@
   fitCanvasCss();
   render();
 
+  function currentBoneLengths(){
+    const pairs={
+      upperArmR:['r_shoulder','r_elbow'],forearmR:['r_elbow','r_wrist'],
+      upperArmL:['l_shoulder','l_elbow'],forearmL:['l_elbow','l_wrist'],
+      thighR:['r_hip','r_knee'],shinR:['r_knee','r_ankle'],
+      thighL:['l_hip','l_knee'],shinL:['l_knee','l_ankle']
+    };
+    return Object.fromEntries(Object.entries(pairs).map(([key,[a,b]])=>[
+      key,Math.hypot(state.points[b].x-state.points[a].x,state.points[b].y-state.points[a].y)
+    ]));
+  }
+
   window.PoseStudio2D=Object.freeze({
     JOINTS,
     getState,
     setState,
     loadProjected,
+    moveJoint,
+    getBoneLengths:currentBoneLengths,
     renderPreview(targetCanvas,poseState){
       const c=targetCanvas,x=c.getContext('2d'),data=poseState?.points||{};
       x.fillStyle='#292c31';x.fillRect(0,0,c.width,c.height);

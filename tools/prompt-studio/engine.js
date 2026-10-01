@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.0.1';
+  const APP_VERSION = '1.0.2';
   const FIELD_IDS = [
     'subject','appearance','expression','outfit','action','pose','environment',
     'lighting','camera','composition','style','visibleText','constraints','negative'

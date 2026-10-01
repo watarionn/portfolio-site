@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="画像生成モデルを調べ、Model DBとして保存し、Prompt Studioへ渡せるModel Inspector。">
+  <title>Model Inspector</title>
+  <meta name="theme-color" content="#25231f">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="title-block">
+      <a class="back-link" href="/AI_CREATION_WORKBENCH/">← 制作ツール</a>
+      <h1>Model Inspector</h1>
+      <p>モデルを調べ、制作向けの情報を整え、モデルDBへ残す。</p>
+    </div>
+    <div class="header-actions">
+      <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
+      <button id="importDbButton" type="button">モデルDBを読み込む</button>
+      <button id="exportDbButton" type="button">モデルDBを書き出す</button>
+    </div>
+  </header>
+
+  <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
+  <input id="offlineJsonInput" class="visually-hidden" type="file" accept="application/json,.json" multiple>
+
+  <nav class="studio-tabs" role="tablist" aria-label="Model Inspector 画面切替">
+    <button class="studio-tab active" data-view="inspect" role="tab" aria-selected="true">モデルを調べる</button>
+    <button class="studio-tab" data-view="database" role="tab" aria-selected="false">モデルDB</button>
+  </nav>
+
+  <main>
+    <section id="inspectView" class="view active">
+      <div class="inspect-layout">
+        <aside class="inspect-sidebar">
+          <section class="panel-section">
+            <div class="heading-with-help">
+              <h2>Civitaiから取得</h2>
+              <button class="info-button" type="button" data-help-key="inspect" aria-label="Civitai取得の説明">i</button>
+            </div>
+            <label>URL
+              <textarea id="modelUrls" rows="8" placeholder="https://civitai.com/models/12345/example&#10;1行に1URL"></textarea>
+            </label>
+            <label>取得方法
+              <select id="fetchMode">
+                <option value="auto">保存JSONを優先 → API</option>
+                <option value="offline">保存JSONだけ使う</option>
+                <option value="api">APIだけ使う</option>
+              </select>
+            </label>
+            <label>API key <span class="optional">任意・保存しません</span>
+              <input id="apiKey" type="password" autocomplete="off" placeholder="制限モデルで必要な場合">
+            </label>
+            <div class="button-grid">
+              <button id="inspectButton" class="primary-button" type="button">取得する</button>
+              <button id="clearInspectButton" type="button">クリア</button>
+            </div>
+          </section>
+
+          <section class="panel-section">
+            <div class="heading-with-help">
+              <h2>保存済みAPI JSON</h2>
+              <button class="info-button" type="button" data-help-key="offline" aria-label="保存JSONの説明">i</button>
+            </div>
+            <button id="offlineJsonButton" type="button">API JSONを読み込む</button>
+            <button id="clearOfflineButton" type="button">読み込みを解除</button>
+            <p id="offlineStatus" class="section-note">0 models / 0 versions / 0 records</p>
+          </section>
+
+          <section class="panel-section">
+            <div class="heading-with-help">
+              <h2>ローカルファイル</h2>
+              <button class="info-button" type="button" data-help-key="local-file" aria-label="ローカルファイルの説明">i</button>
+            </div>
+            <input id="localModelFile" type="file" accept=".safetensors,.ckpt,.pt,.pth,.gguf">
+            <p class="section-note">ファイル名と容量だけ読み取ります。ファイル本体はアップロードしません。</p>
+          </section>
+        </aside>
+
+        <section class="inspect-main">
+          <div class="section-head">
+            <div>
+              <h2>取得結果</h2>
+              <p id="inspectSummary">URLを入力してください。</p>
+            </div>
+            <div class="button-row">
+              <button id="exportInspectCsvButton" type="button">結果をCSV保存</button>
+              <button id="newManualButton" type="button">手入力で登録</button>
+            </div>
+          </div>
+          <div id="inspectResults" class="result-list empty-state">モデル情報がここに並びます。</div>
+        </section>
+      </div>
+    </section>
+
+    <section id="databaseView" class="view" hidden>
+      <div class="database-layout">
+        <aside class="database-sidebar">
+          <div class="heading-with-help">
+            <h2>モデルDB</h2>
+            <button class="info-button" type="button" data-help-key="database" aria-label="モデルDBの説明">i</button>
+          </div>
+          <label>検索<input id="dbSearch" type="search" placeholder="モデル名 / タグ / メモ"></label>
+          <label>Family
+            <select id="familyFilter">
+              <option value="all">すべて</option>
+            </select>
+          </label>
+          <label>種類
+            <select id="typeFilter">
+              <option value="all">すべて</option>
+              <option value="Checkpoint">Checkpoint</option>
+              <option value="LoRA">LoRA</option>
+              <option value="VAE">VAE</option>
+              <option value="ControlNet">ControlNet</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label>評価
+            <select id="ratingFilter">
+              <option value="all">すべて</option>
+              <option value="5">★★★★★</option>
+              <option value="4">★★★★以上</option>
+              <option value="3">★★★以上</option>
+              <option value="1">評価あり</option>
+            </select>
+          </label>
+          <dl class="db-stats">
+            <div><dt>登録済み</dt><dd id="dbCount">0</dd></div>
+            <div><dt>Family</dt><dd id="familyCount">0</dd></div>
+            <div><dt>高評価</dt><dd id="highRatingCount">0</dd></div>
+          </dl>
+          <button id="exportDbCsvButton" type="button">モデルDBをCSV保存</button>
+          <p class="section-note">ブラウザ内は作業コピーです。長く残すときはモデルDBを書き出してGitHub / Google Driveへ保存してください。</p>
+        </aside>
+
+        <section class="database-main">
+          <div class="section-head">
+            <div>
+              <h2>保存したモデル</h2>
+              <p>制作時に必要な情報へ絞って検索・再利用できます。</p>
+            </div>
+            <button id="newDbEntryButton" class="primary-button" type="button">新規登録</button>
+          </div>
+          <div id="dbList" class="db-list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="editorDialog" class="editor-dialog" aria-labelledby="editorTitle">
+    <form id="editorForm" method="dialog">
+      <div class="dialog-head">
+        <h2 id="editorTitle">モデルを登録</h2>
+        <button id="editorCloseButton" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div class="editor-body">
+        <input id="entryId" type="hidden">
+        <div class="field-grid two">
+          <label>モデル名<input id="editModelName" required></label>
+          <label>バージョン名<input id="editVersionName"></label>
+          <label>Family
+            <select id="editFamily">
+              <option value="FLUX">FLUX</option>
+              <option value="SDXL">SDXL</option>
+              <option value="SD 1.5">SD 1.5</option>
+              <option value="GPT Image">GPT Image</option>
+              <option value="Qwen Image">Qwen Image</option>
+              <option value="WAN">WAN</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label>種類
+            <select id="editModelType">
+              <option value="Checkpoint">Checkpoint</option>
+              <option value="LoRA">LoRA</option>
+              <option value="VAE">VAE</option>
+              <option value="ControlNet">ControlNet</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label>Base model<input id="editBaseModel"></label>
+          <label>Creator<input id="editCreator"></label>
+          <label>ファイル名<input id="editFileName"></label>
+          <label>容量<input id="editFileSize" placeholder="例: 6.7 GB"></label>
+          <label class="span-two">SHA256<input id="editSha256" spellcheck="false"></label>
+          <label class="span-two">Civitai / 参照URL<input id="editSourceUrl" type="url"></label>
+          <label>Model ID<input id="editModelId"></label>
+          <label>Version ID<input id="editVersionId"></label>
+          <label>推奨プロンプト書式
+            <select id="editPromptProfile">
+              <option value="flux-natural">FLUX · 自然文</option>
+              <option value="gpt-image-instruction">GPT Image · 指示文</option>
+              <option value="sdxl-natural">SDXL · 自然文</option>
+              <option value="sdxl-tags">SDXL · タグ形式</option>
+              <option value="generic-tags">共通 · 短いタグ形式</option>
+            </select>
+          </label>
+          <label>推奨解像度<input id="editResolution" placeholder="例: 1024×1024"></label>
+          <label>VRAM目安<input id="editVram" placeholder="例: 12 GB"></label>
+          <label>評価
+            <select id="editRating">
+              <option value="0">未評価</option>
+              <option value="1">★</option>
+              <option value="2">★★</option>
+              <option value="3">★★★</option>
+              <option value="4">★★★★</option>
+              <option value="5">★★★★★</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset>
+          <legend>対応・用途</legend>
+          <div class="check-grid">
+            <label class="check"><input id="editControlNet" type="checkbox"> ControlNet</label>
+            <label class="check"><input id="editIpAdapter" type="checkbox"> IP-Adapter</label>
+          </div>
+        </fieldset>
+
+        <label>Trigger words<textarea id="editTriggerWords" rows="2" placeholder="1行またはカンマ区切り"></textarea></label>
+        <label>推奨設定<textarea id="editRecommended" rows="3"></textarea></label>
+        <label>タグ<input id="editTags" placeholder="anime, portrait, realistic"></label>
+        <label>自分用メモ<textarea id="editNotes" rows="5"></textarea></label>
+      </div>
+      <div class="dialog-actions">
+        <button id="deleteEntryButton" class="danger-button hidden" type="button">削除</button>
+        <span></span>
+        <button id="cancelEditorButton" type="button">キャンセル</button>
+        <button id="saveEntryButton" class="primary-button" type="submit">保存</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpDialogTitle">
+    <div class="dialog-head">
+      <h2 id="helpDialogTitle">使い方</h2>
+      <button id="helpDialogClose" type="button" aria-label="説明を閉じる">×</button>
+    </div>
+    <div id="helpDialogBody" class="help-dialog-body"></div>
+  </dialog>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="engine.js"></script>
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

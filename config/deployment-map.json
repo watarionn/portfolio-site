@@ -184,6 +184,11 @@
       "productionRoot": "pose-studio"
     },
     {
+      "id": "model-inspector",
+      "sourceRoot": "tools/model-inspector",
+      "productionRoot": "model-inspector"
+    },
+    {
       "id": "mkpdf-studio",
       "sourceRoot": "tools/mkpdf-studio/public",
       "productionRoot": "MKPDF_STUDIO"

@@ -3692,3 +3692,7 @@ button { font: inherit; }
     aspect-ratio: 3 / 4;
   }
 }
+
+/* Explicit scene paint order: artwork below semantic SVG, above stage fallback. */
+.district-single-scene__picture { z-index: 1; }
+.district-single-scene__hotspots { z-index: 2; }

@@ -430,6 +430,13 @@
     return moveJointOnScreen(name,rect.left+clamp(x,0,1)*rect.width,rect.top+clamp(y,0,1)*rect.height);
   }
 
+  function jointScreenPosition(name){
+    if(!joints[name]) return null;
+    scene.updateMatrixWorld(true);
+    const p=worldPosition(name).project(camera);
+    return {x:p.x*.5+.5,y:-p.y*.5+.5};
+  }
+
   function worldBoneLengths(){
     scene.updateMatrixWorld(true);
     const pairs={
@@ -743,6 +750,7 @@
     projectTo2D,
     applyPreset,
     moveJointToNormalizedScreen,
+    getJointScreenPosition:jointScreenPosition,
     getWorldBoneLengths:worldBoneLengths,
     getPresetNames:()=>Object.keys(PRESETS)
   });

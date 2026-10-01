@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#25231f">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.1.0">
 </head>
 <body>
   <header class="app-header">
@@ -221,6 +221,7 @@
               <label class="check"><input id="showJoints2d" type="checkbox" checked> 関節</label>
               <label class="check"><input id="showLabels2d" type="checkbox"> 関節名</label>
               <label class="check"><input id="mirror2d" type="checkbox"> 左右対称編集</label>
+              <label class="check"><input id="lockBoneLengths2d" type="checkbox" checked> 骨の長さを固定</label>
               <label class="check"><input id="chairGuide2d" type="checkbox"> 椅子ガイド</label>
               <label class="check"><input id="keepInside2d" type="checkbox" checked> 画面内に制限</label>
             </div>
@@ -333,10 +334,10 @@
   <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="gif.js"></script>
-  <script src="store.js"></script>
-  <script src="pose2d.js"></script>
-  <script src="pose3d.js"></script>
-  <script src="app.js"></script>
+  <script src="gif.js?v=1.1.0"></script>
+  <script src="store.js?v=1.1.0"></script>
+  <script src="pose2d.js?v=1.1.0"></script>
+  <script src="pose3d.js?v=1.1.0"></script>
+  <script src="app.js?v=1.1.0"></script>
 </body>
 </html>

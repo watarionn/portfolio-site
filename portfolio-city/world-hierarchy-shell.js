@@ -652,7 +652,7 @@
       const picture = document.createElement('picture');
       picture.className = 'district-single-scene__picture';
       for (const [media, src] of [
-        ['(max-width: 680px)', 'assets/districts/waterside-play/waterside-play-768x512-q86.webp'],
+        ['(max-width: 680px)', 'assets/districts/waterside-play/waterside-play-mobile-1086x1448-q86.webp'],
         ['(max-width: 1100px)', 'assets/districts/waterside-play/waterside-play-1152x768-q86.webp']
       ]) {
         const source = document.createElement('source');
@@ -668,33 +668,50 @@
       image.decoding = 'async';
       picture.append(image);
 
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.classList.add('district-single-scene__hotspots');
-      svg.setAttribute('viewBox', '0 0 1536 1024');
-      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-      svg.setAttribute('aria-label', '作品の建物');
-
-      const activeSlots = [
-        ['WP-01', 'aquarium', '市立水族館', '486,188 763,183 886,291 892,506 822,565 535,566 457,497 459,302'],
-        ['WP-02', 'holoca', 'カードショップ', '65,420 345,411 450,544 449,713 341,754 82,731 37,645'],
-        ['WP-03', 'word-generator', 'ゲームショップ', '1190,505 1447,501 1518,613 1517,797 1433,838 1180,816 1139,692']
+      const hotspotSets = [
+        {
+          mode: 'desktop',
+          viewBox: '0 0 1536 1024',
+          slots: [
+            ['WP-01', 'aquarium', '市立水族館', '486,188 763,183 886,291 892,506 822,565 535,566 457,497 459,302'],
+            ['WP-02', 'holoca', 'カードショップ', '65,420 345,411 450,544 449,713 341,754 82,731 37,645'],
+            ['WP-03', 'word-generator', 'ゲームショップ', '1190,505 1447,501 1518,613 1517,797 1433,838 1180,816 1139,692']
+          ]
+        },
+        {
+          mode: 'mobile',
+          viewBox: '0 0 1086 1448',
+          slots: [
+            ['WP-01', 'aquarium', '市立水族館', '0,408 319,389 449,500 446,779 353,835 68,814 0,737'],
+            ['WP-02', 'holoca', 'カードショップ', '445,585 736,578 803,681 783,833 690,864 466,835 421,746'],
+            ['WP-03', 'word-generator', 'ゲームショップ', '789,659 1086,650 1086,943 1014,1000 819,970 764,850'],
+          ]
+        }
       ];
-      for (const [slotId, projectId, label, points] of activeSlots) {
-        const link = document.createElementNS('http://www.w3.org/2000/svg', 'a');
-        link.classList.add('district-single-scene__hotspot');
-        link.dataset.slotId = slotId;
-        link.dataset.projectId = projectId;
-        link.setAttribute('href', '#');
-        link.setAttribute('aria-label', `${label}、詳細を見る`);
+      for (const hotspotSet of hotspotSets) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.classList.add('district-single-scene__hotspots', `district-single-scene__hotspots--${hotspotSet.mode}`);
+        svg.setAttribute('viewBox', hotspotSet.viewBox);
+        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        svg.setAttribute('aria-label', '作品の建物');
+        for (const [slotId, projectId, label, points] of hotspotSet.slots) {
+          const link = document.createElementNS('http://www.w3.org/2000/svg', 'a');
+          link.classList.add('district-single-scene__hotspot');
+          link.dataset.slotId = slotId;
+          link.dataset.projectId = projectId;
+          link.setAttribute('href', '#');
+          link.setAttribute('aria-label', `${label}、詳細を見る`);
 
-        const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        polygon.setAttribute('points', points);
-        polygon.setAttribute('vector-effect', 'non-scaling-stroke');
-        link.append(polygon);
-        svg.append(link);
+          const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+          polygon.setAttribute('points', points);
+          polygon.setAttribute('vector-effect', 'non-scaling-stroke');
+          link.append(polygon);
+          svg.append(link);
+        }
+        scene.append(svg);
       }
 
-      scene.append(picture, svg);
+      scene.prepend(picture);
 
       const projectNote = document.createElement('aside');
       projectNote.className = 'district-single-scene__project-note';

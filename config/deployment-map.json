@@ -179,6 +179,11 @@
       "productionRoot": "prompt-studio"
     },
     {
+      "id": "pose-studio",
+      "sourceRoot": "tools/pose-studio",
+      "productionRoot": "pose-studio"
+    },
+    {
       "id": "mkpdf-studio",
       "sourceRoot": "tools/mkpdf-studio/public",
       "productionRoot": "MKPDF_STUDIO"

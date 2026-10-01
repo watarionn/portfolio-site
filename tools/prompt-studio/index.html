@@ -13,7 +13,7 @@
 <body>
   <header class="app-header">
     <div class="title-block">
-      <a class="back-link" href="/AI_CREATION_WORKBENCH/">← Creation Tools</a>
+      <a class="back-link" href="/AI_CREATION_WORKBENCH/">← 制作ツール</a>
       <h1>Prompt Studio</h1>
       <p>画像の内容を一度組み立てれば、使うモデルに合った書き方へ変換して保存できます。</p>
     </div>
@@ -26,7 +26,7 @@
 
   <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
 
-  <div class="studio-tabs" role="tablist" aria-label="Prompt Studio views">
+  <div class="studio-tabs" role="tablist" aria-label="Prompt Studio 画面切替">
     <button class="studio-tab active" data-view="compose" role="tab" aria-selected="true">プロンプト作成</button>
     <button class="studio-tab" data-view="database" role="tab" aria-selected="false">プロンプトDB</button>
   </div>
@@ -34,7 +34,7 @@
   <main>
     <section id="composeView" class="view active">
       <div class="studio-grid">
-        <aside class="composer-panel" aria-label="Prompt composer">
+        <aside class="composer-panel" aria-label="プロンプト作成">
           <section class="panel-section">
             <div class="heading-with-help"><h2>出力先モデル</h2><button class="info-button" type="button" data-help-key="render-target" aria-label="出力先モデルの説明">i</button></div>
             <label>
@@ -98,7 +98,7 @@
           </div>
         </aside>
 
-        <section class="output-panel" aria-label="Rendered prompt">
+        <section class="output-panel" aria-label="生成プロンプト">
           <div class="output-header">
             <div>
               <div class="heading-with-help"><h2>生成プロンプト</h2><button class="info-button" type="button" data-help-key="output" aria-label="生成プロンプトの説明">i</button></div>
@@ -121,7 +121,7 @@
           <section class="meaning-preview">
             <div class="meaning-header">
               <span class="heading-with-help"><h3>内容データ</h3><button class="info-button" type="button" data-help-key="semantic" aria-label="内容データの説明">i</button></span>
-              <span id="dbStatus">Built-in working DB</span>
+              <span id="dbStatus">作業データ</span>
             </div>
             <pre id="semanticPreview"></pre>
           </section>
@@ -142,7 +142,7 @@
       <div class="database-layout">
         <aside class="database-sidebar">
           <h2>プロンプトDB</h2>
-          <label>検索<input id="dbSearch" type="search" placeholder="title / tag / prompt"></label>
+          <label>検索<input id="dbSearch" type="search" placeholder="タイトル / タグ / プロンプト"></label>
           <label>状態<select id="dbStatusFilter"><option value="all">すべて</option><option value="saved">保存済み</option><option value="draft">下書き</option></select></label>
           <dl class="db-stats">
             <div><dt>保存済みプロンプト</dt><dd id="libraryCount">0</dd></div>
@@ -153,7 +153,7 @@
         </aside>
 
         <section class="database-main">
-          <div class="db-section-tabs" role="tablist" aria-label="PromptDB sections">
+          <div class="db-section-tabs" role="tablist" aria-label="プロンプトDBの表示切替">
             <button class="db-section-tab active" data-db-section="library" role="tab" aria-selected="true">保存済み</button>
             <button class="db-section-tab" data-db-section="concepts" role="tab" aria-selected="false">パーツ辞書</button>
             <button class="db-section-tab" data-db-section="recipes" role="tab" aria-selected="false">組み立てレシピ</button>

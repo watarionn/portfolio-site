@@ -3678,3 +3678,17 @@ button { font: inherit; }
     height: auto;
   }
 }
+
+.district-single-scene__hotspots--mobile { display: none; }
+@media (max-width: 680px) {
+  .district-single-scene__picture img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+  .district-single-scene__hotspots--desktop { display: none; }
+  .district-single-scene__hotspots--mobile { display: block; }
+  body[data-world-level="district"] .district-single-scene__stage {
+    max-height: none;
+    aspect-ratio: 3 / 4;
+  }
+}

@@ -18,14 +18,13 @@
       <p>画像の内容を一度組み立てれば、使うモデルに合った書き方へ変換して保存できます。</p>
     </div>
     <div class="header-actions">
-      <button id="importDbButton">PromptDB v2を読込</button>
-      <button id="importLegacyButton">旧PromptDBを取込</button>
-      <button id="exportDbButton">PromptDBを書出</button>
+      <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
+      <button id="importDbButton">プロンプトDBを読み込む</button>
+      <button id="exportDbButton">プロンプトDBを書き出す</button>
     </div>
   </header>
 
   <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
-  <input id="legacyFolderInput" class="visually-hidden" type="file" webkitdirectory multiple>
 
   <div class="studio-tabs" role="tablist" aria-label="Prompt Studio views">
     <button class="studio-tab active" data-view="compose" role="tab" aria-selected="true">プロンプト作成</button>
@@ -39,11 +38,11 @@
           <section class="panel-section">
             <div class="heading-with-help"><h2>出力先モデル</h2><button class="info-button" type="button" data-help-key="render-target" aria-label="出力先モデルの説明">i</button></div>
             <label>
-              Model / Dialect
+              <span class="label-title">モデル / プロンプト書式 <button class="info-button" type="button" data-help-key="dialect" aria-label="プロンプト書式の説明">i</button></span>
               <select id="profileSelect"></select>
             </label>
             <label>
-              Checkpoint / model name <span class="optional">optional</span>
+              <span class="label-title">Checkpoint / モデル名 <span class="optional">任意</span> <button class="info-button" type="button" data-help-key="model-name" aria-label="Checkpointとモデル名の説明">i</button></span>
               <input id="modelName" type="text" placeholder="例: Animagine XL / FLUX.2 / gpt-image-1.5">
             </label>
             <p id="profileNote" class="section-note"></p>
@@ -174,7 +173,7 @@
               <span><b id="conceptCountForCategory">0</b> 件</span>
             </div>
             <div class="concept-editor">
-              <label>Category
+              <label><span class="label-title">カテゴリ <button class="info-button" type="button" data-help-key="category" aria-label="カテゴリの説明">i</button></span>
                 <input id="conceptCategoryInput" type="text" list="conceptCategoryOptions" placeholder="pose / lighting / custom_category">
                 <datalist id="conceptCategoryOptions"></datalist>
               </label>
@@ -209,7 +208,7 @@
     </div>
     <div id="helpDialogBody" class="help-dialog-body"></div>
   </dialog>
-\n  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
   <script src="engine.js"></script>
   <script src="store.js"></script>

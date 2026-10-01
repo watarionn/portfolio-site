@@ -74,8 +74,8 @@
 
     <section class="workspace" id="panel-model" role="tabpanel" aria-labelledby="tab-model" tabindex="0">
       <div class="workspace-head">
-        <div><span class="eyebrow">MODEL RESEARCH</span><h2 id="model-title">Model Inspector</h2><p>Civitai URLをモデルID / バージョンIDへ分解。API取得に加え、保存済みAPI JSONをオフライン資料として利用できます。</p></div>
-        <div class="head-actions"><button id="offlineJsonButton">API JSONを読込</button><button id="clearOfflineJson">Offline DBを解除</button></div>
+        <div><span class="eyebrow">LEGACY MODEL TOOL</span><h2 id="model-title">Model Inspector</h2><p>旧Model Inspectorを互換用に残しています。Model DBとPrompt Studio連携を備えた新しい独立版へ移行します。</p></div>
+        <div class="head-actions"><a class="tool-link" href="../model-inspector/">新しいModel Inspectorを開く</a><button id="offlineJsonButton">旧版へAPI JSONを読込</button><button id="clearOfflineJson">Offline DBを解除</button></div>
       </div>
       <input id="offlineJsonFiles" class="visually-hidden" type="file" accept="application/json,.json" multiple aria-label="Civitai API JSONを選択">
       <div id="offlineDbStatus" class="source-banner">Offline DB: 0 models / 0 versions</div>

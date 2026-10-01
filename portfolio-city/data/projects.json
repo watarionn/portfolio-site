@@ -152,16 +152,6 @@
       "order": 5
     },
     {
-      "id": "ai-creation-workbench",
-      "title": "AI Creation Workbench",
-      "district": "workshop-alley",
-      "building": "制作支援工房",
-      "route": "/AI_CREATION_WORKBENCH/",
-      "type": "Prompt / Pose / Asset Tools",
-      "summary": "プロンプト、ポーズ、モデル情報、制作メモ、素材整理を1つのローカルファーストな作業台にまとめた制作支援ツール。",
-      "order": 6
-    },
-    {
       "id": "mkpdf-studio",
       "title": "mkPDF Studio",
       "district": "archive-street",
@@ -189,7 +179,7 @@
       "route": "/PYTHON_MUSIC_LAB/",
       "type": "Python / MIDI / DSP",
       "summary": "Seed固定のルール作曲、候補比較、自作Synth、音響処理を一つの再現可能な制作環境へまとめた作曲研究所。",
-      "order": 7
+      "order": 6
     }
   ]
 }

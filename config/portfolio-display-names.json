@@ -108,112 +108,133 @@
       "route": "/MINDMAP_MAKER/"
     },
     {
-      "number": "015",
-      "projectId": "ai-creation-workbench",
-      "japaneseName": "AI制作ワークベンチ",
-      "englishName": "AI Creation Workbench",
-      "route": "/AI_CREATION_WORKBENCH/"
+      "projectId": "prompt-studio",
+      "japaneseName": "Prompt Studio",
+      "englishName": "Prompt Studio",
+      "route": "/prompt-studio/",
+      "number": "015"
     },
     {
-      "number": "016",
+      "projectId": "pose-studio",
+      "japaneseName": "Pose Studio",
+      "englishName": "Pose Studio",
+      "route": "/pose-studio/",
+      "number": "016"
+    },
+    {
+      "projectId": "model-inspector",
+      "japaneseName": "Model Inspector",
+      "englishName": "Model Inspector",
+      "route": "/model-inspector/",
+      "number": "017"
+    },
+    {
+      "projectId": "asset-organizer",
+      "japaneseName": "Asset Organizer",
+      "englishName": "Asset Organizer",
+      "route": "/asset-organizer/",
+      "number": "018"
+    },
+    {
+      "number": "019",
       "projectId": "video-workbench",
       "japaneseName": "動画ワークベンチ",
       "englishName": "Video Workbench",
       "route": "/VIDEO_WORKBENCH/"
     },
     {
-      "number": "017",
+      "number": "020",
       "projectId": "mkpdf-studio",
       "japaneseName": "PDF制作スタジオ",
       "englishName": "mkPDF Studio",
       "route": "/MKPDF_STUDIO/"
     },
     {
-      "number": "018",
+      "number": "021",
       "projectId": "s3-upload-audit",
       "japaneseName": "S3アップロード監査",
       "englishName": "S3 Upload Audit",
       "route": "/S3_UPLOAD_AUDIT/"
     },
     {
-      "number": "019",
+      "number": "022",
       "projectId": "project-snapshot-generator",
       "japaneseName": "プロジェクトスナップショット生成ツール",
       "englishName": "Project Snapshot Generator",
       "route": "/PROJECT_SNAPSHOT_GENERATOR/"
     },
     {
-      "number": "020",
+      "number": "023",
       "projectId": "media-collector",
       "japaneseName": "メディア収集ツール",
       "englishName": "Media Collector",
       "route": "/MEDIA_COLLECTOR/"
     },
     {
-      "number": "021",
+      "number": "024",
       "projectId": "download-workbench",
       "japaneseName": "ダウンロードワークベンチ",
       "englishName": "Download Workbench",
       "route": "/DOWNLOAD_WORKBENCH/"
     },
     {
-      "number": "022",
+      "number": "025",
       "projectId": "web-extraction-recipes",
       "japaneseName": "Web抽出レシピ",
       "englishName": "Web Extraction Recipes",
       "route": "/WEB_EXTRACTION_RECIPES/"
     },
     {
-      "number": "023",
+      "number": "026",
       "projectId": "shisha-advisor",
       "japaneseName": "シーシャアドバイザー",
       "englishName": "Shisha Advisor",
       "route": "https://advisor-production-production.up.railway.app/"
     },
     {
-      "number": "024",
+      "number": "027",
       "projectId": "legal-knowledge-base",
       "japaneseName": "法令ナレッジベース",
       "englishName": "Legal Knowledge Base",
       "route": "/LEGAL_KNOWLEDGE_BASE/"
     },
     {
-      "number": "025",
+      "number": "028",
       "projectId": "pose-library-manager",
       "japaneseName": "ポーズライブラリ管理",
       "englishName": "Pose Library Manager",
       "route": "/POSE_LIBRARY_MANAGER/"
     },
     {
-      "number": "026",
+      "number": "029",
       "projectId": "python-music-lab",
       "japaneseName": "Python作曲研究所",
       "englishName": "Non-Generative Composer",
       "route": "/PYTHON_MUSIC_LAB/"
     },
     {
-      "number": "027",
+      "number": "030",
       "projectId": "image-studio",
       "japaneseName": "画像仕立て室",
       "englishName": "Image Studio",
       "route": "/IMAGE_STUDIO/"
     },
     {
-      "number": "028",
+      "number": "031",
       "projectId": "ai-judgement-lab",
       "japaneseName": "AI判断・予測実験室",
       "englishName": "AI Judgement & Prediction Lab",
       "route": "/AI_JUDGEMENT_LAB/"
     },
     {
-      "number": "029",
+      "number": "032",
       "projectId": "osaka-subway-sevens",
       "japaneseName": "大阪地下鉄七並べ",
       "englishName": "Subway Sevens",
       "route": "/OSAKA_SUBWAY_SEVENS/"
     },
     {
-      "number": "030",
+      "number": "033",
       "projectId": "minimalizer",
       "japaneseName": "Minimalizer",
       "englishName": "Image Simplification Tool",

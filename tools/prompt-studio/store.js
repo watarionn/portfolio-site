@@ -1,24 +1,37 @@
 (() => {
   'use strict';
   const E = window.PromptStudioEngine;
-  const STORAGE_KEY = 'prompt-studio-v2-working-db';
+  const STORAGE_KEY = 'prompt-studio-working-db';
+  const PREVIOUS_STORAGE_KEYS = ['prompt-studio-v2-working-db'];
   let db = loadWorkingDb();
 
-  function loadWorkingDb() {
+  function parseStored(raw) {
+    if (!raw) return null;
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return E.normalizeDb(E.DEFAULT_DB);
       const parsed = JSON.parse(raw);
-      return parsed?.format === 'prompt-db-v2' ? E.normalizeDb(parsed) : E.normalizeDb(E.DEFAULT_DB);
-    } catch {
-      return E.normalizeDb(E.DEFAULT_DB);
+      if (parsed?.format === 'prompt-db' || parsed?.format === 'prompt-db-v2') return E.normalizeDb(parsed);
+    } catch {}
+    return null;
+  }
+
+  function loadWorkingDb() {
+    const current = parseStored(localStorage.getItem(STORAGE_KEY));
+    if (current) return current;
+    for (const key of PREVIOUS_STORAGE_KEYS) {
+      const previous = parseStored(localStorage.getItem(key));
+      if (previous) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(previous));
+        return previous;
+      }
     }
+    return E.normalizeDb(E.DEFAULT_DB);
   }
 
   function persist(sourceLabel) {
     db = E.normalizeDb(db);
     db.app_version = E.APP_VERSION;
-    db.version = '2.1.0';
+    db.schema_version = 1;
+    delete db.version;
     db.updated_at = E.now();
     if (sourceLabel) db.source = sourceLabel;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
@@ -54,7 +67,7 @@
       semantic: E.clone(semantic), outputs, created_at: E.now(), updated_at: E.now(), source: 'prompt-studio'
     };
     db.library.unshift(entry);
-    persist(db.source || 'Prompt Studio working DB');
+    persist('Prompt Studio');
     return E.clone(entry);
   }
 
@@ -65,9 +78,9 @@
 
   function addConcept(category, input) {
     const cleanCategory = E.clean(category).toLowerCase().replace(/[^a-z0-9_]+/g, '_').replace(/^_+|_+$/g, '');
-    if (!cleanCategory) throw new Error('Category名が必要です');
+    if (!cleanCategory) throw new Error('カテゴリ名が必要です');
     const entry = E.normalizeConceptEntry(input, cleanCategory);
-    if (!entry) throw new Error('Concept valueが必要です');
+    if (!entry) throw new Error('プロンプト用の内容が必要です');
     db.concepts[cleanCategory] = E.mergeConceptEntries(db.concepts[cleanCategory] || [], [entry], cleanCategory);
     persist();
     return E.clone(entry);
@@ -76,9 +89,9 @@
   function updateConcept(category, id, patch) {
     const values = E.normalizeConceptEntries(db.concepts[category] || [], category);
     const current = values.find((entry) => entry.id === id);
-    if (!current) throw new Error('Conceptが見つかりません');
+    if (!current) throw new Error('パーツが見つかりません');
     const next = E.normalizeConceptEntry({ ...current, ...patch, id: current.id }, category);
-    if (!next) throw new Error('Concept valueが必要です');
+    if (!next) throw new Error('プロンプト用の内容が必要です');
     db.concepts[category] = values.map((entry) => entry.id === id ? next : entry);
     persist();
     return E.clone(next);
@@ -93,7 +106,7 @@
     const entry = {
       id: makeId('recipe'),
       type: 'slot-recipe',
-      title: E.clean(title) || 'Untitled recipe',
+      title: E.clean(title) || '名称未設定のレシピ',
       slots: E.clone(Array.isArray(slots) ? slots : []),
       notes: E.clean(notes),
       created_at: E.now(),
@@ -107,7 +120,7 @@
 
   function updateRecipe(id, patch) {
     const index = db.recipes.findIndex((recipe) => recipe.id === id);
-    if (index < 0) throw new Error('Recipeが見つかりません');
+    if (index < 0) throw new Error('レシピが見つかりません');
     db.recipes[index] = { ...db.recipes[index], ...E.clone(patch), id, updated_at: E.now() };
     persist();
     return E.clone(db.recipes[index]);
@@ -118,54 +131,18 @@
     persist();
   }
 
-  function usableLines(text) {
-    return String(text).split(/\r?\n/).map(E.clean).filter((line) => line && !line.startsWith('#'));
-  }
-
-  async function importLegacy(files) {
-    const listFiles = [...files];
-    const configFile = listFiles.find((file) => /(^|\/)config\.json$/i.test(file.webkitRelativePath || file.name));
-    if (!configFile) throw new Error('旧PromptDBのconfig.jsonが見つかりません');
-    const config = JSON.parse(await configFile.text());
-    const importedConcepts = {};
-    const sentenceFiles = {};
-
-    for (const file of listFiles) {
-      const path = (file.webkitRelativePath || file.name).replaceAll('\\','/');
-      const wordMatch = path.match(/(?:^|\/)words\/([^/]+)\.txt$/i);
-      const sentenceMatch = path.match(/(?:^|\/)sentences\/([^/]+\.txt)$/i);
-      if (wordMatch) importedConcepts[wordMatch[1].toLowerCase().replaceAll('-','_')] = usableLines(await file.text());
-      if (sentenceMatch) sentenceFiles[sentenceMatch[1]] = usableLines(await file.text());
-    }
-
-    Object.entries(importedConcepts).forEach(([category, values]) => {
-      db.concepts[category] = E.mergeConceptEntries(db.concepts[category] || [], values, category);
-    });
-
-    Object.entries(config.groups || {}).forEach(([groupName, group]) => {
-      const refs = (group.sentence_files || []).map((item) => typeof item === 'string' ? item : item.file).filter(Boolean);
-      refs.forEach((fileName) => (sentenceFiles[fileName] || []).forEach((template, index) => {
-        db.recipes.push({
-          id: `legacy.${groupName}.${fileName.replace(/\W+/g,'_')}.${index + 1}`,
-          type: 'legacy-template', group: groupName, title: `${groupName} / ${fileName} #${index + 1}`,
-          template, sentence_file: fileName, source: 'prompt-db-v1'
-        });
-      }));
-    });
-
-    db.recipes = [...new Map(db.recipes.map((recipe) => [recipe.id || JSON.stringify(recipe), recipe])).values()];
-    persist(`Imported legacy PromptDB: ${configFile.webkitRelativePath.split('/')[0] || 'folder'}`);
-    return { categories: Object.keys(importedConcepts).length, recipes: db.recipes.length };
-  }
-
-  async function importV2(file) {
+  async function importDb(file) {
     const parsed = JSON.parse(await file.text());
-    if (parsed?.format !== 'prompt-db-v2') throw new Error('PromptDB v2形式ではありません');
-    merge(parsed, `Imported PromptDB v2: ${file.name}`);
+    if (parsed?.format !== 'prompt-db' && parsed?.format !== 'prompt-db-v2') {
+      throw new Error('プロンプトDBのJSON形式ではありません');
+    }
+    merge(parsed, `読み込んだデータ: ${file.name}`);
   }
 
   function exportObject() {
-    return { ...E.clone(db), app_version: E.APP_VERSION, version: '2.1.0', updated_at: E.now() };
+    const exported = { ...E.clone(db), format: 'prompt-db', schema_version: 1, app_version: E.APP_VERSION, updated_at: E.now() };
+    delete exported.version;
+    return exported;
   }
 
   window.PromptStudioStore = Object.freeze({
@@ -174,6 +151,6 @@
     addLibraryEntry, deleteLibraryEntry,
     addConcept, updateConcept, deleteConcept,
     addRecipe, updateRecipe, deleteRecipe,
-    importLegacy, importV2, exportObject
+    importDb, exportObject
   });
 })();

@@ -91,3 +91,37 @@ Verified on production 2026-09-30.
 Status: **CLOSED / production verified**.
 
 The next Phase 6 production-art target may proceed using the same Single-Scene + semantic hotspot contract.
+
+
+## Mobile production-art extension — 2026-10-01
+
+The mobile district view now uses a separately composed 3:4 master rather than cropping the desktop 4:3 scene.
+
+Accepted mobile master:
+- Google Drive ID: `15O1lzu9UuvvaCDVL-4FDxIVjNquqePr8`
+- filename: `waterside-play-mobile-production-art-accepted-20261001.png`
+- dimensions: 1086x1448
+- SHA-256: `06c78669630f9cb718d34436eb1d5dbc821a4979e782c8e85c69daa31047ec40`
+- role: mobile-only visual source; the accepted desktop master remains unchanged.
+
+Runtime derivative:
+- `waterside-play-mobile-1086x1448-q86.webp`
+- 285,688 bytes
+- SHA-256: `2a1d66c0d603ffaf31699f4b1c6039247a7c70a1986aca9d1ff926d5b37bd02c`
+
+Runtime contract:
+- `max-width: 680px` selects the 3:4 mobile artwork.
+- desktop/tablet retain the existing 4:3 derivatives.
+- mobile semantic geometry uses the mobile master's 1086x1448 source coordinate space.
+- WP-01..WP-03 are interactive; WP-04..WP-06 have reserved mobile geometry but remain non-interactive.
+- artwork and semantic SVG have explicit paint order: artwork z-index 1, hotspots z-index 2.
+
+Production QA:
+- public mobile WebP fetched successfully with the expected dimensions.
+- 390x844-class browser QA selected the 1086x1448 mobile source.
+- exactly three mobile active hotspots were exposed.
+- WP-01, WP-02, and WP-03 each opened their corresponding inline project note.
+- no horizontal overflow was present.
+- desktop QA continued to select `waterside-play-1536x1024-q86.webp`.
+
+Status: **Mobile District View S1 PASS / production verified**.

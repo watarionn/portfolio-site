@@ -48,10 +48,7 @@
   }
 
   function currentCategory() {
-    const input = $('conceptCategoryInput');
-    const categories = conceptCategories();
-    if (!input.value && categories.length) input.value = categories[0];
-    return E.clean(input.value);
+    return E.clean($('conceptCategoryInput').value);
   }
 
   function resetConceptForm() {
@@ -245,6 +242,9 @@
   });
 
   updateCategoryOptions();
+  if (!$('conceptCategoryInput').value && conceptCategories().length) {
+    $('conceptCategoryInput').value = conceptCategories()[0];
+  }
   resetConceptForm();
   renderConcepts();
   renderRecipes();

@@ -7,13 +7,18 @@
   function loadWorkingDb() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return E.clone(E.DEFAULT_DB);
+      if (!raw) return E.normalizeDb(E.DEFAULT_DB);
       const parsed = JSON.parse(raw);
-      return parsed?.format === 'prompt-db-v2' ? E.normalizeDb(parsed) : E.clone(E.DEFAULT_DB);
-    } catch { return E.clone(E.DEFAULT_DB); }
+      return parsed?.format === 'prompt-db-v2' ? E.normalizeDb(parsed) : E.normalizeDb(E.DEFAULT_DB);
+    } catch {
+      return E.normalizeDb(E.DEFAULT_DB);
+    }
   }
 
   function persist(sourceLabel) {
+    db = E.normalizeDb(db);
+    db.app_version = E.APP_VERSION;
+    db.version = '2.1.0';
     db.updated_at = E.now();
     if (sourceLabel) db.source = sourceLabel;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
@@ -27,14 +32,18 @@
   function merge(incoming, sourceLabel) {
     const normalized = E.normalizeDb(incoming);
     Object.entries(normalized.concepts).forEach(([category, values]) => {
-      db.concepts[category] = E.unique([...(db.concepts[category] || []), ...E.normalizeConceptValues(values)]);
+      db.concepts[category] = E.mergeConceptEntries(db.concepts[category] || [], values, category);
     });
-    const recipeMap = new Map(db.recipes.map((r) => [r.id || JSON.stringify(r), r]));
-    normalized.recipes.forEach((r) => recipeMap.set(r.id || JSON.stringify(r), r));
+
+    const recipeMap = new Map(db.recipes.map((recipe) => [recipe.id || JSON.stringify(recipe), recipe]));
+    normalized.recipes.forEach((recipe) => recipeMap.set(recipe.id || makeId('recipe'), recipe));
     db.recipes = [...recipeMap.values()];
+
     const libraryMap = new Map(db.library.map((entry) => [entry.id, entry]));
     normalized.library.forEach((entry) => libraryMap.set(entry.id || makeId('prompt'), entry));
-    db.library = [...libraryMap.values()].sort((a,b) => String(b.updated_at || b.created_at || '').localeCompare(String(a.updated_at || a.created_at || '')));
+    db.library = [...libraryMap.values()].sort((a, b) =>
+      String(b.updated_at || b.created_at || '').localeCompare(String(a.updated_at || a.created_at || ''))
+    );
     persist(sourceLabel);
   }
 
@@ -51,6 +60,61 @@
 
   function deleteLibraryEntry(id) {
     db.library = db.library.filter((entry) => entry.id !== id);
+    persist();
+  }
+
+  function addConcept(category, input) {
+    const cleanCategory = E.clean(category).toLowerCase().replace(/[^a-z0-9_]+/g, '_').replace(/^_+|_+$/g, '');
+    if (!cleanCategory) throw new Error('Category名が必要です');
+    const entry = E.normalizeConceptEntry(input, cleanCategory);
+    if (!entry) throw new Error('Concept valueが必要です');
+    db.concepts[cleanCategory] = E.mergeConceptEntries(db.concepts[cleanCategory] || [], [entry], cleanCategory);
+    persist();
+    return E.clone(entry);
+  }
+
+  function updateConcept(category, id, patch) {
+    const values = E.normalizeConceptEntries(db.concepts[category] || [], category);
+    const current = values.find((entry) => entry.id === id);
+    if (!current) throw new Error('Conceptが見つかりません');
+    const next = E.normalizeConceptEntry({ ...current, ...patch, id: current.id }, category);
+    if (!next) throw new Error('Concept valueが必要です');
+    db.concepts[category] = values.map((entry) => entry.id === id ? next : entry);
+    persist();
+    return E.clone(next);
+  }
+
+  function deleteConcept(category, id) {
+    db.concepts[category] = E.normalizeConceptEntries(db.concepts[category] || [], category).filter((entry) => entry.id !== id);
+    persist();
+  }
+
+  function addRecipe({ title, slots, notes = '' }) {
+    const entry = {
+      id: makeId('recipe'),
+      type: 'slot-recipe',
+      title: E.clean(title) || 'Untitled recipe',
+      slots: E.clone(Array.isArray(slots) ? slots : []),
+      notes: E.clean(notes),
+      created_at: E.now(),
+      updated_at: E.now(),
+      source: 'prompt-studio'
+    };
+    db.recipes.unshift(entry);
+    persist();
+    return E.clone(entry);
+  }
+
+  function updateRecipe(id, patch) {
+    const index = db.recipes.findIndex((recipe) => recipe.id === id);
+    if (index < 0) throw new Error('Recipeが見つかりません');
+    db.recipes[index] = { ...db.recipes[index], ...E.clone(patch), id, updated_at: E.now() };
+    persist();
+    return E.clone(db.recipes[index]);
+  }
+
+  function deleteRecipe(id) {
+    db.recipes = db.recipes.filter((recipe) => recipe.id !== id);
     persist();
   }
 
@@ -75,18 +139,21 @@
     }
 
     Object.entries(importedConcepts).forEach(([category, values]) => {
-      db.concepts[category] = E.unique([...(db.concepts[category] || []), ...values]);
+      db.concepts[category] = E.mergeConceptEntries(db.concepts[category] || [], values, category);
     });
+
     Object.entries(config.groups || {}).forEach(([groupName, group]) => {
       const refs = (group.sentence_files || []).map((item) => typeof item === 'string' ? item : item.file).filter(Boolean);
       refs.forEach((fileName) => (sentenceFiles[fileName] || []).forEach((template, index) => {
         db.recipes.push({
           id: `legacy.${groupName}.${fileName.replace(/\W+/g,'_')}.${index + 1}`,
-          type: 'legacy-template', group: groupName, template, sentence_file: fileName, source: 'prompt-db-v1'
+          type: 'legacy-template', group: groupName, title: `${groupName} / ${fileName} #${index + 1}`,
+          template, sentence_file: fileName, source: 'prompt-db-v1'
         });
       }));
     });
-    db.recipes = [...new Map(db.recipes.map((r) => [r.id || JSON.stringify(r), r])).values()];
+
+    db.recipes = [...new Map(db.recipes.map((recipe) => [recipe.id || JSON.stringify(recipe), recipe])).values()];
     persist(`Imported legacy PromptDB: ${configFile.webkitRelativePath.split('/')[0] || 'folder'}`);
     return { categories: Object.keys(importedConcepts).length, recipes: db.recipes.length };
   }
@@ -98,11 +165,15 @@
   }
 
   function exportObject() {
-    return { ...E.clone(db), app_version: E.APP_VERSION, updated_at: E.now() };
+    return { ...E.clone(db), app_version: E.APP_VERSION, version: '2.1.0', updated_at: E.now() };
   }
 
   window.PromptStudioStore = Object.freeze({
-    getDb: () => E.clone(db), persist, merge, addLibraryEntry, deleteLibraryEntry,
+    getDb: () => E.clone(db),
+    persist, merge,
+    addLibraryEntry, deleteLibraryEntry,
+    addConcept, updateConcept, deleteConcept,
+    addRecipe, updateRecipe, deleteRecipe,
     importLegacy, importV2, exportObject
   });
 })();

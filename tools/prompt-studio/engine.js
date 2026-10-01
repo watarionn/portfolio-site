@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.1.0';
+  const APP_VERSION = '1.0.0';
   const FIELD_IDS = [
     'subject','appearance','expression','outfit','action','pose','environment',
     'lighting','camera','composition','style','visibleText','constraints','negative'
@@ -31,7 +31,7 @@
   };
 
   const DEFAULT_DB = {
-    format: 'prompt-db-v2', version: '2.0.0', app_version: APP_VERSION,
+    format: 'prompt-db-v2', version: '2.1.0', app_version: APP_VERSION,
     updated_at: new Date().toISOString(), source: 'Built-in working DB',
     concepts: {
       subject: ['a young woman','a lone traveler','a small reading room','a vintage camera'],
@@ -57,20 +57,78 @@
   const unique = (values) => [...new Set(values.filter(Boolean))];
   const now = () => new Date().toISOString();
 
-  function normalizeConceptValues(values) {
+  function hashString(value) {
+    let hash = 2166136261;
+    for (const char of String(value)) {
+      hash ^= char.charCodeAt(0);
+      hash = Math.imul(hash, 16777619);
+    }
+    return (hash >>> 0).toString(36);
+  }
+
+  function slug(value) {
+    return clean(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 36) || 'item';
+  }
+
+  function normalizeConceptEntry(item, category = 'concept') {
+    const raw = typeof item === 'string' ? { value: item } : (item || {});
+    const value = clean(raw.value || raw.label_en || raw.label_ja);
+    if (!value) return null;
+    const weightNumber = Number(raw.weight);
+    return {
+      id: clean(raw.id) || `${category}.${slug(value)}.${hashString(value)}`,
+      value,
+      label_ja: clean(raw.label_ja),
+      tags: unique(Array.isArray(raw.tags) ? raw.tags.map(clean) : list(raw.tags)),
+      weight: Number.isFinite(weightNumber) && weightNumber > 0 ? weightNumber : 1
+    };
+  }
+
+  function normalizeConceptEntries(values, category = 'concept') {
     if (!Array.isArray(values)) return [];
-    return unique(values.map((item) => typeof item === 'string' ? clean(item) : clean(item?.value || item?.label_en || item?.label_ja)));
+    const map = new Map();
+    values.forEach((item) => {
+      const entry = normalizeConceptEntry(item, category);
+      if (!entry) return;
+      const key = entry.value.toLowerCase();
+      map.set(key, { ...(map.get(key) || {}), ...entry });
+    });
+    return [...map.values()];
+  }
+
+  function normalizeConceptValues(values) {
+    return normalizeConceptEntries(values).map((entry) => entry.value);
+  }
+
+  function mergeConceptEntries(current, incoming, category = 'concept') {
+    const map = new Map(normalizeConceptEntries(current, category).map((entry) => [entry.value.toLowerCase(), entry]));
+    normalizeConceptEntries(incoming, category).forEach((entry) => map.set(entry.value.toLowerCase(), entry));
+    return [...map.values()];
+  }
+
+  function weightedChoice(values, random = Math.random) {
+    const entries = normalizeConceptEntries(values);
+    if (!entries.length) return null;
+    const total = entries.reduce((sum, entry) => sum + Math.max(0.0001, Number(entry.weight) || 1), 0);
+    let point = random() * total;
+    for (const entry of entries) {
+      point -= Math.max(0.0001, Number(entry.weight) || 1);
+      if (point <= 0) return entry;
+    }
+    return entries[entries.length - 1];
   }
 
   function normalizeDb(input = {}) {
     const normalized = {
       ...clone(DEFAULT_DB), ...input,
+      format: 'prompt-db-v2',
+      version: input.version || '2.1.0',
       concepts: { ...clone(DEFAULT_DB.concepts), ...(input.concepts || {}) },
       recipes: Array.isArray(input.recipes) ? input.recipes : [],
       library: Array.isArray(input.library) ? input.library : []
     };
     Object.keys(normalized.concepts).forEach((key) => {
-      normalized.concepts[key] = normalizeConceptValues(normalized.concepts[key]);
+      normalized.concepts[key] = normalizeConceptEntries(normalized.concepts[key], key);
     });
     return normalized;
   }
@@ -97,8 +155,9 @@
       if (semantic.visibleText) sentences.push(`Include the visible text exactly as: "${semantic.visibleText}".`);
       if (constraintParts.length) sentences.push(`Keep ${constraintParts.join(', ')}.`);
     } else {
-      const segments = [subjectParts, actionParts, sceneParts, framingParts, styleParts];
-      segments.forEach((parts) => { if (parts.length) sentences.push(`${parts.join(', ')}.`); });
+      [subjectParts, actionParts, sceneParts, framingParts, styleParts].forEach((parts) => {
+        if (parts.length) sentences.push(`${parts.join(', ')}.`);
+      });
       if (semantic.visibleText) sentences.push(`Visible text: "${semantic.visibleText}".`);
       if (constraintParts.length) sentences.push(`${constraintParts.join(', ')}.`);
     }
@@ -130,6 +189,8 @@
 
   window.PromptStudioEngine = Object.freeze({
     APP_VERSION, FIELD_IDS, PROFILE_DEFS, DEFAULT_DB,
-    clone, clean, list, unique, now, normalizeConceptValues, normalizeDb, renderForProfile
+    clone, clean, list, unique, now, hashString, slug,
+    normalizeConceptEntry, normalizeConceptEntries, normalizeConceptValues, mergeConceptEntries, weightedChoice,
+    normalizeDb, renderForProfile
   });
 })();

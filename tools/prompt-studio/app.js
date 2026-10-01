@@ -54,8 +54,8 @@
     const db = Store.getDb();
     const map = { subject:'subject', appearance:'appearance', expression:'expression', outfit:'outfit', action:'action', pose:'pose', environment:'environment', lighting:'lighting', camera:'camera', composition:'composition', style:'style', visibleText:'visibleText', constraints:'constraints' };
     Object.entries(map).forEach(([field, category]) => {
-      const values = E.normalizeConceptValues(db.concepts?.[category]);
-      if (values.length) $(field).value = values[Math.floor(Math.random() * values.length)];
+      const entry = E.weightedChoice(db.concepts?.[category] || []);
+      if (entry) $(field).value = entry.value;
     });
     renderCurrent(); showToast('PromptDBのConceptから組みました');
   }

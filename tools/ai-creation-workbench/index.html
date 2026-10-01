@@ -65,8 +65,11 @@
     </section>
 
     <section class="workspace" id="panel-pose" role="tabpanel" aria-labelledby="tab-pose" tabindex="0">
-      <div class="workspace-head"><div><span class="eyebrow">POSE AUTHORING</span><h2 id="pose-title">Pose Studio</h2><p>既存のControlNet Pose Helperを、そのまま編集可能な制作モジュールとして統合しています。</p></div><button id="reloadPose">Pose Studioを再読込</button></div>
-      <div class="pose-frame-wrap"><iframe id="poseFrame" title="Pose Studio" src="modules/pose/index.html"></iframe></div>
+      <div class="workspace-head">
+        <div><span class="eyebrow">LEGACY POSE TOOL</span><h2 id="pose-title">Pose Studio</h2><p>旧2D Pose Helperを互換用に残しています。3D・2D・ポーズDBを統合した新しいPose Studioへ移行します。</p></div>
+        <div class="head-actions"><a class="tool-link" href="../pose-studio/">新しいPose Studioを開く</a><button id="reloadPose">旧Pose Studioを再読込</button></div>
+      </div>
+      <div class="pose-frame-wrap"><iframe id="poseFrame" title="旧Pose Studio" src="modules/pose/index.html"></iframe></div>
     </section>
 
     <section class="workspace" id="panel-model" role="tabpanel" aria-labelledby="tab-model" tabindex="0">

@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="3Dマネキンと2D骨格を行き来しながらポーズを作り、OpenPoseや参照画像として書き出してポーズDBへ保存できるPose Studio。">
+  <title>Pose Studio</title>
+  <meta name="theme-color" content="#25231f">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="title-block">
+      <a class="back-link" href="/AI_CREATION_WORKBENCH/">← 制作ツール</a>
+      <h1>Pose Studio</h1>
+      <p>3Dで形を作り、2Dで整え、ポーズDBへ残す。ControlNet用の出力まで一つの画面で完結します。</p>
+    </div>
+    <div class="header-actions">
+      <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
+      <button id="importDbButton" type="button">ポーズDBを読み込む</button>
+      <button id="exportDbButton" type="button">ポーズDBを書き出す</button>
+    </div>
+  </header>
+
+  <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
+
+  <div class="studio-tabs" role="tablist" aria-label="Pose Studio 画面切替">
+    <button class="studio-tab active" data-view="pose3d" role="tab" aria-selected="true">3Dポーズ</button>
+    <button class="studio-tab" data-view="pose2d" role="tab" aria-selected="false">2Dポーズ</button>
+    <button class="studio-tab" data-view="database" role="tab" aria-selected="false">ポーズDB</button>
+  </div>
+
+  <main>
+    <section id="pose3dView" class="view active">
+      <div class="editor-layout">
+        <section class="stage-panel">
+          <div class="stage-toolbar">
+            <div>
+              <strong>3Dマネキン</strong>
+              <span>背景ドラッグで視点回転 / ホイール・ピンチでズーム / 関節マーカーをドラッグ</span>
+            </div>
+            <div class="toolbar-actions">
+              <button id="to2dButton" class="primary-button" type="button">現在視点を2Dへ送る</button>
+              <button id="save3dToDbButton" type="button">DBに登録</button>
+            </div>
+          </div>
+          <div id="stage3d" class="stage3d" aria-label="3Dポーズ編集ビュー"></div>
+          <p id="status3d" class="status-line" role="status" aria-live="polite">グレーマネキンを編集できます。</p>
+        </section>
+
+        <aside class="control-panel">
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>プリセットと視点</h2>
+              <button class="info-button" type="button" data-help-key="preset-view" aria-label="プリセットと視点の説明">i</button>
+            </div>
+            <h3>ポーズプリセット</h3>
+            <div id="preset3dButtons" class="button-grid compact"></div>
+            <h3>視点</h3>
+            <div id="view3dButtons" class="button-grid compact"></div>
+          </section>
+
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>関節編集</h2>
+              <button class="info-button" type="button" data-help-key="joint3d" aria-label="3D関節編集の説明">i</button>
+            </div>
+            <label>選択中の関節
+              <select id="joint3dSelect"></select>
+            </label>
+            <label>X 前後 <output id="joint3dXOut">0°</output>
+              <input id="joint3dX" type="range" min="-180" max="180" step="1" value="0">
+            </label>
+            <label>Y ひねり <output id="joint3dYOut">0°</output>
+              <input id="joint3dY" type="range" min="-180" max="180" step="1" value="0">
+            </label>
+            <label>Z 左右 <output id="joint3dZOut">0°</output>
+              <input id="joint3dZ" type="range" min="-180" max="180" step="1" value="0">
+            </label>
+            <label>全体の高さ <output id="rootHeightOut">0.00</output>
+              <input id="rootHeight" type="range" min="-0.6" max="0.6" step="0.01" value="0">
+            </label>
+            <div class="button-row">
+              <button id="resetJoint3dButton" type="button">この関節を戻す</button>
+              <button id="resetAll3dButton" type="button">全体を初期化</button>
+            </div>
+          </section>
+
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>3D出力</h2>
+              <button class="info-button" type="button" data-help-key="output3d" aria-label="3D出力の説明">i</button>
+            </div>
+            <label>画像サイズ
+              <select id="export3dSize">
+                <option value="512x768">512 × 768</option>
+                <option value="1024x1536" selected>1024 × 1536</option>
+                <option value="1536x2304">1536 × 2304</option>
+              </select>
+            </label>
+            <div class="button-grid">
+              <button id="export3dPngButton" type="button">現在視点PNG</button>
+              <button id="export3dSheetButton" type="button">4方向シート</button>
+              <button id="export3dFourButton" type="button">4方向を個別保存</button>
+              <button id="export3dOpenPoseButton" type="button">OpenPose画像</button>
+              <button id="export3dOpenPoseJsonButton" type="button">OpenPose JSON</button>
+              <button id="export3dDataButton" type="button">3DポーズJSON</button>
+            </div>
+          </section>
+
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>動きの確認</h2>
+              <button class="info-button" type="button" data-help-key="animation" aria-label="動きの確認の説明">i</button>
+            </div>
+            <p class="section-note">現在のポーズをA / Bに登録して、その間を往復させます。</p>
+            <div class="button-row">
+              <button id="setAnimAButton" type="button">現在をAに設定</button>
+              <button id="setAnimBButton" type="button">現在をBに設定</button>
+            </div>
+            <label>1ループ
+              <select id="animationPeriod">
+                <option value="1">1秒</option>
+                <option value="2" selected>2秒</option>
+                <option value="3">3秒</option>
+                <option value="4">4秒</option>
+              </select>
+            </label>
+            <div class="button-grid">
+              <button id="playAnimationButton" type="button">▶ 再生</button>
+              <button id="exportGifButton" type="button">GIF保存</button>
+              <button id="exportVideoButton" type="button">動画保存</button>
+            </div>
+          </section>
+
+          <section class="save-meta">
+            <div class="heading-with-help">
+              <h2>ポーズDBへ保存</h2>
+              <button class="info-button" type="button" data-help-key="save-db" aria-label="ポーズDB保存の説明">i</button>
+            </div>
+            <label>タイトル<input id="pose3dTitle" type="text" placeholder="例: 本を持って自然に立つ"></label>
+            <label>タグ<input id="pose3dTags" type="text" placeholder="standing, book, neutral"></label>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section id="pose2dView" class="view" hidden>
+      <div class="editor-layout">
+        <section class="stage-panel">
+          <div class="stage-toolbar">
+            <div>
+              <strong>2D骨格</strong>
+              <span>関節をドラッグして微調整。下絵の上からトレースすることもできます。</span>
+            </div>
+            <div class="toolbar-actions">
+              <button id="save2dToDbButton" class="primary-button" type="button">DBに登録</button>
+            </div>
+          </div>
+          <div id="stage2dWrap" class="stage2d-wrap">
+            <canvas id="pose2dCanvas" width="1024" height="1024"></canvas>
+          </div>
+          <p id="status2d" class="status-line" role="status" aria-live="polite">関節をドラッグしてポーズを編集できます。</p>
+        </section>
+
+        <aside class="control-panel">
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>ポーズと見た目</h2>
+              <button class="info-button" type="button" data-help-key="pose2d" aria-label="2Dポーズ編集の説明">i</button>
+            </div>
+            <label>プリセット
+              <div class="field-button-row">
+                <select id="preset2dSelect">
+                  <option value="standing_front">正面立ち</option>
+                  <option value="arms_up">両手上げ</option>
+                  <option value="walking">歩き</option>
+                  <option value="sitting_chair">椅子座り</option>
+                  <option value="straddling_chair">椅子またぎ</option>
+                  <option value="crouch">しゃがみ</option>
+                  <option value="side_view">横向き風</option>
+                </select>
+                <button id="applyPreset2dButton" type="button">適用</button>
+              </div>
+            </label>
+            <label>表示形式
+              <select id="drawMode2d">
+                <option value="openpose">OpenPose風</option>
+                <option value="stick">黒線の棒人間</option>
+                <option value="white_stick">白線の棒人間</option>
+                <option value="silhouette">簡易シルエット</option>
+              </select>
+            </label>
+            <div class="field-grid two">
+              <label>幅<input id="canvas2dWidth" type="number" min="256" max="2048" step="64" value="1024"></label>
+              <label>高さ<input id="canvas2dHeight" type="number" min="256" max="2048" step="64" value="1024"></label>
+            </div>
+            <div class="field-grid two">
+              <label>線幅<input id="lineWidth2d" type="range" min="2" max="30" value="10"></label>
+              <label>関節サイズ<input id="jointSize2d" type="range" min="4" max="32" value="13"></label>
+            </div>
+            <label>背景
+              <select id="background2d">
+                <option value="black">黒</option>
+                <option value="white">白</option>
+                <option value="transparent">透明</option>
+                <option value="gray">グレー</option>
+              </select>
+            </label>
+          </section>
+
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>編集補助</h2>
+              <button class="info-button" type="button" data-help-key="assist2d" aria-label="2D編集補助の説明">i</button>
+            </div>
+            <div class="check-grid">
+              <label class="check"><input id="showGrid2d" type="checkbox" checked> グリッド</label>
+              <label class="check"><input id="showJoints2d" type="checkbox" checked> 関節</label>
+              <label class="check"><input id="showLabels2d" type="checkbox"> 関節名</label>
+              <label class="check"><input id="mirror2d" type="checkbox"> 左右対称編集</label>
+              <label class="check"><input id="chairGuide2d" type="checkbox"> 椅子ガイド</label>
+              <label class="check"><input id="keepInside2d" type="checkbox" checked> 画面内に制限</label>
+            </div>
+            <div class="button-grid">
+              <button id="center2dButton" type="button">中央寄せ</button>
+              <button id="flip2dButton" type="button">左右反転</button>
+              <button id="reset2dButton" type="button">初期化</button>
+              <button id="clearSelection2dButton" type="button">選択解除</button>
+            </div>
+          </section>
+
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>下絵・トレース</h2>
+              <button class="info-button" type="button" data-help-key="reference" aria-label="下絵機能の説明">i</button>
+            </div>
+            <input id="reference2dInput" type="file" accept="image/*">
+            <label>下絵の透明度<input id="referenceOpacity2d" type="range" min="0" max="100" value="35"></label>
+            <label>表示方法
+              <select id="referenceFit2d">
+                <option value="contain">全体表示</option>
+                <option value="cover">画面いっぱい</option>
+                <option value="stretch">引き伸ばし</option>
+              </select>
+            </label>
+            <div class="button-row">
+              <button id="toggleReference2dButton" type="button">表示 / 非表示</button>
+              <button id="clearReference2dButton" type="button">下絵を削除</button>
+            </div>
+          </section>
+
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>選択した関節</h2>
+              <button class="info-button" type="button" data-help-key="joint2d" aria-label="2D関節編集の説明">i</button>
+            </div>
+            <div id="selectedJoint2d" class="selected-box">未選択</div>
+            <div class="field-grid two">
+              <label>X<input id="joint2dX" type="number" step="1"></label>
+              <label>Y<input id="joint2dY" type="number" step="1"></label>
+            </div>
+            <button id="applyJoint2dButton" type="button">座標を反映</button>
+          </section>
+
+          <section class="control-section">
+            <div class="heading-with-help">
+              <h2>2D出力</h2>
+              <button class="info-button" type="button" data-help-key="output2d" aria-label="2D出力の説明">i</button>
+            </div>
+            <div class="button-grid">
+              <button id="export2dPngButton" type="button">PNG保存</button>
+              <button id="export2dSvgButton" type="button">SVG保存</button>
+              <button id="export2dOpenPoseJsonButton" type="button">OpenPose JSON</button>
+              <button id="export2dDataButton" type="button">2DポーズJSON</button>
+            </div>
+          </section>
+
+          <section class="save-meta">
+            <h2>ポーズDBへ保存</h2>
+            <label>タイトル<input id="pose2dTitle" type="text" placeholder="例: 椅子に座って脚を組む"></label>
+            <label>タグ<input id="pose2dTags" type="text" placeholder="sitting, chair, crossed legs"></label>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section id="databaseView" class="view" hidden>
+      <div class="database-layout">
+        <aside class="database-sidebar">
+          <div class="heading-with-help">
+            <h2>ポーズDB</h2>
+            <button class="info-button" type="button" data-help-key="database" aria-label="ポーズDBの説明">i</button>
+          </div>
+          <label>検索<input id="poseDbSearch" type="search" placeholder="タイトル / タグ"></label>
+          <label>種類
+            <select id="poseDbSourceFilter">
+              <option value="all">すべて</option>
+              <option value="3d">3Dから保存</option>
+              <option value="2d">2Dから保存</option>
+            </select>
+          </label>
+          <dl class="db-stats">
+            <div><dt>保存済み</dt><dd id="poseDbCount">0</dd></div>
+            <div><dt>3Dあり</dt><dd id="poseDb3dCount">0</dd></div>
+            <div><dt>2Dあり</dt><dd id="poseDb2dCount">0</dd></div>
+          </dl>
+          <p class="section-note">ブラウザ内のデータは作業用です。長く残すときは「ポーズDBを書き出す」でJSONを保存してください。</p>
+        </aside>
+        <section class="database-main">
+          <div class="database-main-head">
+            <div>
+              <h2>保存したポーズ</h2>
+              <p>3D・2Dどちらから保存しても、同じポーズDBへ入ります。</p>
+            </div>
+          </div>
+          <div id="poseDbList" class="pose-db-list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpDialogTitle">
+    <div class="help-dialog-head">
+      <h2 id="helpDialogTitle">使い方</h2>
+      <button id="helpDialogClose" class="help-dialog-close" type="button" aria-label="説明を閉じる">×</button>
+    </div>
+    <div id="helpDialogBody" class="help-dialog-body"></div>
+  </dialog>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="gif.js"></script>
+  <script src="store.js"></script>
+  <script src="pose2d.js"></script>
+  <script src="pose3d.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

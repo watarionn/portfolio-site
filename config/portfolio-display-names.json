@@ -211,6 +211,13 @@
       "japaneseName": "大阪地下鉄七並べ",
       "englishName": "Subway Sevens",
       "route": "/OSAKA_SUBWAY_SEVENS/"
+    },
+    {
+      "number": "030",
+      "projectId": "minimalizer",
+      "japaneseName": "Minimalizer",
+      "englishName": "Image Simplification Tool",
+      "route": "/minimalizer/"
     }
   ]
 }

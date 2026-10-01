@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="意味ベースでプロンプトを組み立て、FLUX・SDXL・GPT Image向けの書式へ変換し、PromptDBへ保存するPrompt Studio。">
+  <title>Prompt Studio</title>
+  <meta name="theme-color" content="#25231f">
+  <meta name="color-scheme" content="light">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="title-block">
+      <a class="back-link" href="../ai-creation-workbench/">← Creation Tools</a>
+      <h1>Prompt Studio</h1>
+      <p>Compose once, render for each model dialect, keep the meaning in PromptDB.</p>
+    </div>
+    <div class="header-actions">
+      <button id="importDbButton">PromptDB v2を読込</button>
+      <button id="importLegacyButton">旧PromptDBを取込</button>
+      <button id="exportDbButton">PromptDBを書出</button>
+    </div>
+  </header>
+
+  <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
+  <input id="legacyFolderInput" class="visually-hidden" type="file" webkitdirectory multiple>
+
+  <div class="studio-tabs" role="tablist" aria-label="Prompt Studio views">
+    <button class="studio-tab active" data-view="compose" role="tab" aria-selected="true">Compose</button>
+    <button class="studio-tab" data-view="database" role="tab" aria-selected="false">PromptDB</button>
+  </div>
+
+  <main>
+    <section id="composeView" class="view active">
+      <div class="studio-grid">
+        <aside class="composer-panel" aria-label="Prompt composer">
+          <section class="panel-section">
+            <h2>Render target</h2>
+            <label>
+              Model / Dialect
+              <select id="profileSelect"></select>
+            </label>
+            <label>
+              Checkpoint / model name <span class="optional">optional</span>
+              <input id="modelName" type="text" placeholder="例: Animagine XL / FLUX.2 / gpt-image-1.5">
+            </label>
+            <p id="profileNote" class="section-note"></p>
+          </section>
+
+          <section class="panel-section semantic-fields">
+            <div class="section-heading-row">
+              <h2>Scene meaning</h2>
+              <button id="randomizeButton" class="quiet-button">DBから組む</button>
+            </div>
+
+            <label>Subject<textarea id="subject" rows="2" placeholder="a young woman"></textarea></label>
+            <label>Appearance<input id="appearance" type="text" placeholder="gentle, intelligent appearance"></label>
+            <label>Expression<input id="expression" type="text" placeholder="calm expression"></label>
+            <label>Outfit<input id="outfit" type="text" placeholder="white shirt and dark skirt"></label>
+            <label>Action<input id="action" type="text" placeholder="reading a book"></label>
+            <label>Pose<input id="pose" type="text" placeholder="standing naturally"></label>
+            <label>Environment<input id="environment" type="text" placeholder="quiet library at night"></label>
+            <label>Lighting<input id="lighting" type="text" placeholder="soft warm window light"></label>
+            <label>Camera<input id="camera" type="text" placeholder="50mm eye-level medium shot"></label>
+            <label>Composition<input id="composition" type="text" placeholder="balanced composition with foreground depth"></label>
+            <label>Mood / Style<input id="style" type="text" placeholder="quiet editorial photography"></label>
+            <label>Visible text<input id="visibleText" type="text" placeholder="leave blank when no text is needed"></label>
+            <label>Constraints<textarea id="constraints" rows="2" placeholder="keep hands natural; preserve identity"></textarea></label>
+            <label id="negativeField">Negative<textarea id="negative" rows="2" placeholder="blurry, distorted anatomy, extra fingers"></textarea></label>
+          </section>
+
+          <div class="composer-actions">
+            <button id="clearButton">Clear</button>
+            <button id="loadExampleButton">Example</button>
+          </div>
+        </aside>
+
+        <section class="output-panel" aria-label="Rendered prompt">
+          <div class="output-header">
+            <div>
+              <h2>Rendered prompt</h2>
+              <p id="renderSummary">Semantic prompt → model dialect</p>
+            </div>
+            <div class="output-actions">
+              <button id="copyButton">Copy</button>
+              <button id="registerButton" class="primary-button">DBに登録</button>
+            </div>
+          </div>
+
+          <label class="output-label" for="positiveOutput">Positive / instruction</label>
+          <textarea id="positiveOutput" class="prompt-output" rows="13" readonly></textarea>
+
+          <div id="negativeOutputWrap">
+            <label class="output-label" for="negativeOutput">Negative</label>
+            <textarea id="negativeOutput" class="prompt-output negative-output" rows="5" readonly></textarea>
+          </div>
+
+          <section class="meaning-preview">
+            <div class="meaning-header">
+              <h3>Semantic source</h3>
+              <span id="dbStatus">Built-in working DB</span>
+            </div>
+            <pre id="semanticPreview"></pre>
+          </section>
+
+          <section class="save-panel">
+            <h3>Save to PromptDB</h3>
+            <div class="save-grid">
+              <label>Title<input id="entryTitle" type="text" placeholder="夜の図書館で読書"></label>
+              <label>Tags<input id="entryTags" type="text" placeholder="library, reading, portrait"></label>
+            </div>
+            <p>登録内容はブラウザ内の作業コピーへ追加される。正本化するときはPromptDB v2 JSONを書き出してGitHub / Google Drive側へ保存する。</p>
+          </section>
+        </section>
+      </div>
+    </section>
+
+    <section id="databaseView" class="view" hidden>
+      <div class="database-layout">
+        <aside class="database-sidebar">
+          <h2>PromptDB</h2>
+          <label>Search<input id="dbSearch" type="search" placeholder="title / tag / prompt"></label>
+          <label>Status<select id="dbStatusFilter"><option value="all">All</option><option value="saved">Saved</option><option value="draft">Draft</option></select></label>
+          <dl class="db-stats">
+            <div><dt>Library</dt><dd id="libraryCount">0</dd></div>
+            <div><dt>Concept categories</dt><dd id="conceptCount">0</dd></div>
+            <div><dt>Recipes</dt><dd id="recipeCount">0</dd></div>
+          </dl>
+          <p class="section-note">ブラウザ保存は作業コピー。PromptDBの正本はGitHub / Google Driveへ置く前提。</p>
+        </aside>
+
+        <section class="database-main">
+          <div class="database-main-head">
+            <h2>Library</h2>
+            <button id="newFromDbButton">Composeへ戻る</button>
+          </div>
+          <div id="libraryList" class="library-list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

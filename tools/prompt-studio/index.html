@@ -8,42 +8,41 @@
   <meta name="theme-color" content="#25231f">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.0.1">
 </head>
 <body>
   <header class="app-header">
     <div class="title-block">
-      <a class="back-link" href="/AI_CREATION_WORKBENCH/">← Creation Tools</a>
+      <a class="back-link" href="/AI_CREATION_WORKBENCH/">← 制作ツール</a>
       <h1>Prompt Studio</h1>
-      <p>Compose once, render for each model dialect, keep the meaning in PromptDB.</p>
+      <p>画像の内容を一度組み立てれば、使うモデルに合った書き方へ変換して保存できます。</p>
     </div>
     <div class="header-actions">
-      <button id="importDbButton">PromptDB v2を読込</button>
-      <button id="importLegacyButton">旧PromptDBを取込</button>
-      <button id="exportDbButton">PromptDBを書出</button>
+      <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
+      <button id="importDbButton">プロンプトDBを読み込む</button>
+      <button id="exportDbButton">プロンプトDBを書き出す</button>
     </div>
   </header>
 
   <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
-  <input id="legacyFolderInput" class="visually-hidden" type="file" webkitdirectory multiple>
 
-  <div class="studio-tabs" role="tablist" aria-label="Prompt Studio views">
-    <button class="studio-tab active" data-view="compose" role="tab" aria-selected="true">Compose</button>
-    <button class="studio-tab" data-view="database" role="tab" aria-selected="false">PromptDB</button>
+  <div class="studio-tabs" role="tablist" aria-label="Prompt Studio 画面切替">
+    <button class="studio-tab active" data-view="compose" role="tab" aria-selected="true">プロンプト作成</button>
+    <button class="studio-tab" data-view="database" role="tab" aria-selected="false">プロンプトDB</button>
   </div>
 
   <main>
     <section id="composeView" class="view active">
       <div class="studio-grid">
-        <aside class="composer-panel" aria-label="Prompt composer">
+        <aside class="composer-panel" aria-label="プロンプト作成">
           <section class="panel-section">
-            <h2>Render target</h2>
+            <div class="heading-with-help"><h2>出力先モデル</h2><button class="info-button" type="button" data-help-key="render-target" aria-label="出力先モデルの説明">i</button></div>
             <label>
-              Model / Dialect
+              <span class="label-title">モデル / プロンプト書式 <button class="info-button" type="button" data-help-key="dialect" aria-label="プロンプト書式の説明">i</button></span>
               <select id="profileSelect"></select>
             </label>
             <label>
-              Checkpoint / model name <span class="optional">optional</span>
+              <span class="label-title">Checkpoint / モデル名 <span class="optional">任意</span> <button class="info-button" type="button" data-help-key="model-name" aria-label="Checkpointとモデル名の説明">i</button></span>
               <input id="modelName" type="text" placeholder="例: Animagine XL / FLUX.2 / gpt-image-1.5">
             </label>
             <p id="profileNote" class="section-note"></p>
@@ -52,88 +51,88 @@
           <section class="panel-section slot-composer">
             <div class="section-heading-row">
               <div>
-                <h2>Slot Composer</h2>
-                <p class="section-note">PromptDBのConceptをmanual / weighted random / sequentialでSemantic fieldへ流し込む。</p>
+                <div class="heading-with-help"><h2>組み立てルール</h2><button class="info-button" type="button" data-help-key="slots" aria-label="組み立てルールの説明">i</button></div>
+                <p class="section-note">プロンプトDBのパーツを、指定した選び方で下の「画像の内容」へ反映します。</p>
               </div>
-              <button id="addSlotButton" class="quiet-button" type="button">Slotを追加</button>
+              <button id="addSlotButton" class="quiet-button" type="button">ルールを追加</button>
             </div>
             <div class="slot-column-head" aria-hidden="true">
-              <span></span><span></span><span>Field</span><span>Source</span><span>Mode</span><span>Value</span><span></span>
+              <span></span><span></span><span>項目</span><span>辞書</span><span>選び方</span><span>値</span><span></span>
             </div>
             <div id="slotList" class="slot-list"></div>
             <div class="slot-footer">
-              <button id="resolveSlotsButton" class="primary-button" type="button">Resolve slots</button>
-              <span id="slotResultNote">Slotを解決すると下のSemantic fieldsへ反映される。</span>
+              <button id="resolveSlotsButton" class="primary-button" type="button">ルールから反映</button>
+              <span id="slotResultNote">ルールを実行すると、下の「画像の内容」へ値が入ります。</span>
             </div>
             <div class="recipe-save-row">
-              <label>Recipe name<input id="recipeTitle" type="text" placeholder="例: 夜カフェ人物撮影"></label>
-              <button id="saveRecipeButton" type="button">Recipeを保存</button>
+              <label>レシピ名<input id="recipeTitle" type="text" placeholder="例: 夜カフェ人物撮影"></label>
+              <button id="saveRecipeButton" type="button">レシピを保存</button>
             </div>
           </section>
 
           <section class="panel-section semantic-fields">
             <div class="section-heading-row">
-              <h2>Scene meaning</h2>
-              <button id="randomizeButton" class="quiet-button">DBから組む</button>
+              <div class="heading-with-help"><h2>画像の内容</h2><button class="info-button" type="button" data-help-key="scene" aria-label="画像の内容の説明">i</button></div>
+              <button id="randomizeButton" class="quiet-button">DBから自動入力</button>
             </div>
 
-            <label>Subject<textarea id="subject" rows="2" placeholder="a young woman"></textarea></label>
-            <label>Appearance<input id="appearance" type="text" placeholder="gentle, intelligent appearance"></label>
-            <label>Expression<input id="expression" type="text" placeholder="calm expression"></label>
-            <label>Outfit<input id="outfit" type="text" placeholder="white shirt and dark skirt"></label>
-            <label>Action<input id="action" type="text" placeholder="reading a book"></label>
-            <label>Pose<input id="pose" type="text" placeholder="standing naturally"></label>
-            <label>Environment<input id="environment" type="text" placeholder="quiet library at night"></label>
-            <label>Lighting<input id="lighting" type="text" placeholder="soft warm window light"></label>
-            <label>Camera<input id="camera" type="text" placeholder="50mm eye-level medium shot"></label>
-            <label>Composition<input id="composition" type="text" placeholder="balanced composition with foreground depth"></label>
-            <label>Mood / Style<input id="style" type="text" placeholder="quiet editorial photography"></label>
-            <label>Visible text<input id="visibleText" type="text" placeholder="leave blank when no text is needed"></label>
-            <label>Constraints<textarea id="constraints" rows="2" placeholder="keep hands natural; preserve identity"></textarea></label>
-            <label id="negativeField">Negative<textarea id="negative" rows="2" placeholder="blurry, distorted anatomy, extra fingers"></textarea></label>
+            <label>主役・被写体<textarea id="subject" rows="2" placeholder="a young woman"></textarea></label>
+            <label>見た目<input id="appearance" type="text" placeholder="gentle, intelligent appearance"></label>
+            <label>表情<input id="expression" type="text" placeholder="calm expression"></label>
+            <label>服装<input id="outfit" type="text" placeholder="white shirt and dark skirt"></label>
+            <label>動作<input id="action" type="text" placeholder="reading a book"></label>
+            <label>ポーズ<input id="pose" type="text" placeholder="standing naturally"></label>
+            <label>場所・背景<input id="environment" type="text" placeholder="quiet library at night"></label>
+            <label>光・ライティング<input id="lighting" type="text" placeholder="soft warm window light"></label>
+            <label>カメラ<input id="camera" type="text" placeholder="50mm eye-level medium shot"></label>
+            <label>構図<input id="composition" type="text" placeholder="balanced composition with foreground depth"></label>
+            <label>雰囲気・画風<input id="style" type="text" placeholder="quiet editorial photography"></label>
+            <label>画像内の文字<input id="visibleText" type="text" placeholder="leave blank when no text is needed"></label>
+            <label><span class="label-title">守りたい条件 <button class="info-button" type="button" data-help-key="constraints" aria-label="守りたい条件の説明">i</button></span><textarea id="constraints" rows="2" placeholder="keep hands natural; preserve identity"></textarea></label>
+            <label id="negativeField"><span class="label-title">避けたい要素 <button class="info-button" type="button" data-help-key="negative" aria-label="避けたい要素の説明">i</button></span><textarea id="negative" rows="2" placeholder="blurry, distorted anatomy, extra fingers"></textarea></label>
           </section>
 
           <div class="composer-actions">
-            <button id="clearButton">Clear</button>
-            <button id="loadExampleButton">Example</button>
+            <button id="clearButton">クリア</button>
+            <button id="loadExampleButton">例を読み込む</button>
           </div>
         </aside>
 
-        <section class="output-panel" aria-label="Rendered prompt">
+        <section class="output-panel" aria-label="生成プロンプト">
           <div class="output-header">
             <div>
-              <h2>Rendered prompt</h2>
+              <div class="heading-with-help"><h2>生成プロンプト</h2><button class="info-button" type="button" data-help-key="output" aria-label="生成プロンプトの説明">i</button></div>
               <p id="renderSummary">Semantic prompt → model dialect</p>
             </div>
             <div class="output-actions">
-              <button id="copyButton">Copy</button>
+              <button id="copyButton">コピー</button>
               <button id="registerButton" class="primary-button">DBに登録</button>
             </div>
           </div>
 
-          <label class="output-label" for="positiveOutput">Positive / instruction</label>
+          <label class="output-label" for="positiveOutput">プロンプト</label>
           <textarea id="positiveOutput" class="prompt-output" rows="13" readonly></textarea>
 
           <div id="negativeOutputWrap">
-            <label class="output-label" for="negativeOutput">Negative</label>
+            <label class="output-label" for="negativeOutput">ネガティブプロンプト</label>
             <textarea id="negativeOutput" class="prompt-output negative-output" rows="5" readonly></textarea>
           </div>
 
           <section class="meaning-preview">
             <div class="meaning-header">
-              <h3>Semantic source</h3>
-              <span id="dbStatus">Built-in working DB</span>
+              <span class="heading-with-help"><h3>内容データ</h3><button class="info-button" type="button" data-help-key="semantic" aria-label="内容データの説明">i</button></span>
+              <span id="dbStatus">作業データ</span>
             </div>
             <pre id="semanticPreview"></pre>
           </section>
 
           <section class="save-panel">
-            <h3>Save to PromptDB</h3>
+            <div class="heading-with-help"><h3>プロンプトDBに保存</h3><button class="info-button" type="button" data-help-key="save-db" aria-label="プロンプトDB保存の説明">i</button></div>
             <div class="save-grid">
-              <label>Title<input id="entryTitle" type="text" placeholder="夜の図書館で読書"></label>
-              <label>Tags<input id="entryTags" type="text" placeholder="library, reading, portrait"></label>
+              <label>タイトル<input id="entryTitle" type="text" placeholder="夜の図書館で読書"></label>
+              <label>タグ<input id="entryTags" type="text" placeholder="library, reading, portrait"></label>
             </div>
-            <p>登録内容はブラウザ内の作業コピーへ追加される。正本化するときはPromptDB v2 JSONを書き出してGitHub / Google Drive側へ保存する。</p>
+            <p>登録内容はこのブラウザの作業データへ追加されます。長く残したいときは「プロンプトDBを書き出す」でJSONを保存できます。</p>
           </section>
         </section>
       </div>
@@ -142,49 +141,49 @@
     <section id="databaseView" class="view" hidden>
       <div class="database-layout">
         <aside class="database-sidebar">
-          <h2>PromptDB</h2>
-          <label>Search<input id="dbSearch" type="search" placeholder="title / tag / prompt"></label>
-          <label>Status<select id="dbStatusFilter"><option value="all">All</option><option value="saved">Saved</option><option value="draft">Draft</option></select></label>
+          <h2>プロンプトDB</h2>
+          <label>検索<input id="dbSearch" type="search" placeholder="タイトル / タグ / プロンプト"></label>
+          <label>状態<select id="dbStatusFilter"><option value="all">すべて</option><option value="saved">保存済み</option><option value="draft">下書き</option></select></label>
           <dl class="db-stats">
-            <div><dt>Library</dt><dd id="libraryCount">0</dd></div>
-            <div><dt>Concept categories</dt><dd id="conceptCount">0</dd></div>
-            <div><dt>Recipes</dt><dd id="recipeCount">0</dd></div>
+            <div><dt>保存済みプロンプト</dt><dd id="libraryCount">0</dd></div>
+            <div><dt>パーツ辞書</dt><dd id="conceptCount">0</dd></div>
+            <div><dt>組み立てレシピ</dt><dd id="recipeCount">0</dd></div>
           </dl>
-          <p class="section-note">ブラウザ保存は作業コピー。PromptDBの正本はGitHub / Google Driveへ置く前提。</p>
+          <p class="section-note">ここには、作ったプロンプト・再利用するパーツ・組み立て方をまとめて保存できます。</p>
         </aside>
 
         <section class="database-main">
-          <div class="db-section-tabs" role="tablist" aria-label="PromptDB sections">
-            <button class="db-section-tab active" data-db-section="library" role="tab" aria-selected="true">Library</button>
-            <button class="db-section-tab" data-db-section="concepts" role="tab" aria-selected="false">Concepts</button>
-            <button class="db-section-tab" data-db-section="recipes" role="tab" aria-selected="false">Recipes</button>
+          <div class="db-section-tabs" role="tablist" aria-label="プロンプトDBの表示切替">
+            <button class="db-section-tab active" data-db-section="library" role="tab" aria-selected="true">保存済み</button>
+            <button class="db-section-tab" data-db-section="concepts" role="tab" aria-selected="false">パーツ辞書</button>
+            <button class="db-section-tab" data-db-section="recipes" role="tab" aria-selected="false">組み立てレシピ</button>
           </div>
 
           <section id="libraryPanel" class="db-panel active">
             <div class="database-main-head">
-              <div><h2>Library</h2><p>完成したPromptとSemantic sourceを保存。</p></div>
-              <button id="newFromDbButton">Composeへ戻る</button>
+              <div><h2>保存済みプロンプト</h2><p>気に入ったプロンプトと、その元になった内容を保存します。</p></div>
+              <button id="newFromDbButton">プロンプト作成へ</button>
             </div>
             <div id="libraryList" class="library-list"></div>
           </section>
 
           <section id="conceptsPanel" class="db-panel" hidden>
             <div class="database-main-head">
-              <div><h2>Concepts</h2><p>モデルに依存しない意味資産。weightはweighted randomの抽選比率。</p></div>
-              <span><b id="conceptCountForCategory">0</b> items</span>
+              <div><span class="heading-with-help"><h2>パーツ辞書</h2><button class="info-button" type="button" data-help-key="concepts" aria-label="パーツ辞書の説明">i</button></span><p>人物・場所・ポーズ・光など、繰り返し使う部品を登録します。</p></div>
+              <span><b id="conceptCountForCategory">0</b> 件</span>
             </div>
             <div class="concept-editor">
-              <label>Category
+              <label><span class="label-title">カテゴリ <button class="info-button" type="button" data-help-key="category" aria-label="カテゴリの説明">i</button></span>
                 <input id="conceptCategoryInput" type="text" list="conceptCategoryOptions" placeholder="pose / lighting / custom_category">
                 <datalist id="conceptCategoryOptions"></datalist>
               </label>
-              <label>Value<input id="conceptValue" type="text" placeholder="reading a book"></label>
-              <label>日本語ラベル <span class="optional">optional</span><input id="conceptLabelJa" type="text" placeholder="本を読む"></label>
-              <label>Tags <span class="optional">optional</span><input id="conceptTags" type="text" placeholder="reading, book"></label>
-              <label>Weight<input id="conceptWeight" type="number" min="0.01" step="0.1" value="1"></label>
+              <label>プロンプト用の内容<input id="conceptValue" type="text" placeholder="reading a book"></label>
+              <label>日本語ラベル <span class="optional">任意</span><input id="conceptLabelJa" type="text" placeholder="本を読む"></label>
+              <label>タグ <span class="optional">任意</span><input id="conceptTags" type="text" placeholder="reading, book"></label>
+              <label><span class="label-title">抽選の重み <button class="info-button" type="button" data-help-key="weight" aria-label="抽選の重みの説明">i</button></span><input id="conceptWeight" type="number" min="0.01" step="0.1" value="1"></label>
               <div class="concept-form-actions">
-                <button id="conceptCancelButton" type="button" hidden>Cancel</button>
-                <button id="conceptSaveButton" class="primary-button" type="button">Conceptを追加</button>
+                <button id="conceptCancelButton" type="button" hidden>キャンセル</button>
+                <button id="conceptSaveButton" class="primary-button" type="button">パーツを追加</button>
               </div>
             </div>
             <div id="conceptList" class="concept-list"></div>
@@ -192,7 +191,7 @@
 
           <section id="recipesPanel" class="db-panel" hidden>
             <div class="database-main-head">
-              <div><h2>Recipes</h2><p>Slotの並びと抽出方式を再利用する。旧PromptDB templateもここに残る。</p></div>
+              <div><span class="heading-with-help"><h2>組み立てレシピ</h2><button class="info-button" type="button" data-help-key="recipes" aria-label="組み立てレシピの説明">i</button></span><p>「どの項目を、どの辞書から、どう選ぶか」という組み立て方を保存します。</p></div>
             </div>
             <div id="recipeList" class="recipe-list"></div>
           </section>
@@ -201,12 +200,20 @@
     </section>
   </main>
 
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpDialogTitle">
+    <div class="help-dialog-head">
+      <h2 id="helpDialogTitle">使い方</h2>
+      <button id="helpDialogClose" class="help-dialog-close" type="button" aria-label="説明を閉じる">×</button>
+    </div>
+    <div id="helpDialogBody" class="help-dialog-body"></div>
+  </dialog>
   <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
-  <script src="engine.js"></script>
-  <script src="store.js"></script>
-  <script src="app.js"></script>
-  <script src="slots.js"></script>
-  <script src="db-editor.js"></script>
+  <script src="engine.js?v=1.0.1"></script>
+  <script src="store.js?v=1.0.1"></script>
+  <script src="app.js?v=1.0.1"></script>
+  <script src="slots.js?v=1.0.1"></script>
+  <script src="db-editor.js?v=1.0.1"></script>
 </body>
 </html>

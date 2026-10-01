@@ -57,7 +57,7 @@
     $('conceptLabelJa').value = '';
     $('conceptTags').value = '';
     $('conceptWeight').value = '1';
-    $('conceptSaveButton').textContent = 'Conceptを追加';
+    $('conceptSaveButton').textContent = 'パーツを追加';
     $('conceptCancelButton').hidden = true;
   }
 
@@ -67,7 +67,7 @@
     $('conceptLabelJa').value = entry.label_ja || '';
     $('conceptTags').value = (entry.tags || []).join(', ');
     $('conceptWeight').value = String(entry.weight == null ? 1 : entry.weight);
-    $('conceptSaveButton').textContent = 'Conceptを更新';
+    $('conceptSaveButton').textContent = 'パーツを更新';
     $('conceptCancelButton').hidden = false;
     $('conceptValue').focus();
   }
@@ -76,7 +76,7 @@
     const category = currentCategory();
     const value = E.clean($('conceptValue').value);
     if (!category || !value) {
-      notify('CategoryとValueを入力してください');
+      notify('カテゴリとプロンプト用の内容を入力してください');
       return;
     }
     const input = {
@@ -88,7 +88,7 @@
     try {
       if (editingConceptId) Store.updateConcept(category, editingConceptId, input);
       else Store.addConcept(category, input);
-      notify(editingConceptId ? 'Conceptを更新しました' : 'Conceptを追加しました');
+      notify(editingConceptId ? 'パーツを更新しました' : 'パーツを追加しました');
       resetConceptForm();
     } catch (error) {
       notify(error.message || String(error));
@@ -108,7 +108,7 @@
     if (!entries.length) {
       const empty = document.createElement('div');
       empty.className = 'db-empty';
-      empty.textContent = category ? 'このCategoryにはまだConceptがありません。' : 'Category名を入力して最初のConceptを追加できます。';
+      empty.textContent = category ? 'このカテゴリにはまだパーツがありません。' : 'カテゴリ名を入力して最初のパーツを追加できます。';
       box.append(empty);
       return;
     }
@@ -124,13 +124,13 @@
       const bits = [];
       if (entry.label_ja) bits.push(entry.label_ja);
       if (entry.tags && entry.tags.length) bits.push(entry.tags.join(' · '));
-      meta.textContent = bits.join(' / ') || 'no metadata';
+      meta.textContent = bits.join(' / ') || '補足なし';
       info.append(value, meta);
 
       const weight = document.createElement('div');
       weight.className = 'concept-weight';
       const weightLabel = document.createElement('span');
-      weightLabel.textContent = 'weight';
+      weightLabel.textContent = '重み';
       const weightValue = document.createElement('b');
       weightValue.textContent = Number(entry.weight || 1).toFixed(2).replace(/\.00$/,'');
       weight.append(weightLabel, weightValue);
@@ -139,15 +139,15 @@
       actions.className = 'concept-actions';
       const edit = document.createElement('button');
       edit.type = 'button';
-      edit.textContent = 'Edit';
+      edit.textContent = '編集';
       edit.addEventListener('click', () => fillConceptForm(entry));
       const del = document.createElement('button');
       del.type = 'button';
-      del.textContent = 'Delete';
+      del.textContent = '削除';
       del.className = 'danger-button';
       del.addEventListener('click', () => {
         Store.deleteConcept(category, entry.id);
-        notify('Conceptを削除しました');
+        notify('パーツを削除しました');
       });
       actions.append(edit, del);
 
@@ -165,7 +165,7 @@
     if (!db.recipes.length) {
       const empty = document.createElement('div');
       empty.className = 'db-empty';
-      empty.textContent = 'まだRecipeがありません。ComposeのSlot Composerから保存できます。';
+      empty.textContent = 'まだ組み立てレシピがありません。「プロンプト作成」の組み立てルールから保存できます。';
       box.append(empty);
       return;
     }
@@ -176,15 +176,14 @@
 
       const info = document.createElement('div');
       const title = document.createElement('h3');
-      title.textContent = recipe.title || recipe.id || 'Untitled recipe';
+      title.textContent = recipe.title || recipe.id || '名称未設定のレシピ';
       const meta = document.createElement('p');
       meta.textContent = recipe.type === 'slot-recipe'
-        ? String((recipe.slots || []).length) + ' slots · ' + (recipe.updated_at ? new Date(recipe.updated_at).toLocaleString('ja-JP') : 'saved')
-        : ('legacy template · ' + (recipe.group || '') + ' ' + (recipe.sentence_file || '')).trim();
+        ? String((recipe.slots || []).length) + '項目 · ' + (recipe.updated_at ? new Date(recipe.updated_at).toLocaleString('ja-JP') : '保存済み')
+        : '';
       const preview = document.createElement('code');
-      preview.textContent = recipe.type === 'slot-recipe'
-        ? (recipe.slots || []).map((slot) => slot.target + '←' + slot.category + ':' + slot.mode).join(' / ')
-        : (recipe.template || '');
+      const modeLabel = { manual:'手動', random:'重み付きランダム', sequential:'順番' };
+      preview.textContent = (recipe.slots || []).map((slot) => slot.target + ' ← ' + slot.category + '（' + (modeLabel[slot.mode] || slot.mode) + '）').join(' / ');
       info.append(title, meta, preview);
 
       const actions = document.createElement('div');
@@ -192,29 +191,20 @@
       if (recipe.type === 'slot-recipe') {
         const load = document.createElement('button');
         load.type = 'button';
-        load.textContent = 'Load';
+        load.textContent = '読み込む';
         load.addEventListener('click', () => {
-          if (window.PromptStudioSlots && window.PromptStudioSlots.loadRecipe(recipe)) notify('RecipeをSlot Composerへ読み込みました');
+          if (window.PromptStudioSlots && window.PromptStudioSlots.loadRecipe(recipe)) notify('レシピを組み立てルールへ読み込みました');
         });
         actions.append(load);
-      } else if (recipe.template) {
-        const copy = document.createElement('button');
-        copy.type = 'button';
-        copy.textContent = 'Copy template';
-        copy.addEventListener('click', async () => {
-          await navigator.clipboard.writeText(recipe.template);
-          notify('Legacy templateをコピーしました');
-        });
-        actions.append(copy);
       }
 
       const del = document.createElement('button');
       del.type = 'button';
-      del.textContent = 'Delete';
+      del.textContent = '削除';
       del.className = 'danger-button';
       del.addEventListener('click', () => {
         Store.deleteRecipe(recipe.id);
-        notify('Recipeを削除しました');
+        notify('レシピを削除しました');
       });
       actions.append(del);
 

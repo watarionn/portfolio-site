@@ -241,29 +241,89 @@ def is_missing_remote_path_error(exc: BaseException) -> bool:
     )
 
 
-def remove_remote_tree(ftp: ftplib.FTP_TLS, remote_path: str) -> None:
+def normalize_remote_path(path: str) -> str:
+    normalized = posixpath.normpath(path.replace("\\", "/"))
+    if path.startswith("/") and not normalized.startswith("/"):
+        normalized = "/" + normalized
+    return normalized
+
+
+def remote_path_within(candidate: str, allowed_root: str) -> bool:
+    candidate_norm = normalize_remote_path(candidate)
+    root_norm = normalize_remote_path(allowed_root).rstrip("/") or "/"
+    return candidate_norm == root_norm or candidate_norm.startswith(root_norm + "/")
+
+
+def normalize_remote_child(remote_path: str, listed_item: str) -> str | None:
+    raw = listed_item.strip().replace("\\", "/")
+    if not raw:
+        return None
+
+    trimmed = raw.rstrip("/")
+    basename = posixpath.basename(trimmed)
+    if basename in {".", ".."}:
+        return None
+
+    parent = normalize_remote_path(remote_path)
+    if raw.startswith("/"):
+        child = normalize_remote_path(raw)
+    else:
+        parent_without_slash = parent.lstrip("/")
+        raw_norm = posixpath.normpath(raw)
+        if raw_norm == parent_without_slash or raw_norm.startswith(parent_without_slash + "/"):
+            child = normalize_remote_path("/" + raw_norm)
+        else:
+            child = normalize_remote_path(posixpath.join(parent, raw))
+
+    if child == parent:
+        return None
+    return child
+
+
+def remove_remote_tree(
+    ftp: ftplib.FTP_TLS,
+    remote_path: str,
+    *,
+    allowed_root: str | None = None,
+) -> None:
+    current = normalize_remote_path(remote_path)
+    root = normalize_remote_path(allowed_root or remote_path)
+
+    if not remote_path_within(current, root):
+        raise RuntimeError(f"Refusing to delete outside retired root: {current} not within {root}")
+
     try:
-        entries = ftp.nlst(remote_path)
+        entries = ftp.nlst(current)
     except (ftplib.error_perm, ftplib.error_temp) as exc:
         if not is_missing_remote_path_error(exc):
             raise
         try:
-            ftp.delete(remote_path)
+            ftp.delete(current)
         except (ftplib.error_perm, ftplib.error_temp) as delete_exc:
             if not is_missing_remote_path_error(delete_exc):
                 raise
         return
 
-    children = [item for item in entries if item.rstrip("/") != remote_path.rstrip("/")]
+    children: list[str] = []
+    for item in entries:
+        child = normalize_remote_child(current, item)
+        if child is None:
+            continue
+        if not remote_path_within(child, root):
+            raise RuntimeError(
+                f"FTP listing escaped retired root: {child} not within {root}"
+            )
+        children.append(child)
+
     if not children:
         try:
-            ftp.delete(remote_path)
+            ftp.delete(current)
             return
         except (ftplib.error_perm, ftplib.error_temp) as delete_exc:
             if is_missing_remote_path_error(delete_exc):
                 return
             try:
-                ftp.rmd(remote_path)
+                ftp.rmd(current)
             except (ftplib.error_perm, ftplib.error_temp) as rmdir_exc:
                 if not is_missing_remote_path_error(rmdir_exc):
                     raise
@@ -275,9 +335,9 @@ def remove_remote_tree(ftp: ftplib.FTP_TLS, remote_path: str) -> None:
         except (ftplib.error_perm, ftplib.error_temp) as delete_exc:
             if is_missing_remote_path_error(delete_exc):
                 continue
-            remove_remote_tree(ftp, child)
+            remove_remote_tree(ftp, child, allowed_root=root)
     try:
-        ftp.rmd(remote_path)
+        ftp.rmd(current)
     except (ftplib.error_perm, ftplib.error_temp) as rmdir_exc:
         if not is_missing_remote_path_error(rmdir_exc):
             raise

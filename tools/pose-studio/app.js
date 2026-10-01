@@ -284,7 +284,7 @@
   renderDb();
 
   window.PoseStudio=Object.freeze({
-    version:'1.0.0',
+    version:'1.1.0',
     setView,
     getDb:Store.getDb,
     save3d,

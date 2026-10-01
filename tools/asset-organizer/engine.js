@@ -63,28 +63,30 @@
 
   async function imageMeta(file) {
     let width = 0, height = 0;
-    try {
-      if (typeof createImageBitmap === 'function') {
+    if (typeof createImageBitmap === 'function') {
+      try {
         const bitmap = await createImageBitmap(file);
         width = bitmap.width;
         height = bitmap.height;
         bitmap.close?.();
-      } else {
-        const url = URL.createObjectURL(file);
-        try {
-          const image = await new Promise((resolve,reject) => {
-            const img = new Image();
-            img.onload = () => resolve(img);
-            img.onerror = reject;
-            img.src = url;
-          });
-          width = image.naturalWidth || image.width || 0;
-          height = image.naturalHeight || image.height || 0;
-        } finally {
-          URL.revokeObjectURL(url);
-        }
+      } catch {}
+    }
+    if (!width || !height) {
+      const url = URL.createObjectURL(file);
+      try {
+        const image = await new Promise((resolve,reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = url;
+        });
+        width = image.naturalWidth || image.width || 0;
+        height = image.naturalHeight || image.height || 0;
+      } catch {}
+      finally {
+        URL.revokeObjectURL(url);
       }
-    } catch {}
+    }
     return {
       name:file.name,
       path:relativePath(file),

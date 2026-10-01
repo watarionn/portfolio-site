@@ -137,6 +137,25 @@
     select.value = 'flux-natural';
   }
 
+  function applyExternalModelPreset() {
+    const params = new URLSearchParams(location.search);
+    const model = E.clean(params.get('model'));
+    const profile = E.clean(params.get('profile'));
+    let applied = false;
+    if (model) {
+      $('modelName').value = model;
+      applied = true;
+    }
+    if (profile && E.PROFILE_DEFS[profile]) {
+      $('profileSelect').value = profile;
+      applied = true;
+    }
+    if (applied) {
+      renderCurrent();
+      setTimeout(() => showToast('Model Inspectorの設定を受け取りました'), 80);
+    }
+  }
+
   function randomizeFromDb() {
     const db = Store.getDb();
     const map = {
@@ -309,6 +328,7 @@
   }
 
   fillProfileSelect();
+  applyExternalModelPreset();
   document.querySelectorAll('.studio-tab').forEach((button) => {
     button.addEventListener('click', () => setView(button.dataset.view));
   });

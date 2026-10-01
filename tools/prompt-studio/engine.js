@@ -9,29 +9,29 @@
 
   const PROFILE_DEFS = {
     'flux-natural': {
-      label: 'FLUX · natural language', family: 'FLUX', dialect: 'natural-language', supportsNegative: false,
+      label: 'FLUX · 自然文', family: 'FLUX', dialect: 'natural-language', supportsNegative: false,
       note: '自然言語で被写体・行動・環境・光・カメラを明示。Negative欄は使わず、欲しい状態を肯定形で書く。'
     },
     'gpt-image-instruction': {
-      label: 'GPT Image · instruction', family: 'GPT Image', dialect: 'instruction', supportsNegative: false,
+      label: 'GPT Image · 指示文', family: 'GPT Image', dialect: 'instruction', supportsNegative: false,
       note: '作ってほしい画像を明示する指示文。制約は「何を保持するか」「何を避けたいか」を肯定的に書く。'
     },
     'sdxl-natural': {
-      label: 'SDXL · natural language', family: 'SDXL', dialect: 'natural-language', supportsNegative: true,
+      label: 'SDXL · 自然文', family: 'SDXL', dialect: 'natural-language', supportsNegative: true,
       note: '自然言語寄りのSDXL向け。Checkpointの学習傾向によってはtag dialectへ切り替える。'
     },
     'sdxl-tags': {
-      label: 'SDXL · tag / booru style', family: 'SDXL', dialect: 'tags', supportsNegative: true,
+      label: 'SDXL · タグ形式', family: 'SDXL', dialect: 'tags', supportsNegative: true,
       note: 'カンマ区切りのタグ表現。アニメ系・タグ学習系Checkpoint向けの出力形式。'
     },
     'generic-tags': {
-      label: 'Generic · compact tags', family: 'Generic', dialect: 'tags', supportsNegative: true,
+      label: '共通 · 短いタグ形式', family: 'Generic', dialect: 'tags', supportsNegative: true,
       note: 'モデルを限定しないコンパクトなタグ列。未知のCheckpointを試すための中立プロファイル。'
     }
   };
 
   const DEFAULT_DB = {
-    format: 'prompt-db-v2', version: '2.1.0', app_version: APP_VERSION,
+    format: 'prompt-db', schema_version: 1, app_version: APP_VERSION,
     updated_at: new Date().toISOString(), source: 'Built-in working DB',
     concepts: {
       subject: ['a young woman','a lone traveler','a small reading room','a vintage camera'],
@@ -121,10 +121,10 @@
   function normalizeDb(input = {}) {
     const normalized = {
       ...clone(DEFAULT_DB), ...input,
-      format: 'prompt-db-v2',
-      version: input.version || '2.1.0',
+      format: 'prompt-db',
+      schema_version: 1,
       concepts: { ...clone(DEFAULT_DB.concepts), ...(input.concepts || {}) },
-      recipes: Array.isArray(input.recipes) ? input.recipes : [],
+      recipes: Array.isArray(input.recipes) ? input.recipes.filter((recipe) => recipe?.type === 'slot-recipe') : [],
       library: Array.isArray(input.library) ? input.library : []
     };
     Object.keys(normalized.concepts).forEach((key) => {

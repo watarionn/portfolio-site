@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="画像とJSONを監査し、ペア・孤立・重複名を確認して、安全なcollectとAsset DBを作るAsset Organizer。">
+  <title>Asset Organizer</title>
+  <meta name="theme-color" content="#25231f">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="title-block">
+      <a class="back-link" href="/AI_CREATION_WORKBENCH/">← 制作ツール</a>
+      <h1>Asset Organizer</h1>
+      <p>画像とJSONを監査し、対応関係を崩さず安全に整理する。</p>
+    </div>
+    <div class="header-actions">
+      <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
+      <button id="importDbButton" type="button">Asset DBを読み込む</button>
+      <button id="exportDbButton" type="button">Asset DBを書き出す</button>
+    </div>
+  </header>
+
+  <input id="folderInput" class="visually-hidden" type="file" webkitdirectory multiple accept="image/png,image/jpeg,image/webp,application/json,.png,.jpg,.jpeg,.webp,.json">
+  <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
+
+  <nav class="studio-tabs" role="tablist" aria-label="Asset Organizer 画面切替">
+    <button class="studio-tab active" data-view="audit" role="tab" aria-selected="true">フォルダ監査</button>
+    <button class="studio-tab" data-view="database" role="tab" aria-selected="false">Asset DB</button>
+  </nav>
+
+  <main>
+    <section id="auditView" class="view active">
+      <div class="audit-layout">
+        <aside class="audit-sidebar">
+          <section class="panel-section">
+            <div class="heading-with-help">
+              <h2>監査する</h2>
+              <button class="info-button" type="button" data-help-key="audit" aria-label="監査の説明">i</button>
+            </div>
+            <button id="scanFolderButton" class="primary-button wide-button" type="button">フォルダを選ぶ</button>
+            <p class="section-note">PNG / JPG / WEBP と JSON を再帰的に読み取ります。ファイル本体は外部へ送信しません。</p>
+          </section>
+
+          <section class="panel-section">
+            <h2>絞り込み</h2>
+            <label>検索<input id="auditSearch" type="search" placeholder="stem / ファイル名 / パス"></label>
+            <label>状態
+              <select id="auditStatusFilter">
+                <option value="all">すべて</option>
+                <option value="PAIR">画像 + JSON</option>
+                <option value="IMAGE_ONLY">画像だけ</option>
+                <option value="JSON_ONLY">JSONだけ</option>
+                <option value="BROKEN_JSON">JSON破損</option>
+                <option value="NAME_COLLISION">collect名衝突あり</option>
+              </select>
+            </label>
+          </section>
+
+          <section class="panel-section">
+            <div class="heading-with-help">
+              <h2>整理する</h2>
+              <button class="info-button" type="button" data-help-key="collect" aria-label="collectの説明">i</button>
+            </div>
+            <button id="collectButton" type="button">collectへ非破壊コピー</button>
+            <button id="registerAllButton" type="button">監査結果をAsset DBへ登録</button>
+            <div class="button-grid">
+              <button id="exportManifestJsonButton" type="button">Manifest JSON</button>
+              <button id="exportManifestCsvButton" type="button">Manifest CSV</button>
+            </div>
+            <button id="exportCollectPlanButton" type="button">collect計画をJSON保存</button>
+            <p class="section-note">collectでは同名ペアを <code>name / name_1 / name_2</code> の単位で割り当て、画像とJSONのstemを揃えます。元ファイルは削除しません。</p>
+          </section>
+        </aside>
+
+        <section class="audit-main">
+          <div class="section-head">
+            <div>
+              <h2>監査結果</h2>
+              <p id="auditSummary">フォルダを選んでください。</p>
+            </div>
+          </div>
+
+          <dl class="audit-stats">
+            <div><dt>Images</dt><dd id="imageCount">0</dd></div>
+            <div><dt>JSON</dt><dd id="jsonCount">0</dd></div>
+            <div><dt>Pairs</dt><dd id="pairCount">0</dd></div>
+            <div><dt>Orphans</dt><dd id="orphanCount">0</dd></div>
+            <div><dt>Broken JSON</dt><dd id="brokenCount">0</dd></div>
+            <div><dt>Name collisions</dt><dd id="collisionCount">0</dd></div>
+          </dl>
+
+          <div id="auditList" class="asset-list empty-state">監査結果がここに並びます。</div>
+        </section>
+      </div>
+    </section>
+
+    <section id="databaseView" class="view" hidden>
+      <div class="database-layout">
+        <aside class="database-sidebar">
+          <div class="heading-with-help">
+            <h2>Asset DB</h2>
+            <button class="info-button" type="button" data-help-key="database" aria-label="Asset DBの説明">i</button>
+          </div>
+          <label>検索<input id="dbSearch" type="search" placeholder="stem / タグ / メモ"></label>
+          <label>状態
+            <select id="dbStatusFilter">
+              <option value="all">すべて</option>
+              <option value="PAIR">画像 + JSON</option>
+              <option value="IMAGE_ONLY">画像だけ</option>
+              <option value="JSON_ONLY">JSONだけ</option>
+              <option value="BROKEN_JSON">JSON破損</option>
+            </select>
+          </label>
+          <dl class="db-stats">
+            <div><dt>登録済み</dt><dd id="dbCount">0</dd></div>
+            <div><dt>Pairs</dt><dd id="dbPairCount">0</dd></div>
+            <div><dt>要確認</dt><dd id="dbReviewCount">0</dd></div>
+          </dl>
+          <button id="exportDbCsvButton" type="button">Asset DBをCSV保存</button>
+          <p class="section-note">Asset DBはファイル本体ではなく、パス・サイズ・寸法・状態・タグ・メモなどの台帳です。</p>
+        </aside>
+
+        <section class="database-main">
+          <div class="section-head">
+            <div>
+              <h2>保存したアセット</h2>
+              <p>監査時の状態を台帳として残し、後から検索できます。</p>
+            </div>
+          </div>
+          <div id="dbList" class="db-list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="editorDialog" class="editor-dialog" aria-labelledby="editorTitle">
+    <form id="editorForm" method="dialog">
+      <div class="dialog-head">
+        <h2 id="editorTitle">Asset DBを編集</h2>
+        <button id="editorCloseButton" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div class="editor-body">
+        <input id="entryId" type="hidden">
+        <label>Stem<input id="editStem" readonly></label>
+        <label>タグ<input id="editTags" placeholder="character, pose, approved"></label>
+        <label>メモ<textarea id="editNotes" rows="5"></textarea></label>
+      </div>
+      <div class="dialog-actions">
+        <button id="deleteEntryButton" class="danger-button" type="button">DBから削除</button>
+        <span></span>
+        <button id="cancelEditorButton" type="button">キャンセル</button>
+        <button id="saveEntryButton" class="primary-button" type="submit">保存</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpDialogTitle">
+    <div class="dialog-head">
+      <h2 id="helpDialogTitle">使い方</h2>
+      <button id="helpDialogClose" type="button" aria-label="説明を閉じる">×</button>
+    </div>
+    <div id="helpDialogBody" class="help-dialog-body"></div>
+  </dialog>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="engine.js"></script>
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

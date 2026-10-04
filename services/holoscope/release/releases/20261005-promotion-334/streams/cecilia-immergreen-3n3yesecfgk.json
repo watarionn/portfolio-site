@@ -1,0 +1,274 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_3n3yesecfgk",
+  "slug": "cecilia-immergreen-3n3yesecfgk",
+  "videoId": "3n3yeSECfGk",
+  "title": "Cecilia Immergreen、『PREY』で生存者救出からリアクターへ",
+  "originalTitle": "【PREY】Have you ever had a dream that if that when that if you've that",
+  "originalUrl": "https://www.youtube.com/watch?v=3n3yeSECfGk",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 10255,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_cecilia_immergreen",
+    "slug": "cecilia-immergreen",
+    "displayName": "Cecilia Immergreen"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Cecilia Immergreenが『PREY』を約3時間プレイ。Cargo Bayの生存者を助け、能力選択と物資管理に悩みながらリアクター周辺まで探索を進めた。",
+  "summaryOneLine": "Cecilia Immergreenが『PREY』を約3時間プレイ。Cargo Bayの生存者を助け、能力選択と物資管理に悩みながらリアクター周辺まで探索を進めた。",
+  "keyPoints": [
+    "今回の方針を整理",
+    "Cargo Bayで生存者と合流",
+    "Neuromodは選択肢だらけ"
+  ],
+  "articleBodyHtml": "<p>Cecilia Immergreenが『PREY』を約3時間プレイした。前回までの状況を自分の言葉で整理したうえで、Cargo Bayの生存者を助け、Neuromodの能力選択に悩みながら探索を継続。後半はリアクター周辺へ進み、Talos Iの奥へ踏み込んだ。</p>\n<h2>今回の方針を整理</h2>\n<p>配信は、抹茶ラテをこぼした話やPCのストレージ事情など、慌ただしい雑談から始まった。ゲームに戻ると、Ceciliaは前回までの状況を整理する。Talos Iでは生存者が限られ、兄Alexは研究を残そうとしている一方、自分はTyphonが地球へ到達する危険を避けるため宇宙ステーションを破壊すべきだと考えている、と説明した。</p>\n<p>ただし、その方針と目の前の生存者をどう扱うかは別問題だった。Cargo Bayでは生存者を守るためのタレットを集め、配置を調整しながら準備を進める。無重力区画では方向感覚に苦戦しつつもCargo Bay Bへ戻った。</p>\n<h2>Cargo Bayで生存者と合流</h2>\n<p>Cargo Bayではタレットを揃え、生存者たちと合流して先へ進む。Ceciliaは高所から援護しようとしながら、周囲のアイテム回収も続けた。危険な場面では焦りつつも、切り抜けるとすぐ探索へ戻る。この戦闘と収集を行き来するテンポが今回のプレイを通して続いた。</p>\n<p>周辺のコンテナも調べ、保管物資を回収。大量の素材をリサイクルし、回復アイテムや武器強化へ回していく。Cargo Bayで豊富な物資を見つけ、ショットガンなどの装備も整えていった。</p>\n<h2>Neuromodは選択肢だらけ</h2>\n<p>探索が進むとNeuromodの能力選択へ。遠隔操作、サイキック系能力、Phantom Shift、シールドなどを一つずつ見比べるものの、候補が増えるほど迷いも増える。選択肢の多さに声を上げながら、生存性や普段の戦い方を考えて能力を選んだ。</p>\n<p>能力を取得した後にはNightmareから狙われているという表示も出る。Ceciliaは探索を続行し、その後も高所へ登れる経路やジェットパックを活用して施設内を進んだ。</p>\n<h2>リアクターへ</h2>\n<p>後半はリアクター方面へ移動。敵に対処しながら、コードや設備を探して区画を進む。インベントリが埋まるたびに食料や素材を整理し、リサイクラーを見つけては荷物を圧縮するという資源管理も続いた。</p>\n<p>リアクター周辺では設備の修理が必要になり、Repair能力を取得するか、交換部品を探すかで再び迷う。周囲を探した結果、必要な部品を見つけ、ポイント消費を避けることに成功した。終盤には冷却設備や制御盤を操作し、Talos Iのシステムを進めながらさらに奥へ向かった。</p>\n<p>約3時間の配信は、Cargo Bayの生存者との合流から装備強化、能力選択、リアクター探索までをじっくり進める回になった。大きな方針を語りつつ、目の前の物資や探索経路も丁寧に拾っていくCeciliaらしい進行が続いた。</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 825,
+      "text": "前回までの状況整理"
+    },
+    {
+      "timestampSeconds": 1473,
+      "text": "Talos Iの状況説明"
+    },
+    {
+      "timestampSeconds": 3390,
+      "text": "Cargo Bay進行"
+    },
+    {
+      "timestampSeconds": 3440,
+      "text": "タレット搬入"
+    },
+    {
+      "timestampSeconds": 3838,
+      "text": "生存者との合流"
+    },
+    {
+      "timestampSeconds": 4859,
+      "text": "Neuromod選択"
+    },
+    {
+      "timestampSeconds": 5000,
+      "text": "Nightmare通知"
+    },
+    {
+      "timestampSeconds": 5177,
+      "text": "Nightmare回避"
+    },
+    {
+      "timestampSeconds": 5802,
+      "text": "装備強化"
+    },
+    {
+      "timestampSeconds": 7127,
+      "text": "終盤の選択肢確認"
+    },
+    {
+      "timestampSeconds": 7950,
+      "text": "後半戦"
+    },
+    {
+      "timestampSeconds": 9053,
+      "text": "設備修理"
+    },
+    {
+      "timestampSeconds": 9717,
+      "text": "制御設備探索"
+    },
+    {
+      "timestampSeconds": 9766,
+      "text": "交換部品発見"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=3n3yeSECfGk",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-10-04T23:16:12Z",
+    "articleUpdatedAt": "2026-10-04T23:16:12Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_1rixu_4xgvy",
+      "slug": "cecilia-immergreen-1rixu-4xgvy",
+      "videoId": "1rIXU_4xGvY",
+      "title": "Baeが振付師に　CCGGが3Dライブ最終曲のダンス練習を振り返る",
+      "summaryOneLine": "約2時間半のアフタートークから、最終曲のダンスがどう準備され、Baeが振付・レッスン・収録時の助言まで関わったかをまとまって追える",
+      "streamType": "chatting",
+      "publishedAt": "2026-05-20T20:09:48.000Z",
+      "durationSeconds": 9006,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0o-alstqaoo",
+      "slug": "cecilia-immergreen-0o-alstqaoo",
+      "videoId": "0o-alstqAoo",
+      "title": "「頭を空っぽ」にしたはずが耳は忙しい　Ceciliaの『Bits & Bops』リズム攻略",
+      "summaryOneLine": "リズムゲームの結果だけでなく、遅延調整、早めの入力、声で数える工夫、『十分』と『もう一回』の判断がどのようにプレイを支えたかを読める",
+      "streamType": "game",
+      "publishedAt": "2026-04-12T19:17:13.000Z",
+      "durationSeconds": 7681,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0zvti9cibve",
+      "slug": "cecilia-immergreen-0zvti9cibve",
+      "videoId": "0ZvTI9cibvE",
+      "title": "アイスを売って借金返済へ　CeciliaのholoGTA商売記",
+      "summaryOneLine": "この日のholoGTAでCeciliaを動かしていたのは、銃や犯罪だけではなく「アイスを売る」という一貫した目的でした。",
+      "streamType": "game",
+      "publishedAt": "2024-09-23T15:41:35Z",
+      "durationSeconds": 12636,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0ZvTI9cibvE/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-09",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-qkg8fau9gm",
+      "slug": "cecilia-immergreen-qkg8fau9gm",
+      "videoId": "-QKg8Fau9GM",
+      "title": "帽子ひとつが冒険の羅針盤に　CeciliaのENRecoで広がった交渉と記憶の謎",
+      "summaryOneLine": "長時間のロールプレイ配信で、帽子という小さな目的が行動の選択基準と物語世界を読む入口の両方になったことが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 8543,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-_rizkxjk7u",
+      "slug": "cecilia-immergreen-rizkxjk7u",
+      "videoId": "-_RizkxJK7U",
+      "title": "懐かしさは、攻略を覚えていることではない　CeciliaのSuper Mario World",
+      "summaryOneLine": "懐かしさが正確な攻略記憶ではなく、操作を学び直す余白と好きな要素を再発見する入り口になったことが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11072,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-bbxoxje4zu",
+      "slug": "cecilia-immergreen-bbxoxje4zu",
+      "videoId": "-bBXoXje4ZU",
+      "title": "「見えない」を共有すると道になる　CeciliaとRaoraのBackrooms協力術",
+      "summaryOneLine": "ホラーで視界が制限されても、ランドマーク、声、光、待つ判断を共有すれば、恐怖を二人で扱える探索課題へ変えられることが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11084,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_cecilia_immergreen",
+        "slug": "cecilia-immergreen",
+        "displayName": "Cecilia Immergreen"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

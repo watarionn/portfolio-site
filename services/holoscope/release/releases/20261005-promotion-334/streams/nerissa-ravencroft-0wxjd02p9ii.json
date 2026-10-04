@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_0wxjd02p9ii",
+  "slug": "nerissa-ravencroft-0wxjd02p9ii",
+  "videoId": "0WXjD02P9II",
+  "title": "5時間の巻き戻りを「次の一手」へ　Nerissa RavencroftのWind Waker実況",
+  "originalTitle": "Sorry, how many stones did you say there were? | The Legend of Zelda: The Wind Waker",
+  "originalUrl": "https://www.youtube.com/watch?v=0WXjD02P9II",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 19250,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_nerissa_ravencroft",
+    "slug": "nerissa-ravencroft",
+    "displayName": "Nerissa Ravencroft"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Nerissa Ravencroftの『The Legend of Zelda: The Wind Waker』実況は、保存操作の取り違えで大きく巻き戻る場面から立て直しを迫られました。Nerissa自身の見積もりは約5時間。それでも、データ破損と決めつけず、loadとcreateを取り違えたと原因を切り分けます。その後はsaveを作り直し、地図を数マスずつ埋める小さな目標へ戻りました。",
+  "summaryOneLine": "作品の筋を再話せず、長時間配信の大きな失敗後に配信者が操作と次行動をどう取り戻すかを読める",
+  "keyPoints": [
+    "この配信の要点",
+    "落胆しながらも、原因を切り分ける",
+    "再発防止を実際の操作に変える"
+  ],
+  "articleBodyHtml": "<p>Nerissa Ravencroftの『The Legend of Zelda: The Wind Waker』実況は、保存操作の取り違えで大きく巻き戻る場面から立て直しを迫られました。Nerissa自身の見積もりは約5時間。それでも、データ破損と決めつけず、loadとcreateを取り違えたと原因を切り分けます。その後はsaveを作り直し、地図を数マスずつ埋める小さな目標へ戻りました。</p>\n<h2>この配信の要点</h2>\n<ul><li>誤って古いsaveをloadした直後、何が起きたかを言葉にした</li><li>通常のsaveと本体のsuspend pointを分けて再設定した</li><li>後半は地図を少しずつ埋め、寄り道するかをその場で判断した</li><li>視聴者の助言は、自分が求めたときだけと境界を明示した</li></ul>\n<h2>落胆しながらも、原因を切り分ける</h2>\n<p>古いsaveをloadしたことに気づいたNerissaは、すぐに「全部やり直し」だと理解し、強いショックを隠しません。そのうえで、通常のsaveが壊れたのではなく、新しいsuspend pointをcreateするつもりでloadを押したと説明します。原因の範囲を限定したことが、次の操作を決める起点になりました。</p>\n<p>Nerissaは約5時間分後ろに戻ったと語り、自分の操作ミスだと受け止めます。ここでの要点は、落胆を消すことではなく、感情と原因説明を分けたことです。</p>\n<h2>再発防止を実際の操作に変える</h2>\n<p>しばらく進めた後、Nerissaは「同じことが起きないように」と、suspend pointのcreateを慎重に実行します。それとは別に通常のsaveも作成。原因を理解しただけで終わらせず、間違えにくい状態をその場で作りました。</p>\n<h2>大きな遅れを、地図の小さな単位へ分ける</h2>\n<p>後半になると、海を移動しながら地図を数マスずつ埋める時間が生まれます。途中で別の場所へ寄る案が出ても、後からwarpで来られると整理し、今の地図作りを続けます。「急ぐ必要はない」と判断し、当面の目標を保ったのです。</p>\n<p>一方、進行先が分からない場面では視聴者に助けを求めます。ただし、backseatingは自分が聞いたときだけと明示。全てを教えてもらうのではなく、自分で試す時間と助けを求める時間を分けています。終盤に残った課題は「別の日の問題」と切り分け、次回へ持ち越しました。</p>\n<h2>見どころ</h2>\n<ul><li><strong>00:50:05</strong> — 古いsaveをloadしたことに気づく</li><li><strong>00:52:39</strong> — 新しいsuspend pointを作っていなかったと説明する</li><li><strong>00:53:33</strong> — createではなくloadを押したと原因を語る</li><li><strong>00:57:18</strong> — 自分の見積もりで約5時間分戻ったと語る</li><li><strong>00:59:35</strong> — 自分のsave state操作が原因だと受け止める</li><li><strong>01:00:47</strong> — 問題は通常のsaveではないと切り分ける</li><li><strong>01:31:52</strong> — 慎重に新しいsuspend pointを作る</li><li><strong>01:32:12</strong> — 通常のsaveも改めて実行する</li><li><strong>04:31:02</strong> — 地図をもう数マス埋めると決める</li><li><strong>04:32:52</strong> — あと六つ進めたら終えると目標を区切る</li><li><strong>04:33:01</strong> — 寄り道するかを検討する</li><li><strong>04:33:50</strong> — 後でwarpで戻れるため、今の作業を続ける</li><li><strong>04:34:20</strong> — 急ぐ必要はないと判断する</li><li><strong>05:07:50</strong> — 助言は自分が求めたときだけと境界を伝える</li><li><strong>05:16:52</strong> — 残った課題を別の日の問題として区切る</li></ul>\n<h2>まとめ</h2>\n<p>Nerissaは巻き戻りを小さく見せようとしませんでした。落胆を表に出しながら、原因を限定し、saveを作り直し、地図という小さな単位へ戻る。全てを一度に取り戻すのではなく、次の一手を確定させることで長時間配信を立て直した過程が見どころです。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=0WXjD02P9II)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月11日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 3005,
+      "text": "古いsaveをloadしたことに気づく"
+    },
+    {
+      "timestampSeconds": 3159,
+      "text": "新しいsuspend pointを作っていなかったと説明する"
+    },
+    {
+      "timestampSeconds": 3213,
+      "text": "createではなくloadを押したと原因を語る"
+    },
+    {
+      "timestampSeconds": 3438,
+      "text": "自分の見積もりで約5時間分戻ったと語る"
+    },
+    {
+      "timestampSeconds": 3575,
+      "text": "自分のsave state操作が原因だと受け止める"
+    },
+    {
+      "timestampSeconds": 3647,
+      "text": "問題は通常のsaveではないと切り分ける"
+    },
+    {
+      "timestampSeconds": 5512,
+      "text": "慎重に新しいsuspend pointを作る"
+    },
+    {
+      "timestampSeconds": 5532,
+      "text": "通常のsaveも改めて実行する"
+    },
+    {
+      "timestampSeconds": 16262,
+      "text": "地図をもう数マス埋めると決める"
+    },
+    {
+      "timestampSeconds": 16372,
+      "text": "あと六つ進めたら終えると目標を区切る"
+    },
+    {
+      "timestampSeconds": 16381,
+      "text": "寄り道するかを検討する"
+    },
+    {
+      "timestampSeconds": 16430,
+      "text": "後でwarpで戻れるため今の作業を続ける"
+    },
+    {
+      "timestampSeconds": 16460,
+      "text": "急ぐ必要はないと判断する"
+    },
+    {
+      "timestampSeconds": 18470,
+      "text": "助言は自分が求めたときだけと境界を伝える"
+    },
+    {
+      "timestampSeconds": 19012,
+      "text": "残った課題を別の日の問題として区切る"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=0WXjD02P9II",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-29T09:57:28Z",
+    "articleUpdatedAt": "2026-09-29T09:58:21Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_1p-b4c7twsu",
+      "slug": "nerissa-ravencroft-1p-b4c7twsu",
+      "videoId": "1p-b4c7TwsU",
+      "title": "1回でSSR3人、それでも持ち帰れない　NerissaがStarSaviorで「ガチャを回す喜び」を満喫",
+      "summaryOneLine": "約1時間の案件配信から、Nerissaの大当たりガチャと、自分のアカウントではないことへの惜しさ、ゲームへの興味までをまとめて追える",
+      "streamType": "game",
+      "publishedAt": "2026-04-03T02:55:22.000Z",
+      "durationSeconds": 3935,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_vomhneyv_m",
+      "slug": "nerissa-ravencroft-vomhneyv-m",
+      "videoId": "_vOMhneYv_M",
+      "title": "NerissaとInaがAmiAmiでクリスマスギフト探し　店内を巡って見つけた「相手らしい一品」",
+      "summaryOneLine": "AmiAmiの豊富な商品を見ながら、二人が相手や仲間を思い浮かべてクリスマスギフトを選ぶ買い物企画です。",
+      "streamType": "event",
+      "publishedAt": "2025-12-25T02:30:00Z",
+      "durationSeconds": 759,
+      "thumbnailUrl": "https://i.ytimg.com/vi/_vOMhneYv_M/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [
+        {
+          "uid": "mem_ninomae_inanis",
+          "slug": "ninomae-inanis",
+          "displayName": "Ninomae Ina'nis"
+        }
+      ],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "collab",
+      "month": "2025-12",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "PR",
+        "AmiAmi",
+        "クリスマス"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-bff3e6yjwy",
+      "slug": "nerissa-ravencroft-bff3e6yjwy",
+      "videoId": "-BFf3e6YJwY",
+      "title": "「witch」は仮面か記憶か　NerissaのENRecoで呼び名の意味が変わるまで",
+      "summaryOneLine": "長いENReco配信のquest羅列ではなく、『witch』という一語の意味がroleplayと物語情報の両側から変化する構造を追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 16468,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-fyftew0lwm",
+      "slug": "nerissa-ravencroft-fyftew0lwm",
+      "videoId": "-FyFTEw0lwM",
+      "title": "「Charが気になる」から宇宙世紀へ　Nerissaの『Gundam The Origin』watchalong",
+      "summaryOneLine": "作品の筋書き要約ではなく、知識がない状態からシリーズへ入るときに、人物への関心、分からない用語への質問、感情の追跡をどう足場にできるかが分かる",
+      "streamType": "other",
+      "publishedAt": null,
+      "durationSeconds": 27709,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-itmhasmfay",
+      "slug": "nerissa-ravencroft-itmhasmfay",
+      "videoId": "-ITmHaSMFAY",
+      "title": "『NARUTO』が居場所への道を作った　Nerissaが雑談の最後に語った原点",
+      "summaryOneLine": "感想の羅列ではなく、Nerissaにとって一つの作品がどのように他者とつながる足場になったのかが分かる",
+      "streamType": "chatting",
+      "publishedAt": null,
+      "durationSeconds": 9032,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-p05eg6in4e",
+      "slug": "nerissa-ravencroft-p05eg6in4e",
+      "videoId": "-P05eG6iN4E",
+      "title": "怖いから走る、分からないから見直す　Nerissaの初『Resident Evil』が変えた探索",
+      "summaryOneLine": "筋書きの短縮ではなく、初見プレイヤーが恐怖、操作不足、観察をどう往復して前進したかが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 9214,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

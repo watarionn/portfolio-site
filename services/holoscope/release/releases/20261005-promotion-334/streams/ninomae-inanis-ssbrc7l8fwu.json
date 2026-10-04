@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_ssbrc7l8fwu",
+  "slug": "ninomae-inanis-ssbrc7l8fwu",
+  "videoId": "ssbrC7l8fWU",
+  "title": "Calliの線画にFaunaの瞬きを足す　Inaが「90年代VHS調」へ進めたInadacemyの試行錯誤",
+  "originalTitle": "【DRAWING】 INADACEMY SPECIAL #4: CALL IN THE REINFORCEMENTS",
+  "originalUrl": "https://www.youtube.com/watch?v=ssbrC7l8fWU",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 14409,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_ninomae_inanis",
+    "slug": "ninomae-inanis",
+    "displayName": "Ninomae Ina'nis"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Ninomae Ina'nisが「INADACEMY SPECIAL #4」で、Mori Calliopeのartを土台にCeres Faunaのanimationを作りました。目を閉じる一枚を足せば終わる作業ではありません。double blinkの間隔、hold frame、眉の動き、bar風の背景、After Effectsでのcompositingを順に試し、途中で分からないmenuを調べながら形へ近づけます。配信で速く描けることと、品質検査を伴う仕事の速さは違うという説明も、この制作工程を読む重要な手掛かりです。",
+  "summaryOneLine": "完成品では見えないtiming調整、tool探索、業務品質検査と配信速度の違いを抽出する",
+  "keyPoints": [
+    "この記事の要点",
+    "一枚の線画から「動き」を考える",
+    "90年代animeの質感を目標にする"
+  ],
+  "articleBodyHtml": "<p>Ninomae Ina&#x27;nisが「INADACEMY SPECIAL #4」で、Mori Calliopeのartを土台にCeres Faunaのanimationを作りました。目を閉じる一枚を足せば終わる作業ではありません。double blinkの間隔、hold frame、眉の動き、bar風の背景、After Effectsでのcompositingを順に試し、途中で分からないmenuを調べながら形へ近づけます。配信で速く描けることと、品質検査を伴う仕事の速さは違うという説明も、この制作工程を読む重要な手掛かりです。</p>\n<h2>この記事の要点</h2>\n<ul><li>Calliのartをbaselineに、Faunaが瞬きする複数frameを追加した</li><li>double blinkのtiming、hold frame、瞳と眉の動きを繰り返し調整した</li><li>色とbar風の背景を加え、90年代animeやVHSを思わせる表現を目指した</li><li>Clip Studio PaintからAfter Effectsへ移り、mask、gradient、blur、pluginを試した</li><li>配信上の速さと、feedback・quality checkを伴う業務制作を同じ基準で見ないよう説明した</li></ul>\n<h2>一枚の線画から「動き」を考える</h2>\n<p>確認できる制作区間で、InaはCalliのartをbaselineとして取り出し、Faunaが目を閉じるframeを作ります。瞳を少し大きくする、目を二度瞬かせる、眉も連動させる。小さな差分を増やしながら、静止画の表情を時間の流れへ置き換えました。</p>\n<p>最初のpreviewは動きましたが、Inaはそこで止めません。double blinkを速くし、前後へhold frameを足し、視線が動く直前の間を調整します。「動いた」から「自然に見える」へ進むため、frameの枚数よりtimingを見直していました。</p>\n<h2>90年代animeの質感を目標にする</h2>\n<p>animationの形が見えると、Inaは90年代animeやVHSのような仕上がりを試したいと話します。昔のanimeと現在の作品では、流行だけでなく制作toolも変わり、同じ時間で扱える複雑さが違うのではないかと考えました。</p>\n<p>Faunaの姿勢をbarのcounterへ寄りかかっている場面と解釈し、暗い背景と暖色の光を置きます。Calliの元artをそのままなぞるのではなく、許可された調整の範囲で場面を読み替え、「alternate universeのbartender」という小さな物語まで生まれました。</p>\n<h2>分からないmenuも制作過程に含める</h2>\n<p>後半はAfter Effectsへ移ります。Inaはclipping maskに相当する機能の名前を思い出せず、検索してmenuへたどり着きました。gradient、camera lens blur、glowを試し、狙った効果にならなければ戻します。pluginも一度では期待どおりに動きません。</p>\n<p>この場面の価値は、熟練者が迷わない姿を見せることではありません。必要な機能を言葉にし、検索し、試し、違えば調整する。「Inadacemy」という名前どおり、完成までの不確かさも学習の一部として見せています。</p>\n<h2>配信での速さと、仕事の速さは違う</h2>\n<p>雑談の中でInaは、配信で速く描けるのは複数回の確認やfeedback修正を通していないからだと説明します。merchandiseや別のtalentのdesignでは、画面に映らない確認工程が増えます。</p>\n<p>そのため、視聴者が配信を見て「自分も5時間で同じものを描けるはず」と焦る必要はないと話しました。速度が重要になるprofessionalな場面までは、速さだけを評価軸にしない。この説明によって、配信上の作画は完成品の早回しではなく、条件の異なる公開制作だと分かります。</p>\n<h2>制作を続けるための境界</h2>\n<p>Inaは長時間描き続けることについて、配信だからできている面があり、休憩を取るべきだとも話しました。screenを見続けた時のeye strainや自身のwristの経験にも触れています。ただし、これはIna個人の経験談であり、医療上の助言として扱うものではありません。</p>\n<p>実際に配信中もsnackを取りに席を外しました。作品の速度だけでなく、作業を中断する判断まで含めて制作工程として残っています。</p>\n<h2>見どころ</h2>\n<ul><li><strong>00:43:37</strong> — 長時間作画では休憩を取るよう話す</li><li><strong>00:55:12</strong> — Calliのartをbaselineにanimationを開始</li><li><strong>01:11:05</strong> — double blinkをpreview</li><li><strong>01:15:40</strong> — hold frameと眉の動きを調整</li><li><strong>01:22:21</strong> — 色とVHS調のcompositingへ移る</li><li><strong>01:32:15</strong> — toolの変化とanime表現を考える</li><li><strong>01:50:45</strong> — 配信作画と品質検査を伴う仕事の違い</li><li><strong>01:54:35</strong> — 90年代anime風の色と影へ</li><li><strong>02:30:09</strong> — After Effectsでcompositingを開始</li><li><strong>02:38:54</strong> — 機能名を調べ、mask設定へ到達</li><li><strong>02:55:54</strong> — pluginを試し、効果を調整</li></ul>\n<h2>まとめ</h2>\n<p>このInadacemyは、線画を受け取って色を塗るだけの回ではありません。瞬きのtimingを作り、背景の物語を考え、別toolへ移り、分からない機能を調べる。さらに、配信で見える速さの裏に、通常はfeedbackとquality checkがあることまで説明しました。完成品だけでなく、判断とやり直しを記事化することで、Inaの制作が「速く描く技術」以上のものだと見えてきます。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=ssbrC7l8fWU)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年8月30日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 2617,
+      "text": "長時間作画では休憩を取るよう話す"
+    },
+    {
+      "timestampSeconds": 3312,
+      "text": "Calliのartをbaselineにする"
+    },
+    {
+      "timestampSeconds": 4265,
+      "text": "double blinkをpreview"
+    },
+    {
+      "timestampSeconds": 4540,
+      "text": "hold frameと眉を調整"
+    },
+    {
+      "timestampSeconds": 4941,
+      "text": "VHS調compositingを目指す"
+    },
+    {
+      "timestampSeconds": 5535,
+      "text": "制作toolとanime表現の変化"
+    },
+    {
+      "timestampSeconds": 6645,
+      "text": "配信作画とfeedback・quality checkを伴う仕事を区別"
+    },
+    {
+      "timestampSeconds": 6875,
+      "text": "90年代anime風の色と影"
+    },
+    {
+      "timestampSeconds": 9009,
+      "text": "After Effectsへ移る"
+    },
+    {
+      "timestampSeconds": 9534,
+      "text": "機能名を調べmaskを設定"
+    },
+    {
+      "timestampSeconds": 10554,
+      "text": "pluginの効果を試す"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=ssbrC7l8fWU",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-10-04T23:16:12Z",
+    "articleUpdatedAt": "2026-10-04T23:16:12Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_xqhkhs2hhxm",
+      "slug": "ninomae-inanis-xqhkhs2hhxm",
+      "videoId": "XQHKHS2hHxM",
+      "title": "Inaの休暇前雑談　Kingdom Hearts IVへの驚きから音楽、食事、Bibooとの外出まで",
+      "summaryOneLine": "Inaが最近気になったゲームと音楽、生活の工夫、Bibooとの外出を落ち着いたテンポで振り返る休暇前雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2026-06-10T23:00:00Z",
+      "durationSeconds": 3831,
+      "thumbnailUrl": "https://i.ytimg.com/vi/XQHKHS2hHxM/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1zxbowmsl_w",
+      "slug": "ninomae-inanis-1zxbowmsl-w",
+      "videoId": "1zXbOwmSL_w",
+      "title": "InaのFilm of the Year予想は「Reze」　Anime of the YearはMy Hero Academiaへ",
+      "summaryOneLine": "3時間超の同時視聴から、最後の大きな2部門を前にInaがどの作品へ心が傾いていたか、その理由とともに短く追える",
+      "streamType": "event",
+      "publishedAt": "2026-05-23T08:03:12.000Z",
+      "durationSeconds": 11010,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_incvfixxh_a",
+      "slug": "ninomae-inanis-incvfixxh-a",
+      "videoId": "INcVfIXXh_A",
+      "title": "Ninomae Ina'nisが「夏酒Season 2」で選んだ洋梨　醸造と雨のvisualを結んだPR配信",
+      "summaryOneLine": "配信時点の発表と現在変わり得る販売条件を分離し、PR内容を安全に記録する",
+      "streamType": "other",
+      "publishedAt": "2026-04-22T11:00:14.000Z",
+      "durationSeconds": 2681,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0fmux6izsvw",
+      "slug": "ninomae-inanis-0fmux6izsvw",
+      "videoId": "0fmuX6IZsVw",
+      "title": "「自分の好み」だけで決めない　InaがFashion Dreamerで作ったコーデの考え方",
+      "summaryOneLine": "この配信は、かわいい服を次々と選ぶだけの時間ではありません。",
+      "streamType": "game",
+      "publishedAt": "2023-11-17T00:29:46Z",
+      "durationSeconds": 8458,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fmuX6IZsVw/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0h5a1xkuofa",
+      "slug": "ninomae-inanis-0h5a1xkuofa",
+      "videoId": "0h5A1xkuofA",
+      "title": "「分かった」を二人で積み重ねる　InaとAmeliaのPortal 2協力プレイ",
+      "summaryOneLine": "InaとAmeliaの協力プレイは、答えを知っている人が引っ張る配信ではありません。",
+      "streamType": "game",
+      "publishedAt": "2020-12-05T00:47:45Z",
+      "durationSeconds": 5667,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0h5A1xkuofA/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-12",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ebnwntfnne",
+      "slug": "ninomae-inanis-ebnwntfnne",
+      "videoId": "-EBNWntFNNE",
+      "title": "「また手に入る」がAwakeningにつながる　InaとKiaraの『Valkyrie Connect』発表",
+      "summaryOneLine": "PR発表の項目列挙ではなく、前回参加者、取り逃した人、新規player、出演者それぞれに次の接点が用意された構造を把握できる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 3097,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

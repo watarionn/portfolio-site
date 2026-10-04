@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_ouro_kronii",
+  "slug": "ouro-kronii",
+  "displayName": "Ouro Kronii",
+  "nameJa": "オーロ・クロニー",
+  "channelId": "UCmbs8T6MWqUHP1tIQvSgKrg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCmbs8T6MWqUHP1tIQvSgKrg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_v-_xenfaqn8w",
+      "slug": "ouro-kronii-xenfaqn8w",
+      "videoId": "-_XeNfAqn8w",
+      "title": "正解より、自分の手順を残す　Kroniiの『The Entropy Centre』復元思考",
+      "summaryOneLine": "巻き戻し能力が単なるやり直しではなく、仮説を小さく試し、失敗した手順を保存して次の試行へつなぐ思考法として機能したことが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 19753,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ouro_kronii",
+        "slug": "ouro-kronii",
+        "displayName": "Ouro Kronii"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 1,
+    "soloCount": 1,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/ouro-kronii/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCmbs8T6MWqUHP1tIQvSgKrg",
+      "checkedAt": "2026-09-29T09:55:00Z"
+    }
+  ],
+  "createdAt": "2026-09-29T09:55:00Z",
+  "updatedAt": "2026-09-29T09:55:00Z"
+}

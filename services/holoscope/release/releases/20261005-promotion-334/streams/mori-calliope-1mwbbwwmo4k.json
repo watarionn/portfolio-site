@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_1mwbbwwmo4k",
+  "slug": "mori-calliope-1mwbbwwmo4k",
+  "videoId": "1mwBbwWmo4k",
+  "title": "Solaireと二人でOrnstein＆Smoughへ　Calliが柱を使いながら二体ボスを突破",
+  "originalTitle": "【DARK SOULS: REMASTERED】dexfiends may excuse themselves (part 3) #calliolive",
+  "originalUrl": "https://www.youtube.com/watch?v=1mwBbwWmo4k",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 15052,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_mori_calliope",
+    "slug": "mori-calliope",
+    "displayName": "Mori Calliope"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "『DARK SOULS: REMASTERED』配信でMori Calliopeは、OrnsteinとSmoughの二体を相手にするボス戦へ挑んだ。Solaireと一緒に入り、まず一体を落としてから残る相手へ集中する作戦で突破を狙う。",
+  "summaryOneLine": "4時間超の配信から、Calliが二体ボスの順番を決め、Solaireと役割を分けながら勝ち切る約5分の攻略を追える",
+  "keyPoints": [
+    "まずOrnsteinから",
+    "柱を挟みながら最後まで削る",
+    "Calliが先にOrnstein側を狙う方針でボス戦へ入る"
+  ],
+  "articleBodyHtml": "<p>『DARK SOULS: REMASTERED』配信でMori Calliopeは、OrnsteinとSmoughの二体を相手にするボス戦へ挑んだ。Solaireと一緒に入り、まず一体を落としてから残る相手へ集中する作戦で突破を狙う。</p>\n<h2>まずOrnsteinから</h2>\n<p>03:10:38ごろ、Calliは先に「lion guy」を狙う方針を確認して戦闘へ入る。</p>\n<p>03:11:01ごろには、二体を相手にする状況から『Godskin Duo』を思い出すと話しつつ、Solaireが攻撃されるのを気にしながら立ち回る。</p>\n<p>03:11:52ごろ、最初の一体を撃破。すぐに残る相手との戦いへ切り替えた。</p>\n<h2>柱を挟みながら最後まで削る</h2>\n<p>03:13:09ごろ、CalliはSolaireに相手を引きつけてもらいながら、自分にも注意を向けようと動く。攻撃範囲に苦戦しつつ、柱を使って距離を取る場面も続いた。</p>\n<p>03:15:27ごろにはあと少しまで追い込み、Humanityを使って体勢を立て直す。そして03:15:46ごろ、ついに撃破。SoulとHumanityを得たことを確認し、「一人で二体を相手にするのは想像できない」と戦いを振り返った。</p>\n<p>何度も崩されながらも、狙う順番とSolaireとの役割を整理して押し切ったボス戦だった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=1mwBbwWmo4k)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月24日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 11438,
+      "text": "Calliが先にOrnstein側を狙う方針でボス戦へ入る"
+    },
+    {
+      "timestampSeconds": 11461,
+      "text": "Godskin Duoを思い出すと話しつつSolaireへ攻撃が向くのを気にする"
+    },
+    {
+      "timestampSeconds": 11512,
+      "text": "最初の一体を倒し、次の相手へ切り替える"
+    },
+    {
+      "timestampSeconds": 11589,
+      "text": "Solaireに相手を引きつけてもらい、自分へ注意を向けようとする"
+    },
+    {
+      "timestampSeconds": 11727,
+      "text": "あと少しまで削り、Humanityを使って立て直す"
+    },
+    {
+      "timestampSeconds": 11746,
+      "text": "撃破してSoulとHumanityを得たことを確認し、二人だけで戦う難しさを振り返る"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=1mwBbwWmo4k",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-27T23:33:32Z",
+    "articleUpdatedAt": "2026-09-29T09:35:13Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-ps5pxgjneq",
+      "slug": "mori-calliope-ps5pxgjneq",
+      "videoId": "-Ps5pxGJNEQ",
+      "title": "「遊びたい」は映像のどこから生まれる？　CalliopeとBijouのState of Play観察軸",
+      "summaryOneLine": "発表タイトルの一覧ではなく、二人が映像のどこを見て『遊びたい』へ判断を進めたかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-06-02T20:56:36.000Z",
+      "durationSeconds": 4836,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0eghejywaey",
+      "slug": "mori-calliope-0eghejywaey",
+      "videoId": "0eghejYwaeY",
+      "title": "100万再生祝いはゲームから音楽の夢へ　Calliope×syudouの対談配信",
+      "summaryOneLine": "ゲームを遊びながら100万再生を祝うだけでなく、音楽家同士が次の目標を言葉にしていく配信でした。",
+      "streamType": "event",
+      "publishedAt": "2025-05-23T11:19:20Z",
+      "durationSeconds": 4467,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0eghejYwaeY/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0fqfi9ntle4",
+      "slug": "mori-calliope-0fqfi9ntle4",
+      "videoId": "0fQfi9ntlE4",
+      "title": "リズムゲーム苦手から音楽に乗るまで　Calliopeがつかんだ遊び方",
+      "summaryOneLine": "この配信で面白いのは、Calliopeが苦手意識を消してから遊ぶのではなく、苦手なまま音楽へ乗り、失敗を笑い、物語にも興味を広げていくところです。",
+      "streamType": "game",
+      "publishedAt": "2020-11-05T16:50:57Z",
+      "durationSeconds": 6031,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fQfi9ntlE4/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-e3x1jaebdo",
+      "slug": "mori-calliope-e3x1jaebdo",
+      "videoId": "-E3x1JAEbdo",
+      "title": "別々のtutorialが「4人で遊びたい」に変わる　CalliopeとIRySの『Warframe』初日",
+      "summaryOneLine": "長く続くgameの情報量を網羅せず、初心者二人が何を一緒に学び、協力playへどう移ったかを追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11690,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ocnd2nc9qo",
+      "slug": "mori-calliope-ocnd2nc9qo",
+      "videoId": "-OcnD2Nc9qo",
+      "title": "知らない言葉を自分の記憶へ変える　Mori Calliopeのドイツ語学習3つの足場",
+      "summaryOneLine": "単語の列挙ではなく、未知の言語を覚えるためにCalliopeが使った仮説、語呂、利用場面という三つの足場が分かる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 7073,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-usdgcbosog",
+      "slug": "mori-calliope-usdgcbosog",
+      "videoId": "-UsdGcBoSog",
+      "title": "「もっと武器にできる」が止まらない　Calliopeのゴリラ実況は即席ゲーム設計会議",
+      "summaryOneLine": "笑いの多い短編実況の中で、Calliopeが何に迷い、どの余白を『もっと遊べる』と評価したのかが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 5325,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_2amhozhsecw",
+  "slug": "takanashi-kiara-2amhozhsecw",
+  "videoId": "2AmhOZHSEcw",
+  "title": "Hololive Cosmicubeから始まるAmong Us　EN・IDメンバーの疑いと推理",
+  "originalTitle": "【HOLO EN x ID AMONG US】Cosmicube & Proximity VC Version! #HololiveCosmicube #kfp",
+  "originalUrl": "https://www.youtube.com/watch?v=2AmhOZHSEcw",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 8288,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_takanashi_kiara",
+    "slug": "takanashi-kiara",
+    "displayName": "Takanashi Kiara"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Takanashi Kiaraの配信では、Hololive EN・IDのメンバーが集まり、Hololive Cosmicubeを紹介したあとAmong Usをプレイした。Proximity Voice Chatを交えたゲームでは、目撃情報や行動を手掛かりに疑いが何度も揺れ動いていく。",
+  "summaryOneLine": "2時間超のコラボから、Cosmicube紹介、会議での推理、終盤の駆け引きという流れをsource-groundedに把握できる",
+  "keyPoints": [
+    "Hololive Cosmicubeを紹介",
+    "「killできたのにしなかった」",
+    "疑いが揺れる終盤"
+  ],
+  "articleBodyHtml": "<p>Takanashi Kiaraの配信では、Hololive EN・IDのメンバーが集まり、Hololive Cosmicubeを紹介したあとAmong Usをプレイした。Proximity Voice Chatを交えたゲームでは、目撃情報や行動を手掛かりに疑いが何度も揺れ動いていく。</p>\n<h2>Hololive Cosmicubeを紹介</h2>\n<p>00:08:53ごろ、配信ではAmong Usに追加されたHololive Cosmicubeを紹介。00:09:22ごろには、CosmicubeからHololive EN・ID・JPのselected membersをモチーフにしたoutfitを入手できると説明している。</p>\n<p>続けて参加メンバーが欲しいoutfitについて話しながら準備を進め、ゲーム本編へ入った。</p>\n<h2>「killできたのにしなかった」</h2>\n<p>00:51:20ごろの会議では、Koboとしばらく一緒にいたことを根拠に「She could have killed me, she didn&#x27;t」とする推理が出る。誰と一緒にいたか、そこで何が起きなかったかまで材料にしながら疑いを絞っていく。</p>\n<p>01:01:23ごろにはAnyaのbodyをbathroomで見つけたという報告があり、Zetaらをsusとする発言へつながった。会議のたびに新しい情報が加わり、推理の方向も変化していく。</p>\n<h2>疑いが揺れる終盤</h2>\n<p>01:21:29ごろにはMumeiへ「次のmeetingまで」と猶予を与えるやり取りが発生。01:43:47ごろには「Ame is voting for me again, isn&#x27;t she?」という反応も飛び出し、投票そのものが駆け引きの一部になっていく。</p>\n<p>02:06:38ごろ、最後のラウンドを振り返りながら、時間が迫っているため続行を無理強いしたくないと話す。Cosmicubeのお披露目から始まり、疑い、弁明、投票が次々に入れ替わるAmong Usらしいコラボになった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=2AmhOZHSEcw)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月27日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 533,
+      "text": "新機能Hololive Cosmic Cubeを紹介して配信を開始する"
+    },
+    {
+      "timestampSeconds": 562,
+      "text": "CosmicubeでHololive EN・ID・JPのselected membersのoutfitを得られると説明する"
+    },
+    {
+      "timestampSeconds": 3080,
+      "text": "Koboは一緒にいた間にkillできたのにしなかったためfineだと思うという推理が出る"
+    },
+    {
+      "timestampSeconds": 3683,
+      "text": "Anyaのbodyをbathroomで見つけZetaらをsusとする報告が出る"
+    },
+    {
+      "timestampSeconds": 4889,
+      "text": "Mumeiに次のmeetingまで猶予を与えるという会話になる"
+    },
+    {
+      "timestampSeconds": 6227,
+      "text": "Ameがまた自分へ投票しているのではという反応が出る"
+    },
+    {
+      "timestampSeconds": 7598,
+      "text": "last roundを振り返り、時間が迫っているため続行を無理強いしたくないと話す"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=2AmhOZHSEcw",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-27T23:33:32Z",
+    "articleUpdatedAt": "2026-09-29T09:35:13Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_2gwyjothw9i",
+      "slug": "takanashi-kiara-2gwyjothw9i",
+      "videoId": "2gWYJOtHW9I",
+      "title": "Kiara、歯のトラブルもGartic Phoneのネタに　Ollieたちとの描画リレーがカオス化",
+      "summaryOneLine": "約2時間半の配信から、各ゲームモードの違い、歯ネタが繰り返される経緯、終盤の歯の顛末を短時間で把握できる",
+      "streamType": "other",
+      "publishedAt": "2026-06-06T12:29:52.000Z",
+      "durationSeconds": 9453,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_s15lgzzk_ek",
+      "slug": "takanashi-kiara-s15lgzzk-ek",
+      "videoId": "S15LgZZk_ek",
+      "title": "Kiaraが新宿で8つのミッションに挑戦　ガチャ、限定アイス、Exit 8探しを完遂",
+      "summaryOneLine": "Kiaraが新宿を歩き回り、ランダムに選んだ8つの課題をすべて達成して最後の告知へつなげる街歩きVlogです。",
+      "streamType": "event",
+      "publishedAt": "2024-09-13T19:00:00Z",
+      "durationSeconds": 1128,
+      "thumbnailUrl": "https://i.ytimg.com/vi/S15LgZZk_ek/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-09",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "Vlog",
+        "日本"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-5p17bxvzte",
+      "slug": "takanashi-kiara-5p17bxvzte",
+      "videoId": "-5P17BxVZTE",
+      "title": "「待たせたくない」が相談に変わる　Kiaraたち4人の『Slay the Spire 2』",
+      "summaryOneLine": "deck構築の手順要約ではなく、multiplayer化した『Slay the Spire 2』で相談が判断待ちの不安をteam playへ変える過程を追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 10171,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-aaotmxcz9i",
+      "slug": "takanashi-kiara-aaotmxcz9i",
+      "videoId": "-AaOTmXcZ9I",
+      "title": "遅れて届くchatを即時feedbackへ　Kiaraが『Point of View』を発表するまで",
+      "summaryOneLine": "長時間配信を攻略と告知に分断せず、助言を受け入れることがplay styleの修正と発表の意味を生む過程として読める",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 14861,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-lpb9x8f9cy",
+      "slug": "takanashi-kiara-lpb9x8f9cy",
+      "videoId": "-Lpb9X8F9CY",
+      "title": "カニ姿のKiaraが“新デビュー”　Crabby Wawaがクイズと装備で作った一夜の世界",
+      "summaryOneLine": "単なる衣装披露ではなく、見た目の特徴と言葉遊び、参加型クイズ、小道具がキャラクターの世界観を支えたことが分かる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 3742,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0aan0m32cwe",
+      "slug": "takanashi-kiara-0aan0m32cwe",
+      "videoId": "0Aan0M32cwE",
+      "title": "見つからない時間にも、探索条件を更新する　KiaraのMinecraft",
+      "summaryOneLine": "目的地へ到達したかだけでなく、見つからない時間に探索基準をどう言葉にし、別の成果を持ち帰る判断へ変えるかを読める",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 13124,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

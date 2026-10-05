@@ -170,3 +170,254 @@ html.pwa-standalone .back-link{display:none}
     padding-left:max(8px,env(safe-area-inset-left))
   }
 }
+
+
+/* PWA fixed-viewport workspace */
+html.pwa-standalone,
+html.pwa-standalone body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  overscroll-behavior:none
+}
+html.pwa-standalone body{
+  display:grid;
+  grid-template-rows:auto auto minmax(0,1fr);
+  min-height:0
+}
+html.pwa-standalone main{
+  min-height:0;
+  overflow:hidden
+}
+html.pwa-standalone .view.active{
+  height:100%;
+  min-height:0;
+  overflow:hidden
+}
+html.pwa-standalone .editor-layout{
+  height:100%;
+  min-height:0
+}
+html.pwa-standalone .stage-panel{
+  min-height:0
+}
+html.pwa-standalone .stage3d,
+html.pwa-standalone .stage2d-wrap{
+  min-height:0
+}
+html.pwa-standalone .database-layout{
+  height:100%;
+  min-height:0;
+  overflow:hidden
+}
+html.pwa-standalone .database-main{
+  min-height:0;
+  overflow:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch
+}
+
+@media(max-width:1100px){
+  html.pwa-standalone .editor-layout{
+    display:block;
+    position:relative
+  }
+  html.pwa-standalone .stage-panel{
+    height:100%;
+    border-bottom:0
+  }
+  html.pwa-standalone .stage3d,
+  html.pwa-standalone .stage2d-wrap{
+    min-height:0
+  }
+  html.pwa-standalone .control-panel{
+    position:fixed;
+    z-index:35;
+    left:max(8px,env(safe-area-inset-left));
+    right:max(8px,env(safe-area-inset-right));
+    bottom:max(8px,env(safe-area-inset-bottom));
+    height:min(68dvh,620px);
+    max-height:calc(100dvh - max(16px,env(safe-area-inset-top)) - 88px);
+    display:flex;
+    flex-direction:column;
+    padding:0;
+    overflow:hidden;
+    border:1px solid var(--line2);
+    border-radius:12px;
+    box-shadow:0 18px 52px rgba(24,21,18,.34);
+    transform:translateY(calc(100% + 28px));
+    visibility:hidden;
+    transition:transform .2s ease,visibility 0s linear .2s
+  }
+  html.pwa-standalone .pwa-panel-open .control-panel{
+    transform:translateY(0);
+    visibility:visible;
+    transition:transform .2s ease
+  }
+  html.pwa-standalone .pwa-panel-head{
+    flex:0 0 auto;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto;
+    align-items:center;
+    gap:8px;
+    padding:10px;
+    background:#ddd5ca;
+    border-bottom:1px solid var(--line2)
+  }
+  html.pwa-standalone .pwa-panel-head strong{
+    font-size:12px
+  }
+  html.pwa-standalone .pwa-panel-select{
+    margin:0;
+    padding:7px 8px
+  }
+  html.pwa-standalone .pwa-panel-close{
+    padding:7px 9px;
+    font-size:10px
+  }
+  html.pwa-standalone .control-panel>.control-section,
+  html.pwa-standalone .control-panel>.save-meta{
+    display:none;
+    flex:1 1 auto;
+    min-height:0;
+    margin:0;
+    padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+    overflow:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    border-bottom:0
+  }
+  html.pwa-standalone .control-panel>.pwa-section-active{
+    display:block
+  }
+  html.pwa-standalone .pwa-control-toggle{
+    display:inline-flex
+  }
+  html.pwa-standalone .database-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:auto minmax(0,1fr)
+  }
+  html.pwa-standalone .database-sidebar{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:7px 10px;
+    padding:10px 12px;
+    border-right:0;
+    border-bottom:1px solid var(--line2)
+  }
+  html.pwa-standalone .database-sidebar>.heading-with-help,
+  html.pwa-standalone .database-sidebar>.db-stats,
+  html.pwa-standalone .database-sidebar>.section-note{
+    display:none
+  }
+  html.pwa-standalone .database-sidebar label{
+    margin:0
+  }
+  html.pwa-standalone .database-main{
+    padding:12px
+  }
+}
+
+@media(max-width:760px){
+  html.pwa-standalone .app-header{
+    min-height:0;
+    flex-direction:row;
+    align-items:center;
+    gap:10px;
+    padding-top:max(8px,env(safe-area-inset-top));
+    padding-right:max(10px,env(safe-area-inset-right));
+    padding-bottom:8px;
+    padding-left:max(10px,env(safe-area-inset-left))
+  }
+  html.pwa-standalone .title-block{
+    flex:1 1 auto
+  }
+  html.pwa-standalone .title-block h1{
+    margin:0;
+    font-size:16px
+  }
+  html.pwa-standalone .title-block p,
+  html.pwa-standalone .back-link{
+    display:none
+  }
+  html.pwa-standalone .header-actions{
+    flex:0 0 auto;
+    width:auto;
+    flex-wrap:nowrap;
+    gap:5px
+  }
+  html.pwa-standalone .header-actions button{
+    flex:0 0 auto;
+    min-width:36px;
+    padding:6px 8px;
+    font-size:9px
+  }
+  html.pwa-standalone #installPwaButton{
+    display:none!important
+  }
+  html.pwa-standalone .studio-tabs{
+    min-height:38px;
+    padding-right:max(6px,env(safe-area-inset-right));
+    padding-left:max(6px,env(safe-area-inset-left))
+  }
+  html.pwa-standalone .studio-tab{
+    padding:8px 5px;
+    font-size:10px
+  }
+  html.pwa-standalone .stage-toolbar{
+    flex:0 0 auto;
+    flex-direction:row;
+    align-items:center;
+    gap:8px;
+    padding:7px 8px
+  }
+  html.pwa-standalone .stage-toolbar>div:first-child{
+    display:none
+  }
+  html.pwa-standalone .toolbar-actions{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:5px;
+    width:100%
+  }
+  html.pwa-standalone .toolbar-actions button{
+    min-width:0;
+    padding:7px 4px;
+    font-size:9px;
+    white-space:nowrap
+  }
+  html.pwa-standalone .stage3d,
+  html.pwa-standalone .stage2d-wrap{
+    flex:1 1 auto;
+    height:auto;
+    min-height:0
+  }
+  html.pwa-standalone .stage2d-wrap{
+    overflow:hidden;
+    padding:8px
+  }
+  html.pwa-standalone #pose2dCanvas{
+    width:auto;
+    height:auto;
+    max-width:100%;
+    max-height:100%
+  }
+  html.pwa-standalone .status-line{
+    flex:0 0 auto;
+    padding:5px 8px;
+    font-size:9px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis
+  }
+}
+
+@media(max-width:430px){
+  html.pwa-standalone .toolbar-actions{
+    grid-template-columns:repeat(5,minmax(0,1fr))
+  }
+  html.pwa-standalone .toolbar-actions button{
+    font-size:8px;
+    letter-spacing:-.02em
+  }
+}

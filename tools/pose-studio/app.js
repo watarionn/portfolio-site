@@ -332,7 +332,7 @@
   updateHistoryButtons();
 
   window.PoseStudio=Object.freeze({
-    version:'1.3.0',
+    version:'1.4.0',
     setView,
     getDb:Store.getDb,
     save3d,

@@ -1,0 +1,16 @@
+{
+  "id": "/prompt-studio/",
+  "name": "Prompt Studio",
+  "short_name": "Prompt Studio",
+  "description": "意味ベースでプロンプトを組み立て、モデル向け書式へ変換し、履歴とPromptDBへ保存するプロンプト制作ツール",
+  "lang": "ja",
+  "start_url": "/prompt-studio/",
+  "scope": "/prompt-studio/",
+  "display": "standalone",
+  "background_color": "#f3efe7",
+  "theme_color": "#25231f",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

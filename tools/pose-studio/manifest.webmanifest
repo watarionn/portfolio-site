@@ -1,0 +1,26 @@
+{
+  "id": "/pose-studio/",
+  "name": "Pose Studio",
+  "short_name": "Pose Studio",
+  "description": "3Dマネキンと2D骨格を編集し、OpenPoseや参照画像として書き出してポーズDBへ保存できるポーズ制作ツール",
+  "lang": "ja",
+  "start_url": "/pose-studio/",
+  "scope": "/pose-studio/",
+  "display": "standalone",
+  "background_color": "#f3efe7",
+  "theme_color": "#25231f",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

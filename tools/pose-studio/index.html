@@ -7,8 +7,14 @@
   <title>Pose Studio</title>
   <meta name="theme-color" content="#25231f">
   <meta name="color-scheme" content="light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pose Studio">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=1.2.0">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css?v=1.3.0">
 </head>
 <body>
   <header class="app-header">
@@ -19,6 +25,7 @@
     </div>
     <div class="header-actions">
       <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
+      <button id="installPwaButton" type="button" hidden>アプリとして使う</button>
       <button id="importDbButton" type="button">ポーズDBを読み込む</button>
       <button id="exportDbButton" type="button">ポーズDBを書き出す</button>
     </div>
@@ -342,6 +349,7 @@
   <script src="store.js?v=1.2.0"></script>
   <script src="pose2d.js?v=1.2.0"></script>
   <script src="pose3d.js?v=1.2.0"></script>
-  <script src="app.js?v=1.2.0"></script>
+  <script src="app.js?v=1.3.0"></script>
+  <script src="pwa.js?v=1.0.0"></script>
 </body>
 </html>

@@ -140,3 +140,33 @@ output{color:#795236;font-size:10px;font-variant-numeric:tabular-nums}
   .pose-db-preview{width:100%;height:220px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+@media(display-mode:standalone){
+  body{min-height:100dvh}
+  .back-link{display:none}
+  .app-header{
+    padding-top:max(18px,env(safe-area-inset-top));
+    padding-right:max(24px,env(safe-area-inset-right));
+    padding-left:max(24px,env(safe-area-inset-left))
+  }
+  .studio-tabs{
+    padding-right:max(24px,env(safe-area-inset-right));
+    padding-left:max(24px,env(safe-area-inset-left))
+  }
+  .toast{
+    right:max(16px,env(safe-area-inset-right));
+    bottom:max(16px,env(safe-area-inset-bottom))
+  }
+}
+html.pwa-standalone .back-link{display:none}
+@media(max-width:760px) and (display-mode:standalone){
+  .app-header{
+    padding-top:max(15px,env(safe-area-inset-top));
+    padding-right:max(15px,env(safe-area-inset-right));
+    padding-left:max(15px,env(safe-area-inset-left))
+  }
+  .studio-tabs{
+    padding-right:max(8px,env(safe-area-inset-right));
+    padding-left:max(8px,env(safe-area-inset-left))
+  }
+}

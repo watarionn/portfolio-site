@@ -1,11 +1,11 @@
 'use strict';
 
 const CACHE_PREFIX='pose-studio-';
-const CACHE_NAME=CACHE_PREFIX+'v1.3.0';
+const CACHE_NAME=CACHE_PREFIX+'v1.4.0';
 const APP_SHELL=[
   './',
   './index.html',
-  './style.css?v=1.3.0',
+  './style.css?v=1.4.0',
   './favicon.svg',
   './apple-touch-icon.png',
   './icon-192.png',
@@ -15,8 +15,8 @@ const APP_SHELL=[
   './store.js?v=1.2.0',
   './pose2d.js?v=1.2.0',
   './pose3d.js?v=1.2.0',
-  './app.js?v=1.3.0',
-  './pwa.js?v=1.0.0'
+  './app.js?v=1.4.0',
+  './pwa.js?v=1.1.0'
 ];
 const RUNTIME_ASSETS=[
   'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'

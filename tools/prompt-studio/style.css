@@ -110,3 +110,75 @@ input,select,textarea{width:100%;border:1px solid #bfb3a5;background:#fffdf9;col
 .help-dialog-head h2{margin:0;font-size:17px}
 .help-dialog-close{width:30px;height:30px;padding:0;font-size:17px;line-height:28px}
 .help-dialog-body{padding:18px;font-size:12px;line-height:1.85;white-space:pre-line;color:#4f473f}
+
+
+/* Prompt Studio PWA */
+.pwa-history-tab,.pwa-bottom-bar{display:none!important}
+.history-layout{padding:22px 24px;max-width:1100px;margin:0 auto}
+.history-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.history-head h2{margin:0 0 4px;font-size:18px}.history-head p{margin:0;color:var(--muted);font-size:11px}
+.history-list{display:grid;gap:8px;padding:14px 0}.history-entry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.history-entry-main{display:block;text-align:left;border:0;background:transparent;padding:0;border-radius:0}.history-entry-main:hover{background:transparent}
+.history-entry-main strong,.history-entry-main span{display:block}.history-entry-main strong{font-size:12px}.history-entry-main span{font-size:10px;color:var(--muted);margin-top:2px}.history-entry-main p{margin:6px 0 0;font:11px/1.55 "SFMono-Regular",Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-entry-actions{display:flex;gap:6px;align-items:center}.history-empty{padding:28px 0;color:var(--muted);font-size:12px}
+
+html.pwa-standalone,html.pwa-standalone body{height:100%;width:100%;overflow:hidden;overscroll-behavior:none}
+html.pwa-standalone body{min-height:0;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto}
+html.pwa-standalone .back-link,html.pwa-standalone .title-block p{display:none}
+html.pwa-standalone .pwa-history-tab{display:block!important}
+html.pwa-standalone .pwa-bottom-bar{display:grid!important;grid-template-columns:repeat(4,1fr);gap:6px;padding:7px max(8px,env(safe-area-inset-right)) max(7px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:#ddd5ca;border-top:1px solid var(--line2);z-index:30}
+html.pwa-standalone .pwa-bottom-bar button{padding:9px 5px;font-size:10px}
+html.pwa-standalone main{min-height:0;overflow:hidden}
+html.pwa-standalone .view.active{display:block;height:100%;min-height:0;overflow:hidden}
+html.pwa-standalone #historyView.active{display:block}
+html.pwa-standalone .studio-grid{display:block;height:100%;min-height:0}
+html.pwa-standalone .output-panel{height:100%;max-height:none;min-height:0;display:grid;grid-template-rows:auto auto minmax(150px,1fr) auto auto;gap:8px;padding:10px 12px;overflow:hidden}
+html.pwa-standalone .output-header{align-items:center;padding-bottom:8px}
+html.pwa-standalone .output-header h2{font-size:15px;margin:0}
+html.pwa-standalone .output-header p{font-size:9px}
+html.pwa-standalone .output-label{margin:0;font-size:9px}
+html.pwa-standalone .prompt-output{min-height:0;height:100%;resize:none;font-size:12px;line-height:1.6;padding:10px}
+html.pwa-standalone #negativeOutputWrap{min-height:0;display:grid;grid-template-rows:auto minmax(62px,.35fr);gap:4px}
+html.pwa-standalone #negativeOutputWrap[hidden]{display:none}
+html.pwa-standalone .negative-output{min-height:0;height:100%}
+html.pwa-standalone .meaning-preview{display:none}
+html.pwa-standalone .save-panel{margin:0}
+html.pwa-standalone .composer-panel{position:fixed;z-index:45;left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));bottom:calc(52px + env(safe-area-inset-bottom));height:min(72dvh,640px);max-height:calc(100dvh - 122px);display:flex;flex-direction:column;padding:0;overflow:hidden;border:1px solid var(--line2);border-radius:12px;box-shadow:0 18px 52px rgba(24,21,18,.34);transform:translateY(calc(100% + 90px));visibility:hidden;transition:transform .2s ease,visibility 0s linear .2s}
+html.pwa-standalone.pwa-drawer-open .composer-panel{transform:translateY(0);visibility:visible;transition:transform .2s ease}
+html.pwa-standalone .pwa-drawer-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;padding:10px;background:#ddd5ca;border-bottom:1px solid var(--line2);flex:0 0 auto}
+html.pwa-standalone .pwa-drawer-head strong{font-size:11px}
+html.pwa-standalone .pwa-drawer-head select{margin:0;padding:7px}
+html.pwa-standalone .pwa-drawer-head button{padding:7px 9px;font-size:10px}
+html.pwa-standalone .pwa-drawer-section{display:none!important;flex:1 1 auto;min-height:0;margin:0;padding:14px;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;border-bottom:0}
+html.pwa-standalone .pwa-drawer-section.pwa-drawer-active{display:block!important}
+html.pwa-standalone .pwa-composer-actions{display:flex;flex:0 0 auto;padding:8px 12px;border-top:1px solid var(--line);background:#e8e1d7}
+html.pwa-standalone .slot-column-head{display:none}
+html.pwa-standalone .slot-row{grid-template-columns:auto auto minmax(110px,1fr);gap:6px}
+html.pwa-standalone .slot-row .slot-category,html.pwa-standalone .slot-row .slot-mode,html.pwa-standalone .slot-row .slot-value{grid-column:3}
+html.pwa-standalone .database-layout{height:100%;min-height:0;overflow:hidden}
+html.pwa-standalone .database-main{min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+html.pwa-standalone .history-layout{height:100%;min-height:0;padding:10px 12px;display:grid;grid-template-rows:auto minmax(0,1fr)}
+html.pwa-standalone .history-list{min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:8px 0}
+html.pwa-standalone .history-head{padding-bottom:8px}
+html.pwa-standalone .history-head h2{font-size:14px}
+html.pwa-standalone .history-head p{font-size:9px}
+
+@media(max-width:760px){
+  html.pwa-standalone .app-header{min-height:0;align-items:center;padding-top:max(8px,env(safe-area-inset-top));padding-right:max(10px,env(safe-area-inset-right));padding-bottom:8px;padding-left:max(10px,env(safe-area-inset-left));gap:8px}
+  html.pwa-standalone .title-block{flex:1 1 auto}
+  html.pwa-standalone .title-block h1{margin:0;font-size:16px}
+  html.pwa-standalone .header-actions{width:auto;flex-wrap:nowrap;gap:5px}
+  html.pwa-standalone .header-actions button{flex:0 0 auto;padding:6px 8px;font-size:9px}
+  html.pwa-standalone #installPwaButton{display:none!important}
+  html.pwa-standalone .studio-tabs{min-height:38px;padding:0 6px}
+  html.pwa-standalone .studio-tab{flex:1;padding:8px 5px;font-size:10px;text-align:center}
+  html.pwa-standalone .output-actions{gap:5px;flex-wrap:nowrap}
+  html.pwa-standalone .output-actions button{padding:6px 8px;font-size:9px}
+  html.pwa-standalone .output-header>div:first-child{min-width:0}
+  html.pwa-standalone #renderSummary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:52vw}
+  html.pwa-standalone .database-layout{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}
+  html.pwa-standalone .database-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;padding:9px 10px;border-right:0;border-bottom:1px solid var(--line2)}
+  html.pwa-standalone .database-sidebar h2,html.pwa-standalone .database-sidebar .db-stats,html.pwa-standalone .database-sidebar .section-note{display:none}
+  html.pwa-standalone .database-sidebar label{margin:0}
+  html.pwa-standalone .database-main{padding:10px}
+}

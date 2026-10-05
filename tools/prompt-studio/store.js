@@ -60,8 +60,15 @@
     persist(sourceLabel);
   }
 
-  function addLibraryEntry({ title, tags, modelName, semantic }) {
-    const outputs = Object.keys(E.PROFILE_DEFS).map((profileId) => E.renderForProfile(profileId, semantic));
+  function addLibraryEntry({ title, tags, modelName, semantic, profileId = '', positive = '', negative = '' }) {
+    const outputs = Object.keys(E.PROFILE_DEFS).map((candidateId) => {
+      const rendered = E.renderForProfile(candidateId, semantic);
+      if (candidateId === profileId && E.clean(positive)) {
+        rendered.positive = String(positive).trim();
+        rendered.negative = String(negative || '').trim();
+      }
+      return rendered;
+    });
     const entry = {
       id: makeId('prompt'), title, status: 'saved', tags, model_name: modelName,
       semantic: E.clone(semantic), outputs, created_at: E.now(), updated_at: E.now(), source: 'prompt-studio'

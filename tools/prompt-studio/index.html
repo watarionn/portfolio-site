@@ -7,8 +7,14 @@
   <title>Prompt Studio</title>
   <meta name="theme-color" content="#25231f">
   <meta name="color-scheme" content="light">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Prompt Studio">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=1.0.2">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css?v=1.1.0">
 </head>
 <body>
   <header class="app-header">
@@ -19,6 +25,7 @@
     </div>
     <div class="header-actions">
       <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
+      <button id="installPwaButton" type="button" hidden>アプリとして使う</button>
       <button id="importDbButton">プロンプトDBを読み込む</button>
       <button id="exportDbButton">プロンプトDBを書き出す</button>
     </div>
@@ -28,6 +35,7 @@
 
   <div class="studio-tabs" role="tablist" aria-label="Prompt Studio 画面切替">
     <button class="studio-tab active" data-view="compose" role="tab" aria-selected="true">プロンプト作成</button>
+    <button class="studio-tab pwa-history-tab" data-view="history" role="tab" aria-selected="false">履歴</button>
     <button class="studio-tab" data-view="database" role="tab" aria-selected="false">プロンプトDB</button>
   </div>
 
@@ -138,6 +146,16 @@
       </div>
     </section>
 
+    <section id="historyView" class="view" hidden>
+      <div class="history-layout">
+        <div class="history-head">
+          <div><h2>作業履歴</h2><p>コピーまたはDB登録したプロンプトを新しい順に保存します。</p></div>
+          <button id="clearHistoryButton" type="button">履歴を消去</button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </div>
+    </section>
+
     <section id="databaseView" class="view" hidden>
       <div class="database-layout">
         <aside class="database-sidebar">
@@ -201,6 +219,13 @@
   </main>
 
 
+  <nav class="pwa-bottom-bar" aria-label="Prompt Studio操作">
+    <button id="pwaConditionsButton" type="button">条件</button>
+    <button id="pwaSlotsButton" type="button">スロット</button>
+    <button id="pwaFormatButton" type="button">整形</button>
+    <button id="pwaCopyButton" class="primary-button" type="button">コピー</button>
+  </nav>
+
   <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpDialogTitle">
     <div class="help-dialog-head">
       <h2 id="helpDialogTitle">使い方</h2>
@@ -210,10 +235,11 @@
   </dialog>
   <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
-  <script src="engine.js?v=1.0.2"></script>
-  <script src="store.js?v=1.0.2"></script>
-  <script src="app.js?v=1.0.2"></script>
-  <script src="slots.js?v=1.0.2"></script>
-  <script src="db-editor.js?v=1.0.2"></script>
+  <script src="engine.js?v=1.1.0"></script>
+  <script src="store.js?v=1.1.0"></script>
+  <script src="app.js?v=1.1.0"></script>
+  <script src="slots.js?v=1.1.0"></script>
+  <script src="db-editor.js?v=1.1.0"></script>
+  <script src="pwa.js?v=1.0.0"></script>
 </body>
 </html>

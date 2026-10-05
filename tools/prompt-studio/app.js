@@ -4,6 +4,21 @@
   const Store = window.PromptStudioStore;
   const $ = (id) => document.getElementById(id);
   let toastTimer = null;
+  const HISTORY_KEY = 'prompt-studio-pwa-history-v1';
+  const HISTORY_LIMIT = 40;
+
+  function loadHistory() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function persistHistory(items) {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(items.slice(0, HISTORY_LIMIT)));
+  }
 
   const HELP = {
     quickstart: {
@@ -174,9 +189,18 @@
 
   function registerCurrent() {
     const semantic = getSemantic();
-    const title = E.clean($('entryTitle').value) || E.clean(semantic.subject) || `プロンプト ${new Date().toLocaleString('ja-JP')}`;
+    const title = E.clean($('entryTitle').value) || E.clean(semantic.subject) || ('プロンプト ' + new Date().toLocaleString('ja-JP'));
     const tags = E.unique(E.list($('entryTags').value));
-    Store.addLibraryEntry({ title, tags, modelName:E.clean($('modelName').value), semantic });
+    Store.addLibraryEntry({
+      title,
+      tags,
+      modelName:E.clean($('modelName').value),
+      semantic,
+      profileId:$('profileSelect').value,
+      positive:$('positiveOutput').value,
+      negative:$('negativeOutput').value
+    });
+    saveHistorySnapshot('db');
     $('entryTitle').value = '';
     showToast('プロンプトDBへ保存しました');
   }
@@ -274,17 +298,165 @@
   }
 
   function setView(name) {
+    const allowed = ['compose','history','database'];
+    if (!allowed.includes(name)) name = 'compose';
     document.querySelectorAll('.studio-tab').forEach((button) => {
       const active = button.dataset.view === name;
       button.classList.toggle('active', active);
       button.setAttribute('aria-selected', String(active));
     });
-    const compose = name === 'compose';
-    $('composeView').classList.toggle('active', compose);
-    $('composeView').hidden = !compose;
-    $('databaseView').classList.toggle('active', !compose);
-    $('databaseView').hidden = compose;
-    if (!compose) renderLibrary();
+    allowed.forEach((viewName) => {
+      const section = $(viewName + 'View');
+      if (!section) return;
+      const active = viewName === name;
+      section.classList.toggle('active', active);
+      section.hidden = !active;
+    });
+    if (name === 'database') renderLibrary();
+    if (name === 'history') renderHistory();
+  }
+
+  function historySignature(item) {
+    return [item.profile_id, item.model_name, item.positive, item.negative].join('\n');
+  }
+
+  function saveHistorySnapshot(reason = 'manual') {
+    const positive = String($('positiveOutput').value || '').trim();
+    const negative = String($('negativeOutput').value || '').trim();
+    if (!positive && !negative) return null;
+    const item = {
+      id:'history.' + Date.now().toString(36) + '.' + Math.random().toString(36).slice(2,7),
+      created_at:E.now(),
+      reason,
+      profile_id:$('profileSelect').value,
+      model_name:E.clean($('modelName').value),
+      semantic:getSemantic(),
+      positive,
+      negative
+    };
+    const items = loadHistory();
+    const signature = historySignature(item);
+    const deduped = items.filter((entry) => historySignature(entry) !== signature);
+    deduped.unshift(item);
+    persistHistory(deduped);
+    renderHistory();
+    return item;
+  }
+
+  function restoreHistoryItem(item) {
+    if (!item) return;
+    if (item.profile_id && E.PROFILE_DEFS[item.profile_id]) $('profileSelect').value = item.profile_id;
+    $('modelName').value = E.clean(item.model_name);
+    setSemantic(item.semantic || {});
+    $('positiveOutput').value = String(item.positive || '');
+    $('negativeOutput').value = String(item.negative || '');
+    setView('compose');
+    showToast('履歴を作成画面へ戻しました');
+  }
+
+  function renderHistory() {
+    const list = $('historyList');
+    if (!list) return;
+    const items = loadHistory();
+    list.replaceChildren();
+    if (!items.length) {
+      const empty = document.createElement('div');
+      empty.className = 'history-empty';
+      empty.textContent = 'まだ履歴はありません。プロンプトをコピーまたはDB登録すると、ここへ残ります。';
+      list.append(empty);
+      return;
+    }
+
+    items.forEach((item) => {
+      const row = document.createElement('article');
+      row.className = 'history-entry';
+
+      const main = document.createElement('button');
+      main.type = 'button';
+      main.className = 'history-entry-main';
+      const time = document.createElement('strong');
+      time.textContent = item.created_at ? new Date(item.created_at).toLocaleString('ja-JP') : '履歴';
+      const meta = document.createElement('span');
+      meta.textContent = [E.PROFILE_DEFS[item.profile_id]?.label || item.profile_id, item.model_name].filter(Boolean).join(' · ');
+      const prompt = document.createElement('p');
+      prompt.textContent = item.positive || '';
+      main.append(time, meta, prompt);
+      main.addEventListener('click', () => restoreHistoryItem(item));
+
+      const actions = document.createElement('div');
+      actions.className = 'history-entry-actions';
+      const copy = document.createElement('button');
+      copy.type = 'button';
+      copy.textContent = 'コピー';
+      copy.addEventListener('click', async () => {
+        const profile = E.PROFILE_DEFS[item.profile_id];
+        const text = profile?.supportsNegative && item.negative
+          ? item.positive + '\n\nNegative: ' + item.negative
+          : item.positive;
+        await navigator.clipboard.writeText(text || '');
+        showToast('履歴のプロンプトをコピーしました');
+      });
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.textContent = '削除';
+      del.className = 'danger-button';
+      del.addEventListener('click', () => {
+        persistHistory(loadHistory().filter((entry) => entry.id !== item.id));
+        renderHistory();
+      });
+      actions.append(copy, del);
+      row.append(main, actions);
+      list.append(row);
+    });
+  }
+
+  function formatText(text, tagsMode = false) {
+    const source = String(text || '').trim();
+    if (!source) return '';
+    if (!tagsMode) {
+      return source.replace(/[ \t]+/g, ' ').replace(/\s*\n\s*/g, ' ').replace(/\s+([.,])/g, '$1').trim();
+    }
+    const seen = new Set();
+    return source.split(',').map((part) => part.replace(/\s+/g, ' ').trim()).filter((part) => {
+      if (!part) return false;
+      const key = part.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).join(', ');
+  }
+
+  function formatCurrent() {
+    const profile = E.PROFILE_DEFS[$('profileSelect').value];
+    $('positiveOutput').value = formatText($('positiveOutput').value, profile?.dialect === 'tags');
+    $('negativeOutput').value = formatText($('negativeOutput').value, true);
+    showToast('プロンプトを整形しました');
+  }
+
+  function getDraftSnapshot() {
+    return {
+      profile_id:$('profileSelect').value,
+      model_name:$('modelName').value,
+      semantic:getSemantic(),
+      positive:$('positiveOutput').value,
+      negative:$('negativeOutput').value,
+      entry_title:$('entryTitle').value,
+      entry_tags:$('entryTags').value,
+      updated_at:E.now()
+    };
+  }
+
+  function restoreDraft(snapshot) {
+    if (!snapshot || typeof snapshot !== 'object') return false;
+    if (snapshot.profile_id && E.PROFILE_DEFS[snapshot.profile_id]) $('profileSelect').value = snapshot.profile_id;
+    $('modelName').value = E.clean(snapshot.model_name);
+    setSemantic(snapshot.semantic || {});
+    if (typeof snapshot.positive === 'string') $('positiveOutput').value = snapshot.positive;
+    if (typeof snapshot.negative === 'string') $('negativeOutput').value = snapshot.negative;
+    $('entryTitle').value = E.clean(snapshot.entry_title);
+    $('entryTags').value = E.clean(snapshot.entry_tags);
+    renderLibrary();
+    return true;
   }
 
   async function copyCurrent() {
@@ -292,8 +464,9 @@
     const positive = $('positiveOutput').value;
     const negative = $('negativeOutput').value;
     await navigator.clipboard.writeText(
-      profile.supportsNegative && negative ? `${positive}\n\nNegative: ${negative}` : positive
+      profile.supportsNegative && negative ? (positive + '\n\nNegative: ' + negative) : positive
     );
+    saveHistorySnapshot('copy');
     showToast('プロンプトをコピーしました');
   }
 
@@ -346,6 +519,11 @@
   $('dbSearch').addEventListener('input', renderLibrary);
   $('dbStatusFilter').addEventListener('change', renderLibrary);
   $('newFromDbButton').addEventListener('click', () => setView('compose'));
+  $('clearHistoryButton')?.addEventListener('click', () => {
+    persistHistory([]);
+    renderHistory();
+    showToast('履歴を消去しました');
+  });
 
   $('exportDbButton').addEventListener('click', () => {
     download('prompt-db.json', JSON.stringify(Store.exportObject(), null, 2));
@@ -384,8 +562,18 @@
     version: E.APP_VERSION,
     getDb: Store.getDb,
     getSemantic,
+    setSemantic,
+    setView,
+    renderCurrent,
     renderForProfile: E.renderForProfile,
-    importDb: Store.importDb
+    importDb: Store.importDb,
+    copyCurrent,
+    registerCurrent,
+    formatCurrent,
+    getDraftSnapshot,
+    restoreDraft,
+    saveHistorySnapshot,
+    renderHistory
   });
 
   updateDbUi();

@@ -8,6 +8,82 @@
 
   if(standalone){
     document.documentElement.classList.add('pwa-standalone');
+    enhanceStandaloneLayout();
+  }
+
+  function enhanceStandaloneLayout(){
+    if(!standalone) return;
+
+    const compactLabels=[
+      ['helpButton','?'],
+      ['importDbButton','読込'],
+      ['exportDbButton','保存']
+    ];
+    compactLabels.forEach(([id,label])=>{
+      const button=document.getElementById(id);
+      if(!button) return;
+      if(!button.dataset.fullLabel) button.dataset.fullLabel=button.textContent;
+      button.textContent=label;
+    });
+
+    document.querySelectorAll('.editor-layout').forEach((layout)=>{
+      const stageToolbar=layout.querySelector('.stage-toolbar .toolbar-actions');
+      const panel=layout.querySelector('.control-panel');
+      if(!stageToolbar||!panel||panel.dataset.pwaEnhanced==='true') return;
+      panel.dataset.pwaEnhanced='true';
+
+      const sections=[...panel.children].filter((child)=>
+        child.classList.contains('control-section')||child.classList.contains('save-meta')
+      );
+      if(!sections.length) return;
+
+      const panelHead=document.createElement('div');
+      panelHead.className='pwa-panel-head';
+
+      const title=document.createElement('strong');
+      title.textContent='操作';
+
+      const select=document.createElement('select');
+      select.className='pwa-panel-select';
+      select.setAttribute('aria-label','操作カテゴリ');
+
+      sections.forEach((section,index)=>{
+        const heading=section.querySelector('h2')?.textContent?.trim()||`操作 ${index+1}`;
+        const option=document.createElement('option');
+        option.value=String(index);
+        option.textContent=heading;
+        select.append(option);
+        section.classList.toggle('pwa-section-active',index===0);
+      });
+
+      const close=document.createElement('button');
+      close.type='button';
+      close.className='pwa-panel-close';
+      close.textContent='閉じる';
+
+      panelHead.append(title,select,close);
+      panel.prepend(panelHead);
+
+      const toggle=document.createElement('button');
+      toggle.type='button';
+      toggle.className='pwa-control-toggle';
+      toggle.textContent='操作';
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','操作パネルを開く');
+      stageToolbar.append(toggle);
+
+      const setOpen=(open)=>{
+        layout.classList.toggle('pwa-panel-open',open);
+        toggle.setAttribute('aria-expanded',String(open));
+      };
+
+      toggle.addEventListener('click',()=>setOpen(!layout.classList.contains('pwa-panel-open')));
+      close.addEventListener('click',()=>setOpen(false));
+      select.addEventListener('change',()=>{
+        const selected=Number(select.value);
+        sections.forEach((section,index)=>section.classList.toggle('pwa-section-active',index===selected));
+      });
+    });
   }
 
   function showInstallHelp(){
@@ -59,7 +135,7 @@
   }
 
   window.PoseStudioPWA=Object.freeze({
-    version:'1.0.0',
+    version:'1.1.0',
     standalone
   });
 })();

@@ -17,12 +17,20 @@
     const compactLabels=[
       ['helpButton','?'],
       ['importDbButton','読込'],
-      ['exportDbButton','保存']
+      ['exportDbButton','保存'],
+      ['undo3dButton','戻す'],
+      ['redo3dButton','やり直す'],
+      ['to2dButton','2Dへ'],
+      ['save3dToDbButton','DB登録'],
+      ['undo2dButton','戻す'],
+      ['redo2dButton','やり直す'],
+      ['save2dToDbButton','DB登録']
     ];
     compactLabels.forEach(([id,label])=>{
       const button=document.getElementById(id);
       if(!button) return;
       if(!button.dataset.fullLabel) button.dataset.fullLabel=button.textContent;
+      if(!button.hasAttribute('aria-label')) button.setAttribute('aria-label',button.dataset.fullLabel);
       button.textContent=label;
     });
 

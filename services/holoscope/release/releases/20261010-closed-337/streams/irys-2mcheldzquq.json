@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_2mcheldzquq",
+  "slug": "irys-2mcheldzquq",
+  "videoId": "2MCHelDzquQ",
+  "title": "IRySとBiboo、Dead Space 3を二人で手探り",
+  "originalTitle": "【Dead Space 3】We Love Markers w/ Biboo",
+  "originalUrl": "https://www.youtube.com/watch?v=2MCHelDzquQ",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 23918,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_irys",
+    "slug": "irys",
+    "displayName": "IRyS"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "IRySとBibooが『Dead Space 3』の協力プレイに挑んだ。シリーズの記憶を確かめ合いながら始まった配信は、戦闘だけでなく、二人でゲームの仕組みを理解していく時間そのものが見どころになっている。",
+  "summaryOneLine": "長時間配信の中から、二人で仕組みを理解しながら進める協力プレイらしい場面を一次文字起こしの確認済み時刻つきで追える",
+  "keyPoints": [
+    "benchでweapon craftingの説明を受け、Planet Cracker Plasma Cutterの解放を確認する",
+    "weapon upgradeの話から、目の前で彼女がkissした物語展開への反応に移る",
+    "Greeleyへ向かうshipで操縦役を確認し、Star Toursの話題へ広がる"
+  ],
+  "articleBodyHtml": "<p>IRySとBibooが『Dead Space 3』の協力プレイに挑んだ。シリーズの記憶を確かめ合いながら始まった配信は、戦闘だけでなく、二人でゲームの仕組みを理解していく時間そのものが見どころになっている。</p>\n<p>01:10:34ごろには武器クラフトに足を止め、scopeやlower tool、plasma cutterの構成を一つずつ試した。完成形を知ったうえで進むのではなく、実際にパーツを付け替えながら覚えていく試行錯誤が、そのまま二人の会話の種になっていく。</p>\n<p>01:32:17ごろにはEllieをめぐる物語の展開に二人が反応。シリアスな場面にも冗談を重ね、協力相手がいることで作品の緊張感が別のリズムへ変わっていく。</p>\n<p>01:59:38ごろ、Greeleyへ向かう移動では操縦役を確認したところからDisneyのStar Toursの話へ会話が広がった。02:00:42ごろには船外へ出て、oxygen tankの使い方を確かめながら探索を続ける。</p>\n<p>戦闘、探索、装備作り、雑談が細かく行き来する一回。未知の仕組みを二人で触り、失敗も含めて遊びに変えていく協力プレイになっていた。</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 4234,
+      "text": "benchでweapon craftingの説明を受け、Planet Cracker Plasma Cutterの解放を確認する"
+    },
+    {
+      "timestampSeconds": 5537,
+      "text": "weapon upgradeの話から、目の前で彼女がkissした物語展開への反応に移る"
+    },
+    {
+      "timestampSeconds": 7178,
+      "text": "Greeleyへ向かうshipで操縦役を確認し、Star Toursの話題へ広がる"
+    },
+    {
+      "timestampSeconds": 7242,
+      "text": "到着後、oxygen tankの位置を確認しながら船外探索を始める"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=2MCHelDzquQ",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-10-10T07:12:55Z",
+    "articleUpdatedAt": "2026-10-10T07:12:55Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-whoqyb8dyo",
+      "slug": "irys-whoqyb8dyo",
+      "videoId": "-WHOqyb8dyo",
+      "title": "説明された「力」を走って調整する　IRySのRS50スポンサー配信",
+      "summaryOneLine": "製品仕様の要約ではなく、IRySが説明された機能を実際の運転でどう認識し、自分に合う強さへ調整したかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-05-03T03:00:41.000Z",
+      "durationSeconds": 11825,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v7jnn0ybwd0",
+      "slug": "irys-v7jnn0ybwd0",
+      "videoId": "v7JnN0YBWD0",
+      "title": "IRySのホロお正月CUP2022　直前練習と緊張の中で挑んだMario Kart大会",
+      "summaryOneLine": "ロビー待機から始まり、直前練習で得た感触を頼りに、アイテムが飛び交う大会レースへ挑んだ配信です。",
+      "streamType": "event",
+      "publishedAt": "2022-01-07T04:30:00Z",
+      "durationSeconds": 2237,
+      "thumbnailUrl": "https://i.ytimg.com/vi/v7JnN0YBWD0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2022-01",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "ホロお正月CUP2022",
+        "Mario Kart 8 Deluxe"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-00unz2lkrs",
+      "slug": "irys-00unz2lkrs",
+      "videoId": "-00UnZ2LkRs",
+      "title": "heroを送る側へ回ったIRyS　『Dispatch』初見で見つけたZ-Team再出発の仕事",
+      "summaryOneLine": "物語の全要約ではなく、IRySが『Dispatch』の仕事を理解し、能力値と感情の両方でZ-Teamを選ぶようになる変化を追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 14047,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-r21ksug8og",
+      "slug": "irys-r21ksug8og",
+      "videoId": "-R21KSUg8Og",
+      "title": "馬小屋から始まる生存圏　IRySがRustで「失わない工夫」を増やした4時間",
+      "summaryOneLine": "4時間を超える配信を、危険を避けるだけでなく損失を小さくしながら次の選択肢を増やすプレイとして理解できる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 15625,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-k2v7odjick",
+      "slug": "irys-k2v7odjick",
+      "videoId": "-k2v7ODJIck",
+      "title": "10分交代が恐怖の引き継ぎになる　IRySとCeciliaの『Amnesia: The Bunker』",
+      "summaryOneLine": "オフコラボの協力が同時操作ではなく、限られた弾薬、経路、セーブ、危険箇所を交代時に共有する引き継ぎとして機能したことが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 8511,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-kchjd4u28a",
+      "slug": "irys-kchjd4u28a",
+      "videoId": "-kchjD4u28A",
+      "title": "「ステルスで行く」が即興へ広がる　IRySが『Dishonored』で見つけた複数の道",
+      "summaryOneLine": "ステルスゲームの選択が、最初の方針を守ることではなく、体力、地形、能力、敵の配置を見て経路を作り直す過程だと分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 17900,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

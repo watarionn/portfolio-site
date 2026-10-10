@@ -9,6 +9,9 @@ ROOT = Path(__file__).resolve().parent
 LOG = ROOT / "publication-task-log.jsonl"
 started = dt.datetime.now(dt.timezone.utc).isoformat()
 try:
+    editorial = subprocess.run([sys.executable, str(ROOT / "publication_auto_closure.py")], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=7200)
+    if editorial.returncode:
+        raise RuntimeError("editorial closure failed: " + editorial.stderr[-2000:] + editorial.stdout[-1000:])
     recovery = subprocess.run([sys.executable, str(ROOT / "publication_recovery.py")], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=7200)
     if recovery.returncode:
         raise RuntimeError("production recovery failed: " + recovery.stderr[-2000:])

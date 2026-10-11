@@ -169,5 +169,5 @@
     },{once:true});
   }
 
-  window.PromptStudioPWA=Object.freeze({version:'1.0.0',standalone});
+  window.PromptStudioPWA=Object.freeze({version:'1.2.0',standalone});
 })();

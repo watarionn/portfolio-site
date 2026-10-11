@@ -1,0 +1,22 @@
+{
+  "name": "rinka-image-experiment-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/main.js --bundle --minify --format=esm --target=es2021 --outfile=assets/main.js",
+    "check": "node --check src/main.js && node --check assets/main.js"
+  },
+  "dependencies": {
+    "d3-voronoi": "1.1.4",
+    "delaunator": "5.0.1",
+    "earcut": "3.0.2",
+    "glfx": "0.0.4",
+    "paper": "0.12.18",
+    "pts": "1.0.1",
+    "roughjs": "4.6.6"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10"
+  }
+}

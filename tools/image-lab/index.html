@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#25231f">
+<meta name="description" content="画像を端末から送らずに、幾何学・手描き・フィルター処理ライブラリを比較できる独立した実験PWA。">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Image Lab">
+<title>Image Lab | 画像実験室</title>
+<link rel="icon" type="image/svg+xml" href="./icon.svg">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./style.css?v=0.1.0">
+</head>
+<body>
+<header class="site-header">
+  <div><a class="back" href="/">← 作品索引</a><div class="eyebrow">RINKA LAB / IMAGE EXPERIMENTS</div><h1>画像実験室</h1><p>元画像はそのまま。アルゴリズムを着替えて、違いを見る。</p></div>
+  <div class="header-actions"><button type="button" id="sampleButton">作例を試す</button><label class="file-button" for="upload">画像を読み込む<input id="upload" type="file" accept="image/png,image/jpeg,image/webp,image/avif,image/gif,image/bmp"></label></div>
+</header>
+<main class="layout">
+ <section class="workspace" aria-label="画像比較">
+   <div class="workspace-top"><h2>プレビュー</h2><span id="meta" aria-live="polite">ローカル処理・アップロードなし</span></div>
+   <div class="compare">
+     <figure><figcaption>ORIGINAL / 元画像</figcaption><div class="canvas-frame"><canvas id="source" width="512" height="512" aria-label="元画像"></canvas></div></figure>
+     <figure><figcaption>RESULT / 実験結果</figcaption><div class="canvas-frame"><canvas id="result" width="512" height="512" aria-label="実験結果"></canvas></div></figure>
+   </div>
+   <div class="workspace-footer">
+     <p id="status" role="status" aria-live="polite">作例を使って、好きなライブラリを試してみて。</p>
+     <div class="file-actions"><button type="button" id="pngButton">結果をPNG保存</button><button type="button" id="svgButton" disabled>SVG保存</button></div>
+   </div>
+ </section>
+ <aside class="controls">
+   <section><div class="section-index">01 / EXPERIMENT</div><h2>何を試す？</h2><label for="effect">ライブラリと効果</label><select id="effect">
+      <optgroup label="幾何学"><option value="voronoi">d3-voronoi ・ 色の領域分割</option><option value="delaunay">Delaunator ・ 低ポリゴン</option><option value="earcut">Earcut ・ 穴あきタイル</option><option value="pts">Pts.js ・ 点と線のネットワーク</option></optgroup>
+      <optgroup label="描画と加工"><option value="rough">Rough.js ・ 手描き風</option><option value="paper">Paper.js ・ ベクタータイル</option><option value="glfx">glfx.js ・ GPUフィルター</option></optgroup>
+   </select><p id="description" class="explain"></p></section>
+   <section><div class="section-index">02 / TUNE</div><h2>調整</h2>
+      <div class="range-line"><label for="detail">細かさ <output id="detailValue">55</output></label><input id="detail" type="range" min="8" max="100" value="55"></div>
+      <div class="range-line"><label for="weight">線・効果の強さ <output id="weightValue">45</output></label><input id="weight" type="range" min="0" max="100" value="45"></div>
+      <div class="range-line"><label for="seed">乱数シード <output id="seedValue">17</output></label><input id="seed" type="range" min="1" max="99" value="17"></div>
+      <button type="button" id="randomButton" class="secondary">シードを変える</button>
+      <button type="button" id="runButton" class="primary">この設定で作る</button>
+      <p class="micro">すべて元画像から再計算。前の加工結果には重ねないから、安心して実験できるよ。</p>
+   </section>
+   <section><div class="section-index">03 / NEXT</div><h2>次の実験候補</h2>
+      <p class="explain">Trianglify（GPL-3.0 の公開条件を確認中） / p5.js / PIXI.js / SVGPathCommander + SVGO + VTracer / Clipper2-WASM は次の実装候補。実験済みと誤解されないよう、まだ選択肢には入れていないよ。</p>
+      <p class="micro">画像はブラウザ内のみ。実験結果の最大サイズは長辺1,200px。PNGと、ベクター対応モードではSVGを保存できる。</p>
+   </section>
+ </aside>
+</main>
+<footer class="footer">Image Lab · 実験用PWA v0.1.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
+<script type="module" src="./assets/main.js?v=0.1.0"></script>
+</body>
+</html>

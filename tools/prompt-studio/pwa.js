@@ -58,15 +58,15 @@
     const select=document.createElement('select');
     select.id='pwaDrawerSelect';
     select.setAttribute('aria-label','設定カテゴリ');
-    const names=['出力先モデル','組み立てルール','画像の内容','DB保存'];
+    const names=['出力先モデル','画像の内容','自動組み立て','DB保存'];
     sections.forEach((section,index)=>{
       const option=document.createElement('option');
       option.value=String(index);
       option.textContent=names[index]||section.querySelector('h2,h3')?.textContent||('設定 '+(index+1));
       select.append(option);
-      section.classList.toggle('pwa-drawer-active',index===2);
+      section.classList.toggle('pwa-drawer-active',index===1);
     });
-    select.value='2';
+    select.value='1';
 
     const close=document.createElement('button');
     close.type='button';
@@ -80,11 +80,20 @@
     };
     const setOpen=(open)=>document.documentElement.classList.toggle('pwa-drawer-open',open);
 
-    select.addEventListener('change',()=>setSection(Number(select.value)));
+    select.addEventListener('change',()=>{
+      setSection(Number(select.value));
+      if(select.value==='2') window.PromptStudioUsability?.setMode('auto',{navigate:false});
+    });
     close.addEventListener('click',()=>setOpen(false));
 
-    document.getElementById('pwaConditionsButton')?.addEventListener('click',()=>{setSection(2);setOpen(true);});
-    document.getElementById('pwaSlotsButton')?.addEventListener('click',()=>{setSection(1);setOpen(true);});
+    document.getElementById('pwaConditionsButton')?.addEventListener('click',()=>{
+      if(document.body.dataset.editorMode==='auto') window.PromptStudioUsability?.setMode('simple',{navigate:false});
+      setSection(1);setOpen(true);
+    });
+    document.getElementById('pwaSlotsButton')?.addEventListener('click',()=>{
+      window.PromptStudioUsability?.setMode('auto',{navigate:false});
+      setSection(2);setOpen(true);
+    });
     document.getElementById('pwaFormatButton')?.addEventListener('click',()=>window.PromptStudio?.formatCurrent?.());
     document.getElementById('pwaCopyButton')?.addEventListener('click',()=>window.PromptStudio?.copyCurrent?.());
 

@@ -1,11 +1,11 @@
 'use strict';
 
 const CACHE_PREFIX='prompt-studio-';
-const CACHE_NAME=CACHE_PREFIX+'v1.1.0';
+const CACHE_NAME=CACHE_PREFIX+'v1.2.0';
 const APP_SHELL=[
   './',
   './index.html',
-  './style.css?v=1.1.0',
+  './style.css?v=1.2.0',
   './favicon.svg',
   './apple-touch-icon.png',
   './icon-192.png',
@@ -13,10 +13,11 @@ const APP_SHELL=[
   './manifest.webmanifest',
   './engine.js?v=1.1.0',
   './store.js?v=1.1.0',
-  './app.js?v=1.1.0',
+  './app.js?v=1.2.0',
   './slots.js?v=1.1.0',
   './db-editor.js?v=1.1.0',
-  './pwa.js?v=1.0.0'
+  './usability.js?v=1.2.0',
+  './pwa.js?v=1.2.0'
 ];
 
 self.addEventListener('install',(event)=>{

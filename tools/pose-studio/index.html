@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="3Dマネキンと2D骨格を行き来しながらポーズを作り、OpenPoseや参照画像として書き出してポーズDBへ保存できるPose Studio。">
+  <meta name="description" content="3Dマネキンでポーズを作成し、OpenPose画像・JSONや参照画像を書き出してポーズDBに保存できるPose Studio。">
   <title>Pose Studio</title>
   <meta name="theme-color" content="#25231f">
   <meta name="color-scheme" content="light">
@@ -14,14 +14,14 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="style.css?v=1.4.0">
+  <link rel="stylesheet" href="style.css?v=1.5.0">
 </head>
 <body>
   <header class="app-header">
     <div class="title-block">
       <a class="back-link" href="/#index">← 作品索引</a>
       <h1>Pose Studio</h1>
-      <p>3Dで形を作り、2Dで整え、ポーズDBへ残す。ControlNet用の出力まで一つの画面で完結します。</p>
+      <p>3Dマネキンでポーズを作り、OpenPose画像・JSONや参照画像を書き出せます。</p>
     </div>
     <div class="header-actions">
       <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
@@ -35,7 +35,6 @@
 
   <div class="studio-tabs" role="tablist" aria-label="Pose Studio 画面切替">
     <button class="studio-tab active" data-view="pose3d" role="tab" aria-selected="true">3Dポーズ</button>
-    <button class="studio-tab" data-view="pose2d" role="tab" aria-selected="false">2Dポーズ</button>
     <button class="studio-tab" data-view="database" role="tab" aria-selected="false">ポーズDB</button>
   </div>
 
@@ -51,7 +50,6 @@
             <div class="toolbar-actions">
               <button id="undo3dButton" type="button" disabled>元に戻す</button>
               <button id="redo3dButton" type="button" disabled>やり直す</button>
-              <button id="to2dButton" class="primary-button" type="button">現在視点を2Dへ送る</button>
               <button id="save3dToDbButton" type="button">DBに登録</button>
             </div>
           </div>
@@ -156,7 +154,8 @@
       </div>
     </section>
 
-    <section id="pose2dView" class="view" hidden>
+    <!-- Legacy 2D editor DOM is retained but intentionally inaccessible. pose2d.js still supplies historical previews and 3D projection data for the existing DB. -->
+    <section id="pose2dView" class="view" hidden inert aria-hidden="true">
       <div class="editor-layout">
         <section class="stage-panel">
           <div class="stage-toolbar">
@@ -311,21 +310,21 @@
             <select id="poseDbSourceFilter">
               <option value="all">すべて</option>
               <option value="3d">3Dから保存</option>
-              <option value="2d">2Dから保存</option>
+              <option value="2d">従来の2Dデータ</option>
             </select>
           </label>
           <dl class="db-stats">
             <div><dt>保存済み</dt><dd id="poseDbCount">0</dd></div>
             <div><dt>3Dあり</dt><dd id="poseDb3dCount">0</dd></div>
-            <div><dt>2Dあり</dt><dd id="poseDb2dCount">0</dd></div>
+            <div><dt>2D投影・保存データ</dt><dd id="poseDb2dCount">0</dd></div>
           </dl>
-          <p class="section-note">ブラウザ内のデータは作業用です。長く残すときは「ポーズDBを書き出す」でJSONを保存してください。</p>
+          <p class="section-note">以前保存した2Dポーズは保持されます。2Dの編集ページは非表示ですが、JSON書き出しは可能です。長期保存は「ポーズDBを書き出す」を使ってください。</p>
         </aside>
         <section class="database-main">
           <div class="database-main-head">
             <div>
               <h2>保存したポーズ</h2>
-              <p>3D・2Dどちらから保存しても、同じポーズDBへ入ります。</p>
+              <p>3Dポーズを保存・再編集できます。従来の2Dデータもそのまま保持・書き出し可能です。</p>
             </div>
           </div>
           <div id="poseDbList" class="pose-db-list"></div>
@@ -349,7 +348,7 @@
   <script src="store.js?v=1.2.0"></script>
   <script src="pose2d.js?v=1.2.0"></script>
   <script src="pose3d.js?v=1.2.0"></script>
-  <script src="app.js?v=1.4.0"></script>
-  <script src="pwa.js?v=1.1.0"></script>
+  <script src="app.js?v=1.5.0"></script>
+  <script src="pwa.js?v=1.5.0"></script>
 </body>
 </html>

@@ -182,3 +182,35 @@ html.pwa-standalone .history-head p{font-size:9px}
   html.pwa-standalone .database-sidebar label{margin:0}
   html.pwa-standalone .database-main{padding:10px}
 }
+
+
+/* Prompt Studio 1.2: progressive, source-compatible editor */
+.editor-mode-bar{margin:0 0 18px;padding:0 0 14px;border-bottom:1px solid #c9beaf}
+.editor-mode-title{font-weight:800;font-size:12px;margin:0 0 8px}
+.editor-mode-buttons{display:flex;flex-wrap:wrap;gap:5px}
+.editor-mode-buttons button{font-size:11px;padding:9px 10px;flex:1 1 auto}
+.editor-mode-buttons button.is-active{color:#fff;background:var(--accent);border-color:var(--accent)}
+.starter-row{display:grid;grid-template-columns:minmax(0,1fr);gap:3px;margin:12px 0 16px}
+.starter-row label{margin:0}
+.semantic-field{position:relative;padding:0 0 12px;margin-bottom:8px;border-bottom:1px solid #d5cabc}
+.semantic-field label{margin:0 0 6px}
+.semantic-field .concept-pick-button{font-size:10px;padding:5px 9px;background:transparent}
+.semantic-field.just-edited{border-bottom-color:var(--accent)}
+.semantic-field.is-hidden{display:none!important}
+body[data-editor-mode="simple"] .advanced-field,
+body[data-editor-mode="auto"] .advanced-field{display:none}
+body:not([data-editor-mode="auto"]) .slot-composer{display:none}
+#changedFieldNote{color:var(--accent);font-size:10px;line-height:1.5;margin:7px 0 0;overflow-wrap:anywhere}
+#saveScopeNote{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}
+.concept-picker-dialog{width:min(480px,calc(100vw - 28px));max-height:78dvh;border:1px solid var(--line2);border-radius:9px;background:var(--surface);color:var(--ink);padding:16px}
+.concept-picker-dialog::backdrop{background:rgba(22,20,18,.48)}
+.concept-picker-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.concept-picker-list{display:grid;gap:0;max-height:52dvh;overflow:auto;margin-top:10px}
+.concept-picker-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:10px 5px;background:transparent}
+.concept-picker-item strong,.concept-picker-item span{display:block;overflow-wrap:anywhere}
+.concept-picker-item strong{font-size:12px}.concept-picker-item span{font-size:10px;color:var(--muted);margin-top:3px}
+html.pwa-standalone .editor-mode-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+html.pwa-standalone .editor-mode-buttons button{padding:9px 3px;font-size:10px}
+html.pwa-standalone .starter-row{margin:10px 0}
+html.pwa-standalone #changedFieldNote{font-size:9px;max-height:34px;overflow:auto}
+@media(max-width:560px){.editor-mode-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.editor-mode-buttons button{padding:9px 3px;font-size:10px}}

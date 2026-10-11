@@ -577,5 +577,5 @@
   });
 
   updateDbUi();
-  loadExample();
+  renderCurrent();
 })();

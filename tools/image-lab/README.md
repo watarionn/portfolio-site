@@ -1,28 +1,30 @@
-# Image Lab 0.1.0 (独立した画像実験PWA)
+# Image Lab v0.2.0 / 画像実験PWA
 
-Minimalizer / MinimalizerPublic、既存の画像仕立て室 \`tools/image-studio\` とは**別プロジェクト**。
+Minimalizer/MinimalizerPublic、既存 Image Studio とは独立。
 
-目的: 画像をブラウザの外へ送らず、異なるJS/WASMライブラリの画像処理結果を比較・保存する。比較画像は毎回**元画像から**作り直し、破壊的処理や生成AIの描き足しは行わない。
+## 画像処理
+既存7モード: d3-voronoi, Delaunator, Earcut, Pts.js, Rough.js, Paper.js, glfx.js。
+新規6モード: p5.js（ドローイング）、PIXI.js（GPUカラー合成）、SVGPathCommander（パス最適化）、
+SVGO（SVG最適化）、VTracer WASM（画像をSVG化）、Clipper2-WASM（ポリゴン交差）。
 
-## 今回の実機対応モード
-- d3-voronoi: 元画像色のボロノイ領域分割
-- Delaunator: 元画像色の低ポリゴン化
-- Earcut: 穴あきタイルメッシュの元画像色パターン
-- Pts.js: 元画像の色に応じた点・線ネットワーク
-- Rough.js: 元画像の色に応じた手描きスケッチ
-- Paper.js: ベクタータイル表現
-- glfx.js: WebGL GPUフィルター。GPUが使えない環境では明示エラーとなる
+元画像は常に保持。通常は元画像から新規処理する。明示的に「結果を重ねる」を押すと
+次のモードは現在の加工結果を入力にして処理する。最大5段階のスナップショットが戻せる。
+「元画像に戻す」ですべて破棄。履歴は端末メモリのみで、ページ更新すると消える。
 
-使用する各パッケージはpackage-lockで固定し、esbuildでローカルにバンドル。CDNに依存しない。ビルド成果物 \`assets/main.js\` をコミットする。第三者コードのライセンス確認は別途実施する（\`THIRD_PARTY.md\`）。
+PNG出力。SVGはベクター対応モードのみ。出力表示は長辺最大1,200px。
+VTracerは長辺160px以下の縮小画像をトレースするため、SVGは完全な原画再現ではない。
 
-## 次の研究モード（未実装）
-Trianglify（GPL-3.0 のため配布条件を確認中）, p5.js, PIXI.js, SVGPathCommander, SVGO, VTracer-WASM, Clipper2-WASM。初期版ではメニューには出さず、未実装のものを「完成」と表記しない。
+## 配布とセキュリティ
+全処理は端末ブラウザ内、画像のアップロードなし。CDNなし。
+npm package-lock固定、esbuildコード分割で遅延ロード。p5は変更なしの配布物を独立読込。
+p5 LGPL-2.1対応としてminify版と可読ソースをassets/vendorに同梱。
+詳細は THIRD_PARTY.md。Trianglify GPL-3.0は対応検討のためHOLD。
 
-## QA
-- PNG/WebP/JPEG等の画像を読み込み → プレビュー → PNG出力（最大1200px）
-- SVG保存は描画上有効なベクター出力を作れたモードのみ可能
-- 同一シード・同一元画像で再現可能
-- 全処理はローカル、サーバへの画像アップロードなし
-- PWAはservice workerでアプリファイルをキャッシュ
+## 開発
+npm ci --ignore-scripts
+npm run build
+npm run check
 
-開発: \`npm ci\` → \`npm run build\`。検証: \`npm run check\`。
+初期ブラウザテストは13モードPASS、積層操作6件PASS。
+追加6モードのiPhone Safari実機検証は別途必要。
+オフライン時はキャッシュ済みのモードのみ利用可能。初回の追加モードにはネット接続が必要。

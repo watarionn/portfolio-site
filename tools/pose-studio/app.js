@@ -8,7 +8,7 @@
   const HELP={
     quickstart:{
       title:'Pose Studio の使い方',
-      body:'1. まず「3Dポーズ」で大まかな姿勢を作ります。\n2. 「現在視点を2Dへ送る」で、その見え方を2D骨格へ変換できます。\n3. 「2Dポーズ」でControlNet向けに関節位置を細かく調整します。\n4. 気に入ったポーズは「DBに登録」で保存します。\n5. OpenPose画像・JSON、通常PNG、SVGなど必要な形式で書き出します。\n\n最初から2Dだけを使うこともできます。\n\n関節を動かしすぎたときは、作業面上部の「元に戻す / やり直す」を使えます。PCでは Ctrl/Cmd + Z、Ctrl/Cmd + Shift + Z でも操作できます。'
+      body:'1. 「3Dポーズ」でマネキンの関節や視点を調整します。\n2. 「3D出力」から現在視点PNG、4方向シート、OpenPose画像・JSONなどを保存します。\n3. 気に入ったポーズを「DBに登録」で保存します。\n4. 保存したものは「ポーズDB」から読み込んで再編集できます。\n\n以前の2DポーズもDBに残り、JSONとして書き出せます。2D編集ページは表示しません。\n\n元に戻す / やり直すや Ctrl/Cmd + Z も利用できます。'
     },
     'preset-view':{
       title:'プリセットと視点',
@@ -52,7 +52,7 @@
     },
     database:{
       title:'ポーズDB',
-      body:'3Dと2Dのポーズを同じ場所に保存します。3Dから保存したポーズは3Dへ戻して編集でき、2D骨格も一緒に保存されるので2Dへ読み込むこともできます。'
+      body:'3Dから保存したポーズは3Dへ戻して編集できます。3D保存時の2D投影データや、過去に作った2D専用ポーズも維持されます。2D専用データはJSONとして取り出せます。'
     }
   };
 
@@ -81,19 +81,19 @@
   }
 
   function setView(name){
+    if(name!=='pose3d'&&name!=='database') name='pose3d';
     document.querySelectorAll('.studio-tab').forEach((button)=>{
       const active=button.dataset.view===name;
       button.classList.toggle('active',active);
       button.setAttribute('aria-selected',String(active));
     });
-    ['pose3d','pose2d','database'].forEach((viewName)=>{
+    ['pose3d','database'].forEach((viewName)=>{
       const section=$(viewName+'View');
       const active=viewName===name;
       section.classList.toggle('active',active);
       section.hidden=!active;
     });
     if(name==='database') renderDb();
-    if(name==='pose2d') requestAnimationFrame(()=>window.PoseStudio2D?.setState(window.PoseStudio2D.getState(),{resetHistory:false}));
     updateHistoryButtons();
   }
 
@@ -108,7 +108,6 @@
 
   function activeEditor(){
     if(!$('pose3dView').hidden) return window.PoseStudio3D;
-    if(!$('pose2dView').hidden) return window.PoseStudio2D;
     return null;
   }
 
@@ -190,7 +189,7 @@
     if(!entries.length){
       const empty=document.createElement('div');
       empty.className='pose-db-empty';
-      empty.textContent=db.entries.length?'条件に一致するポーズはありません。':'まだポーズが保存されていません。3Dまたは2Dで作って「DBに登録」してください。';
+      empty.textContent=db.entries.length?'条件に一致するポーズはありません。':'まだポーズが保存されていません。3Dで作って「DBに登録」してください。';
       list.append(empty);
       return;
     }
@@ -235,17 +234,16 @@
       }
 
       if(entry.pose2d){
-        const load2d=document.createElement('button');
-        load2d.type='button';
-        load2d.textContent='2Dへ読み込む';
-        load2d.addEventListener('click',()=>{
-          window.PoseStudio2D.setState(entry.pose2d);
-          $('pose2dTitle').value=entry.title;
-          $('pose2dTags').value=(entry.tags||[]).join(', ');
-          setView('pose2d');
-          toast('2Dへ読み込みました');
+        const exportLegacy2d=document.createElement('button');
+        exportLegacy2d.type='button';
+        exportLegacy2d.textContent='2DデータJSON保存';
+        exportLegacy2d.addEventListener('click',()=>{
+          const fileId=String(entry.id||'pose').replace(/[^a-zA-Z0-9_-]/g,'_').slice(0,60);
+          const data={app:'pose-studio',mode:'2d',version:1,...entry.pose2d};
+          download('pose_2d_'+fileId+'.json',JSON.stringify(data,null,2));
+          toast('2DデータをJSONに書き出しました');
         });
-        actions.append(load2d);
+        actions.append(exportLegacy2d);
       }
 
       const del=document.createElement('button');
@@ -285,7 +283,6 @@
   $('redo3dButton').addEventListener('click',()=>{window.PoseStudio3D?.redo?.();updateHistoryButtons();});
   $('undo2dButton').addEventListener('click',()=>{window.PoseStudio2D?.undo?.();updateHistoryButtons();});
   $('redo2dButton').addEventListener('click',()=>{window.PoseStudio2D?.redo?.();updateHistoryButtons();});
-  $('to2dButton').addEventListener('click',transfer3dTo2d);
   $('save3dToDbButton').addEventListener('click',save3d);
   $('save2dToDbButton').addEventListener('click',save2d);
 
@@ -332,11 +329,9 @@
   updateHistoryButtons();
 
   window.PoseStudio=Object.freeze({
-    version:'1.4.0',
+    version:'1.5.0',
     setView,
     getDb:Store.getDb,
-    save3d,
-    save2d,
-    transfer3dTo2d
+    save3d
   });
 })();

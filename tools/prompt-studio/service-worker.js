@@ -11,7 +11,7 @@ const APP_SHELL=[
   './icon-192.png',
   './icon-512.png',
   './manifest.webmanifest',
-  './engine.js?v=1.1.0',
+  './engine.js?v=1.2.0',
   './store.js?v=1.1.0',
   './app.js?v=1.2.0',
   './slots.js?v=1.1.0',

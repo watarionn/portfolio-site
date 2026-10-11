@@ -143,7 +143,7 @@ export function createLayerLab({source,output,status,download,onLeave}){
    status('レイヤー分解に失敗：'+(e?.message||String(e)));
   }finally{processing=false;start.disabled=false;}
  }
- start.addEventListener('click',startDecomposition);
+
  exit.addEventListener('click',leave);
  nameInput.addEventListener('change',applyName);
  nameInput.addEventListener('blur',applyName);
@@ -154,5 +154,5 @@ export function createLayerLab({source,output,status,download,onLeave}){
   scheduleDraw();
  });
  saveSingle.addEventListener('click',saveLayer);
- return {reset,active:()=>active};
+ return {reset,active:()=>active,start:startDecomposition};
 }

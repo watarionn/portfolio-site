@@ -34,7 +34,7 @@ async function showDecomposer(){
   layerController=createLayerLab({source,output,status:setStatus,
    download:downloadBlob,onLeave:()=>{updateStackUI();queueRender();}});
  }
- // UI module owns the start button; this function only ensures lazy import.
+ return layerController;
 }
 
 const layerHistory=[];
@@ -318,13 +318,18 @@ function downloadBlob(blob,extension,tag=$('effect').value){
 }
 $('upload').addEventListener('change',e=>{loadFile(e.target.files?.[0]);e.target.value='';});
 $('sampleButton').addEventListener('click',paintSample);
-$('decomposeButton').addEventListener('click',async event=>{
- if(layerController)return;
- event.stopImmediatePropagation();
- const btn=$('decomposeButton');btn.disabled=true;
- try{await showDecomposer();btn.disabled=false;btn.click();}
- catch(error){btn.disabled=false;setStatus('レイヤーツールの読み込みに失敗：'+error.message);}
-},{capture:true});
+$('decomposeButton').addEventListener('click',async ()=>{
+ const btn=$('decomposeButton');
+ if(btn.disabled)return;
+ btn.disabled=true;
+ setStatus('レイヤー分解を準備中…');
+ try{
+  const controller=await showDecomposer();
+  await controller.start();
+ }catch(error){
+  setStatus('レイヤー分解の起動に失敗：'+(error?.message||String(error)));
+ }finally{btn.disabled=false;}
+});
 $('commitButton').addEventListener('click',commitStack);
 $('undoButton').addEventListener('click',()=>{
   if(!layerHistory.length||inProgress)return;

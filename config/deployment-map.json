@@ -139,6 +139,11 @@
       "productionRoot": "IMAGE_STUDIO"
     },
     {
+      "id": "image-lab",
+      "sourceRoot": "tools/image-lab",
+      "productionRoot": "image-lab"
+    },
+    {
       "id": "dqb2",
       "sourceRoot": "works/dqb2",
       "productionRoot": "DQB2"

@@ -1,0 +1,32 @@
+{
+  "id": "/image-lab/",
+  "name": "Image Lab | 画像実験室",
+  "short_name": "Image Lab",
+  "description": "幾何学・手描き・画像フィルターを端末内で試す実験用PWA",
+  "lang": "ja",
+  "start_url": "/image-lab/",
+  "scope": "/image-lab/",
+  "display": "standalone",
+  "background_color": "#f2eee6",
+  "theme_color": "#282522",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

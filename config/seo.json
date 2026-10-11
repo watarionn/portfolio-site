@@ -24,6 +24,7 @@
     "/S3_UPLOAD_AUDIT/",
     "/VIDEO_WORKBENCH/",
     "/IMAGE_STUDIO/",
+    "/image-lab/",
     "/PROJECT_SNAPSHOT_GENERATOR/",
     "/MEDIA_COLLECTOR/",
     "/DOWNLOAD_WORKBENCH/",

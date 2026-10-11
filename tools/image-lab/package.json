@@ -1,11 +1,11 @@
 {
   "name": "rinka-image-experiment-lab",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node --check src/main.js && node --check src/modes/paint.js && node --check src/modes/vector.js && node --check src/modes/wasm.js && node --check assets/main.js"
+    "check": "node --check src/main.js && node --check src/layers/decompose.js && node --check src/layers/ui.js && node --check assets/main.js && node --test tests/*.test.mjs"
   },
   "dependencies": {
     "clipper2-wasm": "0.4.0",

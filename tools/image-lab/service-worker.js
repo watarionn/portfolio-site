@@ -1,5 +1,5 @@
 'use strict';
-const NAME='image-lab-v0.2.0';
+const NAME='image-lab-v0.3.0';
 const FILES=['./','./index.html','./style.css?v=0.2.0','./assets/main.js?v=0.2.0','./icon.svg','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./manifest.webmanifest'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(NAME);await cache.addAll(FILES);await self.skipWaiting();})()));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{const names=await caches.keys();await Promise.all(names.filter(n=>n.startsWith('image-lab-v')&&n!==NAME).map(n=>caches.delete(n)));await self.clients.claim();})()));

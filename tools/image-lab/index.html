@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style.css?v=0.2.0">
+<link rel="stylesheet" href="./style.css?v=0.3.0">
 </head>
 <body>
 <header class="site-header">
@@ -31,14 +31,14 @@
    </div>
  </section>
  <aside class="controls">
-   <section><div class="section-index">01 / EXPERIMENT</div><h2>何を試す？</h2><label for="effect">ライブラリと効果</label><select id="effect">
+   <section id="effectSection"><div class="section-index">01 / EXPERIMENT</div><h2>何を試す？</h2><label for="effect">ライブラリと効果</label><select id="effect">
       <optgroup label="幾何学"><option value="voronoi">d3-voronoi ・ 色の領域分割</option><option value="delaunay">Delaunator ・ 低ポリゴン</option><option value="earcut">Earcut ・ 穴あきタイル</option><option value="pts">Pts.js ・ 点と線のネットワーク</option></optgroup>
       <optgroup label="描画と加工"><option value="rough">Rough.js ・ 手描き風</option><option value="paper">Paper.js ・ ベクタータイル</option><option value="glfx">glfx.js ・ GPUフィルター</option>
       <option value="p5">p5.js ・ カラードローイング</option>
       <option value="pixi">PIXI.js ・ GPUカラーレイヤー</option></optgroup>
    <optgroup label="SVGとWASM"><option value="svgpath">SVGPathCommander ・ パスの最適化</option><option value="svgo">SVGO ・ SVGサイズ最適化</option><option value="vtracer">VTracer WASM ・ 画像のSVG化</option><option value="clipper">Clipper2-WASM ・ 図形の交差</option></optgroup>
    </select><p id="description" class="explain"></p></section>
-   <section><div class="section-index">02 / TUNE</div><h2>調整</h2>
+   <section id="tuneSection"><div class="section-index">02 / TUNE</div><h2>調整</h2>
       <div class="range-line"><label for="detail">細かさ <output id="detailValue">55</output></label><input id="detail" type="range" min="8" max="100" value="55"></div>
       <div class="range-line"><label for="weight">線・効果の強さ <output id="weightValue">45</output></label><input id="weight" type="range" min="0" max="100" value="45"></div>
       <div class="range-line"><label for="seed">乱数シード <output id="seedValue">17</output></label><input id="seed" type="range" min="1" max="99" value="17"></div>
@@ -52,13 +52,38 @@
       </div>
       <p class="micro">元画像は常に保存。「結果を重ねる」を押した時だけ、加工を次の効果へ積み重ねる。5段階まで、1つ戻せる。</p>
    </section>
-   <section><div class="section-index">03 / NEXT</div><h2>次の実験候補</h2>
-      <p class="explain">Trianglifyはライセンス確認中。個別レイヤー管理と履歴の保存は今後の候補。現在は画像の加工結果を最大5段階まで積み重ねられる。</p>
+   <section id="layerSection">
+      <div class="section-index">03 / LAYER DECOMPOSER</div>
+      <h2>1枚をレイヤーに分ける</h2>
+      <p class="explain">色とつながった領域を使って自動分離。人物・服などを意味的に認識するAI分離ではないよ。</p>
+      <label for="layerDetail">分解の細かさ</label>
+      <select id="layerDetail">
+       <option value="6">ざっくり（6色）</option>
+       <option value="10" selected>標準（10色）</option>
+       <option value="14">細かく（14色）</option>
+      </select>
+      <button type="button" id="decomposeButton" class="primary layer-main">元画像をレイヤー分解</button>
+      <div id="layerResults" hidden>
+       <p id="layerMeta" class="micro" role="status"></p>
+       <div id="layerList" class="layer-list" aria-label="抽出されたレイヤー"></div>
+       <div class="layer-edit">
+        <label for="layerName">選択レイヤー名</label>
+        <input type="text" id="layerName" maxlength="36" autocomplete="off" />
+        <label for="layerOpacity">不透明度 <output id="layerOpacityValue">100%</output></label>
+        <input type="range" id="layerOpacity" min="0" max="100" value="100" />
+        <button type="button" id="saveLayerButton" disabled>選択レイヤーを透過PNG保存</button>
+        <button type="button" id="leaveLayersButton">画像効果モードに戻る</button>
+       </div>
+       <p class="micro">「結果をPNG保存」で表示中の合成画像を保存。「単独」で領域だけ確認できる。全レイヤーを表示・不透明にすると、元画像をそのまま再現するよ。</p>
+      </div>
+   </section>
+   <section><div class="section-index">04 / NEXT</div><h2>次の実験候補</h2>
+      <p class="explain">Trianglifyはライセンス確認中。人物・髪・服などのAI意味分離、ブラシによる境界修正、レイヤー別エフェクトや編集履歴の永続保存は今後の候補。</p>
       <p class="micro">画像はブラウザ内のみ。実験結果の最大サイズは長辺1,200px。PNGと、ベクター対応モードではSVGを保存できる。</p>
    </section>
  </aside>
 </main>
-<footer class="footer">Image Lab · 実験用PWA v0.2.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
-<script type="module" src="./assets/main.js?v=0.2.0"></script>
+<footer class="footer">Image Lab · 実験用PWA v0.3.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
+<script type="module" src="./assets/main.js?v=0.3.0"></script>
 </body>
 </html>

@@ -20,7 +20,6 @@
       ['exportDbButton','保存'],
       ['undo3dButton','戻す'],
       ['redo3dButton','やり直す'],
-      ['to2dButton','2Dへ'],
       ['save3dToDbButton','DB登録'],
       ['undo2dButton','戻す'],
       ['redo2dButton','やり直す'],
@@ -34,7 +33,7 @@
       button.textContent=label;
     });
 
-    document.querySelectorAll('.editor-layout').forEach((layout)=>{
+    document.querySelectorAll('#pose3dView .editor-layout').forEach((layout)=>{
       const stageToolbar=layout.querySelector('.stage-toolbar .toolbar-actions');
       const panel=layout.querySelector('.control-panel');
       if(!stageToolbar||!panel||panel.dataset.pwaEnhanced==='true') return;
@@ -143,7 +142,7 @@
   }
 
   window.PoseStudioPWA=Object.freeze({
-    version:'1.1.0',
+    version:'1.5.0',
     standalone
   });
 })();

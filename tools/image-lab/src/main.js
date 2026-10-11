@@ -26,18 +26,29 @@ const desc={
   clipper:'Clipper2-WASM。異なる多角形の交差領域を計算し、画像の色で塗る。'
 };
 let sourceName='sample', vectorSvg='', inProgress=false, pending=false, debounce=0;
+let layerController=null;
+async function showDecomposer(){
+ if(inProgress)throw Error('画像効果の処理が終わってから分解してね。');
+ if(!layerController){
+  const {createLayerLab}=await import('./layers/ui.js');
+  layerController=createLayerLab({source,output,status:setStatus,
+   download:downloadBlob,onLeave:()=>{updateStackUI();queueRender();}});
+ }
+ // UI module owns the start button; this function only ensures lazy import.
+}
+
 const layerHistory=[];
 function updateStackUI(){
   $('stackCount').textContent='積み重ね '+layerHistory.length+' / 5';
   $('undoButton').disabled=layerHistory.length===0;
   $('clearButton').disabled=layerHistory.length===0;
-  $('commitButton').disabled=inProgress;
+  $('commitButton').disabled=inProgress||!!layerController?.active();
 }
 function clearStack(){
   layerHistory.length=0;updateStackUI();
 }
 function commitStack(){
-  if(inProgress||!status.textContent.includes('完了'))return;
+  if(inProgress||layerController?.active()||!status.textContent.includes('完了'))return;
   const snap=document.createElement('canvas');snap.width=output.width;snap.height=output.height;
   snap.getContext('2d').drawImage(output,0,0);
   layerHistory.push(snap);
@@ -68,7 +79,7 @@ function prepare(sizeW,sizeH){
   srcCtx.imageSmoothingEnabled=true;srcCtx.imageSmoothingQuality='high';
 }
 function paintSample(){
-  clearStack();
+  layerController?.reset();clearStack();
   prepare(720,540);
   const g=srcCtx.createLinearGradient(0,0,720,540);
   g.addColorStop(0,'#ead4b1');g.addColorStop(.45,'#9bb3aa');g.addColorStop(1,'#385b71');
@@ -220,6 +231,7 @@ function renderGlfx(ctx,image,density,weight,seed,inputCanvas){
   }finally{tex.destroy();}
 }
 async function render(){
+  if(layerController?.active())return;
   if(inProgress){pending=true;return;}
   inProgress=true;
   $('runButton').disabled=true;updateStackUI();
@@ -275,7 +287,7 @@ async function render(){
     if(pending){pending=false;setTimeout(render,0);}
   }
 }
-function queueRender(){clearTimeout(debounce);debounce=setTimeout(render,110);}
+function queueRender(){if(layerController?.active())return;clearTimeout(debounce);debounce=setTimeout(render,110);}
 async function loadFile(file){
   if(!file||!file.type.startsWith('image/')){setStatus('画像ファイルを選んでね。');return;}
   if(file.size>25*1024*1024){setStatus('25MB以下の画像を選んでね。');return;}
@@ -290,7 +302,7 @@ async function loadFile(file){
     const w=img.naturalWidth,h=img.naturalHeight;
     if(!w||!h||w*h>140000000)throw Error('画像サイズが大きすぎるよ。');
     const scale=Math.min(1,1200/Math.max(w,h));
-    clearStack();prepare(Math.round(w*scale),Math.round(h*scale));
+    layerController?.reset();clearStack();prepare(Math.round(w*scale),Math.round(h*scale));
     srcCtx.drawImage(img,0,0,source.width,source.height);
     sourceName=file.name.replace(/\\.[^.]+$/,'').replace(/[^a-zA-Z0-9-_]/g,'_').slice(0,40)||'image';
     $('meta').textContent=file.name+' · '+w+' × '+h+' → '+source.width+' × '+source.height+'px';
@@ -298,14 +310,21 @@ async function loadFile(file){
   }catch(error){setStatus('画像を開けなかった：'+(error?.message||String(error)));}
   finally{URL.revokeObjectURL(url);}
 }
-function downloadBlob(blob,extension){
+function downloadBlob(blob,extension,tag=$('effect').value){
   if(!blob){setStatus('書き出しに失敗したよ。');return;}
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='image-lab-'+sourceName+'-'+$('effect').value+'.'+extension;
+  a.download='image-lab-'+sourceName+'-'+tag+'.'+extension;
   document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),30000);
 }
 $('upload').addEventListener('change',e=>{loadFile(e.target.files?.[0]);e.target.value='';});
 $('sampleButton').addEventListener('click',paintSample);
+$('decomposeButton').addEventListener('click',async event=>{
+ if(layerController)return;
+ event.stopImmediatePropagation();
+ const btn=$('decomposeButton');btn.disabled=true;
+ try{await showDecomposer();btn.disabled=false;btn.click();}
+ catch(error){btn.disabled=false;setStatus('レイヤーツールの読み込みに失敗：'+error.message);}
+},{capture:true});
 $('commitButton').addEventListener('click',commitStack);
 $('undoButton').addEventListener('click',()=>{
   if(!layerHistory.length||inProgress)return;
@@ -320,7 +339,7 @@ $('runButton').addEventListener('click',render);
 $('randomButton').addEventListener('click',()=>{$('seed').value=1+Math.floor(Math.random()*99);$('seedValue').textContent=$('seed').value;queueRender();});
 $('effect').addEventListener('change',()=>{$('description').textContent=desc[$('effect').value];queueRender();});
 ['detail','weight','seed'].forEach(id=>$(id).addEventListener('input',()=>{$(id+'Value').textContent=$(id).value;queueRender();}));
-pngButton.addEventListener('click',()=>output.toBlob(blob=>downloadBlob(blob,'png'),'image/png'));
+pngButton.addEventListener('click',()=>output.toBlob(blob=>downloadBlob(blob,'png',layerController?.active()?'layers-composite':$('effect').value),'image/png'));
 svgButton.addEventListener('click',()=>{if(vectorSvg)downloadBlob(new Blob([vectorSvg],{type:'image/svg+xml'}),'svg');});
 window.addEventListener('dragover',event=>{event.preventDefault();});
 window.addEventListener('drop',event=>{event.preventDefault();if(event.dataTransfer?.files?.length)loadFile(event.dataTransfer.files[0]);});

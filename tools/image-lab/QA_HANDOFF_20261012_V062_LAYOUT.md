@@ -28,14 +28,18 @@
 - Production updated through the existing certificate-verified FTPS pathway; 13 changed Image Lab files uploaded in dependency-first order with `index.html` and `service-worker.js` last. No remote assets were removed and no other app routes were changed.
 - Source blob bytes from that **exact main commit** compared to public HTTPS responses: **13/13 SHA-256 PASS**. Old lazy-load hashed chunk was checked accessible before cutover.
 - Public HTTPS browser runtime tested in headless Edge at 390×844, 375×667, 768×1024, 1440×900: **4/4 PASS**, no horizontal overflow; correct version `v0.6.2`, result widths 360/345/738 CSS px; source expand/collapse, two control tabs, color decomposition, loss-prevention while editing, and editor exit PASS.
-- **OPEN: Physical iPhone Safari acceptance of v0.6.2**. Browser device emulation is not user confirmation.
+- **CLOSED: Physical iPhone acceptance of the published v0.6.2, USER-CONFIRMED PASS on 2026-10-13 JST.** The user reported `iPhoneで確認できた！` after production release. This is release-level hands-on acceptance, not an independently recorded result for every item in the regression checklist. Headless browser tests and public HTTPS checks remain separate evidence.
 
-## Release checklist
+## Release checklist (completed release; reusable for later regressions)
 1. Read back v0.6.2 build and source from the exact branch/merge commit.
 2. Merge only after tests pass, then deploy the reviewed Image Lab delta using the existing credential-verified FTPS route.
 3. Read public HTML, versioned CSS, JS, and SW over HTTPS and compare bytes/SHA-256 to committed source. Do not touch other production routes.
 4. User physical iPhone acceptance after release: enlarged preview, source expansion, mode switching, effects, layer decomposition/retouch/undo, PNG export, and PWA cache refresh.
 5. Record physical acceptance only if user confirms it, not from browser emulation.
+
+## Closure
+- v0.6.2 enlarged RESULT and compact controls: implementation, merge, publication, automated/browser verification, and user-reported iPhone acceptance are complete.
+- No additional modification to runtime code is needed to record this acceptance.
 
 ## Note
 Do not confuse GitHub merge with production publication. v0.6.1 was already user-confirmed in QA_HANDOFF_20261012_V061.md. This is a new 0.6.2 release with a separate acceptance gate.

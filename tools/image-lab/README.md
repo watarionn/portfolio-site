@@ -85,3 +85,11 @@ ONNX Runtime Web module is served from assets/ort/ort-wasm-simd-threaded-loader.
 - The merged composite is pixel-identical to the visible composite before the operation. Layer name, visibility, opacity and transparent PNG export work after merging.
 - Up to three in-memory merge undo steps. History does not survive a refresh.
 - Solo display resets on entering multiple selection. Hidden layers can be selected, but their hidden pixels are baked transparent.
+
+## v0.6 Order and Mask Retouch
+- Move the selected layer earlier/later by one with large mobile controls; remaps all owner IDs so layer identity and pixel assignments remain correct.
+- Ownership layers are disjoint: reordering changes list order only and does not create visual overlap. It does not change the displayed composite until a future overlapping-layer compositor is implemented.
+- Boundary brush: tap selected layer, select Add or Remove, choose destination when removing, then draw on the RESULT canvas with Pointer Events (touch-action none) and a configurable radius.
+- Every edited pixel receives its original uploaded RGBA, changing only membership; no invented pixels. Original uploaded image canvas is not modified. A stroke commits on pointer-up. Pointer cancellation rolls back.
+- Unified maximum 5 in-memory Undo steps for merge, reorder, and brush strokes. Reopening/resetting the editor clears edits.
+- Browser-only and touch friendly; editing on the result canvas requires viewing the result image at a usable size.

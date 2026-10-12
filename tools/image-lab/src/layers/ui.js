@@ -1,5 +1,6 @@
 import {segmentImage,composeLayers} from './decompose.js';
 import {mergeLayerModel,identicalComposite} from './merge.js';
+import {reorderLayers,strokeSegment,recalcLayerCounts} from './retouch.js';
 const $=id=>document.getElementById(id);
 const named=(tag,className,text)=>{
  const el=document.createElement(tag);if(className)el.className=className;
@@ -12,6 +13,7 @@ const safeName=(name,index)=>{
 export function createLayerLab({source,output,status,download,onLeave}){
  let active=false,model=null,selected=0,solo=-1,processing=false;
  let multi=false,picked=new Set(),merges=[];
+ let brush=false,painting=null,brushChanged=false,lastPoint=null;
  let previewScheduled=false;
  const ui=$('layerList'),section=$('layerResults'),meta=$('layerMeta');
  const nameInput=$('layerName'),opacity=$('layerOpacity'),opacityValue=$('layerOpacityValue');
@@ -20,6 +22,11 @@ export function createLayerLab({source,output,status,download,onLeave}){
  const mergeButton=$('layerMergeButton'),cancelMulti=$('layerCancelSelectButton');
  const undoMerge=$('layerUndoMergeButton'),mergeName=$('layerMergeName');
  const selectionMeta=$('layerSelectionMeta');
+ const moveFront=$('layerMoveFront'),moveBack=$('layerMoveBack');
+ const brushToggle=$('layerBrushToggle'),brushPanel=$('layerBrushPanel');
+ const brushMode=$('layerBrushMode'),brushTarget=$('layerBrushTarget');
+ const brushSize=$('layerBrushSize'),brushValue=$('layerBrushSizeValue');
+ const cursor=$('brushCursor'),canvas=output;
  const effectInputs=['effect','detail','weight','seed','runButton','randomButton','commitButton','undoButton','clearButton'];
  function lockEffects(value){
   for(const id of effectInputs)$(id).disabled=value;
@@ -28,7 +35,8 @@ export function createLayerLab({source,output,status,download,onLeave}){
  }
  function reset(){
   active=false;model=null;selected=0;solo=-1;processing=false;
-  multi=false;picked.clear();merges=[];updateBulk();
+  multi=false;picked.clear();merges=[];painting=null;brush=false;brushChanged=false;lastPoint=null;
+  output.classList.remove('brush-enabled');cursor.hidden=true;brushPanel.hidden=true;updateBulk();
   section.hidden=true;ui.replaceChildren();meta.textContent='';
   $('svgButton').disabled=true;
   lockEffects(false);start.disabled=false;
@@ -70,21 +78,46 @@ export function createLayerLab({source,output,status,download,onLeave}){
   thumb.getContext('2d').putImageData(img,0,0);
   return thumb;
  }
+ function remember(before=model,selection=selected){
+  merges.push({model:{...before,layers:before.layers.map(x=>({...x}))},selected:selection});
+  if(merges.length>5)merges.shift();
+ }
+ function updateEditor(){
+  moveFront.disabled=!active||multi||brush||selected===0;
+  moveBack.disabled=!active||multi||brush||!model||selected===model.layers.length-1;
+  brushToggle.disabled=!active||multi||!model||model.layers.length<2;
+  brushToggle.textContent=brush?'境界修正を終了':'境界修正を開始';
+  brushPanel.hidden=!brush;
+  brushValue.textContent=brushSize.value+'px';
+  if(!model)return;
+  const previous=brushTarget.value;
+  brushTarget.replaceChildren();
+  model.layers.forEach((layer,i)=>{
+   if(i===selected)return;
+   const opt=document.createElement('option');opt.value=String(i);opt.textContent=layer.label;
+   brushTarget.append(opt);
+  });
+  if([...brushTarget.options].some(o=>o.value===previous))brushTarget.value=previous;
+  const next=Number(brushTarget.value);
+  if(next===selected||!Number.isInteger(next))brushTarget.selectedIndex=0;
+  brushTarget.disabled=brushMode.value==='add'||!brush;
+ }
  function updateBulk(){
   multiButton.textContent=multi?'選択中':'複数選択';
-  multiButton.disabled=!active||processing||!model||model.layers.length<2;
+  multiButton.disabled=!active||processing||brush||!model||model.layers.length<2;
   bulk.hidden=!multi;
   selectionMeta.textContent=picked.size+'枚選択中';
   mergeButton.disabled=!multi||picked.size<2;
   undoMerge.disabled=!active||!merges.length;
-  undoMerge.textContent='統合を1つ戻す'+(merges.length?'（'+merges.length+'）':'');
+  undoMerge.textContent='操作を1つ戻す'+(merges.length?'（'+merges.length+'）':'');
+  updateEditor();
  }
  function togglePicked(i){
   if(picked.has(i))picked.delete(i);else picked.add(i);
   refreshRows();updateBulk();
  }
  function setMulti(value){
-  if(!active||processing)return;
+  if(!active||processing||brush)return;
   multi=value;picked.clear();solo=-1;mergeName.value='';
   refreshRows();updateBulk();scheduleDraw();
  }
@@ -93,8 +126,7 @@ export function createLayerLab({source,output,status,download,onLeave}){
   try{
    const result=mergeLayerModel(model,[...picked],{label:mergeName.value});
    if(!identicalComposite(model,result.model))throw Error('統合前後で表示が変わるため中止しました');
-   merges.push({model,selected});
-   if(merges.length>3)merges.shift();
+   remember();
    model=result.model;selected=result.index;solo=-1;
    multi=false;picked.clear();mergeName.value='';
    refreshRows();refreshSelection();updateBulk();
@@ -109,7 +141,72 @@ export function createLayerLab({source,output,status,download,onLeave}){
   multi=false;picked.clear();mergeName.value='';
   refreshRows();refreshSelection();updateBulk();
   meta.textContent=model.layers.length+'レイヤー · 統合を元に戻しました';
-  status('直前のレイヤー統合を元に戻しました。');
+  status('直前のレイヤー操作を元に戻しました。');
+ }
+ function moveSelection(delta){
+  if(!model||processing||multi||brush)return;
+  const to=selected+delta;
+  if(to<0||to>=model.layers.length)return;
+  const before=model,index=selected;
+  const next=reorderLayers(model,selected,to);
+  remember(before,index);
+  model=next.model;selected=next.index;solo=-1;
+  refreshRows();refreshSelection();
+  status('レイヤーの一覧順を変更したよ。各画素は1枚に属するため、この操作だけでは画像の重なりは変わりません。');
+ }
+ function endBrushMode(){
+  if(painting)finishStroke(true);
+  brush=false;cursor.hidden=true;output.classList.remove('brush-enabled');
+  brushPanel.hidden=true;refreshRows();updateBulk();scheduleDraw();
+ }
+ function imagePoint(event){
+  const rect=output.getBoundingClientRect(),ratio=model.width/model.height;
+  const renderW=Math.min(rect.width,rect.height*ratio);
+  const renderH=renderW/ratio;
+  const left=rect.left+(rect.width-renderW)/2,top=rect.top+(rect.height-renderH)/2;
+  const inside=event.clientX>=left&&event.clientX<left+renderW&&event.clientY>=top&&event.clientY<top+renderH;
+  return {inside,x:Math.max(0,Math.min(model.width-1,(event.clientX-left)*model.width/renderW)),
+   y:Math.max(0,Math.min(model.height-1,(event.clientY-top)*model.height/renderH)),
+   scale:renderW/model.width};
+ }
+ function moveCursor(event,point){
+  if(!brush)return;
+  cursor.hidden=!point.inside;
+  if(!point.inside)return;
+  const r=Number(brushSize.value)*point.scale;
+  cursor.style.width=2*r+'px';cursor.style.height=2*r+'px';
+  cursor.style.left=event.clientX+'px';cursor.style.top=event.clientY+'px';
+ }
+ function startStroke(event){
+  if(!brush||!model||multi||processing||event.button>0)return;
+  const at=imagePoint(event);
+  if(!at.inside)return;
+  const original=source.getContext('2d',{willReadFrequently:true})
+    .getImageData(0,0,source.width,source.height).data;
+  painting={before:model,selection:selected,original,
+   draft:{...model,source:new Uint8ClampedArray(model.source),
+    owner:new Uint8Array(model.owner),layers:model.layers.map(x=>({...x}))},
+   pointerId:event.pointerId};
+  model=painting.draft;brushChanged=false;lastPoint={x:at.x,y:at.y};
+  try{output.setPointerCapture(event.pointerId);}catch{}
+  event.preventDefault();paintAt(lastPoint);
+ }
+ function paintAt(point){
+  if(!painting||!model)return;
+  const delta=strokeSegment(model,painting.original,{
+   from:lastPoint||point,to:point,radius:Number(brushSize.value),
+   mode:brushMode.value,selected,target:Number(brushTarget.value)});
+  if(delta){brushChanged=true;scheduleDraw();}
+  lastPoint=point;
+ }
+ function finishStroke(cancel=false){
+  if(!painting)return;
+  const before=painting.before,wasChanged=brushChanged;
+  if(cancel||!wasChanged){model=before;}
+  else{remember(before,painting.selection);recalcLayerCounts(model);}
+  painting=null;brushChanged=false;lastPoint=null;
+  refreshRows();refreshSelection();updateBulk();
+  if(wasChanged&&!cancel)status('境界を修正したよ。操作を1つ戻すで復元できる。');
  }
  function refreshRows(){
   if(!model)return;
@@ -159,7 +256,7 @@ export function createLayerLab({source,output,status,download,onLeave}){
   nameInput.value=layer.label;opacity.value=String(layer.opacity);
   opacityValue.textContent=layer.opacity+'%';
   saveSingle.disabled=false;
-  scheduleDraw();
+  updateEditor();scheduleDraw();
  }
  function applyName(){
   if(!model)return;
@@ -201,7 +298,8 @@ export function createLayerLab({source,output,status,download,onLeave}){
     next=segmentImage(src,{colorGroups:groups});
    }
    model=next;selected=0;solo=-1;active=true;
-   merges=[];multi=false;picked.clear();mergeName.value='';
+   merges=[];multi=false;picked.clear();mergeName.value='';brush=false;
+   output.classList.remove('brush-enabled');cursor.hidden=true;brushPanel.hidden=true;
    lockEffects(true);section.hidden=false;
    meta.textContent=(next.method==='semantic'?'AI意味分離 · ':'色・領域分解 · ')+next.layers.length+'レイヤー・'+next.groupsFound+'領域候補・'+next.sampleWidth+'×'+next.sampleHeight+'の解析';
    refreshRows();refreshSelection();updateBulk();
@@ -217,6 +315,33 @@ export function createLayerLab({source,output,status,download,onLeave}){
    $('layerDetail').disabled=ai;
    start.textContent=ai?'AIで人物・髪・服を分ける':'元画像をレイヤー分解';
  });
+ moveFront.addEventListener('click',()=>moveSelection(-1));
+ moveBack.addEventListener('click',()=>moveSelection(1));
+ brushToggle.addEventListener('click',()=>{
+  if(!active||!model||multi||processing)return;
+  if(brush){endBrushMode();return;}
+  solo=-1;brush=true;brushPanel.hidden=false;output.classList.add('brush-enabled');
+  refreshRows();updateBulk();scheduleDraw();
+  status('結果画像を指でなぞって境界を修正できるよ。');
+ });
+ brushMode.addEventListener('change',updateEditor);
+ brushSize.addEventListener('input',updateEditor);
+ output.addEventListener('pointerdown',startStroke);
+ output.addEventListener('pointermove',event=>{
+  if(!brush||!model)return;
+  const point=imagePoint(event);moveCursor(event,point);
+  if(painting&&event.pointerId===painting.pointerId){event.preventDefault();paintAt(point);}
+ });
+ output.addEventListener('pointerup',event=>{
+  if(painting&&event.pointerId===painting.pointerId){event.preventDefault();finishStroke();}
+ });
+ output.addEventListener('pointercancel',event=>{
+  if(painting&&event.pointerId===painting.pointerId)finishStroke(true);
+ });
+ output.addEventListener('lostpointercapture',()=>{
+  if(painting)finishStroke();
+ });
+ output.addEventListener('pointerleave',()=>{if(!painting)cursor.hidden=true;});
  multiButton.addEventListener('click',()=>setMulti(!multi));
  cancelMulti.addEventListener('click',()=>setMulti(false));
  mergeButton.addEventListener('click',mergePicked);

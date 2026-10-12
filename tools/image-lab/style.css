@@ -34,3 +34,15 @@
 .layer-row.is-picked{background:#e8e1d1}
 .layer-row .layer-checkbox{flex:0 0 22px;width:22px;height:22px;margin:4px 5px;accent-color:var(--accent)}
 .layer-row .layer-pick{min-height:44px}
+
+/* v0.6 mobile retouch and order */
+.canvas-frame:has(#result){position:relative}
+#result.brush-enabled{touch-action:none;cursor:crosshair}
+.brush-cursor{position:fixed;z-index:30;border:2px solid #fff;border-radius:50%;
+ box-shadow:0 0 0 1.5px #4e2821,0 0 5px #0005;pointer-events:none;transform:translate(-50%,-50%)}
+.layer-order-actions{margin-bottom:9px}
+.controls .layer-order-actions button{min-height:44px;margin:0 0 8px}
+.layer-brush-panel{border:1px solid var(--rule);padding:12px;margin:8px 0 12px;background:#f9f3e8}
+.layer-brush-panel select{margin:0 0 12px}
+.layer-brush-panel input[type=range]{width:100%;accent-color:var(--accent)}
+.layer-brush-panel label:has(output){display:flex;justify-content:space-between}

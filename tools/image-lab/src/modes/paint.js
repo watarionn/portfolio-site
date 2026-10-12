@@ -7,7 +7,7 @@ function sample(image,x,y){
 }
 function rng(seed){let s=seed|0;return()=>{s=(Math.imul(s,1664525)+1013904223)|0;return(s>>>0)/4294967296;};}
 let p5loading;
-async function loadP5(){
+export async function loadP5(){
  if(window.p5)return window.p5;
  if(!p5loading){
   p5loading=new Promise((resolve,reject)=>{

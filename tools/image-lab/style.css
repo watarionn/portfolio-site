@@ -121,3 +121,9 @@
 .library-research-info{font-size:12px;line-height:1.55;margin:10px 0}
 .library-research-info ul{padding-left:20px;margin:8px 0}
 @media(max-width:480px){.fx-stack-row{gap:3px}}
+/* v0.9 capability API experiment panel; compact until explicitly expanded. */
+.cap-preview{display:block;width:100%;max-width:100%;height:auto;max-height:380px;object-fit:contain;border:1px solid var(--rule);background:#fff}
+.cap-preview[hidden],.cap-json[hidden]{display:none}
+.cap-json{max-width:100%;max-height:250px;overflow:auto;padding:10px;border:1px solid var(--rule);font-size:11px;white-space:pre-wrap;word-break:break-word}
+.cap-history{max-height:230px;overflow:auto;margin:10px 0;border-block:1px solid var(--rule)}
+.cap-history-row{font-size:11px;line-height:1.5;padding:6px 0;border-bottom:1px solid var(--rule)}

@@ -6,6 +6,7 @@ import {Pt, Line} from 'pts';
 import paper from 'paper';
 import * as glfx from 'glfx';
 import {LIBRARY_ATLAS} from './library-atlas.js';
+import {createCapabilityLab} from './capabilities/ui.js';
 
 const $=id=>document.getElementById(id);
 const source=$('source'), output=$('result');
@@ -400,4 +401,5 @@ researchTry.addEventListener('click',()=>{
  $('effectSection').scrollIntoView({behavior:'smooth',block:'start'});
 });
 refreshLibraryResearch();
+createCapabilityLab({source});
 paintSample();

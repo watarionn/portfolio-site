@@ -75,3 +75,6 @@ v0.3.0でService Workerの事前キャッシュ一覧だけ旧v0.2.0のJS/CSSク
 - 全表示の再合成は元画像のRGBAと一致。内容生成・塗り足し無し。人物が検出されなければ色・領域分解に戻す。
 - 写真向けチェックポイントであり、アニメイラスト・複数人物・ポーズ・複雑背景は精度保証しない。
 - WASMとモデルは画像をサーバに送信せず、同一サイトから配信する。オフライン初回AI推論は不可。
+ 
+## v0.4.1 Cloudfree runtime fix 
+ONNX Runtime Web module is served from assets/ort/ort-wasm-simd-threaded-loader.js, an identical copy of the upstream .mjs file, because the production nginx host does not serve a JavaScript Content-Type for .mjs. wasmPaths explicitly maps mjs and wasm. No vendor code modifications.

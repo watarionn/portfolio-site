@@ -31,7 +31,11 @@ async function getSession(progress){
    const ort=await import('onnxruntime-web/wasm');
    ort.env.wasm.numThreads=1;
    ort.env.wasm.proxy=false;
-   ort.env.wasm.wasmPaths=new URL('./ort/',import.meta.url).href;
+   ort.env.wasm.wasmPaths={
+    // The Cloudfree nginx host does not assign JS MIME type to .mjs.
+    mjs:new URL('./ort/ort-wasm-simd-threaded-loader.js',import.meta.url).href,
+    wasm:new URL('./ort/ort-wasm-simd-threaded.wasm',import.meta.url).href
+   };
    progress('AIモデルを読み込み中（約4.4MB・初回のみ）…');
    const modelUrl=new URL('./models/segformer-b0-clothes-int8.onnx',import.meta.url).href;
    const session=await ort.InferenceSession.create(modelUrl,{executionProviders:['wasm'],graphOptimizationLevel:'all'});

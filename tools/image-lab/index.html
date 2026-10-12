@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style-v0.4.1.css">
+<link rel="stylesheet" href="./style-v0.5.0.css">
 </head>
 <body>
 <header class="site-header">
@@ -71,6 +71,19 @@
       <button type="button" id="decomposeButton" class="primary layer-main">元画像をレイヤー分解</button>
       <div id="layerResults" hidden>
        <p id="layerMeta" class="micro" role="status"></p>
+       <div class="layer-bulk-header">
+        <button type="button" id="layerMultiSelectButton">複数選択</button>
+        <button type="button" id="layerUndoMergeButton" disabled>統合を1つ戻す</button>
+       </div>
+       <div id="layerBulkControls" class="layer-bulk-controls" hidden>
+        <p id="layerSelectionMeta" role="status" class="micro">0枚選択中</p>
+        <label for="layerMergeName">統合後の名前（空欄なら自動）</label>
+        <input id="layerMergeName" type="text" maxlength="36" placeholder="例：服、上半身" autocomplete="off">
+        <div class="layer-bulk-actions">
+         <button type="button" id="layerMergeButton" class="primary" disabled>選んだレイヤーを統合</button>
+         <button type="button" id="layerCancelSelectButton">キャンセル</button>
+        </div>
+       </div>
        <div id="layerList" class="layer-list" aria-label="抽出されたレイヤー"></div>
        <div class="layer-edit">
         <label for="layerName">選択レイヤー名</label>
@@ -80,7 +93,7 @@
         <button type="button" id="saveLayerButton" disabled>選択レイヤーを透過PNG保存</button>
         <button type="button" id="leaveLayersButton">画像効果モードに戻る</button>
        </div>
-       <p class="micro">「結果をPNG保存」で表示中の合成画像を保存。「単独」で領域だけ確認できる。全レイヤーを表示・不透明にすると、元画像をそのまま再現するよ。</p>
+       <p class="micro">「結果をPNG保存」で表示中の合成画像を保存。「単独」で領域だけ確認できる。「複数選択」から2枚以上を統合し、統合は3回まで戻せる。全レイヤーを表示・不透明にすると、元画像をそのまま再現するよ。</p>
       </div>
    </section>
    <section><div class="section-index">04 / NEXT</div><h2>次の実験候補</h2>
@@ -89,7 +102,7 @@
    </section>
  </aside>
 </main>
-<footer class="footer">Image Lab · 実験用PWA v0.4.1 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
-<script type="module" src="./assets/main-v0.4.1.js"></script>
+<footer class="footer">Image Lab · 実験用PWA v0.5.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
+<script type="module" src="./assets/main-v0.5.0.js"></script>
 </body>
 </html>

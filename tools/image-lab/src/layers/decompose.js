@@ -5,6 +5,7 @@
  * Keep only one full-size owner map rather than a full-size RGBA canvas per layer.
  */
 import {hasTone,toneRGB} from './tone.js';
+import {applyFxStacks} from './fx-stack.js';
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const dist=(r,g,b,c)=>{const x=r-c[0],y=g-c[1],z=b-c[2];return x*x*1.1+y*y*1.4+z*z*.8;};
 const hex=c=>'#'+c.map(v=>clamp(Math.round(v),0,255).toString(16).padStart(2,'0')).join('');
@@ -129,7 +130,11 @@ export function composeLayers(model,{soloIndex=-1,onlyIndex=-1,ignoreVisibility=
    const [r,g,b]=toneRGB(out[idx-3],out[idx-2],out[idx-1],layer.tone);
    out[idx-3]=r;out[idx-2]=g;out[idx-1]=b;
   }
-  if(!ignoreOpacity&&layer.opacity!==100)out[idx]=Math.round(out[idx]*layer.opacity/100);
+ }
+ applyFxStacks(out,model);
+ if(!ignoreOpacity)for(let p=0;p<owner.length;p++){
+  const idx=p*4+3,layer=layers[owner[p]];
+  if(out[idx]>0&&layer.opacity!==100)out[idx]=Math.round(out[idx]*layer.opacity/100);
  }
  return {width:w,height:h,data:out};
 }

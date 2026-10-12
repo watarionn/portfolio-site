@@ -2,6 +2,7 @@ import {segmentImage,composeLayers} from './decompose.js';
 import {mergeLayerModel,identicalComposite} from './merge.js';
 import {reorderLayers,strokeSegment,recalcLayerCounts,canStartPointerStroke} from './retouch.js';
 import {normalizedTone,applyToneToLayer,toneRGB} from './tone.js';
+import {FX_TYPES,updateLayerFx} from './fx-stack.js';
 const $=id=>document.getElementById(id);
 const named=(tag,className,text)=>{
  const el=document.createElement(tag);if(className)el.className=className;
@@ -15,9 +16,10 @@ export function createLayerLab({source,output,status,download,onLeave}){
  let active=false,model=null,selected=0,solo=-1,processing=false;
  let multi=false,picked=new Set(),merges=[];
  let brush=false,painting=null,brushChanged=false,lastPoint=null;
- let previewScheduled=false, toneDraft=null;
+ let previewScheduled=false, toneDraft=null, fxDraft=null;
  const toneSliders={brightness:$('layerBrightness'),contrast:$('layerContrast'),saturation:$('layerSaturation')};
  const toneApply=$('layerToneApply'),toneReset=$('layerToneReset');
+ const fxAdd=$('layerFxAdd'),fxKind=$('layerFxKind'),fxList=$('layerFxList');
  const ui=$('layerList'),section=$('layerResults'),meta=$('layerMeta');
  const nameInput=$('layerName'),opacity=$('layerOpacity'),opacityValue=$('layerOpacityValue');
  const saveSingle=$('saveLayerButton'),exit=$('leaveLayersButton'),start=$('decomposeButton');
@@ -39,7 +41,7 @@ export function createLayerLab({source,output,status,download,onLeave}){
  function reset(){
   active=false;model=null;selected=0;solo=-1;processing=false;
   multi=false;picked.clear();merges=[];painting=null;brush=false;brushChanged=false;lastPoint=null;
-  toneDraft=null;
+  toneDraft=null;fxDraft=null;
   output.classList.remove('brush-enabled');cursor.hidden=true;brushPanel.hidden=true;updateBulk();
   section.hidden=true;ui.replaceChildren();meta.textContent='';
   $('svgButton').disabled=true;
@@ -53,7 +55,9 @@ export function createLayerLab({source,output,status,download,onLeave}){
   if(!active||!model)return;
   const preview=toneDraft&&toneDraft.index===selected?
    applyToneToLayer(model,selected,toneDraft.value):model;
-  const image=composeLayers(preview,{soloIndex:solo});
+  const fxPreview=fxDraft&&fxDraft.layer===selected?
+   updateLayerFx(preview,selected,{type:'amount',position:fxDraft.position,amount:fxDraft.amount}):preview;
+  const image=composeLayers(fxPreview,{soloIndex:solo});
   if(output.width!==image.width||output.height!==image.height){
    output.width=image.width;output.height=image.height;
   }
@@ -108,7 +112,7 @@ export function createLayerLab({source,output,status,download,onLeave}){
   toneReset.disabled=!active||multi||brush||processing||!dirty;
  }
  function discardToneDraft(){
-  toneDraft=null;
+  toneDraft=null;fxDraft=null;
   if(model)updateToneControls();
  }
  function previewTone(){
@@ -128,8 +132,49 @@ export function createLayerLab({source,output,status,download,onLeave}){
   refreshRows();refreshSelection();updateBulk();
   status('選択したレイヤーの色調整を適用したよ。操作を1つ戻すで復元できる。');
  }
+ function renderFxRows(){
+  if(!model){fxList.replaceChildren();fxAdd.disabled=true;return;}
+  const safe=active&&!multi&&!brush&&!processing;
+  const stack=model.layers[selected].fx||[];
+  fxAdd.disabled=!safe||stack.length>=8;fxKind.disabled=!safe;
+  const rows=stack.map((fx,i)=>{
+   const row=named('div','fx-stack-row');
+   const caption=named('strong','fx-stack-caption',(i+1)+'. '+(FX_TYPES.find(f=>f.kind===fx.kind)?.label||fx.kind));
+   const toggle=named('button','layer-mini',fx.enabled?'ON':'OFF');
+   toggle.type='button';toggle.disabled=!safe;toggle.setAttribute('aria-label','効果の有効切替 '+caption.textContent);
+   toggle.setAttribute('aria-pressed',String(fx.enabled));
+   const upper=named('button','layer-mini','↑');upper.type='button';upper.disabled=!safe||i===0;upper.setAttribute('aria-label','FXを上へ');
+   const lower=named('button','layer-mini','↓');lower.type='button';lower.disabled=!safe||i===stack.length-1;lower.setAttribute('aria-label','FXを下へ');
+   const remove=named('button','layer-mini','削除');remove.type='button';remove.disabled=!safe;
+   const range=named('input','fx-strength');range.type='range';range.min='0';range.max='100';range.value=String(fx.amount);
+   range.disabled=!safe;range.setAttribute('aria-label',caption.textContent+' の強さ');
+   const value=named('output','fx-value',String(fx.amount));
+   const applyChange=change=>mutateFx(change);
+   toggle.addEventListener('click',()=>applyChange({type:'toggle',position:i}));
+   upper.addEventListener('click',()=>applyChange({type:'move',position:i,delta:-1}));
+   lower.addEventListener('click',()=>applyChange({type:'move',position:i,delta:1}));
+   remove.addEventListener('click',()=>applyChange({type:'delete',position:i}));
+   range.addEventListener('input',()=>{fxDraft={layer:selected,position:i,amount:Number(range.value)};value.textContent=range.value;scheduleDraw();});
+   range.addEventListener('change',()=>applyChange({type:'amount',position:i,amount:Number(range.value)}));
+   row.append(caption,toggle,upper,lower,remove,range,value);
+   return row;
+  });
+  fxList.replaceChildren(...rows);
+  if(!rows.length)fxList.append(named('p','micro','このレイヤーにはまだFXがありません。'));
+ }
+ function mutateFx(change){
+  if(!active||!model||multi||brush||processing)return;
+  discardToneDraft();
+  try{
+   const before=model,next=updateLayerFx(before,selected,change);
+   fxDraft=null;remember(before,selected);model=next;
+   refreshRows();refreshSelection();updateBulk();
+   status('レイヤーFXを更新しました。操作を1つ戻すで復元できます。');
+  }catch(e){fxDraft=null;status('FXの変更に失敗：'+(e?.message||String(e)));}
+ }
  function updateEditor(){
   if(model)updateToneControls();
+  renderFxRows();
   moveFront.disabled=!active||multi||brush||selected===0;
   moveBack.disabled=!active||multi||brush||!model||selected===model.layers.length-1;
   brushToggle.disabled=!active||multi||!model||model.layers.length<2;
@@ -277,7 +322,7 @@ export function createLayerLab({source,output,status,download,onLeave}){
    pick.append(makeThumbnail(i));
    const text=named('span','layer-caption');
    const label=named('strong','',layer.label);
-   const sub=named('small','',Math.round(100*layer.pixelCount/(model.width*model.height))+'% の画素');
+   const sub=named('small','',Math.round(100*layer.pixelCount/(model.width*model.height))+'% の画素'+(layer.fx?.length?' · FX '+layer.fx.length:''));
    text.append(label,sub);pick.append(text);
    pick.addEventListener('click',()=>{if(multi){togglePicked(i);return;}discardToneDraft();selected=i;refreshRows();refreshSelection();});
    const eye=named('button','layer-mini',layer.visible?'表示':'非表示');
@@ -409,6 +454,7 @@ export function createLayerLab({source,output,status,download,onLeave}){
   layer.opacity=Number(opacity.value);opacityValue.textContent=opacity.value+'%';
   scheduleDraw();
  });
+ fxAdd.addEventListener('click',()=>mutateFx({type:'add',kind:fxKind.value,amount:65}));
  for(const input of Object.values(toneSliders))input.addEventListener('input',previewTone);
  toneApply.addEventListener('click',applyTone);
  toneReset.addEventListener('click',()=>{discardToneDraft();scheduleDraw();});

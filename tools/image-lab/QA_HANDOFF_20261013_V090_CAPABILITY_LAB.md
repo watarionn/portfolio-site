@@ -30,3 +30,12 @@ This is a **working, incremental API research workbench**, not a claim of comple
 - Do not call excluded, unregistered or merely listed capabilities PASS.
 - Keep the release's source code and handoff in GitHub main. Save handoff to Google Drive only under 'chatGPT及びCodex用' if connected and authorized. Record final GitHub merge, upload readback, live HTTPS browser test below after completing them.
 - Local test harnesses: tests/e2e_capabilities.py and tests/e2e_onnx_wasm.py (Python, Selenium + Edge); set IMAGE_LAB_QA_URL to target URL.
+
+## Published production release (2026-10-13)
+- PR #197 squash-merged into main, exact commit `7afd572993307338ae7563976411603291843d02`.
+- Released to https://cf278796.cloudfree.jp/image-lab/ via certificate-verified FTPS, exactly 51 added/modified files from merged Git blobs; prior v0.8 files were retained, and new index.html and Service Worker uploaded last.
+- All 51 files downloaded again over live HTTPS and checked by SHA-256 against the exact merged Git blob bytes: **51/51 PASS**.
+- Re-ran the committed `tests/e2e_capabilities.py` against the live HTTPS URL: **61/61 direct API trials PASS** across 13 library categories; sample canvas remained unchanged. No horizontal overflow at 375/390/768 CSS pixels.
+- Re-ran committed `tests/e2e_onnx_wasm.py` against live HTTPS: **ONNX Runtime Web WASM 1/1 PASS**; WebGPU explicitly disabled in browser UI.
+- **Published candidate accepted by automation: 62/62 runnable trial cases PASS. User physical iPhone v0.9.0 acceptance: OPEN**. Earlier user confirmation is only for v0.8.0.
+- Library vendor public API coverage remains incomplete. This record is about precisely the 64 registered cases (62 runnable, 2 excluded), not every library method.

@@ -26,10 +26,14 @@
 - Version v0.7.0 deployed to https://cf278796.cloudfree.jp/image-lab/ through the existing certificate-verified FTPS path, uploading 17 changed/new Image Lab files in dependency-first order. Old hashed JS chunks and previous versioned assets were retained; no other application paths changed.
 - All 17 uploaded files were fetched back independently over live HTTPS and compared by SHA-256 against exact merged Git blobs: **17/17 PASS**.
 - Re-ran browser interaction tests against the real public HTTPS URL at 390×844, 375×667, 768×1024 and 1440×900: **4/4 PASS**, including live slider preview, apply, Undo, merge visual parity, original canvas unchanged, responsive sizing, and correct v0.7.0 footer.
-- **OPEN: user physical iPhone acceptance of this v0.7.0 release.** Desktop Edge mobile emulation does not replace that evidence.
+- **CLOSED: v0.7.0 physical iPhone acceptance, USER-CONFIRMED PASS on 2026-10-13 JST.** After public release, the user reported `iPhoneで確認できた！`. This is release-level hands-on acceptance; the conversation did not separately record a device trace or each individual checklist action. Desktop Edge simulation and HTTP readbacks are separate technical evidence.
 
 ## Release gate
 - Build outputs are versioned assets/main-v0.7.0.js and style-v0.7.0.css; Service Worker cache image-lab-v0.7.0. Old hashed assets must be retained for older cached clients.
 - Publish the committed Image Lab delta using the existing certificate-verified FTPS route. Verify HTTP SHA-256 of uploaded files against exact merged GitHub blobs.
-- Physical iPhone acceptance of v0.7.0 is a distinct **OPEN** gate; do not infer user approval from automated tests.
+- Physical iPhone acceptance of v0.7.0 is now **CLOSED** through explicit user confirmation; keep the manual checklist below as a reusable regression reference, not a claim of individually measured results.
 - Manual acceptance: in Layer Decomposer, select one layer, expand the tone controls, change sliders, see live preview, cancel preview, re-adjust and apply, Undo restores, merge with another layer and export PNG. Verify the ORIGINAL remains unmodified and the v0.6.2 result preview is still large on iPhone.
+
+## Closure (2026-10-13)
+- v0.7.0 per-layer tone adjustment: GitHub merge, production publication, automated regression, public HTTPS browser checks, and user-reported iPhone acceptance complete.
+- Next possible feature stages (spatial per-layer effects, persistent project files, overlapping compositor) require separate scope, implementation, and device validation.

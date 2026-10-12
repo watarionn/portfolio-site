@@ -21,6 +21,13 @@
   - Tested live canvas differences on slider input, Apply preview parity, Undo exact restoration, original canvas immutability, two-layer merge exact result, version label, and no horizontal overflow.
 - Browser simulation is **not** physical iPhone Safari evidence.
 
+## Published release and production checks (2026-10-13)
+- PR #195 squash-merged into main at commit f1b3cd934fb32b387a51f6fbeaa45cb82b21b46f.
+- Version v0.7.0 deployed to https://cf278796.cloudfree.jp/image-lab/ through the existing certificate-verified FTPS path, uploading 17 changed/new Image Lab files in dependency-first order. Old hashed JS chunks and previous versioned assets were retained; no other application paths changed.
+- All 17 uploaded files were fetched back independently over live HTTPS and compared by SHA-256 against exact merged Git blobs: **17/17 PASS**.
+- Re-ran browser interaction tests against the real public HTTPS URL at 390×844, 375×667, 768×1024 and 1440×900: **4/4 PASS**, including live slider preview, apply, Undo, merge visual parity, original canvas unchanged, responsive sizing, and correct v0.7.0 footer.
+- **OPEN: user physical iPhone acceptance of this v0.7.0 release.** Desktop Edge mobile emulation does not replace that evidence.
+
 ## Release gate
 - Build outputs are versioned assets/main-v0.7.0.js and style-v0.7.0.css; Service Worker cache image-lab-v0.7.0. Old hashed assets must be retained for older cached clients.
 - Publish the committed Image Lab delta using the existing certificate-verified FTPS route. Verify HTTP SHA-256 of uploaded files against exact merged GitHub blobs.

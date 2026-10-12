@@ -5,6 +5,7 @@ import rough from 'roughjs';
 import {Pt, Line} from 'pts';
 import paper from 'paper';
 import * as glfx from 'glfx';
+import {LIBRARY_ATLAS} from './library-atlas.js';
 
 const $=id=>document.getElementById(id);
 const source=$('source'), output=$('result');
@@ -372,4 +373,31 @@ window.addEventListener('dragover',event=>{event.preventDefault();});
 window.addEventListener('drop',event=>{event.preventDefault();if(event.dataTransfer?.files?.length)loadFile(event.dataTransfer.files[0]);});
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js',{scope:'./'}).catch(console.warn),{once:true});
 $('description').textContent=desc[$('effect').value];
+const researchSelect=$('libraryResearchSelect'),researchInfo=$('libraryResearchInfo'),researchTry=$('libraryResearchTry');
+for(const lib of LIBRARY_ATLAS){
+ const option=document.createElement('option');option.value=lib.name;option.textContent=lib.name;
+ researchSelect.append(option);
+}
+function refreshLibraryResearch(){
+ const lib=LIBRARY_ATLAS.find(item=>item.name===researchSelect.value);
+ if(!lib)return;
+ researchInfo.replaceChildren();
+ const intro=document.createElement('p');
+ intro.textContent=lib.mode?'代表モードは実行可能。以下は追加検証候補であり、全機能検証済みという意味ではありません。':
+ 'このライブラリの独立代表モードは未提供（または保留）です。';
+ const ul=document.createElement('ul');
+ for(const feature of lib.features){const li=document.createElement('li');li.textContent=feature+' · 個別検証待ち';ul.append(li);}
+ researchInfo.append(intro,ul);
+ researchTry.disabled=!lib.mode;
+}
+researchSelect.addEventListener('change',refreshLibraryResearch);
+researchTry.addEventListener('click',()=>{
+ const lib=LIBRARY_ATLAS.find(item=>item.name===researchSelect.value);
+ if(!lib?.mode)return;
+ if(layerController?.active()){setStatus('レイヤー編集中です。画像効果モードに戻ってから代表実験を試してね。');return;}
+ showControlView('effects');$('effect').value=lib.mode;
+ $('effect').dispatchEvent(new Event('change',{bubbles:true}));
+ $('effectSection').scrollIntoView({behavior:'smooth',block:'start'});
+});
+refreshLibraryResearch();
 paintSample();

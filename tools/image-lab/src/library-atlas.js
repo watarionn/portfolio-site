@@ -1,0 +1,17 @@
+export const LIBRARY_ATLAS=[
+ {name:"d3-voronoi",mode:"voronoi",features:["セル分割","クリッピング","隣接"]},
+ {name:"Delaunator",mode:"delaunay",features:["三角分割","halfedge","凸包","更新"]},
+ {name:"Earcut",mode:"earcut",features:["穴あきポリゴン","三角分割"]},
+ {name:"Pts.js",mode:"pts",features:["幾何","線","交差","アニメーション"]},
+ {name:"Rough.js",mode:"rough",features:["図形","手描きパターン","ラフ度"]},
+ {name:"Paper.js",mode:"paper",features:["パス","boolean演算","レイヤー","ラスタ","SVG"]},
+ {name:"glfx.js",mode:"glfx",features:["色調","ぼかし","網点","歪み","輪郭"]},
+ {name:"p5.js",mode:"p5",features:["フィルター","描画","マスク","シェーダー"]},
+ {name:"PixiJS",mode:"pixi",features:["フィルター","スプライト","合成","ブレンド"]},
+ {name:"SVGPathCommander",mode:"svgpath",features:["パス最適化","曲線変換","座標変換"]},
+ {name:"SVGO",mode:"svgo",features:["SVG最適化","プラグイン","属性削減"]},
+ {name:"VTracer WASM",mode:"vtracer",features:["カラー","二値トレース","ベクター化"]},
+ {name:"Clipper2-WASM",mode:"clipper",features:["クリップ","合成","Offset","穴"]},
+ {name:"ONNX Runtime Web",mode:null,features:["WASM","意味分離","軽量モデル推論"]},
+ {name:"Trianglify",mode:null,features:["三角形模様","seed","palette","gradient（ライセンス保留）"]},
+];

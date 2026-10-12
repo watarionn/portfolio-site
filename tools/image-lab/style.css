@@ -111,3 +111,13 @@
 .layer-tone-range label{display:flex;justify-content:space-between;gap:8px}
 .layer-tone-range output{font-variant-numeric:tabular-nums;color:var(--accent)}
 .layer-tone-range input[type=range]{width:100%;margin:0;accent-color:var(--accent);min-height:30px}
+/* v0.8 compact layer FX stack and research atlas */
+.fx-stack-list{display:grid;gap:8px;margin:12px 0}
+.fx-stack-row{display:grid;grid-template-columns:minmax(0,1fr) repeat(4,auto);align-items:center;gap:5px;padding:8px 0;border-top:1px solid var(--rule)}
+.fx-stack-caption{font-size:12px;min-width:0}
+.controls .fx-stack-row .layer-mini{font-size:11px;min-width:32px;padding:8px 4px;min-height:34px}
+.fx-stack-row .fx-strength{grid-column:1/5;width:100%;min-height:36px;margin:0}
+.fx-stack-row .fx-value{text-align:right;min-width:2ch;font-variant-numeric:tabular-nums}
+.library-research-info{font-size:12px;line-height:1.55;margin:10px 0}
+.library-research-info ul{padding-left:20px;margin:8px 0}
+@media(max-width:480px){.fx-stack-row{gap:3px}}

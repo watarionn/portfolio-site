@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style-v0.7.0.css">
+<link rel="stylesheet" href="./style-v0.8.0.css">
 </head>
 <body>
 <header class="site-header">
@@ -107,6 +107,20 @@
           <button type="button" id="layerToneReset" disabled>調整を元に戻す</button>
          </div>
         </details>
+        <details id="layerStackDetails" class="layer-tone">
+         <summary>選択レイヤーの画像効果スタック</summary>
+         <p class="micro">元画像は不変。FXは上から順番に適用し、8個まで。各操作は「操作を1つ戻す」に記録されます。</p>
+         <label for="layerFxKind">追加する効果</label>
+         <select id="layerFxKind">
+          <option value="invert">色反転</option><option value="grayscale">グレースケール</option>
+          <option value="posterize">ポスタライズ</option><option value="threshold">二値化</option>
+          <option value="mosaic">モザイク</option><option value="blur">ぼかし</option>
+          <option value="halftone">網点</option><option value="edges">エッジ強調</option>
+         </select>
+         <button type="button" id="layerFxAdd">選択レイヤーにFXを追加</button>
+         <div id="layerFxList" class="fx-stack-list" aria-label="選択レイヤーのFX順序"></div>
+         <p class="micro">FXはImage Lab独自のCPU処理。外部ライブラリ自体の実行テストは別の実験台で管理します。</p>
+        </details>
         <button type="button" id="layerBrushToggle">境界修正を開始</button>
         <div id="layerBrushPanel" class="layer-brush-panel" hidden>
          <p class="micro">上の「実験結果」画像を指でなぞります。元の画素を別レイヤーへ割り当て直し、描き足しはしません。</p>
@@ -124,13 +138,19 @@
        <p class="micro">「結果をPNG保存」で表示中の合成画像を保存。「単独」で領域だけ確認できる。「複数選択」から2枚以上を統合し、統合・並び替え・境界修正を5回まで戻せる。全レイヤーを表示・不透明にすると、元画像をそのまま再現するよ。</p>
       </div>
    </section>
+   <details id="libraryResearch" class="about-tools"><summary>Library Explorer · 各ライブラリの実験項目</summary>
+      <label for="libraryResearchSelect">ライブラリ</label><select id="libraryResearchSelect"></select>
+      <div id="libraryResearchInfo" class="library-research-info"></div>
+      <button type="button" id="libraryResearchTry">既存の代表実験を開く</button>
+      <p class="micro">未検証のAPIも一覧化。利用できない処理を実装済みと表示しません。</p>
+   </details>
    <details class="about-tools"><summary>この実験室について</summary>
-      <p class="explain">Trianglifyはライセンス確認中。空間フィルターのレイヤー別適用や、編集履歴の永続保存は今後の候補。</p>
+      <p class="explain">Trianglifyはライセンス確認中。外部ライブラリごとの全API検証と、編集履歴の永続保存は段階的に進めます。</p>
       <p class="micro">画像はブラウザ内のみ。実験結果の最大サイズは長辺1,200px。PNGと、ベクター対応モードではSVGを保存できる。</p>
    </details>
  </aside>
 </main>
-<footer class="footer">Image Lab · 実験用PWA v0.7.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
-<script type="module" src="./assets/main-v0.7.0.js"></script>
+<footer class="footer">Image Lab · 実験用PWA v0.8.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
+<script type="module" src="./assets/main-v0.8.0.js"></script>
 </body>
 </html>

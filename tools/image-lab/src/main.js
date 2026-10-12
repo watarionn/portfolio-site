@@ -8,6 +8,26 @@ import * as glfx from 'glfx';
 
 const $=id=>document.getElementById(id);
 const source=$('source'), output=$('result');
+const controls=document.querySelector('.controls');
+function showControlView(view){
+  if(view!=='effects'&&view!=='layers')throw Error('Unknown Image Lab control view');
+  if(view==='effects'&&layerController?.active()){
+    $('modeHint').hidden=false;
+    return;
+  }
+  $('modeHint').hidden=true;
+  controls.dataset.view=view;
+  $('effectViewButton').setAttribute('aria-pressed',String(view==='effects'));
+  $('layersViewButton').setAttribute('aria-pressed',String(view==='layers'));
+}
+$('effectViewButton').addEventListener('click',()=>showControlView('effects'));
+$('layersViewButton').addEventListener('click',()=>showControlView('layers'));
+$('sourceExpandButton').addEventListener('click',()=>{
+  const preview=$('comparePreview'),expanded=preview.classList.toggle('source-expanded');
+  $('sourceExpandButton').setAttribute('aria-expanded',String(expanded));
+  $('sourceExpandButton').textContent=expanded?'元画像を縮小':'元画像を拡大';
+});
+
 const srcCtx=source.getContext('2d',{willReadFrequently:true});
 const status=$('status'), svgButton=$('svgButton'), pngButton=$('pngButton');
 const desc={
@@ -34,7 +54,7 @@ async function showDecomposer(){
  if(!layerController){
   const {createLayerLab}=await import('./layers/ui.js');
   layerController=createLayerLab({source,output,status:setStatus,
-   download:downloadBlob,onLeave:()=>{updateStackUI();queueRender();}});
+   download:downloadBlob,onLeave:()=>{showControlView('effects');updateStackUI();queueRender();}});
  }
  return layerController;
 }

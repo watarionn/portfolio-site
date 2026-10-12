@@ -1,4 +1,4 @@
-# Image Lab v0.6.1 / 独立した画像実験PWA
+# Image Lab v0.6.2 / 独立した画像実験PWA
 
 Minimalizer / MinimalizerPublic、既存の画像仕立て室から独立している。
 画像はアップロードされず、すべてブラウザ内で扱う。元画像の破壊的編集、AIによる描き足しは行わない。
@@ -93,3 +93,10 @@ ONNX Runtime Web module is served from assets/ort/ort-wasm-simd-threaded-loader.
 - Every edited pixel receives its original uploaded RGBA, changing only membership; no invented pixels. Original uploaded image canvas is not modified. A stroke commits on pointer-up. Pointer cancellation rolls back.
 - Unified maximum 5 in-memory Undo steps for merge, reorder, and brush strokes. Reopening/resetting the editor clears edits.
 - Browser-only and touch friendly; editing on the result canvas requires viewing the result image at a usable size.
+
+## v0.6.2 Mobile Preview & Compact Controls
+- スマートフォンやタブレット（幅930px以下）では RESULT を先に横幅いっぱいに表示。ORIGINAL は112pxの比較サムネイルにし、必要なときだけ展開できる。
+- 「画像効果」「レイヤー分解」は切り替え式で、無関係な長い設定を同時に並べない。編集中のレイヤーをタブ操作だけで破棄しない。
+- 元画像と結果のRGBA、各エフェクト・レイヤーの演算、エクスポート形式は不変更。CSSと操作導線のみ変更。
+- 390pxと375px相当のEdge端末エミュレーションで結果幅360px/345px、元画像サムネイル幅110px、横スクロール無し。切り替え・色分解・復帰を確認。
+- iPhone Safari物理実機でのv0.6.2受入は、本番公開後の別ゲート。

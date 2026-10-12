@@ -29,14 +29,14 @@ async function vtracer(){
  })().catch(err=>{vtracerPromise=null;throw err;});
  return vtracerPromise;
 }
-export async function renderVTracer({ctx,source,image,detail,weight,seed}){
+export async function renderVTracer({ctx,source,image,detail,weight,seed,variant='color'}){
  const mod=await vtracer(),w=image.width,h=image.height,k=Math.min(1,maxSide/Math.max(w,h));
  const sw=Math.max(1,Math.round(w*k)),sh=Math.max(1,Math.round(h*k));
  const c=document.createElement('canvas');c.width=sw;c.height=sh;
  const temp=c.getContext('2d',{willReadFrequently:true});
  temp.drawImage(source,0,0,sw,sh);
  const pixels=new Uint8Array(temp.getImageData(0,0,sw,sh).data);
- const options={...traceOptions,colorPrecision:clamp(Math.floor(3+detail/16),3,8),
+ const options={...traceOptions,binary:variant==='binary',colorPrecision:clamp(Math.floor(3+detail/16),3,8),
   filterSpeckle:clamp(Math.floor(12-weight/11),1,12),
   lengthThreshold:clamp(Math.floor(10-detail/15),2,10)};
  const traced=cleanSvg(mod.to_svg(pixels,sw,sh,options));
@@ -60,14 +60,17 @@ async function clipper(){
  return clipperPromise;
 }
 const scale=16;
-function intersectPolygon(mod,a,b){
+function intersectPolygon(mod,a,b,variant='intersection'){
  const pathsA=new mod.Paths64(),pathsB=new mod.Paths64();
  let sol;
  try{
   const p1=mod.MakePath64(a.flatMap(p=>p.map(v=>Math.round(v*scale))));
   const p2=mod.MakePath64(b.flatMap(p=>p.map(v=>Math.round(v*scale))));
   try{pathsA.push_back(p1);pathsB.push_back(p2);}finally{p1.delete();p2.delete();}
-  sol=mod.Intersect64(pathsA,pathsB,mod.FillRule.EvenOdd);
+  const ops={intersection:'Intersect64',union:'Union64',difference:'Difference64',xor:'Xor64'};
+  const method=ops[variant];
+  if(!method||typeof mod[method]!=='function')throw Error('このWASMビルドでは '+variant+' は未対応');
+  sol=mod[method](pathsA,pathsB,mod.FillRule.EvenOdd);
   const rings=[];
   for(let i=0;i<Math.min(sol.size(),8);i++){
    const path=sol.get(i);
@@ -84,7 +87,7 @@ function sampled(image,x,y){
  const ix=clamp(Math.floor(x),0,image.width-1),iy=clamp(Math.floor(y),0,image.height-1),i=(iy*image.width+ix)*4;
  return '#'+[image.data[i],image.data[i+1],image.data[i+2]].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
-export async function renderClipper({ctx,source,image,detail,weight,seed}){
+export async function renderClipper({ctx,source,image,detail,weight,seed,variant='intersection'}){
  const mod=await clipper(),w=image.width,h=image.height,cols=clamp(Math.floor(3+detail/10),4,13);
  const step=w/cols,rows=Math.ceil(h/step),paths=[];
  ctx.fillStyle='#f3ede4';ctx.fillRect(0,0,w,h);
@@ -94,7 +97,7 @@ export async function renderClipper({ctx,source,image,detail,weight,seed}){
   const square=[[x,y],[x+step,y],[x+step,y+step],[x,y+step]];
   const rad=step*(.55+weight*.0025),angle=(seed+i+j)*Math.PI/31;
   const ngon=Array.from({length:5},(_,k)=>[cx+rad*Math.cos(angle+k*Math.PI*2/5),cy+rad*Math.sin(angle+k*Math.PI*2/5)]);
-  const rings=intersectPolygon(mod,square,ngon);
+  const rings=intersectPolygon(mod,square,ngon,variant);
   const color=sampled(image,cx,cy);
   for(const ring of rings){
    ctx.beginPath();ctx.moveTo(...ring[0]);

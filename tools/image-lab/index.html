@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style-v0.8.0.css">
+<link rel="stylesheet" href="./style-v0.9.0.css">
 </head>
 <body>
 <header class="site-header">
@@ -144,13 +144,31 @@
       <button type="button" id="libraryResearchTry">既存の代表実験を開く</button>
       <p class="micro">未検証のAPIも一覧化。利用できない処理を実装済みと表示しません。</p>
    </details>
+   <details id="capabilityLab" class="about-tools">
+      <summary>Capability Lab · ライブラリのAPIを実行して試す</summary>
+      <p class="micro">15ライブラリの実験対象を記録。実行前は未実行、成功時だけPASSと表示します。元画像は変更しません。</p>
+      <p id="capTotal" class="micro"></p>
+      <label for="capLibrary">ライブラリ</label><select id="capLibrary"></select>
+      <label for="capCapability">試す機能</label><select id="capCapability"></select>
+      <div class="layer-bulk-actions">
+       <button type="button" id="capRun" class="primary">このAPIを試す</button>
+       <button type="button" id="capRunAll">このライブラリを順に試す</button>
+      </div>
+      <p id="capStatus" role="status" class="micro"></p>
+      <canvas id="capCanvas" class="cap-preview" hidden></canvas>
+      <img id="capSvg" class="cap-preview" alt="SVG実験結果" hidden />
+      <pre id="capJson" class="cap-json" hidden></pre>
+      <div id="capHistory" class="cap-history" aria-label="機能ごとの実行結果"></div>
+      <button type="button" id="capExport" disabled>結果ログをJSONで保存</button>
+      <p class="micro">重いモデル/WASMは選択時だけ読み込み。未対応とライセンス保留は実行しません。</p>
+   </details>
    <details class="about-tools"><summary>この実験室について</summary>
       <p class="explain">Trianglifyはライセンス確認中。外部ライブラリごとの全API検証と、編集履歴の永続保存は段階的に進めます。</p>
       <p class="micro">画像はブラウザ内のみ。実験結果の最大サイズは長辺1,200px。PNGと、ベクター対応モードではSVGを保存できる。</p>
    </details>
  </aside>
 </main>
-<footer class="footer">Image Lab · 実験用PWA v0.8.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
-<script type="module" src="./assets/main-v0.8.0.js"></script>
+<footer class="footer">Image Lab · 実験用PWA v0.9.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
+<script type="module" src="./assets/main-v0.9.0.js"></script>
 </body>
 </html>

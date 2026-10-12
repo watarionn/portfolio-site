@@ -4,6 +4,7 @@
  * Every original pixel belongs to exactly one layer. No generative filling.
  * Keep only one full-size owner map rather than a full-size RGBA canvas per layer.
  */
+import {hasTone,toneRGB} from './tone.js';
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 const dist=(r,g,b,c)=>{const x=r-c[0],y=g-c[1],z=b-c[2];return x*x*1.1+y*y*1.4+z*z*.8;};
 const hex=c=>'#'+c.map(v=>clamp(Math.round(v),0,255).toString(16).padStart(2,'0')).join('');
@@ -123,8 +124,12 @@ export function composeLayers(model,{soloIndex=-1,onlyIndex=-1,ignoreVisibility=
   const id=owner[p],layer=layers[id],idx=p*4+3;
   const visible=(onlyIndex<0||id===onlyIndex)&&(soloIndex<0||id===soloIndex)&&
     (ignoreVisibility||id===soloIndex||layer.visible);
-  if(!visible)out[idx]=0;
-  else if(!ignoreOpacity&&layer.opacity!==100)out[idx]=Math.round(out[idx]*layer.opacity/100);
+  if(!visible){out[idx]=0;continue;}
+  if(out[idx]>0&&hasTone(layer.tone)){
+   const [r,g,b]=toneRGB(out[idx-3],out[idx-2],out[idx-1],layer.tone);
+   out[idx-3]=r;out[idx-2]=g;out[idx-1]=b;
+  }
+  if(!ignoreOpacity&&layer.opacity!==100)out[idx]=Math.round(out[idx]*layer.opacity/100);
  }
  return {width:w,height:h,data:out};
 }

@@ -23,3 +23,14 @@
 .layer-edit label:has(output){display:flex;justify-content:space-between}
 .muted-section{opacity:.55}
 .canvas-frame:has(#result){background-color:#eee8dd;background-image:linear-gradient(45deg,#d8cfc1 25%,transparent 25%),linear-gradient(-45deg,#d8cfc1 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d8cfc1 75%),linear-gradient(-45deg,transparent 75%,#d8cfc1 75%);background-size:24px 24px;background-position:0 0,0 12px,12px -12px,-12px 0}
+
+/* Image Lab v0.5 Layer Merge */
+.layer-bulk-header{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.controls .layer-bulk-header button{width:100%;margin:0;min-height:44px}
+.layer-bulk-controls{padding:10px 12px 13px;border:1px solid var(--rule);margin-bottom:12px;background:#f7f0e6}
+.layer-bulk-controls input[type=text]{width:100%;min-height:44px;margin:0 0 10px;padding:9px 11px;border:1px solid #b8aa9b;background:#fffdf9}
+.layer-bulk-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.controls .layer-bulk-actions button{min-height:44px;width:100%;margin:0}
+.layer-row.is-picked{background:#e8e1d1}
+.layer-row .layer-checkbox{flex:0 0 22px;width:22px;height:22px;margin:4px 5px;accent-color:var(--accent)}
+.layer-row .layer-pick{min-height:44px}

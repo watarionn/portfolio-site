@@ -78,3 +78,10 @@ v0.3.0でService Workerの事前キャッシュ一覧だけ旧v0.2.0のJS/CSSク
  
 ## v0.4.1 Cloudfree runtime fix 
 ONNX Runtime Web module is served from assets/ort/ort-wasm-simd-threaded-loader.js, an identical copy of the upstream .mjs file, because the production nginx host does not serve a JavaScript Content-Type for .mjs. wasmPaths explicitly maps mjs and wasm. No vendor code modifications.
+
+## v0.5 Layer Merge
+- Choose two or more Color or Semantic layers via multi-selection, optionally name the merged output.
+- Image Lab uses disjoint pixel ownership. The selected layer visibility and opacity are baked into pixel alpha. Unselected layers are unchanged; the original input canvas is never mutated.
+- The merged composite is pixel-identical to the visible composite before the operation. Layer name, visibility, opacity and transparent PNG export work after merging.
+- Up to three in-memory merge undo steps. History does not survive a refresh.
+- Solo display resets on entering multiple selection. Hidden layers can be selected, but their hidden pixels are baked transparent.

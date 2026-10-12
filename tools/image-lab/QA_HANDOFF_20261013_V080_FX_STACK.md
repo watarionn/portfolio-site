@@ -21,6 +21,14 @@
 - Automatic tests cover every effect, alpha invariance, source/owner immutability, neutral/disabled effects, order and move/delete/toggle APIs, merge parity, reorder, invalid input and max-eight cap.
 - Browser tests are **not** physical iPhone Safari acceptance.
 
+## Published release and verification (2026-10-13)
+- PR #196 squash-merged to main at 225dbd3bfdbca237989a49cf08bc9a29b7a381e4.
+- v0.8.0 production deployed by certificate-verified FTPS to https://cf278796.cloudfree.jp/image-lab/.
+- Exact merged Git blob bytes of 18 changed/new Image Lab files compared against no-cache production HTTPS reads: **18/18 SHA-256 PASS**.
+- Old v0.7 app shell and hash chunks remain reachable. Only Image Lab paths were uploaded, new shell HTML and Service Worker published last.
+- Production browser end-to-end at 390x844, 375x667, 768x1024 and 1440x900: **4/4 PASS**. Tests cover FX add/preview/toggle/Undo/merge, unchanged source, no horizontal overflow, and v0.8.0 footer.
+- **OPEN: physical iPhone Safari acceptance of v0.8.0**. Do not infer from desktop browser emulation.
+
 ## Release/next steps
 - GitHub PR/merge, FTPS deployment, HTTP byte-for-byte readback and remote QA handoff update should be recorded below after verification.
 - Physical iPhone confirmation is **OPEN** until user says they confirmed v0.8.0.

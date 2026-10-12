@@ -5,7 +5,7 @@ const get=path=>readFile(new URL(path,import.meta.url),'utf8');
 test('release script/style paths are exact filenames distinct from v0.3 cache',async()=>{
  const [page,worker,pack]=await Promise.all([get('../index.html'),get('../service-worker.js'),get('../package.json')]);
  const version=JSON.parse(pack).version;
- assert.equal(version,'0.6.1');
+ assert.equal(version,'0.6.2');
  const js='assets/main-v'+version+'.js',css='style-v'+version+'.css';
  assert.ok(page.includes('./'+js));
  assert.ok(page.includes('./'+css));

@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style-v0.6.1.css">
+<link rel="stylesheet" href="./style-v0.6.2.css">
 </head>
 <body>
 <header class="site-header">
@@ -21,16 +21,18 @@
 <main class="layout">
  <section class="workspace" aria-label="画像比較">
    <div class="workspace-top"><h2>プレビュー</h2><span id="meta" aria-live="polite">ローカル処理・アップロードなし</span></div>
-   <div class="compare">
-     <figure><figcaption>ORIGINAL / 元画像</figcaption><div class="canvas-frame"><canvas id="source" width="512" height="512" aria-label="元画像"></canvas></div></figure>
-     <figure><figcaption>RESULT / 実験結果</figcaption><div class="canvas-frame"><canvas id="result" width="512" height="512" aria-label="実験結果"></canvas><div id="brushCursor" class="brush-cursor" hidden aria-hidden="true"></div></div></figure>
+   <div class="compare" id="comparePreview">
+     <figure class="original-preview"><figcaption>ORIGINAL / 元画像 <button type="button" id="sourceExpandButton" class="preview-toggle" aria-expanded="false">元画像を拡大</button></figcaption><div class="canvas-frame"><canvas id="source" width="512" height="512" aria-label="元画像"></canvas></div></figure>
+     <figure class="result-preview"><figcaption>RESULT / 実験結果</figcaption><div class="canvas-frame"><canvas id="result" width="512" height="512" aria-label="実験結果"></canvas><div id="brushCursor" class="brush-cursor" hidden aria-hidden="true"></div></div></figure>
    </div>
    <div class="workspace-footer">
      <p id="status" role="status" aria-live="polite">作例を使って、好きなライブラリを試してみて。</p>
      <div class="file-actions"><button type="button" id="pngButton">結果をPNG保存</button><button type="button" id="svgButton" disabled>SVG保存</button></div>
    </div>
  </section>
- <aside class="controls">
+ <aside class="controls" data-view="effects">
+   <div class="mode-switch" role="group" aria-label="編集モード"><button type="button" id="effectViewButton" aria-pressed="true">画像効果</button><button type="button" id="layersViewButton" aria-pressed="false">レイヤー分解</button></div>
+   <p id="modeHint" class="mode-hint" role="status" hidden>レイヤー編集中です。下の「画像効果モードに戻る」から編集を終了できます。</p>
    <section id="effectSection"><div class="section-index">01 / EXPERIMENT</div><h2>何を試す？</h2><label for="effect">ライブラリと効果</label><select id="effect">
       <optgroup label="幾何学"><option value="voronoi">d3-voronoi ・ 色の領域分割</option><option value="delaunay">Delaunator ・ 低ポリゴン</option><option value="earcut">Earcut ・ 穴あきタイル</option><option value="pts">Pts.js ・ 点と線のネットワーク</option></optgroup>
       <optgroup label="描画と加工"><option value="rough">Rough.js ・ 手描き風</option><option value="paper">Paper.js ・ ベクタータイル</option><option value="glfx">glfx.js ・ GPUフィルター</option>
@@ -96,7 +98,7 @@
         </div>
         <button type="button" id="layerBrushToggle">境界修正を開始</button>
         <div id="layerBrushPanel" class="layer-brush-panel" hidden>
-         <p class="micro">プレビューの右側「結果画像」を指でなぞります。元の画素を別レイヤーへ割り当て直し、描き足しはしません。</p>
+         <p class="micro">上の「実験結果」画像を指でなぞります。元の画素を別レイヤーへ割り当て直し、描き足しはしません。</p>
          <label for="layerBrushMode">操作</label>
          <select id="layerBrushMode"><option value="add">選択レイヤーへ追加</option><option value="remove">選択レイヤーから除外</option></select>
          <label for="layerBrushTarget">除外先レイヤー</label>
@@ -111,13 +113,13 @@
        <p class="micro">「結果をPNG保存」で表示中の合成画像を保存。「単独」で領域だけ確認できる。「複数選択」から2枚以上を統合し、統合・並び替え・境界修正を5回まで戻せる。全レイヤーを表示・不透明にすると、元画像をそのまま再現するよ。</p>
       </div>
    </section>
-   <section><div class="section-index">04 / NEXT</div><h2>次の実験候補</h2>
+   <details class="about-tools"><summary>この実験室について</summary>
       <p class="explain">Trianglifyはライセンス確認中。レイヤー別エフェクトや編集履歴の永続保存は今後の候補。</p>
       <p class="micro">画像はブラウザ内のみ。実験結果の最大サイズは長辺1,200px。PNGと、ベクター対応モードではSVGを保存できる。</p>
-   </section>
+   </details>
  </aside>
 </main>
-<footer class="footer">Image Lab · 実験用PWA v0.6.1 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
-<script type="module" src="./assets/main-v0.6.1.js"></script>
+<footer class="footer">Image Lab · 実験用PWA v0.6.2 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
+<script type="module" src="./assets/main-v0.6.2.js"></script>
 </body>
 </html>

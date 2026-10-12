@@ -1,6 +1,6 @@
 import {segmentImage,composeLayers} from './decompose.js';
 import {mergeLayerModel,identicalComposite} from './merge.js';
-import {reorderLayers,strokeSegment,recalcLayerCounts} from './retouch.js';
+import {reorderLayers,strokeSegment,recalcLayerCounts,canStartPointerStroke} from './retouch.js';
 const $=id=>document.getElementById(id);
 const named=(tag,className,text)=>{
  const el=document.createElement(tag);if(className)el.className=className;
@@ -178,7 +178,8 @@ export function createLayerLab({source,output,status,download,onLeave}){
   cursor.style.left=event.clientX+'px';cursor.style.top=event.clientY+'px';
  }
  function startStroke(event){
-  if(!brush||!model||multi||processing||event.button>0)return;
+  if(!brush||!model||multi||processing||event.button>0||
+     !canStartPointerStroke(painting?.pointerId??null,event))return;
   const at=imagePoint(event);
   if(!at.inside)return;
   const original=source.getContext('2d',{willReadFrequently:true})

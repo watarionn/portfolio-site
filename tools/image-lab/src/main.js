@@ -29,6 +29,8 @@ let sourceName='sample', vectorSvg='', inProgress=false, pending=false, debounce
 let layerController=null;
 async function showDecomposer(){
  if(inProgress)throw Error('画像効果の処理が終わってから分解してね。');
+ // Cancel a pending image-effect redraw before asynchronous semantic inference.
+ clearTimeout(debounce);pending=false;
  if(!layerController){
   const {createLayerLab}=await import('./layers/ui.js');
   layerController=createLayerLab({source,output,status:setStatus,

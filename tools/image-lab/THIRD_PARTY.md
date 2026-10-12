@@ -47,3 +47,5 @@ JavaScript dependencies are pinned in package-lock.json, compiled to assets/main
 - assets/models/segformer-b0-clothes-int8.onnx SHA256 4f9d3e4fcf3e0b677ee0cf9810ebccdc7f478f9c69a60d38267bad598799ef73
 - assets/ort/ort-wasm-simd-threaded.wasm SHA256 3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2
 - assets/ort/ort-wasm-simd-threaded.mjs SHA256 e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b
+
+- v0.4.1 production compatibility: assets/ort/ort-wasm-simd-threaded-loader.js is a byte-identical, unmodified copy of ort-wasm-simd-threaded.mjs under a .js URL so the Cloudfree nginx host serves the module with a valid JavaScript Content-Type. SHA256 e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b

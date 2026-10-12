@@ -63,3 +63,15 @@ v0.3.0でService Workerの事前キャッシュ一覧だけ旧v0.2.0のJS/CSSク
 （3）二度目の合成クリックを使わない単一の非同期click操作への変更。
 古いSWから切り替わる初回読み込みでも、旧キャッシュにないパスを要求するので利用できる。
 回帰テストでは旧SWの事前キャッシュがある状態から新版へ更新する。
+
+## v0.4 Semantic Layers Beta
+
+- 分解方法に「AI意味分離」を追加。写真人物の背景・髪・顔・服の上下・ドレス・腕・脚・靴・帽子・小物を解析。
+- ONNX Runtime Web（WASM 1スレッド）とMITライセンスの SegFormer-B0 clothes ONNX INT8を自己ホスト。
+- モデルID：Xenova/segformer_b0_clothes、リビジョン：a2489ea8e7ec1ee912190546bad31a4906ccca76。
+- 元モデル：mattmdjaga/segformer_b0_clothes、ライセンスMIT。確認：https://huggingface.co/mattmdjaga/segformer_b0_clothes。
+- 質量約4.4 MBモデルと約14 MB WASMは初回のAI操作時だけ遅延読込。
+- 256x256 RGB入力、ImageNet正規化、18 logits argmax、各ピクセルを一意の意味レイヤーに割り当てる。
+- 全表示の再合成は元画像のRGBAと一致。内容生成・塗り足し無し。人物が検出されなければ色・領域分解に戻す。
+- 写真向けチェックポイントであり、アニメイラスト・複数人物・ポーズ・複雑背景は精度保証しない。
+- WASMとモデルは画像をサーバに送信せず、同一サイトから配信する。オフライン初回AI推論は不可。

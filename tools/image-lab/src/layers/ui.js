@@ -132,18 +132,34 @@ export function createLayerLab({source,output,status,download,onLeave}){
    const src=source.getContext('2d',{willReadFrequently:true})
      .getImageData(0,0,source.width,source.height);
    const groups=Number($('layerDetail').value);
-   const next=segmentImage(src,{colorGroups:groups});
+   const mode=$('layerMode').value;
+   let next;
+   if(mode==='semantic'){
+    const {segmentSemantic}=await import('./semantic.js');
+    next=await segmentSemantic(source,{progress:status});
+    if(!next){
+     status('人物を認識できなかったため、色・領域で分解します…');
+     next=segmentImage(src,{colorGroups:groups});
+    }
+   }else{
+    next=segmentImage(src,{colorGroups:groups});
+   }
    model=next;selected=0;solo=-1;active=true;
    lockEffects(true);section.hidden=false;
-   meta.textContent=next.layers.length+'レイヤー・'+next.groupsFound+'領域候補・'+next.sampleWidth+'×'+next.sampleHeight+'の解析';
+   meta.textContent=(next.method==='semantic'?'AI意味分離 · ':'色・領域分解 · ')+next.layers.length+'レイヤー・'+next.groupsFound+'領域候補・'+next.sampleWidth+'×'+next.sampleHeight+'の解析';
    refreshRows();refreshSelection();
-   status('レイヤー分解完了。'+next.layers.length+'枚に分離したよ。各領域の表示・透明度・個別PNG保存を試してね。');
+   status((next.method==='semantic'?'AI意味分離':'色分解')+'完了。'+next.layers.length+'枚のレイヤーを作成したよ。');
   }catch(e){
    active=false;section.hidden=true;lockEffects(false);
    status('レイヤー分解に失敗：'+(e?.message||String(e)));
   }finally{processing=false;start.disabled=false;}
  }
 
+ $('layerMode').addEventListener('change',()=>{
+   const ai=$('layerMode').value==='semantic';
+   $('layerDetail').disabled=ai;
+   start.textContent=ai?'AIで人物・髪・服を分ける':'元画像をレイヤー分解';
+ });
  exit.addEventListener('click',leave);
  nameInput.addEventListener('change',applyName);
  nameInput.addEventListener('blur',applyName);

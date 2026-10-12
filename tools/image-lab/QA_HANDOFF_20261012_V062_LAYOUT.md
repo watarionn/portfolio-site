@@ -23,6 +23,13 @@
   - Source expand/collapse, Effects -> Layers, color decomposition, effects-mode guard during live editing, exit editor -> effects PASS.
 - Browser emulation is **not** a physical iPhone Safari test.
 
+## Release and live verification result (2026-10-12)
+- PR #194 merged to `main` as commit `3b1b9ace925a0d145688d1edff33b6d3032f6f53`.
+- Production updated through the existing certificate-verified FTPS pathway; 13 changed Image Lab files uploaded in dependency-first order with `index.html` and `service-worker.js` last. No remote assets were removed and no other app routes were changed.
+- Source blob bytes from that **exact main commit** compared to public HTTPS responses: **13/13 SHA-256 PASS**. Old lazy-load hashed chunk was checked accessible before cutover.
+- Public HTTPS browser runtime tested in headless Edge at 390×844, 375×667, 768×1024, 1440×900: **4/4 PASS**, no horizontal overflow; correct version `v0.6.2`, result widths 360/345/738 CSS px; source expand/collapse, two control tabs, color decomposition, loss-prevention while editing, and editor exit PASS.
+- **OPEN: Physical iPhone Safari acceptance of v0.6.2**. Browser device emulation is not user confirmation.
+
 ## Release checklist
 1. Read back v0.6.2 build and source from the exact branch/merge commit.
 2. Merge only after tests pass, then deploy the reviewed Image Lab delta using the existing credential-verified FTPS route.

@@ -103,3 +103,11 @@
 }
 
 .mode-hint{padding:9px 12px;margin:0 0 12px;border:1px solid var(--rule);background:var(--panel);color:var(--accent);font-size:11px;line-height:1.6}
+/* v0.7 per-layer tone editor, collapsed by default to preserve compact mobile layout. */
+.layer-tone{border:1px solid var(--rule);background:var(--panel);border-radius:5px;padding:10px 12px;margin:0 0 14px}
+.layer-tone summary{cursor:pointer;font-size:13px;font-weight:720;min-height:30px;padding:5px 0}
+.layer-tone[open] summary{margin-bottom:7px;border-bottom:1px solid var(--rule)}
+.layer-tone-range{margin:10px 0}
+.layer-tone-range label{display:flex;justify-content:space-between;gap:8px}
+.layer-tone-range output{font-variant-numeric:tabular-nums;color:var(--accent)}
+.layer-tone-range input[type=range]{width:100%;margin:0;accent-color:var(--accent);min-height:30px}

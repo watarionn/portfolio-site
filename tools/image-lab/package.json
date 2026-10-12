@@ -1,11 +1,11 @@
 {
   "name": "rinka-image-experiment-lab",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node --check src/main.js && node --check src/layers/decompose.js && node --check src/layers/ui.js && node --check src/layers/semantic.js && node --check src/layers/merge.js && node --check src/layers/retouch.js && node --check assets/main.js && node --test tests/*.test.mjs"
+    "check": "node --check src/main.js && node --check src/layers/decompose.js && node --check src/layers/tone.js && node --check src/layers/ui.js && node --check src/layers/semantic.js && node --check src/layers/merge.js && node --check src/layers/retouch.js && node --check assets/main.js && node --test tests/*.test.mjs"
   },
   "dependencies": {
     "clipper2-wasm": "0.4.0",

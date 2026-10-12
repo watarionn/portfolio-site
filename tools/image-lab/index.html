@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style-v0.6.2.css">
+<link rel="stylesheet" href="./style-v0.7.0.css">
 </head>
 <body>
 <header class="site-header">
@@ -96,6 +96,17 @@
          <button type="button" id="layerMoveFront" disabled>↑ 前へ</button>
          <button type="button" id="layerMoveBack" disabled>↓ 後へ</button>
         </div>
+        <details id="layerFxDetails" class="layer-tone">
+         <summary>選択レイヤーの色を調整</summary>
+         <p class="micro">選んだレイヤーだけに適用。スライダーはプレビューで、「適用」を押すとUndoに記録されます。</p>
+         <div class="layer-tone-range"><label for="layerBrightness">明るさ <output id="layerBrightnessValue">0</output></label><input id="layerBrightness" type="range" min="-100" max="100" value="0"></div>
+         <div class="layer-tone-range"><label for="layerContrast">コントラスト <output id="layerContrastValue">0</output></label><input id="layerContrast" type="range" min="-100" max="100" value="0"></div>
+         <div class="layer-tone-range"><label for="layerSaturation">彩度 <output id="layerSaturationValue">0</output></label><input id="layerSaturation" type="range" min="-100" max="100" value="0"></div>
+         <div class="layer-bulk-actions">
+          <button type="button" id="layerToneApply" class="primary" disabled>色調整を適用</button>
+          <button type="button" id="layerToneReset" disabled>調整を元に戻す</button>
+         </div>
+        </details>
         <button type="button" id="layerBrushToggle">境界修正を開始</button>
         <div id="layerBrushPanel" class="layer-brush-panel" hidden>
          <p class="micro">上の「実験結果」画像を指でなぞります。元の画素を別レイヤーへ割り当て直し、描き足しはしません。</p>
@@ -114,12 +125,12 @@
       </div>
    </section>
    <details class="about-tools"><summary>この実験室について</summary>
-      <p class="explain">Trianglifyはライセンス確認中。レイヤー別エフェクトや編集履歴の永続保存は今後の候補。</p>
+      <p class="explain">Trianglifyはライセンス確認中。空間フィルターのレイヤー別適用や、編集履歴の永続保存は今後の候補。</p>
       <p class="micro">画像はブラウザ内のみ。実験結果の最大サイズは長辺1,200px。PNGと、ベクター対応モードではSVGを保存できる。</p>
    </details>
  </aside>
 </main>
-<footer class="footer">Image Lab · 実験用PWA v0.6.2 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
-<script type="module" src="./assets/main-v0.6.2.js"></script>
+<footer class="footer">Image Lab · 実験用PWA v0.7.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
+<script type="module" src="./assets/main-v0.7.0.js"></script>
 </body>
 </html>

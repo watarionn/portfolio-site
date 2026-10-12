@@ -32,6 +32,9 @@ export function mergeLayerModel(model, indices, {label}={}){
    nextLayers.push({...layers[i]});
   }
  }
+ // Bake the exact visible composite RGB/alpha of selected layers. Any per-layer
+ // tone effect must survive merging without double-application.
+ const visible=composeLayers(model).data;
  const newSource=new Uint8ClampedArray(source),newOwner=new Uint8Array(owner);
  let pixels=0;
  for(let p=0;p<owner.length;p++){
@@ -39,9 +42,8 @@ export function mergeLayerModel(model, indices, {label}={}){
   if(index>=layers.length)throw Error('画素とレイヤーの対応が不正です');
   newOwner[p]=mapping[index];
   if(!picked[index])continue;
-  const a=p*4+3,layer=layers[index];
-  const visibleAlpha=layer.visible?Math.round(source[a]*layer.opacity/100):0;
-  newSource[a]=visibleAlpha;
+  const t=p*4,visibleAlpha=visible[t+3];
+  newSource.set(visible.subarray(t,t+4),t);
   if(visibleAlpha>0)pixels++;
  }
  nextLayers[target].pixelCount=pixels;

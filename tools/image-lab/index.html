@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style-v0.3.1.css">
+<link rel="stylesheet" href="./style-v0.4.0.css">
 </head>
 <body>
 <header class="site-header">
@@ -55,7 +55,13 @@
    <section id="layerSection">
       <div class="section-index">03 / LAYER DECOMPOSER</div>
       <h2>1枚をレイヤーに分ける</h2>
-      <p class="explain">色とつながった領域を使って自動分離。人物・服などを意味的に認識するAI分離ではないよ。</p>
+      <p class="explain">色・領域による分離と、人物・髪・顔・服・腕・脚など18クラスを使うAI分離を切り替えられるよ。</p>
+      <label for="layerMode">分解方法</label>
+      <select id="layerMode">
+       <option value="color">色・連続領域で分ける</option>
+       <option value="semantic">AI意味分離（人物・髪・服）β</option>
+      </select>
+      <p class="micro">AIは初回のみモデル約4.4MBと推論エンジン約14MBを読み込む。写真を中心としたモデルで、イラストの結果は画像によって変わる。</p>
       <label for="layerDetail">分解の細かさ</label>
       <select id="layerDetail">
        <option value="6">ざっくり（6色）</option>
@@ -78,12 +84,12 @@
       </div>
    </section>
    <section><div class="section-index">04 / NEXT</div><h2>次の実験候補</h2>
-      <p class="explain">Trianglifyはライセンス確認中。人物・髪・服などのAI意味分離、ブラシによる境界修正、レイヤー別エフェクトや編集履歴の永続保存は今後の候補。</p>
+      <p class="explain">Trianglifyはライセンス確認中。ブラシによる境界修正、レイヤー別エフェクトや編集履歴の永続保存は今後の候補。</p>
       <p class="micro">画像はブラウザ内のみ。実験結果の最大サイズは長辺1,200px。PNGと、ベクター対応モードではSVGを保存できる。</p>
    </section>
  </aside>
 </main>
-<footer class="footer">Image Lab · 実験用PWA v0.3.1 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
-<script type="module" src="./assets/main-v0.3.1.js"></script>
+<footer class="footer">Image Lab · 実験用PWA v0.4.0 · <a href="./README.md">技術メモ</a> · <a href="./THIRD_PARTY.md">ライセンス</a></footer>
+<script type="module" src="./assets/main-v0.4.0.js"></script>
 </body>
 </html>

@@ -38,4 +38,5 @@ This is a **working, incremental API research workbench**, not a claim of comple
 - Re-ran the committed `tests/e2e_capabilities.py` against the live HTTPS URL: **61/61 direct API trials PASS** across 13 library categories; sample canvas remained unchanged. No horizontal overflow at 375/390/768 CSS pixels.
 - Re-ran committed `tests/e2e_onnx_wasm.py` against live HTTPS: **ONNX Runtime Web WASM 1/1 PASS**; WebGPU explicitly disabled in browser UI.
 - **Published candidate accepted by automation: 62/62 runnable trial cases PASS. User physical iPhone v0.9.0 acceptance: OPEN**. Earlier user confirmation is only for v0.8.0.
+- Public HTTPS browser JSON-export smoke test: PASS. Executed actual d3-voronoi polygons() operation, exported `image-lab-capability-results.json` through the UI, parsed it, verified the PASS record and unchanged original canvas.
 - Library vendor public API coverage remains incomplete. This record is about precisely the 64 registered cases (62 runnable, 2 excluded), not every library method.

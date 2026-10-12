@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {segmentImage,composeLayers} from '../src/layers/decompose.js';
 import {mergeLayerModel} from '../src/layers/merge.js';
-import {reorderLayers,strokeSegment,recalcLayerCounts} from '../src/layers/retouch.js';
+import {reorderLayers,strokeSegment,recalcLayerCounts,canStartPointerStroke} from '../src/layers/retouch.js';
 function picture(){
  const width=40,height=30,data=new Uint8ClampedArray(width*height*4);
  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
@@ -50,6 +50,16 @@ test('merged alpha is restored from the true source when brush retags a pixel',(
  strokeSegment(next,img.data,{from:point,to:point,radius:1,mode:'add',selected:1});
  assert.equal(next.owner[pixel],1);
  assert.equal(next.source[pixel*4+3],img.data[pixel*4+3]);
+});
+test('a second touch cannot overwrite the active brush stroke or its Undo baseline',()=>{
+ const primary={pointerId:7,pointerType:'touch',isPrimary:true};
+ const secondary={pointerId:8,pointerType:'touch',isPrimary:false};
+ assert.equal(canStartPointerStroke(null,primary),true);
+ assert.equal(canStartPointerStroke(7,secondary),false);
+ assert.equal(canStartPointerStroke(7,primary),false);
+ assert.equal(canStartPointerStroke(null,secondary),false);
+ assert.equal(canStartPointerStroke(null,{pointerId:1,pointerType:'mouse',isPrimary:true}),true);
+ assert.equal(canStartPointerStroke(null,primary),true);
 });
 test('brush stroke interpolates from pointer start to end',()=>{
  const img=picture(),m=segmentImage(img,{colorGroups:5});

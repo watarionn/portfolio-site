@@ -1,4 +1,9 @@
 /** Image Lab v0.6: ordering and non-generative owner-mask brush. */
+// Keep a stroke bound to its first pointer; a second finger must not replace its Undo baseline.
+export function canStartPointerStroke(activePointerId,{pointerId,pointerType,isPrimary}={}){
+ return activePointerId==null && Number.isInteger(pointerId) &&
+  !(pointerType==='touch' && isPrimary===false);
+}
 export function reorderLayers(model,from,to){
  const {layers,owner}=model;
  if(!Number.isInteger(from)||!Number.isInteger(to)||from<0||to<0||

@@ -27,9 +27,9 @@
 - Exact merged Git blob bytes of 18 changed/new Image Lab files compared against no-cache production HTTPS reads: **18/18 SHA-256 PASS**.
 - Old v0.7 app shell and hash chunks remain reachable. Only Image Lab paths were uploaded, new shell HTML and Service Worker published last.
 - Production browser end-to-end at 390x844, 375x667, 768x1024 and 1440x900: **4/4 PASS**. Tests cover FX add/preview/toggle/Undo/merge, unchanged source, no horizontal overflow, and v0.8.0 footer.
-- **OPEN: physical iPhone Safari acceptance of v0.8.0**. Do not infer from desktop browser emulation.
+- **CLOSED: v0.8.0 iPhone physical-device acceptance USER-CONFIRMED PASS on 2026-10-13 JST**. The user said `iPhone実機確認できた！`; individual checklist items were not separately reported.. Do not infer from desktop browser emulation.
 
 ## Release/next steps
 - GitHub PR/merge, FTPS deployment, HTTP byte-for-byte readback and remote QA handoff update should be recorded below after verification.
-- Physical iPhone confirmation is **OPEN** until user says they confirmed v0.8.0.
+- Physical iPhone release-level acceptance is **CLOSED** by explicit user confirmation, separate from browser emulation..
 - Library API campaign follow-ups: enumerate per-library public methods; implement direct trial adapters; classify supported/unavailable and record results. ONNX Runtime Web WebGPU on iPhone Safari is skipped due to known support limitations; WASM is viable.

@@ -21,7 +21,7 @@ try:
  print('CATALOG_LIBRARIES',len(libs),json.dumps(libs),flush=True)
  failures=[]
  for lib in libs:
-  if lib in ['onnx','trianglify']:continue
+  if lib == 'onnx':continue
   d.execute_script("const s=document.getElementById('capLibrary');s.value=arguments[0];s.dispatchEvent(new Event('change',{bubbles:true}));",lib)
   b=d.find_element(By.ID,'capRunAll')
   assert b.is_enabled(),lib

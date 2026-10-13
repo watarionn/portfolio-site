@@ -1,4 +1,4 @@
-# Image Lab v0.9.0 / 独立した画像実験PWA
+# Image Lab v0.9.1 / 独立した画像実験PWA
 
 Minimalizer / MinimalizerPublic、既存の画像仕立て室から独立している。
 画像はアップロードされず、すべてブラウザ内で扱う。元画像の破壊的編集、AIによる描き足しは行わない。
@@ -124,3 +124,9 @@ ONNX Runtime Web module is served from assets/ort/ort-wasm-simd-threaded-loader.
 - ライブラリごとの一括実行は明示操作のみ。ONNX推論モデル等をアプリ起動時に読み込まない。
 - PWA iPhone SafariではONNX WebGPUを実行しない。Trianglifyはライセンス上の保留を維持。
 - 追加試験は「各ライブラリの全公開APIの網羅」を意味しない。今後API列挙・カバレッジ拡大を続ける。
+
+## v0.9.1 Trianglify系パターン実験
+- GPL-3.0の公式Trianglifyは組み込まない。MITの別実装 @gkucmierz/trianglify@1.0.0 を採用し、画面でもTrianglify系 (MIT)と表示する。
+- 実ライブラリtoSVGString()を利用して三角形、配色、seed、カラーポイントの4種類を実験できる。
+- 入力画像のピクセルを変更せずSVGプレビューを返す。既存FXとの多段合成は別工程。
+- iPhone実機v0.9.1検証は別途実施する。

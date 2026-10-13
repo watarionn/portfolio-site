@@ -1,6 +1,6 @@
 {
   "name": "rinka-image-experiment-lab",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -21,7 +21,8 @@
     "roughjs": "4.6.6",
     "svg-path-commander": "2.3.3",
     "svgo": "4.1.0",
-    "vtracer-wasm": "0.1.0"
+    "vtracer-wasm": "0.1.0",
+    "@gkucmierz/trianglify": "1.0.0"
   },
   "devDependencies": {
     "esbuild": "0.25.10"

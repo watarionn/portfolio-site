@@ -1,3 +1,4 @@
+from qa_origin import qa_url
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.by import By
@@ -9,7 +10,7 @@ for a in ['--headless=new','--disable-gpu','--enable-unsafe-swiftshader','--no-f
 d=webdriver.Edge(options=o)
 try:
  d.set_window_size(1280,900)
- d.get(os.getenv('IMAGE_LAB_QA_URL','http://127.0.0.1:29790/index.html'))
+ d.get(qa_url())
  w=WebDriverWait(d,40);w.until(lambda d:'完了' in d.find_element(By.ID,'status').text)
  d.find_element(By.ID,'capabilityLab').click()
  d.execute_script("const x=document.getElementById('capLibrary');x.value='onnx';x.dispatchEvent(new Event('change',{bubbles:true}));")

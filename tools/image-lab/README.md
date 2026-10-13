@@ -33,6 +33,19 @@ Paper.js、glfx.js、p5.js、PIXI.js、SVGPathCommander、SVGO、VTracer WASM、
 5段階のメモリ内履歴に対応。PNG書き出し、ベクター対応モードのみSVG書き出し。
 レイヤー別の色調整はv0.7で利用可能。図形等の空間エフェクトのレイヤー別適用とレイヤープロジェクトの永続保存は未実装。境界の手動修正はv0.6から利用可能。
 
+## ポートを開かないローカル検証（2026-10-14）
+
+Image Lab は静的HTML・CSS・JS（オンデマンド取得のWASM/ONNXを含む）として配信する。
+ローカル検証でも `python -m http.server` 等の待受サーバーを起動しない。
+Rinka Lab の専用18784/18785番など、他の開発ツールのポートを使用しない。
+
+- `npm run check`: Nodeの単体テスト。ネットワークの待受なし。
+- `npm run smoke:no-port`: Edge/Chrome を隔離プロファイルでヘッドレス起動し、Chrome DevTools **pipe** で静的ファイルを渡す。HTML/ES Modules、作例、色分解、元画像の不変性を確認。HTTPサーバーもTCPデバッグポートも不要。
+- `npm run preview:no-port`: 同じ方式でEdge/Chromeの通常ウィンドウを表示して手動検証。ウィンドウを閉じると終了し、隔離プロファイルを削除する。`IMAGE_LAB_BROWSER` でブラウザ実行ファイルを指定可能。
+- 公開後のE2E/Service Worker/HTTPS/ONNX実配信確認は既存の公開サイトや、ポートを新設しない既存のHTTPS配信先で行う。`IMAGE_LAB_QA_URL` はHTTPSのみ。ローカルHTTPは検証経路にしない。
+
+ローカルの合成HTTPS URLはブラウザ内の検証用で実際のネットワーク接続ではない。Service Workerの実オフライン受入試験は公開HTTPSで別途実施する。ブラウザ機能の差を隠さず、検証未実施の機能をPASS扱いにしない。
+
 ## ビルドと検証
 
 npm ci --ignore-scripts --no-audit --no-fund

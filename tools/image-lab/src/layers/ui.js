@@ -27,6 +27,8 @@ export function createLayerLab({source,output,status,download,onLeave}){
  const mergeButton=$('layerMergeButton'),cancelMulti=$('layerCancelSelectButton');
  const undoMerge=$('layerUndoMergeButton'),mergeName=$('layerMergeName');
  const selectionMeta=$('layerSelectionMeta');
+ const comparePanel=$('semanticCompare'),usePhoto=$('semanticUsePhoto'),useAnime=$('semanticUseAnime');
+ let compared=null;
  const moveFront=$('layerMoveFront'),moveBack=$('layerMoveBack');
  const brushToggle=$('layerBrushToggle'),brushPanel=$('layerBrushPanel');
  const brushMode=$('layerBrushMode'),brushTarget=$('layerBrushTarget');
@@ -41,7 +43,7 @@ export function createLayerLab({source,output,status,download,onLeave}){
  function reset(){
   active=false;model=null;selected=0;solo=-1;processing=false;
   multi=false;picked.clear();merges=[];painting=null;brush=false;brushChanged=false;lastPoint=null;
-  toneDraft=null;fxDraft=null;
+  toneDraft=null;fxDraft=null;compared=null;comparePanel.hidden=true;
   output.classList.remove('brush-enabled');cursor.hidden=true;brushPanel.hidden=true;updateBulk();
   section.hidden=true;ui.replaceChildren();meta.textContent='';
   $('svgButton').disabled=true;
@@ -373,45 +375,101 @@ export function createLayerLab({source,output,status,download,onLeave}){
    download(blob,'png','layer-'+String(selected+1).padStart(2,'0')+'-'+safeName(layer.label,selected));
   },'image/png');
  }
+ function drawClassificationPreview(canvas,entry){
+  if(!entry){canvas.width=1;canvas.height=1;return;}
+  const w=Math.max(1,Math.round(Math.min(360/entry.width,270/entry.height,1)*entry.width));
+  const h=Math.max(1,Math.round(Math.min(360/entry.width,270/entry.height,1)*entry.height));
+  canvas.width=w;canvas.height=h;
+  const c=canvas.getContext('2d');
+  const data=c.createImageData(w,h);
+  const palette=['#56616b','#d94d69','#3f8fb0','#f9b44c','#9e72cd','#5eac74','#e07f47','#c1b66c',
+    '#506d9d','#b56578','#86a2a0','#a389cc','#7baf6a','#db8d82','#8c9aa3','#c3bba2'];
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+   const sx=Math.min(entry.width-1,Math.floor((x+.5)*entry.width/w));
+   const sy=Math.min(entry.height-1,Math.floor((y+.5)*entry.height/h));
+   const source=(sy*entry.width+sx)*4,at=(y*w+x)*4;
+   const color=palette[entry.owner[sy*entry.width+sx]%palette.length];
+   const rgb=[1,3,5].map(i=>parseInt(color.slice(i,i+2),16));
+   for(let i=0;i<3;i++)data.data[at+i]=Math.round(entry.source[source+i]*.35+rgb[i]*.65);
+   data.data[at+3]=entry.source[source+3];
+  }
+  c.putImageData(data,0,0);
+ }
+ function applyDecomposition(next){
+  if(!next)throw Error('領域が見つかりませんでした');
+  model=next;selected=0;solo=-1;active=true;toneDraft=null;fxDraft=null;
+  compared=null;comparePanel.hidden=true;
+  merges=[];multi=false;picked.clear();mergeName.value='';brush=false;
+  output.classList.remove('brush-enabled');cursor.hidden=true;brushPanel.hidden=true;
+  lockEffects(true);section.hidden=false;
+  const sourceName=next.method==='anime'?'アニメ7分類':next.method==='semantic'?'写真18分類':'色・領域分解';
+  meta.textContent=sourceName+' · '+next.layers.length+'レイヤー・'+next.groupsFound+'領域候補・'+next.sampleWidth+'×'+next.sampleHeight+'の解析';
+  refreshRows();refreshSelection();updateBulk();
+  status(sourceName+'を編集へ適用したよ。元画像の画素は変更していません。');
+ }
+ function showComparison(photo,anime,elapsed){
+  compared={photo,anime};active=false;section.hidden=true;lockEffects(false);
+  comparePanel.hidden=false;
+  drawClassificationPreview($('semanticPhotoPreview'),photo);
+  drawClassificationPreview($('semanticAnimePreview'),anime);
+  $('semanticPhotoInfo').textContent=photo?photo.layers.map(x=>x.label).join('・'):'対象人物を検出できませんでした';
+  $('semanticAnimeInfo').textContent=anime?anime.layers.map(x=>x.label).join('・'):'対象人物を検出できませんでした';
+  usePhoto.disabled=!photo;useAnime.disabled=!anime;
+  $('semanticCompareInfo').textContent='両モデルの推論終了（'+Math.round(elapsed)+'ms）。色は分類ラベルで、正解率を意味しません。編集する結果を選んでね。';
+  status('AI比較完了。写真とアニメの領域マスクを確認してから採用できます。');
+ }
+ usePhoto.addEventListener('click',()=>{
+  if(!compared?.photo||processing)return;
+  applyDecomposition(compared.photo);
+ });
+ useAnime.addEventListener('click',()=>{
+  if(!compared?.anime||processing)return;
+  applyDecomposition(compared.anime);
+ });
  async function startDecomposition(){
   if(processing)return;
-  processing=true;start.disabled=true;
-  status('元画像を色・連続領域に分解中…');
-  // Yield to paint the progress message before bounded CPU work.
+  processing=true;start.disabled=true;comparePanel.hidden=true;compared=null;
+  status('レイヤー分解を開始します…');
   await new Promise(resolve=>requestAnimationFrame(()=>setTimeout(resolve,0)));
   try{
    const src=source.getContext('2d',{willReadFrequently:true})
-     .getImageData(0,0,source.width,source.height);
-   const groups=Number($('layerDetail').value);
-   const mode=$('layerMode').value;
+    .getImageData(0,0,source.width,source.height);
+   const groups=Number($('layerDetail').value),mode=$('layerMode').value;
    let next;
+   if(mode==='compare'){
+    const began=performance.now();
+    const {segmentSemantic}=await import('./semantic.js');
+    const photo=await segmentSemantic(source,{progress:status});
+    const {segmentAnime}=await import('./anime.js');
+    const anime=await segmentAnime(source,{progress:status});
+    showComparison(photo,anime,performance.now()-began);
+    return;
+   }
    if(mode==='semantic'){
     const {segmentSemantic}=await import('./semantic.js');
     next=await segmentSemantic(source,{progress:status});
-    if(!next){
-     status('人物を認識できなかったため、色・領域で分解します…');
-     next=segmentImage(src,{colorGroups:groups});
-    }
+   }else if(mode==='anime'){
+    const {segmentAnime}=await import('./anime.js');
+    next=await segmentAnime(source,{progress:status});
    }else{
     next=segmentImage(src,{colorGroups:groups});
    }
-   model=next;selected=0;solo=-1;active=true;toneDraft=null;
-   merges=[];multi=false;picked.clear();mergeName.value='';brush=false;
-   output.classList.remove('brush-enabled');cursor.hidden=true;brushPanel.hidden=true;
-   lockEffects(true);section.hidden=false;
-   meta.textContent=(next.method==='semantic'?'AI意味分離 · ':'色・領域分解 · ')+next.layers.length+'レイヤー・'+next.groupsFound+'領域候補・'+next.sampleWidth+'×'+next.sampleHeight+'の解析';
-   refreshRows();refreshSelection();updateBulk();
-   status((next.method==='semantic'?'AI意味分離':'色分解')+'完了。'+next.layers.length+'枚のレイヤーを作成したよ。');
+   if(!next){
+    status('AIで人物を認識できなかったので、色・領域で分解します…');
+    next=segmentImage(src,{colorGroups:groups});
+   }
+   applyDecomposition(next);
   }catch(e){
    active=false;section.hidden=true;lockEffects(false);
+   comparePanel.hidden=true;compared=null;
    status('レイヤー分解に失敗：'+(e?.message||String(e)));
   }finally{processing=false;start.disabled=false;updateBulk();}
  }
-
  $('layerMode').addEventListener('change',()=>{
-   const ai=$('layerMode').value==='semantic';
-   $('layerDetail').disabled=ai;
-   start.textContent=ai?'AIで人物・髪・服を分ける':'元画像をレイヤー分解';
+  const mode=$('layerMode').value,ai=mode!=='color';
+  $('layerDetail').disabled=ai;
+  start.textContent=mode==='compare'?'写真とアニメのAI結果を比較':ai?'選んだAIでレイヤー分解':'元画像をレイヤー分解';
+  comparePanel.hidden=true;compared=null;
  });
  moveFront.addEventListener('click',()=>moveSelection(-1));
  moveBack.addEventListener('click',()=>moveSelection(1));

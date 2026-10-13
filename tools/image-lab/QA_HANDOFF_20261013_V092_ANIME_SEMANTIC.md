@@ -36,3 +36,14 @@
 - Compare photo18 mapped to comparable classes vs anime7 on same dataset; avoid declaring superior based on synthetic sample or model name.
 - Explore optional advanced AnimeSeg Mask2Former only if licensing, 432+ MB footprint and iPhone runtime are acceptable. Do not upload user images by default.
 - Consider aspect-ratio-preserving preprocess and label fusion only after quantified A/B evidence.
+
+## Production deployment and readback (2026-10-13)
+- User confirmed physical iPhone acceptance for preceding v0.9.1. This is NOT a v0.9.2 iPhone acceptance.
+- PR #199 merged to main (squash commit `e32a162950c2b5ec7288021f5e4528b86e276509`).
+- Exact source: `origin/main` at that commit, not the older local primary worktree.
+- Published 8 exact release files to `https://cf278796.cloudfree.jp/image-lab/` using the established FTPS + Windows Credential Manager deployment path; no site-wide upload or deletion:
+  `assets/models/anime-face-unet-7.onnx`, `assets/chunk-EQFXTCRL.js`, `assets/chunk-QKFACMVB.js`, `style-v0.9.2.css`, `assets/main-v0.9.2.js`, `assets/main.js`, `index.html`, `service-worker.js`.
+- Remote HTTPS byte-for-byte SHA256 readback matched all 8/8 merged Git blobs. ONNX model SHA256 `5cc5d4ede049329681beb18b064bd73efdd7edd1437f9534c682d1c7b5a3f899`.
+- On the actual public HTTPS site in Edge automation, anime 7-class inference, real A/B photo/anime inference, selection of anime result, and return to layer editor PASS. Source canvas did not change. Viewports 375, 390 and 768 px showed no horizontal overflow.
+- Public HTTPS full Capability Lab regression 65/65 PASS; older photo ONNX WASM inference 1/1 PASS, while iPhone Safari WebGPU remains excluded. Node suite 46/46 PASS.
+- Model selection accuracy on annotated anime corpus, per-class IoU/Dice and physical iPhone acceptance for v0.9.2 remain OPEN. The synthetic model parity and smoke test are not accuracy claims.

@@ -401,13 +401,12 @@ export const CAPABILITY_GROUPS = [
  },
  {
   "id": "trianglify",
-  "name": "Trianglify",
+  "name": "Trianglify系 (MIT)",
   "items": [
-   {
-    "id": "pattern",
-    "label": "三角形パターン生成 (ライセンス保留)",
-    "status": "blocked"
-   }
+   {"id":"pattern","label":"三角形パターン","status":"available"},
+   {"id":"palette","label":"パレット変更","status":"available"},
+   {"id":"seed","label":"シード固定","status":"available"},
+   {"id":"gradient","label":"カラーポイント配色","status":"available"}
   ]
  }
 ];

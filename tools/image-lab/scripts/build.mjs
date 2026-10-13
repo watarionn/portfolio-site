@@ -1,9 +1,11 @@
 import {build} from 'esbuild';
-import {readdir,unlink,writeFile,copyFile,readFile} from 'node:fs/promises';
+import {writeFile,copyFile,readFile} from 'node:fs/promises';
 import path from 'node:path';
 const out='assets';
-// Remove only prior hashed chunks emitted by this app, never vendor files.
-for(const file of await readdir(out))if(/^chunk-[A-Z0-9]+\.js$/.test(file))await unlink(path.join(out,file));
+// Keep previously published hashed chunks: older versioned entrypoints still
+// reference them. Removing these chunks would break rollback/offline clients.
+// Orphan cleanup requires a separate reference-graph audit.
+
 const result=await build({
  entryPoints:['src/main.js'],
  outdir:out,entryNames:'main',chunkNames:'chunk-[hash]',assetNames:'asset-[name]-[hash]',

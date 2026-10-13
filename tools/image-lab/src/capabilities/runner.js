@@ -27,5 +27,8 @@ export async function executeCapability(lib,cap,source){
  if(lib==='onnx'){
   const {runOnnx}=await import('./wasm-api.js');return runOnnx(cap,source);
  }
+ if(lib==='trianglify'){
+  const {runTrianglify}=await import('./trianglify.js');return runTrianglify(cap);
+ }
  throw Error('実行アダプター未実装: '+lib);
 }

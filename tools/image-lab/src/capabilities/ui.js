@@ -103,7 +103,7 @@ export function createCapabilityLab({source}){
  all.addEventListener('click',()=>execute(true));
  exportButton.addEventListener('click',()=>{
   const records=Array.from(ledger,([id,result])=>({id,...result}));
-  const blob=new Blob([JSON.stringify({version:'0.9.0',generatedAt:new Date().toISOString(),records},null,2)],{type:'application/json'});
+  const blob=new Blob([JSON.stringify({version:'0.9.1',generatedAt:new Date().toISOString(),records},null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob),a=document.createElement('a');
   a.href=url;a.download='image-lab-capability-results.json';
   document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);

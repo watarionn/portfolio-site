@@ -8,3 +8,13 @@ Anime semantic improvement research: existing ATR-18 photoreal model on 256px in
 Record concrete tests, Git state, deploy result after verification.
 
 Local verification (isolated Windows worktree): npm ci/build/check 43/43 PASS; Selenium Edge direct API 65/65 PASS across 14 executable groups; original source canvas unchanged; mobile widths 375/390/768 no overflow; ONNX WASM 1/1 PASS and WebGPU excluded. Build version 0.9.1. User physical iPhone 0.9.1 is not verified.
+
+## Published production closure (2026-10-13)
+- PR #198 squash-merged to main: 77ee54c5ad52226b2758d267eeda6508adc608c2.
+- Published six exact files from the merged Git blobs to https://cf278796.cloudfree.jp/image-lab/ through certificate-verified FTPS using the established Windows Credential Manager deployment path; no deletion and no site-wide upload.
+- HTTPS raw SHA-256 readback: 6/6 exact matches for new chunk, main-v0.9.1.js, main.js, style-v0.9.1.css, index.html and service-worker.js.
+- Actual Edge on the PUBLIC HTTPS URL: 65/65 direct graphic/vector/WASM/Trianglify trials PASS, original source pixels unchanged; 375/390/768 viewport checks PASS.
+- Real PUBLIC HTTPS ONNX Runtime Web WASM inference: 1/1 PASS; ONNX WebGPU iPhone Safari excluded.
+- Total available trials: 66/66 verified; physical iPhone acceptance still OPEN.
+- No upstream qrohlf GPLv3 dependency bundled. MIT-compatible replacement is labeled separately. Old versioned hashed chunks retained in Git and on host.
+- Future separate work: reversible per-layer ordered effect pipelines and empirical anime-specific parser evaluation, without silently replacing the ATR-18 model.

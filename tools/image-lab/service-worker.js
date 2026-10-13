@@ -1,8 +1,8 @@
 'use strict';
-const NAME='image-lab-v0.9.1';
+const NAME='image-lab-v0.9.2';
 // Pin precise release assets. Never cache-bust solely using query parameters.
 const FILES=[
- './','./index.html','./style-v0.9.1.css','./assets/main-v0.9.1.js',
+ './','./index.html','./style-v0.9.2.css','./assets/main-v0.9.2.js',
  './icon.svg','./icon-192.png','./icon-512.png',
  './apple-touch-icon.png','./manifest.webmanifest'
 ];

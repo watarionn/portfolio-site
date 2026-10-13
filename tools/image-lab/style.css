@@ -127,3 +127,11 @@
 .cap-json{max-width:100%;max-height:250px;overflow:auto;padding:10px;border:1px solid var(--rule);font-size:11px;white-space:pre-wrap;word-break:break-word}
 .cap-history{max-height:230px;overflow:auto;margin:10px 0;border-block:1px solid var(--rule)}
 .cap-history-row{font-size:11px;line-height:1.5;padding:6px 0;border-bottom:1px solid var(--rule)}
+
+/* v0.9.2: semantic model A/B comparison, no source manipulation */
+.semantic-compare{border:1px solid var(--rule);padding:12px;margin:12px 0;background:#f7f0e6}
+.semantic-compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.semantic-compare-grid>div{min-width:0}
+.semantic-compare-grid canvas{display:block;max-width:100%;height:auto;margin:8px 0;border:1px solid var(--rule);background:#ece9e4}
+.semantic-compare-grid button{width:100%;min-height:44px}
+@media(max-width:420px){.semantic-compare-grid{grid-template-columns:1fr}}

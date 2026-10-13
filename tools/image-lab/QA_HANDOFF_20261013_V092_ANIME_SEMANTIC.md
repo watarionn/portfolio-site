@@ -28,7 +28,7 @@
 - Mobile-emulated widths 375/390/768 produced no horizontal overflow.
 - ONNX vs original PyTorch on seeded random 512-square input: maximum absolute output delta 8.48e-5; class argmax different in only 1 of 262,144 pixels. This verifies conversion parity, NOT real-image segmentation accuracy.
 - Existing 65/65 direct vendor trials and original ONNX WASM inference 1/1 still pass.
-- Real hand-annotated anime benchmark and user physical iPhone acceptance for v0.9.2 remain OPEN.
+- Real hand-annotated anime benchmark remains OPEN. User later confirmed v0.9.2 on iPhone (2026-10-13); precise feature-by-feature physical-device coverage was not supplied.
 
 ## Next research
 - Collect legally permitted anime reference images with manually reviewed hair/face/eyes/mouth/clothes masks.
@@ -46,4 +46,9 @@
 - Remote HTTPS byte-for-byte SHA256 readback matched all 8/8 merged Git blobs. ONNX model SHA256 `5cc5d4ede049329681beb18b064bd73efdd7edd1437f9534c682d1c7b5a3f899`.
 - On the actual public HTTPS site in Edge automation, anime 7-class inference, real A/B photo/anime inference, selection of anime result, and return to layer editor PASS. Source canvas did not change. Viewports 375, 390 and 768 px showed no horizontal overflow.
 - Public HTTPS full Capability Lab regression 65/65 PASS; older photo ONNX WASM inference 1/1 PASS, while iPhone Safari WebGPU remains excluded. Node suite 46/46 PASS.
-- Model selection accuracy on annotated anime corpus, per-class IoU/Dice and physical iPhone acceptance for v0.9.2 remain OPEN. The synthetic model parity and smoke test are not accuracy claims.
+- Model selection accuracy on annotated anime corpus and per-class IoU/Dice remain OPEN. The synthetic model parity and smoke test are not accuracy claims.
+
+## User iPhone confirmation (2026-10-13)
+- After v0.9.2 production release and public-browser acceptance, the user reported: 「確認しました！」, confirming their iPhone review of the release.
+- Record this as user-reported v0.9.2 iPhone acceptance. No detailed physical-device metrics or individual mask-quality ratings were provided, so those have not been invented.
+- Remains OPEN: annotated real-anime segmentation accuracy comparison, body/clothes granularity upgrade, and quantitative iPhone performance profiling.

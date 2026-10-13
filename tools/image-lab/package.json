@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "smoke:no-port": "node scripts/browser-no-port.mjs",
+    "preview:no-port": "node scripts/browser-no-port.mjs --preview",
     "check": "node --check src/main.js && node --check src/layers/anime.js && node --check src/layers/decompose.js && node --check src/layers/tone.js && node --check src/layers/fx-stack.js && node --check src/library-atlas.js && node --check src/capabilities/catalog.js && node --check src/capabilities/runner.js && node --check src/capabilities/ui.js && node --check src/layers/ui.js && node --check src/layers/semantic.js && node --check src/layers/merge.js && node --check src/layers/retouch.js && node --check assets/main.js && node --test tests/*.test.mjs"
   },
   "dependencies": {

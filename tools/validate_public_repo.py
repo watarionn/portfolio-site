@@ -199,7 +199,10 @@ TEXT_SUFFIXES = {
 
 SECRET_PATTERNS = [
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
-    # A bundled CSS-selector table includes password:"[type=password]"; that exact\n    # selector is public markup, never a credential. Real password literals still fail.\n    re.compile(r"(?i)\bpassword\b\s*[:=]\s*['\"](?!\[type=password\]['\"])[^'\"]{8,}['\"]"),\n    re.compile(r"(?i)\b(?:passwd|api[_-]?key|access[_-]?token|secret[_-]?key)\b\s*[:=]\s*['\"][^'\"]{8,}['\"]"),
+    # A bundled CSS-selector table contains password:"[type=password]".
+    # This exact selector is not a credential; retain rejection of real literals.
+    re.compile(r"(?i)\bpassword\b\s*[:=]\s*['\"](?!\[type=password\]['\"])[^'\"]{8,}['\"]"),
+    re.compile(r"(?i)\b(?:passwd|api[_-]?key|access[_-]?token|secret[_-]?key)\b\s*[:=]\s*['\"][^'\"]{8,}['\"]"),
 ]
 
 

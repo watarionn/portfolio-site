@@ -1,0 +1,404 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_rkcjcwpe5yu",
+  "slug": "ninomae-inanis-rkcjcwpe5yu",
+  "videoId": "RKCJCWPe5yU",
+  "title": "『Gartic Phone』でお題が思わぬ方向へ　温泉案からアニメーション案まで",
+  "originalTitle": "【Gartic Phone】 EN&JP Gartic Phone!!! I'M GONNA FORGET HOW TO BREATH",
+  "originalUrl": "https://www.youtube.com/watch?v=RKCJCWPe5yU",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 4406,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_ninomae_inanis",
+    "slug": "ninomae-inanis",
+    "displayName": "Ninomae Ina'nis"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "『Gartic Phone』配信では、絵と説明文をもとに想像とは違う展開が生まれ、参加者がさまざまな反応を見せた。このメンバーで温泉に行こうという提案や、食べ物に見立てる表現、アニメーションを作ろうという声が飛び交い、完成したアニメーションを見る時間までにぎやかなやり取りが続いた。",
+  "summaryOneLine": "ゲーム内の出来事と現実の予定を区別できる",
+  "keyPoints": [
+    "自己紹介から、描いては確かめる時間へ",
+    "「ごはん」になった主役と、温泉に行くお題",
+    "アニメーションを作ろう、完成作を見よう"
+  ],
+  "articleBodyHtml": "<p>『Gartic Phone』配信では、絵と説明文をもとに想像とは違う展開が生まれ、参加者がさまざまな反応を見せた。このメンバーで温泉に行こうという提案や、食べ物に見立てる表現、アニメーションを作ろうという声が飛び交い、完成したアニメーションを見る時間までにぎやかなやり取りが続いた。</p>\n<h2>自己紹介から、描いては確かめる時間へ</h2>\n<p>03:14ごろ、ホストの自己紹介が始まり、進行中の呼称は書き起こしだけでは確定できない。参加者たちは順番に文章を書き、絵を描き、説明するゲームを進め、13:24ごろには一人の参加者から「Now I&#x27;m done」という声が上がる。21:33ごろには「これは違う」との反応もあり、次々に変化するお題に戸惑う様子がうかがえる。</p>\n<h2>「ごはん」になった主役と、温泉に行くお題</h2>\n<p>28:42ごろには、登場人物を「メインディッシュ」「ごはん」に見立てる言葉が飛び出した。その後「最後の変更」と声が上がり、絵をどう説明するかをその場で調整している。</p>\n<p>38:47ごろには「温泉に行こう」という言葉に、周囲から次々と賛同の声が重なる。これはゲーム中の絵やお題をめぐるやり取りで、実際に一同が温泉へ出かけたという報告ではない。39:54ごろにはイナの誕生日の話題も出て、フブキの名前を挙げながらお題の意味を考える会話につながった。</p>\n<h2>アニメーションを作ろう、完成作を見よう</h2>\n<p>45:16ごろ、今度はアニメーションを作ろうという提案が繰り返される。ゲームの形式に合わせて作品を作る相談が続き、01:00:35ごろには「できた！」との声。続いて完成したものを見ようと呼びかけ、見る前から期待を口にする参加者もいた。</p>\n<p>01:02:14ごろにはマリンの名前が出る場面もあり、描写をどう受け取るかについて冗談交じりの反応が続く。01:04:40ごろには、聞こえた音がくしゃみだったのかを確認し、否定する声もあった。01:06:04ごろには「よく分からないけれどかわいい」という感想があった。誰の発言かはこの書き起こしだけでは特定しない。複数作品が続くため、どの作品への反応かは断定しない。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: https://www.youtube.com/watch?v=RKCJCWPe5yU</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 未確定</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 162,
+      "text": "Shall we introduce ourselves?"
+    },
+    {
+      "timestampSeconds": 194,
+      "text": "I'm the host of this game, HawksBase!"
+    },
+    {
+      "timestampSeconds": 197,
+      "text": "There are five teachers!"
+    },
+    {
+      "timestampSeconds": 804,
+      "text": "Now I'm done."
+    },
+    {
+      "timestampSeconds": 810,
+      "text": "It's a piece of cake!"
+    },
+    {
+      "timestampSeconds": 1293,
+      "text": "This is wrong"
+    },
+    {
+      "timestampSeconds": 1296,
+      "text": "What are you doing?"
+    },
+    {
+      "timestampSeconds": 1722,
+      "text": "Okay, he's the main dish. He became the gohan, the rice"
+    },
+    {
+      "timestampSeconds": 1738,
+      "text": "It kind of looks like I mean"
+    },
+    {
+      "timestampSeconds": 1741,
+      "text": "Last minute change last minute change"
+    },
+    {
+      "timestampSeconds": 1745,
+      "text": "Light pink light pink done. Okay"
+    },
+    {
+      "timestampSeconds": 1749,
+      "text": "It's it's your turn to describe this scene"
+    },
+    {
+      "timestampSeconds": 2322,
+      "text": "Let's go to a hot spring with these members"
+    },
+    {
+      "timestampSeconds": 2324,
+      "text": "Let's go to a hot spring!"
+    },
+    {
+      "timestampSeconds": 2327,
+      "text": "Let's go to a hot spring!"
+    },
+    {
+      "timestampSeconds": 2329,
+      "text": "Let's go!"
+    },
+    {
+      "timestampSeconds": 2330,
+      "text": "Next! Next!"
+    },
+    {
+      "timestampSeconds": 2331,
+      "text": "Yes! Yes! Yes!"
+    },
+    {
+      "timestampSeconds": 2332,
+      "text": "Today is a cute day"
+    },
+    {
+      "timestampSeconds": 2335,
+      "text": "Today is a cute day"
+    },
+    {
+      "timestampSeconds": 2337,
+      "text": "Cute!"
+    },
+    {
+      "timestampSeconds": 2338,
+      "text": "I don't understand!"
+    },
+    {
+      "timestampSeconds": 2360,
+      "text": "That's how it is, isn't it?"
+    },
+    {
+      "timestampSeconds": 2383,
+      "text": "Fubuki is still cute today."
+    },
+    {
+      "timestampSeconds": 2394,
+      "text": "So that's why it was today!"
+    },
+    {
+      "timestampSeconds": 2403,
+      "text": "Today, Ina's birthday!"
+    },
+    {
+      "timestampSeconds": 2411,
+      "text": "And that's why Fubuki-senpai said"
+    },
+    {
+      "timestampSeconds": 2710,
+      "text": "Animation"
+    },
+    {
+      "timestampSeconds": 2712,
+      "text": "There's no animation"
+    },
+    {
+      "timestampSeconds": 2716,
+      "text": "Then let's make an animation"
+    },
+    {
+      "timestampSeconds": 2718,
+      "text": "Let's make an animation"
+    },
+    {
+      "timestampSeconds": 2720,
+      "text": "Let's make an animation"
+    },
+    {
+      "timestampSeconds": 3635,
+      "text": "we did it!"
+    },
+    {
+      "timestampSeconds": 3639,
+      "text": "okay, let's watch it!"
+    },
+    {
+      "timestampSeconds": 3641,
+      "text": "okay!"
+    },
+    {
+      "timestampSeconds": 3642,
+      "text": "I'm looking forward to it!"
+    },
+    {
+      "timestampSeconds": 3650,
+      "text": "my heart's pounding!"
+    },
+    {
+      "timestampSeconds": 3728,
+      "text": "what did you want to do with this, Marin?"
+    },
+    {
+      "timestampSeconds": 3734,
+      "text": "so I thought that everyone would make me more and more sexy"
+    },
+    {
+      "timestampSeconds": 3880,
+      "text": "It was a sneeze"
+    },
+    {
+      "timestampSeconds": 3882,
+      "text": "Next"
+    },
+    {
+      "timestampSeconds": 3887,
+      "text": "It came out"
+    },
+    {
+      "timestampSeconds": 3961,
+      "text": "It's so hard"
+    },
+    {
+      "timestampSeconds": 3964,
+      "text": "I don't know but it's cute"
+    },
+    {
+      "timestampSeconds": 4014,
+      "text": "It's the main character"
+    },
+    {
+      "timestampSeconds": 4029,
+      "text": "A stuffed animal"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=RKCJCWPe5yU",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-10-15T05:37:40Z",
+    "articleUpdatedAt": "2026-10-15T05:37:40Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_xqhkhs2hhxm",
+      "slug": "ninomae-inanis-xqhkhs2hhxm",
+      "videoId": "XQHKHS2hHxM",
+      "title": "Inaの休暇前雑談　Kingdom Hearts IVへの驚きから音楽、食事、Bibooとの外出まで",
+      "summaryOneLine": "Inaが最近気になったゲームと音楽、生活の工夫、Bibooとの外出を落ち着いたテンポで振り返る休暇前雑談です。",
+      "streamType": "chatting",
+      "publishedAt": "2026-06-10T23:00:00Z",
+      "durationSeconds": 3831,
+      "thumbnailUrl": "https://i.ytimg.com/vi/XQHKHS2hHxM/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1zxbowmsl_w",
+      "slug": "ninomae-inanis-1zxbowmsl-w",
+      "videoId": "1zXbOwmSL_w",
+      "title": "InaのFilm of the Year予想は「Reze」　Anime of the YearはMy Hero Academiaへ",
+      "summaryOneLine": "3時間超の同時視聴から、最後の大きな2部門を前にInaがどの作品へ心が傾いていたか、その理由とともに短く追える",
+      "streamType": "event",
+      "publishedAt": "2026-05-23T08:03:12.000Z",
+      "durationSeconds": 11010,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_incvfixxh_a",
+      "slug": "ninomae-inanis-incvfixxh-a",
+      "videoId": "INcVfIXXh_A",
+      "title": "Ninomae Ina'nisが「夏酒Season 2」で選んだ洋梨　醸造と雨のvisualを結んだPR配信",
+      "summaryOneLine": "配信時点の発表と現在変わり得る販売条件を分離し、PR内容を安全に記録する",
+      "streamType": "other",
+      "publishedAt": "2026-04-22T11:00:14.000Z",
+      "durationSeconds": 2681,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0fmux6izsvw",
+      "slug": "ninomae-inanis-0fmux6izsvw",
+      "videoId": "0fmuX6IZsVw",
+      "title": "「自分の好み」だけで決めない　InaがFashion Dreamerで作ったコーデの考え方",
+      "summaryOneLine": "この配信は、かわいい服を次々と選ぶだけの時間ではありません。",
+      "streamType": "game",
+      "publishedAt": "2023-11-17T00:29:46Z",
+      "durationSeconds": 8458,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fmuX6IZsVw/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0h5a1xkuofa",
+      "slug": "ninomae-inanis-0h5a1xkuofa",
+      "videoId": "0h5A1xkuofA",
+      "title": "「分かった」を二人で積み重ねる　InaとAmeliaのPortal 2協力プレイ",
+      "summaryOneLine": "InaとAmeliaの協力プレイは、答えを知っている人が引っ張る配信ではありません。",
+      "streamType": "game",
+      "publishedAt": "2020-12-05T00:47:45Z",
+      "durationSeconds": 5667,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0h5A1xkuofA/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-12",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ebnwntfnne",
+      "slug": "ninomae-inanis-ebnwntfnne",
+      "videoId": "-EBNWntFNNE",
+      "title": "「また手に入る」がAwakeningにつながる　InaとKiaraの『Valkyrie Connect』発表",
+      "summaryOneLine": "PR発表の項目列挙ではなく、前回参加者、取り逃した人、新規player、出演者それぞれに次の接点が用意された構造を把握できる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 3097,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_ninomae_inanis",
+        "slug": "ninomae-inanis",
+        "displayName": "Ninomae Ina'nis"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

@@ -1,0 +1,470 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_rbiyn_awjmq",
+  "slug": "koseki-bijou-rbiyn-awjmq",
+  "videoId": "RBIYn_AwJMQ",
+  "title": "エモートとアートタグの話から『Lies of P』の初挑戦へ",
+  "originalTitle": "【Lies of P】I Wanna Be A Real Rock! - #1",
+  "originalUrl": "https://www.youtube.com/watch?v=RBIYn_AwJMQ",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 8761,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_koseki_bijou",
+    "slug": "koseki-bijou",
+    "displayName": "Koseki Bijou"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "配信の前半はアートタグとチャットのエモート、後半は『Lies of P』の操作と初めてのボス戦が中心になった。ゲームの比喩を字義どおりの行動や能力変更と混同しない。",
+  "summaryOneLine": "根拠のある話題と未確認情報を区別できる",
+  "keyPoints": [
+    "アートタグとエモートに言及",
+    "『Lies of P』を始める",
+    "能力と初めてのボス戦"
+  ],
+  "articleBodyHtml": "<p>配信の前半はアートタグとチャットのエモート、後半は『Lies of P』の操作と初めてのボス戦が中心になった。ゲームの比喩を字義どおりの行動や能力変更と混同しない。</p>\n<h2>アートタグとエモートに言及</h2>\n<p>00:04:10ごろ、アートタグの扱いで起きた行き違いについて話した。 00:05:08ごろ、表現の取り違えに触れた。</p>\n<p>00:05:31ごろはアートタグについての会話が続き、00:05:58ごろからエモートをめぐる冗談交じりの交渉が話題になった。 00:11:28ごろ、アーティストへの言葉遣いに配慮するよう促した。</p>\n<h2>『Lies of P』を始める</h2>\n<p>00:15:17ごろ、『Lies of P』をプレイすると宣言し、音量の確認を求めた。 00:23:25ごろ、回復アイテム「pulse cell」に使用回数の上限があると説明した。</p>\n<p>00:29:21ごろ、『Dark Souls 3』のジャンプ操作にたとえた。 00:31:01ごろ、扉やはしごでショートカットが作れる仕組みに触れた。</p>\n<h2>能力と初めてのボス戦</h2>\n<p>00:40:57ごろ、『ピノキオ』の青い妖精かもしれないと推測を口にした。 00:41:34ごろ、Motivityなどの能力値を確認しながら、Strength・Dexterity相当の区別を言い直していた。</p>\n<p>00:44:13ごろ、「人形に服を着せるようだが、その人形は危険だ」というたとえを使った。直前には、別のゲームではStrength寄りにしているので、今回はDex寄りを試す意向も語っていた。 00:45:03ごろ、最初のボスに会うのを楽しみにしていると話した。</p>\n<h2>パリィや防御の仕組み</h2>\n<p>01:04:02ごろ、ゲーム内の説明を見て「これがパリィなのか」と理解した様子だった。実際の操作習熟を示す発言ではない。 01:13:41ごろ、配信者はガードを先に学んでから回避を覚え、両方を組み合わせようとする学習方針を語った。</p>\n<p>01:19:54ごろ、「A puppet cannot lie」と語られた。 02:19:59ごろ、正しい道が分からないのでこちらへ進むと話した。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: https://www.youtube.com/watch?v=RBIYn_AwJMQ</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 未確定</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 250,
+      "text": "In today's section, I would like to call the Boo's Misunderstanding Corner!"
+    },
+    {
+      "timestampSeconds": 292,
+      "text": "There's a Shadow the Hedgehog meme where it's Shadow the Hedgehog and he's like standing over you and he says,"
+    },
+    {
+      "timestampSeconds": 301,
+      "text": "That's the meme that I was referencing!"
+    },
+    {
+      "timestampSeconds": 308,
+      "text": "It was, I was referencing the meme."
+    },
+    {
+      "timestampSeconds": 331,
+      "text": "So, I have a proposition that I gave to pre-chat and I will give to you today."
+    },
+    {
+      "timestampSeconds": 373,
+      "text": "If, if the draw her giving birth meme dies, I'll release it."
+    },
+    {
+      "timestampSeconds": 634,
+      "text": "I worked hard on mine."
+    },
+    {
+      "timestampSeconds": 643,
+      "text": "And, and thank you, artist-san, KiriUme-san."
+    },
+    {
+      "timestampSeconds": 688,
+      "text": "It's a head pat."
+    },
+    {
+      "timestampSeconds": 692,
+      "text": "Yeah."
+    },
+    {
+      "timestampSeconds": 696,
+      "text": "The artist worked hard to make a cute head pat."
+    },
+    {
+      "timestampSeconds": 883,
+      "text": "Right. I lie all the time."
+    },
+    {
+      "timestampSeconds": 890,
+      "text": "That's why you can clearly see my nose because I lie all the time."
+    },
+    {
+      "timestampSeconds": 917,
+      "text": "Okay. Anyway, Lies of P. Let's go."
+    },
+    {
+      "timestampSeconds": 1122,
+      "text": "Okay, so that's switch."
+    },
+    {
+      "timestampSeconds": 1133,
+      "text": "And hold A. Okay, that's..."
+    },
+    {
+      "timestampSeconds": 1174,
+      "text": "I get a sword."
+    },
+    {
+      "timestampSeconds": 1179,
+      "text": "Path of the Bastard."
+    },
+    {
+      "timestampSeconds": 1360,
+      "text": "I'm gonna down a tiny, tiny bit."
+    },
+    {
+      "timestampSeconds": 1405,
+      "text": "Use a pulse cell to recover HP."
+    },
+    {
+      "timestampSeconds": 1761,
+      "text": "Dash, jump. Yeah, okay. It's like Dark Souls 3 jump."
+    },
+    {
+      "timestampSeconds": 1767,
+      "text": "Which, I don't like Dark Souls 3 jump, so hopefully I don't need to jump as much."
+    },
+    {
+      "timestampSeconds": 1861,
+      "text": "There are doors and ladders all throughout C.R.A.T. that are locked by devices."
+    },
+    {
+      "timestampSeconds": 1893,
+      "text": "Where is the bonfire?"
+    },
+    {
+      "timestampSeconds": 1906,
+      "text": "Oh, mini boss? Okay."
+    },
+    {
+      "timestampSeconds": 2457,
+      "text": "She's probably Fairy Godmother from Pinocchio. The blue fairy. Yeah, yeah, yeah."
+    },
+    {
+      "timestampSeconds": 2494,
+      "text": "That's strength. This is stamina."
+    },
+    {
+      "timestampSeconds": 2653,
+      "text": "It's like dressing your doll, only the doll is lethal. Yeah!"
+    },
+    {
+      "timestampSeconds": 2671,
+      "text": "Alongside you on the sixth boss. Wish me luck. Good luck!"
+    },
+    {
+      "timestampSeconds": 2703,
+      "text": "Okay. Excited to get to my first boss."
+    },
+    {
+      "timestampSeconds": 2745,
+      "text": "The atmosphere is so cool."
+    },
+    {
+      "timestampSeconds": 2764,
+      "text": "Like Sekiro!"
+    },
+    {
+      "timestampSeconds": 3842,
+      "text": "Okay, so that is a parry. Got it."
+    },
+    {
+      "timestampSeconds": 3861,
+      "text": "When he turns red."
+    },
+    {
+      "timestampSeconds": 4421,
+      "text": "Learn block first and then learn dodge and then combine."
+    },
+    {
+      "timestampSeconds": 4424,
+      "text": "We're learning."
+    },
+    {
+      "timestampSeconds": 4781,
+      "text": "It's not the same thing! It's not the same thing!"
+    },
+    {
+      "timestampSeconds": 4794,
+      "text": "A puppet cannot lie."
+    },
+    {
+      "timestampSeconds": 5280,
+      "text": "Oh!"
+    },
+    {
+      "timestampSeconds": 5307,
+      "text": "I love it."
+    },
+    {
+      "timestampSeconds": 5311,
+      "text": "I just wanted to fight that first boss over and over and over again"
+    },
+    {
+      "timestampSeconds": 5321,
+      "text": "The parry!"
+    },
+    {
+      "timestampSeconds": 5322,
+      "text": "The parry and the perfect blocking is so satisfying."
+    },
+    {
+      "timestampSeconds": 5356,
+      "text": "I think I like Sekiro more than Elden Ring, if that's even possible."
+    },
+    {
+      "timestampSeconds": 5817,
+      "text": "Eugenie, because..."
+    },
+    {
+      "timestampSeconds": 5848,
+      "text": "Ah!"
+    },
+    {
+      "timestampSeconds": 5945,
+      "text": "Wait, what's this?"
+    },
+    {
+      "timestampSeconds": 5953,
+      "text": "What's that do? Does it just poke them?"
+    },
+    {
+      "timestampSeconds": 6035,
+      "text": "There we go."
+    },
+    {
+      "timestampSeconds": 6135,
+      "text": "Gemini!"
+    },
+    {
+      "timestampSeconds": 6358,
+      "text": "Rich people, Ro."
+    },
+    {
+      "timestampSeconds": 6514,
+      "text": "Yeah, we don't want to be cucumber."
+    },
+    {
+      "timestampSeconds": 7150,
+      "text": "Oh, I won."
+    },
+    {
+      "timestampSeconds": 7176,
+      "text": "Boss better."
+    },
+    {
+      "timestampSeconds": 7285,
+      "text": "Too soon?"
+    },
+    {
+      "timestampSeconds": 7298,
+      "text": "Nobody dead."
+    },
+    {
+      "timestampSeconds": 7387,
+      "text": "This is new."
+    },
+    {
+      "timestampSeconds": 7620,
+      "text": "As a puppet, even the petrification disease can't get him."
+    },
+    {
+      "timestampSeconds": 7994,
+      "text": "Because I still have..."
+    },
+    {
+      "timestampSeconds": 7997,
+      "text": "Do not push me off the edge, please."
+    },
+    {
+      "timestampSeconds": 8044,
+      "text": "Amulet."
+    },
+    {
+      "timestampSeconds": 8374,
+      "text": "Advance."
+    },
+    {
+      "timestampSeconds": 8399,
+      "text": "I don't know the correct way to go, so I'll just go this way."
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=RBIYn_AwJMQ",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-10-15T05:37:40Z",
+    "articleUpdatedAt": "2026-10-15T05:37:40Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_2nyj1bmyd3q",
+      "slug": "koseki-bijou-2nyj1bmyd3q",
+      "videoId": "2NYJ1BMYD3Q",
+      "title": "BijouとKiara、Subnautica 2で海中拠点づくり　探索と雑談が続く協力プレイ",
+      "summaryOneLine": "3時間超の配信から、二人の協力プレイらしい進行を確認済み時刻つきで追える",
+      "streamType": "game",
+      "publishedAt": "2026-06-16T13:00:06.000Z",
+      "durationSeconds": 12818,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_3t8ojathtn0",
+      "slug": "koseki-bijou-3t8ojathtn0",
+      "videoId": "3T8OjATHtn0",
+      "title": "Fortniteの合間にこぼれた近況、Suisei宅の鍋と運転コラボの舞台裏",
+      "summaryOneLine": "2時間だけのFortnite配信で、スタジオ続きの近況、ゲーム内のチームプレー、Suisei宅を訪れた思い出、運転コラボの舞台裏が交互に語られた。",
+      "streamType": "other",
+      "publishedAt": "2026-06-15T00:59:50.000Z",
+      "durationSeconds": 7560,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ai5evwe1yy",
+      "slug": "koseki-bijou-ai5evwe1yy",
+      "videoId": "-ai5EVWE1YY",
+      "title": "予告編を「自分が遊ぶ理由」に変える　BijouとCalliopeのPC Gaming Show同時視聴",
+      "summaryOneLine": "多数の予告編を眺めるだけでなく、自分の既知の好みと結び付け、飽和を見分け、ウィッシュリストや終盤の候補選びへ進む二人の視聴軸が分かる",
+      "streamType": "event",
+      "publishedAt": "2026-06-07T18:55:43.000Z",
+      "durationSeconds": 7509,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_28mwjefx_rg",
+      "slug": "koseki-bijou-28mwjefx-rg",
+      "videoId": "28mwJEFX_rg",
+      "title": "Street Fighter 6でPebblesと実戦練習　grabを弱点と認識し「mix it up」へ",
+      "summaryOneLine": "約3時間の練習配信から、対戦相手に一方的に勝ってもらうのではなく教えてもらう方針と、実戦で課題を認識していく過程を短く追える",
+      "streamType": "game",
+      "publishedAt": "2026-06-03T22:55:44.000Z",
+      "durationSeconds": 11192,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-09sp6nee9k",
+      "slug": "koseki-bijou-09sp6nee9k",
+      "videoId": "-09SP6NEe9k",
+      "title": "「surviveではなくthrive」　Bijouたちが『The Forest』のcaveまで運んだglamping",
+      "summaryOneLine": "cannibal survivalの出来事を並べず、『surviveではなくthrive』という宣言が拠点選びと探索準備へどう残ったかを追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 10753,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-rzoqeywzw0",
+      "slug": "koseki-bijou-rzoqeywzw0",
+      "videoId": "-RZoQeyWzW0",
+      "title": "「速さより方向」で噛み合う二人　BijouとKaelaのSplit Fiction連携術",
+      "summaryOneLine": "二人の連携が単なる相性ではなく、失敗を責めずに情報を更新し、非対称な操作を共通語へ変えた結果だと分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11022,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_1mbsihfbfbi",
+  "slug": "raora-panthera-1mbsihfbfbi",
+  "videoId": "1mBsihFbFBI",
+  "title": "足で描いたケープ案が新アクセサリーに？　Raoraが配信でデザインから着用まで披露",
+  "originalTitle": "【NEW ACCESSORY REVEAL】BIG… CHATTINO?!? #JusticeGirlsNight #holoJustice",
+  "originalUrl": "https://www.youtube.com/watch?v=1mBsihFbFBI",
+  "streamType": "event",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 2249,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_raora_panthera",
+    "slug": "raora-panthera",
+    "displayName": "Raora Panthera"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Raora Pantheraの新アクセサリー公開では、完成品をいきなり見せるのではなく、まず本人がその場でケープのデザイン案を描くところから始まった。配信ならではの演出で、スケッチがそのまま新しい姿へつながっていく。",
+  "summaryOneLine": "約37分の配信から、新アクセサリーのアイデアスケッチ、制作を促す演出、着用と完成版への反応までを一続きで追える",
+  "keyPoints": [
+    "足でケープをデザイン",
+    "数分後には「It fits me」",
+    "Raoraが足で絵を描くのは初めてだと話しながらケープ案を仕上げる"
+  ],
+  "articleBodyHtml": "<p>Raora Pantheraの新アクセサリー公開では、完成品をいきなり見せるのではなく、まず本人がその場でケープのデザイン案を描くところから始まった。配信ならではの演出で、スケッチがそのまま新しい姿へつながっていく。</p>\n<h2>足でケープをデザイン</h2>\n<p>00:15:33ごろ、Raoraは「足で描くのは初めて」と話しながらケープ案を仕上げていく。</p>\n<p>00:16:05ごろには、できあがった「new cape」をチャットに評価してほしいと呼びかける。そして00:16:44ごろ、マネージャーへ「今ケープを作って」と頼む展開に。配信上では、その場でデザインがアクセサリーになるような流れで進んだ。</p>\n<h2>数分後には「It fits me」</h2>\n<p>00:17:26ごろ、Raoraはケープがreadyになったとして一度画面を離れ、着用へ。00:17:53ごろに戻ると、「It fits me」と新しい姿を見せる。</p>\n<p>完成版にはフードやポケットもあり、00:20:48ごろにはスタッフへ感謝しながら、「細部まで全部入れてくれた」と喜んだ。</p>\n<p>自分でラフを描き、そのまま完成品へ飛ぶ。実際の制作工程そのものではなく配信上の演出だからこそできる、Raoraらしい遊び心のあるアクセサリー公開になった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=1mBsihFbFBI)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月24日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 933,
+      "text": "Raoraが足で絵を描くのは初めてだと話しながらケープ案を仕上げる"
+    },
+    {
+      "timestampSeconds": 965,
+      "text": "完成した新しいケープ案をチャットに評価してほしいと呼びかける"
+    },
+    {
+      "timestampSeconds": 1004,
+      "text": "マネージャーへ『今ケープを作って』と呼びかける"
+    },
+    {
+      "timestampSeconds": 1046,
+      "text": "ケープがreadyになったとして着用しに行く"
+    },
+    {
+      "timestampSeconds": 1073,
+      "text": "戻ってきて『It fits me』と着用感を示す"
+    },
+    {
+      "timestampSeconds": 1248,
+      "text": "スタッフへ感謝し、細部まで入っていると完成版を喜ぶ"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=1mBsihFbFBI",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-27T23:33:32Z",
+    "articleUpdatedAt": "2026-09-29T09:35:13Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-ht_hzh9day",
+      "slug": "raora-panthera-ht-hzh9day",
+      "videoId": "-Ht_HZH9daY",
+      "title": "掃除が増えるほど連携が深まる　RaoraとKroniiの『Backrooms Cleanup Crew』",
+      "summaryOneLine": "ホラー風の舞台でも、二人が何を優先し、失敗をどう追加作業へ読み替え、協力プレイを継続したかが分かる",
+      "streamType": "game",
+      "publishedAt": "2026-06-11T02:05:13.000Z",
+      "durationSeconds": 11557,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_26ikcnrffna",
+      "slug": "raora-panthera-26ikcnrffna",
+      "videoId": "26iKCnRFFnA",
+      "title": "Raora、誕生日で見た『Chattini Jetpack Project』をプレイ　jetpackを求める物語に感謝",
+      "summaryOneLine": "2時間半近い配信から、ファン文化を題材にしたゲームをRaora本人がどう受け止め、遊び、最後に制作への感謝へつなげたかを短く追える",
+      "streamType": "game",
+      "publishedAt": "2026-06-04T14:00:38.000Z",
+      "durationSeconds": 9168,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-fetkj94cgu",
+      "slug": "raora-panthera-fetkj94cgu",
+      "videoId": "-fETKJ94CgU",
+      "title": "怖さを二人の監視手順に変える　RaoraとLizの『HELLMART』夜勤",
+      "summaryOneLine": "ホラーゲームの協力が操作の代行ではなく、画面共有、音の方向確認、扉の監視、異常の言語化によってプレイヤーの判断を支えることが分かる",
+      "streamType": "game",
+      "publishedAt": "2026-04-12T14:03:01.000Z",
+      "durationSeconds": 14033,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0xax8tmexl0",
+      "slug": "raora-panthera-0xax8tmexl0",
+      "videoId": "0Xax8TmExL0",
+      "title": "AFK事故から立て直す　Raoraたちの7 Days to Die Day 3",
+      "summaryOneLine": "Day 3は、Raoraの装備喪失という大きなマイナスから始まりました。",
+      "streamType": "game",
+      "publishedAt": "2024-10-12T03:06:20Z",
+      "durationSeconds": 10647,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0Xax8TmExL0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-10",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-0rztyi5noy",
+      "slug": "raora-panthera-0rztyi5noy",
+      "videoId": "-0RzTyI5nOY",
+      "title": "全身がgame ruleになる　Raoraの3D debutを動かしたpose、limbo、三つのticket",
+      "summaryOneLine": "Raoraが3Dで何を見せたかを、modelの部位列挙ではなく身体表現とguest interactionの設計から理解できる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 3972,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-emepl3ub_y",
+      "slug": "raora-panthera-emepl3ub-y",
+      "videoId": "-eMEPl3ub_Y",
+      "title": "「Go」の意味を合わせるまで　RaoraとRikkuの『Log Riders』共同運転",
+      "summaryOneLine": "協力ゲームの失敗が技量だけでなく、合図の定義、入力の役割、待つ時間の不一致から生まれ、会話で修復される様子が分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 9182,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_raora_panthera",
+  "slug": "raora-panthera",
+  "displayName": "Raora Panthera",
+  "nameJa": null,
+  "channelId": "UCl69AEx4MdqMZH7Jtsm7Tig",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCl69AEx4MdqMZH7Jtsm7Tig",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_v-ht_hzh9day",
+      "slug": "raora-panthera-ht-hzh9day",
+      "videoId": "-Ht_HZH9daY",
+      "title": "掃除が増えるほど連携が深まる　RaoraとKroniiの『Backrooms Cleanup Crew』",
+      "summaryOneLine": "ホラー風の舞台でも、二人が何を優先し、失敗をどう追加作業へ読み替え、協力プレイを継続したかが分かる",
+      "streamType": "game",
+      "publishedAt": "2026-06-11T02:05:13.000Z",
+      "durationSeconds": 11557,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_26ikcnrffna",
+      "slug": "raora-panthera-26ikcnrffna",
+      "videoId": "26iKCnRFFnA",
+      "title": "Raora、誕生日で見た『Chattini Jetpack Project』をプレイ　jetpackを求める物語に感謝",
+      "summaryOneLine": "2時間半近い配信から、ファン文化を題材にしたゲームをRaora本人がどう受け止め、遊び、最後に制作への感謝へつなげたかを短く追える",
+      "streamType": "game",
+      "publishedAt": "2026-06-04T14:00:38.000Z",
+      "durationSeconds": 9168,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-fetkj94cgu",
+      "slug": "raora-panthera-fetkj94cgu",
+      "videoId": "-fETKJ94CgU",
+      "title": "怖さを二人の監視手順に変える　RaoraとLizの『HELLMART』夜勤",
+      "summaryOneLine": "ホラーゲームの協力が操作の代行ではなく、画面共有、音の方向確認、扉の監視、異常の言語化によってプレイヤーの判断を支えることが分かる",
+      "streamType": "game",
+      "publishedAt": "2026-04-12T14:03:01.000Z",
+      "durationSeconds": 14033,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0xax8tmexl0",
+      "slug": "raora-panthera-0xax8tmexl0",
+      "videoId": "0Xax8TmExL0",
+      "title": "AFK事故から立て直す　Raoraたちの7 Days to Die Day 3",
+      "summaryOneLine": "Day 3は、Raoraの装備喪失という大きなマイナスから始まりました。",
+      "streamType": "game",
+      "publishedAt": "2024-10-12T03:06:20Z",
+      "durationSeconds": 10647,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0Xax8TmExL0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-10",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-0rztyi5noy",
+      "slug": "raora-panthera-0rztyi5noy",
+      "videoId": "-0RzTyI5nOY",
+      "title": "全身がgame ruleになる　Raoraの3D debutを動かしたpose、limbo、三つのticket",
+      "summaryOneLine": "Raoraが3Dで何を見せたかを、modelの部位列挙ではなく身体表現とguest interactionの設計から理解できる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 3972,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-emepl3ub_y",
+      "slug": "raora-panthera-emepl3ub-y",
+      "videoId": "-eMEPl3ub_Y",
+      "title": "「Go」の意味を合わせるまで　RaoraとRikkuの『Log Riders』共同運転",
+      "summaryOneLine": "協力ゲームの失敗が技量だけでなく、合図の定義、入力の役割、待つ時間の不一致から生まれ、会話で修復される様子が分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 9182,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_raora_panthera",
+        "slug": "raora-panthera",
+        "displayName": "Raora Panthera"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 25,
+    "soloCount": 25,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 13
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 6
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 4
+      },
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 2
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/raora-panthera/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCl69AEx4MdqMZH7Jtsm7Tig",
+      "checkedAt": "2026-09-13T04:51:44Z"
+    }
+  ],
+  "createdAt": "2026-09-13T04:51:44Z",
+  "updatedAt": "2026-09-13T04:51:44Z"
+}

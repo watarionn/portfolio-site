@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "disclaimer": "CEFRは配信者本人の英語能力ではなく、視聴者がその配信を聞く際の難易度目安です。未評価配信は学習向け検索に含めません。",
+  "evaluatedStreamCount": 0,
+  "evaluationAxes": [
+    {
+      "key": "vocabulary",
+      "label": "語彙",
+      "description": "使われる単語の幅と難しさ"
+    },
+    {
+      "key": "sentenceComplexity",
+      "label": "文の複雑さ",
+      "description": "文の長さ、構造、つながり方"
+    },
+    {
+      "key": "speechSpeed",
+      "label": "話す速度",
+      "description": "1分あたりの語数を参考にした速度"
+    },
+    {
+      "key": "pronunciationClarity",
+      "label": "発音の明瞭さ",
+      "description": "音の区切りを聞き取りやすいか"
+    },
+    {
+      "key": "overlap",
+      "label": "発話の重なり",
+      "description": "複数人が同時に話す量"
+    },
+    {
+      "key": "slang",
+      "label": "スラング量",
+      "description": "口語・ネット表現の多さ"
+    },
+    {
+      "key": "contextSupport",
+      "label": "文脈推測のしやすさ",
+      "description": "画面や会話の流れから意味を補いやすいか"
+    }
+  ],
+  "byCefr": [],
+  "clearSpeech": [],
+  "lowOverlap": [],
+  "lowSlang": [],
+  "highContextSupport": [],
+  "recentPhrases": [],
+  "recentSlang": [],
+  "guides": []
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="color-scheme" content="dark"/>
+  <title>Reference Shape Editor | Golden Trace Studio</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<div id="app">
+  <header class="app-head">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">▱</span><div><strong>REFERENCE SHAPE EDITOR</strong><small>GOLDEN TRACE STUDIO · ローカル完結</small></div></div>
+    <div class="top-actions">
+      <label class="action primary" for="sourceInput" title="下敷き画像を読み込む"><span>＋</span> 画像を開く</label>
+      <input type="file" id="sourceInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden/>
+      <label class="action" for="projectInput">JSONを開く</label><input type="file" id="projectInput" accept="application/json,.json" hidden/>
+      <button class="action" id="saveProject">JSON保存</button>
+      <div class="export-wrap"><button class="action" id="exportSvg">SVG</button><button class="action" id="exportPng">PNG</button></div>
+      <button class="action" id="panelButton" title="右のパネル表示">パネル ☷</button>
+      <button class="action icon-action" id="openHelp" title="ヘルプ" aria-label="使い方">?</button>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <nav class="toolrail" aria-label="描画ツール">
+      <button class="tool active" data-tool="draw" title="図形化 (P)"><span class="glyph">⬡</span><small>図形化</small></button>
+      <button class="tool" data-tool="select" title="選択 (V)"><span class="glyph">↖</span><small>選択</small></button>
+      <button class="tool" data-tool="vertex" title="頂点編集 (E)"><span class="glyph">⌘</span><small>頂点</small></button>
+      <button class="tool" data-tool="move" title="図形を移動 (M)"><span class="glyph">✥</span><small>移動</small></button>
+      <button class="tool" data-tool="pan" title="移動・パン (H / Space)"><span class="glyph">✋</span><small>パン</small></button>
+      <button class="tool" data-tool="eyedropper" title="元画像スポイト (I)"><span class="glyph">◉</span><small>スポイト</small></button>
+      <div class="tool-rail-bottom"><button class="tool compact" id="undo" title="元に戻す (Ctrl/⌘+Z)">↶</button><button class="tool compact" id="redo" title="やり直し (Ctrl/⌘+Shift+Z)">↷</button></div>
+    </nav>
+
+    <main class="center">
+      <div class="canvas-head">
+        <div><strong id="projectTitle">無題の手本</strong><span class="muted" id="imageInfo">画像を読み込んでください</span></div>
+        <div class="canvas-head-right"><span id="toolHint" class="hint">クリックして頂点を追加 · 既存の点をスナップ</span><button class="small-quiet" id="fit">全体表示</button><button class="small-quiet" id="fitWidth" title="原寸大の形を保って画像の幅を広く表示">幅に合わせる</button><button class="small-quiet zoom-button" id="zoomOut" title="縮小">−</button><button class="small-quiet zoom-button" id="zoomIn" title="拡大">＋</button><span class="zoom-value" id="zoomValue">100%</span></div>
+      </div>
+      <div id="viewport" class="viewport" tabindex="0" aria-label="ポリゴン編集キャンバス">
+        <svg id="stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" preserveAspectRatio="xMidYMid meet" aria-label="編集領域">
+          <defs><pattern id="paperGrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0 H0 V32" fill="none" stroke="#999" stroke-opacity=".09" stroke-width="1"/></pattern></defs>
+          <rect id="canvasBase" width="960" height="640" fill="#fcfbf6"/>
+          <rect id="canvasGrid" width="960" height="640" fill="url(#paperGrid)"/>
+          <image id="underlay" width="960" height="640" opacity=".35" preserveAspectRatio="none"/>
+          <g id="polygonLayer"></g>
+          <g id="draftLayer"></g>
+          <g id="handleLayer"></g>
+        </svg>
+        <div class="empty-state" id="emptyState"><div class="empty-icon">⌗</div><h1>輪郭を、あなたの手で。</h1><p>画像を読み込んだら、点を打って「図形化」。<br/>重なる頂点は共有できるので、細い隙間も防げます。</p><label for="sourceInput" class="big-launch">画像を選ぶ <span>↗</span></label><span class="empty-tip">ドラッグ＆ドロップにも対応 / 画像は外部送信しません</span></div>
+        <div class="canvas-progress" id="canvasProgress"><label for="verticalNav">縦位置 <output id="verticalNavValue">0%</output></label><input type="range" id="verticalNav" min="0" max="100" value="0" step="1" aria-label="縦長画像の表示位置"/></div>
+        <div class="canvas-overlay-bottom"><span id="cursorInfo">x: –　y: –</span><span id="canvasStats">0 図形 · 0 頂点</span></div>
+      </div>
+      <div class="draftbar">
+        <div><span class="label-overline">編集中</span><span id="draftCount">0 点</span><span class="muted">3点以上で閉じられます</span></div>
+        <div class="draft-controls"><button class="small-quiet" id="cancelDraft">取り消し <kbd>Esc</kbd></button><button class="small-quiet" id="removeDraftPoint">1点戻す <kbd>⌫</kbd></button><button class="build" id="finishPolygon" disabled>図形化 <span>↗</span></button></div>
+      </div>
+    </main>
+
+    <aside class="inspector" id="inspector">
+      <div class="inspector-head"><span>INSPECTOR</span><button id="toggleInspector" class="small-quiet" title="パネルの表示を切り替え">☷</button></div>
+      <section class="panel-section">
+        <h2>下敷き <span>01</span></h2>
+        <label class="field-row" for="opacity"><span>透過表示</span><strong id="opacityValue">35%</strong></label>
+        <input id="opacity" type="range" min="0" max="100" value="35" step="1"/>
+        <div class="two-col"><label class="check"><input type="checkbox" id="showUnderlay" checked/>画像を表示</label><label class="check"><input type="checkbox" id="showGrid"/>グリッド</label></div>
+      </section>
+      <section class="panel-section">
+        <h2>頂点スナップ <span>02</span></h2>
+        <div class="field-row"><span>既存頂点を共有</span><label class="switch"><input type="checkbox" id="snapEnabled" checked/><i></i></label></div>
+        <div class="field-row"><span>吸着範囲</span><output id="snapValue">12 px</output></div>
+        <input type="range" id="snapRadius" min="4" max="24" value="12" step="1"/>
+        <p class="panel-note">青く光る点をクリックすると既存頂点を共有します。移動時も接続された図形が連動します。</p>
+      </section>
+      <section class="panel-section palette-section">
+        <div class="head-line"><h2>塗り色 <span>03</span></h2><label class="mini-link" for="paletteInput">色を読込</label><input id="paletteInput" type="file" accept=".json,application/json" hidden/></div>
+        <div class="color-current"><input id="colorPicker" type="color" value="#d47c5c" aria-label="カスタム塗り色"/><div><strong id="colorName">#D47C5C</strong><small>選択中の色</small></div></div>
+        <div class="palette-heading"><span>Characteristic <em>特徴色</em></span><small id="charLabel">画像待ち</small></div>
+        <div class="swatches" id="characteristicColors"></div>
+        <div class="palette-heading"><span>Featured <em>アクセント</em></span></div>
+        <div class="swatches" id="featuredColors"></div>
+        <div class="palette-heading"><span>Representative <em>代表色</em></span></div>
+        <div class="swatches" id="representativeColors"></div>
+        <p id="paletteNote" class="panel-note">下敷き画像からブラウザ内で色候補を計算します。ColorStrip出力JSONを取り込んで正確な色も使えます。</p>
+      </section>
+      <section class="panel-section">
+        <h2>選択中の図形 <span>04</span></h2>
+        <div id="shapeInspector" class="no-selection">図形を選ぶと、名称・色・レイヤーを編集できます。</div>
+      </section>
+      <section class="panel-section layer-section"><div class="head-line"><h2>レイヤー <span>05</span></h2><span class="small-muted" id="layerCount">0件</span></div><div id="layers" class="layers"><p class="muted">図形はまだありません。</p></div></section>
+    </aside>
+  </div>
+  <footer class="status"><span id="statusText">準備完了</span><span>NO GENERATIVE FILL · SOURCE IMAGE UNCHANGED · EXPORT VECTOR ONLY</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="helpDialog"><div class="dialog-head"><div><small>QUICK GUIDE</small><h2>描く、つなぐ、整える。</h2></div><button class="small-quiet" id="closeHelp">閉じる ✕</button></div><div class="guide-grid"><div><strong>01 · 図形化</strong><p>キャンバス上を順にクリックして頂点を追加。3点以上で<strong>「図形化」</strong>または Enter で確定。右クリックで直前の頂点を削除。</p></div><div><strong>02 · 共有頂点</strong><p>既存の頂点に近づくと吸着します。共有頂点を動かすと隣接図形も追従します。頂点モードで辺をダブルクリックすると点を追加。</p></div><div><strong>03 · 色と重なり</strong><p>Characteristic・Featured・代表色を使い分け。右パネルで色と図形名を変更。レイヤーの▲▼で前後関係を調整。</p></div><div><strong>04 · 縦長画像</strong><p>縦長画像は自動で「幅に合わせる」表示になります。ホイールで上下に移動、Ctrl/⌘＋ホイールや＋−で拡大縮小。上部の「全体表示」と「幅に合わせる」で切り替えられます。下部の縦位置スライダーで離れた場所へ移動できます。</p></div><div><strong>05 · 保存</strong><p>JSONは再編集用で下敷き画像も含まれます。PNG/SVGは図形だけを書き出し、元画像を混入させません。</p></div></div><div class="keymap"><span><kbd>P</kbd> 図形</span><span><kbd>V</kbd> 選択</span><span><kbd>E</kbd> 頂点</span><span><kbd>H</kbd> パン</span><span><kbd>I</kbd> 色採取</span><span><kbd>Space</kbd> 一時パン</span><span><kbd>ホイール</kbd> 縦移動</span><span><kbd>Ctrl＋ホイール</kbd> ズーム</span><span><kbd>Ctrl+Z</kbd> 戻す</span><span><kbd>Delete</kbd> 削除</span></div></dialog>
+</body></html>

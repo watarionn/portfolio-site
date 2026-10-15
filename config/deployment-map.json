@@ -252,6 +252,11 @@
       "id": "osaka-subway-sevens",
       "sourceRoot": "works/osaka-subway-sevens",
       "productionRoot": "OSAKA_SUBWAY_SEVENS"
+    },
+    {
+      "id": "reference-shape-editor",
+      "sourceRoot": "tools/reference-shape-editor",
+      "productionRoot": "reference-shape-editor"
     }
   ],
   "aliases": [

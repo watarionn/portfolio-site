@@ -239,6 +239,13 @@
       "japaneseName": "Minimalizer",
       "englishName": "Image Simplification Tool",
       "route": "/minimalizer/"
+    },
+    {
+      "number": "034",
+      "projectId": "reference-shape-editor",
+      "japaneseName": "Reference Shape Editor",
+      "englishName": "Manual Polygon Trace Editor",
+      "route": "/reference-shape-editor/"
     }
   ]
 }

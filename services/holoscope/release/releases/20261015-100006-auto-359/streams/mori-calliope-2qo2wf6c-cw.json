@@ -1,0 +1,262 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_2qo2wf6c-cw",
+  "slug": "mori-calliope-2qo2wf6c-cw",
+  "videoId": "2qo2wF6C-Cw",
+  "title": "Mori Calliopeが復帰配信　近況と音楽活動、今週の予定を語る",
+  "originalTitle": "【RETURN STREAM】+ big news!!! (重大告知)",
+  "originalUrl": "https://www.youtube.com/watch?v=2qo2wF6C-Cw",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 7699,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_mori_calliope",
+    "slug": "mori-calliope",
+    "displayName": "Mori Calliope"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "活動を休んでいた期間を経て戻ってきたMori Calliopeが、離れていた間の出来事を振り返った復帰配信。後半では音楽活動の告知やサイン付き商品、復帰後の配信予定も紹介した。",
+  "summaryOneLine": "活動を休んでいた期間を経て戻ってきたMori Calliopeが、離れていた間の出来事を振り返った復帰配信。後半では音楽活動の告知やサイン付き商品、復帰後の配信予定も紹介した。",
+  "keyPoints": [
+    "休養期間を振り返る",
+    "アニメを見ながら過ごした日々",
+    "“big news”から音楽商品の案内へ"
+  ],
+  "articleBodyHtml": "<p>活動を休んでいた期間を経て戻ってきたMori Calliopeが、離れていた間の出来事を振り返った復帰配信。後半では音楽活動の告知やサイン付き商品、復帰後の配信予定も紹介した。</p>\n<h2>休養期間を振り返る</h2>\n<p>Calliopeは、まず活動を休んでいた期間の出来事を詳しく振り返った。事前にいろいろ調べすぎて考え込んだことや、家族に助けてもらったことを冗談を交えながら語る。</p>\n<h2>アニメを見ながら過ごした日々</h2>\n<p>休養中は『ジョジョの奇妙な冒険 ストーンオーシャン』などを見て過ごした。作品の話から家族とのエピソードへ話題を広げ、長い雑談らしいテンポで近況を伝えていく。</p>\n<h2>“big news”から音楽商品の案内へ</h2>\n<p>57分ごろ、タイトルにもある「big news」を切り出す。途中では「pickleball tourney」と冗談めかして話を転がしつつ、その後は音楽商品の案内へ移った。</p>\n<p>1時間3分ごろにはサインについて説明し、すでにサイン作業を始めていることを明かす。限定版についても、特別なパッケージや32ページのブックレットなどを紹介した。</p>\n<h2>復帰後の一週間へ</h2>\n<p>後半は今後の予定を確認。歌枠やゲームなどを並べながら、活動を少しずつ通常運転へ戻していく方針を話した。</p>\n<p>配信の中心にあったのは単なる復帰報告だけではない。離れていた間の出来事を振り返ったうえで、音楽と配信の予定をひとつずつ再開していく姿だった。</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 676,
+      "text": "術後に杖へ移行した話"
+    },
+    {
+      "timestampSeconds": 991,
+      "text": "手術前に麻酔を調べ続けた話"
+    },
+    {
+      "timestampSeconds": 1271,
+      "text": "術後直後の膝の状態"
+    },
+    {
+      "timestampSeconds": 1568,
+      "text": "入院中のStone Ocean視聴"
+    },
+    {
+      "timestampSeconds": 3422,
+      "text": "big news導入"
+    },
+    {
+      "timestampSeconds": 3451,
+      "text": "発表前のpickleballジョーク"
+    },
+    {
+      "timestampSeconds": 3811,
+      "text": "購入特典サインの説明"
+    },
+    {
+      "timestampSeconds": 3820,
+      "text": "サイン作業開始済み"
+    },
+    {
+      "timestampSeconds": 4087,
+      "text": "限定版パッケージ"
+    },
+    {
+      "timestampSeconds": 4097,
+      "text": "限定版32ページブックレット"
+    },
+    {
+      "timestampSeconds": 5400,
+      "text": "復帰後の歌枠予定"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=2qo2wF6C-Cw",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-10-04T23:16:12Z",
+    "articleUpdatedAt": "2026-10-04T23:16:12Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-ps5pxgjneq",
+      "slug": "mori-calliope-ps5pxgjneq",
+      "videoId": "-Ps5pxGJNEQ",
+      "title": "「遊びたい」は映像のどこから生まれる？　CalliopeとBijouのState of Play観察軸",
+      "summaryOneLine": "発表タイトルの一覧ではなく、二人が映像のどこを見て『遊びたい』へ判断を進めたかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-06-02T20:56:36.000Z",
+      "durationSeconds": 4836,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0eghejywaey",
+      "slug": "mori-calliope-0eghejywaey",
+      "videoId": "0eghejYwaeY",
+      "title": "100万再生祝いはゲームから音楽の夢へ　Calliope×syudouの対談配信",
+      "summaryOneLine": "ゲームを遊びながら100万再生を祝うだけでなく、音楽家同士が次の目標を言葉にしていく配信でした。",
+      "streamType": "event",
+      "publishedAt": "2025-05-23T11:19:20Z",
+      "durationSeconds": 4467,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0eghejYwaeY/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0fqfi9ntle4",
+      "slug": "mori-calliope-0fqfi9ntle4",
+      "videoId": "0fQfi9ntlE4",
+      "title": "リズムゲーム苦手から音楽に乗るまで　Calliopeがつかんだ遊び方",
+      "summaryOneLine": "この配信で面白いのは、Calliopeが苦手意識を消してから遊ぶのではなく、苦手なまま音楽へ乗り、失敗を笑い、物語にも興味を広げていくところです。",
+      "streamType": "game",
+      "publishedAt": "2020-11-05T16:50:57Z",
+      "durationSeconds": 6031,
+      "thumbnailUrl": "https://i.ytimg.com/vi/0fQfi9ntlE4/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-e3x1jaebdo",
+      "slug": "mori-calliope-e3x1jaebdo",
+      "videoId": "-E3x1JAEbdo",
+      "title": "別々のtutorialが「4人で遊びたい」に変わる　CalliopeとIRySの『Warframe』初日",
+      "summaryOneLine": "長く続くgameの情報量を網羅せず、初心者二人が何を一緒に学び、協力playへどう移ったかを追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 11690,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ocnd2nc9qo",
+      "slug": "mori-calliope-ocnd2nc9qo",
+      "videoId": "-OcnD2Nc9qo",
+      "title": "知らない言葉を自分の記憶へ変える　Mori Calliopeのドイツ語学習3つの足場",
+      "summaryOneLine": "単語の列挙ではなく、未知の言語を覚えるためにCalliopeが使った仮説、語呂、利用場面という三つの足場が分かる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 7073,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-usdgcbosog",
+      "slug": "mori-calliope-usdgcbosog",
+      "videoId": "-UsdGcBoSog",
+      "title": "「もっと武器にできる」が止まらない　Calliopeのゴリラ実況は即席ゲーム設計会議",
+      "summaryOneLine": "笑いの多い短編実況の中で、Calliopeが何に迷い、どの余白を『もっと遊べる』と評価したのかが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 5325,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

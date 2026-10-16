@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_hakos_baelz",
+  "slug": "hakos-baelz",
+  "displayName": "Hakos Baelz",
+  "nameJa": "ハコス・ベールズ",
+  "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_mkru3ewvipu",
+      "slug": "hakos-baelz-mkru3ewvipu",
+      "videoId": "mkrU3EWVIpU",
+      "title": "「30分だけ」のはずが大混乱　Hakos Baelzが寝坊と“禁断の炒飯”計画を語る",
+      "summaryOneLine": "寝坊で慌ただしく始まった約30分の雑談で、Baelzが過密日程とMcDonald’sのナゲット入り炒飯という突発的な食事案を語りました。",
+      "streamType": "chatting",
+      "publishedAt": "2024-07-02T02:32:00Z",
+      "durationSeconds": 1668,
+      "thumbnailUrl": "https://i.ytimg.com/vi/mkrU3EWVIpU/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-07",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ]
+    },
+    {
+      "uid": "str_1k6stuynt1a",
+      "slug": "hakos-baelz-1k6stuynt1a",
+      "videoId": "1K6stUYNT1A",
+      "title": "Hakos Baelzの新ケープはタスマニアデビル　3つの予想と豆知識で正体を公開",
+      "summaryOneLine": "動物クイズのような進行を経て、Baelzがオーストラリアに生息するタスマニアデビルをモチーフにしたケープを披露しました。",
+      "streamType": "event",
+      "publishedAt": "2023-09-28T01:30:00Z",
+      "durationSeconds": 1420,
+      "thumbnailUrl": "https://i.ytimg.com/vi/1K6stUYNT1A/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-09",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "衣装お披露目",
+        "Council"
+      ]
+    },
+    {
+      "uid": "str_v-xwflkdvuii",
+      "slug": "hakos-baelz-xwflkdvuii",
+      "videoId": "-XWflKdVuII",
+      "title": "Baeが「Inaの自画像」を描くまで　作画配信をなりきり企画にした50分",
+      "summaryOneLine": "短いお絵描き配信が完成絵だけでなく、声、設定、道具の言い訳、本人の登場までを一つのなりきり企画として設計していたことが分かる",
+      "streamType": "event",
+      "publishedAt": null,
+      "durationSeconds": 3189,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-os0ukasjvq",
+      "slug": "hakos-baelz-os0ukasjvq",
+      "videoId": "-os0UkaSjvQ",
+      "title": "金を集めた後に始まる準備　BaeがMinecraftでライトショーを構想するまで",
+      "summaryOneLine": "資源集めの成果が、持ち帰る量を決め、共有物を返し、装備を守り、次の建築を構想する段取りへ変わる様子が分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 10654,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0jzbmybjtie",
+      "slug": "hakos-baelz-0jzbmybjtie",
+      "videoId": "0JZbMyBjTIE",
+      "title": "「何をすればいい？」から水族館デートまで　SanaがBaeへ見せた『Animal Crossing』の未来",
+      "summaryOneLine": "操作の羅列ではなく、初心者への支援、自己決定、将来像の共有としてcollabを構造化する",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 14490,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 5,
+    "soloCount": 5,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 2
+      },
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 2
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/hakos-baelz/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

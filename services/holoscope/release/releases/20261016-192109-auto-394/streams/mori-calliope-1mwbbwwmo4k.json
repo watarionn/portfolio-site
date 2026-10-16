@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_1mwbbwwmo4k",
+  "slug": "mori-calliope-1mwbbwwmo4k",
+  "videoId": "1mwBbwWmo4k",
+  "title": "Solaireと二人でOrnstein＆Smoughへ　Calliが柱を使いながら二体ボスを突破",
+  "originalTitle": "【DARK SOULS: REMASTERED】dexfiends may excuse themselves (part 3) #calliolive",
+  "originalUrl": "https://www.youtube.com/watch?v=1mwBbwWmo4k",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": "2024-07-23T02:28:45.000Z",
+  "durationSeconds": 15052,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_mori_calliope",
+    "slug": "mori-calliope",
+    "displayName": "Mori Calliope"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "『DARK SOULS: REMASTERED』配信でMori Calliopeは、OrnsteinとSmoughの二体を相手にするボス戦へ挑んだ。Solaireと一緒に入り、まず一体を落としてから残る相手へ集中する作戦で突破を狙う。",
+  "summaryOneLine": "4時間超の配信から、Calliが二体ボスの順番を決め、Solaireと役割を分けながら勝ち切る約5分の攻略を追える",
+  "keyPoints": [
+    "まずOrnsteinから",
+    "柱を挟みながら最後まで削る",
+    "Calliが先にOrnstein側を狙う方針でボス戦へ入る"
+  ],
+  "articleBodyHtml": "<p>『DARK SOULS: REMASTERED』配信でMori Calliopeは、OrnsteinとSmoughの二体を相手にするボス戦へ挑んだ。Solaireと一緒に入り、まず一体を落としてから残る相手へ集中する作戦で突破を狙う。</p>\n<h2>まずOrnsteinから</h2>\n<p>03:10:38ごろ、Calliは先に「lion guy」を狙う方針を確認して戦闘へ入る。</p>\n<p>03:11:01ごろには、二体を相手にする状況から『Godskin Duo』を思い出すと話しつつ、Solaireが攻撃されるのを気にしながら立ち回る。</p>\n<p>03:11:52ごろ、最初の一体を撃破。すぐに残る相手との戦いへ切り替えた。</p>\n<h2>柱を挟みながら最後まで削る</h2>\n<p>03:13:09ごろ、CalliはSolaireに相手を引きつけてもらいながら、自分にも注意を向けようと動く。攻撃範囲に苦戦しつつ、柱を使って距離を取る場面も続いた。</p>\n<p>03:15:27ごろにはあと少しまで追い込み、Humanityを使って体勢を立て直す。そして03:15:46ごろ、ついに撃破。SoulとHumanityを得たことを確認し、「一人で二体を相手にするのは想像できない」と戦いを振り返った。</p>\n<p>何度も崩されながらも、狙う順番とSolaireとの役割を整理して押し切ったボス戦だった。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=1mwBbwWmo4k)</li><li>配信公開日: 2024年7月23日</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月24日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 11438,
+      "text": "Calliが先にOrnstein側を狙う方針でボス戦へ入る"
+    },
+    {
+      "timestampSeconds": 11461,
+      "text": "Godskin Duoを思い出すと話しつつSolaireへ攻撃が向くのを気にする"
+    },
+    {
+      "timestampSeconds": 11512,
+      "text": "最初の一体を倒し、次の相手へ切り替える"
+    },
+    {
+      "timestampSeconds": 11589,
+      "text": "Solaireに相手を引きつけてもらい、自分へ注意を向けようとする"
+    },
+    {
+      "timestampSeconds": 11727,
+      "text": "あと少しまで削り、Humanityを使って立て直す"
+    },
+    {
+      "timestampSeconds": 11746,
+      "text": "撃破してSoulとHumanityを得たことを確認し、二人だけで戦う難しさを振り返る"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=1mwBbwWmo4k",
+    "streamPublishedAt": "2024-07-23T02:28:45.000Z",
+    "articlePublishedAt": "2026-09-27T23:33:32Z",
+    "articleUpdatedAt": "2026-09-29T09:35:13Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_0ootopu1mbo",
+      "slug": "mori-calliope-0ootopu1mbo",
+      "videoId": "0OoToPU1Mbo",
+      "title": "偶然集まった仲間を一つの場へ　Calliope Moriの「hotel talk」が写した本番前夜",
+      "summaryOneLine": "performance内容の予想ではなく、偶然の集合、近況、期待を受け止めることで本番前夜の空気を作る配信設計を読める",
+      "streamType": "event",
+      "publishedAt": "2026-07-03T03:01:02.000Z",
+      "durationSeconds": 4862,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ps5pxgjneq",
+      "slug": "mori-calliope-ps5pxgjneq",
+      "videoId": "-Ps5pxGJNEQ",
+      "title": "「遊びたい」は映像のどこから生まれる？　CalliopeとBijouのState of Play観察軸",
+      "summaryOneLine": "発表タイトルの一覧ではなく、二人が映像のどこを見て『遊びたい』へ判断を進めたかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-06-02T20:56:36.000Z",
+      "durationSeconds": 4836,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-e3x1jaebdo",
+      "slug": "mori-calliope-e3x1jaebdo",
+      "videoId": "-E3x1JAEbdo",
+      "title": "別々のtutorialが「4人で遊びたい」に変わる　CalliopeとIRySの『Warframe』初日",
+      "summaryOneLine": "長く続くgameの情報量を網羅せず、初心者二人が何を一緒に学び、協力playへどう移ったかを追える",
+      "streamType": "game",
+      "publishedAt": "2026-01-09T05:25:09.000Z",
+      "durationSeconds": 11690,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-01",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0kc1cmtaamq",
+      "slug": "mori-calliope-0kc1cmtaamq",
+      "videoId": "0kc1cmtAaMQ",
+      "title": "「自分がゲームにいる」を自分で演じる　CalliopeがGoddess Orderで作ったライブ吹替",
+      "summaryOneLine": "この配信では、Calliopeがゲーム内の自分を“見る側”に留まりませんでした。",
+      "streamType": "game",
+      "publishedAt": "2025-09-30T04:24:57.000Z",
+      "durationSeconds": 10821,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-09",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_3nvlqfeegn4",
+      "slug": "mori-calliope-3nvlqfeegn4",
+      "videoId": "3NvLQFEEgN4",
+      "title": "QQQbeats!!!にMori Calliope本人が参戦　Dead Beatsとの対戦からGigiとの一騎打ちまで",
+      "summaryOneLine": "Mori Calliopeが、自身もプレイアブルキャラクターとして登場する『QQQbeats!!!』をプレイ。Dead Beatsとの対戦と協力プレイを経て、最後にはGigi Murinとの一騎打ちを楽しんだ。",
+      "streamType": "other",
+      "publishedAt": "2025-09-20T05:55:37.000Z",
+      "durationSeconds": 9736,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-09",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_f__bbqofczy",
+      "slug": "mori-calliope-f-bbqofczy",
+      "videoId": "F__bBQoFCZY",
+      "title": "日本語曲を歌いたい――カラオケ配信で語られた準備、選曲、今後の予定",
+      "summaryOneLine": "カラオケ配信での音声調整、日本語曲の選曲、歌唱時の準備、過去の経験、今後の予定を、歌詞と会話を区別しながら整理している。",
+      "streamType": "chatting",
+      "publishedAt": "2025-08-15T13:58:28.000Z",
+      "durationSeconds": 9764,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-08",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

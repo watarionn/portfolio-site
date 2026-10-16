@@ -108,6 +108,15 @@
   </svg>
 </div>
 
+<!-- タッチ端末専用のクイックアクション。既存の編集/保存モデルは共通。 -->
+<nav id="mobile-actions" aria-label="ノードのクイック操作">
+  <button class="mobile-action primary" id="mobile-add" type="button">＋ ノード</button>
+  <button class="mobile-action" id="mobile-edit" type="button" disabled>文字編集</button>
+  <button class="mobile-action" id="mobile-link" type="button" disabled>接続</button>
+  <button class="mobile-action" id="mobile-style" type="button" disabled>スタイル</button>
+  <button class="mobile-action" id="mobile-more" type="button" aria-label="ノードのその他の操作" disabled>その他</button>
+</nav>
+
 <!-- 形状選択パネル -->
 <div id="shape-panel">
   <span class="panel-label">形状</span>
@@ -229,7 +238,7 @@
       <button class="file-action" id="file-load-local">保存データを読み込み<span>この端末の保存内容を復元</span></button>
       <button class="file-action" id="file-import-json">JSONを開く<span>書き出したマップを読み込み</span></button>
       <button class="file-action" id="file-export-json">JSONとして保存<span>編集可能な形式で書き出し</span></button>
-      <div class="app-version">MindMap Maker v1.0.0 · ローカルファースト</div>
+      <div class="app-version">MindMap Maker v1.1.0 · ローカルファースト</div>
     </div>
   </div>
 </div>
@@ -280,7 +289,7 @@
     <div class="welcome-hero">
       <img src="favicon.svg" alt="" class="welcome-logo">
       <div>
-        <div class="eyebrow">MindMap Maker v1.0</div>
+        <div class="eyebrow">MindMap Maker v1.1</div>
         <h1 id="onboarding-title">思考を、軽く、自由につなぐ。</h1>
       </div>
     </div>
@@ -305,10 +314,10 @@
     <div class="modal-body help-body">
       <section>
         <h2>基本操作</h2>
-        <p><b>追加</b>：空白をクリック / タップしてノードを追加。</p>
-        <p><b>編集</b>：ノードを選択。ダブルクリックで文字を編集。</p>
-        <p><b>接続</b>：接続モードで、始点と終点のノードを順番に選択。</p>
-        <p><b>複数</b>：ドラッグ範囲選択後、グループ化や一括削除。</p>
+        <p><b>追加</b>：空白をクリック / タップしてノードを追加。スマホでは下の「＋ ノード」からも追加できます。</p>
+        <p><b>編集</b>：PCではダブルクリック。スマホではノードをタップし、下の「文字編集」を選択。</p>
+        <p><b>接続</b>：接続モードで始点と終点を選択。スマホではノードを選んで下の「接続」も使えます。</p>
+        <p><b>複数</b>：PCは範囲ドラッグ、スマホはノードを順番にタップして選択。グループ化や一括削除ができます。</p>
       </section>
       <section>
         <h2>便利な機能</h2>

@@ -7,7 +7,7 @@ const MAX_HISTORY = 60;
 const NODE_DEFAULT_W = 130;
 const NODE_DEFAULT_H = 50;
 const NS = 'http://www.w3.org/2000/svg';
-const APP_VERSION = '1.0.0';
+const APP_VERSION = '1.1.0';
 const ONBOARDING_KEY = 'mindmap-maker-onboarding-v1';
 
 /* ─── 状態 ─── */
@@ -105,6 +105,7 @@ function renderAll() {
   renderConns();
   renderNodes();
   updateMultiBar();
+  updateMobileActions();
   updateUndoRedo();
   renderMinimap();
   updateMapTitleUI();
@@ -370,6 +371,23 @@ function bindAll() {
     btn.addEventListener('click', ()=>setMode(btn.dataset.mode));
   });
 
+  /* iPhoneなどのタッチ端末向けショートカット */
+  $('mobile-add').addEventListener('click', addMobileNode);
+  $('mobile-edit').addEventListener('click', openEditModal);
+  $('mobile-link').addEventListener('click', ()=>{
+    const id=S.selNodeId;
+    if (!id) return;
+    setMode('connect');
+    onNodeClick(id,{type:'touch'});
+  });
+  $('mobile-style').addEventListener('click', openStyleModal);
+  $('mobile-more').addEventListener('click', e=>{
+    e.stopPropagation(); // documentの外側クリックハンドラで即時に閉じない
+    if (!S.selNodeId) return;
+    const b=$('mobile-more').getBoundingClientRect();
+    showCtxMenu(b.left,b.top-8,'node');
+  });
+
   /* 接続種別 */
   document.querySelectorAll('.conn-btn').forEach(btn => {
     btn.addEventListener('click', ()=>{
@@ -432,6 +450,7 @@ function bindAll() {
   svgWrap.addEventListener('touchstart', onTouchStart, {passive:false});
   svgWrap.addEventListener('touchmove',  onTouchMove,  {passive:false});
   svgWrap.addEventListener('touchend',   onTouchEnd,   {passive:false});
+  svgWrap.addEventListener('touchcancel',onTouchCancel,{passive:false});
   svgWrap.addEventListener('contextmenu',e=>e.preventDefault());
 
   /* コンテキストメニュー（ノード） */
@@ -515,6 +534,7 @@ function setMode(m) {
   connPreview.setAttribute('display','none');
 
   svgWrap.className = m==='add' ? 'mode-add' : m==='connect' ? 'mode-connect' : '';
+  document.body.classList.toggle('mode-not-add',m!=='add');
   renderAll();
 }
 
@@ -653,33 +673,7 @@ function bindNodeSvgEvents(g, id) {
     startNodeDrag(id, e.clientX, e.clientY);
     e.preventDefault();
   });
-  // タッチ
-  let tapTimer=null, tapCount=0;
-  g.addEventListener('touchstart', e=>{
-    e.stopPropagation();
-    if(e.touches.length===1){
-      tapCount++;
-      if(tapCount===1){
-        tapTimer = setTimeout(()=>tapCount=0, 350);
-        if(S.mode!=='connect') startNodeDrag(id, e.touches[0].clientX, e.touches[0].clientY);
-      } else {
-        clearTimeout(tapTimer); tapCount=0;
-        S.selNodeId = id; openEditModal();
-      }
-    }
-    e.preventDefault();
-  },{passive:false});
-  g.addEventListener('touchmove', e=>{
-    e.stopPropagation();
-    if(S.drag?.active && e.touches.length===1) dragNodeMove(e.touches[0].clientX, e.touches[0].clientY);
-    e.preventDefault();
-  },{passive:false});
-  g.addEventListener('touchend', e=>{
-    e.stopPropagation();
-    if(S.drag?.active) endNodeDrag();
-    else if(S.mode==='connect'&&tapCount===1) onNodeClick(id,{clientX:e.changedTouches[0].clientX,clientY:e.changedTouches[0].clientY});
-    e.preventDefault();
-  },{passive:false});
+  // タッチ操作はキャンバスで一元管理する。ノード自身ではバブリングを止めない。
   // 右クリック（編集モード）
   g.addEventListener('contextmenu', e=>{
     e.preventDefault(); e.stopPropagation();
@@ -728,12 +722,43 @@ function onNodeClick(id, e) {
   }
 }
 
+/* モバイル下部バー。選択中のノードに対する主要操作を一箇所へ集約。 */
+function updateMobileActions() {
+  const selected=!!S.nodes.find(n=>n.id===S.selNodeId);
+  $('mobile-add').textContent=selected?'＋ 子ノード':'＋ ノード';
+  ['mobile-edit','mobile-link','mobile-style','mobile-more'].forEach(id=>{
+    $(id).disabled=!selected;
+  });
+  $('mobile-link').textContent=S.mode==='connect'&&S.connFrom?'接続中…':'接続';
+}
+
+function addMobileNode() {
+  const parent=S.nodes.find(n=>n.id===S.selNodeId);
+  const center=clientToSvg(
+    svgWrap.getBoundingClientRect().left+svgWrap.clientWidth/2,
+    svgWrap.getBoundingClientRect().top+svgWrap.clientHeight/2
+  );
+  const node=makeNode(
+    parent ? parent.x+parent.w+65 : center.x-NODE_DEFAULT_W/2,
+    parent ? parent.y+parent.h/2-NODE_DEFAULT_H/2 : center.y-NODE_DEFAULT_H/2
+  );
+  if (parent) addConn(parent.id,node.id);
+  S.nodes.push(node);
+  setMode('add');
+  S.selNodeId=node.id;
+  pushHistory();
+  focusNode(node.id);
+  showToast(parent?'子ノードを追加しました':'ノードを追加しました');
+}
+
 /* =========================================================
    ノード追加
    ========================================================= */
 function addNodeAt(clientX, clientY) {
   const p = clientToSvg(clientX, clientY);
-  const node = makeNode(p.x - NODE_DEFAULT_W/2, p.y - NODE_DEFAULT_H/2);
+  const node = makeNode(p.x, p.y);
+  node.x -= node.w/2;
+  node.y -= node.h/2;
   // 選択中ノードから自動接続
   if (S.selNodeId) addConn(S.selNodeId, node.id);
   S.nodes.push(node);
@@ -795,73 +820,108 @@ function endNodeDrag() {
 }
 
 /* =========================================================
-   タッチ（ピンチ/パン）
+   タッチ: 1本指はタップ/ドラッグ/パン、2本指はピンチ。
+   SVGノードに個別のtouch listenerを置かず、再描画中も追跡する。
    ========================================================= */
+const TOUCH_SLOP = 9;
+let touchSession = null;
+
 function onTouchStart(e) {
   if (e.touches.length === 2) {
     e.preventDefault();
-    const d = tDist(e.touches), m = tMid(e.touches);
-    S.gesture = { active:true, dist:d, scale:S.view.scale, mid:m, svx:S.view.x, svy:S.view.y };
+    if (S.drag?.active) endNodeDrag();
+    S.pan.active = false;
+    S.rubber.active = false;
+    rubberBand.setAttribute('display','none');
+    touchSession = null;
+    const m=tMid(e.touches);
+    S.gesture = {
+      active:true, dist:Math.max(1,tDist(e.touches)),
+      scale:S.view.scale, mid:m, svx:S.view.x, svy:S.view.y
+    };
     return;
   }
-  if (e.touches.length === 1) {
-    const t = e.touches[0];
-    const g = e.target.closest('.node-g');
-    if (!g) {
-      if (S.mode==='multi') {
-        const p = clientToSvg(t.clientX, t.clientY);
-        S.rubber = { active:true, sx:p.x, sy:p.y };
-      } else {
-        S.pan = { active:true, sx:t.clientX, sy:t.clientY, svx:S.view.x, svy:S.view.y };
-      }
-      e.preventDefault();
-    }
-  }
+  if (e.touches.length !== 1 || S.gesture.active) return;
+  e.preventDefault(); // 合成click/mousedownによる二重操作を防ぐ
+  const t=e.touches[0];
+  const node=e.target.closest('.node-g');
+  const conn=e.target.closest('.conn-hit');
+  touchSession={
+    id:node?.dataset.id||null, connId:conn?.dataset.cid||null,
+    isBg:e.target===mainSvg||e.target===$('bg-rect'),
+    x:t.clientX, y:t.clientY, moved:false
+  };
+  closeCtx();
 }
 
 function onTouchMove(e) {
   if (e.touches.length === 2 && S.gesture.active) {
     e.preventDefault();
-    const d  = tDist(e.touches), m = tMid(e.touches);
-    const g  = S.gesture;
-    const ns = Math.min(4, Math.max(0.15, g.scale*(d/g.dist)));
-    const r  = svgWrap.getBoundingClientRect();
-    const ox = m.x - r.left, oy = m.y - r.top;
-    const pdx= m.x - g.mid.x, pdy = m.y - g.mid.y;
-    setView(ox-(ox-g.svx)*(ns/g.scale)+pdx, oy-(oy-g.svy)*(ns/g.scale)+pdy, ns);
+    const d=tDist(e.touches), m=tMid(e.touches), g=S.gesture;
+    const scale=Math.min(4,Math.max(0.15,g.scale*(d/g.dist)));
+    const r=svgWrap.getBoundingClientRect();
+    // 開始時の2本指の中点が指の移動先へ追従するように変換する。
+    const worldX=(g.mid.x-r.left-g.svx)/g.scale;
+    const worldY=(g.mid.y-r.top-g.svy)/g.scale;
+    setView(m.x-r.left-worldX*scale,m.y-r.top-worldY*scale,scale);
     return;
   }
-  if (e.touches.length === 1) {
-    const t = e.touches[0];
-    if (S.drag?.active) { dragNodeMove(t.clientX, t.clientY); e.preventDefault(); return; }
-    if (S.pan.active)   { setView(S.pan.svx+(t.clientX-S.pan.sx), S.pan.svy+(t.clientY-S.pan.sy), S.view.scale); e.preventDefault(); return; }
-    if (S.rubber.active){ drawRubberBand(t.clientX, t.clientY); e.preventDefault(); }
-    if (S.mode==='connect' && S.connFrom) {
-      const from = S.nodes.find(n=>n.id===S.connFrom);
-      if (from) {
-        const p = clientToSvg(t.clientX, t.clientY);
-        connPreview.setAttribute('display','block');
-        connPreview.setAttribute('x1',from.x+from.w/2); connPreview.setAttribute('y1',from.y+from.h/2);
-        connPreview.setAttribute('x2',p.x); connPreview.setAttribute('y2',p.y);
-      }
+  if (e.touches.length !== 1 || S.gesture.active || !touchSession) return;
+  e.preventDefault();
+  const t=e.touches[0], session=touchSession;
+  if (!session.moved && Math.hypot(t.clientX-session.x,t.clientY-session.y)>TOUCH_SLOP) {
+    session.moved=true;
+    if (session.id && S.mode!=='connect') {
+      startNodeDrag(session.id,session.x,session.y);
+    } else if (!session.id) {
+      S.pan={active:true,sx:session.x,sy:session.y,svx:S.view.x,svy:S.view.y};
     }
+  }
+  if (!session.moved) return;
+  if (S.drag?.active) {
+    dragNodeMove(t.clientX,t.clientY);
+  } else if (S.pan.active) {
+    setView(S.pan.svx+t.clientX-S.pan.sx,S.pan.svy+t.clientY-S.pan.sy,S.view.scale);
   }
 }
 
 function onTouchEnd(e) {
-  if (e.touches.length < 2) S.gesture.active = false;
-  if (e.touches.length === 0) {
-    S.pan.active = false;
-    if (S.drag?.active) endNodeDrag();
-    if (S.rubber.active) {
-      const t = e.changedTouches[0];
-      endRubberBand(t.clientX, t.clientY);
+  if (S.gesture.active) {
+    if (e.touches.length < 2) S.gesture.active=false;
+    touchSession=null;
+    return;
+  }
+  if (e.touches.length !== 0) return;
+  const session=touchSession;
+  touchSession=null;
+  if (S.drag?.active) { endNodeDrag(); S.pan.active=false; return; }
+  if (S.pan.active) { S.pan.active=false; return; }
+  if (!session || session.moved) return;
+  const t=e.changedTouches[0];
+  if (session.id) {
+    onNodeClick(session.id,{type:'touch',clientX:t.clientX,clientY:t.clientY});
+  } else if (session.connId && S.mode==='edit') {
+    onConnClick(session.connId,t.clientX,t.clientY);
+  } else if (session.isBg) {
+    if (S.mode==='add') {
+      addNodeAt(t.clientX,t.clientY);
+    } else {
+      S.selNodeId=null; S.selConnId=null; S.multiSelIds=[]; S.connFrom=null;
+      connPreview.setAttribute('display','none');
+      renderAll();
     }
   }
 }
 
-function tDist(ts) { return Math.hypot(ts[0].clientX-ts[1].clientX, ts[0].clientY-ts[1].clientY); }
-function tMid(ts)  { return { x:(ts[0].clientX+ts[1].clientX)/2, y:(ts[0].clientY+ts[1].clientY)/2 }; }
+function onTouchCancel() {
+  touchSession=null;
+  S.pan.active=false;
+  S.gesture.active=false;
+  if (S.drag?.active) endNodeDrag();
+}
+
+function tDist(ts) { return Math.hypot(ts[0].clientX-ts[1].clientX,ts[0].clientY-ts[1].clientY); }
+function tMid(ts) { return {x:(ts[0].clientX+ts[1].clientX)/2,y:(ts[0].clientY+ts[1].clientY)/2}; }
 
 /* =========================================================
    ラバーバンド（複数選択）

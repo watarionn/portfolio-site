@@ -381,7 +381,8 @@ function bindAll() {
     onNodeClick(id,{type:'touch'});
   });
   $('mobile-style').addEventListener('click', openStyleModal);
-  $('mobile-more').addEventListener('click', ()=>{
+  $('mobile-more').addEventListener('click', e=>{
+    e.stopPropagation(); // documentの外側クリックハンドラで即時に閉じない
     if (!S.selNodeId) return;
     const b=$('mobile-more').getBoundingClientRect();
     showCtxMenu(b.left,b.top-8,'node');

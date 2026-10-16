@@ -1,0 +1,265 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_1zom2tsqsry",
+  "slug": "irys-1zom2tsqsry",
+  "videoId": "1ZOM2TsqsrY",
+  "title": "「フルコンしたい、できない！」Hololive Dreamsで挑み続けたIRySのリズムゲーム配信",
+  "originalTitle": "【Hololive Dreams】 C'MON IRyS GET GUUD!! フルコン！！！したい！！！できない！！！",
+  "originalUrl": "https://www.youtube.com/watch?v=1ZOM2TsqsrY",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": null,
+  "durationSeconds": 16740,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_irys",
+    "slug": "irys",
+    "displayName": "IRyS"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Hololive Dreamsの長時間配信でIRySは、まだ触れていない曲を確かめながらリズムゲームへ挑み、編成やスコアを考えつつ何度もプレイを重ねた。この記事では約4時間半の配信全体を網羅せず、「フルコンしたい」という気持ちが見える序盤から、難度への驚き、プレイ中の集中、最後に「楽しかった」と振り返るまでを追う。",
+  "summaryOneLine": "約4時間半の配信からリズムゲーム挑戦の節目を追える",
+  "keyPoints": [
+    "「まだやっていない曲がたくさんある」",
+    "編成とスコアを見ながら試行錯誤",
+    "リズムゲーム中は質問も封印"
+  ],
+  "articleBodyHtml": "<p>Hololive Dreamsの長時間配信でIRySは、まだ触れていない曲を確かめながらリズムゲームへ挑み、編成やスコアを考えつつ何度もプレイを重ねた。この記事では約4時間半の配信全体を網羅せず、「フルコンしたい」という気持ちが見える序盤から、難度への驚き、プレイ中の集中、最後に「楽しかった」と振り返るまでを追う。</p>\n<h2>「まだやっていない曲がたくさんある」</h2>\n<p>00:10:20ごろ、IRySは配信でフルコンできなかった曲があることを残念がり、「まだやっていない曲がたくさんある」と話す。ここから、未挑戦の曲も含めて遊んでいく長いチャレンジが始まった。</p>\n<h2>編成とスコアを見ながら試行錯誤</h2>\n<p>02:16:32ごろにはピックアップの結果に反応し、キャラクターや編成を眺めながら進める。02:26:28ごろには他メンバーとのスコア差に疑問を持ち、タイプやsynergy skillの影響を考えていた。単に譜面を叩くだけでなく、スコアを伸ばすための要素にも目を向けていく。</p>\n<h2>リズムゲーム中は質問も封印</h2>\n<p>02:30:16ごろ、プレイしながら質問した直後に「リズムゲームをやっている間に質問するべきじゃない」と自分で訂正する。02:33:17ごろにはiPadを見下ろしてプレイしているため画面上では目を閉じているように見える、と説明し、「直接画面を見ないとプレイできない」と集中ぶりを語った。</p>\n<p>03:13:16ごろにはExpert 29を見て「怖いのは、これが30じゃなくて29なこと。30はどれだけ難しいの」と驚く。さらに03:33:14ごろ、難しい譜面を前にまず通常のExpertから試すことにしており、難度に合わせて挑戦方法を変えていた。</p>\n<h2>長い挑戦の最後は「楽しかった」</h2>\n<p>04:01:28ごろ、プレイを終えたIRySは「That was fun」「That was very fun」と振り返り、視聴者へ感謝を伝える。その後はスーパーチャット読みへ移り、配信のゲーム部分は一区切りとなった。</p>\n<p>フルコンへの悔しさから始まり、編成やスコアを確認し、難しい譜面では集中して何度も挑む。Hololive Dreamsを遊ぶ過程そのものが、IRySの試行錯誤をたっぷり見せる配信になっていた。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=1ZOM2TsqsrY)</li><li>配信公開日: 未確認</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月21日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 620,
+      "text": "フルコンできなかった曲を残念がる"
+    },
+    {
+      "timestampSeconds": 629,
+      "text": "まだ遊んでいない曲が多いと話す"
+    },
+    {
+      "timestampSeconds": 8192,
+      "text": "ピックアップ結果や衣装に反応する"
+    },
+    {
+      "timestampSeconds": 8788,
+      "text": "他メンバーとのスコア差を確認する"
+    },
+    {
+      "timestampSeconds": 9016,
+      "text": "リズムゲーム中に質問するべきではないと話す"
+    },
+    {
+      "timestampSeconds": 9197,
+      "text": "iPadの画面を直接見てプレイする必要があると説明する"
+    },
+    {
+      "timestampSeconds": 11596,
+      "text": "Expert 29を見て難度30はさらに難しいのかと驚く"
+    },
+    {
+      "timestampSeconds": 12794,
+      "text": "まず通常のExpertから試すと決める"
+    },
+    {
+      "timestampSeconds": 14488,
+      "text": "プレイ後に楽しかったと振り返る"
+    },
+    {
+      "timestampSeconds": 14497,
+      "text": "とても楽しかったと重ねて感想を述べる"
+    },
+    {
+      "timestampSeconds": 14513,
+      "text": "スーパーチャット読みへ移る"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=1ZOM2TsqsrY",
+    "streamPublishedAt": null,
+    "articlePublishedAt": "2026-09-29T09:57:28Z",
+    "articleUpdatedAt": "2026-09-29T09:58:21Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-whoqyb8dyo",
+      "slug": "irys-whoqyb8dyo",
+      "videoId": "-WHOqyb8dyo",
+      "title": "説明された「力」を走って調整する　IRySのRS50スポンサー配信",
+      "summaryOneLine": "製品仕様の要約ではなく、IRySが説明された機能を実際の運転でどう認識し、自分に合う強さへ調整したかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-05-03T03:00:41.000Z",
+      "durationSeconds": 11825,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v7jnn0ybwd0",
+      "slug": "irys-v7jnn0ybwd0",
+      "videoId": "v7JnN0YBWD0",
+      "title": "IRySのホロお正月CUP2022　直前練習と緊張の中で挑んだMario Kart大会",
+      "summaryOneLine": "ロビー待機から始まり、直前練習で得た感触を頼りに、アイテムが飛び交う大会レースへ挑んだ配信です。",
+      "streamType": "event",
+      "publishedAt": "2022-01-07T04:30:00Z",
+      "durationSeconds": 2237,
+      "thumbnailUrl": "https://i.ytimg.com/vi/v7JnN0YBWD0/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2022-01",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [
+        "ホロお正月CUP2022",
+        "Mario Kart 8 Deluxe"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-00unz2lkrs",
+      "slug": "irys-00unz2lkrs",
+      "videoId": "-00UnZ2LkRs",
+      "title": "heroを送る側へ回ったIRyS　『Dispatch』初見で見つけたZ-Team再出発の仕事",
+      "summaryOneLine": "物語の全要約ではなく、IRySが『Dispatch』の仕事を理解し、能力値と感情の両方でZ-Teamを選ぶようになる変化を追える",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 14047,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-r21ksug8og",
+      "slug": "irys-r21ksug8og",
+      "videoId": "-R21KSUg8Og",
+      "title": "馬小屋から始まる生存圏　IRySがRustで「失わない工夫」を増やした4時間",
+      "summaryOneLine": "4時間を超える配信を、危険を避けるだけでなく損失を小さくしながら次の選択肢を増やすプレイとして理解できる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 15625,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-k2v7odjick",
+      "slug": "irys-k2v7odjick",
+      "videoId": "-k2v7ODJIck",
+      "title": "10分交代が恐怖の引き継ぎになる　IRySとCeciliaの『Amnesia: The Bunker』",
+      "summaryOneLine": "オフコラボの協力が同時操作ではなく、限られた弾薬、経路、セーブ、危険箇所を交代時に共有する引き継ぎとして機能したことが分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 8511,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-kchjd4u28a",
+      "slug": "irys-kchjd4u28a",
+      "videoId": "-kchjD4u28A",
+      "title": "「ステルスで行く」が即興へ広がる　IRySが『Dishonored』で見つけた複数の道",
+      "summaryOneLine": "ステルスゲームの選択が、最初の方針を守ることではなく、体力、地形、能力、敵の配置を見て経路を作り直す過程だと分かる",
+      "streamType": "game",
+      "publishedAt": null,
+      "durationSeconds": 17900,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_irys",
+        "slug": "irys",
+        "displayName": "IRyS"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": null,
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

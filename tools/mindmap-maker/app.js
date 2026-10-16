@@ -724,10 +724,11 @@ function onNodeClick(id, e) {
 /* モバイル下部バー。選択中のノードに対する主要操作を一箇所へ集約。 */
 function updateMobileActions() {
   const selected=!!S.nodes.find(n=>n.id===S.selNodeId);
+  $('mobile-add').textContent=selected?'＋ 子ノード':'＋ ノード';
   ['mobile-edit','mobile-link','mobile-style','mobile-more'].forEach(id=>{
     $(id).disabled=!selected;
   });
-  $('mobile-link').textContent=S.mode==='connect'&&S.connFrom?'接続先を選ぶ':'接続';
+  $('mobile-link').textContent=S.mode==='connect'&&S.connFrom?'接続中…':'接続';
 }
 
 function addMobileNode() {
@@ -754,7 +755,9 @@ function addMobileNode() {
    ========================================================= */
 function addNodeAt(clientX, clientY) {
   const p = clientToSvg(clientX, clientY);
-  const node = makeNode(p.x - NODE_DEFAULT_W/2, p.y - NODE_DEFAULT_H/2);
+  const node = makeNode(p.x, p.y);
+  node.x -= node.w/2;
+  node.y -= node.h/2;
   // 選択中ノードから自動接続
   if (S.selNodeId) addConn(S.selNodeId, node.id);
   S.nodes.push(node);

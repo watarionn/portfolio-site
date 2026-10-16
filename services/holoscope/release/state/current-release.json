@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "releaseId": "20261016-150426-auto-388",
-  "manifestSha256": "6ec35bf7ddca2d041030dc56deb7aa7e7ac9c457f3a5dc6eae99665d857516aa",
-  "verifiedCommitSha": "80ab02dca8010a2191229bac3aeab1ed0f29f423",
-  "activatedAt": "2026-10-04T23:19:24Z"
+  "releaseId": "20261017-video-dates-388",
+  "manifestSha256": "521f2603945667e6dc31ff7c0cb566b759029b8822a30b95dc3c57ac54a23efd",
+  "verifiedCommitSha": "1e8dba65ba735ec17dd777e05f584f71e8ef32aa",
+  "activatedAt": "2026-10-16T15:37:13Z"
 }

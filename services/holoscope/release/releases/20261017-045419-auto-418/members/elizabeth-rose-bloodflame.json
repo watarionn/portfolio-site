@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_elizabeth_rose_bloodflame",
+  "slug": "elizabeth-rose-bloodflame",
+  "displayName": "Elizabeth Rose Bloodflame",
+  "nameJa": "エリザベス・ローズ・ブラッドフレイム",
+  "channelId": "UCW5uhrG1eCBYditmhL0Ykjw",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCW5uhrG1eCBYditmhL0Ykjw",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0wlpgew0ozw",
+      "slug": "elizabeth-rose-bloodflame-0wlpgew0ozw",
+      "videoId": "0Wlpgew0oZw",
+      "title": "舞台の“その後”を練習記録に　Elizabethが振り返るSerendipity",
+      "summaryOneLine": "セットリストの再話ではなく、出演者が事前準備と客席の反応を次の表現・言語練習へつなぐ振り返り方を読める",
+      "streamType": "chatting",
+      "publishedAt": "2026-07-24T20:00:00.000Z",
+      "durationSeconds": 12238,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-k79d-oftek",
+      "slug": "elizabeth-rose-bloodflame-k79d-oftek",
+      "videoId": "-k79d-oFtek",
+      "title": "ファンマスコットを一枚の集合絵へ　Elizabethが輪郭と色で揃えるまで",
+      "summaryOneLine": "ファンマスコットのデザインが、参考画像の確認、輪郭、色、モチーフ、白い縁取りという小さな選択で統一されていくことが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-02-10T00:08:19.000Z",
+      "durationSeconds": 13875,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-02",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_1te2n1kp2ya",
+      "slug": "elizabeth-rose-bloodflame-1te2n1kp2ya",
+      "videoId": "1tE2N1kP2YA",
+      "title": "「諦めたわけじゃない」ElizabethがENrecoのパズルを切り上げた理由",
+      "summaryOneLine": "3時間半超の配信から、難しいパズルへの未練と現実の予定の折り合いをつけながら、手書きメモが攻略の楽しさにつながったと振り返る終盤の会話を追える",
+      "streamType": "game",
+      "publishedAt": "2025-05-07T15:10:04.000Z",
+      "durationSeconds": 12892,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-05",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-qqu7pd73cc",
+      "slug": "elizabeth-rose-bloodflame-qqu7pd73cc",
+      "videoId": "-qQU7pD73cc",
+      "title": "13勝の次に「なぜ」を埋める　ElizabethとJoshuaの『Master Duel』練習",
+      "summaryOneLine": "カードゲーム指導を操作指示の列ではなく、成功とミスを次の判断へ再利用する学習設計として読める",
+      "streamType": "game",
+      "publishedAt": "2025-02-26T22:31:11.000Z",
+      "durationSeconds": 12050,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-02",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-glwt7bjd5c",
+      "slug": "elizabeth-rose-bloodflame-glwt7bjd5c",
+      "videoId": "-Glwt7BJD5c",
+      "title": "山肌にハート型の拠点を刻む　ElizabethのMinecraft建築が「物件づくり」へ広がるまで",
+      "summaryOneLine": "完成結果だけでなく、見た目の目標を先に置き、地形、設備、資材の制約に合わせて設計を更新していくMinecraft建築の考え方が分かる",
+      "streamType": "game",
+      "publishedAt": "2025-02-07T11:02:40.000Z",
+      "durationSeconds": 12593,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-02",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_qeuwfu7ab3w",
+      "slug": "elizabeth-rose-bloodflame-qeuwfu7ab3w",
+      "videoId": "QeUwFu7AB3w",
+      "title": "深夜のMinecraftが「探索の記録」になった　Elizabeth、花とMinecraft Bobbyを連れて仮拠点へ",
+      "summaryOneLine": "Elizabeth Rose Bloodflameが、眠る前に一、二時間だけ遊ぶつもりで「hololive New World」第2回を始めました。実際の配信は約2時間20分。当初調べていた鉄製造施設は準備の多さから後回しにし、雪原での試行錯誤、花集め、オオカミの手懐け、仮拠点づくりへと目的を切り替えていきます。",
+      "streamType": "game",
+      "publishedAt": "2025-02-06T04:09:57.000Z",
+      "durationSeconds": 8438,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-02",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 12,
+    "soloCount": 12,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 6
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 3
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 2
+      },
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 1
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/elizabeth-rose-bloodflame/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCW5uhrG1eCBYditmhL0Ykjw",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

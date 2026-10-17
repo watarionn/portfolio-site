@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_takanashi_kiara",
+  "slug": "takanashi-kiara",
+  "displayName": "Takanashi Kiara",
+  "nameJa": "小鳥遊キアラ",
+  "channelId": "UCHsx4Hqa-1ORjQTh9TYDhww",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCHsx4Hqa-1ORjQTh9TYDhww",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_29vud56w8lm",
+      "slug": "takanashi-kiara-29vud56w8lm",
+      "videoId": "29Vud56W8lM",
+      "title": "Kiaraが「Crash the Party」を改めて紹介　共同制作チームへの信頼を語る",
+      "summaryOneLine": "長時間のSuperchat readingから、Kiaraが直近の活動を振り返りつつCrash the Partyの共同制作相手をどのように受け止めていたかを短く確認できる",
+      "streamType": "other",
+      "publishedAt": "2026-07-26T20:10:29.000Z",
+      "durationSeconds": 7445,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0c5zs6wjtgi",
+      "slug": "takanashi-kiara-0c5zs6wjtgi",
+      "videoId": "0C5zs6WjtGI",
+      "title": "引いた後にも、次の目的を残す　Kiaraの『Arknights: Endfield』更新配信",
+      "summaryOneLine": "新要素への反応だけでなく、一つの結果を次の行動へ接続し、長い更新配信の現在地を保つKiaraの進め方を読める",
+      "streamType": "game",
+      "publishedAt": "2026-07-25T19:17:15.000Z",
+      "durationSeconds": 11190,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0msmz4rk4k4",
+      "slug": "takanashi-kiara-0msmz4rk4k4",
+      "videoId": "0msmZ4rK4k4",
+      "title": "秒差をそろえ、熱を言葉にする　KiaraとEssieが並走した決勝ウォッチアロング",
+      "summaryOneLine": "この配信の中心は、どちらの予想が正しかったかではありません。",
+      "streamType": "event",
+      "publishedAt": "2026-07-19T18:30:15.000Z",
+      "durationSeconds": 13633,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_9d0onwcnsg8",
+      "slug": "takanashi-kiara-9d0onwcnsg8",
+      "videoId": "9D0onwCNSG8",
+      "title": "Nintendo Directをキアラと見届ける　Fire Emblemへの期待と新作映像への反応",
+      "summaryOneLine": "Nintendo Directを視聴したキアラの期待、9月17日のFire Emblem発売日確認、映像への感想と本人の推測を原文時刻付きで区別して追える。",
+      "streamType": "event",
+      "publishedAt": "2026-06-09T13:31:07.000Z",
+      "durationSeconds": 6494,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_2gwyjothw9i",
+      "slug": "takanashi-kiara-2gwyjothw9i",
+      "videoId": "2gWYJOtHW9I",
+      "title": "Kiara、歯のトラブルもGartic Phoneのネタに　Ollieたちとの描画リレーがカオス化",
+      "summaryOneLine": "約2時間半の配信から、各ゲームモードの違い、歯ネタが繰り返される経緯、終盤の歯の顛末を短時間で把握できる",
+      "streamType": "other",
+      "publishedAt": "2026-06-06T12:29:52.000Z",
+      "durationSeconds": 9453,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-5p17bxvzte",
+      "slug": "takanashi-kiara-5p17bxvzte",
+      "videoId": "-5P17BxVZTE",
+      "title": "「待たせたくない」が相談に変わる　Kiaraたち4人の『Slay the Spire 2』",
+      "summaryOneLine": "deck構築の手順要約ではなく、multiplayer化した『Slay the Spire 2』で相談が判断待ちの不安をteam playへ変える過程を追える",
+      "streamType": "game",
+      "publishedAt": "2026-04-23T11:00:35.000Z",
+      "durationSeconds": 10171,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 36,
+    "soloCount": 36,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 14
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 11
+      },
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 7
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 4
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/takanashi-kiara/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCHsx4Hqa-1ORjQTh9TYDhww",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

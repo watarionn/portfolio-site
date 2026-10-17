@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_shiori_novella",
+  "slug": "shiori-novella",
+  "displayName": "Shiori Novella",
+  "nameJa": null,
+  "channelId": "UCgnfPPb9JI3e9A4cXHnWbyg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCgnfPPb9JI3e9A4cXHnWbyg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_1fnun8pc9pa",
+      "slug": "shiori-novella-1fnun8pc9pa",
+      "videoId": "1fNUN8pC9PA",
+      "title": "飛行機は「空を飛ぶ列車」？Shioriが『Denshattack!』の世界設定に注目",
+      "summaryOneLine": "3時間超の配信から、列車アクションの背後にある災害後の世界設定へShioriの関心が向いた約1分の場面を追える",
+      "streamType": "game",
+      "publishedAt": "2026-07-20T19:55:37.000Z",
+      "durationSeconds": 11484,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_1gcsfs7zfko",
+      "slug": "shiori-novella-1gcsfs7zfko",
+      "videoId": "1GcsFS7zfko",
+      "title": "仲間に助けられても、自分で戦いたい　ShioriのDark Souls 2協力プレイ",
+      "summaryOneLine": "攻略順の再話ではなく、協力者の強さを調整してでも自分の挑戦を残し、参加機会を分けるShioriの配信の仕方が分かる",
+      "streamType": "game",
+      "publishedAt": "2026-01-27T02:47:14.000Z",
+      "durationSeconds": 20020,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-01",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-eup_sxh20y",
+      "slug": "shiori-novella-eup-sxh20y",
+      "videoId": "-eUP_SxH20Y",
+      "title": "勝てる編成と残したい仲間のあいだで　ShioriのDigimonパーティ再設計",
+      "summaryOneLine": "編成判断が単なる強さ順ではなく、属性の重複、行動順、回復制限、育成待ち、仲間への愛着を状況ごとに調整する作業だと分かる",
+      "streamType": "game",
+      "publishedAt": "2025-11-20T02:38:07.000Z",
+      "durationSeconds": 18952,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-11",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0l5x0tzyykw",
+      "slug": "shiori-novella-0l5x0tzyykw",
+      "videoId": "0L5X0TZYyKw",
+      "title": "戻れる道を先に作る　Shioriの『Cronos: The New Dawn』資源管理",
+      "summaryOneLine": "恐怖への反応ではなく、戻れる状態を先に作ることで探索の損失を抑える判断の連鎖を読める",
+      "streamType": "game",
+      "publishedAt": "2025-10-02T01:48:43.000Z",
+      "durationSeconds": 16803,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-10",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_273i3ui7ulg",
+      "slug": "shiori-novella-273i3ui7ulg",
+      "videoId": "273I3ui7uLg",
+      "title": "Monster Hunter: WildsでCharge Bladeに挑戦　複雑な操作を実戦で少しずつ確認",
+      "summaryOneLine": "長時間配信の中から、Charge Bladeを初めて本格的に触る場面と、試行錯誤しながら操作感を掴んでいく過程を短く追える",
+      "streamType": "game",
+      "publishedAt": "2025-03-14T04:38:59.000Z",
+      "durationSeconds": 12716,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-03",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_1vsev3wqkgq",
+      "slug": "shiori-novella-1vsev3wqkgq",
+      "videoId": "1VsEV3wQKGQ",
+      "title": "注文と厨房が混線する　Shioriたちの「FastFood Simulator」配信",
+      "summaryOneLine": "複数人の会話が交差する配信を、開店時の役割、注文の混線、難易度変更、ドライブスルーとフライドポテトの導入として追いやすく整理できる",
+      "streamType": "game",
+      "publishedAt": "2025-02-11T04:15:00.000Z",
+      "durationSeconds": 7925,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-02",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 22,
+    "soloCount": 22,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 14
+      },
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 5
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 3
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/shiori-novella/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCgnfPPb9JI3e9A4cXHnWbyg",
+      "checkedAt": "2026-09-13T04:51:44Z"
+    }
+  ],
+  "createdAt": "2026-09-13T04:51:44Z",
+  "updatedAt": "2026-09-13T04:51:44Z"
+}

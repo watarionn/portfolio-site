@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_fuwamoco",
+  "slug": "fuwamoco",
+  "displayName": "FUWAMOCO",
+  "nameJa": "フワワ・アビスガード／モココ・アビスガード",
+  "channelId": "UCt9H_RpQzhxzlyBxFqrdHqA",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCt9H_RpQzhxzlyBxFqrdHqA",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_v-whh_8na5c0",
+      "slug": "fuwamoco-whh-8na5c0",
+      "videoId": "-WHH_8nA5C0",
+      "title": "塗るだけでは隠れられない　FUWAMOCOが学んだカメレオン式かくれんぼ",
+      "summaryOneLine": "にぎやかな大人数戦を結果だけで追わず、カモフラージュが色、地形、時間、囮の四つを調整する情報戦だと分かる",
+      "streamType": "game",
+      "publishedAt": "2026-06-30T00:00:06.000Z",
+      "durationSeconds": 7949,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_1auotcneqww",
+      "slug": "fuwamoco-1auotcneqww",
+      "videoId": "1AuOtcneQww",
+      "title": "最後まで着替えて、撮って、ありがとうを言う　FUWAMOCOのHoloearth送別配信",
+      "summaryOneLine": "終了告知そのものではなく、FUWAMOCOが『最後だから見る』だけで終わらせず、着替える・撮る・遊ぶ・感謝するという形で思い出を作り直した流れを読める",
+      "streamType": "event",
+      "publishedAt": "2026-06-28T11:17:31.000Z",
+      "durationSeconds": 2841,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-kfxs2fjl2o",
+      "slug": "fuwamoco-kfxs2fjl2o",
+      "videoId": "-KfXS2FJl2o",
+      "title": "鍛冶の準備がダンジョン攻略を支える　Fuwawa視点で追うENigmatic Recollection",
+      "summaryOneLine": "パズルや戦闘だけでなく、事前の調達、製作、交易、パーティ編成が共同攻略の成功条件になったことが分かる",
+      "streamType": "game",
+      "publishedAt": "2026-05-27T00:56:24.000Z",
+      "durationSeconds": 7237,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_osmekrfbcxy",
+      "slug": "fuwamoco-osmekrfbcxy",
+      "videoId": "OSMeKRfbCXY",
+      "title": "FUWAMOCOが香りを紹介　双子で違うフレグランスと記憶をたどるクイズ",
+      "summaryOneLine": "FUWAMOCOそれぞれの香りの構成と本人たちの感想、試香、クイズを原文の時刻とともに追い、商品説明と推量を区別できる。",
+      "streamType": "event",
+      "publishedAt": "2026-05-21T10:55:29.000Z",
+      "durationSeconds": 4279,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0iostcfaq6k",
+      "slug": "fuwamoco-0iostcfaq6k",
+      "videoId": "0IosTcfAq6k",
+      "title": "一人用RPGが声の協力戦になる　FUWAMOCO×Ceciliaの『Chrono Trigger』",
+      "summaryOneLine": "長尺RPG collabの価値を物語要約ではなく、知識と操作を共有可能な手順へ変える三人の連携として読める",
+      "streamType": "game",
+      "publishedAt": "2026-04-27T00:55:22.000Z",
+      "durationSeconds": 15657,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_2e9r_jxip_0",
+      "slug": "fuwamoco-2e9r-jxip-0",
+      "videoId": "2E9r_JxiP_0",
+      "title": "300円のおにぎり屋、具材を増やして売り切れへ　MOCOCOの店舗運営",
+      "summaryOneLine": "長時間の店舗運営から、価格への反応、梅干しなど具材の話、売り切れまでの変化を代表場面で追える",
+      "streamType": "game",
+      "publishedAt": "2026-04-22T00:55:09.000Z",
+      "durationSeconds": 13622,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 68,
+    "soloCount": 68,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 26
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 20
+      },
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 12
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 10
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/fuwamoco/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCt9H_RpQzhxzlyBxFqrdHqA",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

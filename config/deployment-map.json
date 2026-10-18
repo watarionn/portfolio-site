@@ -257,6 +257,11 @@
       "id": "reference-shape-editor",
       "sourceRoot": "tools/reference-shape-editor",
       "productionRoot": "reference-shape-editor"
+    },
+    {
+      "id": "yofukashi-obake-town",
+      "sourceRoot": "works/yofukashi-obake-town/public",
+      "productionRoot": "yofukashi-obake-town"
     }
   ],
   "aliases": [

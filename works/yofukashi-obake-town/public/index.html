@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#141b2d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="おばけ町">
+  <meta name="description" content="3つつなげて育てる、かわいい幽霊たちの小さな箱庭パズル。完全オフラインで遊べる。">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="stylesheet" href="./style.css">
+  <title>よふかしおばけ町</title>
+  <script defer src="./game.js"></script>
+</head>
+<body>
+  <div class="sky-dots" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand-mark" aria-hidden="true"><span class="mark-moon">☾</span><span class="mark-ghost">●</span></div>
+      <div class="brand-copy"><div class="eyebrow">A LITTLE MIDNIGHT WORLD</div><h1>よふかし<span>おばけ町</span></h1></div>
+      <button class="icon-button" id="helpBtn" type="button" aria-label="あそびかたを見る" title="あそびかた">?</button>
+    </header>
+    <main class="main-layout">
+      <section class="play-column" aria-label="ゲーム盤面">
+        <div class="hud">
+          <div class="stat"><span>町の評判</span><strong id="scoreValue">0</strong></div>
+          <div class="stat"><span>おこづかい</span><strong id="coinValue">0 <small>☾</small></strong></div>
+          <div class="stat"><span>人口</span><strong id="citizenValue">0 <small>匹</small></strong></div>
+        </div>
+        <div class="town-scene" id="townScene">
+          <div class="scene-header"><div class="scene-location"><span class="signal-dot"></span><span id="districtName">月の裏通り</span></div><div class="scene-night" id="turnValue">01 夜目</div></div>
+          <div class="moon-disc" aria-hidden="true"></div>
+          <div class="skyline" aria-hidden="true"><span>♟</span><span>▥</span><span>♜</span><span>▥</span><span>♟</span></div>
+          <div class="board-wrap"><div id="board" class="board" role="grid" aria-label="5×5の町。空き地をタップして建物を置く"></div><div class="board-float" id="boardFloat" aria-live="polite"></div></div>
+          <div class="street-info"><span>おばけ町 / ひとまず平和</span><span id="weatherText">☾ 星の多い夜</span></div>
+        </div>
+        <div class="message-strip" aria-live="polite"><span class="ghost-face" aria-hidden="true">◕</span><p id="narrator">空き地に建物を置いてみよう。3つつながると進化するよ！</p></div>
+        <div class="next-panel"><div class="next-heading"><span>つぎに建てる</span><span class="next-hint">空き地をタップ</span></div><div class="next-row"><div class="next-tile current" id="next0"><span class="tile-emoji">🕯️</span><small>灯り</small></div><div class="next-arrow" aria-hidden="true">→</div><div class="next-tile future" id="next1"><span class="tile-emoji">🕯️</span><small>灯り</small></div><div class="next-tile future" id="next2"><span class="tile-emoji">🕯️</span><small>灯り</small></div><div class="next-footnote">３つ以上つなげて<br><b>どんどん進化！</b></div></div></div>
+        <div class="tools" aria-label="ゲーム操作"><button id="undoBtn" type="button" class="tool-button"><span class="tool-icon">↶</span><span>１手もどす</span><small>☾ 6</small></button><button id="broomBtn" type="button" class="tool-button"><span class="tool-icon">✳</span><span id="broomLabel">おそうじ</span><small>☾ 12</small></button><button id="rerollBtn" type="button" class="tool-button"><span class="tool-icon">⤨</span><span>引きなおし</span><small>☾ 4</small></button></div>
+        <div class="bottom-instructions"><span id="saveStatus">● 自動保存</span><span>通信不要で遊べる</span></div>
+      </section>
+      <aside class="side-column" aria-label="町の記録">
+        <div class="side-head"><span>町役場の掲示板</span><span class="small-star">✧</span></div>
+        <section class="goal-panel"><div class="panel-kicker">NEXT DISCOVERY</div><div class="goal-main"><span id="goalEmoji">🌲</span><div><div id="goalName">夜の森を発見しよう</div><p id="goalDesc">同じ建物を3つ集めて合体！</p></div></div><div class="progress-track"><div id="goalProgress"></div></div><div class="progress-text" id="goalFraction">0 / 3 種類発見</div></section>
+        <section class="album-panel"><div class="section-title"><h2>町の発見ノート</h2><button type="button" id="albumBtn" class="text-button">図鑑をひらく ↗</button></div><div id="albumPreview" class="album-preview"></div><p class="muted">はじめて作った建物は、図鑑にずっと残るよ。</p></section>
+        <section class="residents-panel"><div class="section-title"><h2>住人のようす</h2><span class="resident-count" id="residentCount">まだ静か</span></div><div id="residentList" class="resident-list"><p class="muted">おばけ小屋ができたら、誰かが引っ越してくるかも。</p></div></section>
+        <section class="records-panel"><div class="section-title"><h2>ちいさな記録</h2><button type="button" id="newGameBtn" class="text-button">はじめから ↺</button></div><div class="record-grid"><div><span>最高評判</span><strong id="bestScore">0</strong></div><div><span>最高連鎖</span><strong id="bestCombo">0</strong></div><div><span>発見した建物</span><strong id="discoveryCount">1 / 9</strong></div><div><span>町の開発回数</span><strong id="totalMoves">0</strong></div></div></section>
+        <section class="mode-panel"><span>あそび方を選ぶ</span><div class="mode-switch" role="group" aria-label="ゲームモード"><button id="freeModeBtn" type="button" class="selected">ふつうの夜</button><button id="dailyModeBtn" type="button">きょうの夜</button></div><p id="modeInfo">気ままに町づくり。何度でも挑戦できるよ。</p></section>
+        <div class="side-footer"><span>✦ 夜更けの開発日誌 ✦</span><button id="soundBtn" class="text-button" type="button" aria-pressed="false">♪ 音をオン</button></div>
+      </aside>
+    </main>
+    <footer class="page-footer">YO FUKASHI OBAKE TOWN · MADE FOR A QUIET NIGHT</footer>
+  </div>
+  <dialog id="helpDialog" class="game-dialog"><div class="dialog-inside"><div class="dialog-eyebrow">HOW TO PLAY</div><h2>おばけ町へようこそ。</h2><p>ここは、まだ何もない夜の町。ちいさな灯りから始めて、幽霊たちが暮らす不思議な町を育てよう。</p><div class="how-to-step"><span>01</span><div><strong>空き地をタップして建てる</strong><p>下に表示された「つぎに建てる」建物が置かれるよ。</p></div></div><div class="how-to-step"><span>02</span><div><strong>同じ建物を３つ以上つなげる</strong><p>上下左右につながった建物が、ひとつ上の建物に進化！ 連鎖も狙えるよ。</p></div></div><div class="how-to-step"><span>03</span><div><strong>図鑑を埋めて、町を大きく！</strong><p>進化でおこづかいをもらえる。おそうじ・もどす・引きなおしもうまく使おう。</p></div></div><p class="dialog-note">進行状況はこの端末に自動保存。音は初期状態でオフだよ。</p><button id="closeHelpBtn" class="primary-button" type="button">町づくりをはじめる ✦</button></div></dialog>
+  <dialog id="albumDialog" class="game-dialog"><div class="dialog-inside"><div class="dialog-eyebrow">THE TOWN ARCHIVE</div><h2>おばけ町の発見図鑑</h2><p>一度見つけた建物は、何度やり直しても忘れない。</p><div id="albumList" class="album-list"></div><div class="achievements-section"><h3>町のうわさ</h3><div id="achievementsList"></div></div><button id="closeAlbumBtn" class="primary-button" type="button">町に戻る</button></div></dialog>
+  <dialog id="endDialog" class="game-dialog"><div class="dialog-inside end-inside"><div class="dialog-eyebrow">THE TOWN IS FULL</div><div class="end-ghost" aria-hidden="true">👻</div><h2>町がぎゅうぎゅう！</h2><p id="endDescription">おばけたちは引っ越し先を探しているみたい。</p><div class="end-score"><span>今回の町の評判</span><strong id="finalScore">0</strong></div><button id="retryBtn" type="button" class="primary-button">新しい町をつくる ✦</button><button id="endUndoBtn" type="button" class="quiet-button">ひとつ前にもどる（☾ 6）</button><button id="endCloseBtn" type="button" class="quiet-button">町をながめる</button></div></dialog>
+  <dialog id="confirmDialog" class="game-dialog"><div class="dialog-inside"><div class="dialog-eyebrow">A FRESH START</div><h2>新しい町をつくる？</h2><p>今の盤面はリセットされるよ。発見図鑑と最高記録はそのまま残るから安心してね。</p><button id="confirmResetBtn" type="button" class="primary-button">新しい町をつくる</button><button id="cancelResetBtn" type="button" class="quiet-button">やっぱり続ける</button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

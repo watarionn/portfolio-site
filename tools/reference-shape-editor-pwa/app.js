@@ -574,7 +574,7 @@
       });
       if(doc){const data=validateImport(doc);let img=null;
         if(data.project.imageData){img=await decodeImage(data.project.imageData);if(img.naturalWidth!==data.project.width||img.naturalHeight!==data.project.height)throw Error('保存画像の寸法が一致しません');}
-        state.project=data.project;cachedBitmap=img;state.lastName=data.project.imageName?.replace(/\\.[^.]+$/,'')||'無題の手本';state.underlayOpacity=data.opacity;
+        state.project=data.project;cachedBitmap=img;state.lastName=data.project.imageName?.replace(/\.[^.]+$/,'')||'無題の手本';state.underlayOpacity=data.opacity;
         $('opacity').value=Math.round(data.opacity*100);state.history=[];state.future=[];state.selected=null;state.selectedVertex=null;state.draft=[];autoFit();
         status('端末内の自動保存から復元しました');toast('前回の作業を自動復元しました');
       }

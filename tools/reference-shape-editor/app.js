@@ -145,6 +145,12 @@
     state.layerSelection.clear();state.selected=shapes.at(-1).id;render();
     toast(shapes.length+'図形を1つの複合レイヤに統合しました');
   }
+  function toggleGroupVisibility(id){
+    const group=state.project.layerGroups.find(g=>g.id===id);if(!group)return;
+    const members=state.project.shapes.filter(s=>group.shapeIds.includes(s.id));if(!members.length)return;
+    const visible=members.some(s=>s.visible);saveHistory();
+    members.forEach(s=>s.visible=!visible);render();
+  }
   function ungroupLayer(id){
     const group=state.project.layerGroups.find(g=>g.id===id);if(!group)return;
     saveHistory();state.project.layerGroups=state.project.layerGroups.filter(g=>g.id!==id);
@@ -249,7 +255,9 @@
       const sub=document.createElement('small');sub.className='layer-number';sub.textContent=entry.group?entry.shapeIds.length+' 図形 · 複合レイヤ':entry.shapeIds.length+' 図形 · '+s.vertexIds.length+' VERTICES';
       label.append(sub);
       const controls=document.createElement('div');controls.className='layer-controls';
-      if(entry.group){const un=document.createElement('button');un.type='button';un.textContent='分割';un.title='複合レイヤを分割';un.addEventListener('click',e=>{e.stopPropagation();ungroupLayer(entry.group.id)});controls.append(un);}
+      if(entry.group){
+        const eye=document.createElement('button');eye.type='button';eye.textContent=entry.shapeIds.some(id=>state.project.shapes.find(s=>s.id===id)?.visible)?'◉':'○';eye.title='複合レイヤの表示を切り替え';eye.addEventListener('click',e=>{e.stopPropagation();toggleGroupVisibility(entry.group.id)});controls.append(eye);
+        const un=document.createElement('button');un.type='button';un.textContent='分割';un.title='複合レイヤを分割';un.addEventListener('click',e=>{e.stopPropagation();ungroupLayer(entry.group.id)});controls.append(un);}
       else{const eye=document.createElement('button');eye.textContent=s.visible?'◉':'○';eye.title='表示を切り替え';eye.addEventListener('click',e=>{e.stopPropagation();updateVisibility(s.id)});controls.append(eye);}
       row.addEventListener('click',()=>{state.selected=s.id;state.selectedVertex=null;changeTool('select');render()});
       row.append(drag,checkbox,sw,label,controls);layer.append(row);
@@ -286,7 +294,7 @@
     saveHistory();
     if(index<0){colors.push(value);state.paletteEditIndex=colors.length-1;}
     else colors[index]=value;
-    changeColor(value,'palette');renderPalette();
+    renderPalette();
     toast(index<0?'パレットに追加しました':'パレットの色を更新しました');
   }
   function paletteDelete(){
@@ -435,7 +443,15 @@
     const src=json.metadata?.colors||json.colors||json.palette||json;
     let data={};if(Array.isArray(src))data={characteristic:src,featured:src,representative:src};
     else data={characteristic:src.characteristic||src.characteristicColors||src.featured||src.colors||[],featured:src.featured||src.featuredColors||[],representative:src.representative||src.dominant||src.representativeColors||src.colors||[]};
-    let n=0;for(const key of ['characteristic','featured','representative']){const colors=paletteColors(data[key]);if(colors.length){state.project.palette[key]=colors;n+=colors.length}}if(!n)throw Error('対応する色配列がありません（RGB配列、hex、colors、metadata.colors）');saveHistory();state.project.palette.unified=combinedPalette(state.project.palette);state.paletteEditIndex=-1;state.project.palette.imported=true;render();toast(`${n}色の外部パレット候補を読み込みました`);
+    const changes={};let n=0;
+    for(const key of ['characteristic','featured','representative']){
+      const colors=paletteColors(data[key]);if(colors.length){changes[key]=colors;n+=colors.length}
+    }
+    if(!n)throw Error('対応する色配列がありません（RGB配列、hex、colors、metadata.colors）');
+    saveHistory();Object.assign(state.project.palette,changes);
+    state.project.palette.unified=combinedPalette(state.project.palette);
+    state.paletteEditIndex=-1;state.project.palette.imported=true;
+    render();toast(`${n}色の外部パレット候補を読み込みました`);
   }
   async function loadPaletteFile(file){if(!file)return;try{const s=await file.text();importPalette(JSON.parse(s))}catch(e){toast('色パレット読込エラー: '+e.message,5)}}
   function saveProject(){const p=state.project;const doc={schema:'reference-shape-editor/v1',savedAt:new Date().toISOString(),appVersion:APP_VERSION,canvas:{width:p.width,height:p.height},image:{name:p.imageName,dataURL:p.imageData},backgroundOpacity:state.underlayOpacity,vertices:p.vertices,shapes:p.shapes,layerGroups:p.layerGroups,palette:p.palette,nextCounter:p.counter};download(new Blob([JSON.stringify(doc,null,2)],{type:'application/json'}),exportBase()+'.json');status('編集可能なJSONを保存しました')}

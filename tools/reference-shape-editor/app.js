@@ -257,9 +257,67 @@
   }
   function updateVisibility(id){const s=state.project.shapes.find(x=>x.id===id);if(!s)return;saveHistory();s.visible=!s.visible;render()}
   function paletteColors(arr){return (arr||[]).map(rgbFromColor).filter(Boolean).filter((c,i,a)=>a.indexOf(c)===i).slice(0,PALETTE_LIMIT)}
+  const PALETTE_MAX=64;
+  function combinedPalette(palette){
+    return [...new Set(['characteristic','featured','representative'].flatMap(k=>paletteColors(palette[k])))].slice(0,PALETTE_MAX);
+  }
+  function paletteUnified(){
+    const p=state.project.palette;
+    if(!Array.isArray(p.unified))p.unified=combinedPalette(p);
+    return p.unified;
+  }
+  function selectPaletteColor(index){
+    const colors=paletteUnified();if(index<0||index>=colors.length)return;
+    state.paletteEditIndex=index;$('paletteEditColor').value=colors[index];$('paletteEditHex').value=colors[index];
+    changeColor(colors[index],'palette');
+  }
+  function paletteEditReset(){
+    state.paletteEditIndex=-1;
+    $('paletteEditHex').value=state.color;
+    $('paletteEditColor').value=state.color;
+    renderPalette();
+  }
+  function paletteSave(){
+    const value=cleanColor($('paletteEditHex').value.trim());
+    if(!value){toast('色は #RRGGBB の形式で指定してください');return}
+    const colors=paletteUnified(),index=state.paletteEditIndex;
+    if(colors.some((c,i)=>c===value && i!==index)){toast('同じ色は既にパレットにあります');return}
+    if(index<0 && colors.length>=PALETTE_MAX){toast('パレットは最大64色です');return}
+    saveHistory();
+    if(index<0){colors.push(value);state.paletteEditIndex=colors.length-1;}
+    else colors[index]=value;
+    changeColor(value,'palette');renderPalette();
+    toast(index<0?'パレットに追加しました':'パレットの色を更新しました');
+  }
+  function paletteDelete(){
+    const index=state.paletteEditIndex,colors=paletteUnified();
+    if(index<0||index>=colors.length)return;
+    saveHistory();colors.splice(index,1);state.paletteEditIndex=-1;
+    renderPalette();toast('パレットから削除しました（図形の塗り色は維持）');
+  }
   function renderPalette(){
+    const unified=$('unifiedColors');unified.replaceChildren();
+    const colors=paletteUnified();
+    colors.forEach((c,i)=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.className='swatch'+(state.color===c?' active':'')+(state.paletteEditIndex===i?' editing':'');
+      b.style.setProperty('--swatch',c);
+      b.title=c+'（タップで選択・編集）';b.ariaLabel=c+' パレット色を選択';
+      b.addEventListener('click',()=>selectPaletteColor(i));unified.append(b);
+    });
+    $('unifiedCount').textContent=colors.length+'色';
+    $('paletteSave').textContent=state.paletteEditIndex<0?'＋ 追加':'色を更新';
+    $('paletteDelete').disabled=state.paletteEditIndex<0;
     for(const [key,elem] of [['characteristic','characteristicColors'],['featured','featuredColors'],['representative','representativeColors']]){
-      const box=$(elem);box.replaceChildren();for(const c of state.project.palette[key]){const b=document.createElement('button');b.className='swatch'+(state.color===c?' active':'');b.style.setProperty('--swatch',c);b.title=c+' を選ぶ';b.ariaLabel=c+' 塗り色';b.addEventListener('click',()=>changeColor(c,key));box.append(b)}
+      const box=$(elem);box.replaceChildren();
+      for(const c of state.project.palette[key]){
+        const b=document.createElement('button');
+        b.className='swatch'+(state.color===c?' active':'');
+        b.style.setProperty('--swatch',c);b.title=c+' を選ぶ';b.ariaLabel=c+' 塗り色';
+        b.addEventListener('click',()=>{state.paletteEditIndex=-1;$('paletteEditHex').value=c;$('paletteEditColor').value=c;changeColor(c,key)});
+        box.append(b);
+      }
     }
     $('colorName').textContent=state.color.toUpperCase();$('colorPicker').value=state.color;
     $('charLabel').textContent=state.project.palette.imported?'読み込み済み':state.project.imageData?'ブラウザ推定':'画像待ち';
@@ -368,7 +426,7 @@
     try{
       const data=await readFileAsDataUrl(file),image=await decodeImage(data);if(image.naturalWidth>12000||image.naturalHeight>12000)throw Error('画像が大きすぎます (上限12000px)');
       cachedBitmap=image;state.project=newProject(image.naturalWidth,image.naturalHeight);state.project.imageName=file.name;state.project.imageData=data;
-      state.lastName=file.name.replace(/\.[^.]+$/,'');state.project.palette=extractPalette(image);state.draft=[];state.history=[];state.future=[];state.selected=null;state.selectedVertex=null;state.cursor=null;autoFit();status('画像を読み込みました · 色パレットを抽出しました');toast('画像を読み込みました。クリックして頂点を置けます');
+      state.lastName=file.name.replace(/\.[^.]+$/,'');state.project.palette=extractPalette(image);state.project.palette.unified=combinedPalette(state.project.palette);state.layerSelection.clear();state.paletteEditIndex=-1;state.draft=[];state.history=[];state.future=[];state.selected=null;state.selectedVertex=null;state.cursor=null;autoFit();status('画像を読み込みました · 色パレットを抽出しました');toast('画像を読み込みました。クリックして頂点を置けます');
     }catch(e){toast(`読み込みに失敗: ${e.message}`,5)}
   }
   function readFileAsDataUrl(f){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(Error('ファイルを読み込めません'));r.readAsDataURL(f)})}
@@ -377,10 +435,10 @@
     const src=json.metadata?.colors||json.colors||json.palette||json;
     let data={};if(Array.isArray(src))data={characteristic:src,featured:src,representative:src};
     else data={characteristic:src.characteristic||src.characteristicColors||src.featured||src.colors||[],featured:src.featured||src.featuredColors||[],representative:src.representative||src.dominant||src.representativeColors||src.colors||[]};
-    let n=0;for(const key of ['characteristic','featured','representative']){const colors=paletteColors(data[key]);if(colors.length){state.project.palette[key]=colors;n+=colors.length}}if(!n)throw Error('対応する色配列がありません（RGB配列、hex、colors、metadata.colors）');state.project.palette.imported=true;render();toast(`${n}色の外部パレット候補を読み込みました`);
+    let n=0;for(const key of ['characteristic','featured','representative']){const colors=paletteColors(data[key]);if(colors.length){state.project.palette[key]=colors;n+=colors.length}}if(!n)throw Error('対応する色配列がありません（RGB配列、hex、colors、metadata.colors）');saveHistory();state.project.palette.unified=combinedPalette(state.project.palette);state.paletteEditIndex=-1;state.project.palette.imported=true;render();toast(`${n}色の外部パレット候補を読み込みました`);
   }
   async function loadPaletteFile(file){if(!file)return;try{const s=await file.text();importPalette(JSON.parse(s))}catch(e){toast('色パレット読込エラー: '+e.message,5)}}
-  function saveProject(){const p=state.project;const doc={schema:'reference-shape-editor/v1',savedAt:new Date().toISOString(),appVersion:APP_VERSION,canvas:{width:p.width,height:p.height},image:{name:p.imageName,dataURL:p.imageData},backgroundOpacity:state.underlayOpacity,vertices:p.vertices,shapes:p.shapes,palette:p.palette,nextCounter:p.counter};download(new Blob([JSON.stringify(doc,null,2)],{type:'application/json'}),exportBase()+'.json');status('編集可能なJSONを保存しました')}
+  function saveProject(){const p=state.project;const doc={schema:'reference-shape-editor/v1',savedAt:new Date().toISOString(),appVersion:APP_VERSION,canvas:{width:p.width,height:p.height},image:{name:p.imageName,dataURL:p.imageData},backgroundOpacity:state.underlayOpacity,vertices:p.vertices,shapes:p.shapes,layerGroups:p.layerGroups,palette:p.palette,nextCounter:p.counter};download(new Blob([JSON.stringify(doc,null,2)],{type:'application/json'}),exportBase()+'.json');status('編集可能なJSONを保存しました')}
   function validateImport(x){
     if(x?.schema!=='reference-shape-editor/v1')throw Error('非対応のプロジェクト形式です');const w=x.canvas?.width,h=x.canvas?.height;
     if(!Number.isInteger(w)||!Number.isInteger(h)||w<1||h<1||w>12000||h>12000)throw Error('キャンバスサイズが不正です');
@@ -389,10 +447,21 @@
     const vertices=Object.create(null);for(const [id,v] of Object.entries(x.vertices)){if(!/^[A-Za-z0-9_-]{1,50}$/.test(id)||!finite(v?.x)||!finite(v?.y)||Math.abs(v.x)>100000||Math.abs(v.y)>100000)throw Error('頂点が不正です');vertices[id]={x:round(v.x),y:round(v.y)}}
     const ids=new Set(),shapes=x.shapes.map(s=>{if(typeof s.id!=='string'||ids.has(s.id)||!Array.isArray(s.vertexIds)||s.vertexIds.length<3||s.vertexIds.length>20000||!s.vertexIds.every(id=>Object.hasOwn(vertices,id))||new Set(s.vertexIds).size<3)throw Error('図形の頂点参照が不正です');const fill=cleanColor(s.fill);if(!fill)throw Error('図形の色が不正です');ids.add(s.id);return {id:s.id,name:String(s.name||'図形').slice(0,80),vertexIds:s.vertexIds.slice(),fill,visible:s.visible!==false}});
     const palette={characteristic:paletteColors(x.palette?.characteristic),featured:paletteColors(x.palette?.featured),representative:paletteColors(x.palette?.representative),imported:!!x.palette?.imported};
-    return {project:{version:APP_VERSION,width:w,height:h,imageName:String(x.image?.name||'imported.png').slice(0,250),imageData:x.image?.dataURL||null,vertices,shapes,counter:Number.isInteger(x.nextCounter)&&x.nextCounter>=0?x.nextCounter:1000000,palette},opacity:clamp(Number(x.backgroundOpacity)||.35,0,1)};
+    palette.unified=Array.isArray(x.palette?.unified)?[...new Set(x.palette.unified.map(rgbFromColor).filter(Boolean))].slice(0,PALETTE_MAX):combinedPalette(palette);
+    // Composite layers contain only valid polygon IDs, with no overlap between groups.
+    const groupedIds=new Set(),groupNames=new Set();
+    const layerGroups=[];
+    if(x.layerGroups!==undefined&&!Array.isArray(x.layerGroups))throw Error('複合レイヤー形式が不正です');
+    for(const g of x.layerGroups||[]){
+      if(!g||typeof g.id!=='string'||!/^[A-Za-z0-9_-]{1,50}$/.test(g.id)||groupNames.has(g.id)||!Array.isArray(g.shapeIds)||g.shapeIds.length<2)throw Error('複合レイヤー形式が不正です');
+      if(!g.shapeIds.every(id=>ids.has(id)&&!groupedIds.has(id))||new Set(g.shapeIds).size!==g.shapeIds.length)throw Error('複合レイヤーの図形参照が不正です');
+      g.shapeIds.forEach(id=>groupedIds.add(id));groupNames.add(g.id);
+      layerGroups.push({id:g.id,name:String(g.name||'統合レイヤ').slice(0,80),shapeIds:g.shapeIds.slice()});
+    }
+    return {project:{version:APP_VERSION,width:w,height:h,imageName:String(x.image?.name||'imported.png').slice(0,250),imageData:x.image?.dataURL||null,vertices,shapes,layerGroups,counter:Number.isInteger(x.nextCounter)&&x.nextCounter>=0?x.nextCounter:1000000,palette},opacity:clamp(Number(x.backgroundOpacity)||.35,0,1)};
   }
   async function loadProject(file){if(!file)return;try{const text=await file.text();const data=validateImport(JSON.parse(text));let img=null;if(data.project.imageData){img=await decodeImage(data.project.imageData);if(img.naturalWidth!==data.project.width||img.naturalHeight!==data.project.height)throw Error('元画像とキャンバス寸法が一致しません')}
-      state.project=data.project;cachedBitmap=img;state.lastName=data.project.imageName.replace(/\.[^.]+$/,'');state.underlayOpacity=data.opacity;$('opacity').value=Math.round(data.opacity*100);state.selected=null;state.selectedVertex=null;state.draft=[];state.history=[];state.future=[];changeTool('draw');autoFit();toast('編集状態を復元しました');status('JSONプロジェクトを開きました');
+      state.project=data.project;state.layerSelection.clear();state.paletteEditIndex=-1;cachedBitmap=img;state.lastName=data.project.imageName.replace(/\.[^.]+$/,'');state.underlayOpacity=data.opacity;$('opacity').value=Math.round(data.opacity*100);state.selected=null;state.selectedVertex=null;state.draft=[];state.history=[];state.future=[];changeTool('draw');autoFit();toast('編集状態を復元しました');status('JSONプロジェクトを開きました');
     }catch(e){toast('プロジェクト読込エラー: '+e.message,6)}}
   function outputSvg(){const p=state.project;const shapes=p.shapes.filter(s=>s.visible).map(s=>`  <polygon points="${escapeXml(shapeCoords(s))}" fill="${s.fill}" data-shape-name="${escapeXml(s.name)}"/>`).join('\n');return `<svg xmlns="http://www.w3.org/2000/svg" width="${p.width}" height="${p.height}" viewBox="0 0 ${p.width} ${p.height}">\n${shapes}\n</svg>\n`}
   function exportSvg(){download(new Blob([outputSvg()],{type:'image/svg+xml;charset=utf-8'}),exportBase()+'.svg');toast('SVGを書き出しました（下敷き画像を含みません）')}
@@ -404,13 +473,20 @@
     $('sourceInput').addEventListener('change',e=>{loadImage(e.target.files[0]);e.target.value=''});
     $('projectInput').addEventListener('change',e=>{loadProject(e.target.files[0]);e.target.value=''});
     $('paletteInput').addEventListener('change',e=>{loadPaletteFile(e.target.files[0]);e.target.value=''});
+    $('paletteEditColor').addEventListener('input',e=>{$('paletteEditHex').value=e.target.value;});
+    $('paletteEditHex').addEventListener('change',e=>{const c=cleanColor(e.target.value.trim());if(c)$('paletteEditColor').value=c});
+    $('paletteSave').addEventListener('click',paletteSave);
+    $('paletteDelete').addEventListener('click',paletteDelete);
+    $('paletteCancel').addEventListener('click',paletteEditReset);
+    $('mergeLayers').addEventListener('click',mergeLayerSelection);
+    $('clearLayerSelection').addEventListener('click',()=>{state.layerSelection.clear();renderLayerList()});
     $('finishPolygon').addEventListener('click',finishPolygon);$('cancelDraft').addEventListener('click',()=>{state.draft=[];render()});$('removeDraftPoint').addEventListener('click',()=>{state.draft.pop();render()});
     $('undo').addEventListener('click',undo);$('redo').addEventListener('click',redo);
     $('fit').addEventListener('click',fit);
     $('fitWidth').addEventListener('click',fitWidth);
     $('zoomIn').addEventListener('click',()=>zoomCenter(1.35));
     $('zoomOut').addEventListener('click',()=>zoomCenter(1/1.35));
-    $('verticalNav').addEventListener('input',e=>{const travel=Math.max(0,state.project.height-state.view.h);state.view.y=travel*(Number(e.target.value)/100);render()});$('opacity').addEventListener('input',e=>{state.underlayOpacity=e.target.value/100;render()});$('showUnderlay').addEventListener('change',e=>{state.showUnderlay=e.target.checked;render()});$('showGrid').addEventListener('change',e=>{state.showGrid=e.target.checked;render()});
+    $('opacity').addEventListener('input',e=>{state.underlayOpacity=e.target.value/100;render()});$('showUnderlay').addEventListener('change',e=>{state.showUnderlay=e.target.checked;render()});$('showGrid').addEventListener('change',e=>{state.showGrid=e.target.checked;render()});
     $('snapEnabled').addEventListener('change',e=>{state.snapEnabled=e.target.checked;render()});$('snapRadius').addEventListener('input',e=>{state.snapRadius=+e.target.value;render()});$('colorPicker').addEventListener('change',e=>changeColor(e.target.value));
     $('exportSvg').addEventListener('click',exportSvg);$('exportPng').addEventListener('click',exportPng);$('saveProject').addEventListener('click',saveProject);
     $('stage').addEventListener('pointerdown',onPointerDown);$('stage').addEventListener('pointermove',onPointerMove);$('stage').addEventListener('pointerup',onPointerUp);$('stage').addEventListener('pointercancel',onPointerUp);$('stage').addEventListener('dblclick',insertEdgeVertex);
@@ -436,7 +512,7 @@
 
   setBindings();if(window.matchMedia('(max-width:760px)').matches)$('inspector').classList.add('collapsed');state.view={x:0,y:0,w:INITIAL_WIDTH,h:INITIAL_HEIGHT};changeTool('draw');refreshUndo();
   window.ReferenceShapeEditor=Object.freeze({
-    getState:()=>JSON.parse(JSON.stringify({project:state.project,selected:state.selected,mode:state.mode,draft:state.draft,view:state.view})),
+    getState:()=>JSON.parse(JSON.stringify({project:state.project,selected:state.selected,layerSelection:[...state.layerSelection],mode:state.mode,draft:state.draft,view:state.view})),
     importPalette,
     validateImport,
     outputSvg,

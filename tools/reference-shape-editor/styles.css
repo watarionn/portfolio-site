@@ -39,3 +39,10 @@
 .layer .layer-label{white-space:normal;line-height:1.45;}
 .layer-controls button{white-space:nowrap;}
 @media(max-width:760px){.panel-accordion summary{padding:14px}.panel-accordion .accordion-content{padding:0 14px 15px}.layer-drag{min-height:40px}.layer-check{height:20px;width:20px}}
+
+/* Mobile: keep the action toolbar, but remove the oversized decorative brand row. */
+@media (max-width:760px){
+  .app-head{min-height:0;padding:7px 8px;gap:0}
+  .app-head .brand{display:none}
+  .app-head .top-actions{flex:1 1 100%;width:100%;justify-content:flex-start;gap:4px}
+}

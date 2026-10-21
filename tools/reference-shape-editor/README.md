@@ -37,7 +37,7 @@ Minimalizer側で確定したColorStripパレットを使いたいときは、�
 - JSONスキーマ名 `reference-shape-editor/v1` を維持。レイヤー統合は追加項目 `layerGroups` で記録し、既存の `shapes` と `vertices` を破壊しません。旧JSONは `layerGroups` なしでも読めます。
 - `palette.unified` は既存の3分類と独立した、重複のないユーザー編集用パレットです。削除しても既存図形の色や元の分類候補は変化しません。
 - SVG/PNGは既存の全図形を順序通りに出力します。下敷き画像は出力に入りません。
-- `node tools/reference-shape-editor/test-core.js` で追加機能のコア回帰テスト。実際のブラウザのタッチ／ドラッグ操作は別途実機確認が必要です。
+- `node tools/test_reference_shape_editor_core.js` で追加機能のコア回帰テスト。実際のブラウザのタッチ／ドラッグ操作は別途実機確認が必要です。
 
 ## 書き出しと安全性
 

@@ -1,0 +1,20 @@
+{
+  "id": "/reference-shape-editor-pwa/",
+  "name": "Shape Studio | Reference Shape Editor",
+  "short_name": "Shape Studio",
+  "description": "自分用・オフライン対応の手描きポリゴンエディタ",
+  "lang": "ja",
+  "start_url": "/reference-shape-editor-pwa/",
+  "scope": "/reference-shape-editor-pwa/",
+  "display": "standalone",
+  "background_color": "#151719",
+  "theme_color": "#151719",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

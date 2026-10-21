@@ -4,7 +4,7 @@ Minimalizerの手本画像を作るための、ブラウザ内だけで動く手
 
 ## 開き方
 
-**最も簡単な方法**: `ReferenceShapeEditor_Standalone.html` をダブルクリックして、Chrome、EdgeまたはSafariで開く。インターネットやサーバは不要。JS/CSSもHTMLに内蔵されています。
+**最も簡単な方法**: 公開サイトの `/reference-shape-editor/` を開く。オフライン単体版は `watarionn/Minimalizer` の `web/static/reference-shape-editor.html` にあり、ダウンロードしてChrome、EdgeまたはSafariで開けます。CSS/JSをHTMLに内蔵し、サーバは不要です。
 
 **ソース版**: `index.html`、`styles.css`、`app.js` を同じディレクトリに置き、`index.html` を開く。Webサーバが必要な環境では `python -m http.server 8000` で同じ内容を確認できます。
 

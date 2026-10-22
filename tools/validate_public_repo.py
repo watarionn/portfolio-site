@@ -276,6 +276,46 @@ def main() -> None:
                 f"{number} {japanese_name} ({project_id})"
             )
 
+    # Japanese copy and homepage/profile layout contract (2026-10-22).
+    # Check specific approved UI decisions instead of rejecting grammatical
+    # Japanese commas across arbitrary text, source code, or quotations.
+    featured_section = portfolio_index.split('<div class="featured-list">', 1)
+    if len(featured_section) != 2:
+        fail("portfolio featured section is missing")
+    featured_links = re.findall(
+        r'class="featured-work__link" href="([^"]+)"',
+        featured_section[1].split("</section>", 1)[0],
+    )
+    expected_featured = [
+        "/pose-studio/",
+        "/reference-shape-editor/",
+        "/minimalizer/",
+    ]
+    if featured_links != expected_featured:
+        fail(f"portfolio featured works must be Pose/Shape/Minimalizer: {featured_links}")
+    for stale in ("システムエンジニア 4年", ">About<", "Selected / 03"):
+        if stale in portfolio_index:
+            fail(f"obsolete portfolio copy remains: {stale}")
+    profile_html = (ROOT / "profile/index.html").read_text(encoding="utf-8")
+    for stale in (
+        "システムエンジニア 4年",
+        'class="profile-intro__lead"',
+        "最初の制作物は、Visual Basicの脱出ゲーム。",
+        "「アプリ」だけでなく、仕組みそのものへ。",
+        "From first build to now",
+    ):
+        if stale in profile_html:
+            fail(f"obsolete profile copy remains: {stale}")
+    for required in ("学生時代", "システム開発と運用", "最近の個人開発"):
+        if required not in profile_html:
+            fail(f"profile timeline is missing its Japanese section: {required}")
+    homepage_css = (ROOT / "index-style.css").read_text(encoding="utf-8")
+    profile_css = (ROOT / "profile/d_profile.css").read_text(encoding="utf-8")
+    if ".recent-section .section-heading h2" not in homepage_css:
+        fail("recent updates heading must retain its compact type scale")
+    if "font-size: clamp(1.8rem, 4.5vw, 3.3rem)" not in profile_css:
+        fail("profile name must retain its compact type scale")
+
     tracked = tracked_paths()
     tracked_rel = {path.relative_to(ROOT).as_posix() for path in tracked}
 

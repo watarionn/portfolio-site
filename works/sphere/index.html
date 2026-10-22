@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>天球儀 | Sphere Blueprint Generator</title>
+<title>天球儀</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -24,14 +24,14 @@
 <section class="project-hero" aria-label="天球儀 プロジェクト概要">
   <div class="project-shell project-hero__grid">
     <div>
-      <p class="section-index">Sphere Blueprint Generator / PROJECT 03 / VOXEL + CANVAS</p>
+      <p class="section-index">球体の断面設計</p>
     </div>
     <div class="project-hero__copy">
       <p>サンドボックスゲームで球体を組むとき、立体そのものより必要なのは「各段でどこにブロックを置くか」です。直径からボクセル球を計算し、断面図と立体プレビューへ翻訳します。</p>
       <dl class="project-meta">
-        <div><dt>ROLE</dt><dd>Concept / UI / Implementation</dd></div>
-        <div><dt>CORE</dt><dd>Voxel math / Canvas projection</dd></div>
-        <div><dt>OUTPUT</dt><dd>Layer blueprint / 3D preview</dd></div>
+        <div><dt>制作範囲</dt><dd>設計・画面制作・実装</dd></div>
+        <div><dt>処理</dt><dd>ボクセル計算・Canvas描画</dd></div>
+        <div><dt>出力</dt><dd>断面図・3Dプレビュー</dd></div>
       </dl>
     </div>
   </div>
@@ -41,8 +41,8 @@
   <section class="workspace-section" aria-labelledby="workspace-title">
     <div class="project-shell workspace-heading">
       <div>
-        <p class="section-index">01 / BLUEPRINT ENGINE</p>
-        <h2 id="workspace-title">直径を決める。<br>断面で積む。<br>立体で確かめる。</h2>
+        <p class="section-index">01 / 断面図の作成</p>
+        <h2 id="workspace-title">球体の断面図と立体プレビュー</h2>
       </div>
       <div>
         <p>奇数サイズの立方グリッドへ球体を量子化し、建築に使える一段ごとの配置へ分解します。まず中央断面を見て、必要なら3Dで全体像を確認してください。</p>

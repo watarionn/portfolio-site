@@ -11,7 +11,7 @@
 <body>
 <div id="app">
   <header class="app-head">
-    <div class="brand"><span class="brand-mark" aria-hidden="true">▱</span><div><strong>REFERENCE SHAPE EDITOR</strong><small>GOLDEN TRACE STUDIO · ローカル完結</small></div></div>
+    <div class="brand"><span class="brand-mark" aria-hidden="true">▱</span><div><strong>参照図形エディター</strong><small>端末内で編集</small></div></div>
     <div class="top-actions">
       <label class="action primary" for="sourceInput" title="下敷き画像を読み込む"><span>＋</span> 画像を開く</label>
       <input type="file" id="sourceInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden/>
@@ -49,7 +49,7 @@
           <g id="draftLayer"></g>
           <g id="handleLayer"></g>
         </svg>
-        <div class="empty-state" id="emptyState"><div class="empty-icon">⌗</div><h1>輪郭を、あなたの手で。</h1><p>画像を読み込んだら、点を打って「図形化」。<br/>重なる頂点は共有できるので、細い隙間も防げます。</p><label for="sourceInput" class="big-launch">画像を選ぶ <span>↗</span></label><span class="empty-tip">ドラッグ＆ドロップにも対応 / 画像は外部送信しません</span></div>
+        <div class="empty-state" id="emptyState"><div class="empty-icon">⌗</div><h1>画像を読み込んで図形を作成</h1><p>画像を読み込んだ後、頂点を追加して「図形化」を選びます。既存の頂点を共有することもできます。</p><label for="sourceInput" class="big-launch">画像を選ぶ <span>↗</span></label><span class="empty-tip">ドラッグ＆ドロップにも対応 / 画像は外部送信しません</span></div>
         <div class="canvas-overlay-bottom"><span id="cursorInfo">x: –　y: –</span><span id="canvasStats">0 図形 · 0 頂点</span></div>
       </div>
       <div class="draftbar">
@@ -59,7 +59,7 @@
     </main>
 
     <aside class="inspector" id="inspector">
-      <div class="inspector-head"><span>INSPECTOR</span><button id="toggleInspector" class="small-quiet" title="パネルの表示を切り替え">☷</button></div>
+      <div class="inspector-head"><span>編集パネル</span><button id="toggleInspector" class="small-quiet" title="パネルの表示を切り替え">☷</button></div>
       <details class="panel-section panel-accordion">
         <summary><h2>下敷き <span>01</span></h2></summary><div class="accordion-content">
         <label class="field-row" for="opacity"><span>透過表示</span><strong id="opacityValue">35%</strong></label>

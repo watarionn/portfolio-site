@@ -14,8 +14,8 @@
   <header class="app-header">
     <div class="title-block">
       <a class="back-link" href="/#index">← 作品索引</a>
-      <h1>Asset Organizer</h1>
-      <p>画像とJSONを監査し、対応関係を崩さず安全に整理する。</p>
+      <h1>素材整理ツール</h1>
+      <p>画像とJSONの対応関係を調べ、ファイルを整理します。</p>
     </div>
     <div class="header-actions">
       <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
@@ -27,7 +27,7 @@
   <input id="folderInput" class="visually-hidden" type="file" webkitdirectory multiple accept="image/png,image/jpeg,image/webp,application/json,.png,.jpg,.jpeg,.webp,.json">
   <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
 
-  <nav class="studio-tabs" role="tablist" aria-label="Asset Organizer 画面切替">
+  <nav class="studio-tabs" role="tablist" aria-label="素材整理ツールの画面切替">
     <button class="studio-tab active" data-view="audit" role="tab" aria-selected="true">フォルダ監査</button>
     <button class="studio-tab" data-view="database" role="tab" aria-selected="false">Asset DB</button>
   </nav>
@@ -85,12 +85,12 @@
           </div>
 
           <dl class="audit-stats">
-            <div><dt>Images</dt><dd id="imageCount">0</dd></div>
+            <div><dt>画像</dt><dd id="imageCount">0</dd></div>
             <div><dt>JSON</dt><dd id="jsonCount">0</dd></div>
-            <div><dt>Pairs</dt><dd id="pairCount">0</dd></div>
-            <div><dt>Orphans</dt><dd id="orphanCount">0</dd></div>
-            <div><dt>Broken JSON</dt><dd id="brokenCount">0</dd></div>
-            <div><dt>Name collisions</dt><dd id="collisionCount">0</dd></div>
+            <div><dt>ペア</dt><dd id="pairCount">0</dd></div>
+            <div><dt>孤立ファイル</dt><dd id="orphanCount">0</dd></div>
+            <div><dt>不正なJSON</dt><dd id="brokenCount">0</dd></div>
+            <div><dt>名前の重複</dt><dd id="collisionCount">0</dd></div>
           </dl>
 
           <div id="auditList" class="asset-list empty-state">監査結果がここに並びます。</div>
@@ -117,7 +117,7 @@
           </label>
           <dl class="db-stats">
             <div><dt>登録済み</dt><dd id="dbCount">0</dd></div>
-            <div><dt>Pairs</dt><dd id="dbPairCount">0</dd></div>
+            <div><dt>ペア</dt><dd id="dbPairCount">0</dd></div>
             <div><dt>要確認</dt><dd id="dbReviewCount">0</dd></div>
           </dl>
           <button id="exportDbCsvButton" type="button">Asset DBをCSV保存</button>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ボードゲームのお題を、カテゴリ・山札・ラウンドタイマー付きで素早く引けるブラウザツール。">
-  <title>ボードゲーム単語集 | Word Draw Table</title>
+  <title>ボードゲーム単語集</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -12,36 +12,34 @@
 </head>
 <body>
   <header class="site-header">
-    <a href="/" class="home-btn">← PORTFOLIO</a>
-    <div class="site-brand"><b>010</b><span>WORD DRAW TABLE</span></div>
+    <a href="/" class="home-btn">← 個人大辞典</a>
+    <div class="site-brand"><b>010</b><span>ボードゲーム単語集</span></div>
   </header>
 
   <main class="page-shell">
     <section class="project-intro" aria-labelledby="page-title">
       <div class="intro-copy">
-        <p class="eyebrow">BOARD GAME WORD COLLECTION / CLIENT-SIDE TOOL</p>
-        <h1 id="page-title">ボードゲーム単語集</h1>
-        <p class="lead">説明系ボードゲームで使う単語を、山札として扱えるように整理したブラウザ補助器。カテゴリを絞り、カードを引き、ラウンド時間まで一つの卓上UIで管理します。</p>
+                <h1 id="page-title">ボードゲーム単語集</h1>
         <div class="intro-meta" aria-label="実装要素">
-          <span>744 DATA ROWS</span><span>11 GENRES</span><span>RANDOM DECK</span><span>ROUND TIMER</span>
+          <span>744語</span><span>11ジャンル</span><span>山札を自動作成</span><span>ラウンドタイマー</span>
         </div>
       </div>
       <div class="deck-illustration" aria-hidden="true">
         <div class="deck-stack deck-stack-a"><span>?</span></div>
         <div class="deck-stack deck-stack-b"><span>A</span></div>
         <div class="table-line"></div>
-        <p>DRAW / EXPLAIN / GUESS</p>
+        <p>単語を引く・説明する・答える</p>
       </div>
     </section>
 
     <section class="tool-stage" aria-labelledby="tool-title">
       <div class="stage-heading">
-        <div><p class="eyebrow">LIVE TOOL</p><h2 id="tool-title">WORD DRAW TABLE</h2></div>
+        <div><p class="eyebrow">単語選択</p><h2 id="tool-title">単語の山札</h2></div>
         <div class="dataset-metrics" aria-label="データセット概要">
           <span><small>KATA</small><b id="metric-kata">651</b></span>
           <span><small>EIGO</small><b id="metric-eigo">93</b></span>
-          <span><small>GENRES</small><b id="metric-genres">11</b></span>
-          <span><small>NG WORDS</small><b id="metric-ng">279</b></span>
+          <span><small>ジャンル</small><b id="metric-genres">11</b></span>
+          <span><small>禁止語</small><b id="metric-ng">279</b></span>
         </div>
       </div>
 
@@ -56,7 +54,7 @@
         </nav>
 
         <aside class="round-timer" aria-labelledby="timer-title">
-          <div class="timer-head"><span id="timer-title">ROUND TIMER</span><b id="timer-display" aria-live="polite">60</b></div>
+          <div class="timer-head"><span id="timer-title">制限時間</span><b id="timer-display" aria-live="polite">60</b></div>
           <div class="timer-presets" role="group" aria-label="制限時間">
             <button type="button" data-seconds="30">30</button>
             <button type="button" class="selected" data-seconds="60">60</button>
@@ -71,7 +69,7 @@
         <div class="play-area">
           <section class="game-panel active" id="panel-kata" role="tabpanel" aria-labelledby="tab-kata">
             <div class="filter-panel">
-              <div class="panel-label"><span>FILTER</span><b>ジャンルを選ぶ</b></div>
+              <div class="panel-label"><span>絞り込み</span><b>ジャンルを選ぶ</b></div>
               <div class="genre-grid" id="kata-genre-grid" aria-label="カタカナ禁止ジャンル"></div>
             </div>
             <div class="draw-layout">
@@ -129,7 +127,7 @@
   </main>
 
   <footer class="site-footer">
-    <span>WORD DRAW TABLE</span><span>ボードゲーム単語集 / client-side random deck</span>
+    <span>ボードゲーム単語集</span><span>ボードゲーム単語集 / client-side random deck</span>
   </footer>
 
   <script src="words_data.js" defer></script>

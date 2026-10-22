@@ -126,7 +126,7 @@ function buildKataDeck(resetCard = true) {
   updateKataDeckStatus();
   if (resetCard) {
     kataWord.textContent = '単語を引く';
-    kataGenreLabel.textContent = 'READY';
+    kataGenreLabel.textContent = '準備完了';
   }
 }
 
@@ -182,7 +182,7 @@ function buildEigoDeck(resetCard = true) {
   eigoDrawIndex.textContent = '000';
   updateEigoDeckStatus();
   if (resetCard) {
-    eigoWord.textContent = 'DRAW A WORD';
+    eigoWord.textContent = '単語を引く';
     ngList.replaceChildren();
     ngArea.hidden = true;
   }
@@ -220,7 +220,7 @@ let timerDeadline = null;
 
 function renderTimer() {
   timerDisplay.textContent = String(Math.max(0, Math.ceil(timerRemaining)));
-  timerToggle.textContent = timerInterval ? 'PAUSE' : 'START';
+  timerToggle.textContent = timerInterval ? '一時停止' : '開始';
 }
 function stopTimer() {
   if (timerInterval) window.clearInterval(timerInterval);

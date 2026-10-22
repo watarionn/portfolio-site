@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Web、データ、自動化、検索、表現の制作物をまとめた個人ポートフォリオ。">
-  <title>個人大辞典 | Portfolio</title>
+  <title>個人大辞典 | 作品一覧</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="index-style.css?v=20260924-density1">
+  <link rel="stylesheet" href="index-style.css?v=20261022-ja1">
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -16,16 +16,15 @@
   <div class="edition-rail" aria-hidden="true">
     <span>個人大辞典</span>
     <span class="edition-rail__rule"></span>
-    <span>PERSONAL ENCYCLOPEDIA</span>
+    <span>作品と制作記録</span>
   </div>
 
   <header class="masthead" id="top">
     <div class="masthead__bar page-shell">
       <a class="wordmark" href="#top" aria-label="ページ上部へ戻る">
         <span class="wordmark__jp">個人大辞典</span>
-        <span class="wordmark__en">Personal Encyclopedia</span>
       </a>
-      <p class="masthead__edition">Portfolio / Revised 2026</p>
+      <p class="masthead__edition">2026年改訂</p>
     </div>
     <h1 class="visually-hidden">個人大辞典 ポートフォリオ</h1>
   </header>
@@ -35,9 +34,9 @@
       <a href="#featured">注目作品</a>
       <a href="#index">作品索引</a>
       <a href="#recent">最近の更新</a>
-      <a href="#about">About</a>
+      <a href="#about">プロフィール</a>
       <a href="#contact">連絡先</a>
-      <span class="section-nav__page" aria-hidden="true">p. <span id="pageNum">1</span></span>
+      <span class="section-nav__page" aria-hidden="true">ページ <span id="pageNum">1</span></span>
     </div>
   </nav>
 
@@ -48,63 +47,63 @@
           <p class="section-heading__kana" aria-hidden="true">ちゅうもく</p>
           <h2 id="featured-title">注目作品</h2>
         </div>
-        <p class="section-heading__note">Selected / 03</p>
+        <p class="section-heading__note">注目3作品</p>
       </header>
 
       <div class="featured-list">
         <article class="featured-work">
-          <a class="featured-work__link" href="/YOREI/yorei.html">
+          <a class="featured-work__link" href="/pose-studio/">
             <div class="featured-work__number">01</div>
-            <figure class="featured-work__visual">
-              <img src="assets/featured/yorei.webp" width="720" height="420" alt="用例採集の実際の公開ページ" decoding="async">
-              <figcaption>LIVE VIEW / YOREI</figcaption>
+            <figure class="featured-work__visual featured-work__visual--summary">
+              <p class="featured-work__summary-title">3Dポーズ編集</p>
+              <figcaption>関節の調整・画像出力・ポーズ保存</figcaption>
             </figure>
             <div class="featured-work__main">
-              <p class="featured-work__type">Dictionary / Web</p>
-              <h3><ruby><rb>用例採集</rb><rt>ようれいさいしゅう</rt></ruby></h3>
-              <p>見出し語・用例・出典を採集し、自分だけの辞書を育てるWebアプリ。</p>
+              <p class="featured-work__type">ポーズ制作ツール</p>
+              <h3>ポーズスタジオ</h3>
+              <p>3Dマネキンのポーズを編集し、参照画像やOpenPoseデータを書き出せるツール。</p>
             </div>
             <div class="featured-work__aside">
-              <span>Supabase</span><span>JavaScript</span><span>CSS</span>
-              <strong>開く ↗</strong>
+              <span>3D</span><span>OpenPose</span><span>ポーズDB</span>
+              <strong>ポーズを編集する ↗</strong>
             </div>
           </a>
         </article>
 
         <article class="featured-work">
-          <a class="featured-work__link" href="/holoscope/">
+          <a class="featured-work__link" href="/reference-shape-editor/">
             <div class="featured-work__number">02</div>
-            <figure class="featured-work__visual">
-              <img src="assets/featured/holoscope.webp" width="720" height="420" alt="HoloScopeの実際の公開ページ" loading="lazy" decoding="async">
-              <figcaption>LIVE VIEW / HOLOSCOPE</figcaption>
+            <figure class="featured-work__visual featured-work__visual--summary">
+              <p class="featured-work__summary-title">参照図形の編集</p>
+              <figcaption>頂点・レイヤー・パレットを操作</figcaption>
             </figure>
             <div class="featured-work__main">
-              <p class="featured-work__type">Data / Operations / Web</p>
-              <h3>ホロライブEN観測所</h3>
-              <p>観測データを収集・整理し、関係や傾向をWeb上で探索できる情報観測サービス。</p>
+              <p class="featured-work__type">図形編集ツール</p>
+              <h3>参照図形エディター</h3>
+              <p>画像を下敷きにしてポリゴンを描き、レイヤーやパレットを編集できるツール。</p>
             </div>
             <div class="featured-work__aside">
-              <span>PHP</span><span>Data</span><span>Automation</span>
-              <strong>開く ↗</strong>
+              <span>SVG</span><span>レイヤー</span><span>パレット</span>
+              <strong>図形を編集する ↗</strong>
             </div>
           </a>
         </article>
 
         <article class="featured-work">
-          <a class="featured-work__link" href="/SHISHA/">
+          <a class="featured-work__link" href="/minimalizer/">
             <div class="featured-work__number">03</div>
-            <figure class="featured-work__visual">
-              <img src="assets/featured/shisha.webp" width="720" height="420" alt="SHISHA 店舗検索の実際の公開ページ" loading="lazy" decoding="async">
-              <figcaption>LIVE VIEW / SHISHA</figcaption>
+            <figure class="featured-work__visual featured-work__visual--summary">
+              <p class="featured-work__summary-title">画像の簡略化</p>
+              <figcaption>画像処理・形状の整理</figcaption>
             </figure>
             <div class="featured-work__main">
-              <p class="featured-work__type">Search / Data</p>
-              <h3>シーシャ店舗検索</h3>
-              <p>地域・駅・現在地・営業時間などから店舗情報へ辿り着けるデータベース型検索ツール。</p>
+              <p class="featured-work__type">画像処理ツール</p>
+              <h3>画像簡略化ツール</h3>
+              <p>画像の色と形状を解析し、幾何的に単純化した表現を作るツール。</p>
             </div>
             <div class="featured-work__aside">
-              <span>PHP</span><span>JSON</span><span>Search</span>
-              <strong>開く ↗</strong>
+              <span>画像処理</span><span>ブラウザー</span>
+              <strong>画像処理ツールを開く ↗</strong>
             </div>
           </a>
         </article>
@@ -117,38 +116,38 @@
           <p class="section-heading__kana" aria-hidden="true">さくいん</p>
           <h2 id="index-title">作品索引</h2>
         </div>
-        <p class="section-heading__note"><span id="projectCount">35</span> entries</p>
+        <p class="section-heading__note"><span id="projectCount">35</span>件</p>
       </header>
 
       <div class="project-filters" aria-label="作品を制作領域で絞り込む">
         <button type="button" data-filter="all" aria-pressed="true">すべて</button>
-        <button type="button" data-filter="web" aria-pressed="false">Web</button>
-        <button type="button" data-filter="data" aria-pressed="false">Data</button>
-        <button type="button" data-filter="search" aria-pressed="false">Search</button>
-        <button type="button" data-filter="tool" aria-pressed="false">Tool</button>
-        <button type="button" data-filter="creative" aria-pressed="false">Creative</button>
+        <button type="button" data-filter="web" aria-pressed="false">ウェブ</button>
+        <button type="button" data-filter="data" aria-pressed="false">データ</button>
+        <button type="button" data-filter="search" aria-pressed="false">検索</button>
+        <button type="button" data-filter="tool" aria-pressed="false">ツール</button>
+        <button type="button" data-filter="creative" aria-pressed="false">制作</button>
       </div>
 
       <div class="project-index" role="list">
-        <a class="project-row" data-categories="web data tool" href="/YOREI/yorei.html" role="listitem"><span>000</span><strong>用例採集</strong><em>Dictionary / Supabase</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search" href="/holoscope/" role="listitem"><span>001</span><strong>ホロライブEN観測所</strong><em>Data / Operations</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search" href="/SHISHA/" role="listitem"><span>002</span><strong>シーシャ店舗検索</strong><em>Search / PHP</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search" href="/AQUARIUM/aquarium.php" role="listitem"><span>003</span><strong>水族館</strong><em>PHP / MySQL / Search</em><b>↗</b></a>
+        <a class="project-row" data-categories="web data tool" href="/YOREI/yorei.html" role="listitem"><span>000</span><strong>用例採集</strong><em>辞書 / Supabase</em><b>↗</b></a>
+        <a class="project-row" data-categories="web data search" href="/holoscope/" role="listitem"><span>001</span><strong>ホロライブEN観測所</strong><em>データ / 運用</em><b>↗</b></a>
+        <a class="project-row" data-categories="web data search" href="/SHISHA/" role="listitem"><span>002</span><strong>シーシャ店舗検索</strong><em>検索 / PHP</em><b>↗</b></a>
+        <a class="project-row" data-categories="web data search" href="/AQUARIUM/aquarium.php" role="listitem"><span>003</span><strong>水族館</strong><em>PHP / MySQL / 検索</em><b>↗</b></a>
         <a class="project-row" data-categories="web data search" href="/DQB2/dqb2.html" role="listitem"><span>004</span><strong>DQB2 部屋レシピ図鑑</strong><em>Dataset / JavaScript</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search tool" href="/HOLOCA/holoca.html" role="listitem"><span>005</span><strong>ホロカ デッキラボ</strong><em>PHP / Search / Canvas</em><b>↗</b></a>
+        <a class="project-row" data-categories="web data search tool" href="/HOLOCA/holoca.html" role="listitem"><span>005</span><strong>ホロカ デッキラボ</strong><em>PHP / 検索 / Canvas</em><b>↗</b></a>
         <a class="project-row" data-categories="creative tool" href="/SPHERE/sphere.html" role="listitem"><span>006</span><strong>天球儀</strong><em>Canvas / Voxel</em><b>↗</b></a>
         <a class="project-row" data-categories="creative tool" href="/PRIME_DOT_ART/prime_dot_art.html" role="listitem"><span>007</span><strong>素数点画</strong><em>Canvas / Algorithm</em><b>↗</b></a>
         <a class="project-row" data-categories="web creative tool" href="/MADORI/madori.html" role="listitem"><span>008</span><strong>間取図メーカー</strong><em>SVG / Drag & Drop</em><b>↗</b></a>
         <a class="project-row" data-categories="data search tool" href="/OTHER/actress_finder.html" role="listitem"><span>009</span><strong>人物索引</strong><em>JavaScript / JSON</em><b>↗</b></a>
         <a class="project-row" data-categories="data tool creative" href="/WORD_GENERATOR/word_generator.html" role="listitem"><span>010</span><strong>ボードゲーム単語集</strong><em>Dataset / Random Deck</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/MAZE_MAKER/maze_maker.html" role="listitem"><span>011</span><strong>迷路作成補助器</strong><em>Grid Editor / Canvas</em><b>↗</b></a>
+        <a class="project-row" data-categories="creative tool" href="/MAZE_MAKER/maze_maker.html" role="listitem"><span>011</span><strong>迷路作成補助器</strong><em>格子編集 / Canvas</em><b>↗</b></a>
         <a class="project-row" data-categories="tool creative" href="/ANAGRAM/anagram.html" role="listitem"><span>012</span><strong>アナグラム補助器</strong><em>Text Engine / Drag & Drop</em><b>↗</b></a>
-        <a class="project-row" data-categories="data search tool" href="/CHEATSHEET/" role="listitem"><span>013</span><strong>技術早見表</strong><em>Reference / Search</em><b>↗</b></a>
-        <a class="project-row" data-categories="web creative tool" href="/MINDMAP_MAKER/" role="listitem"><span>014</span><strong>マインドマップメーカー</strong><em>SVG / Local-first</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/prompt-studio/" role="listitem"><span>015</span><strong>Prompt Studio</strong><em>Prompt / PromptDB</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/pose-studio/" role="listitem"><span>016</span><strong>Pose Studio</strong><em>3D / OpenPose / PoseDB</em><b>↗</b></a>
-        <a class="project-row" data-categories="data creative tool" href="/model-inspector/" role="listitem"><span>017</span><strong>Model Inspector</strong><em>Model DB / Civitai</em><b>↗</b></a>
-        <a class="project-row" data-categories="data creative tool" href="/asset-organizer/" role="listitem"><span>018</span><strong>Asset Organizer</strong><em>Audit / Asset DB</em><b>↗</b></a>
+        <a class="project-row" data-categories="data search tool" href="/CHEATSHEET/" role="listitem"><span>013</span><strong>技術早見表</strong><em>資料 / 検索</em><b>↗</b></a>
+        <a class="project-row" data-categories="web creative tool" href="/MINDMAP_MAKER/" role="listitem"><span>014</span><strong>マインドマップメーカー</strong><em>SVG / ローカル保存</em><b>↗</b></a>
+        <a class="project-row" data-categories="creative tool" href="/prompt-studio/" role="listitem"><span>015</span><strong>プロンプトスタジオ</strong><em>Prompt / PromptDB</em><b>↗</b></a>
+        <a class="project-row" data-categories="creative tool" href="/pose-studio/" role="listitem"><span>016</span><strong>ポーズスタジオ</strong><em>3D / OpenPose / PoseDB</em><b>↗</b></a>
+        <a class="project-row" data-categories="data creative tool" href="/model-inspector/" role="listitem"><span>017</span><strong>モデル検査ツール</strong><em>モデルDB / Civitai</em><b>↗</b></a>
+        <a class="project-row" data-categories="data creative tool" href="/asset-organizer/" role="listitem"><span>018</span><strong>素材整理ツール</strong><em>監査 / 素材DB</em><b>↗</b></a>
         <a class="project-row" data-categories="tool" href="/VIDEO_WORKBENCH/" role="listitem"><span>019</span><strong>動画ワークベンチ</strong><em>Python / FFmpeg / Desktop</em><b>↗</b></a>
                 <a class="project-row" data-categories="tool creative" href="/MKPDF_STUDIO/" role="listitem"><span>020</span><strong>PDF制作スタジオ</strong><em>Python / Desktop / PDF</em><b>↗</b></a>
         <a class="project-row" data-categories="data tool" href="/S3_UPLOAD_AUDIT/" role="listitem"><span>021</span><strong>S3アップロード監査</strong><em>Python / Desktop / S3</em><b>↗</b></a>
@@ -156,15 +155,15 @@
         <a class="project-row" data-categories="data tool" href="/MEDIA_COLLECTOR/" role="listitem"><span>023</span><strong>メディア収集ツール</strong><em>Python / Tkinter / Media</em><b>↗</b></a>
         <a class="project-row" data-categories="tool" href="/DOWNLOAD_WORKBENCH/" role="listitem"><span>024</span><strong>ダウンロードワークベンチ</strong><em>Python / yt-dlp / FFmpeg</em><b>↗</b></a>
         <a class="project-row" data-categories="data tool" href="/WEB_EXTRACTION_RECIPES/" role="listitem"><span>025</span><strong>Web抽出レシピ</strong><em>Python / Tkinter / HTML</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data tool" href="https://advisor-production-production.up.railway.app/" role="listitem"><span>026</span><strong>シーシャアドバイザー</strong><em>Python / Recommendation / Data</em><b>↗</b></a>
+        <a class="project-row" data-categories="web data tool" href="https://advisor-production-production.up.railway.app/" role="listitem"><span>026</span><strong>シーシャアドバイザー</strong><em>Python / Recommendation / データ</em><b>↗</b></a>
         <a class="project-row" data-categories="web data search" href="/LEGAL_KNOWLEDGE_BASE/" role="listitem"><span>027</span><strong>法令ナレッジベース</strong><em>Python / PostgreSQL / e-Gov</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool creative" href="/POSE_LIBRARY_MANAGER/" role="listitem"><span>028</span><strong>ポーズライブラリ管理</strong><em>Pose Library Manager / Reference</em><b>↗</b></a>
+        <a class="project-row" data-categories="data tool creative" href="/POSE_LIBRARY_MANAGER/" role="listitem"><span>028</span><strong>ポーズライブラリ管理</strong><em>Pose Library Manager / 資料</em><b>↗</b></a>
         <a class="project-row" data-categories="creative tool" href="/PYTHON_MUSIC_LAB/" role="listitem"><span>029</span><strong>Python作曲研究所</strong><em>Non-Generative Composer / Python</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/IMAGE_STUDIO/" role="listitem"><span>030</span><strong>画像仕立て室</strong><em>Canvas / Local-first</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool" href="/AI_JUDGEMENT_LAB/" role="listitem"><span>031</span><strong>AI判断・予測実験室</strong><em>Classification / Regression / JavaScript</em><b>↗</b></a>
+        <a class="project-row" data-categories="creative tool" href="/IMAGE_STUDIO/" role="listitem"><span>030</span><strong>画像仕立て室</strong><em>Canvas / ローカル保存</em><b>↗</b></a>
+        <a class="project-row" data-categories="data tool" href="/AI_JUDGEMENT_LAB/" role="listitem"><span>031</span><strong>AI判断・予測実験室</strong><em>分類 / 回帰 / JavaScript</em><b>↗</b></a>
         <a class="project-row" data-categories="data creative" href="/OSAKA_SUBWAY_SEVENS/" role="listitem"><span>032</span><strong>大阪地下鉄七並べ</strong><em>Board Game / Network Design</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/minimalizer/" role="listitem"><span>033</span><strong>Minimalizer</strong><em>Image Processing / Browser</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/reference-shape-editor/" role="listitem"><span>034</span><strong>Reference Shape Editor</strong><em>Manual Polygon / SVG / Local-first</em><b>↗</b></a>
+        <a class="project-row" data-categories="creative tool" href="/minimalizer/" role="listitem"><span>033</span><strong>画像簡略化ツール</strong><em>画像処理 / ブラウザー</em><b>↗</b></a>
+        <a class="project-row" data-categories="creative tool" href="/reference-shape-editor/" role="listitem"><span>034</span><strong>参照図形エディター</strong><em>Manual Polygon / SVG / ローカル保存</em><b>↗</b></a>
       </div>
     </section>
 
@@ -175,22 +174,22 @@
             <p class="section-heading__kana" aria-hidden="true">さいきん</p>
             <h2 id="recent-title">最近の更新</h2>
           </div>
-          <p class="section-heading__note">2026.09</p>
+          <p class="section-heading__note">更新履歴</p>
         </header>
 
         <div class="recent-grid">
           <a class="recent-item" href="/PYTHON_MUSIC_LAB/">
-            <span>NEW ENTRY</span>
+            <span>掲載作品</span>
             <strong>Python作曲研究所</strong>
             <p>ルールベース作曲、候補評価、自作Synth、音響処理から完成音源まで作るNon-Generative Composerを追加。</p>
           </a>
           <a class="recent-item" href="/POSE_LIBRARY_MANAGER/">
-            <span>NEW ENTRY</span>
+            <span>掲載作品</span>
             <strong>ポーズライブラリ管理</strong>
             <p>採用済みポーズ・衣装を固定ID、台帳、manifest、安全な参照範囲とともに管理する制作基盤を追加。</p>
           </a>
           <a class="recent-item" href="/OSAKA_SUBWAY_SEVENS/">
-            <span>NEW ENTRY</span>
+            <span>掲載作品</span>
             <strong>大阪地下鉄七並べ</strong>
             <p>大阪メトロ9路線・109駅を、隣接駅と乗換分岐でつなぐネットワーク型七並べとして設計。</p>
           </a>
@@ -200,22 +199,22 @@
 
     <section class="editorial-section compact-section page-shell" id="about" aria-labelledby="about-title">
       <header class="compact-heading">
-        <p class="section-heading__kana" aria-hidden="true">about</p>
-        <h2 id="about-title">About</h2>
+        <p class="section-heading__kana" aria-hidden="true">しょうかい</p>
+        <h2 id="about-title">プロフィール</h2>
       </header>
       <div class="about-row">
-        <p>システムエンジニア 4年。Web、データ、自動化、検索、表現をまたいで制作しています。</p>
+        <p>ウェブアプリやデータ処理、検索、制作支援ツールを開発しています。</p>
         <a class="text-link" href="/D_PROFILE/d_profile.html">プロフィール詳細 ↗</a>
       </div>
     </section>
 
     <section class="editorial-section compact-section page-shell" id="contact" aria-labelledby="contact-title">
       <header class="compact-heading">
-        <p class="section-heading__kana" aria-hidden="true">contact</p>
+        <p class="section-heading__kana" aria-hidden="true">れんらく</p>
         <h2 id="contact-title">連絡先</h2>
       </header>
       <div class="contact-links">
-        <a href="mailto:sakawatainfo@gmail.com">Email <span>sakawatainfo@gmail.com</span> ↗</a>
+        <a href="mailto:sakawatainfo@gmail.com">メール <span>sakawatainfo@gmail.com</span> ↗</a>
         <a href="https://github.com/watarionn">GitHub <span>@watarionn</span> ↗</a>
       </div>
     </section>
@@ -223,11 +222,11 @@
 
   <footer class="site-footer">
     <div class="page-shell site-footer__inner">
-      <p class="site-footer__title">個人大辞典 / Personal Encyclopedia</p>
+      <p class="site-footer__title">個人大辞典</p>
       <p>© <span id="currentYear"></span></p>
     </div>
   </footer>
 
-  <script src="index-script.js?v=20260924-density1" defer></script>
+  <script src="index-script.js?v=20261022-ja1" defer></script>
 </body>
 </html>

@@ -283,7 +283,7 @@ a:focus-visible {
 .profile-facts dd {
   margin: 0;
   overflow-wrap: anywhere;
-  font-family: var(--serif-en);
+  font-family: var(--sans);
   font-size: .86rem;
 }
 
@@ -328,7 +328,7 @@ a:focus-visible {
 .section-heading__note {
   margin: 0;
   color: var(--ink-muted);
-  font-family: var(--serif-en);
+  font-family: var(--sans);
   font-size: .68rem;
   letter-spacing: .05em;
   white-space: nowrap;
@@ -365,7 +365,7 @@ a:focus-visible {
 
 .make-card h3 {
   margin: 0;
-  font-family: var(--serif-en);
+  font-family: var(--mincho);
   font-size: clamp(1.2rem, 2vw, 1.55rem);
   font-weight: 400;
 }
@@ -499,7 +499,7 @@ a:focus-visible {
 
 .now-item h3 {
   margin: 0 0 .75rem;
-  font-family: var(--serif-en);
+  font-family: var(--mincho);
   font-size: clamp(1.25rem, 2vw, 1.65rem);
   font-weight: 400;
 }
@@ -611,7 +611,7 @@ a:focus-visible {
 .link-list strong {
   min-width: 0;
   overflow-wrap: anywhere;
-  font-family: var(--serif-en);
+  font-family: var(--mincho);
   font-size: .95rem;
   font-weight: 400;
 }

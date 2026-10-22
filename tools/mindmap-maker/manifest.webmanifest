@@ -1,6 +1,6 @@
 {
-  "name": "MindMap Maker",
-  "short_name": "MindMap",
+  "name": "マインドマップメーカー",
+  "short_name": "マインドマップ",
   "description": "ブラウザだけで使えるSVGベースの軽量マインドマップエディタ",
   "start_url": "./",
   "display": "standalone",
@@ -13,5 +13,6 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "lang": "ja"
 }

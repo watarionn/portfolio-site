@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "policy": "Japanese primary display name; English/technical secondary name. Routes and internal IDs remain unchanged.",
+  "policy": "サイト上の作品名は日本語を優先する。技術名・製品固有名・URL・内部IDは変更しない。",
   "works": [
     {
       "number": "000",
@@ -109,28 +109,28 @@
     },
     {
       "projectId": "prompt-studio",
-      "japaneseName": "Prompt Studio",
+      "japaneseName": "プロンプトスタジオ",
       "englishName": "Prompt Studio",
       "route": "/prompt-studio/",
       "number": "015"
     },
     {
       "projectId": "pose-studio",
-      "japaneseName": "Pose Studio",
+      "japaneseName": "ポーズスタジオ",
       "englishName": "Pose Studio",
       "route": "/pose-studio/",
       "number": "016"
     },
     {
       "projectId": "model-inspector",
-      "japaneseName": "Model Inspector",
+      "japaneseName": "モデル検査ツール",
       "englishName": "Model Inspector",
       "route": "/model-inspector/",
       "number": "017"
     },
     {
       "projectId": "asset-organizer",
-      "japaneseName": "Asset Organizer",
+      "japaneseName": "素材整理ツール",
       "englishName": "Asset Organizer",
       "route": "/asset-organizer/",
       "number": "018"
@@ -236,14 +236,14 @@
     {
       "number": "033",
       "projectId": "minimalizer",
-      "japaneseName": "Minimalizer",
+      "japaneseName": "画像簡略化ツール",
       "englishName": "Image Simplification Tool",
       "route": "/minimalizer/"
     },
     {
       "number": "034",
       "projectId": "reference-shape-editor",
-      "japaneseName": "Reference Shape Editor",
+      "japaneseName": "参照図形エディター",
       "englishName": "Manual Polygon Trace Editor",
       "route": "/reference-shape-editor/"
     }

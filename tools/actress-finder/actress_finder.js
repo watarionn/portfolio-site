@@ -43,13 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function focusCode() {
-    return ({ face: 'FACE', vibe: 'VIBE', style: 'STYLE', balance: 'BALANCE' })[currentFocus] || 'FACE';
+    return ({ face: '顔立ち', vibe: '雰囲気', style: '体型', balance: 'バランス' })[currentFocus] || '顔立ち';
   }
 
   function syncMetrics() {
     peopleCount.textContent = String(people.length);
     focusSummary.textContent = focusCode();
-    briefState.textContent = briefReady ? 'READY' : 'WAIT';
+    briefState.textContent = briefReady ? '作成済み' : '未作成';
     copyButton.disabled = !briefReady;
   }
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="画像生成モデルを調べ、Model DBとして保存し、Prompt Studioへ渡せるModel Inspector。">
-  <title>Model Inspector</title>
+  <title>モデル検査ツール</title>
   <meta name="theme-color" content="#25231f">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -14,8 +14,8 @@
   <header class="app-header">
     <div class="title-block">
       <a class="back-link" href="/#index">← 作品索引</a>
-      <h1>Model Inspector</h1>
-      <p>モデルを調べ、制作向けの情報を整え、モデルDBへ残す。</p>
+      <h1>モデル検査ツール</h1>
+      <p>モデルの取得情報や手入力した情報をモデルDBに保存できます。</p>
     </div>
     <div class="header-actions">
       <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
@@ -27,7 +27,7 @@
   <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
   <input id="offlineJsonInput" class="visually-hidden" type="file" accept="application/json,.json" multiple>
 
-  <nav class="studio-tabs" role="tablist" aria-label="Model Inspector 画面切替">
+  <nav class="studio-tabs" role="tablist" aria-label="モデル検査ツールの画面切替">
     <button class="studio-tab active" data-view="inspect" role="tab" aria-selected="true">モデルを調べる</button>
     <button class="studio-tab" data-view="database" role="tab" aria-selected="false">モデルDB</button>
   </nav>

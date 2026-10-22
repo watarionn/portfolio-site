@@ -276,6 +276,46 @@ def main() -> None:
                 f"{number} {japanese_name} ({project_id})"
             )
 
+    # Japanese copy and homepage/profile layout contract (2026-10-22).
+    # Check specific approved UI decisions instead of rejecting grammatical
+    # Japanese commas across arbitrary text, source code, or quotations.
+    featured_section = portfolio_index.split('<div class="featured-list">', 1)
+    if len(featured_section) != 2:
+        fail("portfolio featured section is missing")
+    featured_links = re.findall(
+        r'class="featured-work__link" href="([^"]+)"',
+        featured_section[1].split("</section>", 1)[0],
+    )
+    expected_featured = [
+        "/pose-studio/",
+        "/reference-shape-editor/",
+        "/minimalizer/",
+    ]
+    if featured_links != expected_featured:
+        fail(f"portfolio featured works must be Pose/Shape/Minimalizer: {featured_links}")
+    for stale in ("システムエンジニア 4年", ">About<", "Selected / 03"):
+        if stale in portfolio_index:
+            fail(f"obsolete portfolio copy remains: {stale}")
+    profile_html = (ROOT / "profile/index.html").read_text(encoding="utf-8")
+    for stale in (
+        "システムエンジニア 4年",
+        'class="profile-intro__lead"',
+        "最初の制作物は、Visual Basicの脱出ゲーム。",
+        "「アプリ」だけでなく、仕組みそのものへ。",
+        "From first build to now",
+    ):
+        if stale in profile_html:
+            fail(f"obsolete profile copy remains: {stale}")
+    for required in ("学生時代", "システム開発と運用", "最近の個人開発"):
+        if required not in profile_html:
+            fail(f"profile timeline is missing its Japanese section: {required}")
+    homepage_css = (ROOT / "index-style.css").read_text(encoding="utf-8")
+    profile_css = (ROOT / "profile/d_profile.css").read_text(encoding="utf-8")
+    if ".recent-section .section-heading h2" not in homepage_css:
+        fail("recent updates heading must retain its compact type scale")
+    if "font-size: clamp(1.8rem, 4.5vw, 3.3rem)" not in profile_css:
+        fail("profile name must retain its compact type scale")
+
     tracked = tracked_paths()
     tracked_rel = {path.relative_to(ROOT).as_posix() for path in tracked}
 
@@ -507,7 +547,7 @@ def main() -> None:
 
     aquarium_js = (ROOT / "apps/aquarium/public/aquarium.js").read_text(encoding="utf-8")
     aquarium_css = (ROOT / "apps/aquarium/public/aquarium.css").read_text(encoding="utf-8")
-    for marker in ('AQUARIUM', 'id="fish-search"', 'id="visible-count"', 'id="random-fish"', 'class="fish-card-trigger"'):
+    for marker in ('<h1>水族館</h1>', 'id="fish-search", 'id="visible-count"', 'id="random-fish"', 'class="fish-card-trigger"'):
         if marker not in aquarium_text:
             fail(f"AQUARIUM Stage 9 presentation marker missing: {marker}")
     for marker in ("function normalizeText(", "function applyFilter(", "function setScope(", "history.replaceState", "event.key === '/'"):
@@ -602,7 +642,7 @@ def main() -> None:
     maze_html = (ROOT / "tools/maze-maker/index.html").read_text(encoding="utf-8")
     maze_js = (ROOT / "tools/maze-maker/maze_maker.js").read_text(encoding="utf-8")
     maze_css = (ROOT / "tools/maze-maker/maze_maker.css").read_text(encoding="utf-8")
-    for marker in ('Maze Draft Board', 'id="btn-undo"', 'id="grid-size-stat"', 'role="grid"'):
+    for marker in ('id="page-title">迷路作成補助器', 'id="btn-undo", 'id="grid-size-stat"', 'role="grid"'):
         if marker not in maze_html:
             fail(f"Maze Maker Stage 9 presentation marker missing: {marker}")
     for marker in ("function undo()", "function redo()", "mazeBody.replaceChildren()", "function escapeHtmlText"):
@@ -617,7 +657,7 @@ def main() -> None:
     anagram_html = (ROOT / "tools/anagram/index.html").read_text(encoding="utf-8")
     anagram_js = (ROOT / "tools/anagram/anagram.js").read_text(encoding="utf-8")
     anagram_css = (ROOT / "tools/anagram/anagram.css").read_text(encoding="utf-8")
-    for marker in ('Letter Workbench', 'id="composeModeBtn"', 'id="chunkModeBtn"', 'id="copyResultBtn"'):
+    for marker in ('id="page-title">アナグラム補助器', 'id="composeModeBtn", 'id="chunkModeBtn"', 'id="copyResultBtn"'):
         if marker not in anagram_html:
             fail(f"Anagram Stage 9 presentation marker missing: {marker}")
     for marker in ("new Intl.Segmenter", "function evaluateUsage()", "let chunkSelected = new Set()", "tileArea.replaceChildren()"):
@@ -632,7 +672,7 @@ def main() -> None:
     word_html = (ROOT / "tools/word-generator/index.html").read_text(encoding="utf-8")
     word_js = (ROOT / "tools/word-generator/word_generator.js").read_text(encoding="utf-8")
     word_css = (ROOT / "tools/word-generator/word_generator.css").read_text(encoding="utf-8")
-    for marker in ("WORD DRAW TABLE", 'id="timer-display"', 'id="draw-history"', 'data-seconds="90"'):
+    for marker in ('id="tool-title">単語の山札', 'id="timer-display", 'id="draw-history"', 'data-seconds="90"'):
         if marker not in word_html:
             fail(f"Word Generator Stage 9 presentation marker missing: {marker}")
     for marker in ("function addHistory(", "kataGenreGrid.replaceChildren()", "ngList.replaceChildren()", "function toggleTimer()", "event.key.toLowerCase() === 'd'"):
@@ -647,7 +687,7 @@ def main() -> None:
     actress_html = (ROOT / "tools/actress-finder/index.html").read_text(encoding="utf-8")
     actress_js = (ROOT / "tools/actress-finder/actress_finder.js").read_text(encoding="utf-8")
     actress_css = (ROOT / "tools/actress-finder/actress_finder.css").read_text(encoding="utf-8")
-    for marker in ("Person Index / Recommendation Brief", 'id="build-brief"', 'id="result-json"'):
+    for marker in ('id="brief-title">推薦条件を整理する', 'id="build-brief", 'id="result-json"'):
         if marker not in actress_html:
             fail(f"Actress Finder Stage 9 presentation marker missing: {marker}")
     for marker in ("function buildPrompt()", "function parseSuggestions(value)", "resultList.replaceChildren", "new URLSearchParams"):

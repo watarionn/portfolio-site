@@ -428,21 +428,21 @@ function updateMetrics(evaluation) {
 
   if (evaluation.excess.length) {
     remainStatus.textContent = '「' + evaluation.excess.join('') + '」は残りタイルにありません';
-    statusCheck.textContent = 'INPUT ERROR';
+    statusCheck.textContent = '入力エラー';
     statusCheck.className = 'status-check error';
     return;
   }
 
   if (remain === 0) {
     remainStatus.textContent = '全文字を一度ずつ使用しています';
-    statusCheck.textContent = 'COMPLETE ✓';
+    statusCheck.textContent = '完成 ✓';
     statusCheck.className = 'status-check ok';
     return;
   }
 
   const unusedText = remainingTiles.map(tile => tile.chars.join('')).join('・');
   remainStatus.textContent = '未使用: ' + unusedText + '（' + remain + '文字）';
-  statusCheck.textContent = 'IN PROGRESS';
+  statusCheck.textContent = '編集中';
   statusCheck.className = 'status-check pending';
 }
 function reconcile() {

@@ -17,7 +17,7 @@ css = CSS.read_text(encoding="utf-8")
 js = JS.read_text(encoding="utf-8")
 
 require(html, (
-    "Maze Draft Board", 'id="btn-undo"', 'id="btn-redo"',
+    'id="page-title">迷路作成補助器', 'id="btn-undo"', 'id="btn-redo"',
     'id="btn-clear"', 'id="grid-size-stat"', 'role="grid"',
     'id="status-live"', 'data-size="15x25"',
 ), "maze HTML contract")

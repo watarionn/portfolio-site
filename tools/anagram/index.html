@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="文字をタイルへ分け、並べ替え・チャンク化しながらアナグラムを組み立てるブラウザツール。">
-  <title>アナグラム補助器 | Letter Workbench</title>
+  <title>アナグラム補助器</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,18 +12,16 @@
 </head>
 <body>
   <header class="site-header">
-    <a href="/" class="home-btn" aria-label="ポートフォリオへ戻る">← PORTFOLIO</a>
-    <div class="site-brand"><b>ANAGRAM</b><span>LETTER WORKBENCH / アナグラム補助器</span></div>
+    <a href="/" class="home-btn" aria-label="ポートフォリオへ戻る">← 個人大辞典</a>
+    <div class="site-brand"><b>文字</b><span>アナグラム補助器</span></div>
   </header>
 
   <main class="page-shell">
     <section class="project-intro" aria-labelledby="page-title">
       <div class="intro-copy">
-        <p class="eyebrow">SPLIT / GROUP / REBUILD</p>
-        <h1 id="page-title">アナグラム補助器</h1>
-        <p class="lead">元の文字列をタイルへ分解し、順番を動かし、まとまりを固定しながら別の語順を試すための小さな作業台です。</p>
+                <h1 id="page-title">アナグラム補助器</h1>
         <div class="intro-meta" aria-label="このツールの特徴">
-          <span>GRAPHEME AWARE</span><span>DRAG / KEYBOARD</span><span>LOCAL ONLY</span>
+          <span>文字単位で編集</span><span>ドラッグ・キーボード対応</span><span>ブラウザー内で処理</span>
         </div>
       </div>
       <div class="letter-illustration" aria-hidden="true">
@@ -37,30 +35,30 @@
 
     <section class="workbench" aria-labelledby="tool-title">
       <div class="workbench-heading">
-        <div><p class="eyebrow">LIVE TOOL</p><h2 id="tool-title">文字の作業台</h2></div>
+        <div><p class="eyebrow">編集画面</p><h2 id="tool-title">文字の作業台</h2></div>
         <p>入力を分解し、タイルを使い切るまで組み替えます。</p>
       </div>
 
       <section class="panel source-panel" aria-labelledby="input-heading">
-        <div class="panel-head"><span>01</span><div><b id="input-heading">SOURCE</b><small>元の文字列</small></div></div>
+        <div class="panel-head"><span>01</span><div><b id="input-heading">元の文字列</b><small>元の文字列</small></div></div>
         <div class="input-row">
           <input type="text" id="sourceInput" class="main-input" placeholder="例：アナグラム / anagram" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="アナグラム元の文字列">
           <button class="btn btn-primary" id="parseBtn" type="button">分解する</button>
           <button class="btn btn-ghost" id="resetBtn" type="button">リセット</button>
         </div>
         <div class="metrics" aria-label="文字列の統計">
-          <div><small>LETTERS</small><strong id="sourceCount">0</strong></div>
-          <div><small>UNIQUE</small><strong id="uniqueCount">0</strong></div>
-          <div><small>CHUNKS</small><strong id="chunkCount">0</strong></div>
-          <div><small>REMAIN</small><strong id="remainingCount">0</strong></div>
+          <div><small>文字数</small><strong id="sourceCount">0</strong></div>
+          <div><small>文字種</small><strong id="uniqueCount">0</strong></div>
+          <div><small>まとまり</small><strong id="chunkCount">0</strong></div>
+          <div><small>残り</small><strong id="remainingCount">0</strong></div>
         </div>
       </section>
 
       <section class="panel tile-section" aria-labelledby="tile-heading">
-        <div class="panel-head"><span>02</span><div><b id="tile-heading">LETTER RACK</b><small>文字タイル</small></div></div>
+        <div class="panel-head"><span>02</span><div><b id="tile-heading">文字タイル</b><small>文字タイル</small></div></div>
         <div class="mode-row" role="group" aria-label="タイル操作モード">
-          <button class="mode-btn active" id="composeModeBtn" type="button" aria-pressed="true">COMPOSE<span>結果へ使う</span></button>
-          <button class="mode-btn" id="chunkModeBtn" type="button" aria-pressed="false">CHUNK<span>まとめる文字を選ぶ</span></button>
+          <button class="mode-btn active" id="composeModeBtn" type="button" aria-pressed="true">文字を組む<span>結果へ使う</span></button>
+          <button class="mode-btn" id="chunkModeBtn" type="button" aria-pressed="false">文字をまとめる<span>まとめる文字を選ぶ</span></button>
         </div>
         <div class="tile-actions" id="tileActions">
           <button class="btn btn-chunk" id="chunkBtn" type="button" disabled>選択文字をまとめる</button>
@@ -80,14 +78,14 @@
       </section>
 
       <section class="panel chunk-panel" aria-labelledby="chunk-heading">
-        <div class="panel-head"><span>03</span><div><b id="chunk-heading">CHUNKS</b><small>固定した文字のまとまり</small></div></div>
+        <div class="panel-head"><span>03</span><div><b id="chunk-heading">文字のまとまり</b><small>固定した文字のまとまり</small></div></div>
         <div class="chunk-list" id="chunkList">
           <p class="tile-empty" id="chunkEmpty">まだチャンクがありません</p>
         </div>
       </section>
 
       <section class="panel result-panel" aria-labelledby="output-heading">
-        <div class="panel-head"><span>04</span><div><b id="output-heading">COMPOSITION</b><small>アナグラム後の文字列</small></div></div>
+        <div class="panel-head"><span>04</span><div><b id="output-heading">組み立て結果</b><small>アナグラム後の文字列</small></div></div>
         <div class="composition-preview" aria-label="タイルから組み立てた文字" id="builtTiles"></div>
         <div class="input-row result-row">
           <input type="text" id="resultInput" class="main-input result-input" placeholder="手入力する文字列" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="アナグラム後の手入力文字列" aria-describedby="remaining-status">

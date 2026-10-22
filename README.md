@@ -12,6 +12,10 @@ Private credentials, server-only configuration, protected content, mutable runti
 
 Production deployment is intentionally non-destructive: the FTPS mirror does not delete remote-only files, and known server-only configuration names are excluded defensively.
 
+## 画面文言の制作規則
+
+サイト内で新しい画面を作る場合、または画面文言を修正する場合は [日本語表記・文章規則](docs/WEB_JAPANESE_COPY_RULES.md) を参照する。日本語で表せるUIラベルは日本語とし、国語として不要な読点や宣伝的なキャッチコピーを使わない。既存の作品固有名、内部ID、URL、機能説明と世界観の本文は誤って改変しない。
+
 ## Publication boundary
 
 Only material explicitly approved for public release may be committed here. `tools/validate_public_repo.py` enforces the reviewed public/private boundary, while `tools/build_deployment.py` creates the production artifact from `config/deployment-map.json`.

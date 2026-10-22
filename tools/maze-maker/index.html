@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="マス目に壁・スタート・ゴール・記号を置き、迷路の下書きを作って画像やHTMLへ書き出せるブラウザツール。">
-  <title>迷路作成補助器 | Maze Draft Board</title>
+  <title>迷路作成補助器</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,20 +12,18 @@
 </head>
 <body class="place-mode">
   <header class="site-header">
-    <a href="/" class="home-btn" aria-label="ポートフォリオへ戻る">← PORTFOLIO</a>
+    <a href="/" class="home-btn" aria-label="ポートフォリオへ戻る">← 個人大辞典</a>
     <div class="site-brand" aria-label="Maze Draft Board">
-      <b>MAZE</b><span>DRAFT BOARD / 迷路作成補助器</span>
+      <b>迷路</b><span>迷路作成補助器</span>
     </div>
   </header>
 
   <main class="page-shell">
     <section class="project-intro" aria-labelledby="page-title">
       <div class="intro-copy">
-        <p class="eyebrow">DRAW / TEST / EXPORT</p>
-        <h1 id="page-title">迷路作成補助器</h1>
-        <p class="lead">紙に線を引く感覚で、壁や目印を置いて迷路を下書きするための小さな設計台です。完成した案は画像やHTMLとして持ち出せます。</p>
+                <h1 id="page-title">迷路作成補助器</h1>
         <div class="intro-meta" aria-label="このツールの特徴">
-          <span>LOCAL EDITING</span><span>UNDO / REDO</span><span>3 EXPORTS</span>
+          <span>ブラウザー内で編集</span><span>元に戻す・やり直す</span><span>3形式で出力</span>
         </div>
       </div>
       <div class="route-illustration" aria-hidden="true">
@@ -33,18 +31,18 @@
           <i class="wall r1"></i><i class="wall r2"></i><i class="wall r3"></i><i class="wall r4"></i>
           <i class="route-line"></i><i class="point start-point">S</i><i class="point goal-point">G</i>
         </div>
-        <p>PLAN<br>YOUR<br>ROUTE</p>
+        <p>迷路の<br>下書き</p>
       </div>
     </section>
 
     <section class="workbench" aria-labelledby="tool-title">
       <div class="workbench-heading">
-        <div><p class="eyebrow">LIVE TOOL</p><h2 id="tool-title">迷路の下書きを作る</h2></div>
+        <div><p class="eyebrow">編集画面</p><h2 id="tool-title">迷路の下書きを作る</h2></div>
         <p>サイズを決め、セルを塗って構成を試します。</p>
       </div>
 
       <div class="panel setup-panel">
-        <div class="panel-head"><span>01</span><div><b>GRID SIZE</b><small>下書きの大きさ</small></div></div>
+        <div class="panel-head"><span>01</span><div><b>迷路の大きさ</b><small>下書きの大きさ</small></div></div>
         <div class="size-row">
           <label class="size-group" for="inp-rows"><span>ROWS / 縦</span><input type="number" id="inp-rows" value="10" min="3" max="40"><small>3–40</small></label>
           <label class="size-group" for="inp-cols"><span>COLS / 横</span><input type="number" id="inp-cols" value="19" min="3" max="60"><small>3–60</small></label>

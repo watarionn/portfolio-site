@@ -1,7 +1,7 @@
 {
   "id": "/reference-shape-editor-pwa/",
-  "name": "Shape Studio | Reference Shape Editor",
-  "short_name": "Shape Studio",
+  "name": "図形スタジオ",
+  "short_name": "図形スタジオ",
   "description": "自分用・オフライン対応の手描きポリゴンエディタ",
   "lang": "ja",
   "start_url": "/reference-shape-editor-pwa/",

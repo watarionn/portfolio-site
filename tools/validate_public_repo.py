@@ -547,7 +547,7 @@ def main() -> None:
 
     aquarium_js = (ROOT / "apps/aquarium/public/aquarium.js").read_text(encoding="utf-8")
     aquarium_css = (ROOT / "apps/aquarium/public/aquarium.css").read_text(encoding="utf-8")
-    for marker in ('<h1>水族館</h1>', 'id="fish-search", 'id="visible-count"', 'id="random-fish"', 'class="fish-card-trigger"'):
+    for marker in ('<h1>水族館</h1>', 'id="fish-search"', 'id="visible-count"', 'id="random-fish"', 'class="fish-card-trigger"'):
         if marker not in aquarium_text:
             fail(f"AQUARIUM Stage 9 presentation marker missing: {marker}")
     for marker in ("function normalizeText(", "function applyFilter(", "function setScope(", "history.replaceState", "event.key === '/'"):
@@ -642,7 +642,7 @@ def main() -> None:
     maze_html = (ROOT / "tools/maze-maker/index.html").read_text(encoding="utf-8")
     maze_js = (ROOT / "tools/maze-maker/maze_maker.js").read_text(encoding="utf-8")
     maze_css = (ROOT / "tools/maze-maker/maze_maker.css").read_text(encoding="utf-8")
-    for marker in ('id="page-title">迷路作成補助器', 'id="btn-undo", 'id="grid-size-stat"', 'role="grid"'):
+    for marker in ('id="page-title">迷路作成補助器', 'id="btn-undo"', 'id="grid-size-stat"', 'role="grid"'):
         if marker not in maze_html:
             fail(f"Maze Maker Stage 9 presentation marker missing: {marker}")
     for marker in ("function undo()", "function redo()", "mazeBody.replaceChildren()", "function escapeHtmlText"):
@@ -657,7 +657,7 @@ def main() -> None:
     anagram_html = (ROOT / "tools/anagram/index.html").read_text(encoding="utf-8")
     anagram_js = (ROOT / "tools/anagram/anagram.js").read_text(encoding="utf-8")
     anagram_css = (ROOT / "tools/anagram/anagram.css").read_text(encoding="utf-8")
-    for marker in ('id="page-title">アナグラム補助器', 'id="composeModeBtn", 'id="chunkModeBtn"', 'id="copyResultBtn"'):
+    for marker in ('id="page-title">アナグラム補助器', 'id="composeModeBtn"', 'id="chunkModeBtn"', 'id="copyResultBtn"'):
         if marker not in anagram_html:
             fail(f"Anagram Stage 9 presentation marker missing: {marker}")
     for marker in ("new Intl.Segmenter", "function evaluateUsage()", "let chunkSelected = new Set()", "tileArea.replaceChildren()"):
@@ -672,7 +672,7 @@ def main() -> None:
     word_html = (ROOT / "tools/word-generator/index.html").read_text(encoding="utf-8")
     word_js = (ROOT / "tools/word-generator/word_generator.js").read_text(encoding="utf-8")
     word_css = (ROOT / "tools/word-generator/word_generator.css").read_text(encoding="utf-8")
-    for marker in ('id="tool-title">単語の山札', 'id="timer-display", 'id="draw-history"', 'data-seconds="90"'):
+    for marker in ('id="tool-title">単語の山札', 'id="timer-display"', 'id="draw-history"', 'data-seconds="90"'):
         if marker not in word_html:
             fail(f"Word Generator Stage 9 presentation marker missing: {marker}")
     for marker in ("function addHistory(", "kataGenreGrid.replaceChildren()", "ngList.replaceChildren()", "function toggleTimer()", "event.key.toLowerCase() === 'd'"):
@@ -687,7 +687,7 @@ def main() -> None:
     actress_html = (ROOT / "tools/actress-finder/index.html").read_text(encoding="utf-8")
     actress_js = (ROOT / "tools/actress-finder/actress_finder.js").read_text(encoding="utf-8")
     actress_css = (ROOT / "tools/actress-finder/actress_finder.css").read_text(encoding="utf-8")
-    for marker in ('id="brief-title">推薦条件を整理する', 'id="build-brief", 'id="result-json"'):
+    for marker in ('id="brief-title">推薦条件を整理する', 'id="build-brief"', 'id="result-json"'):
         if marker not in actress_html:
             fail(f"Actress Finder Stage 9 presentation marker missing: {marker}")
     for marker in ("function buildPrompt()", "function parseSuggestions(value)", "resultList.replaceChildren", "new URLSearchParams"):

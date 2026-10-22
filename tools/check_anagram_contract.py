@@ -17,7 +17,7 @@ css = CSS.read_text(encoding="utf-8")
 js = JS.read_text(encoding="utf-8")
 
 require(html, (
-    "Letter Workbench", 'id="composeModeBtn"', 'id="chunkModeBtn"',
+    'id="page-title">アナグラム補助器', 'id="composeModeBtn"', 'id="chunkModeBtn"',
     'id="remainingCount"', 'id="compositionText"', 'id="copyResultBtn"',
     'id="shuffleBtn"',
 ), "anagram HTML contract")

@@ -26,8 +26,8 @@ $totalFish = count($fishRows);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>水族館 | AQUARIUM</title>
-  <meta name="description" content="魚の漢字名と読みを、検索しながらめくって確かめるフィールドインデックス。">
+  <title>水族館 | 魚名索引</title>
+  <meta name="description" content="魚の漢字名と読みを検索して確認できる索引。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
@@ -40,21 +40,19 @@ $totalFish = count($fishRows);
 
   <header class="site-header">
     <nav class="top-nav" aria-label="ページナビゲーション">
-      <a href="/" class="home-btn">← PORTFOLIO</a>
-      <span class="edition-mark">FIELD INDEX / 09</span>
+      <a href="/" class="home-btn">← 個人大辞典</a>
+      <span class="edition-mark">魚名索引</span>
     </nav>
 
     <div class="hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">AQUARIUM / FISH NAME ARCHIVE</p>
         <h1>水族館</h1>
-        <p class="hero-lead">漢字で出会って、読みをめくる。魚名と読みを往復しながら探せる、小さな水中フィールドインデックスです。</p>
       </div>
 
       <dl class="hero-stats" aria-label="コレクション概要">
-        <div><dt>ENTRIES</dt><dd><?= $totalFish ?></dd></div>
-        <div><dt>INDEX</dt><dd>NAME / READING</dd></div>
-        <div><dt>SOURCE</dt><dd>PHP / MySQL</dd></div>
+        <div><dt>登録件数</dt><dd><?= $totalFish ?></dd></div>
+        <div><dt>検索対象</dt><dd>魚名・読み</dd></div>
+        <div><dt>使用技術</dt><dd>PHP / MySQL</dd></div>
       </dl>
     </div>
   </header>
@@ -62,20 +60,20 @@ $totalFish = count($fishRows);
     <section class="explorer" aria-labelledby="explorer-title">
       <div class="explorer-heading">
         <div>
-          <p class="section-kicker">SEARCH THE WATER</p>
+          <p class="section-kicker">検索</p>
           <h2 id="explorer-title">魚名と読みから探す</h2>
         </div>
-        <p class="result-count"><strong id="visible-count"><?= $totalFish ?></strong><span aria-hidden="true"> / </span><span id="total-count"><?= $totalFish ?></span> entries</p>
+        <p class="result-count"><strong id="visible-count"><?= $totalFish ?></strong><span aria-hidden="true"> / </span><span id="total-count"><?= $totalFish ?></span> 件</p>
       </div>
 
       <div class="search-panel">
         <label class="search-field" for="fish-search">
-          <span>SEARCH</span>
+          <span>検索語</span>
           <input id="fish-search" type="search" autocomplete="off" placeholder="例：鮫 / さめ" aria-describedby="search-help search-status">
         </label>
 
         <div class="scope-block">
-          <span class="control-label" id="scope-label">SEARCH IN</span>
+          <span class="control-label" id="scope-label">検索対象</span>
           <div class="scope-switch" role="group" aria-labelledby="scope-label">
             <button type="button" class="scope-btn is-active" data-scope="all" aria-pressed="true">すべて</button>
             <button type="button" class="scope-btn" data-scope="name" aria-pressed="false">魚名</button>
@@ -96,7 +94,7 @@ $totalFish = count($fishRows);
 
     <section class="collection" aria-labelledby="collection-title">
       <div class="collection-heading">
-        <p class="section-kicker">FIELD CARDS</p>
+        <p class="section-kicker">登録一覧</p>
         <h2 id="collection-title">水中索引</h2>
       </div>
       <div class="card-sea" role="list" aria-label="魚名カード一覧">

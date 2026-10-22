@@ -1,7 +1,7 @@
 {
   "id": "/pose-studio/",
-  "name": "Pose Studio",
-  "short_name": "Pose Studio",
+  "name": "ポーズスタジオ",
+  "short_name": "ポーズスタジオ",
   "description": "3Dマネキンと2D骨格を編集し、OpenPoseや参照画像として書き出してポーズDBへ保存できるポーズ制作ツール",
   "lang": "ja",
   "start_url": "/pose-studio/",

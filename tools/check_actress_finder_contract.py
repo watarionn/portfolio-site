@@ -19,7 +19,7 @@ js = JS.read_text(encoding="utf-8")
 root_html = ROOT_HTML.read_text(encoding="utf-8")
 
 require(html, (
-    "ACTRESS INDEX / RECOMMENDATION BRIEF", 'id="person-input"',
+    'id="brief-title">推薦条件を整理する', 'id="person-input"',
     'id="build-brief"', 'id="result-json"', 'id="results-panel"',
     './actress_finder.css', './actress_finder.js',
 ), "Actress Finder HTML contract")

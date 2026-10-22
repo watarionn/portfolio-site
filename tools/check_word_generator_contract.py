@@ -20,7 +20,7 @@ js = JS.read_text(encoding="utf-8")
 data = DATA.read_text(encoding="utf-8")
 
 require(html, (
-    "WORD DRAW TABLE", 'id="metric-kata"', 'id="metric-eigo"',
+    'id="tool-title">単語の山札', 'id="metric-kata"', 'id="metric-eigo"',
     'id="timer-display"', 'id="draw-history"', 'data-seconds="30"',
     'data-seconds="60"', 'data-seconds="90"',
 ), "word generator HTML contract")

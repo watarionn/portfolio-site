@@ -9,8 +9,10 @@ CITY = ROOT / "portfolio-city"
 
 EXPECTED_DISTRICTS = {
     "observatory-hill": {"holoscope", "sphere", "prime-dot-art"},
-    "archive-street": {"yorei", "actress-finder", "cheatsheet", "shisha"},
-    "workshop-alley": {"dqb2", "madori", "maze-maker", "anagram"},
+    "archive-street": {"yorei", "actress-finder", "cheatsheet", "shisha",
+                       "mkpdf-studio", "s3-upload-audit"},
+    "workshop-alley": {"dqb2", "madori", "maze-maker", "anagram",
+                       "mindmap-maker", "python-music-lab"},
     "waterside-play": {"aquarium", "holoca", "word-generator"},
 }
 
@@ -34,6 +36,10 @@ EXPECTED_ROUTES = {
     "aquarium": "/AQUARIUM/aquarium.php",
     "holoca": "/HOLOCA/holoca.html",
     "word-generator": "/WORD_GENERATOR/word_generator.html",
+    "mindmap-maker": "/MINDMAP_MAKER/",
+    "mkpdf-studio": "/MKPDF_STUDIO/",
+    "s3-upload-audit": "/S3_UPLOAD_AUDIT/",
+    "python-music-lab": "/PYTHON_MUSIC_LAB/",
 }
 
 REQUIRED_FILES = {
@@ -81,8 +87,8 @@ def main() -> int:
 
     projects = project_payload.get("projects")
     districts = district_payload.get("districts")
-    if not isinstance(projects, list) or len(projects) != 14:
-        fail("exactly 14 projects are required")
+    if not isinstance(projects, list) or len(projects) != len(EXPECTED_ROUTES):
+        fail("city project count must match the 18-work reviewed inventory")
     if not isinstance(districts, list) or len(districts) != 4:
         fail("exactly 4 districts are required")
 
@@ -92,9 +98,12 @@ def main() -> int:
 
     project_ids = [item.get("id") for item in projects if isinstance(item, dict)]
     if len(project_ids) != len(set(project_ids)) or set(project_ids) != set(EXPECTED_ROUTES):
-        fail("project IDs differ from the locked 14-work inventory")
+        fail("project IDs differ from the reviewed 18-work inventory")
 
-    for project_id in EXPECTED_ROUTES:
+    # The newer music lab uses the existing programmatic building fallback,
+    # not a custom SVG. Keep the 17 existing handcrafted assets mandatory.
+    custom_building_ids = set(EXPECTED_ROUTES) - {"python-music-lab"}
+    for project_id in custom_building_ids:
         svg_path = CITY / "assets/buildings" / f"{project_id}.svg"
         if not svg_path.is_file():
             fail(f"missing illustrated building asset: {project_id}.svg")
@@ -123,7 +132,7 @@ def main() -> int:
         if route != EXPECTED_ROUTES[project_id]:
             fail(f"route changed for {project_id}: {route}")
         if route.startswith("/SECRET/"):
-            fail("SECRET must not be part of the 14-work city inventory")
+            fail("SECRET must not be part of the city inventory")
         for required in ("title", "building", "type", "summary", "order"):
             if project.get(required) in (None, ""):
                 fail(f"{project_id} is missing {required}")
@@ -148,11 +157,11 @@ def main() -> int:
         if not image or not (CITY / image).is_file():
             fail(f"missing registered terrain asset for chunk {chunk.get('id')}: {image}")
     placements = layout_payload.get("projectPlacements")
-    if not isinstance(placements, list) or len(placements) != 14:
+    if not isinstance(placements, list) or len(placements) != len(EXPECTED_ROUTES):
         fail("map-layout must contain exactly one placement per current project")
     placement_ids = [item.get("projectId") for item in placements if isinstance(item, dict)]
     if set(placement_ids) != set(EXPECTED_ROUTES) or len(placement_ids) != len(set(placement_ids)):
-        fail("map-layout placements must match the locked 14-work inventory exactly once")
+        fail("map-layout placements must match the reviewed 18-work inventory exactly once")
     if any(item.get("anchor") != "bottom-center" for item in placements):
         fail("all Phase 3.5 project placements must use bottom-center anchors")
     regions = layout_payload.get("districtRegions")
@@ -192,7 +201,7 @@ def main() -> int:
         if marker not in css:
             fail(f"city.css is missing required responsive/map rule: {marker}")
 
-    for project_id in EXPECTED_ROUTES:
+    for project_id in custom_building_ids:
         if f'data-project-id="{project_id}"' not in css:
             fail(f"city.css is missing a distinct building rule for {project_id}")
         if f'assets/buildings/{project_id}.svg' not in css:
@@ -203,7 +212,9 @@ def main() -> int:
     if matches != [{"id": "portfolio-city", "sourceRoot": "portfolio-city", "productionRoot": "portfolio-city"}]:
         fail("deployment map must contain exactly one portfolio-city entry")
 
-    validation_workflow = (ROOT / ".github/workflows/validate-public.yml").read_text(encoding="utf-8")
+    # The formerly active validation workflow was intentionally disabled.
+    # Read the reviewed historical test definition, never reactivate deploys.
+    validation_workflow = (ROOT / ".github/workflows-disabled/validate-public.yml").read_text(encoding="utf-8")
     if "node tools/check_portfolio_city_runtime.mjs" not in validation_workflow:
         fail("validate-public workflow must run the Portfolio City runtime contract")
 

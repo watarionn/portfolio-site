@@ -4,47 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="DQB2の部屋レシピを、部屋名・材料・効果から素早く探せるファンメイド検索ツール。">
-  <title>DQB2 部屋レシピ図鑑 | DQB2 Room Recipe Field Guide</title>
+  <title>DQB2 部屋レシピ図鑑</title>
   <link rel="stylesheet" href="dqb2.css">
 </head>
 <body>
   <div class="page-grid" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a class="portfolio-link" href="/">← PORTFOLIO</a>
+    <a class="portfolio-link" href="/">← 個人大辞典</a>
     <div class="brand-lockup">
       <span class="title-badge">DQB2</span>
-      <span class="brand-label">DQB2 ROOM RECIPE FIELD GUIDE</span>
+      <span class="brand-label">部屋レシピ図鑑</span>
     </div>
   </header>
 
   <main>
     <section class="project-intro" aria-labelledby="page-title">
       <div class="intro-copy">
-        <p class="eyebrow">BUILD / SEARCH / DISCOVER</p>
-        <h1 id="page-title">DQB2 部屋レシピ図鑑</h1>
-        <p class="lead">部屋名、必要な材料、完成後の効果。散らばりがちなレシピ情報を、建築前にすぐ引けるフィールドガイドとして整理しました。</p>
+                <h1 id="page-title">DQB2 部屋レシピ図鑑</h1>
         <div class="intro-meta" aria-label="このツールの特徴">
-          <span>STATIC DATASET</span><span>CLIENT-SIDE SEARCH</span><span><b id="intro-room-count">0</b> RECIPES</span>
+          <span>登録済みデータ</span><span>ブラウザー内で検索</span><span><b id="intro-room-count">0</b> 件</span>
         </div>
       </div>
       <div class="block-illustration" aria-hidden="true">
         <span class="block b1"></span><span class="block b2"></span><span class="block b3"></span>
         <span class="block b4"></span><span class="block b5"></span><span class="block b6"></span>
-        <p>FIELD<br>GUIDE</p>
+        <p>部屋の<br>レシピ</p>
       </div>
     </section>
 
     <section class="tool-shell" aria-labelledby="tool-title">
       <div class="tool-heading">
         <div>
-          <p class="section-kicker">LIVE TOOL</p>
+          <p class="section-kicker">検索画面</p>
           <h2 id="tool-title">部屋レシピを探す</h2>
         </div>
         <dl class="tool-stats" aria-label="データセット概要">
-          <div><dt>ROOMS</dt><dd id="total-count">0</dd></div>
-          <div><dt>MATERIALS</dt><dd id="material-count">0</dd></div>
-          <div><dt>VISIBLE</dt><dd id="visible-count">0</dd></div>
+          <div><dt>部屋</dt><dd id="total-count">0</dd></div>
+          <div><dt>材料</dt><dd id="material-count">0</dd></div>
+          <div><dt>表示中</dt><dd id="visible-count">0</dd></div>
         </dl>
       </div>
 
@@ -59,7 +57,7 @@
         </div>
 
         <div class="scope-row" role="group" aria-label="検索対象">
-          <span class="control-label">SEARCH IN</span>
+          <span class="control-label">検索対象</span>
           <button class="scope-btn active" type="button" data-scope="all" aria-pressed="true">すべて</button>
           <button class="scope-btn" type="button" data-scope="name" aria-pressed="false">部屋名</button>
           <button class="scope-btn" type="button" data-scope="items" aria-pressed="false">材料</button>
@@ -67,7 +65,7 @@
         </div>
 
         <div class="filter-row">
-          <span class="control-label">CATEGORY</span>
+          <span class="control-label">カテゴリ</span>
           <div class="filter-scroll" role="group" aria-label="カテゴリで絞り込み">
             <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">すべて</button>
             <button class="filter-btn" type="button" data-filter="寝る" aria-pressed="false">寝室</button>
@@ -86,7 +84,7 @@
       </div>
 
       <div class="result-bar" aria-live="polite">
-        <p><strong id="result-count">0</strong> recipes <span id="result-context">すべての部屋</span></p>
+        <p><strong id="result-count">0</strong>件 <span id="result-context">すべての部屋</span></p>
         <p class="result-hint">カードを選ぶと必要材料と効果を確認できます。</p>
       </div>
 

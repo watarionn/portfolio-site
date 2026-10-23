@@ -13,7 +13,7 @@
     },
     {
       "id": "sphere",
-      "title": "天球儀",
+      "title": "ブロック球体設計室",
       "district": "observatory-hill",
       "building": "プラネタリウム",
       "route": "/SPHERE/sphere.html",
@@ -29,11 +29,12 @@
       "route": "/PRIME_DOT_ART/prime_dot_art.html",
       "type": "Canvas / Algorithm",
       "summary": "素数列の規則を進行方向へ変換し、数理の動きを点と線の軌跡として描く作品。",
-      "order": 3
+      "order": 3,
+      "listed": false
     },
     {
       "id": "yorei",
-      "title": "用例採集",
+      "title": "用例採集帳",
       "district": "archive-street",
       "building": "ことば採集所",
       "route": "/YOREI/yorei.html",
@@ -49,11 +50,12 @@
       "route": "/OTHER/actress_finder.html",
       "type": "Search / JSON / Local-first",
       "summary": "好みの人物情報を整理し、推薦依頼と比較に使えるローカルファーストの索引ツール。",
-      "order": 2
+      "order": 2,
+      "listed": false
     },
     {
       "id": "cheatsheet",
-      "title": "技術早見表",
+      "title": "チートシート集",
       "district": "archive-street",
       "building": "技術資料センター",
       "route": "/CHEATSHEET/",
@@ -83,7 +85,7 @@
     },
     {
       "id": "madori",
-      "title": "間取図メーカー",
+      "title": "間取り図設計室",
       "district": "workshop-alley",
       "building": "設計事務所",
       "route": "/MADORI/madori.html",
@@ -93,7 +95,7 @@
     },
     {
       "id": "maze-maker",
-      "title": "迷路作成補助器",
+      "title": "迷路エディタ",
       "district": "workshop-alley",
       "building": "迷路工房",
       "route": "/MAZE_MAKER/maze_maker.html",
@@ -113,7 +115,7 @@
     },
     {
       "id": "aquarium",
-      "title": "水族館",
+      "title": "漢字水族館",
       "district": "waterside-play",
       "building": "市立水族館",
       "route": "/AQUARIUM/aquarium.php",
@@ -133,7 +135,7 @@
     },
     {
       "id": "word-generator",
-      "title": "ボードゲーム単語集",
+      "title": "カタカナーシ補助器",
       "district": "waterside-play",
       "building": "ゲームショップ",
       "route": "/WORD_GENERATOR/word_generator.html",
@@ -153,7 +155,7 @@
     },
     {
       "id": "mkpdf-studio",
-      "title": "mkPDF Studio",
+      "title": "画像toPDF室",
       "district": "archive-street",
       "building": "製本工房",
       "route": "/MKPDF_STUDIO/",
@@ -163,7 +165,7 @@
     },
     {
       "id": "s3-upload-audit",
-      "title": "S3 Upload Audit",
+      "title": "S3欠損チェッカー",
       "district": "archive-street",
       "building": "クラウド監査室",
       "route": "/S3_UPLOAD_AUDIT/",
@@ -173,7 +175,7 @@
     },
     {
       "id": "python-music-lab",
-      "title": "Python作曲研究所",
+      "title": "作曲研究所",
       "district": "workshop-alley",
       "building": "音響研究室",
       "route": "/PYTHON_MUSIC_LAB/",

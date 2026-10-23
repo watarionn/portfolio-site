@@ -78,6 +78,7 @@ function validateData(projectPayload, districtPayload, layoutPayload, detailPayl
     if (!project.id || projectIds.has(project.id)) throw new Error('作品IDが重複または欠落しています。');
     if (!districtIds.has(project.district)) throw new Error(`不明な地区: ${project.district}`);
     if (typeof project.route !== 'string' || !project.route.startsWith('/')) throw new Error(`不正な作品ルート: ${project.id}`);
+    if (project.listed !== undefined && typeof project.listed !== 'boolean') throw new Error(`不正な掲載設定: ${project.id}`);
     projectIds.add(project.id);
   }
 
@@ -603,7 +604,7 @@ function refreshVisitedState() {
   }
 
   const count = document.getElementById('visitedCount');
-  if (count) count.textContent = String(state.visited.size);
+  if (count) count.textContent = String(state.projects.filter((project) => state.visited.has(project.id)).length);
   const total = document.getElementById('visitedTotal');
   if (total) total.textContent = String(state.projects.length || EXPECTED_PROJECT_COUNT);
 
@@ -719,7 +720,7 @@ async function loadCity() {
     ]);
     validateData(projectPayload, districtPayload, layoutPayload, detailPayload);
 
-    state.projects = projectPayload.projects.slice().sort((a, b) => {
+    state.projects = projectPayload.projects.filter((project) => project.listed !== false).sort((a, b) => {
       const da = districtPayload.districts.find((district) => district.id === a.district)?.order ?? 0;
       const db = districtPayload.districts.find((district) => district.id === b.district)?.order ?? 0;
       return da - db || byOrder(a, b);

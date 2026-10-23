@@ -254,7 +254,7 @@ def main() -> None:
     # registered but must not appear in the visible homepage directory.
     allowed_genres = ("web-tool", "website", "distribution", "exhibit")
     expected_genre_counts = {
-        "web-tool": 16, "website": 9, "distribution": 7, "exhibit": 2,
+        "web-tool": 15, "website": 8, "distribution": 7, "exhibit": 2,
     }
     visible_works = [work for work in display_works if work.get("listed", True) is True]
     observed_genre_counts = {
@@ -315,8 +315,8 @@ def main() -> None:
     if ordered_numbers != sorted(ordered_numbers):
         fail("portfolio index must be displayed in ascending project number order")
     hidden = [work for work in display_works if work.get("listed", True) is False]
-    if {work.get("projectId") for work in hidden} != {"ai-judgement-lab"}:
-        fail("only AI判断・予測実験室 is approved to be hidden from the homepage index")
+    if {work.get("projectId") for work in hidden} != {"ai-judgement-lab", "prime-dot-art", "actress-finder"}:
+        fail("only the approved retired/hidden works may be absent from the homepage index")
 
     # Japanese copy and homepage/profile layout contract (2026-10-22).
     # Check specific approved UI decisions instead of rejecting grammatical

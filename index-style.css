@@ -462,48 +462,70 @@ button:focus-visible {
 }
 
 .project-index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(.9rem, 2.4vw, 1.8rem);
   border-top: 1px solid var(--ink);
 }
 
 .project-row {
   display: grid;
-  grid-template-columns: 4rem minmax(0, 1.3fr) minmax(11rem, .7fr) auto;
+  grid-template-columns: 2.25rem minmax(0, 1fr) 1rem;
+  grid-template-rows: auto auto;
   align-items: baseline;
-  gap: 1.5rem;
-  padding-block: .78rem;
+  gap: .05rem .65rem;
+  min-width: 0;
+  padding: .54rem .25rem;
   border-bottom: 1px solid var(--rule);
   text-decoration: none;
   transition: padding-inline .2s var(--ease), background .2s ease;
 }
 
 .project-row:hover {
-  padding-inline: .7rem;
+  padding-inline: .65rem;
   background: rgba(255, 255, 255, .26);
 }
 
 .project-row > span {
-  color: var(--rule);
+  grid-row: 1 / span 2;
+  color: var(--ink-muted);
   font-family: var(--serif-en);
-  font-size: .66rem;
+  font-size: .62rem;
 }
 
 .project-row strong {
-  font-size: clamp(.98rem, 1.8vw, 1.26rem);
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  font-size: clamp(.86rem, 1.5vw, 1.03rem);
   font-weight: 600;
   letter-spacing: .015em;
+  line-height: 1.45;
 }
 
 .project-row em {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
   color: var(--ink-muted);
   font-family: var(--sans);
-  font-size: .66rem;
+  font-size: .59rem;
   font-style: normal;
+  line-height: 1.45;
 }
 
 .project-row b {
+  grid-column: 3;
+  grid-row: 1;
   color: var(--vermilion);
   font-family: var(--sans);
   font-size: .76rem;
+}
+
+@media (min-width: 1320px) {
+  .project-index {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .recent-section {
@@ -816,27 +838,31 @@ button:focus-visible {
     margin-bottom: .8rem;
   }
 
+  .project-index {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .project-row {
-    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
-    gap: .75rem;
-    min-width: 0;
-    padding-block: .75rem;
+    grid-template-columns: 2.2rem minmax(0, 1fr) 1rem;
+    grid-template-rows: auto;
+    gap: .6rem;
+    align-items: center;
+    padding: .48rem .15rem;
   }
 
+  .project-row > span,
   .project-row strong,
-  .project-row em {
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-
-  .project-row em {
-    grid-column: 2 / -1;
-    grid-row: 2;
-  }
-
   .project-row b {
-    grid-column: 3;
     grid-row: 1;
+  }
+
+  .project-row strong {
+    font-size: .88rem;
+    line-height: 1.5;
+  }
+
+  .project-row em {
+    display: none;
   }
 
   .colophon {

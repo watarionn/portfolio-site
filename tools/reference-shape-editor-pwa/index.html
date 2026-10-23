@@ -85,28 +85,26 @@
       <section class="panel-section palette-section">
         <div class="head-line"><h2>塗り色 <span>03</span></h2><label class="mini-link" for="paletteInput">色を読込</label><input id="paletteInput" type="file" accept=".json,application/json" hidden/></div>
         <div class="color-current"><input id="colorPicker" type="color" value="#d47c5c" aria-label="カスタム塗り色"/><div><strong id="colorName">#D47C5C</strong><small>選択中の色</small></div></div>
-        <div class="palette-heading"><span>パレット <em>重複のない色一覧</em></span><small id="unifiedCount">0色</small></div>
-        <div class="swatches unified-swatches" id="unifiedColors" aria-label="編集可能な統合パレット"></div>
-        <div class="palette-editor" aria-label="パレットの編集">
-          <label for="paletteEditColor">編集する色</label>
-          <input id="paletteEditColor" type="color" value="#d47c5c" aria-label="パレット色"/>
-          <input id="paletteEditHex" type="text" value="#d47c5c" maxlength="7" spellcheck="false" autocomplete="off" aria-label="色のHEXコード"/>
-          <button id="paletteSave" type="button">＋ 追加</button>
-          <button id="paletteDelete" type="button" disabled>削除</button>
-          <button id="paletteCancel" type="button">解除</button>
-        </div>
-        <p class="panel-note">色を選ぶと編集対象になります。追加・変更・削除はこのパレットだけに適用され、下の解析元3分類は保持します。</p>
-        <div class="palette-heading"><span>Characteristic <em>特徴色</em></span><small id="charLabel">画像待ち</small></div>
-        <div class="swatches" id="characteristicColors"></div>
-        <div class="palette-heading"><span>Featured <em>アクセント</em></span></div>
-        <div class="swatches" id="featuredColors"></div>
-        <div class="palette-heading"><span>Representative <em>代表色</em></span></div>
-        <div class="swatches" id="representativeColors"></div>
-        <p id="paletteNote" class="panel-note">下敷き画像からブラウザ内で色候補を計算します。ColorStrip出力JSONを取り込んで正確な色も使えます。</p>
+        <details class="palette-accordion">
+          <summary>編集可能な統合パレット <small id="unifiedCount">0色</small></summary>
+          <div class="accordion-content">
+            <div class="swatches unified-swatches" id="unifiedColors" aria-label="編集可能な統合パレット"></div>
+            <div class="palette-editor" aria-label="パレットの編集">
+              <label for="paletteEditColor">編集する色</label>
+              <input id="paletteEditColor" type="color" value="#d47c5c" aria-label="パレット色"/>
+              <input id="paletteEditHex" type="text" value="#d47c5c" maxlength="7" spellcheck="false" autocomplete="off" aria-label="色のHEXコード"/>
+              <button id="paletteSave" type="button">＋ 追加</button>
+              <button id="paletteDelete" type="button" disabled>削除</button>
+              <button id="paletteCancel" type="button">解除</button>
+            </div>
+            <p class="panel-note">抽出した色をまとめて表示します。色の追加・編集・削除ができます。</p>
+            <p id="paletteNote" class="panel-note">画像から色候補を抽出します。外部の色データも読み込めます。</p>
+          </div>
+        </details>
       </section>
       <section class="panel-section">
         <h2>選択中の図形 <span>04</span></h2>
-        <div id="shapeInspector" class="no-selection">図形を選ぶと、名称・色・レイヤーを編集できます。</div>
+        <div id="shapeInspector" class="no-selection">図形を選ぶと、名称・塗り色・辺・レイヤーを編集できます。</div>
       </section>
       <section class="panel-section layer-section">
         <div class="head-line"><h2>レイヤー <span>05</span></h2><span class="small-muted" id="layerCount">0件</span></div>
@@ -119,5 +117,5 @@
   <footer class="status"><span id="statusText">準備完了</span><span>NO GENERATIVE FILL · SOURCE IMAGE UNCHANGED · EXPORT VECTOR ONLY</span></footer>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
-<dialog id="helpDialog"><div class="dialog-head"><div><small>QUICK GUIDE</small><h2>描く、つなぐ、整える。</h2></div><button class="small-quiet" id="closeHelp">閉じる ✕</button></div><div class="guide-grid"><div><strong>01 · 図形化</strong><p>タップして頂点を追加。指1本でドラッグすると画面移動、指2本でピンチズーム。3点以上で<strong>「図形化」</strong>または Enter で確定。右クリックで直前の頂点を削除。</p></div><div><strong>02 · 共有頂点</strong><p>「辺に点」モードで選択図形の辺をタップすると頂点を追加。「頂点」モードの矢印で1px単位の微調整ができます。既存の頂点に近づくと吸着します。共有頂点を動かすと隣接図形も追従します。頂点モードで辺をダブルクリックすると点を追加。</p></div><div><strong>03 · 色と重なり</strong><p>Characteristic・Featured・代表色を使い分け。右パネルで色と図形名を変更。レイヤーの≡ をドラッグして重なり順を変更。複数選択から統合・分割も可能。重複のないパレットは色の追加・編集・削除に対応。</p></div><div><strong>04 · 縦長画像</strong><p>縦長画像は自動で「幅に合わせる」表示になります。ホイールで上下に移動、Ctrl/⌘＋ホイールや＋−で拡大縮小。上部の「全体表示」と「幅に合わせる」で切り替えられます。</p></div><div><strong>05 · 保存</strong><p>JSONは再編集用で下敷き画像も含まれます。PNG/SVGは図形だけを書き出し、元画像を混入させません。</p></div></div><div class="keymap"><span><kbd>P</kbd> 図形</span><span><kbd>V</kbd> 選択</span><span><kbd>E</kbd> 頂点</span><span><kbd>H</kbd> パン</span><span><kbd>I</kbd> 色採取</span><span><kbd>Space</kbd> 一時パン</span><span><kbd>ホイール</kbd> 縦移動</span><span><kbd>Ctrl＋ホイール</kbd> ズーム</span><span><kbd>Ctrl+Z</kbd> 戻す</span><span><kbd>Delete</kbd> 削除</span></div></dialog>
+<dialog id="helpDialog"><div class="dialog-head"><div><small>QUICK GUIDE</small><h2>描く、つなぐ、整える。</h2></div><button class="small-quiet" id="closeHelp">閉じる ✕</button></div><div class="guide-grid"><div><strong>01 · 図形化</strong><p>タップして頂点を追加。指1本でドラッグすると画面移動、指2本でピンチズーム。3点以上で<strong>「図形化」</strong>または Enter で確定。右クリックで直前の頂点を削除。</p></div><div><strong>02 · 共有頂点</strong><p>「辺に点」モードで選択図形の辺をタップすると頂点を追加。「頂点」モードの矢印で1px単位の微調整ができます。既存の頂点に近づくと吸着します。共有頂点を動かすと隣接図形も追従します。頂点モードで辺をダブルクリックすると点を追加。</p></div><div><strong>03 · 色と重なり</strong><p>編集可能な統合パレットから色を選択。右パネルで塗り色・辺・図形名を変更。レイヤーの≡ をドラッグして重なり順を変更。複数選択から統合・分割も可能。重複のないパレットは色の追加・編集・削除に対応。</p></div><div><strong>04 · 縦長画像</strong><p>縦長画像は自動で「幅に合わせる」表示になります。ホイールで上下に移動、Ctrl/⌘＋ホイールや＋−で拡大縮小。上部の「全体表示」と「幅に合わせる」で切り替えられます。</p></div><div><strong>05 · 保存</strong><p>JSONは再編集用で下敷き画像も含まれます。PNG/SVGは図形だけを書き出し、元画像を混入させません。</p></div></div><div class="keymap"><span><kbd>P</kbd> 図形</span><span><kbd>V</kbd> 選択</span><span><kbd>E</kbd> 頂点</span><span><kbd>H</kbd> パン</span><span><kbd>I</kbd> 色採取</span><span><kbd>Space</kbd> 一時パン</span><span><kbd>ホイール</kbd> 縦移動</span><span><kbd>Ctrl＋ホイール</kbd> ズーム</span><span><kbd>Ctrl+Z</kbd> 戻す</span><span><kbd>Delete</kbd> 削除</span></div></dialog>
 </body></html>

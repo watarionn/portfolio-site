@@ -29,7 +29,8 @@
       "route": "/PRIME_DOT_ART/prime_dot_art.html",
       "type": "Canvas / Algorithm",
       "summary": "素数列の規則を進行方向へ変換し、数理の動きを点と線の軌跡として描く作品。",
-      "order": 3
+      "order": 3,
+      "listed": false
     },
     {
       "id": "yorei",
@@ -49,7 +50,8 @@
       "route": "/OTHER/actress_finder.html",
       "type": "Search / JSON / Local-first",
       "summary": "好みの人物情報を整理し、推薦依頼と比較に使えるローカルファーストの索引ツール。",
-      "order": 2
+      "order": 2,
+      "listed": false
     },
     {
       "id": "cheatsheet",

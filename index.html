@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="index-style.css?v=20261022-ja1">
+  <link rel="stylesheet" href="index-style.css?v=20261023-genre1">
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -115,54 +115,51 @@
           <p class="section-heading__kana" aria-hidden="true">さくいん</p>
           <h2 id="index-title">作品索引</h2>
         </div>
-        <p class="section-heading__note"><span id="projectCount">35</span>件</p>
+        <p class="section-heading__note"><span id="projectCount">34</span>件</p>
       </header>
 
-      <div class="project-filters" aria-label="作品を制作領域で絞り込む">
+      <div class="project-filters" role="group" aria-label="作品を公開形態で絞り込む">
         <button type="button" data-filter="all" aria-pressed="true">すべて</button>
-        <button type="button" data-filter="web" aria-pressed="false">ウェブ</button>
-        <button type="button" data-filter="data" aria-pressed="false">データ</button>
-        <button type="button" data-filter="search" aria-pressed="false">検索</button>
-        <button type="button" data-filter="tool" aria-pressed="false">ツール</button>
-        <button type="button" data-filter="creative" aria-pressed="false">制作</button>
+        <button type="button" data-filter="web-tool" aria-pressed="false">Webツール</button>
+        <button type="button" data-filter="website" aria-pressed="false">Webサイト</button>
+        <button type="button" data-filter="distribution" aria-pressed="false">配布</button>
+        <button type="button" data-filter="exhibit" aria-pressed="false">展示</button>
       </div>
-
       <div class="project-index" role="list">
-        <a class="project-row" data-categories="web data tool" href="/YOREI/yorei.html" role="listitem"><span>000</span><strong>用例採集</strong><em>辞書 / Supabase</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search" href="/holoscope/" role="listitem"><span>001</span><strong>ホロライブEN観測所</strong><em>データ / 運用</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search" href="/SHISHA/" role="listitem"><span>002</span><strong>シーシャ店舗検索</strong><em>検索 / PHP</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search" href="/AQUARIUM/aquarium.php" role="listitem"><span>003</span><strong>水族館</strong><em>PHP / MySQL / 検索</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search" href="/DQB2/dqb2.html" role="listitem"><span>004</span><strong>DQB2 部屋レシピ図鑑</strong><em>データ集 / JavaScript</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search tool" href="/HOLOCA/holoca.html" role="listitem"><span>005</span><strong>ホロカ デッキラボ</strong><em>PHP / 検索 / Canvas</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/SPHERE/sphere.html" role="listitem"><span>006</span><strong>天球儀</strong><em>Canvas / ボクセル</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/PRIME_DOT_ART/prime_dot_art.html" role="listitem"><span>007</span><strong>素数点画</strong><em>Canvas / 描画アルゴリズム</em><b>↗</b></a>
-        <a class="project-row" data-categories="web creative tool" href="/MADORI/madori.html" role="listitem"><span>008</span><strong>間取図メーカー</strong><em>SVG / ドラッグ操作</em><b>↗</b></a>
-        <a class="project-row" data-categories="data search tool" href="/OTHER/actress_finder.html" role="listitem"><span>009</span><strong>人物索引</strong><em>JavaScript / JSON</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool creative" href="/WORD_GENERATOR/word_generator.html" role="listitem"><span>010</span><strong>ボードゲーム単語集</strong><em>単語データ / 山札の抽選</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/MAZE_MAKER/maze_maker.html" role="listitem"><span>011</span><strong>迷路作成補助器</strong><em>格子編集 / Canvas</em><b>↗</b></a>
-        <a class="project-row" data-categories="tool creative" href="/ANAGRAM/anagram.html" role="listitem"><span>012</span><strong>アナグラム補助器</strong><em>文字処理 / ドラッグ操作</em><b>↗</b></a>
-        <a class="project-row" data-categories="data search tool" href="/CHEATSHEET/" role="listitem"><span>013</span><strong>技術早見表</strong><em>資料 / 検索</em><b>↗</b></a>
-        <a class="project-row" data-categories="web creative tool" href="/MINDMAP_MAKER/" role="listitem"><span>014</span><strong>マインドマップメーカー</strong><em>SVG / ローカル保存</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/prompt-studio/" role="listitem"><span>015</span><strong>プロンプトスタジオ</strong><em>プロンプト / プロンプトDB</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/pose-studio/" role="listitem"><span>016</span><strong>ポーズスタジオ</strong><em>3D / OpenPose / PoseDB</em><b>↗</b></a>
-        <a class="project-row" data-categories="data creative tool" href="/model-inspector/" role="listitem"><span>017</span><strong>モデル検査ツール</strong><em>モデルDB / Civitai</em><b>↗</b></a>
-        <a class="project-row" data-categories="data creative tool" href="/asset-organizer/" role="listitem"><span>018</span><strong>素材整理ツール</strong><em>監査 / 素材DB</em><b>↗</b></a>
-        <a class="project-row" data-categories="tool" href="/VIDEO_WORKBENCH/" role="listitem"><span>019</span><strong>動画ワークベンチ</strong><em>Python / FFmpeg / デスクトップ</em><b>↗</b></a>
-                <a class="project-row" data-categories="tool creative" href="/MKPDF_STUDIO/" role="listitem"><span>020</span><strong>PDF制作スタジオ</strong><em>Python / デスクトップ / PDF</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool" href="/S3_UPLOAD_AUDIT/" role="listitem"><span>021</span><strong>S3アップロード監査</strong><em>Python / デスクトップ / S3</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool" href="/PROJECT_SNAPSHOT_GENERATOR/" role="listitem"><span>022</span><strong>プロジェクトスナップショット生成ツール</strong><em>Python / Tkinter / 解析</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool" href="/MEDIA_COLLECTOR/" role="listitem"><span>023</span><strong>メディア収集ツール</strong><em>Python / Tkinter / メディア</em><b>↗</b></a>
-        <a class="project-row" data-categories="tool" href="/DOWNLOAD_WORKBENCH/" role="listitem"><span>024</span><strong>ダウンロードワークベンチ</strong><em>Python / yt-dlp / FFmpeg</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool" href="/WEB_EXTRACTION_RECIPES/" role="listitem"><span>025</span><strong>Web抽出レシピ</strong><em>Python / Tkinter / HTML</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data tool" href="https://advisor-production-production.up.railway.app/" role="listitem"><span>026</span><strong>シーシャアドバイザー</strong><em>Python / 推薦 / データ</em><b>↗</b></a>
-        <a class="project-row" data-categories="web data search" href="/LEGAL_KNOWLEDGE_BASE/" role="listitem"><span>027</span><strong>法令ナレッジベース</strong><em>Python / PostgreSQL / e-Gov</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool creative" href="/POSE_LIBRARY_MANAGER/" role="listitem"><span>028</span><strong>ポーズライブラリ管理</strong><em>ポーズ資料管理 / 台帳</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/PYTHON_MUSIC_LAB/" role="listitem"><span>029</span><strong>Python作曲研究所</strong><em>ルールベース作曲 / Python</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/IMAGE_STUDIO/" role="listitem"><span>030</span><strong>画像仕立て室</strong><em>Canvas / ローカル保存</em><b>↗</b></a>
-        <a class="project-row" data-categories="data tool" href="/AI_JUDGEMENT_LAB/" role="listitem"><span>031</span><strong>AI判断・予測実験室</strong><em>分類 / 回帰 / JavaScript</em><b>↗</b></a>
-        <a class="project-row" data-categories="data creative" href="/OSAKA_SUBWAY_SEVENS/" role="listitem"><span>032</span><strong>大阪地下鉄七並べ</strong><em>ボードゲーム / 路線図</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/minimalizer/" role="listitem"><span>033</span><strong>画像簡略化ツール</strong><em>画像処理 / ブラウザー</em><b>↗</b></a>
-        <a class="project-row" data-categories="creative tool" href="/reference-shape-editor/" role="listitem"><span>034</span><strong>参照図形エディター</strong><em>多角形編集 / SVG / ローカル保存</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/YOREI/yorei.html" role="listitem"><span>000</span><strong>用例採集</strong><em>辞書 / Supabase</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/SPHERE/sphere.html" role="listitem"><span>006</span><strong>天球儀</strong><em>Canvas / ボクセル</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/PRIME_DOT_ART/prime_dot_art.html" role="listitem"><span>007</span><strong>素数点画</strong><em>Canvas / 描画アルゴリズム</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/MADORI/madori.html" role="listitem"><span>008</span><strong>間取図メーカー</strong><em>SVG / ドラッグ操作</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/WORD_GENERATOR/word_generator.html" role="listitem"><span>010</span><strong>ボードゲーム単語集</strong><em>単語データ / 山札の抽選</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/MAZE_MAKER/maze_maker.html" role="listitem"><span>011</span><strong>迷路生成補助器</strong><em>格子編集 / Canvas</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/ANAGRAM/anagram.html" role="listitem"><span>012</span><strong>アナグラム補助器</strong><em>文字処理 / ドラッグ操作</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/MINDMAP_MAKER/" role="listitem"><span>014</span><strong>マインドマップメーカー</strong><em>SVG / ローカル保存</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/prompt-studio/" role="listitem"><span>015</span><strong>プロンプトスタジオ</strong><em>プロンプト / プロンプトDB</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/pose-studio/" role="listitem"><span>016</span><strong>ポーズスタジオ</strong><em>3D / OpenPose / PoseDB</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/model-inspector/" role="listitem"><span>017</span><strong>モデル検査ツール</strong><em>モデルDB / Civitai</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/asset-organizer/" role="listitem"><span>018</span><strong>素材整理ツール</strong><em>監査 / 素材DB</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/PYTHON_MUSIC_LAB/" role="listitem"><span>029</span><strong>Python作曲研究所</strong><em>ルールベース作曲 / Python</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/IMAGE_STUDIO/" role="listitem"><span>030</span><strong>画像仕立て室</strong><em>Canvas / ローカル保存</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/minimalizer/" role="listitem"><span>033</span><strong>画像簡略化ツール</strong><em>画像処理 / ブラウザー</em><b>↗</b></a>
+        <a class="project-row" data-genre="web-tool" href="/reference-shape-editor/" role="listitem"><span>034</span><strong>参照図形エディター</strong><em>多角形編集 / SVG / ローカル保存</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="/holoscope/" role="listitem"><span>001</span><strong>ホロライブEN観測所</strong><em>データ / 運用</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="/SHISHA/" role="listitem"><span>002</span><strong>シーシャ店舗検索</strong><em>検索 / PHP</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="/AQUARIUM/aquarium.php" role="listitem"><span>003</span><strong>水族館</strong><em>PHP / MySQL / 検索</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="/DQB2/dqb2.html" role="listitem"><span>004</span><strong>DQB2 部屋レシピ図鑑</strong><em>データ集 / JavaScript</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="/HOLOCA/holoca.html" role="listitem"><span>005</span><strong>ホロカ デッキラボ</strong><em>PHP / 検索 / Canvas</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="/OTHER/actress_finder.html" role="listitem"><span>009</span><strong>人物索引</strong><em>JavaScript / JSON</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="/CHEATSHEET/" role="listitem"><span>013</span><strong>技術早見表</strong><em>資料 / 検索</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="https://advisor-production-production.up.railway.app/" role="listitem"><span>026</span><strong>シーシャアドバイザー</strong><em>Python / 推薦 / データ</em><b>↗</b></a>
+        <a class="project-row" data-genre="website" href="/LEGAL_KNOWLEDGE_BASE/" role="listitem"><span>027</span><strong>法令ナレッジベース</strong><em>Python / PostgreSQL / e-Gov</em><b>↗</b></a>
+        <a class="project-row" data-genre="distribution" href="/VIDEO_WORKBENCH/" role="listitem"><span>019</span><strong>動画ワークベンチ</strong><em>Python / FFmpeg / デスクトップ</em><b>↗</b></a>
+        <a class="project-row" data-genre="distribution" href="/MKPDF_STUDIO/" role="listitem"><span>020</span><strong>PDF製作スタジオ</strong><em>Python / デスクトップ / PDF</em><b>↗</b></a>
+        <a class="project-row" data-genre="distribution" href="/S3_UPLOAD_AUDIT/" role="listitem"><span>021</span><strong>S3アップロード監査</strong><em>Python / デスクトップ / S3</em><b>↗</b></a>
+        <a class="project-row" data-genre="distribution" href="/PROJECT_SNAPSHOT_GENERATOR/" role="listitem"><span>022</span><strong>プロジェクトスナップショット作成ツール</strong><em>Python / Tkinter / 解析</em><b>↗</b></a>
+        <a class="project-row" data-genre="distribution" href="/MEDIA_COLLECTOR/" role="listitem"><span>023</span><strong>メディア収集ツール</strong><em>Python / Tkinter / メディア</em><b>↗</b></a>
+        <a class="project-row" data-genre="distribution" href="/DOWNLOAD_WORKBENCH/" role="listitem"><span>024</span><strong>ダウンロードワークベンチ</strong><em>Python / yt-dlp / FFmpeg</em><b>↗</b></a>
+        <a class="project-row" data-genre="distribution" href="/WEB_EXTRACTION_RECIPES/" role="listitem"><span>025</span><strong>Web抽出レシピ</strong><em>Python / Tkinter / HTML</em><b>↗</b></a>
+        <a class="project-row" data-genre="exhibit" href="/POSE_LIBRARY_MANAGER/" role="listitem"><span>028</span><strong>ポーズライブラリ管理</strong><em>ポーズ資料管理 / 台帳</em><b>↗</b></a>
+        <a class="project-row" data-genre="exhibit" href="/OSAKA_SUBWAY_SEVENS/" role="listitem"><span>032</span><strong>大阪地下鉄七並べ</strong><em>ボードゲーム / 路線図</em><b>↗</b></a>
       </div>
     </section>
 
@@ -229,6 +226,6 @@
     </div>
   </footer>
 
-  <script src="index-script.js?v=20261022-ja1" defer></script>
+  <script src="index-script.js?v=20261023-genre1" defer></script>
 </body>
 </html>

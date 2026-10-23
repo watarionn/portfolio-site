@@ -7,245 +7,281 @@
       "projectId": "yorei",
       "japaneseName": "用例採集",
       "englishName": "Corpus Collector",
-      "route": "/YOREI/yorei.html"
+      "route": "/YOREI/yorei.html",
+      "genre": "web-tool"
     },
     {
       "number": "001",
       "projectId": "holoscope",
       "japaneseName": "ホロライブEN観測所",
       "englishName": "HoloScope",
-      "route": "/holoscope/"
+      "route": "/holoscope/",
+      "genre": "website"
     },
     {
       "number": "002",
       "projectId": "shisha",
       "japaneseName": "シーシャ店舗検索",
       "englishName": "SHISHA Search",
-      "route": "/SHISHA/"
+      "route": "/SHISHA/",
+      "genre": "website"
     },
     {
       "number": "003",
       "projectId": "aquarium",
       "japaneseName": "水族館",
       "englishName": "AQUARIUM",
-      "route": "/AQUARIUM/aquarium.php"
+      "route": "/AQUARIUM/aquarium.php",
+      "genre": "website"
     },
     {
       "number": "004",
       "projectId": "dqb2",
       "japaneseName": "DQB2 部屋レシピ図鑑",
       "englishName": "DQB2 Room Recipe Field Guide",
-      "route": "/DQB2/dqb2.html"
+      "route": "/DQB2/dqb2.html",
+      "genre": "website"
     },
     {
       "number": "005",
       "projectId": "holoca",
       "japaneseName": "ホロカ デッキラボ",
       "englishName": "HOLOCA Deck Lab",
-      "route": "/HOLOCA/holoca.html"
+      "route": "/HOLOCA/holoca.html",
+      "genre": "website"
     },
     {
       "number": "006",
       "projectId": "sphere",
       "japaneseName": "天球儀",
       "englishName": "Sphere Blueprint Generator",
-      "route": "/SPHERE/sphere.html"
+      "route": "/SPHERE/sphere.html",
+      "genre": "web-tool"
     },
     {
       "number": "007",
       "projectId": "prime-dot-art",
       "japaneseName": "素数点画",
       "englishName": "Prime Dot Art",
-      "route": "/PRIME_DOT_ART/prime_dot_art.html"
+      "route": "/PRIME_DOT_ART/prime_dot_art.html",
+      "genre": "web-tool"
     },
     {
       "number": "008",
       "projectId": "madori",
       "japaneseName": "間取図メーカー",
       "englishName": "Floor Plan Maker",
-      "route": "/MADORI/madori.html"
+      "route": "/MADORI/madori.html",
+      "genre": "web-tool"
     },
     {
       "number": "009",
       "projectId": "actress-finder",
       "japaneseName": "人物索引",
       "englishName": "Person Index",
-      "route": "/OTHER/actress_finder.html"
+      "route": "/OTHER/actress_finder.html",
+      "genre": "website"
     },
     {
       "number": "010",
       "projectId": "word-generator",
       "japaneseName": "ボードゲーム単語集",
       "englishName": "Word Draw Table",
-      "route": "/WORD_GENERATOR/word_generator.html"
+      "route": "/WORD_GENERATOR/word_generator.html",
+      "genre": "web-tool"
     },
     {
       "number": "011",
       "projectId": "maze-maker",
       "japaneseName": "迷路作成補助器",
       "englishName": "Maze Draft Board",
-      "route": "/MAZE_MAKER/maze_maker.html"
+      "route": "/MAZE_MAKER/maze_maker.html",
+      "genre": "web-tool"
     },
     {
       "number": "012",
       "projectId": "anagram",
       "japaneseName": "アナグラム補助器",
       "englishName": "Letter Workbench",
-      "route": "/ANAGRAM/anagram.html"
+      "route": "/ANAGRAM/anagram.html",
+      "genre": "web-tool"
     },
     {
       "number": "013",
       "projectId": "cheatsheet",
       "japaneseName": "技術早見表",
       "englishName": "Cheat Sheet Tables",
-      "route": "/CHEATSHEET/"
+      "route": "/CHEATSHEET/",
+      "genre": "website"
     },
     {
       "number": "014",
       "projectId": "mindmap-maker",
       "japaneseName": "マインドマップメーカー",
       "englishName": "MindMap Maker",
-      "route": "/MINDMAP_MAKER/"
+      "route": "/MINDMAP_MAKER/",
+      "genre": "web-tool"
     },
     {
       "projectId": "prompt-studio",
       "japaneseName": "プロンプトスタジオ",
       "englishName": "Prompt Studio",
       "route": "/prompt-studio/",
-      "number": "015"
+      "number": "015",
+      "genre": "web-tool"
     },
     {
       "projectId": "pose-studio",
       "japaneseName": "ポーズスタジオ",
       "englishName": "Pose Studio",
       "route": "/pose-studio/",
-      "number": "016"
+      "number": "016",
+      "genre": "web-tool"
     },
     {
       "projectId": "model-inspector",
       "japaneseName": "モデル検査ツール",
       "englishName": "Model Inspector",
       "route": "/model-inspector/",
-      "number": "017"
+      "number": "017",
+      "genre": "web-tool"
     },
     {
       "projectId": "asset-organizer",
       "japaneseName": "素材整理ツール",
       "englishName": "Asset Organizer",
       "route": "/asset-organizer/",
-      "number": "018"
+      "number": "018",
+      "genre": "web-tool"
     },
     {
       "number": "019",
       "projectId": "video-workbench",
       "japaneseName": "動画ワークベンチ",
       "englishName": "Video Workbench",
-      "route": "/VIDEO_WORKBENCH/"
+      "route": "/VIDEO_WORKBENCH/",
+      "genre": "distribution"
     },
     {
       "number": "020",
       "projectId": "mkpdf-studio",
       "japaneseName": "PDF制作スタジオ",
       "englishName": "mkPDF Studio",
-      "route": "/MKPDF_STUDIO/"
+      "route": "/MKPDF_STUDIO/",
+      "genre": "distribution"
     },
     {
       "number": "021",
       "projectId": "s3-upload-audit",
       "japaneseName": "S3アップロード監査",
       "englishName": "S3 Upload Audit",
-      "route": "/S3_UPLOAD_AUDIT/"
+      "route": "/S3_UPLOAD_AUDIT/",
+      "genre": "distribution"
     },
     {
       "number": "022",
       "projectId": "project-snapshot-generator",
       "japaneseName": "プロジェクトスナップショット生成ツール",
       "englishName": "Project Snapshot Generator",
-      "route": "/PROJECT_SNAPSHOT_GENERATOR/"
+      "route": "/PROJECT_SNAPSHOT_GENERATOR/",
+      "genre": "distribution"
     },
     {
       "number": "023",
       "projectId": "media-collector",
       "japaneseName": "メディア収集ツール",
       "englishName": "Media Collector",
-      "route": "/MEDIA_COLLECTOR/"
+      "route": "/MEDIA_COLLECTOR/",
+      "genre": "distribution"
     },
     {
       "number": "024",
       "projectId": "download-workbench",
       "japaneseName": "ダウンロードワークベンチ",
       "englishName": "Download Workbench",
-      "route": "/DOWNLOAD_WORKBENCH/"
+      "route": "/DOWNLOAD_WORKBENCH/",
+      "genre": "distribution"
     },
     {
       "number": "025",
       "projectId": "web-extraction-recipes",
       "japaneseName": "Web抽出レシピ",
       "englishName": "Web Extraction Recipes",
-      "route": "/WEB_EXTRACTION_RECIPES/"
+      "route": "/WEB_EXTRACTION_RECIPES/",
+      "genre": "distribution"
     },
     {
       "number": "026",
       "projectId": "shisha-advisor",
       "japaneseName": "シーシャアドバイザー",
       "englishName": "Shisha Advisor",
-      "route": "https://advisor-production-production.up.railway.app/"
+      "route": "https://advisor-production-production.up.railway.app/",
+      "genre": "website"
     },
     {
       "number": "027",
       "projectId": "legal-knowledge-base",
       "japaneseName": "法令ナレッジベース",
       "englishName": "Legal Knowledge Base",
-      "route": "/LEGAL_KNOWLEDGE_BASE/"
+      "route": "/LEGAL_KNOWLEDGE_BASE/",
+      "genre": "website"
     },
     {
       "number": "028",
       "projectId": "pose-library-manager",
       "japaneseName": "ポーズライブラリ管理",
       "englishName": "Pose Library Manager",
-      "route": "/POSE_LIBRARY_MANAGER/"
+      "route": "/POSE_LIBRARY_MANAGER/",
+      "genre": "exhibit"
     },
     {
       "number": "029",
       "projectId": "python-music-lab",
       "japaneseName": "Python作曲研究所",
       "englishName": "Non-Generative Composer",
-      "route": "/PYTHON_MUSIC_LAB/"
+      "route": "/PYTHON_MUSIC_LAB/",
+      "genre": "web-tool"
     },
     {
       "number": "030",
       "projectId": "image-studio",
       "japaneseName": "画像仕立て室",
       "englishName": "Image Studio",
-      "route": "/IMAGE_STUDIO/"
+      "route": "/IMAGE_STUDIO/",
+      "genre": "web-tool"
     },
     {
       "number": "031",
       "projectId": "ai-judgement-lab",
       "japaneseName": "AI判断・予測実験室",
       "englishName": "AI Judgement & Prediction Lab",
-      "route": "/AI_JUDGEMENT_LAB/"
+      "route": "/AI_JUDGEMENT_LAB/",
+      "genre": "website",
+      "listed": false
     },
     {
       "number": "032",
       "projectId": "osaka-subway-sevens",
       "japaneseName": "大阪地下鉄七並べ",
       "englishName": "Subway Sevens",
-      "route": "/OSAKA_SUBWAY_SEVENS/"
+      "route": "/OSAKA_SUBWAY_SEVENS/",
+      "genre": "exhibit"
     },
     {
       "number": "033",
       "projectId": "minimalizer",
       "japaneseName": "画像簡略化ツール",
       "englishName": "Image Simplification Tool",
-      "route": "/minimalizer/"
+      "route": "/minimalizer/",
+      "genre": "web-tool"
     },
     {
       "number": "034",
       "projectId": "reference-shape-editor",
       "japaneseName": "参照図形エディター",
       "englishName": "Manual Polygon Trace Editor",
-      "route": "/reference-shape-editor/"
+      "route": "/reference-shape-editor/",
+      "genre": "web-tool"
     }
   ]
 }

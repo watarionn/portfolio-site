@@ -65,3 +65,20 @@
 .precision-controls{display:grid;grid-template-columns:repeat(4,34px);gap:4px}
 .precision-controls button{min-width:34px;min-height:36px;color:#d9f1ee;background:#314649;border:1px solid #638584;border-radius:5px;font-size:18px;touch-action:manipulation}
 @media(max-width:760px){.precision{left:8px;right:auto;bottom:39px;flex-wrap:wrap;max-width:calc(100vw - 16px)}.precision-controls button{min-height:42px;min-width:42px}}
+
+/* Unified palette and per-polygon outline editor. */
+.palette-accordion{border:1px solid #42494a;margin-top:12px;background:#24282b}
+.palette-accordion>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 10px;font-size:12px;font-weight:650;list-style-position:inside}
+.palette-accordion>summary small{font-size:10px;font-weight:400;color:#a9b1b1;white-space:nowrap}
+.palette-accordion .accordion-content{padding:0 12px 13px}
+.palette-accordion .swatches{margin:10px 0 13px}
+.shape-outline{border:1px solid #455050;margin:13px 0 2px;padding:10px 11px}
+.shape-outline legend{padding:0 5px;color:#b9d0ce;font-size:12px}
+.shape-outline>.check{min-height:35px;cursor:pointer}
+.outline-settings{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.outline-settings label{display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:11px;color:#c9cecc}
+.outline-settings input[type=color]{width:48px;height:36px;cursor:pointer;background:transparent;border:1px solid #475252;padding:2px}
+.outline-settings input[type=number]{width:65px;max-width:100%;padding:8px;background:#2a2e30;color:#eceeed;border:1px solid #535e60;border-radius:0;font-size:12px}
+.outline-settings input:disabled{opacity:.35;cursor:not-allowed}
+#stage polygon.selected-shape{filter:drop-shadow(0 0 3px #f1ad7b99)}
+@media(max-width:760px){.palette-accordion>summary{min-height:44px}.shape-outline>.check{min-height:44px}.outline-settings input{min-height:40px}}

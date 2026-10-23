@@ -92,13 +92,20 @@
     if(Math.abs(area)<.5){toast('面積のない図形は作れません');return;}
     if(polygonSelfIntersects(pts)){toast('辺が交差しています。頂点の順番を見直してください');return;}
     saveHistory();const vertexIds=[];for(const d of state.draft){if(d.ref){vertexIds.push(d.ref)}else{const id=nextId('v');state.project.vertices[id]={x:d.x,y:d.y};vertexIds.push(id)}}
-    const s={id:nextId('s'),name:`図形 ${state.project.shapes.length+1}`,vertexIds,fill:state.color,visible:true};
+    const s={id:nextId('s'),name:`図形 ${state.project.shapes.length+1}`,vertexIds,fill:state.color,strokeColor:'#000000',strokeWidth:0,visible:true};
     state.project.shapes.push(s);state.draft=[];state.selected=s.id;changeTool('select');render();toast(`「${s.name}」を作成しました`);
   }
   function orient(a,b,c){return (b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x)}
   function segmentsCross(a,b,c,d){const eps=1e-8;const o1=orient(a,b,c),o2=orient(a,b,d),o3=orient(c,d,a),o4=orient(c,d,b);return ((o1>eps&&o2< -eps)||(o1< -eps&&o2>eps))&&((o3>eps&&o4< -eps)||(o3< -eps&&o4>eps));}
   function polygonSelfIntersects(points){for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++){if(j===i+1 || i===0&&j===points.length-1)continue;if(segmentsCross(points[i],points[(i+1)%points.length],points[j],points[(j+1)%points.length]))return true;}return false;}
   function selectedShape(){return state.project.shapes.find(s=>s.id===state.selected)||null}
+  function outlineWidth(shape){return Number.isFinite(shape.strokeWidth)&&shape.strokeWidth>0?shape.strokeWidth:0}
+  function outlineColor(shape){return cleanColor(shape.strokeColor)||'#000000'}
+  function outlineAttrs(shape){
+    const width=outlineWidth(shape), color=width?outlineColor(shape):'none';
+    return {stroke:color,'stroke-width':width,'stroke-linejoin':'round',
+      style:'stroke:'+color+';stroke-width:'+width+';stroke-dasharray:none'};
+  }
   function countUsage(id){return state.project.shapes.filter(s=>s.vertexIds.includes(id)).length}
   function mergeVertices(from,to){if(from===to)return true;for(const s of state.project.shapes){if(s.vertexIds.includes(from)&&s.vertexIds.includes(to)){toast('同じ図形に同じ頂点が重複するため統合できません');return false}}for(const s of state.project.shapes)s.vertexIds=s.vertexIds.map(id=>id===from?to:id);delete state.project.vertices[from];state.selectedVertex=to;return true;}
   function shiftPolygon(shape,dx,dy){const ids=new Set(shape.vertexIds);for(const id of ids){const p=vertex(id);p.x=round(clamp(p.x+dx,0,state.project.width));p.y=round(clamp(p.y+dy,0,state.project.height))}}
@@ -181,7 +188,7 @@
     $('underlay').setAttribute('opacity',state.showUnderlay?state.underlayOpacity:0);
     $('emptyState').classList.toggle('hidden',!!p.imageData||p.shapes.length>0);
     const pol=$('polygonLayer');pol.replaceChildren();
-    for(const s of p.shapes){if(!s.visible)continue;const node=svgNode('polygon',{points:shapeCoords(s),fill:s.fill,'data-shape':s.id,'class':state.selected===s.id?'selected-shape':''});pol.append(node)}
+    for(const s of p.shapes){if(!s.visible)continue;const node=svgNode('polygon',{points:shapeCoords(s),fill:s.fill,...outlineAttrs(s),'data-shape':s.id,'class':state.selected===s.id?'selected-shape':''});pol.append(node)}
     const draft=$('draftLayer');draft.replaceChildren();const pts=draftPolygonPoints();const sc=1/Math.max(getScale(),.001);
     if(pts.length){let d=pts.map(t=>`${round(t.x)},${round(t.y)}`).join(' ');
       if(state.cursor){const near=snapNearest(state.cursor),q=near?vertex(near):limitPoint(state.cursor);d+=` ${round(q.x)},${round(q.y)}`}
@@ -203,14 +210,32 @@
   }
   function renderInspector(){
     const s=selectedShape(),el=$('shapeInspector');el.replaceChildren();
-    if(!s){el.className='no-selection';el.textContent='図形を選ぶと、名称・色・レイヤーを編集できます。';}
+    if(!s){el.className='no-selection';el.textContent='図形を選ぶと、名称・塗り色・辺・レイヤーを編集できます。';}
     else{
       el.className='';
       const field=document.createElement('input');field.className='shape-input';field.value=s.name;field.maxLength=80;field.ariaLabel='図形の名前';field.addEventListener('change',()=>{if(field.value.trim()!==s.name)updateShape({name:field.value.trim()||s.name})});
       const meta=document.createElement('p');meta.className='shape-meta';meta.textContent=`${s.vertexIds.length} 頂点 · 色 ${s.fill.toUpperCase()} · 共有 ${s.vertexIds.filter(id=>countUsage(id)>1).length} 点`;
       const row=document.createElement('div');row.className='shape-controls';
       [['▲ 手前へ',()=>raiseShape(1)],['▼ 奥へ',()=>raiseShape(-1)],['削除',()=>removeSelected()]].forEach(([label,fn])=>{const b=document.createElement('button');b.textContent=label;b.addEventListener('click',fn);row.append(b)});
-      el.append(field,meta,row);
+      const outline=document.createElement('fieldset');outline.className='shape-outline';
+      const legend=document.createElement('legend');legend.textContent='辺の設定';
+      const toggle=document.createElement('label');toggle.className='check';
+      const enabled=document.createElement('input');enabled.type='checkbox';enabled.checked=outlineWidth(s)>0;
+      toggle.append(enabled,document.createTextNode(' 辺を表示'));
+      const settings=document.createElement('div');settings.className='outline-settings';
+      const colorLabel=document.createElement('label');colorLabel.textContent='辺の色';
+      const colorInput=document.createElement('input');colorInput.type='color';colorInput.value=outlineColor(s);colorInput.ariaLabel='辺の色';
+      colorLabel.append(colorInput);
+      const widthLabel=document.createElement('label');widthLabel.textContent='辺の太さ';
+      const widthInput=document.createElement('input');widthInput.type='number';widthInput.min='0.25';widthInput.max='40';widthInput.step='0.25';widthInput.value=outlineWidth(s)||2;widthInput.inputMode='decimal';widthInput.ariaLabel='辺の太さ（画像のピクセル）';
+      const unit=document.createElement('span');unit.textContent='px';widthLabel.append(widthInput,unit);
+      settings.append(colorLabel,widthLabel);
+      settings.querySelectorAll('input').forEach(input=>input.disabled=!enabled.checked);
+      enabled.addEventListener('change',()=>updateShape({strokeColor:outlineColor(s),strokeWidth:enabled.checked?2:0}));
+      colorInput.addEventListener('change',()=>{const color=cleanColor(colorInput.value);if(color)updateShape({strokeColor:color})});
+      widthInput.addEventListener('change',()=>{const width=Number(widthInput.value);if(Number.isFinite(width)&&width>=.25&&width<=40)updateShape({strokeWidth:width});else{widthInput.value=String(outlineWidth(s)||2);toast('辺の太さは0.25〜40 pxで指定してください')}});
+      outline.append(legend,toggle,settings);
+      el.append(field,meta,outline,row);
     }
     renderLayerList();
   }
@@ -320,18 +345,7 @@
     $('unifiedCount').textContent=colors.length+'色';
     $('paletteSave').textContent=state.paletteEditIndex<0?'＋ 追加':'色を更新';
     $('paletteDelete').disabled=state.paletteEditIndex<0;
-    for(const [key,elem] of [['characteristic','characteristicColors'],['featured','featuredColors'],['representative','representativeColors']]){
-      const box=$(elem);box.replaceChildren();
-      for(const c of state.project.palette[key]){
-        const b=document.createElement('button');
-        b.className='swatch'+(state.color===c?' active':'');
-        b.style.setProperty('--swatch',c);b.title=c+' を選ぶ';b.ariaLabel=c+' 塗り色';
-        b.addEventListener('click',()=>{state.paletteEditIndex=-1;$('paletteEditHex').value=c;$('paletteEditColor').value=c;changeColor(c,key)});
-        box.append(b);
-      }
-    }
     $('colorName').textContent=state.color.toUpperCase();$('colorPicker').value=state.color;
-    $('charLabel').textContent=state.project.palette.imported?'読み込み済み':state.project.imageData?'ブラウザ推定':'画像待ち';
   }
   function updateCursor(e){const p=screenToSource(e);state.cursor=p;$('cursorInfo').textContent=`x: ${round(p.x)}　y: ${round(p.y)}`;state.hoverVertex=snapNearest(p);}
   const touchPoints=new Map();
@@ -519,7 +533,10 @@
     if(x.image?.dataURL && (!/^data:image\/(png|jpeg|webp|gif);base64,/i.test(x.image.dataURL)||x.image.dataURL.length>MAX_PICTURE_BYTES*1.5))throw Error('画像データの形式または容量が不正です');
     if(!x.vertices||Array.isArray(x.vertices)||typeof x.vertices!=='object'||!Array.isArray(x.shapes)||x.shapes.length>20000||Object.keys(x.vertices).length>100000)throw Error('図形データが不正です');
     const vertices=Object.create(null);for(const [id,v] of Object.entries(x.vertices)){if(!/^[A-Za-z0-9_-]{1,50}$/.test(id)||!finite(v?.x)||!finite(v?.y)||Math.abs(v.x)>100000||Math.abs(v.y)>100000)throw Error('頂点が不正です');vertices[id]={x:round(v.x),y:round(v.y)}}
-    const ids=new Set(),shapes=x.shapes.map(s=>{if(typeof s.id!=='string'||ids.has(s.id)||!Array.isArray(s.vertexIds)||s.vertexIds.length<3||s.vertexIds.length>20000||!s.vertexIds.every(id=>Object.hasOwn(vertices,id))||new Set(s.vertexIds).size<3)throw Error('図形の頂点参照が不正です');const fill=cleanColor(s.fill);if(!fill)throw Error('図形の色が不正です');ids.add(s.id);return {id:s.id,name:String(s.name||'図形').slice(0,80),vertexIds:s.vertexIds.slice(),fill,visible:s.visible!==false}});
+    const ids=new Set(),shapes=x.shapes.map(s=>{if(typeof s.id!=='string'||ids.has(s.id)||!Array.isArray(s.vertexIds)||s.vertexIds.length<3||s.vertexIds.length>20000||!s.vertexIds.every(id=>Object.hasOwn(vertices,id))||new Set(s.vertexIds).size<3)throw Error('図形の頂点参照が不正です');const fill=cleanColor(s.fill);if(!fill)throw Error('図形の色が不正です');ids.add(s.id);return {id:s.id,name:String(s.name||'図形').slice(0,80),vertexIds:s.vertexIds.slice(),fill,
+      strokeColor:s.strokeColor===undefined?'#000000':(cleanColor(s.strokeColor)||(()=>{throw Error('辺の色が不正です')})()),
+      strokeWidth:s.strokeWidth===undefined?0:(Number.isFinite(s.strokeWidth)&&s.strokeWidth>=0&&s.strokeWidth<=40?s.strokeWidth:(()=>{throw Error('辺の太さが不正です')})()),
+      visible:s.visible!==false}});
     const palette={characteristic:paletteColors(x.palette?.characteristic),featured:paletteColors(x.palette?.featured),representative:paletteColors(x.palette?.representative),imported:!!x.palette?.imported};
     palette.unified=Array.isArray(x.palette?.unified)?[...new Set(x.palette.unified.map(rgbFromColor).filter(Boolean))].slice(0,PALETTE_MAX):combinedPalette(palette);
     // Composite layers contain only valid polygon IDs, with no overlap between groups.
@@ -537,7 +554,7 @@
   async function loadProject(file){if(!file)return;try{const text=await file.text();const data=validateImport(JSON.parse(text));let img=null;if(data.project.imageData){img=await decodeImage(data.project.imageData);if(img.naturalWidth!==data.project.width||img.naturalHeight!==data.project.height)throw Error('元画像とキャンバス寸法が一致しません')}
       state.project=data.project;state.layerSelection.clear();state.paletteEditIndex=-1;cachedBitmap=img;state.lastName=data.project.imageName.replace(/\.[^.]+$/,'');state.underlayOpacity=data.opacity;$('opacity').value=Math.round(data.opacity*100);state.selected=null;state.selectedVertex=null;state.draft=[];state.history=[];state.future=[];changeTool('draw');autoFit();toast('編集状態を復元しました');status('JSONプロジェクトを開きました');
     }catch(e){toast('プロジェクト読込エラー: '+e.message,6)}}
-  function outputSvg(){const p=state.project;const shapes=p.shapes.filter(s=>s.visible).map(s=>`  <polygon points="${escapeXml(shapeCoords(s))}" fill="${s.fill}" data-shape-name="${escapeXml(s.name)}"/>`).join('\n');return `<svg xmlns="http://www.w3.org/2000/svg" width="${p.width}" height="${p.height}" viewBox="0 0 ${p.width} ${p.height}">\n${shapes}\n</svg>\n`}
+  function outputSvg(){const p=state.project;const shapes=p.shapes.filter(s=>s.visible).map(s=>`  <polygon points="${escapeXml(shapeCoords(s))}" fill="${s.fill}" stroke="${outlineWidth(s)?outlineColor(s):'none'}" stroke-width="${outlineWidth(s)}" stroke-linejoin="round" data-shape-name="${escapeXml(s.name)}"/>`).join('\n');return `<svg xmlns="http://www.w3.org/2000/svg" width="${p.width}" height="${p.height}" viewBox="0 0 ${p.width} ${p.height}">\n${shapes}\n</svg>\n`}
   function exportSvg(){download(new Blob([outputSvg()],{type:'image/svg+xml;charset=utf-8'}),exportBase()+'.svg');toast('SVGを書き出しました（下敷き画像を含みません）')}
   async function exportPng(){const p=state.project;if(p.width*p.height>48_000_000){toast('PNG出力が大きすぎます (48MP以下にしてください)');return}
     const svg=outputSvg(),url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));try{const img=await decodeImage(url),canvas=document.createElement('canvas');canvas.width=p.width;canvas.height=p.height;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);canvas.toBlob(blob=>{if(blob){download(blob,exportBase()+'.png');toast('PNGを書き出しました（背景は透明）')}else toast('PNG保存に失敗しました')},'image/png')}catch(e){toast('PNG書き出しエラー: '+e.message)}finally{URL.revokeObjectURL(url)}}

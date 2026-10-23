@@ -536,6 +536,35 @@ def main() -> None:
                 f"expected {expected_sha}, got {actual_sha}"
             )
 
+    # The individual encyclopedia homepage uses one colophon, not an About
+    # and a separate contact marketing section. Its first issue date is the
+    # 2026-09-24 reviewed production edition of 個人大辞典.
+    home_html = (ROOT / "index.html").read_text(encoding="utf-8")
+    home_css = (ROOT / "index-style.css").read_text(encoding="utf-8")
+    for marker in (
+        'id="colophon" aria-labelledby="colophon-title"',
+        '<h2 class="colophon-section__heading" id="colophon-title">奥付</h2>',
+        '<p class="colophon__site-name">個人大辞典</p>',
+        '<time datetime="2026-09-24">2026年09月24日</time>',
+        'href="/D_PROFILE/d_profile.html">watarionn</a>',
+        'href="mailto:watarionn@gmail.com">watarionn@gmail.com</a>',
+        'href="https://github.com/watarionn">https://github.com/watarionn</a>',
+        '<a href="#colophon">奥付</a>',
+    ):
+        if marker not in home_html:
+            fail(f"Homepage colophon contract marker missing: {marker}")
+    for removed in ('id="about"', 'id="contact"', 'href="#about"',
+                    'href="#contact"', 'class="about-row"',
+                    'class="contact-links"'):
+        if removed in home_html:
+            fail(f"Legacy About/Contact block remains: {removed}")
+    if home_html.count('id="colophon"') != 1:
+        fail("Homepage must have exactly one colophon block")
+    for selector in (".colophon__site-name", ".colophon__entry",
+                     ".colophon__entry a:focus-visible"):
+        if selector not in home_css:
+            fail(f"Homepage colophon responsive styles missing: {selector}")
+
     aquarium_php = ROOT / "apps/aquarium/public/aquarium.php"
     aquarium_index = ROOT / "apps/aquarium/public/index.php"
     if aquarium_php.read_bytes() != aquarium_index.read_bytes():

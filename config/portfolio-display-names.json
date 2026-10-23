@@ -5,7 +5,7 @@
     {
       "number": "000",
       "projectId": "yorei",
-      "japaneseName": "用例採集",
+      "japaneseName": "用例採集帳",
       "englishName": "Corpus Collector",
       "route": "/YOREI/yorei.html",
       "genre": "web-tool"
@@ -29,7 +29,7 @@
     {
       "number": "003",
       "projectId": "aquarium",
-      "japaneseName": "水族館",
+      "japaneseName": "漢字水族館",
       "englishName": "AQUARIUM",
       "route": "/AQUARIUM/aquarium.php",
       "genre": "website"
@@ -53,7 +53,7 @@
     {
       "number": "006",
       "projectId": "sphere",
-      "japaneseName": "天球儀",
+      "japaneseName": "ブロック球体設計室",
       "englishName": "Sphere Blueprint Generator",
       "route": "/SPHERE/sphere.html",
       "genre": "web-tool"
@@ -64,12 +64,13 @@
       "japaneseName": "素数点画",
       "englishName": "Prime Dot Art",
       "route": "/PRIME_DOT_ART/prime_dot_art.html",
-      "genre": "web-tool"
+      "genre": "web-tool",
+      "listed": false
     },
     {
       "number": "008",
       "projectId": "madori",
-      "japaneseName": "間取図メーカー",
+      "japaneseName": "間取り図設計室",
       "englishName": "Floor Plan Maker",
       "route": "/MADORI/madori.html",
       "genre": "web-tool"
@@ -80,12 +81,13 @@
       "japaneseName": "人物索引",
       "englishName": "Person Index",
       "route": "/OTHER/actress_finder.html",
-      "genre": "website"
+      "genre": "website",
+      "listed": false
     },
     {
       "number": "010",
       "projectId": "word-generator",
-      "japaneseName": "ボードゲーム単語集",
+      "japaneseName": "カタカナーシ補助器",
       "englishName": "Word Draw Table",
       "route": "/WORD_GENERATOR/word_generator.html",
       "genre": "web-tool"
@@ -93,7 +95,7 @@
     {
       "number": "011",
       "projectId": "maze-maker",
-      "japaneseName": "迷路作成補助器",
+      "japaneseName": "迷路エディタ",
       "englishName": "Maze Draft Board",
       "route": "/MAZE_MAKER/maze_maker.html",
       "genre": "web-tool"
@@ -109,7 +111,7 @@
     {
       "number": "013",
       "projectId": "cheatsheet",
-      "japaneseName": "技術早見表",
+      "japaneseName": "チートシート集",
       "englishName": "Cheat Sheet Tables",
       "route": "/CHEATSHEET/",
       "genre": "website"
@@ -140,7 +142,7 @@
     },
     {
       "projectId": "model-inspector",
-      "japaneseName": "モデル検査ツール",
+      "japaneseName": "モデル検査室",
       "englishName": "Model Inspector",
       "route": "/model-inspector/",
       "number": "017",
@@ -148,7 +150,7 @@
     },
     {
       "projectId": "asset-organizer",
-      "japaneseName": "素材整理ツール",
+      "japaneseName": "画像素材管理室",
       "englishName": "Asset Organizer",
       "route": "/asset-organizer/",
       "number": "018",
@@ -157,7 +159,7 @@
     {
       "number": "019",
       "projectId": "video-workbench",
-      "japaneseName": "動画ワークベンチ",
+      "japaneseName": "動画カット・結合室",
       "englishName": "Video Workbench",
       "route": "/VIDEO_WORKBENCH/",
       "genre": "distribution"
@@ -165,7 +167,7 @@
     {
       "number": "020",
       "projectId": "mkpdf-studio",
-      "japaneseName": "PDF制作スタジオ",
+      "japaneseName": "画像toPDF室",
       "englishName": "mkPDF Studio",
       "route": "/MKPDF_STUDIO/",
       "genre": "distribution"
@@ -173,7 +175,7 @@
     {
       "number": "021",
       "projectId": "s3-upload-audit",
-      "japaneseName": "S3アップロード監査",
+      "japaneseName": "S3欠損チェッカー",
       "englishName": "S3 Upload Audit",
       "route": "/S3_UPLOAD_AUDIT/",
       "genre": "distribution"
@@ -181,7 +183,7 @@
     {
       "number": "022",
       "projectId": "project-snapshot-generator",
-      "japaneseName": "プロジェクトスナップショット生成ツール",
+      "japaneseName": "フォルダ構成監視室",
       "englishName": "Project Snapshot Generator",
       "route": "/PROJECT_SNAPSHOT_GENERATOR/",
       "genre": "distribution"
@@ -189,7 +191,7 @@
     {
       "number": "023",
       "projectId": "media-collector",
-      "japaneseName": "メディア収集ツール",
+      "japaneseName": "画像収集マネージャ",
       "englishName": "Media Collector",
       "route": "/MEDIA_COLLECTOR/",
       "genre": "distribution"
@@ -197,7 +199,7 @@
     {
       "number": "024",
       "projectId": "download-workbench",
-      "japaneseName": "ダウンロードワークベンチ",
+      "japaneseName": "動画収集室",
       "englishName": "Download Workbench",
       "route": "/DOWNLOAD_WORKBENCH/",
       "genre": "distribution"
@@ -205,7 +207,7 @@
     {
       "number": "025",
       "projectId": "web-extraction-recipes",
-      "japaneseName": "Web抽出レシピ",
+      "japaneseName": "Webデータ抽出室",
       "englishName": "Web Extraction Recipes",
       "route": "/WEB_EXTRACTION_RECIPES/",
       "genre": "distribution"
@@ -221,7 +223,7 @@
     {
       "number": "027",
       "projectId": "legal-knowledge-base",
-      "japaneseName": "法令ナレッジベース",
+      "japaneseName": "法令リサーチラボ",
       "englishName": "Legal Knowledge Base",
       "route": "/LEGAL_KNOWLEDGE_BASE/",
       "genre": "website"
@@ -229,7 +231,7 @@
     {
       "number": "028",
       "projectId": "pose-library-manager",
-      "japaneseName": "ポーズライブラリ管理",
+      "japaneseName": "ポーズ・衣装資料庫",
       "englishName": "Pose Library Manager",
       "route": "/POSE_LIBRARY_MANAGER/",
       "genre": "exhibit"
@@ -237,7 +239,7 @@
     {
       "number": "029",
       "projectId": "python-music-lab",
-      "japaneseName": "Python作曲研究所",
+      "japaneseName": "作曲研究所",
       "englishName": "Non-Generative Composer",
       "route": "/PYTHON_MUSIC_LAB/",
       "genre": "web-tool"
@@ -245,7 +247,7 @@
     {
       "number": "030",
       "projectId": "image-studio",
-      "japaneseName": "画像仕立て室",
+      "japaneseName": "画像サイズ調整室",
       "englishName": "Image Studio",
       "route": "/IMAGE_STUDIO/",
       "genre": "web-tool"
@@ -270,7 +272,7 @@
     {
       "number": "033",
       "projectId": "minimalizer",
-      "japaneseName": "画像簡略化ツール",
+      "japaneseName": "ミニマライザー",
       "englishName": "Image Simplification Tool",
       "route": "/minimalizer/",
       "genre": "web-tool"
@@ -278,7 +280,7 @@
     {
       "number": "034",
       "projectId": "reference-shape-editor",
-      "japaneseName": "参照図形エディター",
+      "japaneseName": "切り絵作成室",
       "englishName": "Manual Polygon Trace Editor",
       "route": "/reference-shape-editor/",
       "genre": "web-tool"

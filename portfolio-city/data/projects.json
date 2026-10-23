@@ -13,7 +13,7 @@
     },
     {
       "id": "sphere",
-      "title": "天球儀",
+      "title": "ブロック球体設計室",
       "district": "observatory-hill",
       "building": "プラネタリウム",
       "route": "/SPHERE/sphere.html",
@@ -33,7 +33,7 @@
     },
     {
       "id": "yorei",
-      "title": "用例採集",
+      "title": "用例採集帳",
       "district": "archive-street",
       "building": "ことば採集所",
       "route": "/YOREI/yorei.html",
@@ -53,7 +53,7 @@
     },
     {
       "id": "cheatsheet",
-      "title": "技術早見表",
+      "title": "チートシート集",
       "district": "archive-street",
       "building": "技術資料センター",
       "route": "/CHEATSHEET/",
@@ -83,7 +83,7 @@
     },
     {
       "id": "madori",
-      "title": "間取図メーカー",
+      "title": "間取り図設計室",
       "district": "workshop-alley",
       "building": "設計事務所",
       "route": "/MADORI/madori.html",
@@ -93,7 +93,7 @@
     },
     {
       "id": "maze-maker",
-      "title": "迷路作成補助器",
+      "title": "迷路エディタ",
       "district": "workshop-alley",
       "building": "迷路工房",
       "route": "/MAZE_MAKER/maze_maker.html",
@@ -113,7 +113,7 @@
     },
     {
       "id": "aquarium",
-      "title": "水族館",
+      "title": "漢字水族館",
       "district": "waterside-play",
       "building": "市立水族館",
       "route": "/AQUARIUM/aquarium.php",
@@ -133,7 +133,7 @@
     },
     {
       "id": "word-generator",
-      "title": "ボードゲーム単語集",
+      "title": "カタカナーシ補助器",
       "district": "waterside-play",
       "building": "ゲームショップ",
       "route": "/WORD_GENERATOR/word_generator.html",
@@ -153,7 +153,7 @@
     },
     {
       "id": "mkpdf-studio",
-      "title": "mkPDF Studio",
+      "title": "画像toPDF室",
       "district": "archive-street",
       "building": "製本工房",
       "route": "/MKPDF_STUDIO/",
@@ -163,7 +163,7 @@
     },
     {
       "id": "s3-upload-audit",
-      "title": "S3 Upload Audit",
+      "title": "S3欠損チェッカー",
       "district": "archive-street",
       "building": "クラウド監査室",
       "route": "/S3_UPLOAD_AUDIT/",
@@ -173,7 +173,7 @@
     },
     {
       "id": "python-music-lab",
-      "title": "Python作曲研究所",
+      "title": "作曲研究所",
       "district": "workshop-alley",
       "building": "音響研究室",
       "route": "/PYTHON_MUSIC_LAB/",

@@ -318,6 +318,17 @@ def main() -> None:
     if {work.get("projectId") for work in hidden} != {"ai-judgement-lab", "prime-dot-art", "actress-finder"}:
         fail("only the approved retired/hidden works may be absent from the homepage index")
 
+    # Retired works remain in the legacy city inventory for map coordinate
+    # integrity, but must never be offered as clickable buildings or listings.
+    city_projects = json.loads((ROOT / "portfolio-city/data/projects.json").read_text(encoding="utf-8"))["projects"]
+    for retired_id in ("prime-dot-art", "actress-finder"):
+        registered = [item for item in city_projects if item.get("id") == retired_id]
+        if len(registered) != 1 or registered[0].get("listed") is not False:
+            fail(f"retired Portfolio City work is still listed: {retired_id}")
+    city_runtime = (ROOT / "portfolio-city/city.js").read_text(encoding="utf-8")
+    if "projectPayload.projects.filter((project) => project.listed !== false)" not in city_runtime:
+        fail("Portfolio City does not filter delisted projects")
+
     # Japanese copy and homepage/profile layout contract (2026-10-22).
     # Check specific approved UI decisions instead of rejecting grammatical
     # Japanese commas across arbitrary text, source code, or quotations.

@@ -308,6 +308,12 @@ def main() -> None:
         fail("portfolio rows differ from registered, listed works and exclusive genres")
     if len(found_rows) != len(set(found_rows)):
         fail("portfolio contains duplicate index rows")
+    # Numeric identifiers are the public directory's stable reading order.
+    # Grouping HTML by genre makes the printed numbers jump (000 -> 006),
+    # even though each interactive filter already matches data-genre.
+    ordered_numbers = [int(row[2]) for row in found_rows]
+    if ordered_numbers != sorted(ordered_numbers):
+        fail("portfolio index must be displayed in ascending project number order")
     hidden = [work for work in display_works if work.get("listed", True) is False]
     if {work.get("projectId") for work in hidden} != {"ai-judgement-lab"}:
         fail("only AI判断・予測実験室 is approved to be hidden from the homepage index")

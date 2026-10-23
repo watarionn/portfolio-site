@@ -247,34 +247,70 @@ def main() -> None:
     display_works = display_name_config.get("works", [])
     if display_name_config.get("schemaVersion") != 1 or not isinstance(display_works, list):
         fail("portfolio display-name config schema is invalid")
+    if not all(isinstance(work, dict) for work in display_works):
+        fail("portfolio display-name entry must be an object")
+
+    # A work can have exactly one public-facing genre. Unlisted works remain
+    # registered but must not appear in the visible homepage directory.
+    allowed_genres = ("web-tool", "website", "distribution", "exhibit")
+    expected_genre_counts = {
+        "web-tool": 16, "website": 9, "distribution": 7, "exhibit": 2,
+    }
+    visible_works = [work for work in display_works if work.get("listed", True) is True]
+    observed_genre_counts = {
+        genre: sum(work.get("genre") == genre for work in visible_works)
+        for genre in allowed_genres
+    }
+    if observed_genre_counts != expected_genre_counts:
+        fail(f"portfolio genre allocation differs from the approved list: {observed_genre_counts}")
     seen_numbers: set[str] = set()
     seen_ids: set[str] = set()
     seen_routes: set[str] = set()
     portfolio_index = (ROOT / "index.html").read_text(encoding="utf-8")
-    expected_count_marker = f'<span id="projectCount">{len(display_works)}</span>'
+    expected_count_marker = f'<span id="projectCount">{len(visible_works)}</span>'
     if expected_count_marker not in portfolio_index:
-        fail(f"portfolio projectCount does not match display-name config: expected {len(display_works)}")
+        fail(f"portfolio projectCount does not match visible works: expected {len(visible_works)}")
+    if "data-categories=" in portfolio_index:
+        fail("portfolio still contains overlapping legacy categories")
+    filters = re.findall(r'<button type="button" data-filter="([^"]+)"', portfolio_index)
+    if filters != ["all", *allowed_genres]:
+        fail(f"portfolio filters must correspond to the four exclusive genres: {filters}")
+
+    expected_rows: set[tuple[str, str, str, str]] = set()
     for work in display_works:
-        if not isinstance(work, dict):
-            fail("portfolio display-name entry must be an object")
         number = str(work.get("number", ""))
         project_id = str(work.get("projectId", ""))
         japanese_name = str(work.get("japaneseName", ""))
         english_name = str(work.get("englishName", ""))
         route = str(work.get("route", ""))
+        genre = work.get("genre")
+        listed = work.get("listed", True)
         if not all((number, project_id, japanese_name, english_name, route)):
             fail(f"portfolio display-name entry has blank fields: {work!r}")
         if number in seen_numbers or project_id in seen_ids or route in seen_routes:
             fail(f"portfolio display-name entry is duplicated: {work!r}")
+        if genre not in allowed_genres:
+            fail(f"portfolio work must have exactly one approved genre: {work!r}")
+        if type(listed) is not bool:
+            fail(f"portfolio listed must be a boolean: {work!r}")
         seen_numbers.add(number)
         seen_ids.add(project_id)
         seen_routes.add(route)
-        row_marker = f'href="{route}" role="listitem"><span>{number}</span><strong>{japanese_name}</strong>'
-        if row_marker not in portfolio_index:
-            fail(
-                "portfolio index display-name mismatch: "
-                f"{number} {japanese_name} ({project_id})"
-            )
+        if listed:
+            expected_rows.add((genre, route, number, japanese_name))
+
+    found_rows = re.findall(
+        r'<a class="project-row" data-genre="([^"]+)" href="([^"]+)" role="listitem">'
+        r'<span>([^<]+)</span><strong>([^<]+)</strong>',
+        portfolio_index,
+    )
+    if len(found_rows) != len(visible_works) or set(found_rows) != expected_rows:
+        fail("portfolio rows differ from registered, listed works and exclusive genres")
+    if len(found_rows) != len(set(found_rows)):
+        fail("portfolio contains duplicate index rows")
+    hidden = [work for work in display_works if work.get("listed", True) is False]
+    if {work.get("projectId") for work in hidden} != {"ai-judgement-lab"}:
+        fail("only AI判断・予測実験室 is approved to be hidden from the homepage index")
 
     # Japanese copy and homepage/profile layout contract (2026-10-22).
     # Check specific approved UI decisions instead of rejecting grammatical

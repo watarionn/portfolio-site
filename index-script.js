@@ -7,7 +7,7 @@
 
 (function initProjectFilters() {
   const buttons = Array.from(document.querySelectorAll('[data-filter]'));
-  const rows = Array.from(document.querySelectorAll('.project-row[data-categories]'));
+  const rows = Array.from(document.querySelectorAll('.project-row[data-genre]'));
   const count = document.getElementById('projectCount');
 
   if (!buttons.length || !rows.length) return;
@@ -16,8 +16,7 @@
     let visibleCount = 0;
 
     rows.forEach((row) => {
-      const categories = (row.dataset.categories || '').split(/\s+/).filter(Boolean);
-      const visible = filter === 'all' || categories.includes(filter);
+      const visible = filter === 'all' || row.dataset.genre === filter;
       row.hidden = !visible;
       if (visible) visibleCount += 1;
     });

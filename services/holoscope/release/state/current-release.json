@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "releaseId": "20261027-225052-auto-440",
-  "manifestSha256": "32611e774fa7e52b341acf6fc1445389fe70ff1db426ca4add18aae7106bbe06",
-  "verifiedCommitSha": "b4658a916c2888f732b62952d7dc79f3516bf63d",
+  "releaseId": "20261027-235618-auto-440",
+  "manifestSha256": "367ed0e0edc4f2c25749a2138fe4819bcefcde9c498e68d95f092e63b724ee92",
+  "verifiedCommitSha": "2f34c884ca64641947fa81be170e58a3617a4fd1",
   "activatedAt": "2026-10-16T17:05:10Z"
 }

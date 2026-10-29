@@ -63,3 +63,15 @@
 .outline-settings input:disabled{opacity:.35;cursor:not-allowed}
 #stage polygon.selected-shape{filter:drop-shadow(0 0 3px #f1ad7b99)}
 @media(max-width:760px){.palette-accordion>summary{min-height:44px}.shape-outline>.check{min-height:44px}.outline-settings input{min-height:40px}}
+
+/* iOS standalone/Safari: keep the first action row below the system status bar. */
+@supports (padding-top: env(safe-area-inset-top)) {
+  @media (max-width:760px) {
+    .app-head { padding-top: calc(7px + env(safe-area-inset-top)); }
+  }
+}
+@media (max-width:760px) {
+  .app-head .top-actions { min-width:0; flex-wrap:wrap; }
+  .app-head .action { min-height:44px; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; }
+  .app-head .export-wrap { display:inline-flex; flex-wrap:wrap; }
+}

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_mori_calliope",
+  "slug": "mori-calliope",
+  "displayName": "Mori Calliope",
+  "nameJa": "森カリオペ",
+  "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCL_qhgtOy0dy1Agp8vkySQg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0ootopu1mbo",
+      "slug": "mori-calliope-0ootopu1mbo",
+      "videoId": "0OoToPU1Mbo",
+      "title": "偶然集まった仲間を一つの場へ　Calliope Moriの「hotel talk」が写した本番前夜",
+      "summaryOneLine": "performance内容の予想ではなく、偶然の集合、近況、期待を受け止めることで本番前夜の空気を作る配信設計を読める",
+      "streamType": "event",
+      "publishedAt": "2026-07-03T03:01:02.000Z",
+      "durationSeconds": 4862,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-ps5pxgjneq",
+      "slug": "mori-calliope-ps5pxgjneq",
+      "videoId": "-Ps5pxGJNEQ",
+      "title": "「遊びたい」は映像のどこから生まれる？　CalliopeとBijouのState of Play観察軸",
+      "summaryOneLine": "発表タイトルの一覧ではなく、二人が映像のどこを見て『遊びたい』へ判断を進めたかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-06-02T20:56:36.000Z",
+      "durationSeconds": 4836,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_bmktimlpw8w",
+      "slug": "mori-calliope-bmktimlpw8w",
+      "videoId": "BMKtiMlpW8w",
+      "title": "森カリオペたちの『Fortnite』ゼロビルド挑戦　ミクとの遭遇から終盤の連携まで",
+      "summaryOneLine": "森カリオペ、ジジ、ネリッサ、後からリズが加わるFortniteゼロビルドの対戦中に起きたトラブル、ゲーム内コラボスキンとの遭遇、位置取りの相談とThe Office談義を配信原文の時系列に沿って把握できる。",
+      "streamType": "game",
+      "publishedAt": "2026-01-30T03:19:49.000Z",
+      "durationSeconds": 7204,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-01",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-e3x1jaebdo",
+      "slug": "mori-calliope-e3x1jaebdo",
+      "videoId": "-E3x1JAEbdo",
+      "title": "別々のtutorialが「4人で遊びたい」に変わる　CalliopeとIRySの『Warframe』初日",
+      "summaryOneLine": "長く続くgameの情報量を網羅せず、初心者二人が何を一緒に学び、協力playへどう移ったかを追える",
+      "streamType": "game",
+      "publishedAt": "2026-01-09T05:25:09.000Z",
+      "durationSeconds": 11690,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-01",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_0kc1cmtaamq",
+      "slug": "mori-calliope-0kc1cmtaamq",
+      "videoId": "0kc1cmtAaMQ",
+      "title": "「自分がゲームにいる」を自分で演じる　CalliopeがGoddess Orderで作ったライブ吹替",
+      "summaryOneLine": "この配信では、Calliopeがゲーム内の自分を“見る側”に留まりませんでした。",
+      "streamType": "game",
+      "publishedAt": "2025-09-30T04:24:57.000Z",
+      "durationSeconds": 10821,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-09",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_3nvlqfeegn4",
+      "slug": "mori-calliope-3nvlqfeegn4",
+      "videoId": "3NvLQFEEgN4",
+      "title": "QQQbeats!!!にMori Calliope本人が参戦　Dead Beatsとの対戦からGigiとの一騎打ちまで",
+      "summaryOneLine": "Mori Calliopeが、自身もプレイアブルキャラクターとして登場する『QQQbeats!!!』をプレイ。Dead Beatsとの対戦と協力プレイを経て、最後にはGigi Murinとの一騎打ちを楽しんだ。",
+      "streamType": "other",
+      "publishedAt": "2025-09-20T05:55:37.000Z",
+      "durationSeconds": 9736,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-09",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 60,
+    "soloCount": 60,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 23
+      },
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 16
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 13
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 8
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/mori-calliope/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCL_qhgtOy0dy1Agp8vkySQg",
+      "checkedAt": "2026-09-14T10:05:59Z"
+    }
+  ],
+  "createdAt": "2026-09-14T10:05:59Z",
+  "updatedAt": "2026-09-14T10:05:59Z"
+}

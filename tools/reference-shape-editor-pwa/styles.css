@@ -82,3 +82,9 @@
 .outline-settings input:disabled{opacity:.35;cursor:not-allowed}
 #stage polygon.selected-shape{filter:drop-shadow(0 0 3px #f1ad7b99)}
 @media(max-width:760px){.palette-accordion>summary{min-height:44px}.shape-outline>.check{min-height:44px}.outline-settings input{min-height:40px}}
+
+/* Standalone PWA: reserve the status-bar area outside the fixed mobile toolbar. */
+@media (display-mode: standalone) and (max-width:760px) {
+  #app { padding-top: env(safe-area-inset-top, 0px); }
+  .app-head { padding-top: 7px; height:auto; min-height:67px; }
+}

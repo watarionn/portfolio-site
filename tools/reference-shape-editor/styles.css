@@ -75,3 +75,9 @@
   .app-head .action { min-height:44px; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; }
   .app-head .export-wrap { display:inline-flex; flex-wrap:wrap; }
 }
+
+/* Standalone PWA: reserve the status-bar area outside the fixed mobile toolbar. */
+@media (display-mode: standalone) and (max-width:760px) {
+  #app { padding-top: env(safe-area-inset-top, 0px); }
+  .app-head { padding-top: 7px; height:auto; min-height:67px; }
+}

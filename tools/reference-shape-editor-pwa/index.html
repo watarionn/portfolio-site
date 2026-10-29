@@ -11,8 +11,8 @@
   <meta name="apple-mobile-web-app-title" content="Shape Studio"/>
   <link rel="manifest" href="./manifest.webmanifest"/>
   <link rel="icon" href="./icon.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="styles.css"/>
-  <script defer src="app.js"></script>
+  <link rel="stylesheet" href="styles.css?v=20261029-standalone-safe-area-v2"/>
+  <script defer src="app.js?v=20261029-no-quickguide"></script>
   <script>if ('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(console.warn));</script>
 </head>
 <body>
@@ -26,7 +26,6 @@
       <button class="action" id="saveProject">JSON保存</button>
       <div class="export-wrap"><button class="action" id="exportSvg">SVG</button><button class="action" id="exportPng">PNG</button></div>
       <button class="action" id="panelButton" title="右のパネル表示">パネル ☷</button>
-      <button class="action icon-action" id="openHelp" title="ヘルプ" aria-label="使い方">?</button>
     </div>
   </header>
 
@@ -117,5 +116,5 @@
   <footer class="status"><span id="statusText">準備完了</span><span>NO GENERATIVE FILL · SOURCE IMAGE UNCHANGED · EXPORT VECTOR ONLY</span></footer>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
-<dialog id="helpDialog"><div class="dialog-head"><div><small>QUICK GUIDE</small><h2>描く、つなぐ、整える。</h2></div><button class="small-quiet" id="closeHelp">閉じる ✕</button></div><div class="guide-grid"><div><strong>01 · 図形化</strong><p>タップして頂点を追加。指1本でドラッグすると画面移動、指2本でピンチズーム。3点以上で<strong>「図形化」</strong>または Enter で確定。右クリックで直前の頂点を削除。</p></div><div><strong>02 · 共有頂点</strong><p>「辺に点」モードで選択図形の辺をタップすると頂点を追加。「頂点」モードの矢印で1px単位の微調整ができます。既存の頂点に近づくと吸着します。共有頂点を動かすと隣接図形も追従します。頂点モードで辺をダブルクリックすると点を追加。</p></div><div><strong>03 · 色と重なり</strong><p>編集可能な統合パレットから色を選択。右パネルで塗り色・辺・図形名を変更。レイヤーの≡ をドラッグして重なり順を変更。複数選択から統合・分割も可能。重複のないパレットは色の追加・編集・削除に対応。</p></div><div><strong>04 · 縦長画像</strong><p>縦長画像は自動で「幅に合わせる」表示になります。ホイールで上下に移動、Ctrl/⌘＋ホイールや＋−で拡大縮小。上部の「全体表示」と「幅に合わせる」で切り替えられます。</p></div><div><strong>05 · 保存</strong><p>JSONは再編集用で下敷き画像も含まれます。PNG/SVGは図形だけを書き出し、元画像を混入させません。</p></div></div><div class="keymap"><span><kbd>P</kbd> 図形</span><span><kbd>V</kbd> 選択</span><span><kbd>E</kbd> 頂点</span><span><kbd>H</kbd> パン</span><span><kbd>I</kbd> 色採取</span><span><kbd>Space</kbd> 一時パン</span><span><kbd>ホイール</kbd> 縦移動</span><span><kbd>Ctrl＋ホイール</kbd> ズーム</span><span><kbd>Ctrl+Z</kbd> 戻す</span><span><kbd>Delete</kbd> 削除</span></div></dialog>
+
 </body></html>

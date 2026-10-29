@@ -627,7 +627,7 @@
     $('viewport').addEventListener('wheel',onWheel,{passive:false});
     $('viewport').addEventListener('dragover',e=>e.preventDefault());$('viewport').addEventListener('drop',e=>{e.preventDefault();const file=e.dataTransfer.files[0];if(file?.type.startsWith('image/'))loadImage(file);else if(file?.name.endsWith('.json'))loadProject(file)});
     $('stage').addEventListener('contextmenu',e=>{if(state.mode==='draw'){e.preventDefault();state.draft.pop();render()}});
-    $('openHelp').addEventListener('click',()=>$('helpDialog').showModal());$('closeHelp').addEventListener('click',()=>$('helpDialog').close());
+
     $('toggleInspector').addEventListener('click',()=>$('inspector').classList.toggle('collapsed'));$('panelButton').addEventListener('click',()=>$('inspector').classList.toggle('collapsed'));
     document.addEventListener('keydown',e=>{if(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement||e.target.isContentEditable)return;
       if(e.code==='Space'){state.spaceDown=true;e.preventDefault()}

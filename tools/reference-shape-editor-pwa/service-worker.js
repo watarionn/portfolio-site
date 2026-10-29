@@ -1,6 +1,6 @@
 'use strict';
 const PREFIX='shape-studio-pwa-';
-const CACHE=PREFIX+'v1.4.0';
+const CACHE=PREFIX+'v1.5.0';
 const CORE=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(CORE);await self.skipWaiting()})()));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));

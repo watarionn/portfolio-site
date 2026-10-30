@@ -2,12 +2,14 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   const SVGNS = 'http://www.w3.org/2000/svg';
-  const APP_VERSION = '1.2.0';
+  const APP_VERSION = '1.3.0';
   const MAX_PICTURE_BYTES = 24 * 1024 * 1024;
   const PALETTE_LIMIT = 12;
   const INITIAL_WIDTH = 960, INITIAL_HEIGHT = 640;
   const toolTips = {
     draw: 'クリックして頂点を追加 · 近くの既存頂点を再利用',
+    line: '2点以上を選んで線を作成 · Enterで確定',
+    edge: '選択した辺をクリックして頂点を追加',
     select: 'クリックして図形を選択 · 右のパネルで編集',
     vertex: '白/青の頂点をドラッグ · 辺のダブルクリックで追加',
     move: '選んだ図形をドラッグ · 共有頂点も連動',
@@ -63,6 +65,7 @@
   function usedIds(){return new Set(state.project.shapes.flatMap(s=>s.vertexIds).concat(state.draft.filter(v=>v.ref).map(v=>v.ref)))}
   function cleanupVertices(){const ids=usedIds();for(const id of Object.keys(state.project.vertices))if(!ids.has(id))delete state.project.vertices[id]}
   function shapePoints(shape){return shape.vertexIds.map(id=>vertex(id)).filter(Boolean)}
+  function isLine(shape){return shape?.kind==='line'}
   function shapeValid(ids){
     if(ids.length<3 || new Set(ids).size<3)return false;
     const points=ids.map(vertex);if(points.some(v=>!v))return false;
@@ -74,26 +77,40 @@
   function snapNearest(p,except=null){if(!state.snapEnabled)return null;const max=state.snapRadius/Math.max(getScale(),.0001);let target=null,d=max;for(const [id,v] of Object.entries(state.project.vertices)){if(id===except)continue;const dd=Math.hypot(p.x-v.x,p.y-v.y);if(dd<=d){target=id;d=dd}}return target}
   function pointsDeduplicated(p){const ids=state.draft.filter(d=>d.ref).map(d=>d.ref);return !!ids.length && ids.at(-1)===p;}
   function limitPoint(p){return {x:round(clamp(p.x,0,state.project.width)),y:round(clamp(p.y,0,state.project.height))};}
-  function changeTool(name){if(!toolTips[name])return;state.mode=name;$('viewport').dataset.tool=name;document.querySelectorAll('.tool[data-tool]').forEach(el=>el.classList.toggle('active',el.dataset.tool===name));$('toolHint').textContent=toolTips[name];render();}
+  function changeTool(name){if(!toolTips[name])return;if((state.mode==='draw'&&name==='line')||(state.mode==='line'&&name==='draw'))state.draft=[];state.mode=name;$('viewport').dataset.tool=name;document.querySelectorAll('.tool[data-tool]').forEach(el=>el.classList.toggle('active',el.dataset.tool===name));$('toolHint').textContent=toolTips[name];render();}
   function addDraftPoint(p){
-    if(state.mode!=='draw')return;
-    const nearest=snapNearest(p);
-    if(nearest && pointsDeduplicated(nearest))return;
-    if(nearest){state.draft.push({ref:nearest})}else{const pt=limitPoint(p);state.draft.push({x:pt.x,y:pt.y})}
-    render();
+    if(state.mode!=='draw'&&state.mode!=='line')return;
+    const nearest=snapNearest(p),point=nearest?vertex(nearest):limitPoint(p),existing=draftPolygonPoints();
+    const tolerance=(state.snapEnabled?state.snapRadius:0.5)/Math.max(getScale(),.001);
+    const repeated=existing.findIndex(q=>Math.hypot(q.x-point.x,q.y-point.y)<=tolerance);
+    if(repeated!==-1){
+      if(state.mode==='draw'&&repeated===0&&existing.length>=3)finishPolygon();
+      return;
+    }
+    state.draft.push(nearest?{ref:nearest}:{x:point.x,y:point.y});render();
   }
   function draftPolygonPoints(){return state.draft.map(d=>d.ref?vertex(d.ref):d)}
-  function finishPolygon(){
-    if(state.draft.length<3){toast('3点以上の頂点を置いてください');return;}
-    const pts=draftPolygonPoints(); if(pts.some(x=>!x))return;
-    const distinct=new Set(pts.map(p=>`${round(p.x)}:${round(p.y)}`));if(distinct.size<3){toast('異なる位置の3点が必要です');return;}if(distinct.size!==pts.length){toast('同じ頂点は1つの図形内では再利用できません');return;}
-    let area=0;pts.forEach((p,i)=>{const q=pts[(i+1)%pts.length];area+=p.x*q.y-p.y*q.x;});
-    if(Math.abs(area)<.5){toast('面積のない図形は作れません');return;}
-    if(polygonSelfIntersects(pts)){toast('辺が交差しています。頂点の順番を見直してください');return;}
-    saveHistory();const vertexIds=[];for(const d of state.draft){if(d.ref){vertexIds.push(d.ref)}else{const id=nextId('v');state.project.vertices[id]={x:d.x,y:d.y};vertexIds.push(id)}}
-    const s={id:nextId('s'),name:`図形 ${state.project.shapes.length+1}`,vertexIds,fill:state.color,strokeColor:'#000000',strokeWidth:0,visible:true};
-    state.project.shapes.push(s);state.draft=[];state.selected=s.id;changeTool('select');render();toast(`「${s.name}」を作成しました`);
+  function makeDraftShape(kind){
+    const pts=draftPolygonPoints(),minimum=kind==='line'?2:3;
+    if(pts.length<minimum){toast(kind==='line'?'線は2点以上必要です':'3点以上の頂点を置いてください');return}
+    if(pts.some(p=>!p))return;
+    const keys=new Set(pts.map(p=>`${round(p.x)}:${round(p.y)}`));
+    if(keys.size<minimum||keys.size!==pts.length){toast('重複しない頂点を選んでください');return}
+    if(kind==='line'){
+      const length=pts.slice(1).reduce((n,p,i)=>n+Math.hypot(p.x-pts[i].x,p.y-pts[i].y),0);
+      if(length<.5){toast('長さのある線を描いてください');return}
+    }else{
+      let area=0;pts.forEach((p,i)=>{const q=pts[(i+1)%pts.length];area+=p.x*q.y-p.y*q.x});
+      if(Math.abs(area)<.5){toast('面積のない図形は作れません。線モードを使ってください');return}
+      if(polygonSelfIntersects(pts)){toast('辺が交差しています。頂点の順番を見直してください');return}
+    }
+    saveHistory();const vertexIds=[];
+    for(const d of state.draft){if(d.ref)vertexIds.push(d.ref);else{const id=nextId('v');state.project.vertices[id]={x:d.x,y:d.y};vertexIds.push(id)}}
+    const isStroke=kind==='line',count=state.project.shapes.filter(s=>isLine(s)===isStroke).length+1;
+    const shape={id:nextId('s'),...(isStroke?{kind:'line'}:{}),name:(isStroke?'線 ':'図形 ')+count,vertexIds,fill:state.color,strokeColor:isStroke?state.color:'#000000',strokeWidth:isStroke?2:0,visible:true};
+    state.project.shapes.push(shape);state.draft=[];state.selected=shape.id;changeTool('select');render();toast('「'+shape.name+'」を作成しました');
   }
+  function finishPolygon(){makeDraftShape(state.mode==='line'?'line':'polygon')}
   function orient(a,b,c){return (b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x)}
   function segmentsCross(a,b,c,d){const eps=1e-8;const o1=orient(a,b,c),o2=orient(a,b,d),o3=orient(c,d,a),o4=orient(c,d,b);return ((o1>eps&&o2< -eps)||(o1< -eps&&o2>eps))&&((o3>eps&&o4< -eps)||(o3< -eps&&o4>eps));}
   function polygonSelfIntersects(points){for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++){if(j===i+1 || i===0&&j===points.length-1)continue;if(segmentsCross(points[i],points[(i+1)%points.length],points[j],points[(j+1)%points.length]))return true;}return false;}
@@ -108,9 +125,9 @@
   function countUsage(id){return state.project.shapes.filter(s=>s.vertexIds.includes(id)).length}
   function mergeVertices(from,to){if(from===to)return true;for(const s of state.project.shapes){if(s.vertexIds.includes(from)&&s.vertexIds.includes(to)){toast('同じ図形に同じ頂点が重複するため統合できません');return false}}for(const s of state.project.shapes)s.vertexIds=s.vertexIds.map(id=>id===from?to:id);delete state.project.vertices[from];state.selectedVertex=to;return true;}
   function shiftPolygon(shape,dx,dy){const ids=new Set(shape.vertexIds);for(const id of ids){const p=vertex(id);p.x=round(clamp(p.x+dx,0,state.project.width));p.y=round(clamp(p.y+dy,0,state.project.height))}}
-  function removeSelected(){if(state.mode==='vertex'&&state.selectedVertex){const s=selectedShape();if(!s || !s.vertexIds.includes(state.selectedVertex))return;if(s.vertexIds.length<=3){toast('3頂点以下にはできません');return}saveHistory();s.vertexIds=s.vertexIds.filter(id=>id!==state.selectedVertex);state.selectedVertex=null;cleanupVertices();render();return}if(!state.selected)return;saveHistory();state.project.shapes=state.project.shapes.filter(s=>s.id!==state.selected);for(const g of state.project.layerGroups)g.shapeIds=g.shapeIds.filter(id=>id!==state.selected);state.project.layerGroups=state.project.layerGroups.filter(g=>g.shapeIds.length>1);state.layerSelection.clear();state.selected=null;cleanupVertices();render();toast('図形を削除しました');}
+  function removeSelected(){if(state.mode==='vertex'&&state.selectedVertex){const s=selectedShape();if(!s || !s.vertexIds.includes(state.selectedVertex))return;if(s.vertexIds.length<=(isLine(s)?2:3)){toast(isLine(s)?'線は2点以上必要です':'3頂点以下にはできません');return}saveHistory();s.vertexIds=s.vertexIds.filter(id=>id!==state.selectedVertex);state.selectedVertex=null;cleanupVertices();render();return}if(!state.selected)return;saveHistory();state.project.shapes=state.project.shapes.filter(s=>s.id!==state.selected);for(const g of state.project.layerGroups)g.shapeIds=g.shapeIds.filter(id=>id!==state.selected);state.project.layerGroups=state.project.layerGroups.filter(g=>g.shapeIds.length>1);state.layerSelection.clear();state.selected=null;cleanupVertices();render();toast('図形を削除しました');}
   function updateShape(patch){const s=selectedShape();if(!s)return;saveHistory();Object.assign(s,patch);render();}
-  function changeColor(color,source='manual'){color=cleanColor(color);if(!color)return;state.color=color;state.colorSource=source;const s=selectedShape();if(s){if(s.fill!==color){saveHistory();s.fill=color}}render();}
+  function changeColor(color,source='manual'){color=cleanColor(color);if(!color)return;state.color=color;state.colorSource=source;const s=selectedShape();if(s){if((isLine(s)?outlineColor(s):s.fill)!==color){saveHistory();if(isLine(s))s.strokeColor=color;else s.fill=color}}render();}
   function layerEntries() {
     const p=state.project, lookup=new Map();
     for(const g of p.layerGroups||[])for(const id of g.shapeIds)lookup.set(id,g);
@@ -187,18 +204,25 @@
     $('underlay').setAttribute('opacity',state.showUnderlay?state.underlayOpacity:0);
     $('emptyState').classList.toggle('hidden',!!p.imageData||p.shapes.length>0);
     const pol=$('polygonLayer');pol.replaceChildren();
-    for(const s of p.shapes){if(!s.visible)continue;const node=svgNode('polygon',{points:shapeCoords(s),fill:s.fill,...outlineAttrs(s),'data-shape':s.id,'class':state.selected===s.id?'selected-shape':''});pol.append(node)}
+    for(const s of p.shapes){if(!s.visible)continue;
+    if(isLine(s)){
+      const points=shapeCoords(s),width=outlineWidth(s);
+      pol.append(svgNode('polyline',{points,fill:'none',stroke:outlineColor(s),'stroke-width':width,'stroke-linecap':'round','stroke-linejoin':'round','pointer-events':'none'}));
+      pol.append(svgNode('polyline',{points,fill:'none',stroke:'transparent','stroke-width':Math.max(width,18/Math.max(getScale(),.001)),'pointer-events':'stroke','data-shape':s.id,'class':'line-hit'}));
+    }else{pol.append(svgNode('polygon',{points:shapeCoords(s),fill:s.fill,...outlineAttrs(s),'data-shape':s.id,'class':state.selected===s.id?'selected-shape':''}))}
+  }
     const draft=$('draftLayer');draft.replaceChildren();const pts=draftPolygonPoints();const sc=1/Math.max(getScale(),.001);
     if(pts.length){let d=pts.map(t=>`${round(t.x)},${round(t.y)}`).join(' ');
       if(state.cursor){const near=snapNearest(state.cursor),q=near?vertex(near):limitPoint(state.cursor);d+=` ${round(q.x)},${round(q.y)}`}
       draft.append(svgNode('polyline',{points:d,'class':'draft-line',fill:'none'}));pts.forEach(t=>draft.append(svgNode('circle',{cx:t.x,cy:t.y,r:4.3*sc,'class':'draft-point'})));
     }
     const layer=$('handleLayer');layer.replaceChildren();const selected=selectedShape();
-    const toShow=new Set((selected&&['vertex','select','move'].includes(state.mode)?selected.vertexIds:[]));
+    const toShow=new Set((selected&&['vertex','select','move','edge'].includes(state.mode)?selected.vertexIds:[]));
     if(state.hoverVertex)toShow.add(state.hoverVertex);
     for(const id of toShow){const v=vertex(id);if(!v)continue;layer.append(svgNode('circle',{'data-vertex':id,cx:v.x,cy:v.y,r:(id===state.hoverVertex?7:5.5)*sc,'class':'handle'+(countUsage(id)>1?' shared':'')+(id===state.hoverVertex||id===state.selectedVertex?' hover':'')}));}
-    $('draftCount').textContent=state.draft.length+' 点';$('finishPolygon').disabled=state.draft.length<3;
-    $('canvasStats').textContent=`${p.shapes.length} 図形 · ${Object.keys(p.vertices).length} 頂点`;
+    $('draftCount').textContent=state.draft.length+' 点';$('finishPolygon').disabled=state.draft.length<(state.mode==='line'?2:3);
+    $('finishPolygon').innerHTML=(state.mode==='line'?'線を確定':'図形化')+' <span>↗</span>';
+    $('canvasStats').textContent=`${p.shapes.filter(s=>!isLine(s)).length} 図形 · ${p.shapes.filter(isLine).length} 線 · ${Object.keys(p.vertices).length} 頂点`;
     $('imageInfo').textContent=p.imageName?`${p.imageName} / ${p.width} × ${p.height}`:'画像を読み込んでください';
     $('projectTitle').textContent=state.lastName;
     $('zoomValue').textContent=Math.round(getScale()*100)+'%';
@@ -207,23 +231,23 @@
   }
   function renderInspector(){
     const s=selectedShape(),el=$('shapeInspector');el.replaceChildren();
-    if(!s){el.className='no-selection';el.textContent='図形を選ぶと、名称・塗り色・辺・レイヤーを編集できます。';}
+    if(!s){el.className='no-selection';el.textContent='図形・線を選ぶと、色や太さとレイヤーを編集できます。';}
     else{
       el.className='';
       const field=document.createElement('input');field.className='shape-input';field.value=s.name;field.maxLength=80;field.ariaLabel='図形の名前';field.addEventListener('change',()=>{if(field.value.trim()!==s.name)updateShape({name:field.value.trim()||s.name})});
-      const meta=document.createElement('p');meta.className='shape-meta';meta.textContent=`${s.vertexIds.length} 頂点 · 色 ${s.fill.toUpperCase()} · 共有 ${s.vertexIds.filter(id=>countUsage(id)>1).length} 点`;
+      const meta=document.createElement('p');meta.className='shape-meta';meta.textContent=`${s.vertexIds.length} 頂点 · ${isLine(s)?'線':'図形'} · 色 ${(isLine(s)?outlineColor(s):s.fill).toUpperCase()} · 共有 ${s.vertexIds.filter(id=>countUsage(id)>1).length} 点`;
       const row=document.createElement('div');row.className='shape-controls';
       [['▲ 手前へ',()=>raiseShape(1)],['▼ 奥へ',()=>raiseShape(-1)],['削除',()=>removeSelected()]].forEach(([label,fn])=>{const b=document.createElement('button');b.textContent=label;b.addEventListener('click',fn);row.append(b)});
       const outline=document.createElement('fieldset');outline.className='shape-outline';
-      const legend=document.createElement('legend');legend.textContent='辺の設定';
+      const legend=document.createElement('legend');legend.textContent=isLine(s)?'線の設定':'辺の設定';
       const toggle=document.createElement('label');toggle.className='check';
-      const enabled=document.createElement('input');enabled.type='checkbox';enabled.checked=outlineWidth(s)>0;
+      const enabled=document.createElement('input');enabled.type='checkbox';enabled.checked=outlineWidth(s)>0;toggle.style.display=isLine(s)?'none':'';
       toggle.append(enabled,document.createTextNode(' 辺を表示'));
       const settings=document.createElement('div');settings.className='outline-settings';
-      const colorLabel=document.createElement('label');colorLabel.textContent='辺の色';
+      const colorLabel=document.createElement('label');colorLabel.textContent=isLine(s)?'線の色':'辺の色';
       const colorInput=document.createElement('input');colorInput.type='color';colorInput.value=outlineColor(s);colorInput.ariaLabel='辺の色';
       colorLabel.append(colorInput);
-      const widthLabel=document.createElement('label');widthLabel.textContent='辺の太さ';
+      const widthLabel=document.createElement('label');widthLabel.textContent=isLine(s)?'線の太さ':'辺の太さ';
       const widthInput=document.createElement('input');widthInput.type='number';widthInput.min='0.25';widthInput.max='40';widthInput.step='0.25';widthInput.value=outlineWidth(s)||2;widthInput.inputMode='decimal';widthInput.ariaLabel='辺の太さ（画像のピクセル）';
       const unit=document.createElement('span');unit.textContent='px';widthLabel.append(widthInput,unit);
       settings.append(colorLabel,widthLabel);
@@ -275,9 +299,9 @@
         };
         drag.addEventListener('pointermove',move);drag.addEventListener('pointerup',end);drag.addEventListener('pointercancel',end);
       });
-      const sw=document.createElement('span');sw.className='layer-swatch';sw.style.setProperty('--swatch',s.fill);
+      const sw=document.createElement('span');sw.className='layer-swatch';sw.style.setProperty('--swatch',isLine(s)?outlineColor(s):s.fill);
       const label=document.createElement('div');label.className='layer-label';label.textContent=entry.group?.name||s.name;
-      const sub=document.createElement('small');sub.className='layer-number';sub.textContent=entry.group?entry.shapeIds.length+' 図形 · 複合レイヤ':entry.shapeIds.length+' 図形 · '+s.vertexIds.length+' VERTICES';
+      const sub=document.createElement('small');sub.className='layer-number';sub.textContent=entry.group?entry.shapeIds.length+' 要素 · 複合レイヤ':(isLine(s)?'線':'図形')+' · '+s.vertexIds.length+' VERTICES';
       label.append(sub);
       const controls=document.createElement('div');controls.className='layer-controls';
       if(entry.group){
@@ -348,7 +372,8 @@
   function onPointerDown(e){if(e.button!==0 && e.button!==1)return;if(!state.project.imageData&&state.project.shapes.length===0)return;
     $('viewport').focus({preventScroll:true});const pt=screenToSource(e);const target=e.target;const handle=target.closest('[data-vertex]');const shapeNode=target.closest('[data-shape]');
     if(state.spaceDown||state.mode==='pan'||e.button===1){state.interaction={kind:'pan',view:{...state.view},origin:{x:e.clientX,y:e.clientY},scale:getScale()};$('viewport').dataset.panning='yes';}
-    else if(state.mode==='draw'){if(pt.x<0||pt.y<0||pt.x>state.project.width||pt.y>state.project.height)return;addDraftPoint(pt);return;}
+    else if(state.mode==='draw'||state.mode==='line'){if(pt.x<0||pt.y<0||pt.x>state.project.width||pt.y>state.project.height)return;addDraftPoint(pt);return;}
+    else if(state.mode==='edge'){insertEdgeVertex(e);return;}
     else if(state.mode==='eyedropper'){if(pt.x<0||pt.y<0||pt.x>=state.project.width||pt.y>=state.project.height)return;pickImageColor(pt);return;}
     else if(state.mode==='vertex' && handle){const id=handle.getAttribute('data-vertex');if(id){state.selectedVertex=id;saveHistory();state.interaction={kind:'vertex',id,original:{...vertex(id)},changed:false};}}
     else if(shapeNode){const id=shapeNode.getAttribute('data-shape');state.selected=id;state.selectedVertex=null;if(state.mode==='move'){
@@ -366,11 +391,11 @@
     if(a?.kind==='move'){const now=screenToSource(e),dx=now.x-a.origin.x,dy=now.y-a.origin.y;
       for(const [id,p] of Object.entries(a.start)){const v=vertex(id);if(v){v.x=round(clamp(p.x+dx,0,state.project.width));v.y=round(clamp(p.y+dy,0,state.project.height))}}a.changed=true;render();return;
     }
-    if(state.mode==='draw')render();else renderHandles();
+    if(state.mode==='draw'||state.mode==='line')render();else renderHandles();
   }
   function renderHandles(){ // draw handles only on hover without rebuilding color/layers inspector
     const layer=$('handleLayer'),selected=selectedShape();layer.replaceChildren();const sc=1/Math.max(getScale(),.001);
-    const ids=new Set((selected&&['vertex','select','move'].includes(state.mode)?selected.vertexIds:[]));if(state.hoverVertex)ids.add(state.hoverVertex);
+    const ids=new Set((selected&&['vertex','select','move','edge'].includes(state.mode)?selected.vertexIds:[]));if(state.hoverVertex)ids.add(state.hoverVertex);
     for(const id of ids){const v=vertex(id);if(!v)continue;layer.append(svgNode('circle',{'data-vertex':id,cx:v.x,cy:v.y,r:(id===state.hoverVertex?7:5.5)*sc,'class':'handle'+(countUsage(id)>1?' shared':'')+(id===state.hoverVertex||id===state.selectedVertex?' hover':'')}))}
   }
   function onPointerUp(e){const a=state.interaction;state.interaction=null;delete $('viewport').dataset.panning;if(!a)return;
@@ -378,8 +403,8 @@
     if((a.kind==='vertex'||a.kind==='move')&&!a.changed){state.history.pop();refreshUndo()}
     render();try{$('stage').releasePointerCapture(e.pointerId)}catch{}
   }
-  function insertEdgeVertex(e){if(state.mode!=='vertex')return;const s=selectedShape();if(!s || !s.visible)return;const p=screenToSource(e),pts=shapePoints(s),ids=s.vertexIds;const max=14/Math.max(getScale(),.001);let best={index:-1,dist:max,projection:null};
-    for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length],dx=b.x-a.x,dy=b.y-a.y;const len=dx*dx+dy*dy;if(len===0)continue;const t=clamp(((p.x-a.x)*dx+(p.y-a.y)*dy)/len,0,1);const q={x:a.x+t*dx,y:a.y+t*dy},d=Math.hypot(p.x-q.x,p.y-q.y);if(d<best.dist&&t>.05&&t<.95)best={index:i,dist:d,projection:q};}
+  function insertEdgeVertex(e){if(state.mode!=='vertex'&&state.mode!=='edge')return;const s=selectedShape();if(!s || !s.visible)return;const p=screenToSource(e),pts=shapePoints(s),ids=s.vertexIds;const max=14/Math.max(getScale(),.001);let best={index:-1,dist:max,projection:null};
+    for(let i=0;i<(isLine(s)?pts.length-1:pts.length);i++){const a=pts[i],b=pts[(i+1)%pts.length],dx=b.x-a.x,dy=b.y-a.y;const len=dx*dx+dy*dy;if(len===0)continue;const t=clamp(((p.x-a.x)*dx+(p.y-a.y)*dy)/len,0,1);const q={x:a.x+t*dx,y:a.y+t*dy},d=Math.hypot(p.x-q.x,p.y-q.y);if(d<best.dist&&t>.05&&t<.95)best={index:i,dist:d,projection:q};}
     if(best.index<0)return;saveHistory();const id=nextId('v');state.project.vertices[id]=limitPoint(best.projection);ids.splice(best.index+1,0,id);state.selectedVertex=id;render();toast('辺に頂点を追加しました');
   }
   function viewportRatio(){
@@ -475,10 +500,15 @@
     if(x.image?.dataURL && (!/^data:image\/(png|jpeg|webp|gif);base64,/i.test(x.image.dataURL)||x.image.dataURL.length>MAX_PICTURE_BYTES*1.5))throw Error('画像データの形式または容量が不正です');
     if(!x.vertices||Array.isArray(x.vertices)||typeof x.vertices!=='object'||!Array.isArray(x.shapes)||x.shapes.length>20000||Object.keys(x.vertices).length>100000)throw Error('図形データが不正です');
     const vertices=Object.create(null);for(const [id,v] of Object.entries(x.vertices)){if(!/^[A-Za-z0-9_-]{1,50}$/.test(id)||!finite(v?.x)||!finite(v?.y)||Math.abs(v.x)>100000||Math.abs(v.y)>100000)throw Error('頂点が不正です');vertices[id]={x:round(v.x),y:round(v.y)}}
-    const ids=new Set(),shapes=x.shapes.map(s=>{if(typeof s.id!=='string'||ids.has(s.id)||!Array.isArray(s.vertexIds)||s.vertexIds.length<3||s.vertexIds.length>20000||!s.vertexIds.every(id=>Object.hasOwn(vertices,id))||new Set(s.vertexIds).size<3)throw Error('図形の頂点参照が不正です');const fill=cleanColor(s.fill);if(!fill)throw Error('図形の色が不正です');ids.add(s.id);return {id:s.id,name:String(s.name||'図形').slice(0,80),vertexIds:s.vertexIds.slice(),fill,
-      strokeColor:s.strokeColor===undefined?'#000000':(cleanColor(s.strokeColor)||(()=>{throw Error('辺の色が不正です')})()),
-      strokeWidth:s.strokeWidth===undefined?0:(Number.isFinite(s.strokeWidth)&&s.strokeWidth>=0&&s.strokeWidth<=40?s.strokeWidth:(()=>{throw Error('辺の太さが不正です')})()),
-      visible:s.visible!==false}});
+    const ids=new Set(),shapes=x.shapes.map(s=>{
+      const kind=s.kind===undefined?'polygon':s.kind,minimum=kind==='line'?2:3;
+      if(!['polygon','line'].includes(kind)||typeof s.id!=='string'||ids.has(s.id)||!Array.isArray(s.vertexIds)||s.vertexIds.length<minimum||s.vertexIds.length>20000||!s.vertexIds.every(id=>Object.hasOwn(vertices,id))||new Set(s.vertexIds).size<minimum)throw Error('図形または線の頂点参照が不正です');
+      const fill=cleanColor(s.fill);if(!fill)throw Error('図形の色が不正です');
+      const strokeColor=s.strokeColor===undefined?(kind==='line'?fill:'#000000'):(cleanColor(s.strokeColor)||(()=>{throw Error('線の色が不正です')})());
+      const width=s.strokeWidth===undefined?(kind==='line'?2:0):s.strokeWidth;
+      if(!Number.isFinite(width)||width>40||width<(kind==='line'?.25:0))throw Error('線または辺の太さが不正です');
+      ids.add(s.id);return {id:s.id,...(kind==='line'?{kind:'line'}:{}),name:String(s.name||(kind==='line'?'線':'図形')).slice(0,80),vertexIds:s.vertexIds.slice(),fill,strokeColor,strokeWidth:width,visible:s.visible!==false};
+    });
     const palette={characteristic:paletteColors(x.palette?.characteristic),featured:paletteColors(x.palette?.featured),representative:paletteColors(x.palette?.representative),imported:!!x.palette?.imported};
     palette.unified=Array.isArray(x.palette?.unified)?[...new Set(x.palette.unified.map(rgbFromColor).filter(Boolean))].slice(0,PALETTE_MAX):combinedPalette(palette);
     // Composite layers contain only valid polygon IDs, with no overlap between groups.
@@ -496,7 +526,10 @@
   async function loadProject(file){if(!file)return;try{const text=await file.text();const data=validateImport(JSON.parse(text));let img=null;if(data.project.imageData){img=await decodeImage(data.project.imageData);if(img.naturalWidth!==data.project.width||img.naturalHeight!==data.project.height)throw Error('元画像とキャンバス寸法が一致しません')}
       state.project=data.project;state.layerSelection.clear();state.paletteEditIndex=-1;cachedBitmap=img;state.lastName=data.project.imageName.replace(/\.[^.]+$/,'');state.underlayOpacity=data.opacity;$('opacity').value=Math.round(data.opacity*100);state.selected=null;state.selectedVertex=null;state.draft=[];state.history=[];state.future=[];changeTool('draw');autoFit();toast('編集状態を復元しました');status('JSONプロジェクトを開きました');
     }catch(e){toast('プロジェクト読込エラー: '+e.message,6)}}
-  function outputSvg(){const p=state.project;const shapes=p.shapes.filter(s=>s.visible).map(s=>`  <polygon points="${escapeXml(shapeCoords(s))}" fill="${s.fill}" stroke="${outlineWidth(s)?outlineColor(s):'none'}" stroke-width="${outlineWidth(s)}" stroke-linejoin="round" data-shape-name="${escapeXml(s.name)}"/>`).join('\n');return `<svg xmlns="http://www.w3.org/2000/svg" width="${p.width}" height="${p.height}" viewBox="0 0 ${p.width} ${p.height}">\n${shapes}\n</svg>\n`}
+  function outputSvg(){const p=state.project;const shapes=p.shapes.filter(s=>s.visible).map(s=>{
+    if(isLine(s))return `  <polyline points="${escapeXml(shapeCoords(s))}" fill="none" stroke="${outlineColor(s)}" stroke-width="${outlineWidth(s)}" stroke-linecap="round" stroke-linejoin="round" data-shape-name="${escapeXml(s.name)}"/>`;
+    return `  <polygon points="${escapeXml(shapeCoords(s))}" fill="${s.fill}" stroke="${outlineWidth(s)?outlineColor(s):'none'}" stroke-width="${outlineWidth(s)}" stroke-linejoin="round" data-shape-name="${escapeXml(s.name)}"/>`;
+  }).join('\n');return `<svg xmlns="http://www.w3.org/2000/svg" width="${p.width}" height="${p.height}" viewBox="0 0 ${p.width} ${p.height}">\n${shapes}\n</svg>\n`}
   function exportSvg(){download(new Blob([outputSvg()],{type:'image/svg+xml;charset=utf-8'}),exportBase()+'.svg');toast('SVGを書き出しました（下敷き画像を含みません）')}
   async function exportPng(){const p=state.project;if(p.width*p.height>48_000_000){toast('PNG出力が大きすぎます (48MP以下にしてください)');return}
     const svg=outputSvg(),url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));try{const img=await decodeImage(url),canvas=document.createElement('canvas');canvas.width=p.width;canvas.height=p.height;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);canvas.toBlob(blob=>{if(blob){download(blob,exportBase()+'.png');toast('PNGを書き出しました（背景は透明）')}else toast('PNG保存に失敗しました')},'image/png')}catch(e){toast('PNG書き出しエラー: '+e.message)}finally{URL.revokeObjectURL(url)}}
@@ -525,7 +558,7 @@
     $('stage').addEventListener('pointerdown',onPointerDown);$('stage').addEventListener('pointermove',onPointerMove);$('stage').addEventListener('pointerup',onPointerUp);$('stage').addEventListener('pointercancel',onPointerUp);$('stage').addEventListener('dblclick',insertEdgeVertex);
     $('viewport').addEventListener('wheel',onWheel,{passive:false});
     $('viewport').addEventListener('dragover',e=>e.preventDefault());$('viewport').addEventListener('drop',e=>{e.preventDefault();const file=e.dataTransfer.files[0];if(file?.type.startsWith('image/'))loadImage(file);else if(file?.name.endsWith('.json'))loadProject(file)});
-    $('stage').addEventListener('contextmenu',e=>{if(state.mode==='draw'){e.preventDefault();state.draft.pop();render()}});
+    $('stage').addEventListener('contextmenu',e=>{if(state.mode==='draw'||state.mode==='line'){e.preventDefault();state.draft.pop();render()}});
 
     $('toggleInspector').addEventListener('click',()=>$('inspector').classList.toggle('collapsed'));$('panelButton').addEventListener('click',()=>$('inspector').classList.toggle('collapsed'));
     document.addEventListener('keydown',e=>{if(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement||e.target.isContentEditable)return;
@@ -533,10 +566,10 @@
       if((e.ctrlKey||e.metaKey)&&e.code==='KeyZ'){e.preventDefault();if(e.shiftKey)redo();else undo();return}
       if((e.ctrlKey||e.metaKey)&&e.code==='KeyY'){e.preventDefault();redo();return}
       if(e.key==='Escape'){state.draft=[];state.selectedVertex=null;render();return}
-      if(e.key==='Backspace'&&state.mode==='draw'){e.preventDefault();state.draft.pop();render();return}
+      if(e.key==='Backspace'&&(state.mode==='draw'||state.mode==='line')){e.preventDefault();state.draft.pop();render();return}
       if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();removeSelected();return}
-      if(e.key==='Enter'&&state.mode==='draw'){e.preventDefault();finishPolygon();return}
-      const map={KeyP:'draw',KeyV:'select',KeyE:'vertex',KeyM:'move',KeyH:'pan',KeyI:'eyedropper'};if(map[e.code]&&!e.ctrlKey&&!e.metaKey){changeTool(map[e.code]);return}
+      if(e.key==='Enter'&&(state.mode==='draw'||state.mode==='line')){e.preventDefault();finishPolygon();return}
+      const map={KeyL:'line',KeyP:'draw',KeyV:'select',KeyE:'vertex',KeyM:'move',KeyH:'pan',KeyI:'eyedropper'};if(map[e.code]&&!e.ctrlKey&&!e.metaKey){changeTool(map[e.code]);return}
       if((e.key==='+'||e.key==='=')&&!e.ctrlKey){e.preventDefault();zoomCenter(1.2)}if(e.key==='-'&&!e.ctrlKey){e.preventDefault();zoomCenter(1/1.2)}
     });
     document.addEventListener('keyup',e=>{if(e.code==='Space')state.spaceDown=false});window.addEventListener('blur',()=>state.spaceDown=false);window.addEventListener('resize',()=>{const v=state.view,cx=v.x+v.w/2,cy=v.y+v.h/2;showSourceRect(v.w,cx,cy)});

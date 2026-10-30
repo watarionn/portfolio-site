@@ -11,3 +11,12 @@ Independent personal PWA fork of the website's Reference Shape Editor v1.2.
 - On first launch, an HTTPS visit is needed for SW install. iOS: Safari Share → Add to Home Screen.
 - Test with real iPhone Safari before claiming final touch/pinch acceptance. PWA storage is browser-managed and may be evicted: keep JSON backups.
 - Avoid changing Minimalizer Golden/C08/Worker via this fork.
+
+## Line mode (v1.4 PWA)
+- Draw 2 or more points to make an open straight/polyline, then tap 線を確定.
+- Duplicate draft points are ignored, tapping the first draft point after 3+ points closes a polygon.
+- Select a line or polygon and use 辺に点 to add a vertex to any existing segment. Lines have no implicit closing segment.
+- Lines have editable stroke color/width (0.25–40px), layered ordering, shared vertex editing, JSON and SVG/PNG export.
+- The v1 schema is retained; line entries in shapes use kind: line, while legacy polygons need no kind.
+- Run node tools/test_reference_shape_editor_line_mode.js for common geometry regression. Actual touch QA is separate.
+

@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark"/>
   <title>参照図形エディター</title>
   <link rel="stylesheet" href="styles.css?v=20261029-standalone-safe-area-v2"/>
-  <script defer src="app.js?v=20261029-no-quickguide"></script>
+  <script defer src="app.js?v=20261030-line-mode-v1"></script>
 </head>
 <body>
 <div id="app">
@@ -25,8 +25,10 @@
   <div class="workspace">
     <nav class="toolrail" aria-label="描画ツール">
       <button class="tool active" data-tool="draw" title="図形化 (P)"><span class="glyph">⬡</span><small>図形化</small></button>
+      <button class="tool" data-tool="line" title="線を描画 (L)"><span class="glyph">╱</span><small>線</small></button>
       <button class="tool" data-tool="select" title="選択 (V)"><span class="glyph">↖</span><small>選択</small></button>
       <button class="tool" data-tool="vertex" title="頂点編集 (E)"><span class="glyph">⌘</span><small>頂点</small></button>
+      <button class="tool" data-tool="edge" title="選択した辺に頂点を追加"><span class="glyph">⊕</span><small>辺に点</small></button>
       <button class="tool" data-tool="move" title="図形を移動 (M)"><span class="glyph">✥</span><small>移動</small></button>
       <button class="tool" data-tool="pan" title="移動・パン (H / Space)"><span class="glyph">✋</span><small>パン</small></button>
       <button class="tool" data-tool="eyedropper" title="元画像スポイト (I)"><span class="glyph">◉</span><small>スポイト</small></button>
@@ -52,7 +54,7 @@
         <div class="canvas-overlay-bottom"><span id="cursorInfo">x: –　y: –</span><span id="canvasStats">0 図形 · 0 頂点</span></div>
       </div>
       <div class="draftbar">
-        <div><span class="label-overline">編集中</span><span id="draftCount">0 点</span><span class="muted">3点以上で閉じられます</span></div>
+        <div><span class="label-overline">編集中</span><span id="draftCount">0 点</span><span class="muted">図形は3点、線は2点以上</span></div>
         <div class="draft-controls"><button class="small-quiet" id="cancelDraft">取り消し <kbd>Esc</kbd></button><button class="small-quiet" id="removeDraftPoint">1点戻す <kbd>⌫</kbd></button><button class="build" id="finishPolygon" disabled>図形化 <span>↗</span></button></div>
       </div>
     </main>
@@ -93,7 +95,7 @@
         </details>
       </section>
       <section class="panel-section">
-        <h2>選択中の図形 <span>04</span></h2>
+        <h2>選択中の図形・線 <span>04</span></h2>
         <div id="shapeInspector" class="no-selection">図形を選ぶと、名称・塗り色・辺・レイヤーを編集できます。</div>
       </section>
       <section class="panel-section layer-section">

@@ -88,3 +88,9 @@
   #app { padding-top: env(safe-area-inset-top, 0px); }
   .app-head { padding-top: 7px; height:auto; min-height:67px; }
 }
+
+/* Polyline selection with generous hit targets and an extended tool list. */
+.viewport[data-tool=line] svg{cursor:crosshair}
+#stage .line-hit{cursor:pointer;vector-effect:non-scaling-stroke}
+.toolrail{overflow-y:auto;min-height:0}
+@media(max-width:760px){.toolrail{overflow-x:auto;overflow-y:hidden}}

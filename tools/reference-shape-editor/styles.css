@@ -84,6 +84,6 @@
 
 /* Polyline selection with generous hit targets and an extended tool list. */
 .viewport[data-tool=line] svg{cursor:crosshair}
-#stage .line-hit{cursor:pointer;vector-effect:non-scaling-stroke}
+#stage .line-hit{cursor:pointer;pointer-events:stroke}
 .toolrail{overflow-y:auto;min-height:0}
 @media(max-width:760px){.toolrail{overflow-x:auto;overflow-y:hidden}}

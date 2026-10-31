@@ -1,0 +1,243 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_d2an-t5l1pg",
+  "slug": "hakos-baelz-d2an-t5l1pg",
+  "videoId": "d2An-T5L1Pg",
+  "title": "夏休み明けの挨拶と遅刻の言い訳",
+  "originalTitle": "《BAEWATCH》SCHOOL STARTS! - Ep. 1",
+  "originalUrl": "https://www.youtube.com/watch?v=d2An-T5L1Pg",
+  "streamType": "event",
+  "videoStatus": "public",
+  "publishedAt": "2021-11-29T23:30:13.000Z",
+  "durationSeconds": 180,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_hakos_baelz",
+    "slug": "hakos-baelz",
+    "displayName": "Hakos Baelz"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "夏休み明けの挨拶や宿題の話、ホームルーム前のやり取りを描く約3分の短編会話劇だ。大きな事件よりも、短い返事、照れた反応、遅刻の言い訳が会話の見どころになる。",
+  "summaryOneLine": "原文と照合できる時刻付きで短編の出来事と英語表現を追う",
+  "keyPoints": [
+    "元気な挨拶とFumiの照れ",
+    "Miiの『普通』が会話のテンポを変える",
+    "友達に会えず寂しかったかという問い"
+  ],
+  "articleBodyHtml": "<p>夏休み明けの挨拶や宿題の話、ホームルーム前のやり取りを描く約3分の短編会話劇だ。大きな事件よりも、短い返事、照れた反応、遅刻の言い訳が会話の見どころになる。</p>\n<p>会話は夏休みの近況から席のやり取りへ移り、ホームルームの開始を告げる声の後に未到着者の話題になる。原文の話者ラベルはないため、誰と誰の関係かは断定せず、発言の順序を追う。</p>\n<h2>元気な挨拶とFumiの照れ</h2>\n<p>冒頭は「夏休みはどうだった？」という明るい挨拶で始まる。「うるさい」という反応が入り、続いてFumiへの呼びかけがある。話者ラベルのないASRから、最初の反応をFumi本人の発言とは断定しない。</p>\n<p>00:00:13ごろ、新しい衣装に緊張しているかというFumiへの問いが出る。「Fumiはかわいいから心配しないで」という声の直後には「C-cute!」と、ためらいを含む短い返答が続く。</p>\n<h2>Miiの『普通』が会話のテンポを変える</h2>\n<p>Miiへの呼びかけに続き、夏休みや宿題の話題が次々と出る。「Normal...（普通）」という短い返事が二度記録されるが、相手の期待や内心までは原文から分からない。</p>\n<p>00:01:03ごろには「ここは私の席」という言葉が出る。誰が誰の席にいたかまではASRから確定できない。直後には「Geez, that girl...」「Did you see that?」という反応が続く。</p>\n<h2>友達に会えず寂しかったかという問い</h2>\n<p>00:01:57ごろ、「友達に会えず寂しかった？」という問いが出る。続く発言は別の挨拶で、誰が寂しかったか、どんな答えだったかはASRから分からない。</p>\n<p>冒頭とMiiへの問いかけでは「夏休みはどうだった？」が繰り返される。返答の「普通」や途中の挨拶を、話者を決めつけずに並べて聞くと会話の流れが追いやすい。</p>\n<h2>英語で追うなら――学校の定番表現</h2>\n<p>『How was your summer vacation?』は「夏休みはどうだった？」。過去の休暇について感想を尋ねる、再会時に使える表現だ。</p>\n<p>00:02:12ごろの『The homeroom will start soon』は「もうすぐホームルームが始まる」。近い開始時刻を示しているのはsoonで、will startはこれから始まることを表す。</p>\n<h2>遅刻者の弁明で締めくくる</h2>\n<p>ホームルームを始めようとするが、まだ一人いない。00:02:42ごろには、家を出る時に年配の女性が『何らかの理由で銀行に行きたい』と話したため、手伝ったという説明が続く。その理由や誰がいつ到着したかはASRだけでは確定できない。</p>\n<p>しかし最後には「寝坊助だ」という反応が返る。原文で確認できる結末は遅刻の弁明とその一言までで、授業や全員の着席の様子は描かれていない。</p>\n<h2>出典</h2>\n<ul><li>[公式動画](https://www.youtube.com/watch?v=d2An-T5L1Pg)</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 13,
+      "text": "新しい衣装への反応"
+    },
+    {
+      "timestampSeconds": 63,
+      "text": "席の取り違え"
+    },
+    {
+      "timestampSeconds": 117,
+      "text": "友人を恋しく思ったかという質問"
+    },
+    {
+      "timestampSeconds": 132,
+      "text": "ホームルームの開始"
+    },
+    {
+      "timestampSeconds": 162,
+      "text": "遅刻者の説明"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=d2An-T5L1Pg",
+    "streamPublishedAt": "2021-11-29T23:30:13.000Z",
+    "articlePublishedAt": "2026-10-17T22:15:37Z",
+    "articleUpdatedAt": "2026-10-17T22:15:37Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-xwflkdvuii",
+      "slug": "hakos-baelz-xwflkdvuii",
+      "videoId": "-XWflKdVuII",
+      "title": "Baeが「Inaの自画像」を描くまで　作画配信をなりきり企画にした50分",
+      "summaryOneLine": "短いお絵描き配信が完成絵だけでなく、声、設定、道具の言い訳、本人の登場までを一つのなりきり企画として設計していたことが分かる",
+      "streamType": "event",
+      "publishedAt": "2024-08-15T02:14:54.000Z",
+      "durationSeconds": 3189,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-08",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_em-temrlwzg",
+      "slug": "hakos-baelz-em-temrlwzg",
+      "videoId": "Em-TeMRLWzg",
+      "title": "Subaruを待つ『自由研究』、起床確認から配信終了まで",
+      "summaryOneLine": "原文と照合できる時刻付きで短編の出来事と英語表現を追う",
+      "streamType": "event",
+      "publishedAt": "2024-08-04T05:36:11.000Z",
+      "durationSeconds": 616,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-08",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_mkru3ewvipu",
+      "slug": "hakos-baelz-mkru3ewvipu",
+      "videoId": "mkrU3EWVIpU",
+      "title": "「30分だけ」のはずが大混乱　Hakos Baelzが寝坊と“禁断の炒飯”計画を語る",
+      "summaryOneLine": "寝坊で慌ただしく始まった約30分の雑談で、Baelzが過密日程とMcDonald’sのナゲット入り炒飯という突発的な食事案を語りました。",
+      "streamType": "chatting",
+      "publishedAt": "2024-07-02T02:32:00Z",
+      "durationSeconds": 1668,
+      "thumbnailUrl": "https://i.ytimg.com/vi/mkrU3EWVIpU/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2024-07",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "雑談"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1k6stuynt1a",
+      "slug": "hakos-baelz-1k6stuynt1a",
+      "videoId": "1K6stUYNT1A",
+      "title": "Hakos Baelzの新ケープはタスマニアデビル　3つの予想と豆知識で正体を公開",
+      "summaryOneLine": "動物クイズのような進行を経て、Baelzがオーストラリアに生息するタスマニアデビルをモチーフにしたケープを披露しました。",
+      "streamType": "event",
+      "publishedAt": "2023-09-28T01:30:00Z",
+      "durationSeconds": 1420,
+      "thumbnailUrl": "https://i.ytimg.com/vi/1K6stUYNT1A/maxresdefault.jpg",
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-09",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [
+        "衣装お披露目",
+        "Council"
+      ],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-0_9xcpljh0",
+      "slug": "hakos-baelz-0-9xcpljh0",
+      "videoId": "-0_9xCPljh0",
+      "title": "さまざまな状況と感情の描写",
+      "summaryOneLine": "Subaruは水を飲んでいることが確認されています。",
+      "streamType": "other",
+      "publishedAt": "2023-04-08T03:00:08.000Z",
+      "durationSeconds": 428,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2023-04",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_4ozxyscgoqc",
+      "slug": "hakos-baelz-4ozxyscgoqc",
+      "videoId": "4OzxYScGoqc",
+      "title": "雪の日に思い描くクリスマスデート――『A Winter's Dream』の手紙",
+      "summaryOneLine": "実際の出来事と脚本内の描写を区別し、英語表現と物語の転換を原文時刻で追える。",
+      "streamType": "event",
+      "publishedAt": "2022-12-25T01:00:08.000Z",
+      "durationSeconds": 732,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2022-12",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

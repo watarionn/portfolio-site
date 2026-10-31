@@ -1,0 +1,246 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_2axo-tp-5so",
+  "slug": "mori-calliope-2axo-tp-5so",
+  "videoId": "2Axo-TP-5So",
+  "title": "River City Girls 2をMonarchと協力プレイ　「basically…punch everyone」",
+  "originalTitle": "【RIVER CITY GIRLS 2】Punching Literally Everyone with Monarch!",
+  "originalUrl": "https://www.youtube.com/watch?v=2Axo-TP-5So",
+  "streamType": "game",
+  "videoStatus": "public",
+  "publishedAt": "2023-01-06T04:09:39.000Z",
+  "durationSeconds": 3760,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_mori_calliope",
+    "slug": "mori-calliope",
+    "displayName": "Mori Calliope"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "Mori CalliopeとMonarchはRiver City Girls 2を一緒にプレイし、操作を確かめながら街の敵を次々に倒していった。ピンチになっても軽口を交わし、戦闘そのものを笑いに変えていくテンポの速いコラボだ。",
+  "summaryOneLine": "約1時間のコラボから、ゲーム理解、戦闘の勢い、ピンチでの掛け合いという見どころを短く把握できる",
+  "keyPoints": [
+    "まずは「punch everyone」",
+    "強い敵にもリアクション全開",
+    "AIの動きに翻弄されながら"
+  ],
+  "articleBodyHtml": "<p>Mori CalliopeとMonarchはRiver City Girls 2を一緒にプレイし、操作を確かめながら街の敵を次々に倒していった。ピンチになっても軽口を交わし、戦闘そのものを笑いに変えていくテンポの速いコラボだ。</p>\n<h2>まずは「punch everyone」</h2>\n<p>00:03:10ごろ、できるだけゲームを進めようと話し、まだunlockされていないcharacterを確認しながらプレイを開始する。</p>\n<p>00:08:19ごろ、操作をつかみ始めると「basically in this game you just punch everyone」とゲームを大胆に要約。敵との戦闘へ勢いよく飛び込んでいった。</p>\n<h2>強い敵にもリアクション全開</h2>\n<p>00:24:22ごろには敵のtornado attackを見て驚き、続けて「That&#x27;s not fair」と反応する。00:35:40ごろには進む道を探している最中にnew moveを発見し、戦い方も少しずつ広がっていく。</p>\n<p>00:41:47ごろには「one HP」の厳しい状況になりながら、knocked outになるのはこのゲームではpretty normalだと笑い混じりに受け止めた。</p>\n<h2>AIの動きに翻弄されながら</h2>\n<p>00:47:08ごろ、敵が攻撃をかわすような動きを見せると「not a smart AI」と反応。思い通りに殴らせてくれない相手にも、その場の驚きを掛け合いへ変えていく。</p>\n<p>00:56:58ごろには「I&#x27;m better than these guys」と敵へ強気な一言。操作を覚えるところから始まり、苦戦や発見を二人で共有しながら進む協力プレイが、この回の軸になっていた。</p>\n<h2>記事情報</h2>\n<ul><li>元配信: [YouTubeで視聴する](https://www.youtube.com/watch?v=2Axo-TP-5So)</li><li>配信公開日: 2023年1月6日</li><li>記事公開日: 未公開</li><li>記事最終更新日: 2026年9月27日</li></ul>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 190,
+      "text": "できるだけゲームを進めようと話し、未unlockのcharacterを確認する"
+    },
+    {
+      "timestampSeconds": 499,
+      "text": "ゲームの基本をつかみbasically in this game you just punch everyoneとまとめる"
+    },
+    {
+      "timestampSeconds": 1462,
+      "text": "敵のtornado attackに驚きThat's not fairと反応する"
+    },
+    {
+      "timestampSeconds": 2140,
+      "text": "進路を見つけた直後にnew moveを発見する"
+    },
+    {
+      "timestampSeconds": 2507,
+      "text": "one HPの状況でknocked outはpretty normalだと話す"
+    },
+    {
+      "timestampSeconds": 2828,
+      "text": "敵AIの動きにsmart AIは困ると反応する"
+    },
+    {
+      "timestampSeconds": 3418,
+      "text": "I'm better than these guysと敵への強気な反応を見せる"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=2Axo-TP-5So",
+    "streamPublishedAt": "2023-01-06T04:09:39.000Z",
+    "articlePublishedAt": "2026-09-27T23:33:32Z",
+    "articleUpdatedAt": "2026-09-29T09:35:13Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_0ootopu1mbo",
+      "slug": "mori-calliope-0ootopu1mbo",
+      "videoId": "0OoToPU1Mbo",
+      "title": "偶然集まった仲間を一つの場へ　Calliope Moriの「hotel talk」が写した本番前夜",
+      "summaryOneLine": "performance内容の予想ではなく、偶然の集合、近況、期待を受け止めることで本番前夜の空気を作る配信設計を読める",
+      "streamType": "event",
+      "publishedAt": "2026-07-03T03:01:02.000Z",
+      "durationSeconds": 4862,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-ps5pxgjneq",
+      "slug": "mori-calliope-ps5pxgjneq",
+      "videoId": "-Ps5pxGJNEQ",
+      "title": "「遊びたい」は映像のどこから生まれる？　CalliopeとBijouのState of Play観察軸",
+      "summaryOneLine": "発表タイトルの一覧ではなく、二人が映像のどこを見て『遊びたい』へ判断を進めたかが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-06-02T20:56:36.000Z",
+      "durationSeconds": 4836,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_e7bp1efohh4",
+      "slug": "mori-calliope-e7bp1efohh4",
+      "videoId": "E7bP1EFoHh4",
+      "title": "ひなたの最新動向とファンへのメッセージ",
+      "summaryOneLine": "ひなたは暗い部屋にいる様子で、視聴者に向けて「wave」が見られないことや、以前の配信が短すぎたことを言及しています。",
+      "streamType": "other",
+      "publishedAt": "2026-05-12T03:59:58.000Z",
+      "durationSeconds": 475,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "short",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_bmktimlpw8w",
+      "slug": "mori-calliope-bmktimlpw8w",
+      "videoId": "BMKtiMlpW8w",
+      "title": "森カリオペたちの『Fortnite』ゼロビルド挑戦　ミクとの遭遇から終盤の連携まで",
+      "summaryOneLine": "森カリオペ、ジジ、ネリッサ、後からリズが加わるFortniteゼロビルドの対戦中に起きたトラブル、ゲーム内コラボスキンとの遭遇、位置取りの相談とThe Office談義を配信原文の時系列に沿って把握できる。",
+      "streamType": "game",
+      "publishedAt": "2026-01-30T03:19:49.000Z",
+      "durationSeconds": 7204,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-01",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-e3x1jaebdo",
+      "slug": "mori-calliope-e3x1jaebdo",
+      "videoId": "-E3x1JAEbdo",
+      "title": "別々のtutorialが「4人で遊びたい」に変わる　CalliopeとIRySの『Warframe』初日",
+      "summaryOneLine": "長く続くgameの情報量を網羅せず、初心者二人が何を一緒に学び、協力playへどう移ったかを追える",
+      "streamType": "game",
+      "publishedAt": "2026-01-09T05:25:09.000Z",
+      "durationSeconds": 11690,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-01",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0kc1cmtaamq",
+      "slug": "mori-calliope-0kc1cmtaamq",
+      "videoId": "0kc1cmtAaMQ",
+      "title": "「自分がゲームにいる」を自分で演じる　CalliopeがGoddess Orderで作ったライブ吹替",
+      "summaryOneLine": "この配信では、Calliopeがゲーム内の自分を“見る側”に留まりませんでした。",
+      "streamType": "game",
+      "publishedAt": "2025-09-30T04:24:57.000Z",
+      "durationSeconds": 10821,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-09",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

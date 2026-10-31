@@ -1,0 +1,326 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_ffvsnjtv15i",
+  "slug": "fuwamoco-ffvsnjtv15i",
+  "videoId": "FFVSnJtV15I",
+  "title": "ゲームに関する会話とその周辺の議論",
+  "originalTitle": "【DONKEY KONG COUNTRY 2】 these demon dogs have DEFINITELY gone bananas 🍌【FUWAMOCO｜スーパードンキーコング2】",
+  "originalUrl": "https://www.youtube.com/watch?v=FFVSnJtV15I",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": "2025-05-23T03:29:43.000Z",
+  "durationSeconds": 8433,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_fuwamoco",
+    "slug": "fuwamoco",
+    "displayName": "FUWAMOCO"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "会話の中で、SNESに類似したゲームが存在することについて言及されている。この情報は、Clay MatesやMoko-chanといったゲーム名が関係している。",
+  "summaryOneLine": "会話の中で、SNESに類似したゲームが存在することについて言及されている。この情報は、Clay MatesやMoko-chanといったゲーム名が関係している。",
+  "keyPoints": [
+    "他のゲームの存在についての言及",
+    "ゲームのレベルに関する苦戦",
+    "医師の存在に関する質問"
+  ],
+  "articleBodyHtml": "<h2>他のゲームの存在についての言及</h2>\n<p>会話の中で、SNESに類似したゲームが存在することについて言及されている。この情報は、Clay MatesやMoko-chanといったゲーム名が関係している。</p>\n<h2>ゲームのレベルに関する苦戦</h2>\n<p>会話の一部では、ゲームのレベルをクリアするのに苦戦している様子が見られる。具体的には、レベルの進行状況について確信が持てないという表現が見られる。</p>\n<h2>医師の存在に関する質問</h2>\n<p>会話の中で、医師が存在するかどうかについての質問が行われている。この質問は、会話の参加者間で医師の役割についての議論を引き起こしている。</p>\n<h2>医師の身分に関する不確実性</h2>\n<p>医師の身分について、会話の参加者は明確な情報を持っていない。この不確実性は、会話の進行に影響を与えている。</p>\n<h2>特定のゲームモードの提案</h2>\n<p>会話の中で、特定のゲームモード「Flora Rage Clay Mates Dream」や「Rage Mates」をプレイすることを提案している。この提案は、ゲームの進行に役立つ可能性がある。</p>\n<h2>ゲームに関する継続的な議論</h2>\n<p>会話の参加者は、ゲームに関する議論を継続したいと考えている。この継続的な議論は、ゲームの新しいレベルコードや手順についての探求に繋がっている。</p>\n<h2>ゲームマニュアルの活用に関する提案</h2>\n<p>会話の中で、ゲームマニュアルを活用してレベルコードを確認する方法が提案されている。この提案は、ゲームの進行に役立つ可能性がある。</p>\n<h2>落下に関する議論</h2>\n<p>会話の中で、落下に関する議論が行われている。この議論は、落下が一般的かどうかについての意見の違いを引き起こしている。</p>\n<h2>落下に関する矛盾</h2>\n<p>落下に関する議論の中で、意見の矛盾が見られる。この矛盾は、会話の参加者間での意見の違いを示している。</p>\n<h2>Alvinの落下に関する具体的な情報</h2>\n<p>会話の中で、Alvinの落下に関する具体的な情報が提供されている。この情報は、2人中5人のAlvinが落下したという内容である。</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=FFVSnJtV15I</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 7652,
+      "text": "Clay Mates? Moko-chan, Clay Mates?"
+    },
+    {
+      "timestampSeconds": 7658,
+      "text": "This level, but I don't know if I completed it"
+    },
+    {
+      "timestampSeconds": 7677,
+      "text": "How did the song go in clay because of some reason and the kid and then the dad and the doc"
+    },
+    {
+      "timestampSeconds": 7692,
+      "text": "Is there a doctor?"
+    },
+    {
+      "timestampSeconds": 7693,
+      "text": "I think the dad's a doctor"
+    },
+    {
+      "timestampSeconds": 7695,
+      "text": "A researcher?"
+    },
+    {
+      "timestampSeconds": 7696,
+      "text": "I don't know"
+    },
+    {
+      "timestampSeconds": 7703,
+      "text": "I just, once I got to the second level, I feel like I didn't finish the first level properly"
+    },
+    {
+      "timestampSeconds": 7708,
+      "text": "Should we just do a Flora Rage Clay Mates Dream?"
+    },
+    {
+      "timestampSeconds": 7712,
+      "text": "Rage Mates"
+    },
+    {
+      "timestampSeconds": 7713,
+      "text": "It's satisfying and everything's going really fast, but then"
+    },
+    {
+      "timestampSeconds": 7729,
+      "text": "Moko-chan, you try it and you see how you do"
+    },
+    {
+      "timestampSeconds": 7739,
+      "text": "Let's keep on thinking about it"
+    },
+    {
+      "timestampSeconds": 7743,
+      "text": "I know we've maybe slightly talked about it before, but I don't know if the roughy has a new level code in the book"
+    },
+    {
+      "timestampSeconds": 7765,
+      "text": "So then you can go to the main menu and write down a level"
+    },
+    {
+      "timestampSeconds": 7767,
+      "text": "One, two"
+    },
+    {
+      "timestampSeconds": 7773,
+      "text": "I remember the manual was really filled up with all the codes"
+    },
+    {
+      "timestampSeconds": 8040,
+      "text": "Oh wait, look where you're going"
+    },
+    {
+      "timestampSeconds": 8042,
+      "text": "Got it"
+    },
+    {
+      "timestampSeconds": 8042,
+      "text": "Got it"
+    },
+    {
+      "timestampSeconds": 8044,
+      "text": "Yeah, is it common to fall?"
+    },
+    {
+      "timestampSeconds": 8044,
+      "text": "Yeah, is it common to fall?"
+    },
+    {
+      "timestampSeconds": 8046,
+      "text": "Probably not, I don't think so"
+    },
+    {
+      "timestampSeconds": 8048,
+      "text": "It's not like uncommon, that's what they say"
+    },
+    {
+      "timestampSeconds": 8050,
+      "text": "But it's probably not common"
+    },
+    {
+      "timestampSeconds": 8053,
+      "text": "Yeah, but"
+    },
+    {
+      "timestampSeconds": 8055,
+      "text": "Two out of five Alvin have fallen"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=FFVSnJtV15I",
+    "streamPublishedAt": "2025-05-23T03:29:43.000Z",
+    "articlePublishedAt": "2026-10-31T03:16:46Z",
+    "articleUpdatedAt": "2026-10-31T03:16:46Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-whh_8na5c0",
+      "slug": "fuwamoco-whh-8na5c0",
+      "videoId": "-WHH_8nA5C0",
+      "title": "塗るだけでは隠れられない　FUWAMOCOが学んだカメレオン式かくれんぼ",
+      "summaryOneLine": "にぎやかな大人数戦を結果だけで追わず、カモフラージュが色、地形、時間、囮の四つを調整する情報戦だと分かる",
+      "streamType": "game",
+      "publishedAt": "2026-06-30T00:00:06.000Z",
+      "durationSeconds": 7949,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1auotcneqww",
+      "slug": "fuwamoco-1auotcneqww",
+      "videoId": "1AuOtcneQww",
+      "title": "最後まで着替えて、撮って、ありがとうを言う　FUWAMOCOのHoloearth送別配信",
+      "summaryOneLine": "終了告知そのものではなく、FUWAMOCOが『最後だから見る』だけで終わらせず、着替える・撮る・遊ぶ・感謝するという形で思い出を作り直した流れを読める",
+      "streamType": "event",
+      "publishedAt": "2026-06-28T11:17:31.000Z",
+      "durationSeconds": 2841,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-kfxs2fjl2o",
+      "slug": "fuwamoco-kfxs2fjl2o",
+      "videoId": "-KfXS2FJl2o",
+      "title": "鍛冶の準備がダンジョン攻略を支える　Fuwawa視点で追うENigmatic Recollection",
+      "summaryOneLine": "パズルや戦闘だけでなく、事前の調達、製作、交易、パーティ編成が共同攻略の成功条件になったことが分かる",
+      "streamType": "game",
+      "publishedAt": "2026-05-27T00:56:24.000Z",
+      "durationSeconds": 7237,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_osmekrfbcxy",
+      "slug": "fuwamoco-osmekrfbcxy",
+      "videoId": "OSMeKRfbCXY",
+      "title": "FUWAMOCOが香りを紹介　双子で違うフレグランスと記憶をたどるクイズ",
+      "summaryOneLine": "FUWAMOCOそれぞれの香りの構成と本人たちの感想、試香、クイズを原文の時刻とともに追い、商品説明と推量を区別できる。",
+      "streamType": "event",
+      "publishedAt": "2026-05-21T10:55:29.000Z",
+      "durationSeconds": 4279,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0iostcfaq6k",
+      "slug": "fuwamoco-0iostcfaq6k",
+      "videoId": "0IosTcfAq6k",
+      "title": "一人用RPGが声の協力戦になる　FUWAMOCO×Ceciliaの『Chrono Trigger』",
+      "summaryOneLine": "長尺RPG collabの価値を物語要約ではなく、知識と操作を共有可能な手順へ変える三人の連携として読める",
+      "streamType": "game",
+      "publishedAt": "2026-04-27T00:55:22.000Z",
+      "durationSeconds": 15657,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_2e9r_jxip_0",
+      "slug": "fuwamoco-2e9r-jxip-0",
+      "videoId": "2E9r_JxiP_0",
+      "title": "300円のおにぎり屋、具材を増やして売り切れへ　MOCOCOの店舗運営",
+      "summaryOneLine": "長時間の店舗運営から、価格への反応、梅干しなど具材の話、売り切れまでの変化を代表場面で追える",
+      "streamType": "game",
+      "publishedAt": "2026-04-22T00:55:09.000Z",
+      "durationSeconds": 13622,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

@@ -449,10 +449,14 @@ button { font: inherit; }
   padding: 1rem 1.2rem;
   border-bottom: 1px solid var(--rule);
   text-decoration: none;
-  transition: background .15s ease, padding-left .15s var(--ease);
+  transition: background .15s ease;
 }
 .work-row:last-child { border-bottom: 0; }
-.work-row:hover { padding-left: 1.5rem; background: rgba(255,255,255,.28); }
+.work-row:hover { background: rgba(255,255,255,.28); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .work-row > * { transition: transform .15s var(--ease); }
+  .work-row:hover > * { transform: translateX(.3rem); }
+}
 .work-row__num { color: var(--rule); font-family: var(--serif-en); font-size: .65rem; }
 .work-row strong { font-family: var(--mincho); font-size: 1rem; }
 .work-row__type { color: var(--ink-muted); font-size: .63rem; }

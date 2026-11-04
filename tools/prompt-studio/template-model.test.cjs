@@ -13,3 +13,6 @@ console.log('template model tests PASS');
 
 assert.throws(()=>T.addVariable(T.fromText('x'),'empty','Empty',[]),/at least one option/);
 assert.throws(()=>T.normalize({segments:[{type:'variable',ref:'x'}],variables:{x:{options:[]}}}),/at least one option/);
+
+assert.throws(()=>T.addVariable(T.fromText('x'),'constructor','Reserved',['x']),/unique/);
+assert.throws(()=>T.normalize({segments:[],variables:{constructor:{options:['x']}}}),/Invalid variable ID/);

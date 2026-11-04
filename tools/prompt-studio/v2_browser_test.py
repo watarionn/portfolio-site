@@ -30,6 +30,9 @@ def test_editor_roundtrip_and_pending_edit_guard():
             assert page.locator("#negative").input_value() == "blurry"
             assert page.locator("#preview").inner_text() == "A black coat in a forest."
             page.locator("#source").fill("pending change")
+            page.locator("#parts select").select_option("0")
+            assert page.locator("#source").input_value() == "pending change"
+            assert page.locator("#parts select").input_value() == "1"
             page.locator("#save").click()
             assert "未確定" in page.locator("#status").inner_text()
             page.reload()

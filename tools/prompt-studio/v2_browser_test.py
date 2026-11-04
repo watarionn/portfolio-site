@@ -39,3 +39,22 @@ def test_editor_roundtrip_and_pending_edit_guard():
             assert page.locator("#preview").inner_text() == "A black coat in a forest."
         finally:
             browser.close()
+
+def test_invalid_import_does_not_replace_existing_work():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        try:
+            page = browser.new_page()
+            page.goto(URL)
+            page.locator("#source").fill("Keep this prompt.")
+            page.locator("#import").set_input_files({
+                "name": "invalid.json",
+                "mimeType": "application/json",
+                "buffer": b'{"format":"prompt-template-v2","schema_version":2,"template":{}}'
+            })
+            assert "Invalid v2 template" in page.locator("#status").inner_text()
+            assert page.locator("#source").input_value() == "Keep this prompt."
+            page.reload()
+            assert page.locator("#preview").inner_text() == "Keep this prompt."
+        finally:
+            browser.close()

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_hakos_baelz",
+  "slug": "hakos-baelz",
+  "displayName": "Hakos Baelz",
+  "nameJa": "ハコス・ベールズ",
+  "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_r3xpghkhawu",
+      "slug": "hakos-baelz-r3xpghkhawu",
+      "videoId": "R3XpghKHaWU",
+      "title": "スピーカーの感情と今後の活動に関する考察",
+      "summaryOneLine": "スピーカーは、今後の協力活動について不安と希望の両方の感情を抱えている様子が窺える。具体的には、「But hopefully I can.」や「And then there's a very exciting collab that's happening on Sunday.」といった発言から、今後の協力活動に期待を寄せている一方で、その詳細についてはまだ明らかにされていないことがわかる。",
+      "streamType": "other",
+      "publishedAt": "2026-06-08T02:11:28.000Z",
+      "durationSeconds": 6202,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_hp8jp6fdd-i",
+      "slug": "hakos-baelz-hp8jp6fdd-i",
+      "videoId": "Hp8jp6fdd-I",
+      "title": "HoloScopeのひなたが語る物語の魅力とゲームの感動",
+      "summaryOneLine": "ひなたは、この物語が非常に魅力的であり、30分間楽しむことができると言っています。彼女は「Ah」という感嘆の声を上げながら、その体験を語っています。",
+      "streamType": "other",
+      "publishedAt": "2026-03-02T00:50:00.000Z",
+      "durationSeconds": 2388,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-03",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_jmeh-6nxnwa",
+      "slug": "hakos-baelz-jmeh-6nxnwa",
+      "videoId": "jmEH-6NxnwA",
+      "title": "Group Discussion and Activities Involving Numbers, Pepper Facts, and Language Learning",
+      "summaryOneLine": "The group repeatedly mentions the number 'Four' in various contexts. They say 'Four on top' and repeat 'Four' multiple times, indicating a focus on the number 'Four' in their discussion.",
+      "streamType": "chatting",
+      "publishedAt": "2026-02-12T05:34:45.000Z",
+      "durationSeconds": 5289,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-02",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-vx9yc09uw0",
+      "slug": "hakos-baelz-vx9yc09uw0",
+      "videoId": "-vx9Yc09uW0",
+      "title": "Summary of Claims and Context",
+      "summaryOneLine": "The speaker admits to having copied someone else's drawing incorrectly and then asks about an object someone has. This indicates a transition from acknowledging a mistake to showing curiosity about another person's possession.",
+      "streamType": "event",
+      "publishedAt": "2026-02-08T04:36:15.000Z",
+      "durationSeconds": 5398,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-02",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_62czdfyda1m",
+      "slug": "hakos-baelz-62czdfyda1m",
+      "videoId": "62czDfyda1M",
+      "title": "Analysis of Claims and Confidence Levels",
+      "summaryOneLine": "The provided data includes a list of claims with associated confidence levels, segment IDs, and source quotes. Each claim is tied to a specific segment of dialogue or narrative, and the confidence levels range from 'low' to 'high'. Here is a summary of the key points and confidence levels for the claims:",
+      "streamType": "other",
+      "publishedAt": "2025-12-10T03:00:06.000Z",
+      "durationSeconds": 2313,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-12",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_nl8o6nh1ue0",
+      "slug": "hakos-baelz-nl8o6nh1ue0",
+      "videoId": "NL8O6nH1UE0",
+      "title": "The Cat's Request and the Confusion at the Banquet",
+      "summaryOneLine": "The cat, in a moment of clarity, requests a pink scratch. This request is a direct contradiction to a previous statement made just minutes ago, indicating a shift in the cat's desires or a misunderstanding. The cat's insistence on the pink scratch suggests a specific preference, possibly tied to a deeper meaning or a symbolic gesture.",
+      "streamType": "other",
+      "publishedAt": "2025-05-11T03:27:54.000Z",
+      "durationSeconds": 4234,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 62,
+    "soloCount": 62,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 39
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 14
+      },
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 5
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 4
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/hakos-baelz/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

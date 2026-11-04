@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict');
+const T=require('./template-model.js'),L=require('./legacy-adapter.js'),S=require('./v2-state.js');
+const db={format:'prompt-db',library:[{id:'test',title:'sample',semantic:{subject:'cat',negative:'blur'},outputs:[{profile_id:'sdxl-tags',negative:'blur'}]}]};
+const imported=L.importEntry(db,0,T);
+const packed=S.pack(imported.template,imported.legacy,'sdxl-tags','extra blur',T,L);
+const restored=S.unpack(JSON.parse(JSON.stringify(packed)),T,L);
+assert.equal(T.render(restored.template),'cat.');
+assert.equal(restored.negative,'extra blur');
+assert.equal(restored.profile,'sdxl-tags');
+assert.deepEqual(L.restoreOriginal(restored),db.library[0]);
+assert.equal(S.unpack(S.pack(T.fromText('hi'),null,'unknown','',T,L),T,L).profile,'flux-natural');
+console.log('v2 state tests PASS');

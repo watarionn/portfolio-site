@@ -1,0 +1,20 @@
+(()=>{'use strict';
+const T=window.PromptStudioTemplate,L=window.PromptStudioLegacy,S=window.PromptStudioV2State;
+const $=id=>document.getElementById(id),KEY='prompt-studio-v2-phase3';
+let state;try{state=S.unpack(JSON.parse(localStorage.getItem(KEY)||'null'),T,L);}catch{state=S.unpack(null,T,L);}
+const say=s=>$('status').textContent=s;
+function save(){localStorage.setItem(KEY,JSON.stringify(S.pack(state.template,state.legacy,state.profile,state.negative,T,L)));}
+function render(){const value=T.render(state.template);$('source').value=value;$('preview').textContent=value;$('profile').value=state.profile;$('negative').value=state.negative;$('negative').disabled=!['sdxl-natural','sdxl-tags','generic-tags'].includes(state.profile);const box=$('parts');box.replaceChildren();for(const [id,v] of Object.entries(state.template.variables)){const row=document.createElement('div');row.className='part';const label=document.createElement('label');label.textContent=v.label;const select=document.createElement('select');v.options.forEach((o,i)=>{const option=document.createElement('option');option.value=i;option.textContent=o;select.append(option);});select.value=v.selected;select.onchange=()=>{state.template=T.select(state.template,id,Number(select.value));save();render();};label.append(select);row.append(label);box.append(row);}}
+function apply(template,legacy=null,profile=state.profile,negative=state.negative){state={template:T.normalize(template),legacy,profile,negative};save();render();}
+$('sync').onclick=()=>{if(Object.keys(state.template.variables).length&&!confirm('パーツを外して文章に戻す？'))return;apply(T.fromText($('source').value));};
+$('mark').onclick=()=>{const el=$('source'),start=el.selectionStart,end=el.selectionEnd;if(el.value!==T.render(state.template)||start===end){say('未確定の文章を確定してから、文字列を選択してね');return;}const chosen=el.value.slice(start,end),name=prompt('パーツ名',chosen);if(name===null)return;const raw=prompt('候補（改行区切り）',chosen);if(raw===null)return;const options=raw.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);if(!options.length)return say('候補が必要だよ');let i=1;while(state.template.variables['part'+i])i++;const id='part'+i;try{const next=T.replaceRange(T.addVariable(state.template,id,name,options),start,end,id);apply(next,state.legacy);}catch(e){say(e.message);}};
+$('add').onclick=()=>say('文章の一部を選択して「選択部分をパーツ化」を使ってね');
+$('profile').onchange=()=>{state.profile=$('profile').value;save();render();};
+$('negative').oninput=()=>{state.negative=$('negative').value;save();};
+$('save').onclick=()=>{save();say('保存したよ');};
+$('copy').onclick=async()=>{try{await navigator.clipboard.writeText(T.render(state.template));say('コピーしたよ');}catch{say('コピーできなかったよ');}};
+$('export').onclick=()=>{const blob=new Blob([JSON.stringify(S.pack(state.template,state.legacy,state.profile,state.negative,T,L),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='prompt-template-v2.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;const next=S.unpack(JSON.parse(await file.text()),T,L);if(confirm('現在のv2作業内容を置き換える？'))apply(next.template,next.legacy,next.profile,next.negative);}catch(err){say(err.message);}finally{e.target.value='';}};
+$('legacyImport').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;const db=JSON.parse(await file.text()),entries=L.list(db);if(!entries.length)return say('旧DBに保存データがないよ');const raw=prompt('読み込む番号：'+entries.slice(0,20).map(x=>x.index+' '+x.title).join(' / '),'0');if(raw===null)return;const index=Number(raw);if(!Number.isInteger(index)||index<0||index>=entries.length)throw Error('番号が不正だよ');const item=L.importEntry(db,index,T);if(confirm('v2作業内容を置き換える？'))apply(item.template,item.legacy,state.profile,item.legacy.negative);}catch(err){say(err.message);}finally{e.target.value='';}};
+render();
+})();

@@ -87,4 +87,18 @@ function mount(initial, failWrites = true) {
   assert.equal(app.get('status').textContent, '保存したよ');
   assert.equal(S.unpack(JSON.parse(app.stored()), T, L).negative, 'blurry');
 }
+
+{
+  const app = mount(T.fromText('keep'));
+  app.get('negative').value = 'unsaved negative';
+  app.get('negative').oninput();
+  let reads = 0;
+  const input = { target: { files: [{ text: async () => { reads++; return '{}'; } }], value: 'selected' } };
+  app.get('import').onchange(input);
+  assert.equal(reads, 0);
+  assert.match(app.get('status').textContent, /未保存/);
+  app.get('legacyImport').onchange(input);
+  assert.equal(reads, 0);
+  assert.match(app.get('status').textContent, /未保存/);
+}
 console.log('Phase 4 storage rollback tests PASS');

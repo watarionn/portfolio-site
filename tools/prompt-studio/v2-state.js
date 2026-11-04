@@ -7,7 +7,11 @@ function pack(template,legacy,profile,negative,T,L){
  return {...base,settings:{profile:PROFILES.includes(profile)?profile:PROFILES[0],negative:String(negative??'')}};
 }
 function unpack(input,T,L){
- if(!input||input.format!=='prompt-template-v2')return {template:T.normalize(input||T.fromText('')),legacy:null,profile:PROFILES[0],negative:''};
+ if(input===null||input===undefined)return {template:T.fromText(''),legacy:null,profile:PROFILES[0],negative:''};
+ if(input.format!=='prompt-template-v2'){
+  if(input.schema_version===2&&Array.isArray(input.segments))return {template:T.normalize(input),legacy:null,profile:PROFILES[0],negative:''};
+  throw new Error('Unsupported v2 state format');
+ }
  const base=L.readEnvelope(input,T),settings=input.settings||{};
  return {...base,profile:PROFILES.includes(settings.profile)?settings.profile:PROFILES[0],negative:String(settings.negative??base.legacy?.negative??'')};
 }

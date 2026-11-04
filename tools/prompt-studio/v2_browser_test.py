@@ -14,7 +14,7 @@ def test_editor_roundtrip_and_pending_edit_guard():
         try:
             page = browser.new_page(accept_downloads=True)
             page.on("dialog", lambda dialog: dialog.accept(
-                "white dress\\nblack coat" if "候補" in dialog.message else "outfit"))
+                "white dress\nblack coat" if "候補" in dialog.message else "outfit"))
             page.goto(URL)
             page.locator("#source").fill("A white dress in a forest.")
             page.locator("#source").evaluate(

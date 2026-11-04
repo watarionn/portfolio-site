@@ -4,13 +4,14 @@ Requires pytest and playwright (Python) plus a Chromium browser.
 No external network or production writes.
 """
 from pathlib import Path
+import os
 from playwright.sync_api import sync_playwright
 
 URL = (Path(__file__).resolve().parent / "v2-phase3.html").as_uri()
 
 def test_editor_roundtrip_and_pending_edit_guard():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=True, channel=os.environ['PROMPT_STUDIO_BROWSER_CHANNEL']) if os.environ.get('PROMPT_STUDIO_BROWSER_CHANNEL') else p.chromium.launch(headless=True)
         try:
             page = browser.new_page(accept_downloads=True)
             page.on("dialog", lambda dialog: dialog.accept(
@@ -42,7 +43,7 @@ def test_editor_roundtrip_and_pending_edit_guard():
 
 def test_invalid_import_does_not_replace_existing_work():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=True, channel=os.environ['PROMPT_STUDIO_BROWSER_CHANNEL']) if os.environ.get('PROMPT_STUDIO_BROWSER_CHANNEL') else p.chromium.launch(headless=True)
         try:
             page = browser.new_page()
             page.goto(URL)

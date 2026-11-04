@@ -7,7 +7,7 @@
   'use strict';
   const copy = (v) => JSON.parse(JSON.stringify(v));
   const text = (v) => String(v == null ? '' : v);
-  const validId = (id) => /^[a-zA-Z][a-zA-Z0-9_-]*$/.test(id);
+  const validId = (id) => /^[a-zA-Z][a-zA-Z0-9_-]*$/.test(id) && !['__proto__','prototype','constructor'].includes(id);
   function normalize(input) {
     const source = input || {};
     const variables = {};

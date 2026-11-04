@@ -9,4 +9,6 @@ assert.equal(restored.negative,'extra blur');
 assert.equal(restored.profile,'sdxl-tags');
 assert.deepEqual(L.restoreOriginal(restored),db.library[0]);
 assert.equal(S.unpack(S.pack(T.fromText('hi'),null,'unknown','',T,L),T,L).profile,'flux-natural');
+assert.throws(()=>S.unpack({format:'prompt-db',library:[]},T,L),/Unsupported v2 state format/);
+assert.equal(T.render(S.unpack(T.fromText('bare'),T,L).template),'bare');
 console.log('v2 state tests PASS');

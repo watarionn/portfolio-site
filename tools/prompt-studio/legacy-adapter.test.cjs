@@ -1,0 +1,13 @@
+const assert = require('node:assert/strict');
+const T = require('./template-model.js');
+const L = require('./legacy-adapter.js');
+const db = {format:'prompt-db',schema_version:1,concepts:{},recipes:[],library:[{id:'one',title:'Original',semantic:{subject:'cat',outfit:'red coat',negative:'blur'},outputs:[{profile_id:'sdxl-tags',positive:'cat, red coat',negative:'blur'}]}]};
+assert.equal(L.list(db).length,1);
+const imported=L.importEntry(db,0,T);
+assert.equal(T.render(imported.template),'cat. red coat.');
+assert.deepEqual(L.restoreOriginal(imported),db.library[0]);
+const envelope=L.makeEnvelope(imported);
+assert.deepEqual(L.readEnvelope(envelope,T),imported);
+assert.equal(L.outputForProfile(imported,'sdxl-tags',T).negative,'blur');
+assert.equal(db.library[0].semantic.outfit,'red coat');
+console.log('legacy adapter tests PASS');

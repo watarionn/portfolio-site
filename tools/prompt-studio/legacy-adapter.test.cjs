@@ -10,4 +10,6 @@ const envelope=L.makeEnvelope(imported);
 assert.deepEqual(L.readEnvelope(envelope,T),imported);
 assert.equal(L.outputForProfile(imported,'sdxl-tags',T).negative,'blur');
 assert.equal(db.library[0].semantic.outfit,'red coat');
+assert.throws(()=>L.readEnvelope({format:'prompt-template-v2',schema_version:2,template:{}},T),/Invalid v2 template/);
+assert.throws(()=>L.readEnvelope({format:'prompt-template-v2',schema_version:2,template:{schema_version:2,segments:[],variables:[]}},T),/Invalid v2 template/);
 console.log('legacy adapter tests PASS');

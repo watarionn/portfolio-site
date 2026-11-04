@@ -69,4 +69,22 @@ function mount(initial, failWrites = true) {
   assert.equal(app.get('preview').textContent, 'cat runs');
   assert.match(app.get('status').textContent, /QuotaExceeded/);
 }
+
+{
+  const app = mount(T.fromText('positive'));
+  app.get('negative').value = 'blurry';
+  app.get('negative').oninput();
+  assert.match(app.get('status').textContent, /未保存/);
+  app.get('profile').value = 'sdxl-tags';
+  app.get('profile').onchange();
+  assert.equal(app.get('profile').value, 'flux-natural');
+  app.get('export').onclick();
+  assert.match(app.get('status').textContent, /未保存/);
+  app.get('save').onclick();
+  assert.notEqual(app.get('status').textContent, '保存したよ');
+  app.recover();
+  app.get('save').onclick();
+  assert.equal(app.get('status').textContent, '保存したよ');
+  assert.equal(S.unpack(JSON.parse(app.stored()), T, L).negative, 'blurry');
+}
 console.log('Phase 4 storage rollback tests PASS');

@@ -10,5 +10,9 @@ FIELDS.filter(k=>k!=='negative').forEach(k=>{const value=String(semantic[k]||'')
 const template=T.normalize({segments,variables});
 return {template,legacy:{entry:JSON.parse(JSON.stringify(entry)),negative:String(semantic.negative||''),model_name:String(entry.model_name||''),outputs:JSON.parse(JSON.stringify(entry.outputs||[]))}};
 }
-return {FIELDS,isDb,list,importEntry};
+function restoreOriginal(imported){if(!imported||!imported.legacy||!imported.legacy.entry)throw new Error('Missing original legacy entry');return JSON.parse(JSON.stringify(imported.legacy.entry));}
+function makeEnvelope(imported){if(!imported||!imported.template)throw new Error('Missing template');return {format:'prompt-template-v2',schema_version:2,template:JSON.parse(JSON.stringify(imported.template)),legacy:imported.legacy?JSON.parse(JSON.stringify(imported.legacy)):null};}
+function readEnvelope(input,T){if(!input||input.format!=='prompt-template-v2'||input.schema_version!==2)throw new Error('Unsupported v2 envelope');return {template:T.normalize(input.template),legacy:input.legacy?JSON.parse(JSON.stringify(input.legacy)):null};}
+function outputForProfile(imported,profileId,T){const template=T.normalize(imported.template);const positive=T.render(template);const original=imported.legacy&&imported.legacy.entry;const outputs=original&&Array.isArray(original.outputs)?original.outputs:[];const profile=outputs.find(x=>x.profile_id===profileId);return {profile_id:profileId,positive,negative:profile&&profile.negative||imported.legacy&&imported.legacy.negative||'',source:'template-text',original_profile_output:profile?JSON.parse(JSON.stringify(profile)):null};}
+return {FIELDS,isDb,list,importEntry,restoreOriginal,makeEnvelope,readEnvelope,outputForProfile};
 });

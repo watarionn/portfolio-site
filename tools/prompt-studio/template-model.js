@@ -13,7 +13,8 @@
     const variables = {};
     for (const [id, value] of Object.entries(source.variables || {})) {
       if (!validId(id)) throw new Error('Invalid variable ID: ' + id);
-      const options = Array.isArray(value.options) ? value.options.map(text) : [];
+      if (!value || !Array.isArray(value.options) || !value.options.length) throw new Error('Variable must have at least one option: ' + id);
+      const options = value.options.map(text);
       variables[id] = { label: text(value.label || id), options, selected: Math.max(0, Math.min(options.length - 1, Number.isInteger(value.selected) ? value.selected : 0)) };
     }
     const segments = (source.segments || []).map((segment) => {
@@ -31,7 +32,8 @@
   function addVariable(input, id, label, options) {
     const model = normalize(input);
     if (!validId(id) || model.variables[id]) throw new Error('Variable ID must be unique');
-    model.variables[id] = { label:text(label || id), options:(options || []).map(text), selected:0 };
+    if (!Array.isArray(options) || !options.length) throw new Error('Variable must have at least one option');
+    model.variables[id] = { label:text(label || id), options:options.map(text), selected:0 };
     return model;
   }
   function replaceRange(input, start, end, id) {

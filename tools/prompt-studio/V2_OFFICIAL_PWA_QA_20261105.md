@@ -34,3 +34,10 @@ After the user's iPhone Safari acceptance of independent 2.0 preview, promote 2.
 - Public Microsoft Edge Playwright (fresh, isolated profile) confirmed \`https://cf278796.cloudfree.jp/prompt-studio/\` HTTP 200 shows v2, old entrypoint controls are absent, manifest id/start_url/scope preserved, new SW controls page, old v1.2 cache removed, new v2.0.0 shell installed, offline reload works, English tags work offline, 2.0 state and legacy localStorage sentinel survive, 390px layout fits, **0 JavaScript errors**. \`PUBLIC_2PWA_EDGE_PASS\`, exit 0.
 - Per-file actual old-production, historical Git, and new production SHA-256 fingerprints, plus UTC timestamps, are preserved in [V2_OFFICIAL_PWA_RELEASE_RECEIPT_20261105.json](V2_OFFICIAL_PWA_RELEASE_RECEIPT_20261105.json).
 - iPhone physical hardware confirmation before cutover was for the 2.0 preview. Opening/relaunching the newly upgraded installed canonical PWA is a **post-deployment acceptance**, not a pre-deploy blocker. Old 1.2 JS/source assets remain intact for rollback and must not be reported as deleted.
+
+## Post-deployment iPhone acceptance (2026-11-05 JST)
+
+- After the canonical 2.0 PWA was published to https://cf278796.cloudfree.jp/prompt-studio/ and its Service Worker / offline behavior was checked on Windows Edge, **the user confirmed that 2.0 was displayed on their iPhone**.
+- This is direct user-reported **physical iPhone display acceptance after production cutover**. It closes the outstanding canonical-PWA display acceptance condition. The report does not independently prove every interaction, network/offline scenario, or cache migration detail on iPhone; those have not been separately asserted.
+- Earlier the user had also confirmed the independent 2.0 preview on iPhone prior to the canonical release.
+- Result: **Official Prompt Studio 2.0 PWA migration and post-deployment iPhone display acceptance completed**. Do not delete historical 1.2 source, browser storage, or rollback artifacts merely because display acceptance passed; cleanup requires a separate scoped decision.

@@ -1,0 +1,63 @@
+{
+  "schema": "prompt-studio-v2-next-release-evidence-v1",
+  "status": "PASS",
+  "source": {
+    "repository": "watarionn/portfolio-site",
+    "merge_commit": "1c8e20ad5f32f735fcb4e24c8f79e4614eda5cd7",
+    "pr": 224
+  },
+  "publication": {
+    "method": "certificate-verified scoped FTPS new-files-only",
+    "hostname": "sv210.cloudfree.ne.jp",
+    "target": "/cf278796.cloudfree.jp/public_html/prompt-studio",
+    "uploaded": 4,
+    "utc": "2026-11-05T01:25:23Z"
+  },
+  "files": {
+    "v2-next-core.js": {
+      "sha256": "74535a1b6c32a9a990ad908ea1ccbd4b40151f1470558040e8d61b386497903c",
+      "ftps_readback": true,
+      "https_readback": true
+    },
+    "v2-next.css": {
+      "sha256": "b8183a07ee803c98294384ebf8466a8206c509a6602c75b6f9869434da5a6a5a",
+      "ftps_readback": true,
+      "https_readback": true
+    },
+    "v2-next.html": {
+      "sha256": "cf993afdfb9da223e4b44c914240925d8f08fddd90a706f347946117bc2451c5",
+      "ftps_readback": true,
+      "https_readback": true
+    },
+    "v2-next.js": {
+      "sha256": "18ab107e6ad10e4e1ef42de7de3486818ef1aac100a5c053029edd234de317bc",
+      "ftps_readback": true,
+      "https_readback": true
+    }
+  },
+  "browser": {
+    "status": "PASS",
+    "utc": "2026-11-05T01:26:20Z",
+    "url": "https://cf278796.cloudfree.jp/prompt-studio/v2-next.html",
+    "platform": "Windows Microsoft Edge Playwright",
+    "checks": [
+      "HTTP 200",
+      "text entry and specific option reflect",
+      "reload persistence",
+      "template-save placeholder",
+      "template library entry",
+      "390px no horizontal overflow",
+      "0 page exceptions"
+    ],
+    "old_url": "https://cf278796.cloudfree.jp/prompt-studio/",
+    "old_url_checks": [
+      "HTTP 200",
+      "old profile selector present"
+    ]
+  },
+  "pending": [
+    "iPhone Safari hardware acceptance",
+    "2.0 PWA manifest/service-worker switchover",
+    "old v1.2 retirement"
+  ]
+}

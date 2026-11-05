@@ -217,13 +217,14 @@
   $('nameForm').onsubmit=event=>{
     event.preventDefault();
     if(event.submitter?.value==='cancel'){$('nameDialog').close('cancel');pendingName=null;return;}
-    const action=pendingName;pendingName=null;
+    const action=pendingName;
     const name=$('nameInput').value.trim();
     const en=$('englishInput').value.trim(),tag=$('tagInput').value.trim();
     if(!name)return alertText('日本語の表示名を入力してね');
     if(!en)return alertText('英語表現を入力してね');
     if(C.hasJapanese(en)||C.hasJapanese(tag))return alertText('英語表現には日本語を含めないでね');
     if($('englishLabel').textContent.includes('変数名')&&!C.englishKey(en))return alertText('英語変数名は小文字英数字とアンダースコアで設定してね');
+    pendingName=null;
     $('nameDialog').close('submit');
     if(action)action({name,en,tag});
   };
@@ -285,11 +286,12 @@
   $('recordForm').onsubmit=event=>{
     event.preventDefault();
     if(event.submitter?.value==='cancel'){$('recordDialog').close('cancel');pendingRecord=null;return;}
-    const action=pendingRecord;pendingRecord=null;
+    const action=pendingRecord;
     const name=$('recordName').value.trim(),content=$('recordContent').value;
     const previewJa=$('recordPreviewJa').value.trim()||name;
     if(!name)return alertText('名前を入力してね');
     if(C.hasJapanese(content))return alertText('プロンプト本文には英語を入力してね。表示名や説明は日本語で登録できるよ');
+    pendingRecord=null;
     $('recordDialog').close('submit');
     if(!action)return;
     const {kind,id}=action;

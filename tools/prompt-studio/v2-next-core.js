@@ -179,8 +179,8 @@
     else{
       const previous=draft.text;
       if(previous){
-        separator=mode==='tags'?(/[,，、]\\s*$/.test(previous)?' ':', '):
-          (/[\\s、，,。.!！?？]$/.test(previous)?'':'、');
+        separator=mode==='tags'?(/[,，、]\s*$/.test(previous)?' ':', '):
+          (/[\s、，,。.!！?？]$/.test(previous)?'':'、');
       }
       start=end=previous.length;replacement=separator+inserted;
     }

@@ -24,3 +24,13 @@ After the user's iPhone Safari acceptance of independent 2.0 preview, promote 2.
 - Confirm new manifest / index / SW over HTTPS by SHA-256. Run a public online browser/E2E smoke including Service Worker control, offline restart, existing data, and old asset preservation.
 - Preserve production receipt on GitHub main with read-after-write.
 - Physical iPhone installation of the updated canonical PWA is **post-deployment acceptance**. The user's completed iPhone test of 2.0 preview suffices as pre-cutover UI acceptance.
+
+## Actual production cutover and independent live checks (2026-11-05 UTC 03:19–03:20)
+- PR #232 merged and GitHub main readback verified: \`d5e7133bf71313f417341d1b0325910c80b2f9d7\`.
+- First read-only FTPS CAS check returned **HOLD** because the three existing production files' SHA-256 did not match the Git historical old source SHA. No write was made at that point.
+- A separate read-only FTPS/public HTTPS inspection confirmed the actual remote three-file hashes, 200 responses and matching HTTPS bytes. The deployed manifest still had the original \`/prompt-studio/\` id/start/scope; index was the old app with \`#profileSelect\`; SW cached old 1.2 assets. The production difference from historical Git was verified, never assumed.
+- The cutover script was corrected to pin **the verified deployed old SHAs**, not historical Git SHAs, as the compare-and-swap precondition, with the remote originals kept for rollback. A new read-only preflight passed (3/3).
+- Scoped FTPS updated exactly 3 files in safe order: **manifest → canonical index → Service Worker last**. FTPS readbacks **3/3 PASS**, public HTTPS SHA-256 **3/3 PASS**, \`OFFICIAL_PWA_SCOPED_DEPLOY_PASS files=3 readback=True\`, exit 0.
+- Public Microsoft Edge Playwright (fresh, isolated profile) confirmed \`https://cf278796.cloudfree.jp/prompt-studio/\` HTTP 200 shows v2, old entrypoint controls are absent, manifest id/start_url/scope preserved, new SW controls page, old v1.2 cache removed, new v2.0.0 shell installed, offline reload works, English tags work offline, 2.0 state and legacy localStorage sentinel survive, 390px layout fits, **0 JavaScript errors**. \`PUBLIC_2PWA_EDGE_PASS\`, exit 0.
+- Per-file actual old-production, historical Git, and new production SHA-256 fingerprints, plus UTC timestamps, are preserved in [V2_OFFICIAL_PWA_RELEASE_RECEIPT_20261105.json](V2_OFFICIAL_PWA_RELEASE_RECEIPT_20261105.json).
+- iPhone physical hardware confirmation before cutover was for the 2.0 preview. Opening/relaunching the newly upgraded installed canonical PWA is a **post-deployment acceptance**, not a pre-deploy blocker. Old 1.2 JS/source assets remain intact for rollback and must not be reported as deleted.

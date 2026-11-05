@@ -1,5 +1,7 @@
 # Prompt Studio 2.0: unified composer (incremental implementation)
 
+> Historical Phase 3 plan. The new authorized completion specification is [V2_NEXT_SPEC_20261105.md](V2_NEXT_SPEC_20261105.md). The old PromptDB compatibility/migration gates below are superseded and no longer required for the new independent 2.0 build.
+
 ## Goal
 One canonical template model for free-form prose and selectable parts. The existing v1.2 UI, localStorage keys, PromptDB v1, recipes, exports and model-specific renderers remain untouched until migration and E2E verification.
 

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "releaseId": "20261105-001906-auto-624",
+  "releaseId": "20261105-003144-auto-625",
   "verifiedCommitSha": "2f34c884ca64641947fa81be170e58a3617a4fd1",
   "pointerSource": "services/holoscope/release/state/current-release.json",
-  "releaseSource": "services/holoscope/release/releases/20261105-001906-auto-624",
-  "fallbackSource": "services/holoscope/release/releases/20261105-001906-auto-624",
+  "releaseSource": "services/holoscope/release/releases/20261105-003144-auto-625",
+  "fallbackSource": "services/holoscope/release/releases/20261105-003144-auto-625",
   "fallbackEntries": [
     "articles",
     "events",

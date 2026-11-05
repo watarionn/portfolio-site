@@ -40,7 +40,7 @@
   function renderPartPicker(){
     mainCategory=fill($('partCategory'),state.parts,mainCategory);
     const part=resolve(state.parts,mainCategory);
-    mainValue=fill($('partValue'),part?.values||[],mainValue);
+    mainValue=fill($('partValue'),part?.values||[],mainValue,'項目を選択');
     const value=resolve(part?.values||[],mainValue);
     $('partOptions').replaceChildren();
     for(const option of value?.options||[]){

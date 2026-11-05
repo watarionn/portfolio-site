@@ -7,6 +7,8 @@
   'use strict';
   const SCHEMA = 'prompt-studio-2.0';
   const VERSION = 1;
+  const OUTPUT_FORMATS = Object.freeze(['prose', 'tags']);
+  const outputFormat = x => OUTPUT_FORMATS.includes(x) ? x : 'prose';
   const clone = x => JSON.parse(JSON.stringify(x));
   const str = x => String(x == null ? '' : x);
   const nonempty = x => str(x).trim();
@@ -56,7 +58,7 @@
         {id:'sample-a',name:'人物・場所・ポーズ',content:'{登場人物}が{場所}で{ポーズ}をしている。'},
         {id:'sample-b',name:'年代・画風・2人・動き',content:'{年代}の{画風}、{登場人物}、{登場人物}、{動き}'}
       ],
-      prompts: [], recentCopies: [],
+      prompts: [], recentCopies: [], outputFormat:'prose',
       draft: {text:'', marks:[]}
     };
   }
@@ -65,6 +67,8 @@
       throw Error('Prompt Studio 2.0形式ではないデータだよ');
     }
     const state = clone(input);
+    // Old independent 2.0 backups have no outputFormat; upgrade on read without changing their text.
+    state.outputFormat = outputFormat(state.outputFormat);
     if (!Array.isArray(state.parts) || !Array.isArray(state.templates) ||
         !Array.isArray(state.prompts) || !Array.isArray(state.recentCopies) ||
         !state.draft || typeof state.draft.text !== 'string' || !Array.isArray(state.draft.marks)) {
@@ -94,9 +98,11 @@
     unique(state.prompts, 'プロンプト');
     for (const record of [...state.templates, ...state.prompts]) {
       if (typeof record.content !== 'string') throw Error('保存文章が不正だよ');
+      record.outputFormat = outputFormat(record.outputFormat);
     }
     for (const recent of state.recentCopies) {
       if (!recent || typeof recent.text !== 'string') throw Error('コピー履歴が不正だよ');
+      recent.outputFormat = outputFormat(recent.outputFormat);
     }
     if (state.recentCopies.length > 5) state.recentCopies = state.recentCopies.slice(0, 5);
     for (const mark of state.draft.marks) {
@@ -135,15 +141,24 @@
     }
     return value.name + (optionValues.length ? '（'+optionValues.join('、')+'）' : '');
   }
-  function reflect(draft, part, value, picks) {
-    const inserted = selectionText(value, picks);
+  function selectionTags(value, picks) {
+    const tags=[value.name];
+    for (const option of value.options) {
+      const chosen=option.choices.find(x=>x.id===picks?.[option.id]);
+      if(chosen)tags.push(chosen.name);
+    }
+    return tags.join(', ');
+  }
+  function reflect(draft, part, value, picks, format='prose') {
+    const mode=outputFormat(format);
+    const inserted = mode==='tags' ? selectionTags(value,picks) : selectionText(value, picks);
     const placeholder = '{' + part.name + '}';
     const at = draft.text.indexOf(placeholder);
     let start, end, replacement;
     if (at >= 0) {
       start=at;end=at+placeholder.length;replacement=inserted;
     } else {
-      const separator = draft.text && !/[\s、，,。.!！?？]$/.test(draft.text) ? '、' : '';
+      const separator = draft.text && !/[\s、，,。.!！?？]$/.test(draft.text) ? (mode==='tags' ? ', ' : '、') : '';
       start=end=draft.text.length;
       replacement=separator+inserted;
     }
@@ -166,8 +181,8 @@
     }
     return result+draft.text.slice(last);
   }
-  function addCopy(recentCopies, text, now) {
-    return [{text:str(text),at:now},...recentCopies].slice(0,5);
+  function addCopy(recentCopies, text, now, format='prose') {
+    return [{text:str(text),at:now,outputFormat:outputFormat(format)},...recentCopies].slice(0,5);
   }
   function newId(prefix) {
     return prefix + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,9);
@@ -180,6 +195,6 @@
     return validateState(input.data);
   }
   return Object.freeze({
-    SCHEMA,VERSION,starterState,validateState,editText,selectionText,reflect,toTemplate,addCopy,newId,backup,restore,clone
+    SCHEMA,VERSION,OUTPUT_FORMATS,outputFormat,starterState,validateState,editText,selectionText,selectionTags,reflect,toTemplate,addCopy,newId,backup,restore,clone
   });
 });

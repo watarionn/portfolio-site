@@ -210,3 +210,75 @@ def test_part_clear_and_saved_prompt_crud():
             page.close()
         finally:
             browser.close()
+
+
+def test_output_format_mode_switch_tag_reflection_history_and_backup():
+    with sync_playwright() as p:
+        browser = launch(p)
+        try:
+            page = open_page(browser, mobile=True)
+            assert page.locator("#outputFormat").input_value() == "prose"
+            page.locator("#outputFormat").select_option("tags")
+            page.locator("#partCategory").select_option("character")
+            page.locator("#partValue").select_option("woman")
+            page.locator("#partOptions select").first.select_option("hair2")
+            page.locator("#reflect").click()
+            assert page.locator("#promptText").input_value() == "女性, ロング"
+            page.locator("#partCategory").select_option("location")
+            page.locator("#partValue").select_option("train")
+            page.locator("#reflect").click()
+            assert page.locator("#promptText").input_value() == "女性, ロング, 電車"
+            page.locator("#savePrompt").click()
+            page.locator("#saveAsTemplate").click()
+            assert page.locator("#recordContent").input_value() == "{登場人物}, {場所}"
+            record_save(page, "タグ用")
+            page.locator("#savePrompt").click()
+            page.locator("#saveAsPrompt").click()
+            record_save(page, "タグ保存")
+            page.locator("#copyPrompt").click()
+            assert page.evaluate("window.__lastCopy") == "女性, ロング, 電車"
+            page.reload()
+            assert page.locator("#outputFormat").input_value() == "tags"
+            page.locator("#promptText").fill("書き換えた文章")
+            page.locator("#outputFormat").select_option("prose")
+            assert page.locator("#promptText").input_value() == "書き換えた文章"
+            page.locator("#pickHistory").click()
+            page.locator("#pickerList button").first.click()
+            assert page.locator("#outputFormat").input_value() == "tags"
+            assert page.locator("#promptText").input_value() == "女性, ロング, 電車"
+            with page.expect_download() as download:
+                page.locator("#backupExport").click()
+            data=json.loads(download.value.path().read_bytes())
+            assert data["data"]["outputFormat"] == "tags"
+            assert data["data"]["recentCopies"][0]["outputFormat"] == "tags"
+            assert data["data"]["templates"][-1]["outputFormat"] == "tags"
+            assert data["data"]["prompts"][-1]["outputFormat"] == "tags"
+            assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+            page.close()
+        finally:
+            browser.close()
+
+
+def test_older_independent_2_backup_without_mode_defaults_to_prose():
+    with sync_playwright() as p:
+        browser = launch(p)
+        try:
+            page = open_page(browser)
+            old_state=page.evaluate("""() => {
+              const raw=JSON.parse(localStorage.getItem('prompt-studio-2.0-dictionary-v1')||'null');
+              return raw;
+            }""")
+            if old_state is None:
+                page.locator("#promptText").fill("旧2.0の文章")
+                old_state=page.evaluate("JSON.parse(localStorage.getItem('prompt-studio-2.0-dictionary-v1'))")
+            old_state.pop("outputFormat",None)
+            backup={"format":"prompt-studio-2.0-backup","version":1,"data":old_state}
+            page.locator("#outputFormat").select_option("tags")
+            page.locator("#backupImport").set_input_files({
+                "name":"older-v2.json","mimeType":"application/json",
+                "buffer":json.dumps(backup,ensure_ascii=False).encode("utf-8")
+            })
+            assert page.locator("#outputFormat").input_value() == "prose"
+            assert page.locator("#promptText").input_value() == "旧2.0の文章"
+        finally:
+            browser.close()

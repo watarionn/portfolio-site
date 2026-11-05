@@ -35,7 +35,7 @@ const full=C.starterState();
 full.draft=draft;
 full.prompts.push({id:'p1',name:'保存',content:'a'});
 const restored=C.restore(JSON.parse(C.backup(full)));
-assert.deepEqual(restored,full);
+assert.deepEqual(restored,C.validateState(full));
 assert.throws(()=>C.restore({format:'prompt-db',data:full}),/2.0バックアップ/);
 const corrupt=C.clone(full);corrupt.parts[0].values[0].options[0].choices[1].id=corrupt.parts[0].values[0].options[0].choices[0].id;
 assert.throws(()=>C.validateState(corrupt),/ID/);

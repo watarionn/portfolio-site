@@ -243,7 +243,7 @@
       const list=s[field],found=id?resolve(list,id):null;
       if(found){found.name=name;found.content=content;}
       else list.push({id:recordId,name,content});
-    })){dictTab=field;renderDictionary();alertText('「'+name+'」を保存したよ');}
+    })){dictTab=field;renderDictionary();$(kind==='template'?'templateList':'promptList').value=recordId;alertText('「'+name+'」を保存したよ');}
   };
   document.querySelectorAll('[data-record]').forEach(btn=>btn.onclick=()=>{
     const kind=btn.dataset.record,op=btn.dataset.op,field=kind==='template'?'templates':'prompts';

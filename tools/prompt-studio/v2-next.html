@@ -30,6 +30,8 @@
       </section>
       <section class="panel editor-panel" aria-labelledby="editorTitle">
         <div class="panel-head"><h2 id="editorTitle">プロンプト入出力</h2><div class="actions tight"><button id="pickTemplate">テンプレート</button><button id="pickHistory">履歴</button></div></div>
+        <div class="format-control"><label for="outputFormat">プロンプト形式</label><select id="outputFormat"><option value="prose">文章形式（FLUX / GPT Image）</option><option value="tags">タグ形式（SD1.5など）</option></select></div>
+        <p id="formatHelp" class="help">文章形式では文章としてパーツを反映する。既存の文章は自動変換しない。</p>
         <label for="promptText" class="visually-hidden">プロンプト本文</label>
         <textarea id="promptText" rows="14" placeholder="文章を入力するか、パーツやテンプレートを反映してね"></textarea>
         <div class="actions"><button id="clearPrompt" class="secondary">クリア</button><button id="copyPrompt">コピー</button><button id="savePrompt" class="primary">保存</button></div>

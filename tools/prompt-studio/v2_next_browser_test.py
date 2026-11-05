@@ -89,6 +89,7 @@ def test_dictionary_value_specific_options_and_crud():
             page.locator("#showMain").click()
             cat = page.locator("#partCategory")
             cat.select_option(label="小道具")
+            page.locator("#partValue").select_option(label="傘")
             assert page.locator("#partValue").locator("option:checked").inner_text() == "傘"
             assert page.locator("#partOptions label").first.inner_text().startswith("色")
             page.locator("#partOptions select").first.select_option(label="赤")
@@ -122,6 +123,7 @@ def test_edit_preserves_unaffected_part_and_import_rejects_legacy():
         try:
             page = open_page(browser, mobile=True)
             page.locator("#promptText").fill("前半 ")
+            page.locator("#partValue").select_option("woman")
             page.locator("#reflect").click()
             text = page.locator("#promptText").input_value()
             assert "女性" in text

@@ -11,6 +11,19 @@
     corrupt=true; state=C.starterState();
   }
   const alertText=text=>$('status').textContent=text;
+  const modeLabel=format=>format==='tags'?'タグ形式':'文章形式';
+  function showFormat(){
+    $('outputFormat').value=state.outputFormat;
+    $('formatHelp').textContent=state.outputFormat==='tags'
+      ? 'パーツは「項目, オプション値」のタグとして追加する。既存の文章を自動翻訳・タグ変換せず、そのまま残す。'
+      : 'パーツは日本語の文章要素として追加する。既存のタグを文章へ自動変換しない。';
+  }
+  $('outputFormat').onchange=()=>{
+    if(!ensureDraft()){$('outputFormat').value=state.outputFormat;return;}
+    const selected=$('outputFormat').value;
+    if(!commit(s=>{s.outputFormat=selected;})){$('outputFormat').value=state.outputFormat;return;}
+    showFormat();alertText('出力を'+modeLabel(state.outputFormat)+'に切り替えたよ。本文は変更していないよ');
+  };
   function commit(modify, replaceCorrupt=false) {
     if(corrupt&&!replaceCorrupt) {alertText('保存データを保護中。正常なバックアップの読み込みでのみ置き換えできるよ');return false;}
     const next=C.clone(state);
@@ -84,7 +97,7 @@
     if(!ensureDraft())return;
     const part=resolve(state.parts,mainCategory),value=resolve(part?.values||[],mainValue);
     if(!part||!value)return alertText('反映する項目を選んでね');
-    const next=C.reflect(state.draft,part,value,picks);
+    const next=C.reflect(state.draft,part,value,picks,state.outputFormat);
     setDraft(next,'「'+part.name+'」を反映したよ');
   };
   $('clearPrompt').onclick=()=>{
@@ -97,7 +110,7 @@
     const copied=state.draft.text;
     try {
       await navigator.clipboard.writeText(copied);
-      if(commit(s=>{s.recentCopies=C.addCopy(s.recentCopies,copied,new Date().toISOString());}))
+      if(commit(s=>{s.recentCopies=C.addCopy(s.recentCopies,copied,new Date().toISOString(),s.outputFormat);}))
         alertText('コピーして履歴に追加したよ');
       else alertText('コピーはできたけれど履歴を保存できなかったよ');
     }catch{alertText('コピーに失敗したよ。ブラウザの権限を確認してね');}
@@ -115,16 +128,20 @@
     }
     $('pickerDialog').showModal();
   }
-  const loadContent=(content,name)=>{
+  const loadContent=(content,name,format)=>{
     if(!ensureDraft())return;
     if(editor.value&&!confirm('編集中の文章を「'+name+'」で置き換える？'))return;
-    setDraft({text:content,marks:[]},'「'+name+'」を読み込んだよ');
+    if(!setDraft({text:content,marks:[]},'「'+name+'」を読み込んだよ'))return;
+    if(format && format!==state.outputFormat){
+      if(!commit(s=>{s.outputFormat=format;}))return;
+      showFormat();
+    }
   };
-  $('pickTemplate').onclick=()=>showPicker('テンプレート',state.templates.map(x=>({label:x.name,detail:x.content,content:x.content})),x=>loadContent(x.content,x.label));
+  $('pickTemplate').onclick=()=>showPicker('テンプレート',state.templates.map(x=>({label:x.name,detail:x.content,content:x.content,format:x.outputFormat})),x=>loadContent(x.content,x.label,x.format));
   $('pickHistory').onclick=()=>{
-    const recent=state.recentCopies.map((x,i)=>({label:'コピー履歴 '+(i+1),detail:x.text,content:x.text}));
-    const saved=state.prompts.map(x=>({label:'保存済み：'+x.name,detail:x.content,content:x.content}));
-    showPicker('履歴・保存済みプロンプト',[...recent,...saved],x=>loadContent(x.content,x.label));
+    const recent=state.recentCopies.map((x,i)=>({label:'コピー履歴 '+(i+1)+' · '+modeLabel(x.outputFormat),detail:x.text,content:x.text,format:x.outputFormat}));
+    const saved=state.prompts.map(x=>({label:'保存済み：'+x.name,detail:x.content,content:x.content,format:x.outputFormat}));
+    showPicker('履歴・保存済みプロンプト',[...recent,...saved],x=>loadContent(x.content,x.label,x.format));
   };
   $('savePrompt').onclick=()=>{if(ensureDraft())$('saveDialog').showModal();};
   $('saveAsTemplate').onclick=()=>{$('saveDialog').close();openRecordEditor('template',null,C.toTemplate(state.draft));};
@@ -248,8 +265,8 @@
     const field=kind==='template'?'templates':'prompts',recordId=id||C.newId(kind);
     if(commit(s=>{
       const list=s[field],found=id?resolve(list,id):null;
-      if(found){found.name=name;found.content=content;}
-      else list.push({id:recordId,name,content});
+      if(found){found.name=name;found.content=content;found.outputFormat=s.outputFormat;}
+      else list.push({id:recordId,name,content,outputFormat:s.outputFormat});
     })){dictTab=field;renderDictionary();$(kind==='template'?'templateList':'promptList').value=recordId;alertText('「'+name+'」を保存したよ');}
   };
   $('recordDialog').onclose=()=>{pendingRecord=null;};
@@ -284,9 +301,9 @@
       if(!commit(s=>{Object.keys(s).forEach(k=>delete s[k]);Object.assign(s,restored);},true))return;
       unsaved=false;editor.value=state.draft.text;picks={};mainCategory=mainValue='';
       editSel={category:'',value:'',option:'',choice:''};
-      renderPartPicker();renderDictionary();alertText('2.0データを読み込んだよ');
+      renderPartPicker();renderDictionary();showFormat();alertText('2.0データを読み込んだよ');
     }catch(err){alertText('読み込み失敗: '+err.message);}
   };
   window.addEventListener('beforeunload',event=>{if(unsaved){event.preventDefault();event.returnValue='';}});
-  editor.value=state.draft.text;renderPartPicker();
+  editor.value=state.draft.text;renderPartPicker();showFormat();
 })();

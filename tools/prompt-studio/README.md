@@ -1,4 +1,21 @@
-# Prompt Studio
+# Prompt Studio 2.0（正式PWA）
+
+正式URL： https://cf278796.cloudfree.jp/prompt-studio/
+
+旧1.2の入口を2.0の2画面エディタに切り替えた。パーツ・オプション・テンプレート選択は日本語、生成本文は英語で、文章形式（FLUX/GPT Image）とタグ形式（SD1.5）を選べる。辞書・テンプレート・名前付きプロンプト・コピー履歴の編集とJSONバックアップに対応。
+
+PWAの `id` / `start_url` / `scope` は従来どおり `/prompt-studio/`。新しい `service-worker.js` は `prompt-studio-v2.0.0` のアプリシェルを完全取得してから昇格し、古い `prompt-studio-v1.2.0` キャッシュを廃棄する。旧1.2用のlocalStorageやPromptDBは自動削除しない。2.0のlocalStorageキーは `prompt-studio-2.0-dictionary-v1`。
+
+開発用・検証済みプレビュー `/prompt-studio/v2-next.html` も引き続き同じ独立コードとして参照可能。正式HTML `tools/prompt-studio/index.html` は2.0画面とPWA登録を持つ。v1.2のソース資産は、正式切替検証と引継ぎが終わるまでGit履歴と旧ファイルとして保持し、今回のPWA切替では削除しない。
+
+PWA E2E：`python -m pytest -q tools/prompt-studio/v2_pwa_browser_test.py`（localhost上の現行SWの起動、旧キャッシュからの更新、オフライン起動、辞書保存を検証）。従来の2.0機能E2E：`python -m pytest -q tools/prompt-studio/v2_next_browser_test.py`。実機受入はiPhone Safariでプレビューを確認したユーザーの確認を根拠とし、正式URLのホーム画面アプリ起動・更新は本番反映後に別途確認する。
+
+仕様： [V2_NEXT_SPEC_20261105.md](V2_NEXT_SPEC_20261105.md)
+
+---
+
+## 旧1.2版の仕様（履歴）
+
 
 > 2.0の新しい完成仕様・実装は [V2_NEXT_SPEC_20261105.md](V2_NEXT_SPEC_20261105.md) と `v2-next.html` を参照。以下は引き続き公開中の旧1.2版についての説明。2.0は旧PromptDBと独立しており、旧版の削除は2.0受入後とする。
 

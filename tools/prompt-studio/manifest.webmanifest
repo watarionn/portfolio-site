@@ -1,14 +1,14 @@
 {
   "id": "/prompt-studio/",
-  "name": "プロンプトスタジオ",
+  "name": "プロンプトスタジオ 2.0",
   "short_name": "プロンプトスタジオ",
-  "description": "意味ベースでプロンプトを組み立て、モデル向け書式へ変換し、履歴とPromptDBへ保存するプロンプト制作ツール",
+  "description": "日本語のパーツ辞書で英語の文章・タグ形式の画像生成プロンプトを作成し、テンプレート・履歴・JSONバックアップを管理するPWA",
   "lang": "ja",
   "start_url": "/prompt-studio/",
   "scope": "/prompt-studio/",
   "display": "standalone",
-  "background_color": "#f3efe7",
-  "theme_color": "#25231f",
+  "background_color": "#f4f6f5",
+  "theme_color": "#252f32",
   "icons": [
     {
       "src": "icon-192.png",

@@ -223,7 +223,7 @@
           editSel[entity]=newItem.id;
           renderDictionary();renderPartPicker();alertText(name+'を追加したよ');
         }
-      }else if(target&&commit(s=>{resolve(entityList(s,entity),id).name=newName;})){
+      }else if(target&&commit(s=>{resolve(entityList(s,entity),id).name=newName;if(entity==='category'){for(const marker of s.draft.marks){if(marker.categoryId===id)marker.categoryName=newName;}}})){
         renderDictionary();renderPartPicker();alertText(name+'を更新したよ');
       }
     });

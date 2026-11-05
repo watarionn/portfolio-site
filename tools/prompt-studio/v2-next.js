@@ -183,13 +183,16 @@
     $('nameDialog').showModal();
     $('nameInput').focus();
   }
-  $('nameDialog').onclose=()=>{
-    if($('nameDialog').returnValue!=='submit'||!pendingName){pendingName=null;return;}
+  $('nameForm').onsubmit=event=>{
+    event.preventDefault();
+    if(event.submitter?.value==='cancel'){$('nameDialog').close('cancel');pendingName=null;return;}
     const action=pendingName;pendingName=null;
     const name=$('nameInput').value.trim();
     if(!name)return alertText('名前を入力してね');
-    action(name);
+    $('nameDialog').close('submit');
+    if(action)action(name);
   };
+  $('nameDialog').onclose=()=>{pendingName=null;};
   function entityList(s,entity){
     if(entity==='category')return s.parts;
     const cat=resolve(s.parts,editSel.category);
@@ -233,11 +236,15 @@
     pendingRecord={kind,id:existing?.id||null};
     $('recordDialog').showModal();$('recordName').focus();
   }
-  $('recordDialog').onclose=()=>{
-    if($('recordDialog').returnValue!=='submit'||!pendingRecord){pendingRecord=null;return;}
-    const {kind,id}=pendingRecord;pendingRecord=null;
+  $('recordForm').onsubmit=event=>{
+    event.preventDefault();
+    if(event.submitter?.value==='cancel'){$('recordDialog').close('cancel');pendingRecord=null;return;}
+    const action=pendingRecord;pendingRecord=null;
     const name=$('recordName').value.trim(),content=$('recordContent').value;
     if(!name)return alertText('名前を入力してね');
+    $('recordDialog').close('submit');
+    if(!action)return;
+    const {kind,id}=action;
     const field=kind==='template'?'templates':'prompts',recordId=id||C.newId(kind);
     if(commit(s=>{
       const list=s[field],found=id?resolve(list,id):null;
@@ -245,6 +252,7 @@
       else list.push({id:recordId,name,content});
     })){dictTab=field;renderDictionary();$(kind==='template'?'templateList':'promptList').value=recordId;alertText('「'+name+'」を保存したよ');}
   };
+  $('recordDialog').onclose=()=>{pendingRecord=null;};
   document.querySelectorAll('[data-record]').forEach(btn=>btn.onclick=()=>{
     const kind=btn.dataset.record,op=btn.dataset.op,field=kind==='template'?'templates':'prompts';
     const id=$(kind==='template'?'templateList':'promptList').value,record=resolve(state[field],id);

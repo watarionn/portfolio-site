@@ -15,8 +15,8 @@
   function showFormat(){
     $('outputFormat').value=state.outputFormat;
     $('formatHelp').textContent=state.outputFormat==='tags'
-      ? 'パーツは「項目, オプション値」のタグとして追加する。既存の文章を自動翻訳・タグ変換せず、そのまま残す。'
-      : 'パーツは日本語の文章要素として追加する。既存のタグを文章へ自動変換しない。';
+      ? '日本語の項目を選択すると英語タグを追加する。既存の文章は自動翻訳せず残す。'
+      : '日本語の項目を選択すると英語の文章要素を追加する。既存の文章は自動翻訳せず残す。';
   }
   $('outputFormat').onchange=()=>{
     if(!ensureDraft()){$('outputFormat').value=state.outputFormat;return;}
@@ -97,8 +97,10 @@
     if(!ensureDraft())return;
     const part=resolve(state.parts,mainCategory),value=resolve(part?.values||[],mainValue);
     if(!part||!value)return alertText('反映する項目を選んでね');
-    const next=C.reflect(state.draft,part,value,picks,state.outputFormat);
-    setDraft(next,'「'+part.name+'」を反映したよ');
+    try {
+      const next=C.reflect(state.draft,part,value,picks,state.outputFormat);
+      setDraft(next,'「'+part.name+'」を英語で反映したよ');
+    }catch(err){alertText(err.message);}
   };
   $('clearPrompt').onclick=()=>{
     if(!ensureDraft())return;
@@ -108,6 +110,7 @@
   $('copyPrompt').onclick=async()=>{
     if(!ensureDraft())return;
     const copied=state.draft.text;
+    if(C.hasJapanese(copied))return alertText('コピーする文章に日本語が含まれているよ。英語に編集してからコピーしてね');
     try {
       await navigator.clipboard.writeText(copied);
       if(commit(s=>{s.recentCopies=C.addCopy(s.recentCopies,copied,new Date().toISOString(),s.outputFormat);}))
@@ -130,18 +133,28 @@
   }
   const loadContent=(content,name,format)=>{
     if(!ensureDraft())return;
+    if(C.hasJapanese(content))return alertText('「'+name+'」には旧2.0の日本語本文が残っているよ。各種辞書で英語の本文に編集してから読み込んでね');
     if(editor.value&&!confirm('編集中の文章を「'+name+'」で置き換える？'))return;
     if(!commit(s=>{s.draft={text:content,marks:[]};s.outputFormat=C.outputFormat(format||s.outputFormat);}))return;
     editor.value=state.draft.text;unsaved=false;showFormat();alertText('「'+name+'」を読み込んだよ');
   };
-  $('pickTemplate').onclick=()=>showPicker('テンプレート',state.templates.map(x=>({label:x.name,detail:x.content,content:x.content,format:x.outputFormat})),x=>loadContent(x.content,x.label,x.format));
+  $('pickTemplate').onclick=()=>showPicker('テンプレート',state.templates.map(x=>({label:x.name,detail:x.previewJa||x.name,content:x.content,format:x.outputFormat})),x=>loadContent(x.content,x.label,x.format));
   $('pickHistory').onclick=()=>{
     const recent=state.recentCopies.map((x,i)=>({label:'コピー履歴 '+(i+1)+' · '+modeLabel(x.outputFormat),detail:x.text,content:x.text,format:x.outputFormat}));
     const saved=state.prompts.map(x=>({label:'保存済み：'+x.name,detail:x.content,content:x.content,format:x.outputFormat}));
     showPicker('履歴・保存済みプロンプト',[...recent,...saved],x=>loadContent(x.content,x.label,x.format));
   };
-  $('savePrompt').onclick=()=>{if(ensureDraft())$('saveDialog').showModal();};
-  $('saveAsTemplate').onclick=()=>{$('saveDialog').close();openRecordEditor('template',null,C.toTemplate(state.draft));};
+  $('savePrompt').onclick=()=>{
+    if(!ensureDraft())return;
+    if(C.hasJapanese(state.draft.text))return alertText('英語のプロンプトとして保存するには、本文中の日本語を編集してね。旧データは消さずに残してあるよ');
+    $('saveDialog').showModal();
+  };
+  $('saveAsTemplate').onclick=()=>{
+    try {
+      const content=C.toTemplate(state.draft,state.parts);
+      $('saveDialog').close();openRecordEditor('template',null,content);
+    }catch(err){alertText(err.message);}
+  };
   $('saveAsPrompt').onclick=()=>{$('saveDialog').close();openRecordEditor('prompt',null,state.draft.text);};
   document.querySelectorAll('[data-close]').forEach(btn=>btn.onclick=()=>$(btn.dataset.close).close());
   function showScreen(id){
@@ -190,9 +203,13 @@
   $('editOption').onchange=()=>{editSel.option=$('editOption').value;editSel.choice='';renderDictionary();};
   $('editChoice').onchange=()=>{editSel.choice=$('editChoice').value;renderDictionary();};
   document.querySelectorAll('[data-dict]').forEach(b=>b.onclick=()=>{dictTab=b.dataset.dict;renderDictionary();});
-  function editName(title,current,onDone){
+  function editName(title,record,entity,onDone){
     $('nameTitle').textContent=title;
-    $('nameInput').value=current||'';
+    $('nameInput').value=record?.name||'';
+    $('englishInput').value=record?.en||'';
+    $('englishLabel').textContent=entity==='category'?'英語変数名（例：character）':'英語表現（プロンプトに反映）';
+    $('tagInput').value=record?.tag||'';
+    $('tagField').hidden=!(entity==='value'||entity==='choice');
     pendingName=onDone;
     $('nameDialog').showModal();
     $('nameInput').focus();
@@ -202,9 +219,13 @@
     if(event.submitter?.value==='cancel'){$('nameDialog').close('cancel');pendingName=null;return;}
     const action=pendingName;pendingName=null;
     const name=$('nameInput').value.trim();
-    if(!name)return alertText('名前を入力してね');
+    const en=$('englishInput').value.trim(),tag=$('tagInput').value.trim();
+    if(!name)return alertText('日本語の表示名を入力してね');
+    if(!en)return alertText('英語表現を入力してね');
+    if(C.hasJapanese(en)||C.hasJapanese(tag))return alertText('英語表現には日本語を含めないでね');
+    if($('englishLabel').textContent.includes('変数名')&&!C.englishKey(en))return alertText('英語変数名は小文字英数字とアンダースコアで設定してね');
     $('nameDialog').close('submit');
-    if(action)action(name);
+    if(action)action({name,en,tag});
   };
   $('nameDialog').onclose=()=>{pendingName=null;};
   function entityList(s,entity){
@@ -227,9 +248,10 @@
         editSel[entity]='';renderDictionary();renderPartPicker();alertText(name+'を削除したよ');
       }return;
     }
-    editName(name+(op==='add'?'を追加':'を編集'),target?.name||'',newName=>{
+    editName(name+(op==='add'?'を追加':'を編集'),target,entity,fields=>{
       if(op==='add'){
-        const newItem={id:C.newId(entity),name:newName};
+        const newItem={id:C.newId(entity),name:fields.name,en:fields.en};
+        if(entity==='value'||entity==='choice')newItem.tag=fields.tag;
         if(entity==='category')newItem.values=[];
         if(entity==='value')newItem.options=[];
         if(entity==='option')newItem.choices=[];
@@ -237,7 +259,14 @@
           editSel[entity]=newItem.id;
           renderDictionary();renderPartPicker();alertText(name+'を追加したよ');
         }
-      }else if(target&&commit(s=>{resolve(entityList(s,entity),id).name=newName;if(entity==='category'){for(const marker of s.draft.marks){if(marker.categoryId===id)marker.categoryName=newName;}}})){
+      }else if(target&&commit(s=>{
+        const item=resolve(entityList(s,entity),id);
+        item.name=fields.name;item.en=fields.en;
+        if(entity==='value'||entity==='choice')item.tag=fields.tag;
+        if(entity==='category'){
+          for(const marker of s.draft.marks){if(marker.categoryId===id){marker.categoryName=fields.name;marker.categoryKey=fields.en;}}
+        }
+      })){
         renderDictionary();renderPartPicker();alertText(name+'を更新したよ');
       }
     });
@@ -247,6 +276,9 @@
     $('recordTitle').textContent=title+(existing?'を編集':'として保存');
     $('recordName').value=existing?.name||'';
     $('recordContent').value=existing?.content??initial;
+    $('recordPreviewJa').value=existing?.previewJa||existing?.name||'';
+    $('recordPreviewJaLabel').hidden=kind!=='template';
+    $('recordPreviewJa').hidden=kind!=='template';
     pendingRecord={kind,id:existing?.id||null};
     $('recordDialog').showModal();$('recordName').focus();
   }
@@ -255,15 +287,17 @@
     if(event.submitter?.value==='cancel'){$('recordDialog').close('cancel');pendingRecord=null;return;}
     const action=pendingRecord;pendingRecord=null;
     const name=$('recordName').value.trim(),content=$('recordContent').value;
+    const previewJa=$('recordPreviewJa').value.trim()||name;
     if(!name)return alertText('名前を入力してね');
+    if(C.hasJapanese(content))return alertText('プロンプト本文には英語を入力してね。表示名や説明は日本語で登録できるよ');
     $('recordDialog').close('submit');
     if(!action)return;
     const {kind,id}=action;
     const field=kind==='template'?'templates':'prompts',recordId=id||C.newId(kind);
     if(commit(s=>{
       const list=s[field],found=id?resolve(list,id):null;
-      if(found){found.name=name;found.content=content;found.outputFormat=s.outputFormat;}
-      else list.push({id:recordId,name,content,outputFormat:s.outputFormat});
+      if(found){found.name=name;found.content=content;found.outputFormat=s.outputFormat;if(kind==='template')found.previewJa=previewJa;}
+      else list.push({id:recordId,name,content,outputFormat:s.outputFormat,...(kind==='template'?{previewJa}:{})});
     })){dictTab=field;renderDictionary();$(kind==='template'?'templateList':'promptList').value=recordId;alertText('「'+name+'」を保存したよ');}
   };
   $('recordDialog').onclose=()=>{pendingRecord=null;};

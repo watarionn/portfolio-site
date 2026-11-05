@@ -101,6 +101,12 @@ def test_dictionary_value_specific_options_and_crud():
             page.locator("#nameInput").fill("道具")
             page.locator('#nameForm button[value="submit"]').click()
             assert page.locator("#editCategory").locator("option:checked").inner_text() == "道具"
+            page.locator("#showMain").click()
+            page.locator("#savePrompt").click()
+            page.locator("#saveAsTemplate").click()
+            assert "{道具}" in page.locator("#recordContent").input_value()
+            record_save(page, "属性名の追跡")
+            page.locator("#showDictionary").click()
             page.locator('[data-dict="templates"]').click()
             page.locator('[data-record="template"][data-op="add"]').click()
             page.locator("#recordContent").fill("{道具}の画像")

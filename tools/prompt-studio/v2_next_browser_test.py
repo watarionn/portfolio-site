@@ -174,3 +174,39 @@ def test_corrupted_state_is_not_overwritten():
             page.close()
         finally:
             browser.close()
+
+
+def test_part_clear_and_saved_prompt_crud():
+    with sync_playwright() as p:
+        browser = launch(p)
+        try:
+            page = open_page(browser)
+            page.locator("#partValue").select_option("woman")
+            assert page.locator("#reflect").is_enabled()
+            page.locator("#clearPart").click()
+            assert page.locator("#partValue").input_value() == ""
+            assert page.locator("#reflect").is_disabled()
+
+            page.locator("#showDictionary").click()
+            page.locator('[data-dict="prompts"]').click()
+            page.locator('[data-record="prompt"][data-op="add"]').click()
+            page.locator("#recordContent").fill("保存済み本文")
+            record_save(page, "保存済みA")
+            assert page.locator("#promptList").get_by_text("保存済みA").count() == 1
+            page.locator('[data-record="prompt"][data-op="edit"]').click()
+            page.locator("#recordContent").fill("修正済み本文")
+            record_save(page, "保存済みB")
+            assert page.locator("#promptList").get_by_text("保存済みB").count() == 1
+            page.locator('[data-record="prompt"][data-op="delete"]').click()
+            assert page.locator("#promptList").locator("option").count() == 0
+
+            page.locator('[data-dict="parts"]').click()
+            page.locator("#editCategory").select_option("character")
+            page.locator("#editValue").select_option("dog")
+            page.locator("#editOption").select_option("breed")
+            page.locator("#editChoice").select_option("breed0")
+            page.locator('[data-entity="choice"][data-op="delete"]').click()
+            assert page.locator("#editChoice").get_by_text("柴犬").count() == 0
+            page.close()
+        finally:
+            browser.close()

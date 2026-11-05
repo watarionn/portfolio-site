@@ -131,11 +131,8 @@
   const loadContent=(content,name,format)=>{
     if(!ensureDraft())return;
     if(editor.value&&!confirm('編集中の文章を「'+name+'」で置き換える？'))return;
-    if(!setDraft({text:content,marks:[]},'「'+name+'」を読み込んだよ'))return;
-    if(format && format!==state.outputFormat){
-      if(!commit(s=>{s.outputFormat=format;}))return;
-      showFormat();
-    }
+    if(!commit(s=>{s.draft={text:content,marks:[]};s.outputFormat=C.outputFormat(format||s.outputFormat);}))return;
+    editor.value=state.draft.text;unsaved=false;showFormat();alertText('「'+name+'」を読み込んだよ');
   };
   $('pickTemplate').onclick=()=>showPicker('テンプレート',state.templates.map(x=>({label:x.name,detail:x.content,content:x.content,format:x.outputFormat})),x=>loadContent(x.content,x.label,x.format));
   $('pickHistory').onclick=()=>{

@@ -1,246 +1,90 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="意味ベースでプロンプトを組み立て、FLUX・SDXL・GPT Image向けの書式へ変換し、PromptDBへ保存するPrompt Studio。">
-  <title>プロンプトスタジオ</title>
-  <meta name="theme-color" content="#25231f">
-  <meta name="color-scheme" content="light">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="プロンプトスタジオ">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="style.css?v=1.2.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#252f32">
+<meta name="description" content="日本語でパーツを選び、FLUX・GPT Image向けの英語文章やSD1.5向けの英語タグを作成するプロンプトスタジオ2.0。">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="プロンプトスタジオ">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>プロンプトスタジオ 2.0</title>
+<link rel="stylesheet" href="v2-next.css?v=2.0.2">
 </head>
 <body>
-  <header class="app-header">
-    <div class="title-block">
-      <a class="back-link" href="/#index">← 作品索引</a>
-      <h1>プロンプトスタジオ</h1>
-      <p>画像の内容を一度組み立てれば、使うモデルに合った書き方へ変換して保存できます。</p>
-    </div>
-    <div class="header-actions">
-      <button id="helpButton" type="button" data-help-key="quickstart">使い方</button>
-      <button id="installPwaButton" type="button" hidden>アプリとして使う</button>
-      <button id="importDbButton">プロンプトDBを読み込む</button>
-      <button id="exportDbButton">プロンプトDBを書き出す</button>
-    </div>
-  </header>
-
-  <input id="dbFileInput" class="visually-hidden" type="file" accept="application/json,.json">
-
-  <div class="studio-tabs" role="tablist" aria-label="プロンプトスタジオの画面切替">
-    <button class="studio-tab active" data-view="compose" role="tab" aria-selected="true">プロンプト作成</button>
-    <button class="studio-tab pwa-history-tab" data-view="history" role="tab" aria-selected="false">履歴</button>
-    <button class="studio-tab" data-view="database" role="tab" aria-selected="false">プロンプトDB</button>
+<header class="mast">
+  <div class="mast-inner">
+    <div><a href="/#index" class="back">作品索引へ</a><h1>プロンプトスタジオ <span>2.0</span></h1></div>
+    <nav class="topnav" aria-label="画面切替"><button id="showMain" class="active" aria-current="page">メイン画面</button><button id="showDictionary">各種辞書</button></nav>
   </div>
-
-  <main>
-    <section id="composeView" class="view active">
-      <div class="studio-grid">
-        <aside class="composer-panel" aria-label="プロンプト作成">
-          <section class="panel-section">
-            <div class="heading-with-help"><h2>出力先モデル</h2><button class="info-button" type="button" data-help-key="render-target" aria-label="出力先モデルの説明">i</button></div>
-            <label>
-              <span class="label-title">モデル / プロンプト書式 <button class="info-button" type="button" data-help-key="dialect" aria-label="プロンプト書式の説明">i</button></span>
-              <select id="profileSelect"></select>
-            </label>
-            <label>
-              <span class="label-title">Checkpoint / モデル名 <span class="optional">任意</span> <button class="info-button" type="button" data-help-key="model-name" aria-label="Checkpointとモデル名の説明">i</button></span>
-              <input id="modelName" type="text" placeholder="例: Animagine XL / FLUX.2 / gpt-image-1.5">
-            </label>
-            <p id="profileNote" class="section-note"></p>
-          </section>
-
-          <section class="panel-section slot-composer">
-            <div class="section-heading-row">
-              <div>
-                <div class="heading-with-help"><h2>組み立てルール</h2><button class="info-button" type="button" data-help-key="slots" aria-label="組み立てルールの説明">i</button></div>
-                <p class="section-note">プロンプトDBのパーツを、指定した選び方で下の「画像の内容」へ反映します。</p>
-              </div>
-              <button id="addSlotButton" class="quiet-button" type="button">ルールを追加</button>
-            </div>
-            <div class="slot-column-head" aria-hidden="true">
-              <span></span><span></span><span>項目</span><span>辞書</span><span>選び方</span><span>値</span><span></span>
-            </div>
-            <div id="slotList" class="slot-list"></div>
-            <div class="slot-footer">
-              <button id="resolveSlotsButton" class="primary-button" type="button">ルールから反映</button>
-              <span id="slotResultNote">ルールを実行すると、下の「画像の内容」へ値が入ります。</span>
-            </div>
-            <div class="recipe-save-row">
-              <label>レシピ名<input id="recipeTitle" type="text" placeholder="例: 夜カフェ人物撮影"></label>
-              <button id="saveRecipeButton" type="button">レシピを保存</button>
-            </div>
-          </section>
-
-          <section class="panel-section semantic-fields">
-            <div class="section-heading-row">
-              <div class="heading-with-help"><h2>画像の内容</h2><button class="info-button" type="button" data-help-key="scene" aria-label="画像の内容の説明">i</button></div>
-              <button id="randomizeButton" class="quiet-button">DBから自動入力</button>
-            </div>
-
-            <label>主役・被写体<textarea id="subject" rows="2" placeholder="a young woman"></textarea></label>
-            <label>見た目<input id="appearance" type="text" placeholder="gentle, intelligent appearance"></label>
-            <label>表情<input id="expression" type="text" placeholder="calm expression"></label>
-            <label>服装<input id="outfit" type="text" placeholder="white shirt and dark skirt"></label>
-            <label>動作<input id="action" type="text" placeholder="reading a book"></label>
-            <label>ポーズ<input id="pose" type="text" placeholder="standing naturally"></label>
-            <label>場所・背景<input id="environment" type="text" placeholder="quiet library at night"></label>
-            <label>光・ライティング<input id="lighting" type="text" placeholder="soft warm window light"></label>
-            <label>カメラ<input id="camera" type="text" placeholder="50mm eye-level medium shot"></label>
-            <label>構図<input id="composition" type="text" placeholder="balanced composition with foreground depth"></label>
-            <label>雰囲気・画風<input id="style" type="text" placeholder="quiet editorial photography"></label>
-            <label>画像内の文字<input id="visibleText" type="text" placeholder="leave blank when no text is needed"></label>
-            <label><span class="label-title">守りたい条件 <button class="info-button" type="button" data-help-key="constraints" aria-label="守りたい条件の説明">i</button></span><textarea id="constraints" rows="2" placeholder="keep hands natural; preserve identity"></textarea></label>
-            <label id="negativeField"><span class="label-title">避けたい要素 <button class="info-button" type="button" data-help-key="negative" aria-label="避けたい要素の説明">i</button></span><textarea id="negative" rows="2" placeholder="blurry, distorted anatomy, extra fingers"></textarea></label>
-          </section>
-
-          <div class="composer-actions">
-            <button id="clearButton">クリア</button>
-            <button id="loadExampleButton">例を読み込む</button>
-          </div>
-        </aside>
-
-        <section class="output-panel" aria-label="生成プロンプト">
-          <div class="output-header">
-            <div>
-              <div class="heading-with-help"><h2>生成プロンプト</h2><button class="info-button" type="button" data-help-key="output" aria-label="生成プロンプトの説明">i</button></div>
-              <p id="renderSummary">Semantic prompt → model dialect</p>
-            </div>
-            <div class="output-actions">
-              <button id="copyButton">コピー</button>
-              <button id="registerButton" class="primary-button">DBに登録</button>
-            </div>
-          </div>
-
-          <label class="output-label" for="positiveOutput">プロンプト</label>
-          <textarea id="positiveOutput" class="prompt-output" rows="13" readonly></textarea>
-
-          <div id="negativeOutputWrap">
-            <label class="output-label" for="negativeOutput">ネガティブプロンプト</label>
-            <textarea id="negativeOutput" class="prompt-output negative-output" rows="5" readonly></textarea>
-          </div>
-
-          <section class="meaning-preview">
-            <div class="meaning-header">
-              <span class="heading-with-help"><h3>内容データ</h3><button class="info-button" type="button" data-help-key="semantic" aria-label="内容データの説明">i</button></span>
-              <span id="dbStatus">作業データ</span>
-            </div>
-            <pre id="semanticPreview"></pre>
-          </section>
-
-          <section class="save-panel">
-            <div class="heading-with-help"><h3>プロンプトDBに保存</h3><button class="info-button" type="button" data-help-key="save-db" aria-label="プロンプトDB保存の説明">i</button></div>
-            <div class="save-grid">
-              <label>タイトル<input id="entryTitle" type="text" placeholder="夜の図書館で読書"></label>
-              <label>タグ<input id="entryTags" type="text" placeholder="library, reading, portrait"></label>
-            </div>
-            <p>登録内容はこのブラウザの作業データへ追加されます。長く残したいときは「プロンプトDBを書き出す」でJSONを保存できます。</p>
-          </section>
-        </section>
-      </div>
-    </section>
-
-    <section id="historyView" class="view" hidden>
-      <div class="history-layout">
-        <div class="history-head">
-          <div><h2>作業履歴</h2><p>コピーまたはDB登録したプロンプトを新しい順に保存します。</p></div>
-          <button id="clearHistoryButton" type="button">履歴を消去</button>
-        </div>
-        <div id="historyList" class="history-list"></div>
-      </div>
-    </section>
-
-    <section id="databaseView" class="view" hidden>
-      <div class="database-layout">
-        <aside class="database-sidebar">
-          <h2>プロンプトDB</h2>
-          <label>検索<input id="dbSearch" type="search" placeholder="タイトル / タグ / プロンプト"></label>
-          <label>状態<select id="dbStatusFilter"><option value="all">すべて</option><option value="saved">保存済み</option><option value="draft">下書き</option></select></label>
-          <dl class="db-stats">
-            <div><dt>保存済みプロンプト</dt><dd id="libraryCount">0</dd></div>
-            <div><dt>パーツ辞書</dt><dd id="conceptCount">0</dd></div>
-            <div><dt>組み立てレシピ</dt><dd id="recipeCount">0</dd></div>
-          </dl>
-          <p class="section-note">ここには、作ったプロンプト・再利用するパーツ・組み立て方をまとめて保存できます。</p>
-        </aside>
-
-        <section class="database-main">
-          <div class="db-section-tabs" role="tablist" aria-label="プロンプトDBの表示切替">
-            <button class="db-section-tab active" data-db-section="library" role="tab" aria-selected="true">保存済み</button>
-            <button class="db-section-tab" data-db-section="concepts" role="tab" aria-selected="false">パーツ辞書</button>
-            <button class="db-section-tab" data-db-section="recipes" role="tab" aria-selected="false">組み立てレシピ</button>
-          </div>
-
-          <section id="libraryPanel" class="db-panel active">
-            <div class="database-main-head">
-              <div><h2>保存済みプロンプト</h2><p>気に入ったプロンプトと、その元になった内容を保存します。</p></div>
-              <button id="newFromDbButton">プロンプト作成へ</button>
-            </div>
-            <div id="libraryList" class="library-list"></div>
-          </section>
-
-          <section id="conceptsPanel" class="db-panel" hidden>
-            <div class="database-main-head">
-              <div><span class="heading-with-help"><h2>パーツ辞書</h2><button class="info-button" type="button" data-help-key="concepts" aria-label="パーツ辞書の説明">i</button></span><p>人物・場所・ポーズ・光など、繰り返し使う部品を登録します。</p></div>
-              <span><b id="conceptCountForCategory">0</b> 件</span>
-            </div>
-            <div class="concept-editor">
-              <label><span class="label-title">カテゴリ <button class="info-button" type="button" data-help-key="category" aria-label="カテゴリの説明">i</button></span>
-                <input id="conceptCategoryInput" type="text" list="conceptCategoryOptions" placeholder="pose / lighting / custom_category">
-                <datalist id="conceptCategoryOptions"></datalist>
-              </label>
-              <label>プロンプト用の内容<input id="conceptValue" type="text" placeholder="reading a book"></label>
-              <label>日本語ラベル <span class="optional">任意</span><input id="conceptLabelJa" type="text" placeholder="本を読む"></label>
-              <label>タグ <span class="optional">任意</span><input id="conceptTags" type="text" placeholder="reading, book"></label>
-              <label><span class="label-title">抽選の重み <button class="info-button" type="button" data-help-key="weight" aria-label="抽選の重みの説明">i</button></span><input id="conceptWeight" type="number" min="0.01" step="0.1" value="1"></label>
-              <div class="concept-form-actions">
-                <button id="conceptCancelButton" type="button" hidden>キャンセル</button>
-                <button id="conceptSaveButton" class="primary-button" type="button">パーツを追加</button>
-              </div>
-            </div>
-            <div id="conceptList" class="concept-list"></div>
-          </section>
-
-          <section id="recipesPanel" class="db-panel" hidden>
-            <div class="database-main-head">
-              <div><span class="heading-with-help"><h2>組み立てレシピ</h2><button class="info-button" type="button" data-help-key="recipes" aria-label="組み立てレシピの説明">i</button></span><p>「どの項目を、どの辞書から、どう選ぶか」という組み立て方を保存します。</p></div>
-            </div>
-            <div id="recipeList" class="recipe-list"></div>
-          </section>
-        </section>
-      </div>
-    </section>
-  </main>
-
-
-  <nav class="pwa-bottom-bar" aria-label="Prompt Studio操作">
-    <button id="pwaConditionsButton" type="button">条件</button>
-    <button id="pwaSlotsButton" type="button">スロット</button>
-    <button id="pwaFormatButton" type="button">整形</button>
-    <button id="pwaCopyButton" class="primary-button" type="button">コピー</button>
-  </nav>
-
-  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpDialogTitle">
-    <div class="help-dialog-head">
-      <h2 id="helpDialogTitle">使い方</h2>
-      <button id="helpDialogClose" class="help-dialog-close" type="button" aria-label="説明を閉じる">×</button>
+</header>
+<main>
+  <section id="mainScreen" class="screen">
+    <div class="workspace">
+      <section class="panel part-panel" aria-labelledby="partTitle">
+        <h2 id="partTitle">パーツ選択</h2>
+        <label for="partCategory">属性</label>
+        <select id="partCategory"></select>
+        <label for="partValue">項目</label>
+        <select id="partValue"></select>
+        <div id="partOptions" class="options"></div>
+        <div class="actions"><button id="reflect" class="primary">反映</button><button id="clearPart" class="secondary">選択をクリア</button></div>
+        <p class="help">テンプレート内の {character} など英語の変数があれば置き換える。なければ英語で文末に追加する。</p>
+      </section>
+      <section class="panel editor-panel" aria-labelledby="editorTitle">
+        <div class="panel-head"><h2 id="editorTitle">プロンプト入出力</h2><div class="actions tight"><button id="pickTemplate">テンプレート</button><button id="pickHistory">履歴</button></div></div>
+        <div class="format-control"><label for="outputFormat">プロンプト形式</label><select id="outputFormat"><option value="prose">文章形式（FLUX / GPT Image）</option><option value="tags">タグ形式（SD1.5など）</option></select></div>
+        <p id="formatHelp" class="help">パーツ選択は日本語、反映する文章は英語。文章形式とタグ形式を切り替えられる。</p>
+        <label for="promptText" class="visually-hidden">プロンプト本文</label>
+        <textarea id="promptText" rows="14" placeholder="Enter an English prompt or choose a Japanese-labeled part or template."></textarea>
+        <div class="actions"><button id="clearPrompt" class="secondary">クリア</button><button id="copyPrompt">コピー</button><button id="savePrompt" class="primary">保存</button></div>
+        <p id="editNote" class="help">パーツを反映した範囲は、テンプレート保存時に {character} などの英語変数へ置き換わる。既存の日本語文章は自動翻訳せず保護する。</p>
+      </section>
     </div>
-    <div id="helpDialogBody" class="help-dialog-body"></div>
-  </dialog>
-  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
-
-  <script src="engine.js?v=1.2.0"></script>
-  <script src="store.js?v=1.1.0"></script>
-  <script src="app.js?v=1.2.0"></script>
-  <script src="slots.js?v=1.1.0"></script>
-  <script src="db-editor.js?v=1.1.0"></script>
-  <script src="usability.js?v=1.2.0"></script>
-  <script src="pwa.js?v=1.2.0"></script>
+  </section>
+  <section id="dictionaryScreen" class="screen" hidden>
+    <div class="panel">
+      <div class="panel-head"><h2>各種辞書</h2><nav class="dict-nav" aria-label="編集辞書"><button data-dict="parts" class="active">パーツ</button><button data-dict="templates">テンプレート</button><button data-dict="prompts">プロンプト</button></nav></div>
+      <div id="editParts" class="dictionary-pane">
+        <div class="dictionary-grid">
+          <section class="editor-block"><h3>属性</h3><label for="editCategory">編集パーツ選択</label><select id="editCategory" size="6"></select><div class="actions"><button data-entity="category" data-op="add">追加</button><button data-entity="category" data-op="edit">編集</button><button data-entity="category" data-op="delete" class="danger">削除</button></div></section>
+          <section class="editor-block"><h3>値</h3><label for="editValue">選択した属性の値一覧</label><select id="editValue" size="6"></select><div class="actions"><button data-entity="value" data-op="add">追加</button><button data-entity="value" data-op="edit">編集</button><button data-entity="value" data-op="delete" class="danger">削除</button></div></section>
+          <section class="editor-block"><h3>値別オプション</h3><label for="editOption">選択した値のオプション</label><select id="editOption" size="6"></select><div class="actions"><button data-entity="option" data-op="add">追加</button><button data-entity="option" data-op="edit">編集</button><button data-entity="option" data-op="delete" class="danger">削除</button></div></section>
+          <section class="editor-block"><h3>選択候補</h3><label for="editChoice">オプションの候補一覧</label><select id="editChoice" size="6"></select><div class="actions"><button data-entity="choice" data-op="add">追加</button><button data-entity="choice" data-op="edit">編集</button><button data-entity="choice" data-op="delete" class="danger">削除</button></div></section>
+        </div>
+        <p class="help">日本語の表示名と英語の出力表現を登録できる。既存の英語表現がない項目は、登録するまで反映しない。</p>
+      </div>
+      <div id="editTemplates" class="dictionary-pane" hidden><h3>テンプレート一覧</h3><label for="templateList">編集するテンプレート</label><select id="templateList" size="9"></select><div class="actions"><button data-record="template" data-op="add">追加</button><button data-record="template" data-op="edit">編集</button><button data-record="template" data-op="delete" class="danger">削除</button></div></div>
+      <div id="editPrompts" class="dictionary-pane" hidden><h3>プロンプト一覧</h3><label for="promptList">編集するプロンプト</label><select id="promptList" size="9"></select><div class="actions"><button data-record="prompt" data-op="add">追加</button><button data-record="prompt" data-op="edit">編集</button><button data-record="prompt" data-op="delete" class="danger">削除</button></div></div>
+    </div>
+  </section>
+  <section class="panel backup-panel" aria-labelledby="backupTitle">
+    <div><h2 id="backupTitle">データ管理</h2><p class="help">2.0専用の辞書・テンプレート・プロンプト・コピー履歴をJSONでまとめて保存する。旧PromptDBは読み込まない。</p></div>
+    <div class="actions"><button id="backupExport">JSON書き出し</button><label class="file-label" for="backupImport">JSON読み込み<input id="backupImport" type="file" accept=".json,application/json"></label></div>
+  </section>
+  <p id="status" role="status" aria-live="polite"></p>
+</main>
+<dialog id="saveDialog" aria-labelledby="saveTitle"><h2 id="saveTitle">保存方法</h2><p>今の文章をどちらで保存する？</p><div class="stack"><button id="saveAsTemplate">テンプレートとして保存</button><button id="saveAsPrompt">プロンプトとして保存</button></div><button class="dialog-close" data-close="saveDialog">閉じる</button></dialog>
+<dialog id="pickerDialog" aria-labelledby="pickerTitle"><h2 id="pickerTitle">一覧</h2><div id="pickerList" class="picker-list"></div><button class="dialog-close" data-close="pickerDialog">閉じる</button></dialog>
+<dialog id="nameDialog" aria-labelledby="nameTitle"><form id="nameForm" method="dialog"><h2 id="nameTitle">項目を編集</h2><label for="nameInput">表示名（日本語）</label><input id="nameInput" required maxlength="120"><label for="englishInput" id="englishLabel">英語表現（プロンプトに反映）</label><input id="englishInput" required maxlength="160" autocomplete="off"><div id="tagField"><label for="tagInput">タグ用英語（省略時は英語表現と同じ）</label><input id="tagInput" maxlength="160" autocomplete="off"></div><p class="help">新しいパーツや候補には英語表現を登録してね。機械翻訳は行わない。</p><div class="actions"><button class="primary" value="submit">確定</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
+<dialog id="recordDialog" aria-labelledby="recordTitle"><form id="recordForm" method="dialog"><h2 id="recordTitle">文章を編集</h2><label for="recordName">名前</label><input id="recordName" required maxlength="120"><label for="recordPreviewJa" id="recordPreviewJaLabel">選択一覧の説明（日本語、省略可）</label><input id="recordPreviewJa" maxlength="200"><label for="recordContent">プロンプト本文（英語）</label><textarea id="recordContent" rows="9"></textarea><div class="actions"><button class="primary" value="submit">保存</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
+<script src="v2-next-core.js?v=2.0.2"></script><script src="v2-next.js?v=2.0.2"></script>
+<script>
+/* Keep the original PWA id and scope so existing installations update in place.
+   Never clear localStorage: the 2.0 dictionary and prior 1.2 data are independent. */
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./service-worker.js', {
+      scope: './',
+      updateViaCache: 'none'
+    }).catch(function (error) { console.warn('Prompt Studio PWA registration failed', error); });
+  });
+}
+</script>
 </body>
 </html>

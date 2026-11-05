@@ -1,0 +1,53 @@
+{
+  "schema": "prompt-studio-v2-english-output-production-evidence-v1",
+  "status": "PASS",
+  "source": {
+    "repository": "watarionn/portfolio-site",
+    "pr": 230,
+    "merge_commit": "8d468deced84a0b603f926d0fc1170790858ca49"
+  },
+  "deployment": {
+    "method": "certificate-verified scoped FTPS CAS with rollback",
+    "host": "sv210.cloudfree.ne.jp",
+    "target": "/cf278796.cloudfree.jp/public_html/prompt-studio",
+    "utc": "2026-11-05T02:25:02Z",
+    "updated_files": 3,
+    "verified_files": 4,
+    "ftps_sha256_readback": true,
+    "https_sha256_readback": true
+  },
+  "assets": {
+    "v2-next-core.js": "0e81b2100a04eb8fcca3e3f4b427ff464d489c3c0a401f6b4f97e7b379d6ec55",
+    "v2-next.css": "d8e7ae9016036c08a13d60052985c56812ac202228681883dd2341d090614182",
+    "v2-next.html": "bdbd19f80e36b9e2ee6690c2e229fba669bdd44eeb32ebf4f1538a1bf509a448",
+    "v2-next.js": "d0a72d9528a6650ea08b846f38af9e4428817ebf3dd82473ae41f9638aa2b538"
+  },
+  "publicBrowser": {
+    "browser": "Microsoft Edge Playwright",
+    "utc": "2026-11-05T02:25:54Z",
+    "status": "PASS",
+    "url": "https://cf278796.cloudfree.jp/prompt-studio/v2-next.html",
+    "checks": [
+      "HTTP 200",
+      "Japanese template title/preview",
+      "English prose generated from Japanese selection",
+      "English tag generated from Japanese selection",
+      "clipboard English",
+      "reload persistence",
+      "English placeholders in saved template",
+      "390px responsive width",
+      "0 page errors"
+    ]
+  },
+  "legacy": {
+    "url": "https://cf278796.cloudfree.jp/prompt-studio/",
+    "http": 200,
+    "existing_profile_selector": true,
+    "unchanged": true
+  },
+  "pending": [
+    "iPhone Safari physical device acceptance",
+    "canonical PWA 2.0 switchover",
+    "v1.2 retirement"
+  ]
+}

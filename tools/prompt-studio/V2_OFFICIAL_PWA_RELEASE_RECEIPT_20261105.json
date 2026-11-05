@@ -1,0 +1,72 @@
+{
+  "schema": "prompt-studio-v2-official-pwa-release-evidence-v1",
+  "status": "PASS",
+  "source": {
+    "repo": "watarionn/portfolio-site",
+    "feature_pr": 232,
+    "merge_commit": "d5e7133bf71313f417341d1b0325910c80b2f9d7",
+    "previous_main": "614892b1595d4af5412775b18a25f328c341e8e8"
+  },
+  "production": {
+    "url": "https://cf278796.cloudfree.jp/prompt-studio/",
+    "ftps_host": "sv210.cloudfree.ne.jp",
+    "remote": "/cf278796.cloudfree.jp/public_html/prompt-studio",
+    "uploaded": 3,
+    "order": [
+      "manifest.webmanifest",
+      "index.html",
+      "service-worker.js"
+    ],
+    "utc": "2026-11-05T03:19:24Z",
+    "ftps_sha256_readback": true,
+    "https_sha256_readback": true
+  },
+  "assets": {
+    "manifest.webmanifest": {
+      "old_remote_sha256": "293c843f155eca2d122b9da0cd37f32fa9eb4f0124327efe3387ba787a704364",
+      "historical_git_sha256": "1d7a93f41ff6ee59a48e5d51228ce169ae1d1750fb0f566152b14067728d0897",
+      "new_sha256": "71bcab6c1b6512c29eda5e8518875c47ecf0ff0ec0b0a8b859904d7575eef8"
+    },
+    "index.html": {
+      "old_remote_sha256": "0916b0ea93ebd0763ea80ac63c1cd9e510ff7c242334da76cd22908284022c21",
+      "historical_git_sha256": "cc43fbd298f6a98342c55898f3c2d751465068d845d957281bb7679ac0a3e134",
+      "new_sha256": "1e4f32cb3f27e4d7143915f9e2674d69084a773f812b4ae6b2627702df9bb5e1"
+    },
+    "service-worker.js": {
+      "old_remote_sha256": "d7fb49a8398be45381043cc76ea30ea81d466d8b3c66334a50471b3f7cb05cbf",
+      "historical_git_sha256": "dbf232cd2f3533e7957dd09c591f7251fe4f5b079bc9835d310d53687257570a",
+      "new_sha256": "2f26bfd780627c29d507f2f2c5ce13d0c8fdba4fc050cd205c0ddd350c5af849"
+    }
+  },
+  "preflight": {
+    "live_old_assets_match_historical_git": false,
+    "confirmed_v1_2_semantics": true,
+    "remote_matches_public_https": true,
+    "read_only_scope_check": "PASS",
+    "exact_remote_hash_CAS": "PASS",
+    "actual_remote_backups_taken": true,
+    "rollback_on_error_present": true
+  },
+  "publicBrowser": {
+    "browser": "Microsoft Edge Playwright",
+    "utc": "2026-11-05T03:20:20Z",
+    "status": "PASS",
+    "checks": [
+      "HTTP 200 canonical 2.0",
+      "manifest stable id/start_url/scope",
+      "Service Worker controlling same scope",
+      "old v1.2 cache retired",
+      "new v2.0.0 cache installed",
+      "offline root reload",
+      "preserved v2 dictionary draft",
+      "legacy v1.2 localStorage untouched",
+      "English tags while offline",
+      "390px mobile responsive",
+      "0 page errors"
+    ]
+  },
+  "pending": [
+    "Physical reopening of installed canonical iPhone PWA after deployment",
+    "retirement of old 1.2 source/assets after final installed acceptance"
+  ]
+}

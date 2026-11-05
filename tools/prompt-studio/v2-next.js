@@ -138,7 +138,7 @@
     if(!commit(s=>{s.draft={text:content,marks:[]};s.outputFormat=C.outputFormat(format||s.outputFormat);}))return;
     editor.value=state.draft.text;unsaved=false;showFormat();alertText('「'+name+'」を読み込んだよ');
   };
-  $('pickTemplate').onclick=()=>showPicker('テンプレート',state.templates.map(x=>({label:x.name,detail:x.previewJa||x.name,content:x.content,format:x.outputFormat})),x=>loadContent(x.content,x.label,x.format));
+  $('pickTemplate').onclick=()=>showPicker('テンプレート',state.templates.map(x=>({label:x.name,detail:x.previewJa&&x.previewJa!==x.name?x.previewJa:'',content:x.content,format:x.outputFormat})),x=>loadContent(x.content,x.label,x.format));
   $('pickHistory').onclick=()=>{
     const recent=state.recentCopies.map((x,i)=>({label:'コピー履歴 '+(i+1)+' · '+modeLabel(x.outputFormat),detail:x.text,content:x.text,format:x.outputFormat}));
     const saved=state.prompts.map(x=>({label:'保存済み：'+x.name,detail:x.content,content:x.content,format:x.outputFormat}));

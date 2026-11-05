@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#252f32">
+<title>プロンプトスタジオ 2.0 | 開発版</title>
+<link rel="stylesheet" href="v2-next.css">
+</head>
+<body>
+<header class="mast">
+  <div class="mast-inner">
+    <div><a href="./" class="back">旧スタジオへ</a><h1>プロンプトスタジオ <span>2.0 開発版</span></h1></div>
+    <nav class="topnav" aria-label="画面切替"><button id="showMain" class="active" aria-current="page">メイン画面</button><button id="showDictionary">各種辞書</button></nav>
+  </div>
+</header>
+<main>
+  <section id="mainScreen" class="screen">
+    <div class="workspace">
+      <section class="panel part-panel" aria-labelledby="partTitle">
+        <h2 id="partTitle">パーツ選択</h2>
+        <label for="partCategory">属性</label>
+        <select id="partCategory"></select>
+        <label for="partValue">項目</label>
+        <select id="partValue"></select>
+        <div id="partOptions" class="options"></div>
+        <div class="actions"><button id="reflect" class="primary">反映</button><button id="clearPart" class="secondary">選択をクリア</button></div>
+        <p class="help">テンプレート内の {属性} があれば、その位置に反映する。なければ文末に追加する。</p>
+      </section>
+      <section class="panel editor-panel" aria-labelledby="editorTitle">
+        <div class="panel-head"><h2 id="editorTitle">プロンプト入出力</h2><div class="actions tight"><button id="pickTemplate">テンプレート</button><button id="pickHistory">履歴</button></div></div>
+        <label for="promptText" class="visually-hidden">プロンプト本文</label>
+        <textarea id="promptText" rows="14" placeholder="文章を入力するか、パーツやテンプレートを反映してね"></textarea>
+        <div class="actions"><button id="clearPrompt" class="secondary">クリア</button><button id="copyPrompt">コピー</button><button id="savePrompt" class="primary">保存</button></div>
+        <p id="editNote" class="help">パーツを反映した範囲は、テンプレート保存時に {属性} に置き換わる。手入力で変更した範囲は普通の文章になる。</p>
+      </section>
+    </div>
+  </section>
+  <section id="dictionaryScreen" class="screen" hidden>
+    <div class="panel">
+      <div class="panel-head"><h2>各種辞書</h2><nav class="dict-nav" aria-label="編集辞書"><button data-dict="parts" class="active">パーツ</button><button data-dict="templates">テンプレート</button><button data-dict="prompts">プロンプト</button></nav></div>
+      <div id="editParts" class="dictionary-pane">
+        <div class="dictionary-grid">
+          <section class="editor-block"><h3>属性</h3><label for="editCategory">編集パーツ選択</label><select id="editCategory" size="6"></select><div class="actions"><button data-entity="category" data-op="add">追加</button><button data-entity="category" data-op="edit">編集</button><button data-entity="category" data-op="delete" class="danger">削除</button></div></section>
+          <section class="editor-block"><h3>値</h3><label for="editValue">選択した属性の値一覧</label><select id="editValue" size="6"></select><div class="actions"><button data-entity="value" data-op="add">追加</button><button data-entity="value" data-op="edit">編集</button><button data-entity="value" data-op="delete" class="danger">削除</button></div></section>
+          <section class="editor-block"><h3>値別オプション</h3><label for="editOption">選択した値のオプション</label><select id="editOption" size="6"></select><div class="actions"><button data-entity="option" data-op="add">追加</button><button data-entity="option" data-op="edit">編集</button><button data-entity="option" data-op="delete" class="danger">削除</button></div></section>
+          <section class="editor-block"><h3>選択候補</h3><label for="editChoice">オプションの候補一覧</label><select id="editChoice" size="6"></select><div class="actions"><button data-entity="choice" data-op="add">追加</button><button data-entity="choice" data-op="edit">編集</button><button data-entity="choice" data-op="delete" class="danger">削除</button></div></section>
+        </div>
+        <p class="help">各選択肢を編集するとメイン画面にも反映される。削除した属性を参照するテンプレートは自動変更しない。</p>
+      </div>
+      <div id="editTemplates" class="dictionary-pane" hidden><h3>テンプレート一覧</h3><label for="templateList">編集するテンプレート</label><select id="templateList" size="9"></select><div class="actions"><button data-record="template" data-op="add">追加</button><button data-record="template" data-op="edit">編集</button><button data-record="template" data-op="delete" class="danger">削除</button></div></div>
+      <div id="editPrompts" class="dictionary-pane" hidden><h3>プロンプト一覧</h3><label for="promptList">編集するプロンプト</label><select id="promptList" size="9"></select><div class="actions"><button data-record="prompt" data-op="add">追加</button><button data-record="prompt" data-op="edit">編集</button><button data-record="prompt" data-op="delete" class="danger">削除</button></div></div>
+    </div>
+  </section>
+  <section class="panel backup-panel" aria-labelledby="backupTitle">
+    <div><h2 id="backupTitle">データ管理</h2><p class="help">2.0専用の辞書・テンプレート・プロンプト・コピー履歴をJSONでまとめて保存する。旧PromptDBは読み込まない。</p></div>
+    <div class="actions"><button id="backupExport">JSON書き出し</button><label class="file-label" for="backupImport">JSON読み込み<input id="backupImport" type="file" accept=".json,application/json"></label></div>
+  </section>
+  <p id="status" role="status" aria-live="polite"></p>
+</main>
+<dialog id="saveDialog" aria-labelledby="saveTitle"><h2 id="saveTitle">保存方法</h2><p>今の文章をどちらで保存する？</p><div class="stack"><button id="saveAsTemplate">テンプレートとして保存</button><button id="saveAsPrompt">プロンプトとして保存</button></div><button class="dialog-close" data-close="saveDialog">閉じる</button></dialog>
+<dialog id="pickerDialog" aria-labelledby="pickerTitle"><h2 id="pickerTitle">一覧</h2><div id="pickerList" class="picker-list"></div><button class="dialog-close" data-close="pickerDialog">閉じる</button></dialog>
+<dialog id="nameDialog" aria-labelledby="nameTitle"><form id="nameForm" method="dialog"><h2 id="nameTitle">項目を編集</h2><label for="nameInput">名前</label><input id="nameInput" required maxlength="120"><div class="actions"><button class="primary" value="submit">確定</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
+<dialog id="recordDialog" aria-labelledby="recordTitle"><form id="recordForm" method="dialog"><h2 id="recordTitle">文章を編集</h2><label for="recordName">名前</label><input id="recordName" required maxlength="120"><label for="recordContent">内容</label><textarea id="recordContent" rows="9"></textarea><div class="actions"><button class="primary" value="submit">保存</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
+<script src="v2-next-core.js"></script><script src="v2-next.js"></script>
+</body>
+</html>

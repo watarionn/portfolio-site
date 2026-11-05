@@ -1,0 +1,50 @@
+{
+  "schema": "prompt-studio-v2-output-mode-production-evidence-v1",
+  "status": "PASS",
+  "source": {
+    "repo": "watarionn/portfolio-site",
+    "pr_feature": 226,
+    "pr_cache_bust": 227,
+    "commit": "8a3db08ffc57c06014fc113fa3d5e487c15f31d0"
+  },
+  "publication": {
+    "host": "sv210.cloudfree.ne.jp",
+    "scope": "/cf278796.cloudfree.jp/public_html/prompt-studio",
+    "time_utc": "2026-11-05T02:05:17Z",
+    "updated_files": 4,
+    "ftps_readback": true,
+    "https_readback": true
+  },
+  "assets": {
+    "v2-next-core.js": "325dd750086b212fe97c655d2f8ec8d875072362fd91db549df908f051ed9509",
+    "v2-next.css": "d8e7ae9016036c08a13d60052985c56812ac202228681883dd2341d090614182",
+    "v2-next.html": "4935083fc5f7d806de58918d7595331b8bd0dd81af0ce8fb5aefe7276bf462d7",
+    "v2-next.js": "440d6945d64680681327fb72e19915b5fb8756c4ef8b37f0b06145135d1cc350"
+  },
+  "public_browser": {
+    "status": "PASS",
+    "time_utc": "2026-11-05T02:05:55Z",
+    "url": "https://cf278796.cloudfree.jp/prompt-studio/v2-next.html",
+    "browser": "Microsoft Edge Playwright",
+    "checks": [
+      "HTTP 200",
+      "switch to tags",
+      "female/hair tag reflection",
+      "copy",
+      "reload persistence",
+      "template placeholder save",
+      "390px no overflow",
+      "0 page errors"
+    ]
+  },
+  "old_site": {
+    "url": "https://cf278796.cloudfree.jp/prompt-studio/",
+    "http": 200,
+    "old_profile_select_present": true
+  },
+  "remaining": [
+    "iPhone Safari physical device acceptance",
+    "official 2.0 PWA switchover",
+    "legacy 1.2 retirement"
+  ]
+}

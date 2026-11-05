@@ -35,6 +35,8 @@ def record_save(page, name):
 def dictionary_named_action(page, entity, op, name):
     page.locator(f'[data-entity="{entity}"][data-op="{op}"]').click()
     page.locator("#nameInput").fill(name)
+    translations={"小道具":"prop","傘":"an umbrella","色":"color","赤":"red"}
+    page.locator("#englishInput").fill(translations.get(name,name.lower()))
     page.locator('#nameForm button[value="submit"]').click()
 
 
@@ -45,20 +47,20 @@ def test_template_multiple_characters_history_and_copy():
             page = open_page(browser)
             page.locator("#pickTemplate").click()
             page.locator("#pickerList button").nth(1).click()
-            assert page.locator("#promptText").input_value().count("{登場人物}") == 2
+            assert page.locator("#promptText").input_value().count("{character}") == 2
             page.locator("#partCategory").select_option("character")
             page.locator("#partValue").select_option("woman")
             page.locator("#partOptions select").first.select_option("hair2")
             page.locator("#reflect").click()
-            assert "ロング" in page.locator("#promptText").input_value()
-            assert page.locator("#promptText").input_value().count("{登場人物}") == 1
+            assert "long hair" in page.locator("#promptText").input_value()
+            assert page.locator("#promptText").input_value().count("{character}") == 1
             page.locator("#partValue").select_option("dog")
             page.locator("#partOptions select").first.select_option("breed0")
             page.locator("#reflect").click()
-            assert "{登場人物}" not in page.locator("#promptText").input_value()
+            assert "{character}" not in page.locator("#promptText").input_value()
             page.locator("#savePrompt").click()
             page.locator("#saveAsTemplate").click()
-            assert page.locator("#recordContent").input_value().count("{登場人物}") == 2
+            assert page.locator("#recordContent").input_value().count("{character}") == 2
             record_save(page, "二人のテンプレート")
             page.locator("#savePrompt").click()
             page.locator("#saveAsPrompt").click()
@@ -94,7 +96,7 @@ def test_dictionary_value_specific_options_and_crud():
             assert page.locator("#partOptions label").first.inner_text().startswith("色")
             page.locator("#partOptions select").first.select_option(label="赤")
             page.locator("#reflect").click()
-            assert "傘（色：赤）" in page.locator("#promptText").input_value()
+            assert "an umbrella with red" in page.locator("#promptText").input_value()
             page.locator("#showDictionary").click()
             page.locator("#editCategory").select_option(label="小道具")
             page.locator('[data-entity="category"][data-op="edit"]').click()
@@ -104,16 +106,16 @@ def test_dictionary_value_specific_options_and_crud():
             page.locator("#showMain").click()
             page.locator("#savePrompt").click()
             page.locator("#saveAsTemplate").click()
-            assert "{道具}" in page.locator("#recordContent").input_value()
+            assert "{prop}" in page.locator("#recordContent").input_value()
             record_save(page, "属性名の追跡")
             page.locator("#showDictionary").click()
             page.locator('[data-dict="templates"]').click()
             page.locator('[data-record="template"][data-op="add"]').click()
-            page.locator("#recordContent").fill("{道具}の画像")
+            page.locator("#recordContent").fill("A picture of {prop}")
             record_save(page, "道具用")
             assert page.locator("#templateList").get_by_text("道具用").count() == 1
             page.locator('[data-record="template"][data-op="edit"]').click()
-            page.locator("#recordContent").fill("{道具}の写真")
+            page.locator("#recordContent").fill("A photo of {prop}")
             record_save(page, "道具用改訂")
             assert page.locator("#templateList").get_by_text("道具用改訂").count() == 1
             page.locator('[data-record="template"][data-op="delete"]').click()
@@ -128,15 +130,15 @@ def test_edit_preserves_unaffected_part_and_import_rejects_legacy():
         browser = launch(p)
         try:
             page = open_page(browser, mobile=True)
-            page.locator("#promptText").fill("前半 ")
+            page.locator("#promptText").fill("Intro: ")
             page.locator("#partValue").select_option("woman")
             page.locator("#reflect").click()
             text = page.locator("#promptText").input_value()
-            assert "女性" in text
-            page.locator("#promptText").fill("新しい前置き " + text)
+            assert "a woman" in text
+            page.locator("#promptText").fill("New intro: " + text)
             page.locator("#savePrompt").click()
             page.locator("#saveAsTemplate").click()
-            assert "{登場人物}" in page.locator("#recordContent").input_value()
+            assert "{character}" in page.locator("#recordContent").input_value()
             record_save(page, "編集後のテンプレート")
             page.locator("#backupExport").click()
             with page.expect_download() as d:
@@ -190,11 +192,11 @@ def test_part_clear_and_saved_prompt_crud():
             page.locator("#showDictionary").click()
             page.locator('[data-dict="prompts"]').click()
             page.locator('[data-record="prompt"][data-op="add"]').click()
-            page.locator("#recordContent").fill("保存済み本文")
+            page.locator("#recordContent").fill("Saved prompt content")
             record_save(page, "保存済みA")
             assert page.locator("#promptList").get_by_text("保存済みA").count() == 1
             page.locator('[data-record="prompt"][data-op="edit"]').click()
-            page.locator("#recordContent").fill("修正済み本文")
+            page.locator("#recordContent").fill("Revised prompt content")
             record_save(page, "保存済みB")
             assert page.locator("#promptList").get_by_text("保存済みB").count() == 1
             page.locator('[data-record="prompt"][data-op="delete"]').click()
@@ -223,29 +225,29 @@ def test_output_format_mode_switch_tag_reflection_history_and_backup():
             page.locator("#partValue").select_option("woman")
             page.locator("#partOptions select").first.select_option("hair2")
             page.locator("#reflect").click()
-            assert page.locator("#promptText").input_value() == "女性, ロング"
+            assert page.locator("#promptText").input_value() == "1girl, long hair"
             page.locator("#partCategory").select_option("location")
             page.locator("#partValue").select_option("train")
             page.locator("#reflect").click()
-            assert page.locator("#promptText").input_value() == "女性, ロング, 電車"
+            assert page.locator("#promptText").input_value() == "1girl, long hair, train interior"
             page.locator("#savePrompt").click()
             page.locator("#saveAsTemplate").click()
-            assert page.locator("#recordContent").input_value() == "{登場人物}, {場所}"
+            assert page.locator("#recordContent").input_value() == "{character}, {location}"
             record_save(page, "タグ用")
             page.locator("#savePrompt").click()
             page.locator("#saveAsPrompt").click()
             record_save(page, "タグ保存")
             page.locator("#copyPrompt").click()
-            assert page.evaluate("window.__lastCopy") == "女性, ロング, 電車"
+            assert page.evaluate("window.__lastCopy") == "1girl, long hair, train interior"
             page.reload()
             assert page.locator("#outputFormat").input_value() == "tags"
-            page.locator("#promptText").fill("書き換えた文章")
+            page.locator("#promptText").fill("Rewritten text")
             page.locator("#outputFormat").select_option("prose")
-            assert page.locator("#promptText").input_value() == "書き換えた文章"
+            assert page.locator("#promptText").input_value() == "Rewritten text"
             page.locator("#pickHistory").click()
             page.locator("#pickerList button").first.click()
             assert page.locator("#outputFormat").input_value() == "tags"
-            assert page.locator("#promptText").input_value() == "女性, ロング, 電車"
+            assert page.locator("#promptText").input_value() == "1girl, long hair, train interior"
             with page.expect_download() as download:
                 page.locator("#backupExport").click()
             data=json.loads(download.value.path().read_bytes())
@@ -280,5 +282,71 @@ def test_older_independent_2_backup_without_mode_defaults_to_prose():
             })
             assert page.locator("#outputFormat").input_value() == "prose"
             assert page.locator("#promptText").input_value() == "旧2.0の文章"
+        finally:
+            browser.close()
+
+
+def test_japanese_picker_english_text_and_custom_bilingual_entries():
+    with sync_playwright() as p:
+        browser=launch(p)
+        try:
+            page=open_page(browser,mobile=True)
+            page.locator("#pickTemplate").click()
+            assert page.locator("#pickerList button").first.get_by_text("人物・場所・ポーズ").count()==1
+            assert "{登場人物}" in page.locator("#pickerList button").first.inner_text()
+            page.locator("#pickerList button").first.click()
+            assert page.locator("#promptText").input_value()=="{character} {pose} {location}."
+            page.locator("#partValue").select_option("woman")
+            page.locator("#partOptions select").first.select_option("hair2")
+            page.locator("#reflect").click()
+            assert "a woman with long hair" in page.locator("#promptText").input_value()
+            assert not page.locator("#promptText").evaluate("(el)=>/[\\u3040-\\u30ff\\u3400-\\u9fff]/u.test(el.value)")
+            page.locator("#showDictionary").click()
+            page.locator('[data-entity="category"][data-op="add"]').click()
+            page.locator("#nameInput").fill("小道具")
+            page.locator("#englishInput").fill("")
+            page.locator('#nameForm button[value="submit"]').click()
+            assert page.locator("#nameDialog").evaluate("(el)=>el.open")
+            page.locator("#englishInput").fill("prop")
+            page.locator('#nameForm button[value="submit"]').click()
+            page.locator('[data-entity="value"][data-op="add"]').click()
+            page.locator("#nameInput").fill("傘")
+            page.locator("#englishInput").fill("an umbrella")
+            page.locator("#tagInput").fill("umbrella")
+            page.locator('#nameForm button[value="submit"]').click()
+            page.locator("#showMain").click()
+            page.locator("#partCategory").select_option(label="小道具")
+            page.locator("#partValue").select_option(label="傘")
+            page.locator("#outputFormat").select_option("tags")
+            page.locator("#clearPrompt").click()
+            page.locator("#reflect").click()
+            assert page.locator("#promptText").input_value()=="umbrella"
+            page.close()
+        finally:
+            browser.close()
+
+
+def test_legacy_japanese_custom_template_not_saved_as_english():
+    with sync_playwright() as p:
+        browser=launch(p)
+        try:
+            page=open_page(browser)
+            page.locator("#showDictionary").click()
+            page.locator('[data-dict="templates"]').click()
+            page.locator('[data-record="template"][data-op="add"]').click()
+            page.locator("#recordName").fill("日本語の旧テンプレート")
+            page.locator("#recordContent").fill("犬が{場所}にいる。")
+            page.locator('#recordForm button[value="submit"]').click()
+            assert page.locator("#recordDialog").evaluate("(el)=>el.open")
+            assert "英語" in page.locator("#status").inner_text()
+            page.locator("#recordContent").fill("A dog at {location}.")
+            page.locator("#recordPreviewJa").fill("犬が場所にいる")
+            page.locator('#recordForm button[value="submit"]').click()
+            assert not page.locator("#recordDialog").evaluate("(el)=>el.open")
+            page.locator("#showMain").click()
+            page.locator("#pickTemplate").click()
+            assert "犬が場所にいる" in page.locator("#pickerList").inner_text()
+            page.locator("#pickerList").get_by_text("日本語の旧テンプレート").click()
+            assert page.locator("#promptText").input_value()=="A dog at {location}."
         finally:
             browser.close()

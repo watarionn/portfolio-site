@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#252f32">
 <title>プロンプトスタジオ 2.0 | 開発版</title>
-<link rel="stylesheet" href="v2-next.css">
+<link rel="stylesheet" href="v2-next.css?v=2.0.1">
 </head>
 <body>
 <header class="mast">
@@ -30,6 +30,14 @@
       </section>
       <section class="panel editor-panel" aria-labelledby="editorTitle">
         <div class="panel-head"><h2 id="editorTitle">プロンプト入出力</h2><div class="actions tight"><button id="pickTemplate">テンプレート</button><button id="pickHistory">履歴</button></div></div>
+        <div class="output-settings">
+          <label for="outputMode">プロンプト形式</label>
+          <select id="outputMode" aria-describedby="outputModeNote">
+            <option value="prose">文章形式（FLUX / GPT Image）</option>
+            <option value="tags">タグ形式（SD1.5など）</option>
+          </select>
+          <p id="outputModeNote" class="help">文章で記述する形式。辞書のパーツは日本語の説明付きで反映する。</p>
+        </div>
         <label for="promptText" class="visually-hidden">プロンプト本文</label>
         <textarea id="promptText" rows="14" placeholder="文章を入力するか、パーツやテンプレートを反映してね"></textarea>
         <div class="actions"><button id="clearPrompt" class="secondary">クリア</button><button id="copyPrompt">コピー</button><button id="savePrompt" class="primary">保存</button></div>
@@ -61,8 +69,8 @@
 </main>
 <dialog id="saveDialog" aria-labelledby="saveTitle"><h2 id="saveTitle">保存方法</h2><p>今の文章をどちらで保存する？</p><div class="stack"><button id="saveAsTemplate">テンプレートとして保存</button><button id="saveAsPrompt">プロンプトとして保存</button></div><button class="dialog-close" data-close="saveDialog">閉じる</button></dialog>
 <dialog id="pickerDialog" aria-labelledby="pickerTitle"><h2 id="pickerTitle">一覧</h2><div id="pickerList" class="picker-list"></div><button class="dialog-close" data-close="pickerDialog">閉じる</button></dialog>
-<dialog id="nameDialog" aria-labelledby="nameTitle"><form id="nameForm" method="dialog"><h2 id="nameTitle">項目を編集</h2><label for="nameInput">名前</label><input id="nameInput" required maxlength="120"><div class="actions"><button class="primary" value="submit">確定</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
-<dialog id="recordDialog" aria-labelledby="recordTitle"><form id="recordForm" method="dialog"><h2 id="recordTitle">文章を編集</h2><label for="recordName">名前</label><input id="recordName" required maxlength="120"><label for="recordContent">内容</label><textarea id="recordContent" rows="9"></textarea><div class="actions"><button class="primary" value="submit">保存</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
-<script src="v2-next-core.js"></script><script src="v2-next.js"></script>
+<dialog id="nameDialog" aria-labelledby="nameTitle"><form id="nameForm" method="dialog"><h2 id="nameTitle">項目を編集</h2><label for="nameInput">名前</label><input id="nameInput" required maxlength="120"><div id="nameTagField" hidden><label for="nameTagInput">タグ形式で使う表記（任意）</label><input id="nameTagInput" maxlength="240" placeholder="例：1girl, long hair"><p class="help">空欄なら既定のタグ表記、または表示名を使用するよ。</p></div><div class="actions"><button class="primary" value="submit">確定</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
+<dialog id="recordDialog" aria-labelledby="recordTitle"><form id="recordForm" method="dialog"><h2 id="recordTitle">文章を編集</h2><label for="recordName">名前</label><input id="recordName" required maxlength="120"><label for="recordContent">内容</label><textarea id="recordContent" rows="9"></textarea><label for="recordMode">この文章の形式</label><select id="recordMode"><option value="prose">文章形式（FLUX / GPT Image）</option><option value="tags">タグ形式（SD1.5など）</option></select><div class="actions"><button class="primary" value="submit">保存</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
+<script src="v2-next-core.js?v=2.0.1"></script><script src="v2-next.js?v=2.0.1"></script>
 </body>
 </html>

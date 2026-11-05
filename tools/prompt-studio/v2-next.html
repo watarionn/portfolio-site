@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#252f32">
 <title>プロンプトスタジオ 2.0 | 開発版</title>
-<link rel="stylesheet" href="v2-next.css?v=2.0.1">
+<link rel="stylesheet" href="v2-next.css?v=2.0.2">
 </head>
 <body>
 <header class="mast">
@@ -26,16 +26,16 @@
         <select id="partValue"></select>
         <div id="partOptions" class="options"></div>
         <div class="actions"><button id="reflect" class="primary">反映</button><button id="clearPart" class="secondary">選択をクリア</button></div>
-        <p class="help">テンプレート内の {属性} があれば、その位置に反映する。なければ文末に追加する。</p>
+        <p class="help">テンプレート内の {character} など英語の変数があれば置き換える。なければ英語で文末に追加する。</p>
       </section>
       <section class="panel editor-panel" aria-labelledby="editorTitle">
         <div class="panel-head"><h2 id="editorTitle">プロンプト入出力</h2><div class="actions tight"><button id="pickTemplate">テンプレート</button><button id="pickHistory">履歴</button></div></div>
         <div class="format-control"><label for="outputFormat">プロンプト形式</label><select id="outputFormat"><option value="prose">文章形式（FLUX / GPT Image）</option><option value="tags">タグ形式（SD1.5など）</option></select></div>
-        <p id="formatHelp" class="help">文章形式では文章としてパーツを反映する。既存の文章は自動変換しない。</p>
+        <p id="formatHelp" class="help">パーツ選択は日本語、反映する文章は英語。文章形式とタグ形式を切り替えられる。</p>
         <label for="promptText" class="visually-hidden">プロンプト本文</label>
-        <textarea id="promptText" rows="14" placeholder="文章を入力するか、パーツやテンプレートを反映してね"></textarea>
+        <textarea id="promptText" rows="14" placeholder="Enter an English prompt or choose a Japanese-labeled part or template."></textarea>
         <div class="actions"><button id="clearPrompt" class="secondary">クリア</button><button id="copyPrompt">コピー</button><button id="savePrompt" class="primary">保存</button></div>
-        <p id="editNote" class="help">パーツを反映した範囲は、テンプレート保存時に {属性} に置き換わる。手入力で変更した範囲は普通の文章になる。</p>
+        <p id="editNote" class="help">パーツを反映した範囲は、テンプレート保存時に {character} などの英語変数へ置き換わる。既存の日本語文章は自動翻訳せず保護する。</p>
       </section>
     </div>
   </section>
@@ -49,7 +49,7 @@
           <section class="editor-block"><h3>値別オプション</h3><label for="editOption">選択した値のオプション</label><select id="editOption" size="6"></select><div class="actions"><button data-entity="option" data-op="add">追加</button><button data-entity="option" data-op="edit">編集</button><button data-entity="option" data-op="delete" class="danger">削除</button></div></section>
           <section class="editor-block"><h3>選択候補</h3><label for="editChoice">オプションの候補一覧</label><select id="editChoice" size="6"></select><div class="actions"><button data-entity="choice" data-op="add">追加</button><button data-entity="choice" data-op="edit">編集</button><button data-entity="choice" data-op="delete" class="danger">削除</button></div></section>
         </div>
-        <p class="help">各選択肢を編集するとメイン画面にも反映される。削除した属性を参照するテンプレートは自動変更しない。</p>
+        <p class="help">日本語の表示名と英語の出力表現を登録できる。既存の英語表現がない項目は、登録するまで反映しない。</p>
       </div>
       <div id="editTemplates" class="dictionary-pane" hidden><h3>テンプレート一覧</h3><label for="templateList">編集するテンプレート</label><select id="templateList" size="9"></select><div class="actions"><button data-record="template" data-op="add">追加</button><button data-record="template" data-op="edit">編集</button><button data-record="template" data-op="delete" class="danger">削除</button></div></div>
       <div id="editPrompts" class="dictionary-pane" hidden><h3>プロンプト一覧</h3><label for="promptList">編集するプロンプト</label><select id="promptList" size="9"></select><div class="actions"><button data-record="prompt" data-op="add">追加</button><button data-record="prompt" data-op="edit">編集</button><button data-record="prompt" data-op="delete" class="danger">削除</button></div></div>
@@ -63,8 +63,8 @@
 </main>
 <dialog id="saveDialog" aria-labelledby="saveTitle"><h2 id="saveTitle">保存方法</h2><p>今の文章をどちらで保存する？</p><div class="stack"><button id="saveAsTemplate">テンプレートとして保存</button><button id="saveAsPrompt">プロンプトとして保存</button></div><button class="dialog-close" data-close="saveDialog">閉じる</button></dialog>
 <dialog id="pickerDialog" aria-labelledby="pickerTitle"><h2 id="pickerTitle">一覧</h2><div id="pickerList" class="picker-list"></div><button class="dialog-close" data-close="pickerDialog">閉じる</button></dialog>
-<dialog id="nameDialog" aria-labelledby="nameTitle"><form id="nameForm" method="dialog"><h2 id="nameTitle">項目を編集</h2><label for="nameInput">名前</label><input id="nameInput" required maxlength="120"><div class="actions"><button class="primary" value="submit">確定</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
-<dialog id="recordDialog" aria-labelledby="recordTitle"><form id="recordForm" method="dialog"><h2 id="recordTitle">文章を編集</h2><label for="recordName">名前</label><input id="recordName" required maxlength="120"><label for="recordContent">内容</label><textarea id="recordContent" rows="9"></textarea><div class="actions"><button class="primary" value="submit">保存</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
-<script src="v2-next-core.js?v=2.0.1"></script><script src="v2-next.js?v=2.0.1"></script>
+<dialog id="nameDialog" aria-labelledby="nameTitle"><form id="nameForm" method="dialog"><h2 id="nameTitle">項目を編集</h2><label for="nameInput">表示名（日本語）</label><input id="nameInput" required maxlength="120"><label for="englishInput" id="englishLabel">英語表現（プロンプトに反映）</label><input id="englishInput" required maxlength="160" autocomplete="off"><div id="tagField"><label for="tagInput">タグ用英語（省略時は英語表現と同じ）</label><input id="tagInput" maxlength="160" autocomplete="off"></div><p class="help">新しいパーツや候補には英語表現を登録してね。機械翻訳は行わない。</p><div class="actions"><button class="primary" value="submit">確定</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
+<dialog id="recordDialog" aria-labelledby="recordTitle"><form id="recordForm" method="dialog"><h2 id="recordTitle">文章を編集</h2><label for="recordName">名前</label><input id="recordName" required maxlength="120"><label for="recordPreviewJa" id="recordPreviewJaLabel">選択一覧の説明（日本語、省略可）</label><input id="recordPreviewJa" maxlength="200"><label for="recordContent">プロンプト本文（英語）</label><textarea id="recordContent" rows="9"></textarea><div class="actions"><button class="primary" value="submit">保存</button><button value="cancel" formnovalidate>キャンセル</button></div></form></dialog>
+<script src="v2-next-core.js?v=2.0.2"></script><script src="v2-next.js?v=2.0.2"></script>
 </body>
 </html>

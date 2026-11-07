@@ -34,7 +34,7 @@
       version: APP_VERSION,
       width:w, height:h, imageName:null, imageData:null,
       vertices:{}, shapes:[], layerGroups:[], counter:0,
-      palette:{characteristic:[],featured:[],representative:[],unified:[],imported:false}
+      palette:{characteristic:[],featured:[],representative:[],unified:[],imported:false,groups:[],activeGroup:''}
     };
   }
   const round = (n) => Math.round(n * 100) / 100;
@@ -202,7 +202,7 @@
     $('canvasGrid').setAttribute('opacity',state.showGrid?1:0);
     if(p.imageData){$('underlay').setAttribute('href',p.imageData)}else{$('underlay').removeAttribute('href')}
     $('underlay').setAttribute('opacity',state.showUnderlay?state.underlayOpacity:0);
-    $('emptyState').classList.toggle('hidden',!!p.imageData||p.shapes.length>0);
+    $('emptyState').classList.toggle('hidden',!!p.imageData||p.shapes.length>0||!!p.imageName);
     const pol=$('polygonLayer');pol.replaceChildren();
     for(const s of p.shapes){if(!s.visible)continue;
     if(isLine(s)){
@@ -355,6 +355,7 @@
     renderPalette();toast('パレットから削除しました（図形の塗り色は維持）');
   }
   function renderPalette(){
+    renderNamedPalettes();
     const unified=$('unifiedColors');unified.replaceChildren();
     const colors=paletteUnified();
     colors.forEach((c,i)=>{
@@ -523,6 +524,22 @@
     const char=[];for(let ix=0;char.length<8&&ix<Math.min(96,candidates.length);ix++){let winner=null,win=-1;for(const e of candidates){if(char.includes(e)||char.some(a=>labDist(a.lab,e.lab)<13))continue;const distance=char.length?Math.min(...char.map(a=>labDist(a.lab,e.lab))):50;const diversity=.12+.88*Math.min(1,Math.max(0,(distance-9)/32));const chroma=Math.hypot(e.lab[1],e.lab[2]);const score=e.score*diversity*(char.length===0?1:.45+1.45*Math.min(1,chroma/60));if(score>win){win=score;winner=e}}if(!winner)break;char.push(winner)}
     return {characteristic:paletteColors(char.map(x=>hex(...x.rgb))),featured:paletteColors(featured.map(x=>hex(...x.rgb))),representative:paletteColors(rep),imported:false};
   }
+  function createBlankCanvas(){
+    const match=/^(\\d+)x(\\d+)$/.exec($('newCanvasSize').value);
+    if(!match)return toast('サイズを選択してください');
+    const w=Number(match[1]),h=Number(match[2]);
+    if(w<1||h<1||w>12000||h>12000)return toast('サイズが不正です');
+    if((state.project.imageName||state.project.shapes.length)&&!confirm('現在の編集内容を置き換えます。必要なら先にJSON保存してください。'))return;
+    const groups=structuredClone(state.project.palette.groups||[]);
+    const activeGroup=state.project.palette.activeGroup||'';
+    state.project=newProject(w,h);state.project.imageName='無題のキャンバス';
+    state.project.palette.groups=groups;state.project.palette.activeGroup=activeGroup;
+    state.lastName='無題のキャンバス';cachedBitmap=null;
+    state.layerSelection.clear();state.paletteEditIndex=-1;state.draft=[];state.history=[];state.future=[];
+    state.selected=null;state.selectedVertex=null;state.cursor=null;
+    $('newCanvasDialog').hidden=true;changeTool('draw');autoFit();scheduleAutosave();
+    status(w+' × '+h+' の新規キャンバス');toast('新規キャンバスを作成しました');
+  }
   async function loadImage(file){
     if(!file||!/^image\/(png|jpeg|webp|gif)$/.test(file.type)){toast('PNG / JPEG / WebP / GIF の画像を選んでください');return;}
     if(file.size>MAX_PICTURE_BYTES){toast('画像は24MB以下にしてください');return;}
@@ -534,7 +551,63 @@
   }
   function readFileAsDataUrl(f){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(Error('ファイルを読み込めません'));r.readAsDataURL(f)})}
   function decodeImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('画像をデコードできません'));img.src=src})}
+  // Named palette packs are independent of the existing unified 64-color palette.
+  function paletteGroupsFromJson(json){
+    const source=Array.isArray(json)?json:(json?.palettes||json?.characters||json?.characterPalettes||json?.character_palettes||json?.groups);
+    if(!source)return null;
+    const entries=Array.isArray(source)?source:Object.entries(source).map(([name,value])=>({name,...(Array.isArray(value)?{colors:value}:value)}));
+    if(!entries.length||entries.length>200)throw Error('パレット数は1〜200件にしてください');
+    const groups=entries.map((item,i)=>{
+      if(!item||typeof item!=='object')throw Error('パレット項目が不正です');
+      const name=String(item.name||item.character||item.label||item.id||('パレット '+(i+1))).trim().slice(0,80);
+      const raw=Array.isArray(item)?item:(item.colors||item.palette||item.hexColors||item.hex_colors);
+      if(!name||!Array.isArray(raw)||raw.length<1||raw.length>64)throw Error('パレット名または色配列が不正です');
+      const colors=raw.map(rgbFromColor);
+      if(colors.some(c=>!c))throw Error(name+' に無効な色があります');
+      return {name,colors:[...new Set(colors)]};
+    });
+    if(new Set(groups.map(g=>g.name)).size!==groups.length)throw Error('パレット名が重複しています');
+    return groups;
+  }
+  function selectNamedPalette(name){
+    const group=(state.project.palette.groups||[]).find(g=>g.name===name);
+    if(!group)return;
+    state.project.palette.activeGroup=name;
+    state.paletteEditIndex=-1;
+    renderPalette();scheduleAutosave();
+  }
+  function renderNamedPalettes(){
+    const picker=$('namedPaletteSelect');if(!picker)return;
+    const p=state.project.palette,groups=p.groups||[];
+    picker.replaceChildren();
+    const empty=document.createElement('option');empty.value='';empty.textContent='統合パレット';picker.append(empty);
+    for(const g of groups){const o=document.createElement('option');o.value=g.name;o.textContent=g.name+'（'+g.colors.length+'色）';picker.append(o)}
+    picker.value=groups.some(g=>g.name===p.activeGroup)?p.activeGroup:'';
+    const container=$('namedPaletteColors');container.replaceChildren();
+    const active=groups.find(g=>g.name===picker.value);
+    if(active)for(const color of active.colors){
+      const b=document.createElement('button');b.type='button';b.className='swatch'+(state.color===color?' active':'');
+      b.style.setProperty('--swatch',color);b.title=color;b.setAttribute('aria-label',active.name+' '+color);
+      b.addEventListener('click',()=>changeColor(color,'palette'));container.append(b);
+    }
+    $('namedPaletteCount').textContent=groups.length+'件';
+  }
   function importPalette(json){
+    const groups=paletteGroupsFromJson(json);
+    if(groups){
+      const previous=state.project.palette.groups||[];
+      const merged=new Map(previous.map(g=>[g.name,g]));
+      for(const g of groups)merged.set(g.name,g);
+      if(merged.size>200)throw Error('登録可能なパレットは最大200件です');
+      saveHistory();
+      state.project.palette.groups=[...merged.values()];
+      state.project.palette.activeGroup=groups[0].name;
+      state.project.palette.imported=true;
+      state.paletteEditIndex=-1;
+      render();scheduleAutosave();
+      toast(groups.length+'件の名前付きパレットを読み込みました');
+      return;
+    }
     const src=json.metadata?.colors||json.colors||json.palette||json;
     let data={};if(Array.isArray(src))data={characteristic:src,featured:src,representative:src};
     else data={characteristic:src.characteristic||src.characteristicColors||src.featured||src.colors||[],featured:src.featured||src.featuredColors||[],representative:src.representative||src.dominant||src.representativeColors||src.colors||[]};
@@ -565,7 +638,9 @@
       if(!Number.isFinite(width)||width>40||width<(kind==='line'?.25:0))throw Error('線または辺の太さが不正です');
       ids.add(s.id);return {id:s.id,...(kind==='line'?{kind:'line'}:{}),name:String(s.name||(kind==='line'?'線':'図形')).slice(0,80),vertexIds:s.vertexIds.slice(),fill,strokeColor,strokeWidth:width,visible:s.visible!==false};
     });
-    const palette={characteristic:paletteColors(x.palette?.characteristic),featured:paletteColors(x.palette?.featured),representative:paletteColors(x.palette?.representative),imported:!!x.palette?.imported};
+    const groups=x.palette?.groups?paletteGroupsFromJson({groups:x.palette.groups}):[];
+    const activeGroup=groups.some(g=>g.name===x.palette?.activeGroup)?x.palette.activeGroup:'';
+    const palette={characteristic:paletteColors(x.palette?.characteristic),featured:paletteColors(x.palette?.featured),representative:paletteColors(x.palette?.representative),imported:!!x.palette?.imported,groups,activeGroup};
     palette.unified=Array.isArray(x.palette?.unified)?[...new Set(x.palette.unified.map(rgbFromColor).filter(Boolean))].slice(0,PALETTE_MAX):combinedPalette(palette);
     // Composite layers contain only valid polygon IDs, with no overlap between groups.
     const groupedIds=new Set(),groupNames=new Set();
@@ -606,13 +681,13 @@
   }
   function projectDocument(){const p=state.project;return {schema:'reference-shape-editor/v1',savedAt:new Date().toISOString(),appVersion:APP_VERSION,canvas:{width:p.width,height:p.height},image:{name:p.imageName,dataURL:p.imageData},backgroundOpacity:state.underlayOpacity,vertices:p.vertices,shapes:p.shapes,layerGroups:p.layerGroups,palette:p.palette,nextCounter:p.counter};}
   function autosaveNow(){
-    if(!autosaveReady||(!state.project.imageData&&!state.project.shapes.length))return;
+    if(!autosaveReady||(!state.project.imageData&&!state.project.shapes.length&&!state.project.imageName))return;
     const doc=projectDocument();
     openDraftDb().then(db=>new Promise((resolve,reject)=>{
       const tx=db.transaction('drafts','readwrite');tx.objectStore('drafts').put(doc,'current');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);
     })).catch(err=>{if(!autosaveFailureReported){autosaveFailureReported=true;toast('自動保存できません。JSON保存を使ってください: '+err.message,7);}});
   }
-  function scheduleAutosave(){if(!autosaveReady||(!state.project.imageData&&!state.project.shapes.length))return;clearTimeout(autosaveTimer);autosaveTimer=setTimeout(autosaveNow,950);}
+  function scheduleAutosave(){if(!autosaveReady||(!state.project.imageData&&!state.project.shapes.length&&!state.project.imageName))return;clearTimeout(autosaveTimer);autosaveTimer=setTimeout(autosaveNow,950);}
   async function restoreDraft(){
     try{
       const db=await openDraftDb();
@@ -635,8 +710,12 @@
   function setBindings(){
     document.querySelectorAll('.tool[data-tool]').forEach(b=>b.addEventListener('click',()=>changeTool(b.dataset.tool)));
     $('sourceInput').addEventListener('change',e=>{loadImage(e.target.files[0]);e.target.value=''});
+    $('newCanvasButton').addEventListener('click',()=>{$('newCanvasDialog').hidden=false});
+    $('newCanvasCancel').addEventListener('click',()=>{$('newCanvasDialog').hidden=true});
+    $('newCanvasCreate').addEventListener('click',createBlankCanvas);
     $('projectInput').addEventListener('change',e=>{loadProject(e.target.files[0]);e.target.value=''});
     $('paletteInput').addEventListener('change',e=>{loadPaletteFile(e.target.files[0]);e.target.value=''});
+    $('namedPaletteSelect').addEventListener('change',e=>selectNamedPalette(e.target.value));
     $('paletteEditColor').addEventListener('input',e=>{$('paletteEditHex').value=e.target.value;});
     $('paletteEditHex').addEventListener('change',e=>{const c=cleanColor(e.target.value.trim());if(c)$('paletteEditColor').value=c});
     $('paletteSave').addEventListener('click',paletteSave);

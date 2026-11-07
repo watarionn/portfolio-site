@@ -11,10 +11,10 @@
   <meta name="apple-mobile-web-app-title" content="Shape Studio"/>
   <link rel="manifest" href="./manifest.webmanifest"/>
   <link rel="icon" href="./icon.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="styles.css?v=20261029-standalone-safe-area-v2"/>
-  <script defer src="app.js?v=20261107-blank-canvas-v1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261107-save-dialog-fix-v2"/>
+  <script defer src="app.js?v=20261107-save-dialog-fix-v2"></script>
   <script>if ('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(console.warn));</script>
-<style>#newCanvasDialog[hidden]{display:none!important}</style></head>
+<style>#newCanvasDialog[hidden],#saveDialog[hidden]{display:none!important}</style></head>
 <body>
 <div id="newCanvasDialog" hidden style="position:fixed;inset:0;z-index:1000;background:#000b;display:flex;align-items:center;justify-content:center;padding:20px">
   <div style="background:#22282c;color:#fff;padding:24px;border:1px solid #59646a;border-radius:14px;width:min(100%,360px)">
@@ -33,7 +33,7 @@
     <button class="action" id="newCanvasCancel" type="button">キャンセル</button>
   </div>
 </div>
-<div id="saveDialog" hidden role="dialog" aria-modal="true" aria-labelledby="saveDialogTitle" style="position:fixed;inset:0;z-index:1001;background:#000b;display:flex;align-items:center;justify-content:center;padding:20px">
+<div id="saveDialog" hidden role="dialog" aria-modal="true" aria-labelledby="saveDialogTitle" style="position:fixed;inset:0;z-index:1001;background:#000b;display:none;align-items:center;justify-content:center;padding:20px">
   <div style="background:#22282c;color:#fff;padding:24px;border:1px solid #59646a;border-radius:14px;width:min(100%,360px)">
     <h2 id="saveDialogTitle">保存形式を選択</h2>
     <p style="color:#b7c0c1">保存するファイル形式を選んでね。</p>

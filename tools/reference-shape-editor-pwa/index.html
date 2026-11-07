@@ -12,7 +12,7 @@
   <link rel="manifest" href="./manifest.webmanifest"/>
   <link rel="icon" href="./icon.svg" type="image/svg+xml"/>
   <link rel="stylesheet" href="styles.css?v=20261029-standalone-safe-area-v2"/>
-  <script defer src="app.js?v=20261030-line-mode-v1"></script>
+  <script defer src="app.js?v=20261107-named-palettes-v1"></script>
   <script>if ('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(console.warn));</script>
 </head>
 <body>
@@ -84,6 +84,7 @@
       </details>
       <section class="panel-section palette-section">
         <div class="head-line"><h2>塗り色 <span>03</span></h2><label class="mini-link" for="paletteInput">色を読込</label><input id="paletteInput" type="file" accept=".json,application/json" hidden/></div>
+        <div class="field-row"><label for="namedPaletteSelect">キャラクターパレット</label><small id="namedPaletteCount">0件</small></div><select id="namedPaletteSelect" aria-label="キャラクターパレットを選択"><option value="">統合パレット</option></select><div class="swatches unified-swatches" id="namedPaletteColors" aria-label="選択中のキャラクターの色"></div>
         <div class="color-current"><input id="colorPicker" type="color" value="#d47c5c" aria-label="カスタム塗り色"/><div><strong id="colorName">#D47C5C</strong><small>選択中の色</small></div></div>
         <details class="palette-accordion">
           <summary>編集可能な統合パレット <small id="unifiedCount">0色</small></summary>

@@ -34,7 +34,7 @@
       version: APP_VERSION,
       width:w, height:h, imageName:null, imageData:null,
       vertices:{}, shapes:[], layerGroups:[], counter:0,
-      palette:{characteristic:[],featured:[],representative:[],unified:[],imported:false}
+      palette:{characteristic:[],featured:[],representative:[],unified:[],imported:false,groups:[],activeGroup:''}
     };
   }
   const round = (n) => Math.round(n * 100) / 100;
@@ -355,6 +355,7 @@
     renderPalette();toast('パレットから削除しました（図形の塗り色は維持）');
   }
   function renderPalette(){
+    renderNamedPalettes();
     const unified=$('unifiedColors');unified.replaceChildren();
     const colors=paletteUnified();
     colors.forEach((c,i)=>{
@@ -534,7 +535,63 @@
   }
   function readFileAsDataUrl(f){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(Error('ファイルを読み込めません'));r.readAsDataURL(f)})}
   function decodeImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('画像をデコードできません'));img.src=src})}
+  // Named palette packs are independent of the existing unified 64-color palette.
+  function paletteGroupsFromJson(json){
+    const source=Array.isArray(json)?json:(json?.palettes||json?.characters||json?.characterPalettes||json?.character_palettes||json?.groups);
+    if(!source)return null;
+    const entries=Array.isArray(source)?source:Object.entries(source).map(([name,value])=>({name,...(Array.isArray(value)?{colors:value}:value)}));
+    if(!entries.length||entries.length>200)throw Error('パレット数は1〜200件にしてください');
+    const groups=entries.map((item,i)=>{
+      if(!item||typeof item!=='object')throw Error('パレット項目が不正です');
+      const name=String(item.name||item.character||item.label||item.id||('パレット '+(i+1))).trim().slice(0,80);
+      const raw=Array.isArray(item)?item:(item.colors||item.palette||item.hexColors||item.hex_colors);
+      if(!name||!Array.isArray(raw)||raw.length<1||raw.length>64)throw Error('パレット名または色配列が不正です');
+      const colors=raw.map(rgbFromColor);
+      if(colors.some(c=>!c))throw Error(name+' に無効な色があります');
+      return {name,colors:[...new Set(colors)]};
+    });
+    if(new Set(groups.map(g=>g.name)).size!==groups.length)throw Error('パレット名が重複しています');
+    return groups;
+  }
+  function selectNamedPalette(name){
+    const group=(state.project.palette.groups||[]).find(g=>g.name===name);
+    if(!group)return;
+    state.project.palette.activeGroup=name;
+    state.paletteEditIndex=-1;
+    renderPalette();scheduleAutosave();
+  }
+  function renderNamedPalettes(){
+    const picker=$('namedPaletteSelect');if(!picker)return;
+    const p=state.project.palette,groups=p.groups||[];
+    picker.replaceChildren();
+    const empty=document.createElement('option');empty.value='';empty.textContent='統合パレット';picker.append(empty);
+    for(const g of groups){const o=document.createElement('option');o.value=g.name;o.textContent=g.name+'（'+g.colors.length+'色）';picker.append(o)}
+    picker.value=groups.some(g=>g.name===p.activeGroup)?p.activeGroup:'';
+    const container=$('namedPaletteColors');container.replaceChildren();
+    const active=groups.find(g=>g.name===picker.value);
+    if(active)for(const color of active.colors){
+      const b=document.createElement('button');b.type='button';b.className='swatch'+(state.color===color?' active':'');
+      b.style.setProperty('--swatch',color);b.title=color;b.setAttribute('aria-label',active.name+' '+color);
+      b.addEventListener('click',()=>changeColor(color,'palette'));container.append(b);
+    }
+    $('namedPaletteCount').textContent=groups.length+'件';
+  }
   function importPalette(json){
+    const groups=paletteGroupsFromJson(json);
+    if(groups){
+      const previous=state.project.palette.groups||[];
+      const merged=new Map(previous.map(g=>[g.name,g]));
+      for(const g of groups)merged.set(g.name,g);
+      if(merged.size>200)throw Error('登録可能なパレットは最大200件です');
+      saveHistory();
+      state.project.palette.groups=[...merged.values()];
+      state.project.palette.activeGroup=groups[0].name;
+      state.project.palette.imported=true;
+      state.paletteEditIndex=-1;
+      render();scheduleAutosave();
+      toast(groups.length+'件の名前付きパレットを読み込みました');
+      return;
+    }
     const src=json.metadata?.colors||json.colors||json.palette||json;
     let data={};if(Array.isArray(src))data={characteristic:src,featured:src,representative:src};
     else data={characteristic:src.characteristic||src.characteristicColors||src.featured||src.colors||[],featured:src.featured||src.featuredColors||[],representative:src.representative||src.dominant||src.representativeColors||src.colors||[]};
@@ -565,7 +622,9 @@
       if(!Number.isFinite(width)||width>40||width<(kind==='line'?.25:0))throw Error('線または辺の太さが不正です');
       ids.add(s.id);return {id:s.id,...(kind==='line'?{kind:'line'}:{}),name:String(s.name||(kind==='line'?'線':'図形')).slice(0,80),vertexIds:s.vertexIds.slice(),fill,strokeColor,strokeWidth:width,visible:s.visible!==false};
     });
-    const palette={characteristic:paletteColors(x.palette?.characteristic),featured:paletteColors(x.palette?.featured),representative:paletteColors(x.palette?.representative),imported:!!x.palette?.imported};
+    const groups=x.palette?.groups?paletteGroupsFromJson({groups:x.palette.groups}):[];
+    const activeGroup=groups.some(g=>g.name===x.palette?.activeGroup)?x.palette.activeGroup:'';
+    const palette={characteristic:paletteColors(x.palette?.characteristic),featured:paletteColors(x.palette?.featured),representative:paletteColors(x.palette?.representative),imported:!!x.palette?.imported,groups,activeGroup};
     palette.unified=Array.isArray(x.palette?.unified)?[...new Set(x.palette.unified.map(rgbFromColor).filter(Boolean))].slice(0,PALETTE_MAX):combinedPalette(palette);
     // Composite layers contain only valid polygon IDs, with no overlap between groups.
     const groupedIds=new Set(),groupNames=new Set();
@@ -637,6 +696,7 @@
     $('sourceInput').addEventListener('change',e=>{loadImage(e.target.files[0]);e.target.value=''});
     $('projectInput').addEventListener('change',e=>{loadProject(e.target.files[0]);e.target.value=''});
     $('paletteInput').addEventListener('change',e=>{loadPaletteFile(e.target.files[0]);e.target.value=''});
+    $('namedPaletteSelect').addEventListener('change',e=>selectNamedPalette(e.target.value));
     $('paletteEditColor').addEventListener('input',e=>{$('paletteEditHex').value=e.target.value;});
     $('paletteEditHex').addEventListener('change',e=>{const c=cleanColor(e.target.value.trim());if(c)$('paletteEditColor').value=c});
     $('paletteSave').addEventListener('click',paletteSave);

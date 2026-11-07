@@ -555,6 +555,7 @@
   function paletteGroupsFromJson(json){
     const source=Array.isArray(json)?json:(json?.palettes||json?.characters||json?.characterPalettes||json?.character_palettes||json?.groups);
     if(!source)return null;
+    if(Array.isArray(json)&&json.every(value=>rgbFromColor(value)))return null;
     const entries=Array.isArray(source)?source:Object.entries(source).map(([name,value])=>({name,...(Array.isArray(value)?{colors:value}:value)}));
     if(!entries.length||entries.length>200)throw Error('パレット数は1〜200件にしてください');
     const groups=entries.map((item,i)=>{
@@ -638,7 +639,7 @@
       if(!Number.isFinite(width)||width>40||width<(kind==='line'?.25:0))throw Error('線または辺の太さが不正です');
       ids.add(s.id);return {id:s.id,...(kind==='line'?{kind:'line'}:{}),name:String(s.name||(kind==='line'?'線':'図形')).slice(0,80),vertexIds:s.vertexIds.slice(),fill,strokeColor,strokeWidth:width,visible:s.visible!==false};
     });
-    const groups=x.palette?.groups?paletteGroupsFromJson({groups:x.palette.groups}):[];
+    const groups=Array.isArray(x.palette?.groups)&&x.palette.groups.length?paletteGroupsFromJson({groups:x.palette.groups}):[];
     const activeGroup=groups.some(g=>g.name===x.palette?.activeGroup)?x.palette.activeGroup:'';
     const palette={characteristic:paletteColors(x.palette?.characteristic),featured:paletteColors(x.palette?.featured),representative:paletteColors(x.palette?.representative),imported:!!x.palette?.imported,groups,activeGroup};
     palette.unified=Array.isArray(x.palette?.unified)?[...new Set(x.palette.unified.map(rgbFromColor).filter(Boolean))].slice(0,PALETTE_MAX):combinedPalette(palette);

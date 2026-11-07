@@ -33,6 +33,18 @@
     <button class="action" id="newCanvasCancel" type="button">キャンセル</button>
   </div>
 </div>
+<div id="saveDialog" hidden role="dialog" aria-modal="true" aria-labelledby="saveDialogTitle" style="position:fixed;inset:0;z-index:1001;background:#000b;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#22282c;color:#fff;padding:24px;border:1px solid #59646a;border-radius:14px;width:min(100%,360px)">
+    <h2 id="saveDialogTitle">保存形式を選択</h2>
+    <p style="color:#b7c0c1">保存するファイル形式を選んでね。</p>
+    <div style="display:grid;gap:10px">
+      <button class="action" id="saveProject" type="button">JSON（編集データ）</button>
+      <button class="action" id="exportSvg" type="button">SVG（ベクター画像）</button>
+      <button class="action" id="exportPng" type="button">PNG（画像）</button>
+      <button class="action" id="closeSaveDialog" type="button">キャンセル</button>
+    </div>
+  </div>
+</div>
 <div id="app">
   <header class="app-head">
     <div class="brand"><span class="brand-mark" aria-hidden="true">▱</span><div><strong>SHAPE STUDIO</strong><small>GOLDEN TRACE STUDIO · ローカル完結</small></div></div>
@@ -41,8 +53,7 @@
       <label class="action" for="sourceInput" title="下敷き画像を読み込む"><span>＋</span> 画像を開く</label>
       <input type="file" id="sourceInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden/>
       <label class="action" for="projectInput">JSONを開く</label><input type="file" id="projectInput" accept="application/json,.json" hidden/>
-      <button class="action" id="saveProject">JSON保存</button>
-      <div class="export-wrap"><button class="action" id="exportSvg">SVG</button><button class="action" id="exportPng">PNG</button></div>
+      <button class="action" id="openSaveDialog" type="button" aria-haspopup="dialog" aria-controls="saveDialog">保存</button>
       <button class="action" id="panelButton" title="右のパネル表示">パネル ☷</button>
     </div>
   </header>

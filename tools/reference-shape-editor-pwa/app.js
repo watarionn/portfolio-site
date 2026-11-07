@@ -734,8 +734,8 @@
     $('opacity').addEventListener('input',e=>{state.underlayOpacity=e.target.value/100;render()});$('showUnderlay').addEventListener('change',e=>{state.showUnderlay=e.target.checked;render()});$('showGrid').addEventListener('change',e=>{state.showGrid=e.target.checked;render()});
     $('snapEnabled').addEventListener('change',e=>{state.snapEnabled=e.target.checked;render()});$('snapRadius').addEventListener('input',e=>{state.snapRadius=+e.target.value;render()});$('colorPicker').addEventListener('change',e=>changeColor(e.target.value));
     const saveDialog=$('saveDialog');
-    const closeSaveDialog=()=>{saveDialog.hidden=true;$('openSaveDialog').focus()};
-    $('openSaveDialog').addEventListener('click',()=>{saveDialog.hidden=false;$('saveProject').focus()});
+    const closeSaveDialog=()=>{saveDialog.hidden=true;saveDialog.style.display='none';$('openSaveDialog').focus()};
+    $('openSaveDialog').addEventListener('click',()=>{saveDialog.hidden=false;saveDialog.style.display='flex';$('saveProject').focus()});
     $('closeSaveDialog').addEventListener('click',closeSaveDialog);
     saveDialog.addEventListener('click',e=>{if(e.target===saveDialog)closeSaveDialog()});
     saveDialog.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeSaveDialog()}});

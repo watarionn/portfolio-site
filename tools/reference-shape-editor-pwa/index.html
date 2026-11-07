@@ -12,15 +12,33 @@
   <link rel="manifest" href="./manifest.webmanifest"/>
   <link rel="icon" href="./icon.svg" type="image/svg+xml"/>
   <link rel="stylesheet" href="styles.css?v=20261029-standalone-safe-area-v2"/>
-  <script defer src="app.js?v=20261107-named-palettes-v1"></script>
+  <script defer src="app.js?v=20261107-blank-canvas-v1"></script>
   <script>if ('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(console.warn));</script>
-</head>
+<style>#newCanvasDialog[hidden]{display:none!important}</style></head>
 <body>
+<div id="newCanvasDialog" hidden style="position:fixed;inset:0;z-index:1000;background:#000b;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#22282c;color:#fff;padding:24px;border:1px solid #59646a;border-radius:14px;width:min(100%,360px)">
+    <h2>新規キャンバス</h2>
+    <label for="newCanvasSize">キャンバスサイズ</label>
+    <select id="newCanvasSize" style="display:block;width:100%;padding:12px;margin:12px 0 20px">
+      <option value="512x512">512 × 512（正方形）</option>
+      <option value="1024x1024" selected>1024 × 1024（正方形）</option>
+      <option value="1920x1080">1920 × 1080（横長）</option>
+      <option value="1080x1920">1080 × 1920（縦長）</option>
+      <option value="1280x720">1280 × 720（横長）</option>
+      <option value="720x1280">720 × 1280（縦長）</option>
+      <option value="2048x2048">2048 × 2048（高解像度）</option>
+    </select>
+    <button class="action primary" id="newCanvasCreate" type="button">作成</button>
+    <button class="action" id="newCanvasCancel" type="button">キャンセル</button>
+  </div>
+</div>
 <div id="app">
   <header class="app-head">
     <div class="brand"><span class="brand-mark" aria-hidden="true">▱</span><div><strong>SHAPE STUDIO</strong><small>GOLDEN TRACE STUDIO · ローカル完結</small></div></div>
     <div class="top-actions">
-      <label class="action primary" for="sourceInput" title="下敷き画像を読み込む"><span>＋</span> 画像を開く</label>
+      <button class="action primary" id="newCanvasButton" type="button">＋ 新規作成</button>
+      <label class="action" for="sourceInput" title="下敷き画像を読み込む"><span>＋</span> 画像を開く</label>
       <input type="file" id="sourceInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden/>
       <label class="action" for="projectInput">JSONを開く</label><input type="file" id="projectInput" accept="application/json,.json" hidden/>
       <button class="action" id="saveProject">JSON保存</button>

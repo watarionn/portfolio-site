@@ -525,7 +525,7 @@
     return {characteristic:paletteColors(char.map(x=>hex(...x.rgb))),featured:paletteColors(featured.map(x=>hex(...x.rgb))),representative:paletteColors(rep),imported:false};
   }
   function createBlankCanvas(){
-    const match=/^(\\d+)x(\\d+)$/.exec($('newCanvasSize').value);
+    const match=/^(\d+)x(\d+)$/.exec($('newCanvasSize').value);
     if(!match)return toast('サイズを選択してください');
     const w=Number(match[1]),h=Number(match[2]);
     if(w<1||h<1||w>12000||h>12000)return toast('サイズが不正です');

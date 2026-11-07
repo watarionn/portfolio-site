@@ -94,3 +94,6 @@
 #stage .line-hit{cursor:pointer;pointer-events:stroke}
 .toolrail{overflow-y:auto;min-height:0}
 @media(max-width:760px){.toolrail{overflow-x:auto;overflow-y:hidden}}
+
+/* Keep dialogs hidden even when their inline layout uses display:flex. */
+#saveDialog[hidden]{display:none!important}

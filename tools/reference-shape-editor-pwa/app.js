@@ -733,7 +733,15 @@
     $('zoomOut').addEventListener('click',()=>zoomCenter(1/1.35));
     $('opacity').addEventListener('input',e=>{state.underlayOpacity=e.target.value/100;render()});$('showUnderlay').addEventListener('change',e=>{state.showUnderlay=e.target.checked;render()});$('showGrid').addEventListener('change',e=>{state.showGrid=e.target.checked;render()});
     $('snapEnabled').addEventListener('change',e=>{state.snapEnabled=e.target.checked;render()});$('snapRadius').addEventListener('input',e=>{state.snapRadius=+e.target.value;render()});$('colorPicker').addEventListener('change',e=>changeColor(e.target.value));
-    $('exportSvg').addEventListener('click',exportSvg);$('exportPng').addEventListener('click',exportPng);$('saveProject').addEventListener('click',saveProject);
+    const saveDialog=$('saveDialog');
+    const closeSaveDialog=()=>{saveDialog.hidden=true;$('openSaveDialog').focus()};
+    $('openSaveDialog').addEventListener('click',()=>{saveDialog.hidden=false;$('saveProject').focus()});
+    $('closeSaveDialog').addEventListener('click',closeSaveDialog);
+    saveDialog.addEventListener('click',e=>{if(e.target===saveDialog)closeSaveDialog()});
+    saveDialog.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeSaveDialog()}});
+    $('exportSvg').addEventListener('click',()=>{closeSaveDialog();exportSvg()});
+    $('exportPng').addEventListener('click',()=>{closeSaveDialog();exportPng()});
+    $('saveProject').addEventListener('click',()=>{closeSaveDialog();saveProject()});
     $('stage').addEventListener('pointerdown',onPointerDown);$('stage').addEventListener('pointermove',onPointerMove);$('stage').addEventListener('pointerup',onPointerUp);$('stage').addEventListener('pointercancel',onPointerUp);$('stage').addEventListener('dblclick',insertEdgeVertex);
     $('viewport').addEventListener('wheel',onWheel,{passive:false});
     $('viewport').addEventListener('dragover',e=>e.preventDefault());$('viewport').addEventListener('drop',e=>{e.preventDefault();const file=e.dataTransfer.files[0];if(file?.type.startsWith('image/'))loadImage(file);else if(file?.name.endsWith('.json'))loadProject(file)});

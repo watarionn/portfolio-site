@@ -1,9 +1,12 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-06T22:48:01Z",
+  "generatedAt": "2026-11-07T09:49:09Z",
   "note": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
-  "count": 0,
-  "items": [],
+  "status": "insufficient_data",
+  "evaluatedStreamCount": 0,
+  "minimumRequired": 5,
+  "averages": null,
+  "cefrDistribution": [],
   "methodology": {
     "scope": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
     "thresholds": {

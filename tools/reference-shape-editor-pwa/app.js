@@ -202,7 +202,7 @@
     $('canvasGrid').setAttribute('opacity',state.showGrid?1:0);
     if(p.imageData){$('underlay').setAttribute('href',p.imageData)}else{$('underlay').removeAttribute('href')}
     $('underlay').setAttribute('opacity',state.showUnderlay?state.underlayOpacity:0);
-    $('emptyState').classList.toggle('hidden',!!p.imageData||p.shapes.length>0);
+    $('emptyState').classList.toggle('hidden',!!p.imageData||p.shapes.length>0||!!p.imageName);
     const pol=$('polygonLayer');pol.replaceChildren();
     for(const s of p.shapes){if(!s.visible)continue;
     if(isLine(s)){
@@ -524,6 +524,22 @@
     const char=[];for(let ix=0;char.length<8&&ix<Math.min(96,candidates.length);ix++){let winner=null,win=-1;for(const e of candidates){if(char.includes(e)||char.some(a=>labDist(a.lab,e.lab)<13))continue;const distance=char.length?Math.min(...char.map(a=>labDist(a.lab,e.lab))):50;const diversity=.12+.88*Math.min(1,Math.max(0,(distance-9)/32));const chroma=Math.hypot(e.lab[1],e.lab[2]);const score=e.score*diversity*(char.length===0?1:.45+1.45*Math.min(1,chroma/60));if(score>win){win=score;winner=e}}if(!winner)break;char.push(winner)}
     return {characteristic:paletteColors(char.map(x=>hex(...x.rgb))),featured:paletteColors(featured.map(x=>hex(...x.rgb))),representative:paletteColors(rep),imported:false};
   }
+  function createBlankCanvas(){
+    const match=/^(\\d+)x(\\d+)$/.exec($('newCanvasSize').value);
+    if(!match)return toast('サイズを選択してください');
+    const w=Number(match[1]),h=Number(match[2]);
+    if(w<1||h<1||w>12000||h>12000)return toast('サイズが不正です');
+    if((state.project.imageName||state.project.shapes.length)&&!confirm('現在の編集内容を置き換えます。必要なら先にJSON保存してください。'))return;
+    const groups=structuredClone(state.project.palette.groups||[]);
+    const activeGroup=state.project.palette.activeGroup||'';
+    state.project=newProject(w,h);state.project.imageName='無題のキャンバス';
+    state.project.palette.groups=groups;state.project.palette.activeGroup=activeGroup;
+    state.lastName='無題のキャンバス';cachedBitmap=null;
+    state.layerSelection.clear();state.paletteEditIndex=-1;state.draft=[];state.history=[];state.future=[];
+    state.selected=null;state.selectedVertex=null;state.cursor=null;
+    $('newCanvasDialog').hidden=true;changeTool('draw');autoFit();scheduleAutosave();
+    status(w+' × '+h+' の新規キャンバス');toast('新規キャンバスを作成しました');
+  }
   async function loadImage(file){
     if(!file||!/^image\/(png|jpeg|webp|gif)$/.test(file.type)){toast('PNG / JPEG / WebP / GIF の画像を選んでください');return;}
     if(file.size>MAX_PICTURE_BYTES){toast('画像は24MB以下にしてください');return;}
@@ -665,13 +681,13 @@
   }
   function projectDocument(){const p=state.project;return {schema:'reference-shape-editor/v1',savedAt:new Date().toISOString(),appVersion:APP_VERSION,canvas:{width:p.width,height:p.height},image:{name:p.imageName,dataURL:p.imageData},backgroundOpacity:state.underlayOpacity,vertices:p.vertices,shapes:p.shapes,layerGroups:p.layerGroups,palette:p.palette,nextCounter:p.counter};}
   function autosaveNow(){
-    if(!autosaveReady||(!state.project.imageData&&!state.project.shapes.length))return;
+    if(!autosaveReady||(!state.project.imageData&&!state.project.shapes.length&&!state.project.imageName))return;
     const doc=projectDocument();
     openDraftDb().then(db=>new Promise((resolve,reject)=>{
       const tx=db.transaction('drafts','readwrite');tx.objectStore('drafts').put(doc,'current');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);
     })).catch(err=>{if(!autosaveFailureReported){autosaveFailureReported=true;toast('自動保存できません。JSON保存を使ってください: '+err.message,7);}});
   }
-  function scheduleAutosave(){if(!autosaveReady||(!state.project.imageData&&!state.project.shapes.length))return;clearTimeout(autosaveTimer);autosaveTimer=setTimeout(autosaveNow,950);}
+  function scheduleAutosave(){if(!autosaveReady||(!state.project.imageData&&!state.project.shapes.length&&!state.project.imageName))return;clearTimeout(autosaveTimer);autosaveTimer=setTimeout(autosaveNow,950);}
   async function restoreDraft(){
     try{
       const db=await openDraftDb();
@@ -694,6 +710,9 @@
   function setBindings(){
     document.querySelectorAll('.tool[data-tool]').forEach(b=>b.addEventListener('click',()=>changeTool(b.dataset.tool)));
     $('sourceInput').addEventListener('change',e=>{loadImage(e.target.files[0]);e.target.value=''});
+    $('newCanvasButton').addEventListener('click',()=>{$('newCanvasDialog').hidden=false});
+    $('newCanvasCancel').addEventListener('click',()=>{$('newCanvasDialog').hidden=true});
+    $('newCanvasCreate').addEventListener('click',createBlankCanvas);
     $('projectInput').addEventListener('change',e=>{loadProject(e.target.files[0]);e.target.value=''});
     $('paletteInput').addEventListener('change',e=>{loadPaletteFile(e.target.files[0]);e.target.value=''});
     $('namedPaletteSelect').addEventListener('change',e=>selectNamedPalette(e.target.value));

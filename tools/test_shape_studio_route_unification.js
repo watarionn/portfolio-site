@@ -14,8 +14,7 @@ const hrefs=home.match(/href="\/reference-shape-editor(?:-pwa)?\/"/g)||[];
 assert.equal(hrefs.filter(x=>x.includes(canonical)).length,2,'featured work and project index must both open PWA');
 assert.equal(hrefs.filter(x=>x.includes(legacy)).length,0,'no old editor entry remains');
 const config=JSON.parse(read('config/portfolio-display-names.json'));
-const entry=config.projects?.find?.(x=>x.projectId==='reference-shape-editor') || 
-  config.entries?.find?.(x=>x.projectId==='reference-shape-editor');
+const entry=config.works.find(x=>x.projectId==='reference-shape-editor');
 assert.ok(entry,'portfolio Kirie entry must exist');
 assert.equal(entry.route,canonical);
 const seo=JSON.parse(read('config/seo.json'));

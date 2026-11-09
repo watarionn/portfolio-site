@@ -281,8 +281,8 @@
       "number": "034",
       "projectId": "reference-shape-editor",
       "japaneseName": "切り絵作成室",
-      "englishName": "Manual Polygon Trace Editor",
-      "route": "/reference-shape-editor/",
+      "englishName": "Shape Studio",
+      "route": "/reference-shape-editor-pwa/",
       "genre": "web-tool"
     }
   ]

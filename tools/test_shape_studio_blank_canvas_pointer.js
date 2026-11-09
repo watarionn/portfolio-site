@@ -39,7 +39,7 @@ class DOMPoint{
   matrixTransform(){return this;}
 }
 const window={confirm:()=>true,addEventListener(){}};
-vm.runInNewContext(source,{document,window,DOMPoint,structuredClone,setTimeout:()=>0,clearTimeout(){},console},
+vm.runInNewContext(source,{document,window,DOMPoint,structuredClone,confirm:()=>true,setTimeout:()=>0,clearTimeout(){},console},
  {filename:app});
 const h=window.hooks;
 const noTarget={closest(){return null;}};

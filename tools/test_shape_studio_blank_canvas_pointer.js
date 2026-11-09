@@ -38,7 +38,7 @@ class DOMPoint{
   constructor(x,y){this.x=x;this.y=y;}
   matrixTransform(){return this;}
 }
-const window={confirm:()=>true};
+const window={confirm:()=>true,addEventListener(){}};
 vm.runInNewContext(source,{document,window,DOMPoint,structuredClone,setTimeout:()=>0,clearTimeout(){},console},
  {filename:app});
 const h=window.hooks;

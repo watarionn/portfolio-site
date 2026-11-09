@@ -388,7 +388,10 @@
     pinch={view:{...state.view},distance:Math.max(1,distTouch(a,b)),anchor:screenToSource({clientX:cx,clientY:cy})};
   }
   function nudgeVertex(dx,dy){const v=vertex(state.selectedVertex);if(!v)return;const step=Number($('nudgeStep').value)||1;saveHistory();v.x=round(clamp(v.x+dx*step,0,state.project.width));v.y=round(clamp(v.y+dy*step,0,state.project.height));render();}
-  function onPointerDown(e){if(e.button!==0 && e.button!==1)return;if(!state.project.imageData&&state.project.shapes.length===0)return;
+  function onPointerDown(e){if(e.button!==0 && e.button!==1)return;
+    // A named blank canvas is editable even without an underlay or finished shapes.
+    // Only the initial launch placeholder must remain inert until creation/import.
+    if(!state.project.imageData&&!state.project.imageName&&state.project.shapes.length===0)return;
     if(e.pointerType==='touch'){
       touchPoints.set(e.pointerId,{x:e.clientX,y:e.clientY});
       if(touchPoints.size>=2){startPinch();return;}

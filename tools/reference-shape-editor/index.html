@@ -2,112 +2,28 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <meta name="color-scheme" content="dark"/>
-  <title>参照図形エディター</title>
-  <link rel="stylesheet" href="styles.css?v=20261029-standalone-safe-area-v2"/>
-  <script defer src="app.js?v=20261030-line-mode-v1"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta http-equiv="refresh" content="1;url=/reference-shape-editor-pwa/"/>
+  <link rel="canonical" href="https://cf278796.cloudfree.jp/reference-shape-editor-pwa/"/>
+  <title>切り絵作成室 | Shape Studioへ移動</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,-apple-system,sans-serif;background:#151719;color:#eaece9}
+    body{min-height:100dvh;display:grid;place-items:center;margin:0;padding:20px;box-sizing:border-box}
+    main{width:min(100%,480px);padding:24px;border:1px solid #59646a;border-radius:14px;background:#22282c}
+    a{color:#efb278;font-weight:bold}
+  </style>
+  <script>
+    // Keep the installed Shape Studio PWA URL and its origin-scoped autosave storage unchanged.
+    window.location.replace('/reference-shape-editor-pwa/' + window.location.search + window.location.hash);
+  </script>
 </head>
 <body>
-<div id="app">
-  <header class="app-head">
-    <div class="brand"><span class="brand-mark" aria-hidden="true">▱</span><div><strong>参照図形エディター</strong><small>端末内で編集</small></div></div>
-    <div class="top-actions">
-      <label class="action primary" for="sourceInput" title="下敷き画像を読み込む"><span>＋</span> 画像を開く</label>
-      <input type="file" id="sourceInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden/>
-      <label class="action" for="projectInput">JSONを開く</label><input type="file" id="projectInput" accept="application/json,.json" hidden/>
-      <button class="action" id="saveProject">JSON保存</button>
-      <div class="export-wrap"><button class="action" id="exportSvg">SVG</button><button class="action" id="exportPng">PNG</button></div>
-      <button class="action" id="panelButton" title="右のパネル表示">パネル ☷</button>
-    </div>
-  </header>
-
-  <div class="workspace">
-    <nav class="toolrail" aria-label="描画ツール">
-      <button class="tool active" data-tool="draw" title="図形化 (P)"><span class="glyph">⬡</span><small>図形化</small></button>
-      <button class="tool" data-tool="line" title="線を描画 (L)"><span class="glyph">╱</span><small>線</small></button>
-      <button class="tool" data-tool="select" title="選択 (V)"><span class="glyph">↖</span><small>選択</small></button>
-      <button class="tool" data-tool="vertex" title="頂点編集 (E)"><span class="glyph">⌘</span><small>頂点</small></button>
-      <button class="tool" data-tool="edge" title="選択した辺に頂点を追加"><span class="glyph">⊕</span><small>辺に点</small></button>
-      <button class="tool" data-tool="move" title="図形を移動 (M)"><span class="glyph">✥</span><small>移動</small></button>
-      <button class="tool" data-tool="pan" title="移動・パン (H / Space)"><span class="glyph">✋</span><small>パン</small></button>
-      <button class="tool" data-tool="eyedropper" title="元画像スポイト (I)"><span class="glyph">◉</span><small>スポイト</small></button>
-      <div class="tool-rail-bottom"><button class="tool compact" id="undo" title="元に戻す (Ctrl/⌘+Z)">↶</button><button class="tool compact" id="redo" title="やり直し (Ctrl/⌘+Shift+Z)">↷</button></div>
-    </nav>
-
-    <main class="center">
-      <div class="canvas-head">
-        <div><strong id="projectTitle">無題の手本</strong><span class="muted" id="imageInfo">画像を読み込んでください</span></div>
-        <div class="canvas-head-right"><span id="toolHint" class="hint">クリックして頂点を追加 · 既存の点をスナップ</span><button class="small-quiet" id="fit">全体表示</button><button class="small-quiet" id="fitWidth" title="原寸大の形を保って画像の幅を広く表示">幅に合わせる</button><button class="small-quiet zoom-button" id="zoomOut" title="縮小">−</button><button class="small-quiet zoom-button" id="zoomIn" title="拡大">＋</button><span class="zoom-value" id="zoomValue">100%</span></div>
-      </div>
-      <div id="viewport" class="viewport" tabindex="0" aria-label="ポリゴン編集キャンバス">
-        <svg id="stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" preserveAspectRatio="xMidYMid meet" aria-label="編集領域">
-          <defs><pattern id="paperGrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0 H0 V32" fill="none" stroke="#999" stroke-opacity=".09" stroke-width="1"/></pattern></defs>
-          <rect id="canvasBase" width="960" height="640" fill="#fcfbf6"/>
-          <rect id="canvasGrid" width="960" height="640" fill="url(#paperGrid)"/>
-          <image id="underlay" width="960" height="640" opacity=".35" preserveAspectRatio="none"/>
-          <g id="polygonLayer"></g>
-          <g id="draftLayer"></g>
-          <g id="handleLayer"></g>
-        </svg>
-        <div class="empty-state" id="emptyState"><div class="empty-icon">⌗</div><h1>画像を読み込んで図形を作成</h1><p>画像を読み込んだ後、頂点を追加して「図形化」を選びます。既存の頂点を共有することもできます。</p><label for="sourceInput" class="big-launch">画像を選ぶ <span>↗</span></label><span class="empty-tip">ドラッグ＆ドロップにも対応 / 画像は外部送信しません</span></div>
-        <div class="canvas-overlay-bottom"><span id="cursorInfo">x: –　y: –</span><span id="canvasStats">0 図形 · 0 頂点</span></div>
-      </div>
-      <div class="draftbar">
-        <div><span class="label-overline">編集中</span><span id="draftCount">0 点</span><span class="muted">図形は3点、線は2点以上</span></div>
-        <div class="draft-controls"><button class="small-quiet" id="cancelDraft">取り消し <kbd>Esc</kbd></button><button class="small-quiet" id="removeDraftPoint">1点戻す <kbd>⌫</kbd></button><button class="build" id="finishPolygon" disabled>図形化 <span>↗</span></button></div>
-      </div>
-    </main>
-
-    <aside class="inspector" id="inspector">
-      <div class="inspector-head"><span>編集パネル</span><button id="toggleInspector" class="small-quiet" title="パネルの表示を切り替え">☷</button></div>
-      <details class="panel-section panel-accordion">
-        <summary><h2>下敷き <span>01</span></h2></summary><div class="accordion-content">
-        <label class="field-row" for="opacity"><span>透過表示</span><strong id="opacityValue">35%</strong></label>
-        <input id="opacity" type="range" min="0" max="100" value="35" step="1"/>
-        <div class="two-col"><label class="check"><input type="checkbox" id="showUnderlay" checked/>画像を表示</label><label class="check"><input type="checkbox" id="showGrid"/>グリッド</label></div></div>
-      </details>
-      <details class="panel-section panel-accordion">
-        <summary><h2>頂点スナップ <span>02</span></h2></summary><div class="accordion-content">
-        <div class="field-row"><span>既存頂点を共有</span><label class="switch"><input type="checkbox" id="snapEnabled" checked/><i></i></label></div>
-        <div class="field-row"><span>吸着範囲</span><output id="snapValue">12 px</output></div>
-        <input type="range" id="snapRadius" min="4" max="24" value="12" step="1"/>
-        <p class="panel-note">青く光る点をクリックすると既存頂点を共有します。移動時も接続された図形が連動します。</p></div>
-      </details>
-      <section class="panel-section palette-section">
-        <div class="head-line"><h2>塗り色 <span>03</span></h2><label class="mini-link" for="paletteInput">色を読込</label><input id="paletteInput" type="file" accept=".json,application/json" hidden/></div>
-        <div class="color-current"><input id="colorPicker" type="color" value="#d47c5c" aria-label="カスタム塗り色"/><div><strong id="colorName">#D47C5C</strong><small>選択中の色</small></div></div>
-        <details class="palette-accordion">
-          <summary>編集可能な統合パレット <small id="unifiedCount">0色</small></summary>
-          <div class="accordion-content">
-            <div class="swatches unified-swatches" id="unifiedColors" aria-label="編集可能な統合パレット"></div>
-            <div class="palette-editor" aria-label="パレットの編集">
-              <label for="paletteEditColor">編集する色</label>
-              <input id="paletteEditColor" type="color" value="#d47c5c" aria-label="パレット色"/>
-              <input id="paletteEditHex" type="text" value="#d47c5c" maxlength="7" spellcheck="false" autocomplete="off" aria-label="色のHEXコード"/>
-              <button id="paletteSave" type="button">＋ 追加</button>
-              <button id="paletteDelete" type="button" disabled>削除</button>
-              <button id="paletteCancel" type="button">解除</button>
-            </div>
-            <p class="panel-note">抽出した色をまとめて表示します。色の追加・編集・削除ができます。</p>
-            <p id="paletteNote" class="panel-note">画像から色候補を抽出します。外部の色データも読み込めます。</p>
-          </div>
-        </details>
-      </section>
-      <section class="panel-section">
-        <h2>選択中の図形・線 <span>04</span></h2>
-        <div id="shapeInspector" class="no-selection">図形を選ぶと、名称・塗り色・辺・レイヤーを編集できます。</div>
-      </section>
-      <section class="panel-section layer-section">
-        <div class="head-line"><h2>レイヤー <span>05</span></h2><span class="small-muted" id="layerCount">0件</span></div>
-        <div class="layer-batch"><span id="layerSelectionCount">0件選択</span><button type="button" id="mergeLayers" disabled>選択レイヤーを統合</button><button type="button" id="clearLayerSelection">解除</button></div>
-        <p class="panel-note">チェックで複数選択して統合。≡ をドラッグして上下を入れ替え。統合後も元の図形・色・頂点は保持されます。</p>
-        <div id="layers" class="layers"><p class="muted">図形はまだありません。</p></div>
-      </section>
-    </aside>
-  </div>
-  <footer class="status"><span id="statusText">準備完了</span><span>NO GENERATIVE FILL · SOURCE IMAGE UNCHANGED · EXPORT VECTOR ONLY</span></footer>
-</div>
-<div id="toast" role="status" aria-live="polite"></div>
-
-</body></html>
+  <main>
+    <h1>切り絵作成室はShape Studioに統合されたよ</h1>
+    <p>制作画面を一本化したので、同じShape Studioへ移動するよ。</p>
+    <p><a href="/reference-shape-editor-pwa/">Shape Studioを開く</a></p>
+    <p>以前の編集データはJSON保存ファイルから読み込めるよ。</p>
+  </main>
+</body>
+</html>

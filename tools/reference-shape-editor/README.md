@@ -1,10 +1,10 @@
-# Reference Shape Editor 1.2
+# Reference Shape Editor 1.2 (旧版ソース・互換性保持)
 
 Minimalizerの手本画像を作るための、ブラウザ内だけで動く手動の多角形エディター。画像の自動生成や描き足しはしません。
 
 ## 開き方
 
-**最も簡単な方法**: 公開サイトの `/reference-shape-editor/` を開く。オフライン単体版は `watarionn/Minimalizer` の `web/static/reference-shape-editor.html` にあり、ダウンロードしてChrome、EdgeまたはSafariで開けます。CSS/JSをHTMLに内蔵し、サーバは不要です。
+**正式な制作画面**: `/reference-shape-editor-pwa/`（Shape Studio）。旧URL `/reference-shape-editor/` は新画面へ移動する。オフライン単体版は `watarionn/Minimalizer` の `web/static/reference-shape-editor.html` にあり、ダウンロードしてChrome、EdgeまたはSafariで開けます。CSS/JSをHTMLに内蔵し、サーバは不要です。
 
 **ソース版**: `index.html`、`styles.css`、`app.js` を同じディレクトリに置き、`index.html` を開く。Webサーバが必要な環境では `python -m http.server 8000` で同じ内容を確認できます。
 
@@ -75,4 +75,8 @@ Minimalizer 本体の正式変換パイプラインとは独立。既存 C02/C03
 
 ## Webサイトへの設置
 
-公開サイトでは `/reference-shape-editor/` に設置。図形・画像はブラウザ内のみで扱い、外部へアップロードしません。ページは静的なHTML/CSS/JSのみ。JSON保存には元画像が含まれるため、公開リポジトリへ手作業プロジェクトを置かないでください。
+公開サイトでは `/reference-shape-editor/` は `/reference-shape-editor-pwa/` への移動案内。旧エディターのJS/CSSはJSON形式の互換性確認と回帰テストのため保持する。図形・画像はブラウザ内のみで扱い、外部へアップロードしません。ページは静的なHTML/CSS/JSのみ。JSON保存には元画像が含まれるため、公開リポジトリへ手作業プロジェクトを置かないでください。
+
+## 2026-11-09 公開導線統合
+
+ポートフォリオの「切り絵作成室」から最新版Shape Studio PWAに直接進む。旧URLの `index.html` は同じPWAへのリダイレクトであり、旧エディターの資産・JSON互換性テストは削除しない。旧版の作業データは端末内メモリ管理（自動保存なし）なので、過去に保存したJSONを新PWAの「JSONを開く」で読み込む。実機のPWA `start_url` とIndexedDB自動保存領域は変更しない。

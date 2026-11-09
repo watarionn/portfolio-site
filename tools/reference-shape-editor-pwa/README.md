@@ -1,8 +1,8 @@
 # Shape Studio PWA v1.3
 
-Independent personal PWA fork of the website's Reference Shape Editor v1.2.
+Canonical production editing surface for the portfolio site's 切り絵作成室 and the installed iPhone Shape Studio PWA (unified on 2026-11-09).
 
-- Canonical website editor remains at `tools/reference-shape-editor/`; this fork lives at `tools/reference-shape-editor-pwa/` and should be deployed at `/reference-shape-editor-pwa/`.
+- Canonical production editor lives at `tools/reference-shape-editor-pwa/` and `/reference-shape-editor-pwa/`. The portfolio entry now points directly here; `/reference-shape-editor/` redirects here for older bookmarks. Legacy `tools/reference-shape-editor/` JavaScript/CSS remain for compatibility/regression tests and are not a second public editor. Keep the PWA manifest ID, start_url, and Service Worker scope unchanged to protect installed iPhone PWAs and IndexedDB autosave.
 - No dependency or server processing. Service worker caches only static app shell within its own path.
 - Native pointer/touch: single tap adds polygon vertex; single-finger drag pans in draw and edge modes; two-finger pinch zooms anchored to gesture center.
 - Vertex edit: 40 CSS px hit targets, on-canvas nudge 1/5/10 source px. Edge mode adds a point to a selected polygon on one tap.

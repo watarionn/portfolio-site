@@ -341,7 +341,7 @@ def main() -> None:
     )
     expected_featured = [
         "/pose-studio/",
-        "/reference-shape-editor/",
+        "/reference-shape-editor-pwa/",
         "/minimalizer/",
     ]
     if featured_links != expected_featured:

@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+'use strict';
+// Regression for the single public Shape Studio editor entry and legacy bookmark.
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const canonical='/reference-shape-editor-pwa/';
+const legacy='/reference-shape-editor/';
+const home=read('index.html');
+const hrefs=home.match(/href="\/reference-shape-editor(?:-pwa)?\/"/g)||[];
+assert.equal(hrefs.filter(x=>x.includes(canonical)).length,2,'featured work and project index must both open PWA');
+assert.equal(hrefs.filter(x=>x.includes(legacy)).length,0,'no old editor entry remains');
+const config=JSON.parse(read('config/portfolio-display-names.json'));
+const entry=config.works.find(x=>x.projectId==='reference-shape-editor');
+assert.ok(entry,'portfolio Kirie entry must exist');
+assert.equal(entry.route,canonical);
+const seo=JSON.parse(read('config/seo.json'));
+assert.ok(seo.sitemapRoutes.includes(canonical));
+assert.ok(!seo.sitemapRoutes.includes(legacy));
+const oldHtml=read('tools/reference-shape-editor/index.html');
+assert.ok(oldHtml.includes('href="'+canonical+'"'),'static fallback must link canonical PWA');
+assert.ok(oldHtml.includes('content="1;url='+canonical+'"'),'meta refresh fallback');
+assert.ok(!oldHtml.includes('id="app"'),'old editor should not show as a second app');
+const script=oldHtml.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+assert.ok(script,'redirect script must exist');
+let destination;
+vm.runInNewContext(script,{window:{location:{search:'?from=legacy',hash:'#saved',replace:x=>{destination=x}}}});
+assert.equal(destination,canonical+'?from=legacy#saved');
+const manifest=JSON.parse(read('tools/reference-shape-editor-pwa/manifest.webmanifest'));
+assert.equal(manifest.id,canonical,'installed PWA identity must remain stable');
+assert.equal(manifest.start_url,canonical,'installed PWA launch URL must remain stable');
+assert.equal(manifest.scope,canonical,'service worker scope must remain stable');
+console.log('PASS: single Shape Studio entry, safe legacy redirect, stable PWA identity');

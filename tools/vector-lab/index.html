@@ -16,10 +16,10 @@
 <body>
 <header class="top">
   <div class="brand"><span class="brand-mark">◇</span><div><strong>ベクター変換室</strong><small>Vector Lab</small></div></div>
-  <nav aria-label="ページ"><a href="/">作品一覧へ</a><a href="#help">使い方</a></nav>
+  <nav aria-label="ページ"><a href="/">作品一覧へ</a><a href="./licenses.html">ライセンス</a></nav>
 </header>
 <main class="shell">
-  <div class="heading"><div><p class="eyebrow">画像からSVGへ</p><h1>ベクター変換室</h1><p>画像を読み込み、色面や輪郭を調整してSVGに変換する。5つの図形化方式をこの端末内で実行できる。</p></div><span class="version">VTracer 1.0.0-alpha.4</span></div>
+  <div class="heading"><div><p class="eyebrow">VECTOR LAB / SVG WORKSPACE</p><h1>ベクター変換室</h1><p>5種類のエンジンで、画像をSVGに。すべて端末内で変換するよ。</p></div><span class="version">5 ENGINES</span></div>
   <section class="panel source-panel" aria-labelledby="source-title">
     <div class="section-head"><h2 id="source-title"><span class="step">01</span> 元画像</h2><span class="aside">画像はサーバーに送信されない</span></div>
     <div class="source-grid">
@@ -41,8 +41,17 @@
     <section class="panel settings-panel" aria-labelledby="settings-title">
       <div class="section-head"><h2 id="settings-title"><span class="step">02</span> 変換設定</h2><button class="tertiary" id="reset" type="button">設定を初期化</button></div>
       <form id="settings" autocomplete="off">
-        <div class="field"><label for="engine">変換エンジン</label>
-          <select id="engine"><option value="vtracer">VTracer 1.0（輪郭追跡）</option><option value="imagetracer">ImageTracerJS（軽量）</option><option value="primitive">Primitive（図形積み上げ）</option><option value="geometrize">Geometrize（図形最適化）</option><option value="primeval">Primeval（再最適化）</option></select>
+        <div class="field engine-field">
+          <p class="field-heading" id="engine-picker-label">変換エンジン</p>
+          <div class="engine-picker" role="group" aria-labelledby="engine-picker-label">
+            <button type="button" class="engine-choice" data-engine="vtracer" aria-pressed="true"><strong>VTracer</strong><small>輪郭をきれいに</small></button>
+            <button type="button" class="engine-choice" data-engine="imagetracer" aria-pressed="false"><strong>ImageTracerJS</strong><small>軽く・すばやく</small></button>
+            <button type="button" class="engine-choice" data-engine="primitive" aria-pressed="false"><strong>Primitive</strong><small>図形を重ねる</small></button>
+            <button type="button" class="engine-choice" data-engine="geometrize" aria-pressed="false"><strong>Geometrize</strong><small>図形で近似</small></button>
+            <button type="button" class="engine-choice" data-engine="primeval" aria-pressed="false"><strong>Primeval</strong><small>形を最適化</small></button>
+          </div>
+          <label class="sr-only" for="engine">変換エンジンをプルダウンで選ぶ</label>
+          <select class="sr-only" id="engine"><option value="vtracer">VTracer 1.0（輪郭追跡）</option><option value="imagetracer">ImageTracerJS（軽量）</option><option value="primitive">Primitive（図形積み上げ）</option><option value="geometrize">Geometrize（図形最適化）</option><option value="primeval">Primeval（再最適化）</option></select>
         </div>
         <div id="vtracer-panel">
           <div class="field"><label for="clustering">領域の分割方式</label>
@@ -134,16 +143,24 @@
         </div>
         <div class="runbar">
           <label class="check"><input id="auto" type="checkbox" checked> 設定変更で自動再変換</label>
-          <button type="button" class="primary" id="run" disabled>SVGに変換</button>
-          <button type="button" class="tertiary" id="cancel" disabled>変換を停止</button>
+          <div class="run-actions">
+            <button type="button" class="primary" id="run" disabled>SVGに変換</button>
+            <button type="button" class="tertiary" id="cancel" disabled>停止</button>
+          </div>
         </div>
         <p id="status" class="status" role="status" aria-live="polite">元画像を選んでね。</p>
+        <button type="button" class="jump-result tertiary" id="jump-result" hidden>変換結果を見る</button>
       </form>
     </section>
     <section class="panel output-panel" aria-labelledby="output-title">
       <div class="section-head"><h2 id="output-title"><span class="step">03</span> 変換結果</h2><span id="result-meta" class="aside">未生成</span></div>
       <div class="canvas-box"><div class="checker"></div><canvas id="source" aria-label="元画像のプレビュー"></canvas><img id="result" alt="生成したSVG" hidden></div>
-      <div class="compare-tools">
+      <div class="view-picker" role="group" aria-label="プレビューの表示">
+        <button type="button" data-view="source" aria-pressed="false">元画像</button>
+        <button type="button" data-view="compare" aria-pressed="true">比較</button>
+        <button type="button" data-view="result" aria-pressed="false">SVG</button>
+      </div>
+      <div class="compare-tools" id="compare-tools">
         <label for="compare">比較 <output id="compare-value">50%</output></label><input id="compare" type="range" min="0" max="100" value="50" aria-label="元画像とSVGの比較比率">
       </div>
       <div class="output-actions">
@@ -152,26 +169,19 @@
         <button type="button" id="save-json" disabled>設定・比較値を保存</button>
       </div>
       <p id="metrics" class="quiet">変換すると図形数・ファイルサイズ・元画像との差を表示する。</p>
-      <details class="candidate-bank"><summary>候補の一覧と比較</summary><div id="candidates" class="candidate-grid"></div></details>
+      <details class="candidate-bank"><summary>生成した候補を切り替える <span id="candidate-count">0件</span></summary><div id="candidates" class="candidate-grid"></div>
+        <details class="import-details"><summary>外部で作ったSVGを候補に追加（任意）</summary>
+          <div class="import-grid">
+            <label>Primitive SVG<input type="file" data-import="primitive" accept=".svg,image/svg+xml"></label>
+            <label>Geometrize SVG<input type="file" data-import="geometrize" accept=".svg,image/svg+xml"></label>
+            <label>Primeval SVG<input type="file" data-import="primeval" accept=".svg,image/svg+xml"></label>
+          </div>
+        </details>
+      </details>
     </section>
   </div>
-  <section class="panel" aria-labelledby="others-title">
-    <div class="section-head"><h2 id="others-title">ほかの図形化エンジンと比較</h2><span class="aside">合計5方式</span></div>
-    <p class="quiet">3つともこのページ内で変換できるようになったよ。上で選んだ同じ元画像を使い、エンジンごとに図形数と種類を調整できる。以前のSVGファイル取り込み機能も残しているよ。</p>
-    <div class="external-engines">
-      <article><h3>Primitive</h3><p>少数の図形を重ねて近似する</p><button type="button" class="engine-activate" data-activate="primitive">このページで変換</button><a class="engine-source-link" href="https://primitive-playground.taiseiue.jp/" target="_blank" rel="noopener noreferrer">元デモを見る</a><label>SVGを読み込む<input type="file" data-import="primitive" accept=".svg,image/svg+xml"></label></article>
-      <article><h3>Geometrize</h3><p>図形ごとの誤差を減らす</p><button type="button" class="engine-activate" data-activate="geometrize">このページで変換</button><a class="engine-source-link" href="https://www.samcodes.co.uk/project/geometrize-haxe-web/" target="_blank" rel="noopener noreferrer">元デモを見る</a><label>SVGを読み込む<input type="file" data-import="geometrize" accept=".svg,image/svg+xml"></label></article>
-      <article><h3>Primeval</h3><p>図形を追加して配置を再最適化する</p><button type="button" class="engine-activate" data-activate="primeval">このページで変換</button><a class="engine-source-link" href="https://domoarigatomrburato.github.io/primeval/" target="_blank" rel="noopener noreferrer">元デモを見る</a><label>SVGを読み込む<input type="file" data-import="primeval" accept=".svg,image/svg+xml"></label></article>
-    </div>
-  </section>
-  <section class="panel help" id="help">
-    <h2>使い方と注意点</h2>
-    <p>画像を選び、変換エンジンを5方式から選択して「SVGに変換」を押す。VTracerは領域分割と輪郭、Primitive・Geometrize・Primevalは図形数と種類を調整できる。結果はSVG・PNG・比較JSONで保存できる。</p>
-    <p>このツールは画像を図形化するための独立したツールで、Minimalizerのキャラクター認識や意味的パーツ判定は行わない。顔の描画省略などMinimalizer固有の規則は適用されない。</p>
-    <p>VTracer 1.0.0-alpha.4は現時点でアルファ版。大きな画像や細かいWatershed設定では処理に時間やメモリが必要になる。画像は端末内で変換し、サーバーへの送信や作品の自動保存は行わない。</p>
-    <p><a href="./licenses.html">使用ライブラリとライセンス</a></p>
-  </section>
+
 </main>
-<footer>Vector Lab / ベクター変換室 <a href="/">作品一覧</a></footer>
+<footer>Vector Lab / ベクター変換室 <a href="./licenses.html">ライセンス</a><a href="/">作品一覧</a></footer>
 </body>
 </html>

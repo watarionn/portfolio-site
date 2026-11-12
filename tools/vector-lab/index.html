@@ -19,7 +19,7 @@
   <nav aria-label="ページ"><a href="/">作品一覧へ</a><a href="#help">使い方</a></nav>
 </header>
 <main class="shell">
-  <div class="heading"><div><p class="eyebrow">画像からSVGへ</p><h1>ベクター変換室</h1><p>画像を読み込み、色面や輪郭を調整してSVGに変換する。VTracer 1.0とImageTracerJSをこの端末内で実行できる。</p></div><span class="version">VTracer 1.0.0-alpha.4</span></div>
+  <div class="heading"><div><p class="eyebrow">画像からSVGへ</p><h1>ベクター変換室</h1><p>画像を読み込み、色面や輪郭を調整してSVGに変換する。5つの図形化方式をこの端末内で実行できる。</p></div><span class="version">VTracer 1.0.0-alpha.4</span></div>
   <section class="panel source-panel" aria-labelledby="source-title">
     <div class="section-head"><h2 id="source-title"><span class="step">01</span> 元画像</h2><span class="aside">画像はサーバーに送信されない</span></div>
     <div class="source-grid">
@@ -42,7 +42,7 @@
       <div class="section-head"><h2 id="settings-title"><span class="step">02</span> 変換設定</h2><button class="tertiary" id="reset" type="button">設定を初期化</button></div>
       <form id="settings" autocomplete="off">
         <div class="field"><label for="engine">変換エンジン</label>
-          <select id="engine"><option value="vtracer">VTracer 1.0（高機能）</option><option value="imagetracer">ImageTracerJS（軽量）</option></select>
+          <select id="engine"><option value="vtracer">VTracer 1.0（輪郭追跡）</option><option value="imagetracer">ImageTracerJS（軽量）</option><option value="primitive">Primitive（図形積み上げ）</option><option value="geometrize">Geometrize（図形最適化）</option><option value="primeval">Primeval（再最適化）</option></select>
         </div>
         <div id="vtracer-panel">
           <div class="field"><label for="clustering">領域の分割方式</label>
@@ -112,9 +112,30 @@
             <input id="imagetracer-colors" type="range" min="2" max="32" step="1" value="8"></div>
           <p class="quiet">ImageTracerJSはVTracer 1.0とは別の輪郭追跡アルゴリズム。VTracerの細かな設定は適用されない。</p>
         </div>
+        <div id="approx-panel" hidden>
+          <div class="field"><label for="approx-count">追加する図形数 <output id="approx-count-value">35</output></label>
+            <input id="approx-count" type="range" min="1" max="100" step="1" value="35">
+            <small>図形数が多いほど時間がかかる。iPhoneでは少ない数から試してね。</small>
+          </div>
+          <div class="field"><label for="approx-shape">図形の種類</label>
+            <select id="approx-shape">
+              <option value="any">すべて混合</option>
+              <option value="triangle" selected>三角形</option>
+              <option value="rectangle">長方形</option>
+              <option value="ellipse">楕円</option>
+              <option value="circle">円</option>
+              <option value="rotated-rectangle">回転した長方形</option>
+              <option value="rotated-ellipse">回転した楕円</option>
+              <option value="quadratic">ベジェ曲線</option>
+              <option value="polygon">多角形（Primitive / Primeval）</option>
+            </select>
+            <small>PrimitiveはGo版WASM、GeometrizeはHaxe版JavaScript、PrimevalはRust版WASMを使用。</small>
+          </div>
+        </div>
         <div class="runbar">
           <label class="check"><input id="auto" type="checkbox" checked> 設定変更で自動再変換</label>
           <button type="button" class="primary" id="run" disabled>SVGに変換</button>
+          <button type="button" class="tertiary" id="cancel" disabled>変換を停止</button>
         </div>
         <p id="status" class="status" role="status" aria-live="polite">元画像を選んでね。</p>
       </form>
@@ -136,16 +157,16 @@
   </div>
   <section class="panel" aria-labelledby="others-title">
     <div class="section-head"><h2 id="others-title">ほかの図形化エンジンと比較</h2><span class="aside">合計5方式</span></div>
-    <p class="quiet">Primitive・Geometrize・Primevalはそれぞれの公開デモで変換できる。出力したSVGをこの画面に読み込むと候補として見比べられる。元画像の一致は自動確認しないため、同じ画像をそれぞれのデモへ読み込んでね。</p>
+    <p class="quiet">3つともこのページ内で変換できるようになったよ。上で選んだ同じ元画像を使い、エンジンごとに図形数と種類を調整できる。以前のSVGファイル取り込み機能も残しているよ。</p>
     <div class="external-engines">
-      <article><h3>Primitive</h3><p>少数の図形を重ねて近似する</p><a href="https://primitive-playground.taiseiue.jp/" target="_blank" rel="noopener noreferrer">デモを開く</a><label>SVGを読み込む<input type="file" data-import="primitive" accept=".svg,image/svg+xml"></label></article>
-      <article><h3>Geometrize</h3><p>図形ごとの誤差を減らす</p><a href="https://www.samcodes.co.uk/project/geometrize-haxe-web/" target="_blank" rel="noopener noreferrer">デモを開く</a><label>SVGを読み込む<input type="file" data-import="geometrize" accept=".svg,image/svg+xml"></label></article>
-      <article><h3>Primeval</h3><p>図形を追加して配置を再最適化する</p><a href="https://domoarigatomrburato.github.io/primeval/" target="_blank" rel="noopener noreferrer">デモを開く</a><label>SVGを読み込む<input type="file" data-import="primeval" accept=".svg,image/svg+xml"></label></article>
+      <article><h3>Primitive</h3><p>少数の図形を重ねて近似する</p><button type="button" class="engine-activate" data-activate="primitive">このページで変換</button><a class="engine-source-link" href="https://primitive-playground.taiseiue.jp/" target="_blank" rel="noopener noreferrer">元デモを見る</a><label>SVGを読み込む<input type="file" data-import="primitive" accept=".svg,image/svg+xml"></label></article>
+      <article><h3>Geometrize</h3><p>図形ごとの誤差を減らす</p><button type="button" class="engine-activate" data-activate="geometrize">このページで変換</button><a class="engine-source-link" href="https://www.samcodes.co.uk/project/geometrize-haxe-web/" target="_blank" rel="noopener noreferrer">元デモを見る</a><label>SVGを読み込む<input type="file" data-import="geometrize" accept=".svg,image/svg+xml"></label></article>
+      <article><h3>Primeval</h3><p>図形を追加して配置を再最適化する</p><button type="button" class="engine-activate" data-activate="primeval">このページで変換</button><a class="engine-source-link" href="https://domoarigatomrburato.github.io/primeval/" target="_blank" rel="noopener noreferrer">元デモを見る</a><label>SVGを読み込む<input type="file" data-import="primeval" accept=".svg,image/svg+xml"></label></article>
     </div>
   </section>
   <section class="panel help" id="help">
     <h2>使い方と注意点</h2>
-    <p>画像を選び、領域の分割方式と輪郭表現を調整して「SVGに変換」を押す。設定変更時の自動再変換を止めることもできる。結果はSVGとPNGで保存できる。</p>
+    <p>画像を選び、変換エンジンを5方式から選択して「SVGに変換」を押す。VTracerは領域分割と輪郭、Primitive・Geometrize・Primevalは図形数と種類を調整できる。結果はSVG・PNG・比較JSONで保存できる。</p>
     <p>このツールは画像を図形化するための独立したツールで、Minimalizerのキャラクター認識や意味的パーツ判定は行わない。顔の描画省略などMinimalizer固有の規則は適用されない。</p>
     <p>VTracer 1.0.0-alpha.4は現時点でアルファ版。大きな画像や細かいWatershed設定では処理に時間やメモリが必要になる。画像は端末内で変換し、サーバーへの送信や作品の自動保存は行わない。</p>
     <p><a href="./licenses.html">使用ライブラリとライセンス</a></p>

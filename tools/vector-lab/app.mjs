@@ -14,7 +14,7 @@ function clearResults(){
   $("metrics").textContent="変換すると図形数・ファイルサイズ・元画像との差を表示する。";
   for(const k of ["save-svg","save-png","save-json"])$(k).disabled=true;
 }
-function abortWorker(){if(state.worker){state.worker.terminate();state.worker=null;}state.busy=false;$("run").disabled=!state.image;}
+function abortWorker(){if(state.worker){state.worker.terminate();state.worker=null;}state.busy=false;$("run").disabled=!state.image;$("cancel").disabled=true;}
 async function imageFromFile(file){
   if(!file)return;
   if(!["image/png","image/jpeg","image/webp"].includes(file.type)||file.size<1||file.size>20*1024*1024)
@@ -51,6 +51,15 @@ function displayFields(){
   const engine=$("engine").value,clustering=$("clustering").value;
   $("vtracer-panel").hidden=engine!=="vtracer";
   $("imagetracer-panel").hidden=engine!=="imagetracer";
+  const geometric=["primitive","geometrize","primeval"].includes(engine);
+  $("approx-panel").hidden=!geometric;
+  const max=engine==="primitive"?100:engine==="geometrize"?500:600;
+  $("approx-count").max=String(max);
+  if(Number($("approx-count").value)>max)$("approx-count").value=String(max);
+  const polygon=$("approx-shape").querySelector('option[value="polygon"]');
+  polygon.disabled=engine==="geometrize";
+  if(polygon.disabled && $("approx-shape").value==="polygon")$("approx-shape").value="any";
+  $("approx-count-value").textContent=$("approx-count").value;
   for(const el of document.querySelectorAll('[data-for="watershed"]'))el.hidden=clustering!=="watershed";
   for(const el of document.querySelectorAll('[data-for="color"]'))el.hidden=clustering==="bw";
   for(const el of document.querySelectorAll('[data-for="bw"]'))el.hidden=clustering!=="bw";
@@ -150,10 +159,16 @@ async function run(){
   if(!state.image)return;
   clearTimeout(debounce);
   const engine=$("engine").value;
-  const settings=engine==="vtracer"?fromForm($("settings")):{numberOfColors:Number($("imagetracer-colors").value)};
+  const settings=engine==="vtracer" ? fromForm($("settings")):
+    engine==="imagetracer" ? {numberOfColors:Number($("imagetracer-colors").value)}:
+    {count:Number($("approx-count").value),shape:$("approx-shape").value};
+  const approximation=["primitive","geometrize","primeval"].includes(engine);
   const seq=++state.seq;
   abortWorker();
-  state.busy=true;$("run").disabled=true;status((engine==="vtracer"?"VTracer 1.0":"ImageTracerJS")+"を実行中");
+  state.busy=true;$("run").disabled=true;$("cancel").disabled=false;
+  const names={vtracer:"VTracer 1.0",imagetracer:"ImageTracerJS",
+    primitive:"Primitive",geometrize:"Geometrize",primeval:"Primeval"};
+  status(names[engine]+"を実行中（図形生成は端末内のみ）");
   const w=new Worker("./worker.mjs",{type:"module"});state.worker=w;
   const copy=new Uint8ClampedArray(state.image.data),width=state.image.width,height=state.image.height;
   const start=performance.now();
@@ -169,7 +184,20 @@ async function run(){
     finally{if(w===state.worker)abortWorker();}
   };
   w.onerror=e=>{if(w===state.worker){status("変換ワーカーで問題が発生: "+e.message,true);abortWorker();}};
-  w.postMessage({job:seq,engine,rgba:copy,width,height,settings,colors:settings.numberOfColors},[copy.buffer]);
+  let png=null;
+  if(approximation && engine!=="geometrize") {
+    try {
+      const canvas=$("source");
+      const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png"));
+      if(!blob)throw new Error("PNG入力の準備に失敗");
+      png=new Uint8Array(await blob.arrayBuffer());
+    }catch(err){if(state.worker===w){status(err.message,true);abortWorker();}return;}
+  }
+  if(state.worker!==w || seq!==state.seq)return;
+  const payload={job:seq,engine,rgba:copy,png,width,height,settings,
+    colors:settings.numberOfColors,count:settings.count,shape:settings.shape};
+  const transfers=[copy.buffer];if(png)transfers.push(png.buffer);
+  w.postMessage(payload,transfers);
 }
 function updateCompare(){
   const v=Number($("compare").value);
@@ -200,6 +228,22 @@ $("settings").addEventListener("input",e=>{displayFields();if(e.target.closest("
 $("settings").addEventListener("change",e=>{displayFields();if(e.target.closest("#vtracer-panel, #imagetracer-panel")||e.target.id==="engine")schedule()});
 $("engine").addEventListener("change",()=>{displayFields();schedule()});
 $("run").addEventListener("click",()=>run().catch(e=>status(e.message,true)));
+$("cancel").addEventListener("click",()=>{
+  clearTimeout(debounce);state.seq++;abortWorker();status("変換を停止したよ");
+});
+for(const button of document.querySelectorAll("[data-activate]")){
+  button.addEventListener("click",()=>{
+    const engine=button.dataset.activate;
+    const defaults={primitive:20,geometrize:65,primeval:100};
+    if(!(engine in defaults))return;
+    $("engine").value=engine;
+    $("approx-count").value=String(defaults[engine]);
+    $("approx-shape").value=engine==="primitive"?"triangle":"any";
+    displayFields();
+    $("settings-title").scrollIntoView({behavior:"smooth",block:"start"});
+    if(state.image)schedule();
+  });
+}
 $("auto").addEventListener("change",()=>{if($("auto").checked)schedule();else clearTimeout(debounce)});
 $("compare").addEventListener("input",updateCompare);
 $("reset").addEventListener("click",()=>{

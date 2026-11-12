@@ -79,3 +79,73 @@ def test_apache_host_sends_executable_modules():
     assert "AddType application/wasm .wasm" in rules
     assert "AddType application/manifest+json .webmanifest" in rules
     assert "RewriteRule" not in rules
+
+
+def test_all_five_engines_are_real_in_page_and_bundled():
+    import re
+    ui=(APP/"index.html").read_text(encoding="utf-8")
+    js=(APP/"app.mjs").read_text(encoding="utf-8")
+    worker=(APP/"worker.mjs").read_text(encoding="utf-8")
+    for engine in ("primitive","geometrize","primeval"):
+        assert f'<option value="{engine}">' in ui
+        assert f'data-activate="{engine}"' in ui
+        assert f'"{engine}"' in worker
+        assert (APP/"adapters"/f"{engine}.mjs").is_file()
+    assert 'id="approx-count"' in ui
+    assert 'id="approx-shape"' in ui
+    assert 'id="cancel"' in ui
+    assert 'new Worker("./worker.mjs",{type:"module"})' in js
+    assert "canvas.toBlob" in js
+    assert 'w.postMessage(payload,transfers)' in js
+    assert "https://primitive-playground.taiseiue.jp/" in ui  # references are optional, not runtime
+    assert "このページで変換" in ui
+    assert "SVGに変換" in ui
+    assert "Primitive、Geometrize、Primevalはこのツール内では実行せず" not in (APP/"licenses.html").read_text(encoding="utf-8")
+
+
+def test_all_three_engines_pinned_with_original_licenses():
+    import hashlib
+    from pathlib import Path
+    vendors=APP/"vendor"
+    for filename in (
+        "primitive/primitive.wasm",
+        "primeval/wasm/single/primeval_bg.wasm",
+        "primeval/wasm/threaded/primeval_bg.wasm"
+    ):
+        blob=(vendors/filename).read_bytes()
+        assert blob[:4]==b"\x00asm" and len(blob)>10000
+    assert hashlib.sha256((vendors/"primitive/primitive.wasm").read_bytes()).hexdigest() == (
+        "4aaf76dc80c052b900f32d4c8cb58b608ed9608e7bfa750d5289595287496ed0"
+    )
+    assert hashlib.sha256((vendors/"geometrize-haxe.js").read_bytes()).hexdigest() == (
+        "5ade8209e26de7baecbff25c87fcd2c5493ed361a24b1f068b7e54506ee6be3f"
+    )
+    assert "Copyright" in (vendors/"primitive/LICENSE-PLAYGROUND").read_text(encoding="utf-8")
+    assert "Copyright" in (vendors/"primitive/LICENSE-FOGLEMAN").read_text(encoding="utf-8")
+    assert "Copyright" in (vendors/"primitive/LICENSE-GO").read_text(encoding="utf-8")
+    assert "MIT" in (vendors/"LICENSE-GEOMETRIZE").read_text(encoding="utf-8")
+    assert "MIT" in (vendors/"primeval/LICENSE").read_text(encoding="utf-8")
+    geom=(APP/"adapters/geometrize.mjs").read_text(encoding="utf-8")
+    prime=(APP/"adapters/primeval.mjs").read_text(encoding="utf-8")
+    primitive=(APP/"adapters/primitive.mjs").read_text(encoding="utf-8")
+    assert "runner.step(opts)" in geom
+    assert "api.approximate" in prime
+    assert "self.primitiveRun" in primitive
+
+
+def test_all_five_engines_available_offline_without_cdn():
+    import re
+    sw=(APP/"sw.js").read_text(encoding="utf-8")
+    assert "vector-lab-shell-v2-20261112-five-engines" in sw
+    resources=re.findall(r'"(\./[^"\n]+)"',sw.split("const ASSETS=",1)[1].split("];",1)[0])
+    assert len(resources)>25
+    for resource in resources:
+        path=(APP/resource).resolve()
+        assert path.is_relative_to(APP.resolve())
+        assert path.is_file(), f"missing PWA precache asset: {resource}"
+    for engine in ("primitive","geometrize","primeval"):
+        assert f"./adapters/{engine}.mjs" in resources
+    assert "./vendor/primitive/primitive.wasm" in resources
+    assert "./vendor/primeval/wasm/single/primeval_bg.wasm" in resources
+    assert "./vendor/geometrize-haxe.js" in resources
+    assert "https://cdn" not in sw

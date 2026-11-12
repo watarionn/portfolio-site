@@ -22,7 +22,7 @@ async function imagetracer() {
   return imageTracerPromise;
 }
 self.onmessage=async e=>{
-  const {job,engine,rgba,width,height,settings,colors}=e.data||{};
+  const {job,engine,rgba,png,width,height,settings,colors,count,shape}=e.data||{};
   try {
     if(!Number.isInteger(width)||!Number.isInteger(height)||width<1||height<1||
        width>2048||height>2048||!(rgba instanceof Uint8ClampedArray)&&!(rgba instanceof Uint8Array)||
@@ -41,6 +41,15 @@ self.onmessage=async e=>{
         linefilter:false,viewbox:true,strokewidth:0,layering:0,
         rightangleenhance:true
       });
+    }else if (["primitive","geometrize","primeval"].includes(engine)) {
+      const module=await import("./adapters/"+engine+".mjs");
+      const progress=(step,total)=>self.postMessage({
+        job,progress:engine+" の図形化 "+step+"/"+total
+      });
+      const options={png,rgba,width,height,count,shape,progress};
+      if(engine==="primitive")svg=await module.primitiveSvg(options);
+      else if(engine==="geometrize")svg=await module.geometrizeSvg(options);
+      else svg=await module.primevalSvg(options);
     }else throw new Error("未知の図形化エンジンです");
     if(typeof svg!=="string"||svg.length<25||svg.length>6_000_000)
       throw new Error("SVGが不正か、サイズ上限を超えました");

@@ -71,3 +71,11 @@ def test_config_and_realtime_worker_boundaries():
                 "adaptiveWindow", "binaryThreshold", "optimize"):
         assert key in opts
     assert "normalize(input)" in opts
+
+
+def test_apache_host_sends_executable_modules():
+    rules = (APP / ".htaccess").read_text(encoding="utf-8")
+    assert "AddType application/javascript .mjs" in rules
+    assert "AddType application/wasm .wasm" in rules
+    assert "AddType application/manifest+json .webmanifest" in rules
+    assert "RewriteRule" not in rules

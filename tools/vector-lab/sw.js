@@ -1,10 +1,25 @@
 // Vector Lab shell cache ONLY. Never cache user images, generated SVG/PNG or imports.
-const CACHE="vector-lab-shell-v1-20261112";
+const CACHE="vector-lab-shell-v2-20261112-five-engines";
 const PREFIX="vector-lab-shell-";
 const ASSETS=["./","./index.html","./style.css","./app.mjs","./options.mjs","./worker.mjs",
  "./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./apple-touch-icon.png","./licenses.html",
  "./vendor/vtracer10-browser.mjs","./vendor/vtracer_wasm_bg.wasm",
- "./vendor/imagetracer_v1.2.6.js","./vendor/LICENSE-VTRACER"];
+ "./vendor/imagetracer_v1.2.6.js","./vendor/LICENSE-VTRACER",
+ "./adapters/primitive.mjs","./adapters/geometrize.mjs","./adapters/primeval.mjs",
+ "./vendor/primitive/wasm_exec.js","./vendor/primitive/primitive.wasm",
+ "./vendor/primitive/LICENSE-PLAYGROUND","./vendor/primitive/LICENSE-GO",
+ "./vendor/geometrize-haxe.js","./vendor/LICENSE-GEOMETRIZE",
+ "./vendor/primeval/LICENSE",
+ "./vendor/primeval/dist/browser.js","./vendor/primeval/dist/browser-runtime.js",
+ "./vendor/primeval/dist/errors.js","./vendor/primeval/dist/data-uri.js",
+ "./vendor/primeval/dist/result.js","./vendor/primeval/dist/request.js",
+ "./vendor/primeval/dist/types.js","./vendor/primeval/dist/worker-common.js",
+ "./vendor/primeval/dist/worker-protocol.js","./vendor/primeval/dist/worker-single.js",
+ "./vendor/primeval/dist/worker-threaded.js",
+ "./vendor/primeval/wasm/single/primeval.js","./vendor/primeval/wasm/single/primeval_bg.wasm",
+ "./vendor/primeval/wasm/threaded/primeval.js","./vendor/primeval/wasm/threaded/primeval_bg.wasm",
+ "./vendor/primeval/wasm/single/snippets/primeval-wasm-7cebd9fb8a7a84be/inline0.js",
+ "./vendor/primeval/wasm/threaded/snippets/primeval-wasm-7cebd9fb8a7a84be/inline0.js"];
 self.addEventListener("install",event=>event.waitUntil(
   caches.open(CACHE).then(cache=>cache.addAll(ASSETS))
 ));

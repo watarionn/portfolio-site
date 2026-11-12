@@ -77,7 +77,12 @@
       updated_at: now()
     });
     db.entries.unshift(entry);
-    persist();
+    try {
+      persist();
+    } catch (error) {
+      db.entries.shift();
+      throw error;
+    }
     return clone(entry);
   }
 

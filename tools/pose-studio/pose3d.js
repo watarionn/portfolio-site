@@ -590,14 +590,10 @@
   }
 
   function download(blob,name){
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download=name;
-    a.click();
-    setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+    return window.PoseStudioDownload(blob,name);
   }
 
-  const blobOf=(target,type='image/png')=>new Promise((resolve)=>target.toBlob(resolve,type));
+  const blobOf=(target,type='image/png')=>new Promise((resolve,reject)=>target.toBlob((blob)=>blob?resolve(blob):reject(new Error('画像を生成できませんでした')),type));
   const exportSize=()=>$('export3dSize').value.split('x').map(Number);
 
   function snap(width,height,override={}){
@@ -651,6 +647,15 @@
 
   $('export3dFourButton').addEventListener('click',()=>guard(async()=>{
     const [w,h]=exportSize();
+    if(/iPhone|iPad|iPod/.test(navigator.userAgent)){
+      const sheet=document.createElement('canvas');
+      sheet.width=w*4;sheet.height=h;
+      const context=sheet.getContext('2d');
+      VIEWS.forEach(([,az],index)=>context.drawImage(snap(w,h,{...ORTHO,az}),w*index,0));
+      download(await blobOf(sheet),'pose_4views.png');
+      say('iPhoneでは4方向を1枚の画像に保存しました');
+      return;
+    }
     for(const [label,az,id] of VIEWS){
       download(await blobOf(snap(w,h,{...ORTHO,az})),`pose_${id}.png`);
       say(label+'を保存中');
@@ -801,7 +806,7 @@
     try{
       const recorder=new MediaRecorder(canvas.captureStream(30),{mimeType:type});
       recorder.ondataavailable=(event)=>{if(event.data&&event.data.size)chunks.push(event.data);};
-      const stopped=new Promise((resolve)=>{recorder.onstop=resolve;});
+      const stopped=new Promise((resolve,reject)=>{recorder.onstop=resolve;recorder.onerror=()=>reject(new Error('動画の録画に失敗しました'));});
       recorder.start();
       const begin=performance.now(),duration=period()*1000;
       await new Promise((resolve)=>{
@@ -815,6 +820,7 @@
       });
       recorder.stop();
       await stopped;
+      if(!chunks.length) throw new Error('録画データが生成されませんでした');
       download(new Blob(chunks,{type}),`pose.${type.startsWith('video/mp4')?'mp4':'webm'}`);
       say('動画を保存しました');
     }finally{

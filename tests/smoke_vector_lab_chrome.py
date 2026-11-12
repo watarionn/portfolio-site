@@ -85,6 +85,18 @@ window.addEventListener("load",async()=>{
   if(el("jump-result").hidden)throw Error("result jump button missing");
   if(document.getElementById("others-title")||document.getElementById("help"))
     throw Error("redundant sections remain in UI");
+  if(window.innerWidth<=700){
+    const picker=document.querySelector(".engine-picker");
+    if(getComputedStyle(picker).overflowX!=="auto")
+      throw Error("mobile engine picker does not scroll");
+    if(picker.scrollWidth<=picker.clientWidth)
+      throw Error("mobile engine picker is not horizontally scrollable");
+    const card=document.querySelector('[data-engine="vtracer"]');
+    if(card.getBoundingClientRect().height<44)
+      throw Error("mobile engine card touch target too small");
+    if(document.documentElement.scrollWidth>window.innerWidth+2)
+      throw Error("unexpected page-wide horizontal overflow "+document.documentElement.scrollWidth);
+  }
   const importInput=document.querySelector('[data-import="primitive"]');
   const imported=new File(['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="#ee7722" d="M0 0H64V64H0Z"/></svg>'],
     "primitive.svg",{type:"image/svg+xml"});

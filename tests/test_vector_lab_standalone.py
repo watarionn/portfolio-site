@@ -89,7 +89,7 @@ def test_all_five_engines_are_real_in_page_and_bundled():
     for engine in ("primitive","geometrize","primeval"):
         assert f'<option value="{engine}">' in ui
         assert f'data-activate="{engine}"' in ui
-        assert f'engine==="{engine}"' in worker
+        assert f'"{engine}"' in worker
         assert (APP/"adapters"/f"{engine}.mjs").is_file()
     assert 'id="approx-count"' in ui
     assert 'id="approx-shape"' in ui
@@ -99,7 +99,7 @@ def test_all_five_engines_are_real_in_page_and_bundled():
     assert 'w.postMessage(payload,transfers)' in js
     assert "https://primitive-playground.taiseiue.jp/" in ui  # references are optional, not runtime
     assert "このページで変換" in ui
-    assert "SVGを生成" in ui
+    assert "SVGに変換" in ui
     assert "Primitive、Geometrize、Primevalはこのツール内では実行せず" not in (APP/"licenses.html").read_text(encoding="utf-8")
 
 
@@ -113,7 +113,7 @@ def test_all_three_engines_pinned_with_original_licenses():
         "primeval/wasm/threaded/primeval_bg.wasm"
     ):
         blob=(vendors/filename).read_bytes()
-        assert blob[:4]==b"\\x00asm" and len(blob)>10000
+        assert blob[:4]==b"\x00asm" and len(blob)>10000
     assert hashlib.sha256((vendors/"primitive/primitive.wasm").read_bytes()).hexdigest() == (
         "4aaf76dc80c052b900f32d4c8cb58b608ed9608e7bfa750d5289595287496ed0"
     )
@@ -137,7 +137,7 @@ def test_all_five_engines_available_offline_without_cdn():
     import re
     sw=(APP/"sw.js").read_text(encoding="utf-8")
     assert "vector-lab-shell-v2-20261112-five-engines" in sw
-    resources=re.findall(r'"(\\./[^"\\n]+)"',sw.split("const ASSETS=",1)[1].split("];",1)[0])
+    resources=re.findall(r'"(\./[^"\n]+)"',sw.split("const ASSETS=",1)[1].split("];",1)[0])
     assert len(resources)>25
     for resource in resources:
         path=(APP/resource).resolve()

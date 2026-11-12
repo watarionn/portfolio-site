@@ -17,11 +17,11 @@ import sys
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
-sys.path.insert(0,str(Path(__file__).resolve().parent))
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/"scripts"))
+sys.path.insert(0,str(ROOT/"tools"))
 from deploy_production import connect_ftps,close_ftp,read_windows_generic_credential,remote_join
 from build_deployment import render_sitemap
-
-ROOT=Path(__file__).resolve().parents[1]
 BUILD=ROOT/"build/public_html"
 VERSION="vector-lab-vtracer10"
 def hash_bytes(data:bytes)->str:return hashlib.sha256(data).hexdigest()

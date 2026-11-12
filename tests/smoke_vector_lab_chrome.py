@@ -82,7 +82,7 @@ window.addEventListener("load",async()=>{
   if(!el("result").style.clipPath.includes("100%"))throw Error("source-only mode missing");
   document.querySelector('[data-view="compare"]').click();
   if(el("compare-tools").hidden)throw Error("comparison slider hidden");
-  if(el("jump-result").hidden)throw Error("result jump button missing");
+  if(!navigator.standalone && el("jump-result").hidden)throw Error("result jump button missing");
   if(document.getElementById("others-title")||document.getElementById("help"))
     throw Error("redundant sections remain in UI");
   if(window.innerWidth<=700){

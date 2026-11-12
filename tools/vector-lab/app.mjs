@@ -4,12 +4,18 @@ const ids=["vtracer","imagetracer","primitive","geometrize","primeval"];
 const state={file:null,image:null,sha:null,worker:null,seq:0,busy:false,results:new Map(),selected:null,loadSeq:0};
 let debounce=null;
 const MAX_SVG=6_000_000;
-function status(text,error=false){$("status").textContent=text;$("status").classList.toggle("error",error);}
+function status(text,error=false){
+  $("status").textContent=text;
+  $("status").classList.toggle("error",error);
+  $("status").classList.toggle("loading",!error && /実行中|図形化|読み込み中/.test(text));
+}
 function shortSize(n){return n>=1048576?(n/1048576).toFixed(2)+"MB":n>=1024?(n/1024).toFixed(1)+"KB":n+"B"}
 function revokeResult(result){if(result?.url)URL.revokeObjectURL(result.url);}
 function clearResults(){
   for(const r of state.results.values())revokeResult(r);
   state.results.clear();state.selected=null;$("candidates").replaceChildren();
+  $("candidate-count").textContent="0件";
+  $("jump-result").hidden=true;
   $("result").hidden=true;$("result").removeAttribute("src");$("result-meta").textContent="未生成";
   $("metrics").textContent="変換すると図形数・ファイルサイズ・元画像との差を表示する。";
   for(const k of ["save-svg","save-png","save-json"])$(k).disabled=true;
@@ -49,6 +55,9 @@ async function imageFromFile(file){
 }
 function displayFields(){
   const engine=$("engine").value,clustering=$("clustering").value;
+  for(const card of document.querySelectorAll("[data-engine]")){
+    card.setAttribute("aria-pressed",String(card.dataset.engine===engine));
+  }
   $("vtracer-panel").hidden=engine!=="vtracer";
   $("imagetracer-panel").hidden=engine!=="imagetracer";
   const geometric=["primitive","geometrize","primeval"].includes(engine);
@@ -121,9 +130,11 @@ async function metricsOf(svg,url){
 }
 function renderCandidates(){
   const grid=$("candidates");grid.replaceChildren();
+  $("candidate-count").textContent=state.results.size+"件";
   for(const id of ids){
     const r=state.results.get(id);if(!r)continue;
     const box=document.createElement("div");box.className="candidate";
+    box.classList.toggle("is-selected",state.selected===id);
     const image=document.createElement("img");image.src=r.url;image.alt=id+"の出力";
     const name=document.createElement("strong");name.textContent=r.name;
     const note=document.createElement("small");note.textContent=r.metrics.shapes+" 図形 / "+shortSize(r.metrics.bytes);
@@ -135,6 +146,12 @@ function renderCandidates(){
 function selectCandidate(id){
   const r=state.results.get(id);if(!r)return;
   state.selected=id;
+  $("jump-result").hidden=false;
+  for(const card of $("candidates").querySelectorAll(".candidate")){
+    const index=[...card.parentElement.children].indexOf(card);
+    const candidateId=ids.filter(key=>state.results.has(key))[index];
+    card.classList.toggle("is-selected",candidateId===id);
+  }
   const img=$("result");img.src=r.url;img.hidden=false;
   $("result-meta").textContent=r.name+" / "+shortSize(r.metrics.bytes);
   const m=r.metrics;
@@ -199,10 +216,21 @@ async function run(){
   const transfers=[copy.buffer];if(png)transfers.push(png.buffer);
   w.postMessage(payload,transfers);
 }
+let previewMode="compare";
+function setPreviewMode(mode){
+  if(!["source","compare","result"].includes(mode))return;
+  previewMode=mode;
+  for(const button of document.querySelectorAll("[data-view]")){
+    button.setAttribute("aria-pressed",String(button.dataset.view===mode));
+  }
+  $("compare-tools").hidden=mode!=="compare";
+  updateCompare();
+}
 function updateCompare(){
-  const v=Number($("compare").value);
-  $("compare-value").textContent=v+"%";
-  $("result").style.clipPath="inset(0 "+(100-v)+"% 0 0)";
+  const value=Number($("compare").value);
+  $("compare-value").textContent=value+"%";
+  const visible=previewMode==="source"?0:previewMode==="result"?100:value;
+  $("result").style.clipPath="inset(0 "+(100-visible)+"% 0 0)";
 }
 function download(blob,filename){
   const url=URL.createObjectURL(blob),a=document.createElement("a");
@@ -224,25 +252,34 @@ for(const name of ["dragleave","drop"])drop.addEventListener(name,e=>{e.preventD
 drop.addEventListener("drop",e=>imageFromFile(e.dataTransfer.files?.[0]).catch(err=>status(err.message,true)));
 $("resolution").addEventListener("change",()=>{if(state.file)imageFromFile(state.file).catch(e=>status(e.message,true))});
 $("settings").addEventListener("submit",e=>e.preventDefault());
-$("settings").addEventListener("input",e=>{displayFields();if(e.target.closest("#vtracer-panel, #imagetracer-panel"))schedule()});
-$("settings").addEventListener("change",e=>{displayFields();if(e.target.closest("#vtracer-panel, #imagetracer-panel")||e.target.id==="engine")schedule()});
+$("settings").addEventListener("input",e=>{
+  displayFields();
+  // Text entry is debounced, but iPhone sliders do not restart heavy WASM
+  // while the user is still dragging the knob.
+  if(e.target.id==="palette")schedule();
+});
+$("settings").addEventListener("change",e=>{
+  displayFields();
+  if(e.target.closest("#vtracer-panel, #imagetracer-panel, #approx-panel") || e.target.id==="engine")schedule();
+});
 $("engine").addEventListener("change",()=>{displayFields();schedule()});
 $("run").addEventListener("click",()=>run().catch(e=>status(e.message,true)));
 $("cancel").addEventListener("click",()=>{
   clearTimeout(debounce);state.seq++;abortWorker();status("変換を停止したよ");
 });
-for(const button of document.querySelectorAll("[data-activate]")){
+for(const button of document.querySelectorAll("[data-engine]")){
   button.addEventListener("click",()=>{
-    const engine=button.dataset.activate;
-    const defaults={primitive:20,geometrize:65,primeval:100};
-    if(!(engine in defaults))return;
-    $("engine").value=engine;
-    $("approx-count").value=String(defaults[engine]);
-    $("approx-shape").value=engine==="primitive"?"triangle":"any";
+    if($("engine").value===button.dataset.engine)return;
+    $("engine").value=button.dataset.engine;
     displayFields();
-    $("settings-title").scrollIntoView({behavior:"smooth",block:"start"});
-    if(state.image)schedule();
+    schedule();
   });
+}
+$("jump-result").addEventListener("click",()=>
+  $("output-title").scrollIntoView({behavior:"smooth",block:"start"})
+);
+for(const button of document.querySelectorAll("[data-view]")){
+  button.addEventListener("click",()=>setPreviewMode(button.dataset.view));
 }
 $("auto").addEventListener("change",()=>{if($("auto").checked)schedule();else clearTimeout(debounce)});
 $("compare").addEventListener("input",updateCompare);
@@ -280,4 +317,4 @@ window.addEventListener("pagehide",()=>{clearTimeout(debounce);abortWorker();for
 if("serviceWorker" in navigator&&location.protocol==="https:"){
   addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./",updateViaCache:"none"}).catch(()=>{}));
 }
-displayFields();updateCompare();
+displayFields();setPreviewMode("compare");

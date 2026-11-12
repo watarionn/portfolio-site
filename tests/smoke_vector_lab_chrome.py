@@ -69,6 +69,22 @@ window.addEventListener("load",async()=>{
   await trace("geometrize",{},"geometrize");
   el("approx-count").value="8";
   await trace("primeval",{},"primeval");
+  // Five engines are now directly selectable in the compact UI.
+  const cards=[...document.querySelectorAll("[data-engine]")];
+  if(cards.length!==5)throw Error("five engine UI cards missing");
+  const primeCard=document.querySelector('[data-engine="primeval"]');
+  primeCard.click();
+  if(el("engine").value!=="primeval" || primeCard.getAttribute("aria-pressed")!=="true")
+    throw Error("engine card is not synchronized to active engine");
+  document.querySelector('[data-view="result"]').click();
+  if(!el("result").style.clipPath.includes("0%"))throw Error("result-only mode missing");
+  document.querySelector('[data-view="source"]').click();
+  if(!el("result").style.clipPath.includes("100%"))throw Error("source-only mode missing");
+  document.querySelector('[data-view="compare"]').click();
+  if(el("compare-tools").hidden)throw Error("comparison slider hidden");
+  if(el("jump-result").hidden)throw Error("result jump button missing");
+  if(document.getElementById("others-title")||document.getElementById("help"))
+    throw Error("redundant sections remain in UI");
   const importInput=document.querySelector('[data-import="primitive"]');
   const imported=new File(['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="#ee7722" d="M0 0H64V64H0Z"/></svg>'],
     "primitive.svg",{type:"image/svg+xml"});

@@ -264,6 +264,11 @@
       "productionRoot": "reference-shape-editor-pwa"
     },
     {
+      "id": "vector-lab",
+      "sourceRoot": "tools/vector-lab",
+      "productionRoot": "vector-lab"
+    },
+    {
       "id": "yofukashi-obake-town",
       "sourceRoot": "works/yofukashi-obake-town/public",
       "productionRoot": "yofukashi-obake-town"

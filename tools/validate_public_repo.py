@@ -254,7 +254,7 @@ def main() -> None:
     # registered but must not appear in the visible homepage directory.
     allowed_genres = ("web-tool", "website", "distribution", "exhibit")
     expected_genre_counts = {
-        "web-tool": 15, "website": 8, "distribution": 7, "exhibit": 2,
+        "web-tool": 16, "website": 8, "distribution": 7, "exhibit": 2,
     }
     visible_works = [work for work in display_works if work.get("listed", True) is True]
     observed_genre_counts = {

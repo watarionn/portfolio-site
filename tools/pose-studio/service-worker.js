@@ -1,7 +1,7 @@
 'use strict';
 
 const CACHE_PREFIX='pose-studio-';
-const CACHE_NAME=CACHE_PREFIX+'v1.5.0';
+const CACHE_NAME=CACHE_PREFIX+'v1.5.1';
 const APP_SHELL=[
   './',
   './index.html',
@@ -13,9 +13,9 @@ const APP_SHELL=[
   './manifest.webmanifest',
   './gif.js?v=1.2.0',
   './store.js?v=1.2.0',
-  './pose2d.js?v=1.2.0',
-  './pose3d.js?v=1.2.0',
-  './app.js?v=1.5.0',
+  './pose2d.js?v=1.5.1',
+  './pose3d.js?v=1.5.1',
+  './app.js?v=1.5.1',
   './pwa.js?v=1.5.0'
 ];
 const RUNTIME_ASSETS=[

@@ -30,3 +30,15 @@
 - **Impact:** excess vertical scrolling on installed iPhone PWA; no documented alteration to SVG algorithms/data or other portfolio pages.
 - **Fix:** installed-specific four-screen workspace with stage partition, safe-area-aware height and no scroll; browser mode unchanged.
 - **Prevention:** include explicit PWA display-mode, viewport-height and per-pane clipping assertions in `tests/smoke_vector_lab_chrome.py`, not merely CSS grep or horizontal-overflow tests. For any future PWA UI update, re-run these checks and physical-device acceptance.
+
+## Final physical iPhone owner acceptance (2026-11-12 JST)
+
+**Status: COMPLETED / OWNER_ACCEPTED / PUBLIC_RELEASE_PASS.** The user confirmed the updated PWA displayed on their iPhone (「iPhoneで表示できた！」). After explicit follow-up asking whether the Home Screen PWA could switch the four tabs `画像 / 設定 / 結果 / 候補` **without vertical scrolling**, the user confirmed 「問題なし！受け入れ完了！」. This is the owner-supplied real-device acceptance evidence, not an inference from Chrome emulation.
+
+- Accepted source: `watarionn/portfolio-site` main commit `0630ae0d6e2421f94ca74ee3bcbb2c6720ceca8a`, PR #247.
+- Public PWA: `https://cf278796.cloudfree.jp/vector-lab/`, cached shell `vector-lab-shell-v4-20261112-standalone`.
+- Previously verified in release receipt: 4-file scoped FTPS deployment with exact public HTTPS readback, public Chrome 5-engine/export tests, mobile-sized installed-PWA emulation and source/build QA. Owner's separate physical iPhone check closes the final acceptance gate.
+- Acceptance comment and readback: `https://github.com/watarionn/portfolio-site/pull/247#issuecomment-6817700653`.
+- Future no-scroll PWA changes must check actual display mode, vertical scroll amount, controls clipped by short viewports and safe areas, and require physical-device acceptance when appropriate. The check is not replaced by merely setting `overflow:hidden`.
+
+No code, published assets or production configuration were changed as part of this acceptance record.

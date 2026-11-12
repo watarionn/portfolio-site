@@ -1,5 +1,5 @@
 // Vector Lab shell cache ONLY. Never cache user images, generated SVG/PNG or imports.
-const CACHE="vector-lab-shell-v3-20261112-ui";
+const CACHE="vector-lab-shell-v4-20261112-standalone";
 const PREFIX="vector-lab-shell-";
 const ASSETS=["./","./index.html","./style.css","./app.mjs","./options.mjs","./worker.mjs",
  "./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./apple-touch-icon.png","./licenses.html",

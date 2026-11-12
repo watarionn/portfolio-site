@@ -117,7 +117,10 @@ def test_all_three_engines_pinned_with_original_licenses():
     assert hashlib.sha256((vendors/"primitive/primitive.wasm").read_bytes()).hexdigest() == (
         "4aaf76dc80c052b900f32d4c8cb58b608ed9608e7bfa750d5289595287496ed0"
     )
-    assert hashlib.sha256((vendors/"geometrize-haxe.js").read_bytes()).hexdigest() == (
+    # Some older Windows checkouts retain CRLF from before the pinning attribute.
+    # Canonical upstream JS must still match after line-ending normalization.
+    geometrize_js=(vendors/"geometrize-haxe.js").read_bytes().replace(b"\\r\\n",b"\\n")
+    assert hashlib.sha256(geometrize_js).hexdigest() == (
         "5ade8209e26de7baecbff25c87fcd2c5493ed361a24b1f068b7e54506ee6be3f"
     )
     assert "Copyright" in (vendors/"primitive/LICENSE-PLAYGROUND").read_text(encoding="utf-8")

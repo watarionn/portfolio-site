@@ -5,6 +5,22 @@
   const $=(id)=>document.getElementById(id);
   let toastTimer=null;
 
+  // One download path for PWA exports. Keep the anchor in the DOM until the
+  // browser has accepted the click, and delay object URL cleanup for iOS Safari.
+  window.PoseStudioDownload=function(blob,name){
+    if(!(blob instanceof Blob)||!blob.size) throw new Error('保存するデータが空です');
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download=name;
+    a.style.display='none';
+    document.body.appendChild(a);
+    try{a.click();}
+    finally{
+      setTimeout(()=>{a.remove();URL.revokeObjectURL(url);},60000);
+    }
+  };
+
   const HELP={
     quickstart:{
       title:'Pose Studio の使い方',
@@ -271,11 +287,7 @@
   }
 
   function download(name,content){
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(new Blob([content],{type:'application/json'}));
-    a.download=name;
-    a.click();
-    setTimeout(()=>URL.revokeObjectURL(a.href),1200);
+    window.PoseStudioDownload(new Blob([content],{type:'application/json'}),name);
   }
 
   document.querySelectorAll('.studio-tab').forEach((button)=>{

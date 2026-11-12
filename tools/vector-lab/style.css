@@ -267,7 +267,7 @@ body.vl-pwa .workspace-tabs button[aria-pressed="true"]{
   body.vl-pwa .engine-field{margin-bottom:0!important}
   body.vl-pwa .setting-tabs{margin:1px 0 3px}
   body.vl-pwa .setting-tabs button{min-height:29px}
-  body.vl-pwa #vtracer-panel .field{margin:4px 0}
+  body.vl-pwa #vtracer-panel .field{margin:2px 0}
   body.vl-pwa .settings-panel .field input[type="range"]{min-height:17px;margin:2px 0}
   body.vl-pwa .settings-panel .field small{display:none}
   body.vl-pwa .runbar{padding-top:4px;margin-top:auto}

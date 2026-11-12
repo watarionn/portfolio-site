@@ -137,11 +137,20 @@
     const title=$('pose3dTitle').value.trim()||defaultTitle('3Dポーズ');
     const tags=splitTags($('pose3dTags').value);
     const pose3d=window.PoseStudio3D.getState();
-    const pose2d=window.PoseStudio2D.getState();
-    pose2d.points=window.PoseStudio3D.projectTo2D();
-    Store.addEntry({title,tags,source_mode:'3d',pose3d,pose2d});
-    $('pose3dTitle').value='';
-    toast('ポーズDBへ保存しました');
+    try{
+      // The legacy 2D editor is optional. Never block saving a 3D pose when it is unavailable.
+      const pose2d=window.PoseStudio2D?.getState?.()||{width:1024,height:1024};
+      pose2d.points=window.PoseStudio3D.projectTo2D();
+      const saved=Store.addEntry({title,tags,source_mode:'3d',pose3d,pose2d});
+      if(!Store.getDb().entries.some((entry)=>entry.id===saved.id)){
+        throw new Error('保存したポーズを読み戻せませんでした');
+      }
+      $('pose3dTitle').value='';
+      toast('ポーズDBへ保存しました');
+    }catch(error){
+      console.error('Pose Studio 3D save failed:',error);
+      toast('保存できませんでした: '+(error?.message||'保存先を確認してください'));
+    }
   }
 
   function save2d(){

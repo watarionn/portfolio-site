@@ -280,3 +280,14 @@ body.vl-pwa .workspace-tabs button[aria-pressed="true"]{
   body.vl-pwa .output-panel .view-picker button{min-height:30px}
   body.vl-pwa .output-panel .output-actions button{min-height:35px}
 }
+
+@media (max-height:600px){
+  body.vl-pwa .top{flex-basis:calc(31px + env(safe-area-inset-top))}
+  body.vl-pwa .top nav{display:none}
+  body.vl-pwa .engine-choice{min-height:34px;padding:3px 5px}
+  body.vl-pwa .setting-tabs button{min-height:26px}
+  body.vl-pwa .setting-tabs{margin:0 0 2px}
+  body.vl-pwa .settings-panel .field input[type="range"]{margin:1px 0;min-height:16px}
+  body.vl-pwa .settings-panel .field label{font-size:11px}
+  body.vl-pwa .status{min-height:13px;margin:1px 0 0}
+}

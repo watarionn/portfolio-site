@@ -50,6 +50,11 @@ export async function pageValue(url,expression,timeoutMs=55000) {
   });
   await call("Page.enable");
   await call("Runtime.enable");
+  const mobileWidth=Number(process.env.VECTOR_LAB_TEST_MOBILE_WIDTH||0);
+  if(mobileWidth>0){
+    if(!Number.isInteger(mobileWidth)||mobileWidth<320||mobileWidth>600)throw new Error("invalid mobile viewport");
+    await call("Emulation.setDeviceMetricsOverride",{width:mobileWidth,height:844,deviceScaleFactor:3,mobile:true});
+  }
   await call("Page.navigate",{url});
   const deadline=Date.now()+timeoutMs;
   let last="pending";

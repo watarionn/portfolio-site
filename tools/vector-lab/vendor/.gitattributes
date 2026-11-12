@@ -1,0 +1,3 @@
+# Keep the pinned generated Geometrize JS exactly as distributed.
+# Windows Git autocrlf must not rewrite its bytes on checkout.
+geometrize-haxe.js -text

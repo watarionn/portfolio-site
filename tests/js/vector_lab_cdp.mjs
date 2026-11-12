@@ -50,10 +50,16 @@ export async function pageValue(url,expression,timeoutMs=55000) {
   });
   await call("Page.enable");
   await call("Runtime.enable");
+  // Simulate iPhone Home Screen PWA startup before any application JS runs.
+  if(process.env.VECTOR_LAB_TEST_STANDALONE==="1"){
+    await call("Page.addScriptToEvaluateOnNewDocument",{
+      source:'Object.defineProperty(navigator,"standalone",{configurable:true,get:()=>true});'
+    });
+  }
   const mobileWidth=Number(process.env.VECTOR_LAB_TEST_MOBILE_WIDTH||0);
   if(mobileWidth>0){
     if(!Number.isInteger(mobileWidth)||mobileWidth<320||mobileWidth>600)throw new Error("invalid mobile viewport");
-    await call("Emulation.setDeviceMetricsOverride",{width:mobileWidth,height:844,deviceScaleFactor:3,mobile:true});
+    await call("Emulation.setDeviceMetricsOverride",{width:mobileWidth,height:Number(process.env.VECTOR_LAB_TEST_MOBILE_HEIGHT||844),deviceScaleFactor:3,mobile:true});
   }
   await call("Page.navigate",{url});
   const deadline=Date.now()+timeoutMs;

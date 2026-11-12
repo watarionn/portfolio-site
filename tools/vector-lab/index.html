@@ -20,7 +20,7 @@
 </header>
 <main class="shell">
   <div class="heading"><div><p class="eyebrow">VECTOR LAB / SVG WORKSPACE</p><h1>ベクター変換室</h1><p>5種類のエンジンで、画像をSVGに。すべて端末内で変換するよ。</p></div><span class="version">5 ENGINES</span></div>
-  <section class="panel source-panel" aria-labelledby="source-title">
+  <section class="panel source-panel" id="workspace-source" aria-labelledby="source-title">
     <div class="section-head"><h2 id="source-title"><span class="step">01</span> 元画像</h2><span class="aside">画像はサーバーに送信されない</span></div>
     <div class="source-grid">
       <label class="drop" id="drop">
@@ -38,7 +38,7 @@
     </div>
   </section>
   <div class="work-layout">
-    <section class="panel settings-panel" aria-labelledby="settings-title">
+    <section class="panel settings-panel" id="workspace-settings" aria-labelledby="settings-title">
       <div class="section-head"><h2 id="settings-title"><span class="step">02</span> 変換設定</h2><button class="tertiary" id="reset" type="button">設定を初期化</button></div>
       <form id="settings" autocomplete="off">
         <div class="field engine-field">
@@ -53,24 +53,30 @@
           <label class="sr-only" for="engine">変換エンジンをプルダウンで選ぶ</label>
           <select class="sr-only" id="engine"><option value="vtracer">VTracer 1.0（輪郭追跡）</option><option value="imagetracer">ImageTracerJS（軽量）</option><option value="primitive">Primitive（図形積み上げ）</option><option value="geometrize">Geometrize（図形最適化）</option><option value="primeval">Primeval（再最適化）</option></select>
         </div>
+        <div class="setting-tabs" id="setting-tabs" hidden role="group" aria-label="VTracer設定カテゴリ">
+          <button type="button" data-settings-stage="basic" aria-pressed="true">基本</button>
+          <button type="button" data-settings-stage="color" aria-pressed="false">色・白黒</button>
+          <button type="button" data-settings-stage="shape" aria-pressed="false">輪郭</button>
+          <button type="button" data-settings-stage="fine" aria-pressed="false">詳細</button>
+        </div>
         <div id="vtracer-panel">
-          <div class="field"><label for="clustering">領域の分割方式</label>
+          <div class="field" data-vl-settings="basic"><label for="clustering">領域の分割方式</label>
             <select id="clustering" name="clustering">
               <option value="color-cluster">Color Cluster（色のまとまり）</option>
               <option value="watershed">Watershed（境界に沿った領域分割）</option>
               <option value="bw">白黒（2値化）</option>
             </select>
           </div>
-          <div class="field two">
+          <div class="field two" data-vl-settings="basic">
             <label>領域の重ね方<select name="hierarchical" id="hierarchical"><option value="cutout" selected>Cutout（すき間のない切り抜き）</option><option value="stacked">Stacked（色面を重ねる）</option></select></label>
             <label>輪郭の表現<select name="mode" id="mode"><option value="spline" selected>Spline（曲線）</option><option value="polygon">Polygon（多角形）</option><option value="pixel">Pixel（ピクセル輪郭）</option></select></label>
           </div>
-          <div class="field" data-for="watershed">
+          <div class="field" data-for="watershed" data-vl-settings="basic">
             <label for="watershedDetail">Watershedの細かさ <output data-output="watershedDetail">128</output></label>
             <input type="range" name="watershedDetail" id="watershedDetail" min="0" max="512" step="1" value="128">
             <small>値が大きいほど領域が細かくなる。0では大部分が一体化する。</small>
           </div>
-          <div data-for="color">
+          <div data-for="color" data-vl-settings="color">
             <div class="field"><label for="maxColors">自動パレットの色数 <output data-output="maxColors">無制限</output></label>
               <input type="range" name="maxColors" id="maxColors" min="0" max="32" step="1" value="0">
               <small>0は無効。固定パレットを入力すると固定色が優先される。</small>
@@ -80,7 +86,7 @@
               <small>色をカンマか空白で区切って入力する。入力した色のみに合わせる。</small>
             </div>
           </div>
-          <div data-for="bw">
+          <div data-for="bw" data-vl-settings="color">
             <div class="field"><label class="check"><input type="checkbox" name="adaptive" id="adaptive"> 明るさのむらを補正する（Adaptive B/W）</label></div>
             <div class="field" data-for="threshold">
               <label for="binaryThreshold">白黒の境界値 <output data-output="binaryThreshold">128</output></label>
@@ -93,24 +99,24 @@
               <input type="range" name="adaptiveT" id="adaptiveT" min="1" max="50" step="1" value="15">
             </div>
           </div>
-          <div class="field"><label for="simplify">曲線の簡略化 <output data-output="simplify">0（無効）</output></label>
+          <div class="field" data-vl-settings="shape"><label for="simplify">曲線の簡略化 <output data-output="simplify">0（無効）</output></label>
             <input type="range" name="simplify" id="simplify" min="0" max="5" step="0.25" value="0">
             <small>曲線の輪郭を近似してSVGを軽量化する。Splineのみ有効。</small>
           </div>
           <details class="advanced"><summary>詳細設定</summary>
-            <div class="field"><label for="filterSpeckle">小さな領域の除去 <output data-output="filterSpeckle">4</output></label>
+            <div class="field" data-vl-settings="shape"><label for="filterSpeckle">小さな領域の除去 <output data-output="filterSpeckle">4</output></label>
               <input id="filterSpeckle" name="filterSpeckle" type="range" min="1" max="128" step="1" value="4"></div>
-            <div class="field" data-for="color"><label for="colorPrecision">色の精度 <output data-output="colorPrecision">6</output></label>
+            <div class="field" data-for="color" data-vl-settings="fine"><label for="colorPrecision">色の精度 <output data-output="colorPrecision">6</output></label>
               <input id="colorPrecision" name="colorPrecision" type="range" min="1" max="8" step="1" value="6"></div>
-            <div class="field" data-for="color"><label for="layerDifference">色の段差 <output data-output="layerDifference">16</output></label>
+            <div class="field" data-for="color" data-vl-settings="fine"><label for="layerDifference">色の段差 <output data-output="layerDifference">16</output></label>
               <input id="layerDifference" name="layerDifference" type="range" min="0" max="255" step="1" value="16"></div>
-            <div class="field" data-for="spline"><label for="cornerThreshold">角のしきい値 <output data-output="cornerThreshold">60</output></label>
+            <div class="field" data-for="spline" data-vl-settings="shape"><label for="cornerThreshold">角のしきい値 <output data-output="cornerThreshold">60</output></label>
               <input id="cornerThreshold" name="cornerThreshold" type="range" min="0" max="180" step="1" value="60"></div>
-            <div class="field" data-for="spline"><label for="lengthThreshold">線分長 <output data-output="lengthThreshold">4</output></label>
+            <div class="field" data-for="spline" data-vl-settings="shape"><label for="lengthThreshold">線分長 <output data-output="lengthThreshold">4</output></label>
               <input id="lengthThreshold" name="lengthThreshold" type="range" min="3.5" max="10" step="0.5" value="4"></div>
-            <div class="field" data-for="spline"><label for="spliceThreshold">曲線の接続角 <output data-output="spliceThreshold">45</output></label>
+            <div class="field" data-for="spline" data-vl-settings="shape"><label for="spliceThreshold">曲線の接続角 <output data-output="spliceThreshold">45</output></label>
               <input id="spliceThreshold" name="spliceThreshold" type="range" min="0" max="180" step="1" value="45"></div>
-            <div class="field two">
+            <div class="field two" data-vl-settings="fine">
               <label>SVGの最適化<select id="optimize" name="optimize"><option value="0">しない</option><option value="1" selected>標準</option><option value="2">強め</option></select></label>
               <label>座標の小数桁数<select id="pathPrecision" name="pathPrecision"><option value="0">0</option><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="6">6</option><option value="8">8</option></select></label>
             </div>
@@ -152,7 +158,7 @@
         <button type="button" class="jump-result tertiary" id="jump-result" hidden>変換結果を見る</button>
       </form>
     </section>
-    <section class="panel output-panel" aria-labelledby="output-title">
+    <section class="panel output-panel" id="workspace-result" aria-labelledby="output-title">
       <div class="section-head"><h2 id="output-title"><span class="step">03</span> 変換結果</h2><span id="result-meta" class="aside">未生成</span></div>
       <div class="canvas-box"><div class="checker"></div><canvas id="source" aria-label="元画像のプレビュー"></canvas><img id="result" alt="生成したSVG" hidden></div>
       <div class="view-picker" role="group" aria-label="プレビューの表示">
@@ -168,8 +174,8 @@
         <button type="button" id="save-png" disabled>PNG保存</button>
         <button type="button" id="save-json" disabled>設定・比較値を保存</button>
       </div>
-      <p id="metrics" class="quiet">変換すると図形数・ファイルサイズ・元画像との差を表示する。</p>
-      <details class="candidate-bank"><summary>生成した候補を切り替える <span id="candidate-count">0件</span></summary><div id="candidates" class="candidate-grid"></div>
+      <details id="metrics-details" class="metric-details" open><summary>変換指標</summary><p id="metrics" class="quiet">変換すると図形数・ファイルサイズ・元画像との差を表示する。</p></details>
+      <details class="candidate-bank" id="candidate-bank"><summary>生成した候補を切り替える <span id="candidate-count">0件</span></summary><div id="candidates" class="candidate-grid"></div>
         <details class="import-details"><summary>外部で作ったSVGを候補に追加（任意）</summary>
           <div class="import-grid">
             <label>Primitive SVG<input type="file" data-import="primitive" accept=".svg,image/svg+xml"></label>
@@ -182,6 +188,12 @@
   </div>
 
 </main>
+<nav class="workspace-tabs" id="workspace-tabs" aria-label="作業画面" hidden>
+  <button type="button" data-workspace="source" aria-pressed="true">画像</button>
+  <button type="button" data-workspace="settings" aria-pressed="false">設定</button>
+  <button type="button" data-workspace="result" aria-pressed="false">結果</button>
+  <button type="button" data-workspace="candidates" aria-pressed="false">候補</button>
+</nav>
 <footer>Vector Lab / ベクター変換室 <a href="./licenses.html">ライセンス</a><a href="/">作品一覧</a></footer>
 </body>
 </html>

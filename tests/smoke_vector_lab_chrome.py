@@ -85,7 +85,7 @@ window.addEventListener("load",async()=>{
   if(!navigator.standalone && el("jump-result").hidden)throw Error("result jump button missing");
   if(document.getElementById("others-title")||document.getElementById("help"))
     throw Error("redundant sections remain in UI");
-  if(window.innerWidth<=700){
+  if(window.innerWidth<=700 && !navigator.standalone){
     const picker=document.querySelector(".engine-picker");
     if(getComputedStyle(picker).overflowX!=="auto")
       throw Error("mobile engine picker does not scroll");

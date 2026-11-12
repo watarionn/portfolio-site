@@ -22,7 +22,7 @@ def test_vector_lab_is_independent_public_tool():
     assert 'id="palette"' in src
     assert 'id="adaptive"' in src
     assert 'id="simplify"' in src
-    assert "Minimalizer" in src  # only to explain independent semantic boundaries
+    assert "Minimalizer" not in src  # standalone UI has no Minimalizer-specific directions
     assert "local-static/" not in src
     assert "localhost" not in src.lower()
     assert 'href="./licenses.html"' in src
@@ -88,7 +88,7 @@ def test_all_five_engines_are_real_in_page_and_bundled():
     worker=(APP/"worker.mjs").read_text(encoding="utf-8")
     for engine in ("primitive","geometrize","primeval"):
         assert f'<option value="{engine}">' in ui
-        assert f'data-activate="{engine}"' in ui
+        assert f'data-engine="{engine}"' in ui
         assert f'"{engine}"' in worker
         assert (APP/"adapters"/f"{engine}.mjs").is_file()
     assert 'id="approx-count"' in ui
@@ -97,8 +97,8 @@ def test_all_five_engines_are_real_in_page_and_bundled():
     assert 'new Worker("./worker.mjs",{type:"module"})' in js
     assert "canvas.toBlob" in js
     assert 'w.postMessage(payload,transfers)' in js
-    assert "https://primitive-playground.taiseiue.jp/" in ui  # references are optional, not runtime
-    assert "このページで変換" in ui
+    assert "https://primitive-playground.taiseiue.jp/" not in ui
+    assert "このページで変換" not in ui
     assert "SVGに変換" in ui
     assert "Primitive、Geometrize、Primevalはこのツール内では実行せず" not in (APP/"licenses.html").read_text(encoding="utf-8")
 
@@ -117,7 +117,10 @@ def test_all_three_engines_pinned_with_original_licenses():
     assert hashlib.sha256((vendors/"primitive/primitive.wasm").read_bytes()).hexdigest() == (
         "4aaf76dc80c052b900f32d4c8cb58b608ed9608e7bfa750d5289595287496ed0"
     )
-    assert hashlib.sha256((vendors/"geometrize-haxe.js").read_bytes()).hexdigest() == (
+    # Some older Windows checkouts retain CRLF from before the pinning attribute.
+    # Canonical upstream JS must still match after line-ending normalization.
+    geometrize_js=(vendors/"geometrize-haxe.js").read_bytes().replace(b"\r\n",b"\n")
+    assert hashlib.sha256(geometrize_js).hexdigest() == (
         "5ade8209e26de7baecbff25c87fcd2c5493ed361a24b1f068b7e54506ee6be3f"
     )
     assert "Copyright" in (vendors/"primitive/LICENSE-PLAYGROUND").read_text(encoding="utf-8")
@@ -136,7 +139,7 @@ def test_all_three_engines_pinned_with_original_licenses():
 def test_all_five_engines_available_offline_without_cdn():
     import re
     sw=(APP/"sw.js").read_text(encoding="utf-8")
-    assert "vector-lab-shell-v2-20261112-five-engines" in sw
+    assert "vector-lab-shell-v3-20261112-ui" in sw
     resources=re.findall(r'"(\./[^"\n]+)"',sw.split("const ASSETS=",1)[1].split("];",1)[0])
     assert len(resources)>25
     for resource in resources:
@@ -149,3 +152,22 @@ def test_all_five_engines_available_offline_without_cdn():
     assert "./vendor/primeval/wasm/single/primeval_bg.wasm" in resources
     assert "./vendor/geometrize-haxe.js" in resources
     assert "https://cdn" not in sw
+
+
+def test_mobile_ui_removes_redundant_blocks_and_keeps_engine_imports():
+    src=(APP/"index.html").read_text(encoding="utf-8")
+    script=(APP/"app.mjs").read_text(encoding="utf-8")
+    css=(APP/"style.css").read_text(encoding="utf-8")
+    assert "ほかの図形化エンジンと比較" not in src
+    assert "使い方と注意点" not in src
+    assert 'href="#help"' not in src
+    assert 'aria-labelledby="others-title"' not in src
+    assert len(re.findall(r'data-engine="(vtracer|imagetracer|primitive|geometrize|primeval)"',src)) == 5
+    assert 'id="engine"' in src
+    assert 'id="jump-result"' in src and 'id="compare-tools"' in src
+    assert all(f'data-view="{mode}"' in src for mode in ("source","compare","result"))
+    assert len(re.findall(r'data-import="(primitive|geometrize|primeval)"',src)) == 3
+    assert 'class="import-details"' in src
+    assert "setPreviewMode" in script and "aria-pressed" in script
+    assert ".engine-picker" in css and ".view-picker" in css
+    assert "prefers-reduced-motion" in css and ".sr-only" in css

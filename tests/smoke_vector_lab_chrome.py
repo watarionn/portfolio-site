@@ -107,11 +107,69 @@ window.addEventListener("load",async()=>{
     !el("save-svg").disabled&&!el("save-png").disabled&&!el("save-json").disabled;
   // A uniform-color fixture can legitimately make adaptive/fixed B&W identical.
   const changed=hashes.default!==hashes.watershed && hashes.watershed!==hashes.palette;
+  // Actual standalone layout acceptance: no document or nested vertical scroll.
+  let pwa=null;
+  if(navigator.standalone===true){
+    if(!document.body.classList.contains("vl-pwa"))throw Error("PWA class not activated");
+    const nav=el("workspace-tabs");
+    if(nav.hidden||getComputedStyle(nav).display==="none")throw Error("PWA navigation missing");
+    const panes=["source","settings","result","candidates"];
+    const checkPage=()=>{
+      const d=document.documentElement,b=document.body;
+      if(d.scrollHeight>innerHeight+2 || b.scrollHeight>innerHeight+2)
+        throw Error("page vertically scrollable "+JSON.stringify({
+          page:d.scrollHeight,body:b.scrollHeight,height:innerHeight,screen:document.body.dataset.workspace
+        }));
+      if(d.scrollWidth>innerWidth+2)throw Error("page horizontal overflow in PWA");
+      const panel=el(document.body.dataset.workspace==="candidates"?"workspace-result":"workspace-"+document.body.dataset.workspace);
+      if(!panel||getComputedStyle(panel).display==="none")throw Error("workspace pane not visible");
+      const pr=panel.getBoundingClientRect();
+      if(pr.top<0||pr.bottom>innerHeight-38)throw Error("PWA panel extends beyond viewport "+pr.bottom);
+      return panel;
+    };
+    for(const pane of panes){
+      const tab=document.querySelector('[data-workspace="'+pane+'"]');
+      tab.click();
+      if(document.body.dataset.workspace!==pane || tab.getAttribute("aria-pressed")!=="true")
+        throw Error("PWA tab switch failed "+pane);
+      const panel=checkPage();
+      if(pane==="settings"){
+        const stages=["basic","color","shape","fine"];
+        for(const stage of stages){
+          document.querySelector('[data-settings-stage="'+stage+'"]').click();
+          if(document.body.dataset.settingsStage!==stage)throw Error("settings stage unsynced");
+          const group=panel.querySelector('[data-vl-settings="'+stage+'"]');
+          if(!group||getComputedStyle(group).display==="none")throw Error("settings group hidden: "+stage);
+          const children=[...panel.querySelectorAll('[data-vl-settings="'+stage+'"]')]
+            .filter(x=>getComputedStyle(x).display!=="none");
+          const box=el("vtracer-panel").getBoundingClientRect();
+          for(const child of children){
+            const rect=child.getBoundingClientRect();
+            if(rect.bottom>box.bottom+3)throw Error("settings clipped "+stage+" "+rect.bottom+"/"+box.bottom);
+          }
+          if(panel.scrollHeight>panel.clientHeight+2)
+            throw Error("settings nested vertical overflow "+stage);
+        }
+      }
+      if(pane==="result"){
+        if(el("workspace-result").scrollHeight>el("workspace-result").clientHeight+2)
+          throw Error("result nested vertical overflow");
+      }
+      if(pane==="candidates"){
+        if(!el("candidate-bank").open)throw Error("candidate list collapsed");
+        if(el("workspace-result").scrollHeight>el("workspace-result").clientHeight+2)
+          throw Error("candidate nested vertical overflow");
+      }
+    }
+    document.querySelector('[data-workspace="result"]').click();
+    checkPage();
+    pwa={noPageScroll:true,stages:4,tabs:4,viewport:[innerWidth,innerHeight]};
+  }
   const summary={default:hashes.default.length,watershed:hashes.watershed.length,
     palette:hashes.palette.length,adaptive:hashes.adaptive.length,fixed:hashes.fixed.length,
     imagetracer:hashes.imagetracer.length,
     primitive:hashes.primitive.length,geometrize:hashes.geometrize.length,
-    primeval:hashes.primeval.length,changed,externalImport:ok,
+    primeval:hashes.primeval.length,changed,externalImport:ok,pwa,
     selected:el("result-meta").textContent,source:el("source-meta").textContent};
   out.textContent="VTRACER_ROUTE_RESULT="+JSON.stringify(summary);
  }catch(e){out.textContent="VTRACER_ROUTE_FAILURE="+String(e);}

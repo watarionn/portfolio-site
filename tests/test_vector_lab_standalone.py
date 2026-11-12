@@ -139,7 +139,7 @@ def test_all_three_engines_pinned_with_original_licenses():
 def test_all_five_engines_available_offline_without_cdn():
     import re
     sw=(APP/"sw.js").read_text(encoding="utf-8")
-    assert "vector-lab-shell-v3-20261112-ui" in sw
+    assert "vector-lab-shell-v4-20261112-standalone" in sw
     resources=re.findall(r'"(\./[^"\n]+)"',sw.split("const ASSETS=",1)[1].split("];",1)[0])
     assert len(resources)>25
     for resource in resources:
@@ -171,3 +171,29 @@ def test_mobile_ui_removes_redundant_blocks_and_keeps_engine_imports():
     assert "setPreviewMode" in script and "aria-pressed" in script
     assert ".engine-picker" in css and ".view-picker" in css
     assert "prefers-reduced-motion" in css and ".sr-only" in css
+
+
+def test_installed_pwa_uses_tabbed_no_scroll_workspaces_without_losing_controls():
+    src=(APP/"index.html").read_text(encoding="utf-8")
+    js=(APP/"app.mjs").read_text(encoding="utf-8")
+    css=(APP/"style.css").read_text(encoding="utf-8")
+    assert 'id="workspace-tabs"' in src
+    assert all(f'data-workspace="{name}"' in src for name in ("source","settings","result","candidates"))
+    assert 'id="candidate-bank"' in src
+    assert all(f'data-settings-stage="{name}"' in src for name in ("basic","color","shape","fine"))
+    assert len(re.findall(r'data-vl-settings="(basic|color|shape|fine)"',src))>=12
+    assert 'id="metrics-details"' in src
+    assert "const isStandalone" in js
+    assert 'navigator.standalone===true' in js
+    assert 'matchMedia("(display-mode: standalone)")' in js
+    assert "setWorkspace" in js and "setSettingsStage" in js
+    assert "initPwaWorkspace()" in js
+    assert "data-workspace" in css and "data-settings-stage" in css
+    assert "height:100dvh" in css
+    assert "overflow:hidden" in css
+    assert "env(safe-area-inset-top)" in css
+    assert "env(safe-area-inset-bottom)" in css
+    assert "body.vl-pwa" in css
+    assert "body.vl-pwa .workspace-tabs" in css
+    assert "setPreviewMode" in js
+    assert "external-import-unverified-source" in js

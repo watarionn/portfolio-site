@@ -121,13 +121,32 @@ def main():
             report["files"][rel]={"sha256":hash_bytes(data),"bytes":len(data),"changed":existing!=data}
         report["ftpsReadback"]=True
     finally:close_ftp(ftp)
+    https_visible=0
     for rel,info in report["files"].items():
+        # Apache deliberately denies direct HTTPS access to .htaccess itself.
+        # Its exact bytes are verified with FTPS, and its effect is checked by
+        # verifying the active JS module Content-Type below.
+        if rel=="vector-lab/.htaccess":
+            info["httpsVerification"]="protected-config-ftps-only"
+            continue
         live=https_read(opts.site_url,rel,info["sha256"])
         if hash_bytes(live)!=info["sha256"]:
             raise RuntimeError("HTTPS exact-byte mismatch: "+rel)
+        info["httpsVerification"]="sha256-identical"
+        https_visible+=1
+    for rel in ("vector-lab/app.mjs","vector-lab/options.mjs",
+                "vector-lab/worker.mjs","vector-lab/vendor/vtracer10-browser.mjs"):
+        url=opts.site_url.rstrip("/")+"/"+rel
+        req=urllib.request.Request(url,headers={"Cache-Control":"no-cache"})
+        with urllib.request.urlopen(req,timeout=30) as response:
+            mime=response.headers.get("Content-Type","").split(";",1)[0].strip().lower()
+            if mime not in ("application/javascript","text/javascript"):
+                raise RuntimeError("Browser-blocked JavaScript MIME: "+rel+" => "+mime)
     report["httpsReadback"]=True
+    report["httpsVisibleFiles"]=https_visible
+    report["protectedFtpsOnlyFiles"]=["vector-lab/.htaccess"] if "vector-lab/.htaccess" in report["files"] else []
     private=Path(os.environ["LOCALAPPDATA"])/"PortfolioSite"/"vector-lab-release-receipt.json"
     private.parent.mkdir(parents=True,exist_ok=True)
     private.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(f"SCOPED_VECTOR_LAB_PASS files={len(report['files'])} uploaded={len(published)} ftps_readback=True https_readback=True root_status={report['rootStatus']}")
+    print(f"SCOPED_VECTOR_LAB_PASS files={len(report['files'])} uploaded={len(published)} ftps_readback=True https_readback=True https_visible={https_visible} root_status={report['rootStatus']}")
 if __name__=="__main__":main()

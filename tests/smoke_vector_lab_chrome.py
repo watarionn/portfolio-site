@@ -134,6 +134,10 @@ window.addEventListener("load",async()=>{
         throw Error("PWA tab switch failed "+pane);
       const panel=checkPage();
       if(pane==="settings"){
+        el("engine").value="vtracer";
+        el("engine").dispatchEvent(new Event("change",{bubbles:true}));
+        el("clustering").value="color-cluster";
+        el("clustering").dispatchEvent(new Event("change",{bubbles:true}));
         const stages=["basic","color","shape","fine"];
         for(const stage of stages){
           document.querySelector('[data-settings-stage="'+stage+'"]').click();

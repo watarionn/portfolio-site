@@ -119,7 +119,7 @@ def test_all_three_engines_pinned_with_original_licenses():
     )
     # Some older Windows checkouts retain CRLF from before the pinning attribute.
     # Canonical upstream JS must still match after line-ending normalization.
-    geometrize_js=(vendors/"geometrize-haxe.js").read_bytes().replace(b"\\r\\n",b"\\n")
+    geometrize_js=(vendors/"geometrize-haxe.js").read_bytes().replace(b"\r\n",b"\n")
     assert hashlib.sha256(geometrize_js).hexdigest() == (
         "5ade8209e26de7baecbff25c87fcd2c5493ed361a24b1f068b7e54506ee6be3f"
     )

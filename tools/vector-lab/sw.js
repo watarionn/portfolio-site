@@ -2,7 +2,7 @@
 const CACHE="vector-lab-shell-v1-20261112";
 const PREFIX="vector-lab-shell-";
 const ASSETS=["./","./index.html","./style.css","./app.mjs","./options.mjs","./worker.mjs",
- "./manifest.webmanifest","./icon.svg","./licenses.html",
+ "./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./apple-touch-icon.png","./licenses.html",
  "./vendor/vtracer10-browser.mjs","./vendor/vtracer_wasm_bg.wasm",
  "./vendor/imagetracer_v1.2.6.js","./vendor/LICENSE-VTRACER"];
 self.addEventListener("install",event=>event.waitUntil(

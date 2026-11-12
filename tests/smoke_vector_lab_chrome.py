@@ -62,6 +62,13 @@ window.addEventListener("load",async()=>{
   await trace("adaptive",{clustering:"bw",adaptive:true,adaptiveWindow:15,adaptiveT:12});
   await trace("fixed",{clustering:"bw",adaptive:false,binaryThreshold:120});
   await trace("imagetracer",{engine:"imagetracer"},"imagetracer");
+  el("approx-count").value="3";
+  el("approx-shape").value="triangle";
+  await trace("primitive",{},"primitive");
+  el("approx-count").value="8";
+  await trace("geometrize",{},"geometrize");
+  el("approx-count").value="8";
+  await trace("primeval",{},"primeval");
   const importInput=document.querySelector('[data-import="primitive"]');
   const imported=new File(['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="#ee7722" d="M0 0H64V64H0Z"/></svg>'],
     "primitive.svg",{type:"image/svg+xml"});
@@ -74,7 +81,9 @@ window.addEventListener("load",async()=>{
   const changed=hashes.default!==hashes.watershed && hashes.watershed!==hashes.palette;
   const summary={default:hashes.default.length,watershed:hashes.watershed.length,
     palette:hashes.palette.length,adaptive:hashes.adaptive.length,fixed:hashes.fixed.length,
-    imagetracer:hashes.imagetracer.length,changed,externalImport:ok,
+    imagetracer:hashes.imagetracer.length,
+    primitive:hashes.primitive.length,geometrize:hashes.geometrize.length,
+    primeval:hashes.primeval.length,changed,externalImport:ok,
     selected:el("result-meta").textContent,source:el("source-meta").textContent};
   out.textContent="VTRACER_ROUTE_RESULT="+JSON.stringify(summary);
  }catch(e){out.textContent="VTRACER_ROUTE_FAILURE="+String(e);}
@@ -100,7 +109,7 @@ def main():
  try:
   url=f"http://127.0.0.1:{server.server_port}/vector-lab/"
   proc=subprocess.run(["node",str(DRIVER),url,"#vector-lab-probe"],cwd=ROOT,
-    capture_output=True,text=True,encoding="utf-8",errors="replace",timeout=150)
+    capture_output=True,text=True,encoding="utf-8",errors="replace",timeout=260)
   if proc.returncode:raise RuntimeError((proc.stdout+"\n"+proc.stderr)[-3000:])
   marker="VTRACER_ROUTE_RESULT="
   if marker not in proc.stdout:raise RuntimeError(proc.stdout[-2500:])

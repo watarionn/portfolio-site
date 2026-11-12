@@ -97,8 +97,8 @@ body.vl-pwa{
   overflow:hidden;overscroll-behavior:none;display:flex;flex-direction:column;
 }
 body.vl-pwa .top{
-  flex:0 0 44px;min-height:0;padding:5px 12px;
-  padding-top:max(5px,env(safe-area-inset-top));gap:10px;
+  flex:0 0 calc(39px + env(safe-area-inset-top));min-height:0;padding:5px 12px;
+  padding-top:calc(5px + env(safe-area-inset-top));gap:10px;
 }
 body.vl-pwa .top .brand-mark{width:30px;height:30px;font-size:22px;border-radius:8px}
 body.vl-pwa .brand{gap:8px}
@@ -258,7 +258,7 @@ body.vl-pwa .workspace-tabs button[aria-pressed="true"]{
   color:#fff;background:#285c6b;border-color:#5edce3;
 }
 @media (max-height:670px){
-  body.vl-pwa .top{flex-basis:37px}
+  body.vl-pwa .top{flex-basis:calc(34px + env(safe-area-inset-top))}
   body.vl-pwa .shell{padding:4px 6px}
   body.vl-pwa .source-panel,body.vl-pwa .settings-panel,body.vl-pwa .output-panel{padding:6px 8px}
   body.vl-pwa .section-head{margin-bottom:3px}

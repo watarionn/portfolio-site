@@ -3,6 +3,46 @@ const $=id=>document.getElementById(id);
 const ids=["vtracer","imagetracer","primitive","geometrize","primeval"];
 const state={file:null,image:null,sha:null,worker:null,seq:0,busy:false,results:new Map(),selected:null,loadSeq:0};
 let debounce=null;
+const isStandalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone===true;
+let activeWorkspace="source";
+let activeSettingsStage="basic";
+function setWorkspace(pane){
+  if(!isStandalone || !["source","settings","result","candidates"].includes(pane))return;
+  activeWorkspace=pane;
+  document.body.dataset.workspace=pane;
+  for(const button of document.querySelectorAll("[data-workspace]")){
+    button.setAttribute("aria-pressed",String(button.dataset.workspace===pane));
+  }
+  const list=$("candidate-bank");
+  if(pane==="candidates")list.open=true;
+  else list.open=false;
+  $("metrics-details").open=false;
+}
+function setSettingsStage(stage){
+  if(!["basic","color","shape","fine"].includes(stage))return;
+  activeSettingsStage=stage;
+  document.body.dataset.settingsStage=stage;
+  for(const button of document.querySelectorAll("[data-settings-stage]")){
+    button.setAttribute("aria-pressed",String(button.dataset.settingsStage===stage));
+  }
+}
+function initPwaWorkspace(){
+  if(!isStandalone)return;
+  document.body.classList.add("vl-pwa");
+  $("workspace-tabs").hidden=false;
+  $("setting-tabs").hidden=false;
+  $("vtracer-panel").querySelector("details.advanced").open=true;
+  $("metrics-details").open=false;
+  setSettingsStage("basic");
+  setWorkspace("source");
+  for(const button of document.querySelectorAll("[data-workspace]")){
+    button.addEventListener("click",()=>setWorkspace(button.dataset.workspace));
+  }
+  for(const button of document.querySelectorAll("[data-settings-stage]")){
+    button.addEventListener("click",()=>setSettingsStage(button.dataset.settingsStage));
+  }
+}
+
 const MAX_SVG=6_000_000;
 function status(text,error=false){
   $("status").textContent=text;
@@ -60,6 +100,7 @@ function displayFields(){
   }
   $("vtracer-panel").hidden=engine!=="vtracer";
   $("imagetracer-panel").hidden=engine!=="imagetracer";
+  if(isStandalone)$("setting-tabs").hidden=engine!=="vtracer";
   const geometric=["primitive","geometrize","primeval"].includes(engine);
   $("approx-panel").hidden=!geometric;
   const max=engine==="primitive"?100:engine==="geometrize"?500:600;
@@ -86,7 +127,7 @@ function displayFields(){
 function schedule(){
   clearTimeout(debounce);
   if(!state.image||!$("auto").checked)return;
-  debounce=setTimeout(()=>run().catch(e=>status(e.message,true)),350);
+  debounce=setTimeout(()=>run(false).catch(e=>status(e.message,true)),350);
 }
 function parseSVG(svg){
   if(typeof svg!=="string"||svg.length<25||new Blob([svg]).size>MAX_SVG)
@@ -139,14 +180,14 @@ function renderCandidates(){
     const name=document.createElement("strong");name.textContent=r.name;
     const note=document.createElement("small");note.textContent=r.metrics.shapes+" 図形 / "+shortSize(r.metrics.bytes);
     const button=document.createElement("button");button.type="button";button.textContent="表示する";
-    button.addEventListener("click",()=>selectCandidate(id));
+    button.addEventListener("click",()=>{selectCandidate(id);setWorkspace("result");});
     box.append(image,name,note,button);grid.append(box);
   }
 }
 function selectCandidate(id){
   const r=state.results.get(id);if(!r)return;
   state.selected=id;
-  $("jump-result").hidden=false;
+  $("jump-result").hidden=isStandalone;
   for(const card of $("candidates").querySelectorAll(".candidate")){
     const index=[...card.parentElement.children].indexOf(card);
     const candidateId=ids.filter(key=>state.results.has(key))[index];
@@ -172,7 +213,7 @@ async function register(id,svg,settings,origin){
   state.results.set(id,{name:names[id],svg:clean,url,settings,origin,metrics:m,sha:version});
   renderCandidates();selectCandidate(id);
 }
-async function run(){
+async function run(jumpToResult=false){
   if(!state.image)return;
   clearTimeout(debounce);
   const engine=$("engine").value;
@@ -197,6 +238,7 @@ async function run(){
       await register(engine,d.svg,settings,"local");
       if(seq!==state.seq)return;
       status("SVGを生成したよ（"+((performance.now()-start)/1000).toFixed(2)+"秒）");
+      if(jumpToResult)setWorkspace("result");
     }catch(err){status(err.message,true);}
     finally{if(w===state.worker)abortWorker();}
   };
@@ -263,7 +305,7 @@ $("settings").addEventListener("change",e=>{
   if(e.target.closest("#vtracer-panel, #imagetracer-panel, #approx-panel") || e.target.id==="engine")schedule();
 });
 $("engine").addEventListener("change",()=>{displayFields();schedule()});
-$("run").addEventListener("click",()=>run().catch(e=>status(e.message,true)));
+$("run").addEventListener("click",()=>run(true).catch(e=>status(e.message,true)));
 $("cancel").addEventListener("click",()=>{
   clearTimeout(debounce);state.seq++;abortWorker();status("変換を停止したよ");
 });
@@ -317,4 +359,4 @@ window.addEventListener("pagehide",()=>{clearTimeout(debounce);abortWorker();for
 if("serviceWorker" in navigator&&location.protocol==="https:"){
   addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./",updateViaCache:"none"}).catch(()=>{}));
 }
-displayFields();setPreviewMode("compare");
+initPwaWorkspace();displayFields();setPreviewMode("compare");

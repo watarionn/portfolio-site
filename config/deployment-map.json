@@ -272,6 +272,11 @@
       "id": "yofukashi-obake-town",
       "sourceRoot": "works/yofukashi-obake-town/public",
       "productionRoot": "yofukashi-obake-town"
+    },
+    {
+      "id": "komorebi-town-preview",
+      "sourceRoot": "works/komorebi-town/public",
+      "productionRoot": "komorebi-town"
     }
   ],
   "aliases": [

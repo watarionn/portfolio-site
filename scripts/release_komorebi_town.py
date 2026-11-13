@@ -71,10 +71,11 @@ def main() -> None:
     if git("status", "--porcelain", "--", SOURCE, "config/deployment-map.json", "scripts/release_komorebi_town.py"):
         raise RuntimeError("Scoped source or deployment files have uncommitted modifications")
 
-    source = (ROOT / SOURCE).read_bytes()
-    committed = subprocess.check_output(["git", "show", "HEAD:" + SOURCE], cwd=ROOT)
-    if source != committed:
-        raise RuntimeError("Working source does not match the signed Git commit")
+    # Windows may convert the checked-out HTML to CRLF without a tracked
+    # modification. Release the canonical Git blob, never checkout bytes.
+    if not (ROOT / SOURCE).is_file():
+        raise RuntimeError("Preview source is absent from the checkout")
+    source = subprocess.check_output(["git", "show", "HEAD:" + SOURCE], cwd=ROOT)
     if not source.startswith(b"<!doctype html>") or b"three@0.169.0" not in source:
         raise RuntimeError("Unexpected preview source")
 

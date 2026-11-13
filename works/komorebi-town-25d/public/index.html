@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#b5d7bb">
+<meta name="robots" content="noindex,nofollow">
+<title>こもれび町 2.5D | 斜め見下ろしの町</title>
+<style>
+  :root{color-scheme:light;--ink:#344e45;--paper:#fff9e9;--leaf:#487b65}
+  *{box-sizing:border-box}
+  html,body{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;background:#b7d8bf;color:var(--ink);touch-action:none;user-select:none;-webkit-user-select:none}
+  #world{position:fixed;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated;touch-action:none;cursor:crosshair}
+  button,a{font:inherit;-webkit-tap-highlight-color:transparent}
+  .top{position:fixed;z-index:3;top:max(14px,env(safe-area-inset-top));left:16px;display:flex;gap:12px;align-items:flex-start;pointer-events:none}
+  .card{padding:13px 17px;background:#fff9e9ee;border:2px solid #fffef7;border-radius:16px;box-shadow:0 5px 0 #5e907449,0 15px 35px #426f5d26;pointer-events:auto}
+  .eyebrow{font-size:10px;letter-spacing:.14em;font-weight:900;color:#779786}
+  h1{font-size:22px;line-height:1.3;margin:2px 0 0;letter-spacing:.04em}
+  .sub{margin:3px 0 0;font-size:11px;font-weight:700;color:#6a8b78}
+  .back{position:fixed;z-index:4;top:max(18px,env(safe-area-inset-top));right:15px;padding:11px 13px;border:2px solid #fffdf4;border-radius:12px;color:#416d57;background:#fff9e9ee;text-decoration:none;font-weight:850;font-size:12px;box-shadow:0 4px 0 #5e907438}
+  .legend{position:fixed;z-index:2;bottom:22px;left:18px;background:#fff9e9ec;padding:11px 14px;border:2px solid #fffdf5;border-radius:13px;font-size:12px;font-weight:750;box-shadow:0 4px 0 #5e907438;pointer-events:none}
+  .legend kbd{display:inline-block;border-radius:5px;background:#f2e9ce;padding:2px 5px;font:700 11px inherit}
+  #prompt{position:fixed;z-index:3;bottom:93px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:9px 13px;border:2px solid #fff;border-radius:12px;background:#fff8eaf2;font-weight:850;font-size:12px;box-shadow:0 4px 0 #62917560;display:none;pointer-events:none}
+  #prompt.show{display:block}
+  #toast{position:fixed;z-index:6;top:95px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 32px);border-radius:12px;border:2px solid #fff;background:#fff8eaf2;padding:9px 15px;box-shadow:0 4px 0 #62917560;font-size:12px;font-weight:800;pointer-events:none;opacity:0;transition:opacity .2s;text-align:center}
+  #toast.show{opacity:1}
+  .touch{position:fixed;z-index:4;inset:auto 0 0;display:none;pointer-events:none;padding-bottom:env(safe-area-inset-bottom)}
+  .pad{position:absolute;left:12px;bottom:calc(15px + env(safe-area-inset-bottom));display:grid;grid-template:repeat(3,51px)/repeat(3,51px);gap:3px;pointer-events:auto}
+  .pad button,#action{border:2px solid #fff7e9;border-radius:12px;background:#fff9e9d9;color:#3d7058;font-size:20px;font-weight:900;box-shadow:0 3px 0 #5e90745c;touch-action:none;cursor:pointer}
+  .pad button:active,.pad button.active,#action:active{background:#d0e9bc}
+  .pad .up{grid-area:1/2}.pad .down{grid-area:3/2}.pad .left{grid-area:2/1}.pad .right{grid-area:2/3}
+  #action{position:absolute;right:19px;bottom:calc(29px + env(safe-area-inset-bottom));width:77px;height:77px;border-radius:50%;font-size:15px;pointer-events:auto}
+  #dialog{position:fixed;z-index:8;bottom:max(100px,calc(95px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);display:none;width:min(460px,calc(100vw - 28px));background:#fffaea;border:3px solid #fffdf5;border-radius:18px;padding:19px 20px;box-shadow:0 7px 0 #59856a80,0 22px 60px #42665350}
+  #dialog.show{display:block}
+  #who{margin:0 0 7px;font-size:12px;font-weight:900;color:#5c9074}
+  #words{font-size:15px;font-weight:750;line-height:1.7;white-space:pre-line}
+  #dismiss{display:block;margin:13px 0 0 auto;background:#4e876c;color:#fff;border:0;border-radius:10px;padding:9px 16px;font-size:13px;font-weight:850;cursor:pointer}
+  #intro{position:fixed;inset:0;z-index:10;display:grid;place-items:center;text-align:center;background:#b6dac4;color:#3e6a52;font-weight:900;padding:20px}
+  #intro.hide{display:none}
+  @media(pointer:coarse){.touch{display:block}.legend{display:none}#prompt{bottom:calc(190px + env(safe-area-inset-bottom))}#dialog{bottom:calc(180px + env(safe-area-inset-bottom))}}
+  @media(max-width:520px){.top{top:max(11px,env(safe-area-inset-top));left:11px}.card{padding:10px 13px;border-radius:13px}h1{font-size:17px}.sub{font-size:9px}.eyebrow{font-size:9px}.back{right:10px;top:max(13px,env(safe-area-inset-top));padding:9px 11px;font-size:10px}#toast{top:84px}}
+  @media(max-height:560px) and (pointer:coarse){.pad{grid-template:repeat(3,42px)/repeat(3,42px)}#action{width:62px;height:62px}#dialog{bottom:85px}#prompt{bottom:150px}}
+  @media(prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="world" aria-label="こもれび町の斜め見下ろし2.5D探索画面"></canvas>
+<div id="intro" role="status">こもれび町を準備しているよ…</div>
+<header class="top"><div class="card"><div class="eyebrow">こもれび町 ／ 試作品</div><h1>ドットのこもれび町</h1><p class="sub">斜め見下ろしの 2.5D さんぽ</p></div></header>
+<a class="back" href="../komorebi-town/">3D版を見る ↗</a>
+<div class="legend">矢印キー / WASD で歩く　 ·　E で話す　 ·　クリックで移動</div>
+<div id="prompt" role="status">E / しらべる：近くの人や建物</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<section id="dialog" role="dialog" aria-label="町での会話" aria-modal="false">
+  <p id="who"></p><div id="words"></div><button id="dismiss" type="button">とじる</button>
+</section>
+<div class="touch" aria-label="タッチ操作">
+  <div class="pad"><button class="up" data-dir="up" aria-label="上へ">▲</button><button class="left" data-dir="left" aria-label="左へ">◀</button><button class="down" data-dir="down" aria-label="下へ">▼</button><button class="right" data-dir="right" aria-label="右へ">▶</button></div>
+  <button id="action" type="button" aria-label="近くの人と話す、建物を調べる">しらべる</button>
+</div>
+<script>
+'use strict';
+(() => {
+  const canvas=document.getElementById('world');
+  const context=canvas.getContext('2d',{alpha:false});
+  const intro=document.getElementById('intro');
+  if(!context){intro.textContent='画面の描画を開始できなかったよ。別のブラウザで開いてみてね。';return;}
+  const dialog=document.getElementById('dialog');
+  const who=document.getElementById('who');
+  const words=document.getElementById('words');
+  const prompt=document.getElementById('prompt');
+  const toast=document.getElementById('toast');
+  const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let W=innerWidth,H=innerHeight,zoom=1,tw=59,th=29.5,toastUntil=0;
+  let cam={x:13,z:14};
+  const N=27;
+  const people=[{name:'モモ',x:10,z:12,shirt:'#de8b92',hair:'#8d5d4d',message:'こんにちは！ ドットのこもれび町へようこそ。\n画面をタップすると、そこまで歩けるよ。'},
+                {name:'ソラ',x:16,z:13,shirt:'#8ab7a8',hair:'#4b6671',message:'ここはカメラが回らない町なんだ。\n3D版と歩きやすさを比べてみてね。'}];
+  const houses=[
+    {x:7,z:7,name:'図書館',roof:'#b87b93',wall:'#fff1dc',message:'ここは図書館。\n将来は記事や読みものを探せる場所になる予定。'},
+    {x:19,z:7,name:'工房',roof:'#b98758',wall:'#fce9d3',message:'ここは工房。\nWebツールを並べるなら、この建物がよさそう。'},
+    {x:7,z:19,name:'展示館',roof:'#78a9b0',wall:'#fff0db',message:'ここは展示館。\n完成した作品をゆっくり眺められる場所にしたいね。'},
+    {x:19,z:19,name:'あそび場',roof:'#d28d79',wall:'#fff1dc',message:'ここはあそび場。\n小さなゲームや実験を置く場所にぴったり！'}
+  ];
+  const trees=[];
+  let seed=246817;
+  const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  const roads=(x,z)=>Math.abs(x-13)<=1 || Math.abs(z-13)<=1 ||
+    ([7,19].includes(x)&&z>=7&&z<=19) || ([7,19].includes(z)&&x>=7&&x<=19);
+  for(let z=1;z<N-1;z++)for(let x=1;x<N-1;x++){
+    if(roads(x,z)||houses.some(h=>Math.abs(h.x-x)<=2&&Math.abs(h.z-z)<=2))continue;
+    const edge=x<3||z<3||x>N-4||z>N-4;
+    if(random()<(edge?.35:.10))trees.push({x,z,shade:Math.floor(random()*4),size:0.90+random()*.22});
+  }
+  const player={x:13,z:17,facing:0,walk:0};
+  const held=new Set();
+  let route=[],targetMarker=null,walkTick=0,lastFrame=0,animationId=0;
+  const blocked=(x,z)=>x<.6||z<.6||x>N-1.6||z>N-1.6||
+    houses.some(h=>Math.abs(x-h.x)<1.65&&Math.abs(z-h.z)<1.65)||
+    trees.some(t=>Math.hypot(x-t.x,z-t.z)<.56);
+  const cellFree=(x,z)=>Number.isInteger(x)&&Number.isInteger(z)&&!blocked(x,z);
+  function resize(){
+    W=innerWidth;H=innerHeight;
+    canvas.width=Math.max(1,Math.round(W*.68));
+    canvas.height=Math.max(1,Math.round(H*.68));
+    canvas.style.width=W+'px';canvas.style.height=H+'px';
+    context.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);
+    zoom=Math.max(.86,Math.min(1.28,W/520));
+    tw=61*zoom;th=30.5*zoom;
+  }
+  function iso(x,z){return {x:W*.5+((x-z)-(cam.x-cam.z))*tw*.5,
+    y:H*.48+((x+z)-(cam.x+cam.z))*th*.5};}
+  function unproject(sx,sy){const dx=(sx-W*.5)/(.5*tw),dy=(sy-H*.48)/(.5*th);
+    return {x:cam.x+(dx+dy)*.5,z:cam.z+(dy-dx)*.5};}
+  function shape(points,color,stroke){context.beginPath();context.moveTo(Math.round(points[0][0]),Math.round(points[0][1]));
+    for(let i=1;i<points.length;i++)context.lineTo(Math.round(points[i][0]),Math.round(points[i][1]));
+    context.closePath();context.fillStyle=color;context.fill();if(stroke){context.strokeStyle=stroke;context.lineWidth=1.2;context.stroke();}}
+  function blockRect(x,y,w,h,color){context.fillStyle=color;context.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));}
+  function diamond(cx,cy,ww,hh,color,stroke){shape([[cx,cy-hh/2],[cx+ww/2,cy],[cx,cy+hh/2],[cx-ww/2,cy]],color,stroke);}
+  function rounded(x,y,w,h,r,color){context.fillStyle=color;context.beginPath();context.roundRect(x,y,w,h,r);context.fill();}
+  function drawTile(x,z){const p=iso(x,z);if(p.x<-tw||p.x>W+tw||p.y<-th||p.y>H+th)return;
+    const grass=((x*13+z*29)%7<3)?'#9dc98d':'#a4ce94';
+    const seaEdge=x===0||z===0||x===N-1||z===N-1;
+    const plaza=Math.abs(x-13)<=2&&Math.abs(z-13)<=2;
+    let color=seaEdge?'#dce6b5':plaza?'#ead7a7':roads(x,z)?'#ddc99d':grass;
+    diamond(p.x,p.y,tw+1,th+1,color);
+    if(plaza&&(x+z)%3===0)blockRect(p.x-2,p.y-1,4,2,'#d3b98b');
+    else if(!roads(x,z)&&!seaEdge&&((x*37+z*19)%11===0)){
+      blockRect(p.x-5,p.y-2,3,2,'#74b47e');blockRect(p.x+4,p.y+2,2,3,'#82ba79');
+    }
+    if(!plaza&&!roads(x,z)&&!seaEdge&&((x*17+z*31)%19===0)){
+      blockRect(p.x-1,p.y-5,3,3,'#fff7de');blockRect(p.x-2,p.y-2,5,2,'#e6a9ad');
+    }
+  }
+  function drawTree(t){const p=iso(t.x,t.z),s=zoom*t.size,cy=p.y-26*s;
+    // Pixel-ish foliage with a visible trunk, no external image assets.
+    diamond(p.x,p.y+2,29*s,12*s,'#7aa37c70');
+    blockRect(p.x-5*s,p.y-29*s,10*s,29*s,'#805d43');
+    blockRect(p.x-3*s,p.y-29*s,3*s,24*s,'#a67c59');
+    const greens=['#4f9270','#6ea477','#659b75','#7eae78'];const g=greens[t.shade];
+    blockRect(p.x-17*s,cy-19*s,34*s,26*s,g);
+    blockRect(p.x-23*s,cy-9*s,46*s,20*s,g);
+    blockRect(p.x-12*s,cy-29*s,24*s,14*s,g);
+    blockRect(p.x-13*s,cy-19*s,8*s,11*s,'#a4cb8b');
+    blockRect(p.x+6*s,cy+3*s,10*s,6*s,'#3f8567');
+  }
+  function drawHouse(h){const p=iso(h.x,h.z),s=zoom,bw=93*s,bh=45*s,wallH=49*s,roofY=p.y-wallH;
+    // Isometric base has two genuinely visible wall planes and two roof planes.
+    diamond(p.x,p.y+4*s,bw*1.12,bh*1.16,'#638e7599');
+    const left=[p.x-bw/2,p.y,p.x,p.y+bh/2,p.x,p.y+bh/2-wallH,p.x-bw/2,p.y-wallH];
+    const right=[p.x,p.y+bh/2,p.x+bw/2,p.y,p.x+bw/2,p.y-wallH,p.x,p.y+bh/2-wallH];
+    shape([[left[0],left[1]],[left[2],left[3]],[left[4],left[5]],[left[6],left[7]]],h.wall,'#ab967a');
+    shape([[right[0],right[1]],[right[2],right[3]],[right[4],right[5]],[right[6],right[7]]],'#e9d3b8','#b1987c');
+    // Roof and ridge are hand-drawn, faceted rather than a rotating 3D mesh.
+    const peak=[p.x,roofY-38*s],west=[p.x-bw*.57,roofY-5*s],east=[p.x+bw*.57,roofY-5*s],front=[p.x,roofY+bh*.58];
+    shape([peak,west,front],h.roof,'#8d6c67');
+    shape([peak,front,east],h.roof==='#78a9b0'?'#528f9c':h.roof==='#b87b93'?'#995f7e':h.roof==='#b98758'?'#98683f':'#b97062','#8d6c67');
+    const doorX=p.x+14*s,doorY=p.y+4*s;
+    shape([[doorX-8*s,doorY-23*s],[doorX+5*s,doorY-16*s],[doorX+5*s,doorY+5*s],[doorX-8*s,doorY-2*s]],'#8c6651');
+    blockRect(p.x-21*s,p.y-18*s,8*s,9*s,'#8ec8c6');
+    blockRect(p.x+23*s,p.y-13*s,7*s,9*s,'#8ec8c6');
+    blockRect(doorX-2*s,doorY-11*s,2*s,2*s,'#f9df9f');
+    const labelY=roofY-47*s;
+    context.textAlign='center';context.font=`900 ${Math.max(10,11*zoom)}px sans-serif`;
+    const width=context.measureText(h.name).width+15;
+    rounded(p.x-width/2,labelY-17*s,width,18*s,5*s,'#fff9e8');
+    context.fillStyle='#466b56';context.fillText(h.name,p.x,labelY-4*s);
+  }
+  function drawPerson(p,main=false){const q=iso(p.x,p.z),s=zoom*(main?1.05:1),jump=main&&!reduceMotion&&route.length?Math.sin(p.walk*13)*2.3*s:0;
+    const x=Math.round(q.x),y=Math.round(q.y-jump),hair=p.hair||'#765744',shirt=p.shirt||'#f4e4bd';
+    context.fillStyle='#557a6077';context.beginPath();context.ellipse(x,y+2*s,12*s,4*s,0,0,Math.PI*2);context.fill();
+    blockRect(x-7*s,y-12*s,5*s,13*s,'#655c69');blockRect(x+2*s,y-12*s,5*s,13*s,'#655c69');
+    blockRect(x-10*s,y-29*s,20*s,18*s,shirt);
+    blockRect(x-14*s,y-27*s,4*s,10*s,'#f3bf9a');blockRect(x+10*s,y-27*s,4*s,10*s,'#f3bf9a');
+    blockRect(x-10*s,y-45*s,20*s,19*s,'#f5caa5');
+    blockRect(x-11*s,y-48*s,22*s,7*s,hair);blockRect(x-11*s,y-42*s,6*s,7*s,hair);blockRect(x+6*s,y-42*s,5*s,6*s,hair);
+    blockRect(x-6*s,y-36*s,3*s,3*s,'#3f3c3a');blockRect(x+4*s,y-36*s,3*s,3*s,'#3f3c3a');
+    blockRect(x-8*s,y-31*s,4*s,2*s,'#e69b9b');blockRect(x+5*s,y-31*s,4*s,2*s,'#e69b9b');
+    if(main){blockRect(x-5*s,y-27*s,10*s,3*s,'#e9ab8f');}
+  }
+  function drawPlaza(){const p=iso(13,13),s=zoom;
+    context.fillStyle='#7aa6ad';context.beginPath();context.ellipse(p.x,p.y+2*s,27*s,12*s,0,0,Math.PI*2);context.fill();
+    context.fillStyle='#bfdfe0';context.beginPath();context.ellipse(p.x,p.y-2*s,24*s,9*s,0,0,Math.PI*2);context.fill();
+    blockRect(p.x-5*s,p.y-26*s,10*s,23*s,'#e6d6bc');
+    context.fillStyle='#8ac9d2';context.beginPath();context.arc(p.x,p.y-29*s,6*s,0,Math.PI*2);context.fill();
+  }
+  function drawNotice(){const p=iso(12,10),s=zoom;
+    blockRect(p.x-4*s,p.y-26*s,8*s,29*s,'#8f7154');
+    blockRect(p.x-21*s,p.y-43*s,42*s,24*s,'#9c7955');
+    blockRect(p.x-17*s,p.y-40*s,34*s,17*s,'#fff0ce');
+    context.textAlign='center';context.fillStyle='#668f6a';context.font=`bold ${10*s}px sans-serif`;context.fillText('こもれび町',p.x,p.y-29*s);
+  }
+  function drawMarker(){if(!targetMarker)return;const p=iso(targetMarker.x,targetMarker.z);
+    const radius=11*zoom+Math.sin(performance.now()/210)*2;
+    context.strokeStyle='#fffdfa';context.lineWidth=3;context.beginPath();context.ellipse(p.x,p.y,radius,radius*.46,0,0,2*Math.PI);context.stroke();}
+  function render(){context.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);
+    context.fillStyle='#8ebdc1';context.fillRect(0,0,W,H);
+    for(let z=0;z<N;z++)for(let x=0;x<N;x++)drawTile(x,z);
+    const items=[...trees.map(t=>({sort:t.x+t.z,draw:()=>drawTree(t)})),
+      ...houses.map(h=>({sort:h.x+h.z+.7,draw:()=>drawHouse(h)})),
+      ...people.map(p=>({sort:p.x+p.z,draw:()=>drawPerson(p)})),
+      {sort:player.x+player.z+.01,draw:()=>drawPerson(player,true)},
+      {sort:26.5,draw:drawPlaza},{sort:22.5,draw:drawNotice}];
+    items.sort((a,b)=>a.sort-b.sort);
+    for(const item of items)item.draw();
+    drawMarker();
+  }
+  function nearest(){const targets=[...people.map(p=>({...p,distance:Math.hypot(p.x-player.x,p.z-player.z),kind:'person'})),
+     ...houses.map(h=>({...h,distance:Math.hypot(h.x-player.x,h.z-player.z)-1.4,kind:'house'}))];
+    return targets.sort((a,b)=>a.distance-b.distance)[0];}
+  function close(){dialog.classList.remove('show');}
+  function interact(){if(dialog.classList.contains('show')){close();return;}
+    const near=nearest();if(!near||near.distance>2.35){showToast('人や建物に近づいてみてね');return;}
+    held.clear();route=[];targetMarker=null;
+    who.textContent=near.name;words.textContent=near.message;dialog.classList.add('show');prompt.classList.remove('show');
+  }
+  function showToast(message){toast.textContent=message;toast.classList.add('show');toastUntil=performance.now()+2700;}
+  function findPath(tx,tz){const sx=Math.round(player.x),sz=Math.round(player.z);
+    let gx=Math.max(1,Math.min(N-2,Math.round(tx))),gz=Math.max(1,Math.min(N-2,Math.round(tz)));
+    if(!cellFree(gx,gz)){
+      let candidate=null,score=Infinity;
+      for(let r=1;r<=4;r++)for(let dx=-r;dx<=r;dx++)for(let dz=-r;dz<=r;dz++){
+        const x=gx+dx,z=gz+dz;if(!cellFree(x,z))continue;
+        const cost=dx*dx+dz*dz+Math.hypot(x-sx,z-sz)*.012;
+        if(cost<score){score=cost;candidate={x,z};}}
+      if(!candidate)return false;gx=candidate.x;gz=candidate.z;
+    }
+    const key=(x,z)=>x+z*N,queue=[[sx,sz]],visited=new Set([key(sx,sz)]),back=new Map();
+    for(let i=0;i<queue.length;i++){
+      const [x,z]=queue[i];if(x===gx&&z===gz)break;
+      for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){
+        const nx=x+dx,nz=z+dz,nk=key(nx,nz);
+        if(!visited.has(nk)&&cellFree(nx,nz)){visited.add(nk);back.set(nk,key(x,z));queue.push([nx,nz]);}
+      }
+    }
+    const end=key(gx,gz);if(!visited.has(end))return false;
+    const result=[];let cursor=end;const start=key(sx,sz);
+    while(cursor!==start){result.push({x:cursor%N,z:Math.floor(cursor/N)});cursor=back.get(cursor);
+      if(cursor===undefined)return false;}
+    result.reverse();route=result;targetMarker={x:gx,z:gz};return true;
+  }
+  function keyDown(e){if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();
+    if(e.key==='Escape'){close();return;}
+    if(e.key==='e'||e.key==='E'||e.key===' '){if(!e.repeat)interact();return;}
+    if(e.key.startsWith('Arrow')||'wasdWASD'.includes(e.key)){
+      held.add(e.key.toLowerCase().replace('arrow',''));route=[];targetMarker=null;}
+  }
+  addEventListener('keydown',keyDown);
+  addEventListener('keyup',e=>held.delete(e.key.toLowerCase().replace('arrow','')));
+  addEventListener('blur',()=>held.clear());
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)held.clear();});
+  for(const button of document.querySelectorAll('[data-dir]')){
+    const dir=button.dataset.dir;
+    const end=()=>{held.delete(dir);button.classList.remove('active');};
+    button.addEventListener('pointerdown',e=>{e.preventDefault();button.setPointerCapture(e.pointerId);held.add(dir);route=[];targetMarker=null;button.classList.add('active');});
+    button.addEventListener('pointerup',end);button.addEventListener('pointercancel',end);button.addEventListener('lostpointercapture',end);
+  }
+  document.getElementById('action').addEventListener('click',interact);
+  document.getElementById('dismiss').addEventListener('click',close);
+  let down=null;
+  canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;down={x:e.clientX,y:e.clientY};});
+  canvas.addEventListener('pointerup',e=>{
+    if(!down||Math.hypot(e.clientX-down.x,e.clientY-down.y)>13){down=null;return;}
+    down=null;if(dialog.classList.contains('show')){close();return;}
+    const p=unproject(e.clientX,e.clientY);
+    if(findPath(p.x,p.z))showToast('目的地へ歩くよ');else showToast('そこへは行けないみたい');
+  });
+  canvas.addEventListener('pointercancel',()=>down=null);
+  function advance(dt){if(dialog.classList.contains('show'))return;
+    let vx=0,vz=0;
+    // Screen-aligned input with a fixed isometric camera: no camera rotation.
+    const dx=Number(held.has('right')||held.has('d'))-Number(held.has('left')||held.has('a'));
+    const dy=Number(held.has('down')||held.has('s'))-Number(held.has('up')||held.has('w'));
+    if(dx||dy){vx=dx+dy;vz=dy-dx;const mag=Math.hypot(vx,vz);vx/=mag;vz/=mag;}
+    else if(route.length){
+      const next=route[0],dist=Math.hypot(next.x-player.x,next.z-player.z);
+      if(dist<.085){route.shift();if(!route.length)targetMarker=null;return;}
+      vx=(next.x-player.x)/dist;vz=(next.z-player.z)/dist;
+    }else return;
+    const speed=3.7,step=Math.min(speed*dt,.22);
+    const nx=player.x+vx*step,nz=player.z+vz*step;
+    let moved=false;
+    if(!blocked(nx,player.z)){player.x=nx;moved=true;}
+    if(!blocked(player.x,nz)){player.z=nz;moved=true;}
+    if(!moved&&route.length){route=[];targetMarker=null;}
+    if(moved){player.walk+=dt;player.facing=Math.atan2(vx,vz);}
+  }
+  function frame(now){const dt=Math.min(.05,(now-lastFrame)/1000||0);lastFrame=now;
+    advance(dt);
+    const follow=reduceMotion?1:1-Math.exp(-dt*5.3);
+    cam.x+=(player.x-cam.x)*follow;cam.z+=(player.z-cam.z)*follow;
+    if(toastUntil&&now>toastUntil){toast.classList.remove('show');toastUntil=0;}
+    const near=nearest();prompt.classList.toggle('show',!!near&&near.distance<2.35&&!dialog.classList.contains('show'));
+    render();animationId=requestAnimationFrame(frame);
+  }
+  addEventListener('resize',resize,{passive:true});
+  resize();intro.classList.add('hide');
+  animationId=requestAnimationFrame(frame);
+  showToast('タップで移動、近づいたら「しらべる」');
+})();
+</script>
+</body>
+</html>

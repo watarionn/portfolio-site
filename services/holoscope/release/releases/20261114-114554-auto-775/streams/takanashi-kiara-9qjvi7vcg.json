@@ -1,0 +1,534 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_v_-9qjvi7vcg",
+  "slug": "takanashi-kiara-9qjvi7vcg",
+  "videoId": "_-9QjVI7vcg",
+  "title": "Hololive Official Card Game: Key Rules and Gameplay Mechanics",
+  "originalTitle": "How To Play Hololive Official Card Game! 【Caravan Learning Video】 #hOCG",
+  "originalUrl": "https://www.youtube.com/watch?v=_-9QjVI7vcg",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": "2025-09-26T22:30:06.000Z",
+  "durationSeconds": 1330,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_takanashi_kiara",
+    "slug": "takanashi-kiara",
+    "displayName": "Takanashi Kiara"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "The Hololive Official Card Game is a strategic card game that involves placing and managing Holomams, using Bloom mechanics, and executing Arts to deal damage. The game is played with a main deck, cheer deck, and specific rules for movement and actions during different phases.",
+  "summaryOneLine": "The Hololive Official Card Game is a strategic card game that involves placing and managing Holomams, using Bloom mechanics, and executing Arts to deal damage. The game is played with a main deck, cheer deck, and specific rules for movement and actions during different phases.",
+  "keyPoints": [
+    "Introduction to the Game",
+    "Game Setup and Initial Actions",
+    "Hey guys, I'm Takanashi Kiara, and I will be your tutor today!"
+  ],
+  "articleBodyHtml": "<h2>Introduction to the Game</h2>\n<p>The Hololive Official Card Game is a strategic card game that involves placing and managing Holomams, using Bloom mechanics, and executing Arts to deal damage. The game is played with a main deck, cheer deck, and specific rules for movement and actions during different phases.</p>\n<h2>Game Setup and Initial Actions</h2>\n<p>At the start of the game, players must place their Holomams on the stage and follow specific rules for movement and positioning. For example, during the reset phase, the collab Holomam is moved to the back position with the resting state, and if the center position is empty, a back Holomam must be moved to the center position.</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=_-9QjVI7vcg</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 7,
+      "text": "Hey guys, I'm Takanashi Kiara, and I will be your tutor today!"
+    },
+    {
+      "timestampSeconds": 12,
+      "text": "Thank you very much for participating in today's Whole Life Official Card Game Learning Session!"
+    },
+    {
+      "timestampSeconds": 17,
+      "text": "Today, I will introduce how to play the Whole Life Official Card Game that is currently released!"
+    },
+    {
+      "timestampSeconds": 23,
+      "text": "This event is going to be about 50 minutes, starting with a demonstration, followed by free playtime."
+    },
+    {
+      "timestampSeconds": 29,
+      "text": "At the end of the event, we'll be handing out a PR Pack as a participation gift, so please enjoy the learning session today!"
+    },
+    {
+      "timestampSeconds": 36,
+      "text": "Before we begin the event, we would like to request your cooperation with the following."
+    },
+    {
+      "timestampSeconds": 42,
+      "text": "Please don't take home any of the cards or items used during this event."
+    },
+    {
+      "timestampSeconds": 48,
+      "text": "You are welcome to take photos of the cards and your gameplay and share them on social media."
+    },
+    {
+      "timestampSeconds": 53,
+      "text": "Just be sure to not include any other participants in your photos. When posting, please use the hashtags."
+    },
+    {
+      "timestampSeconds": 60,
+      "text": "Let's keep these in mind and have fun playing!"
+    },
+    {
+      "timestampSeconds": 209,
+      "text": "Once you have completed this setup, we will declare the start and turn the Holomam cards over."
+    },
+    {
+      "timestampSeconds": 215,
+      "text": "The call is LIFE START! Let's all say it together with me and flip the cards over, okay?"
+    },
+    {
+      "timestampSeconds": 226,
+      "text": "Once you have revealed your Oshiholomam and the Center Holomam, the last step is to prepare your life."
+    },
+    {
+      "timestampSeconds": 234,
+      "text": "Life is prepared from the pile of cards on the left called the CHEER deck."
+    },
+    {
+      "timestampSeconds": 240,
+      "text": "The CHEER deck contains CHEER cards, which help support the Holomam in their performance."
+    },
+    {
+      "timestampSeconds": 245,
+      "text": "The number of life depends on your Oshiholomam. Please check the bottom right of your Oshiholomam."
+    },
+    {
+      "timestampSeconds": 251,
+      "text": "For Azuki, the life is 6, and for Toki no Sora, the life is 5."
+    },
+    {
+      "timestampSeconds": 255,
+      "text": "So take those number of cards from your CHEER deck and put it face down in the life area."
+    },
+    {
+      "timestampSeconds": 324,
+      "text": "We can place more Holomam in the back position."
+    },
+    {
+      "timestampSeconds": 327,
+      "text": "To do so, take card 2, Amane Kanata, and card 3, Hakui Koyori, from your hand"
+    },
+    {
+      "timestampSeconds": 333,
+      "text": "and place them in the lower half of the playmat, the back position."
+    },
+    {
+      "timestampSeconds": 338,
+      "text": "These two cards have SPOT written in the top left corner, and they are called SPOT Holomam."
+    },
+    {
+      "timestampSeconds": 345,
+      "text": "During the main phase, you can place DEBUT Holomam or SPOT Holomam in the back position."
+    },
+    {
+      "timestampSeconds": 350,
+      "text": "There are many other actions you can take during your turn,"
+    },
+    {
+      "timestampSeconds": 354,
+      "text": "but in the first player's turn, your options are limited."
+    },
+    {
+      "timestampSeconds": 357,
+      "text": "However, there is one more thing you can do this turn that I'd like to introduce, and that is Collab."
+    },
+    {
+      "timestampSeconds": 422,
+      "text": "Now it's the main phase."
+    },
+    {
+      "timestampSeconds": 424,
+      "text": "Let's place the spot Holomam Hakui Koyori card 2 and the debut Holomam Toki no Sora card 3 into the back position."
+    },
+    {
+      "timestampSeconds": 424,
+      "text": "Let's place the spot Holomam Hakui Koyori card 2 and the debut Holomam Toki no Sora card 3 into the back position."
+    },
+    {
+      "timestampSeconds": 432,
+      "text": "Once you've placed them on the stage, you can perform a Collab as well."
+    },
+    {
+      "timestampSeconds": 432,
+      "text": "Once you've placed them on the stage, you can perform a Collab as well."
+    },
+    {
+      "timestampSeconds": 432,
+      "text": "Once you've placed them on the stage, you can perform a Collab as well."
+    },
+    {
+      "timestampSeconds": 438,
+      "text": "Place one card face down from the top of your deck as Holopower."
+    },
+    {
+      "timestampSeconds": 438,
+      "text": "Place one card face down from the top of your deck as Holopower."
+    },
+    {
+      "timestampSeconds": 443,
+      "text": "Then move Hakui Koyori card 2 next to the center Holomam to become a Collab Holomam."
+    },
+    {
+      "timestampSeconds": 443,
+      "text": "Then move Hakui Koyori card 2 next to the center Holomam to become a Collab Holomam."
+    },
+    {
+      "timestampSeconds": 443,
+      "text": "Then move Hakui Koyori card 2 next to the center Holomam to become a Collab Holomam."
+    },
+    {
+      "timestampSeconds": 449,
+      "text": "This time, I'll introduce a new mechanic, the Collab effect."
+    },
+    {
+      "timestampSeconds": 449,
+      "text": "This time, I'll introduce a new mechanic, the Collab effect."
+    },
+    {
+      "timestampSeconds": 456,
+      "text": "A Collab effect is an ability that activates when that Holomam performs a Collab from the back position."
+    },
+    {
+      "timestampSeconds": 456,
+      "text": "A Collab effect is an ability that activates when that Holomam performs a Collab from the back position."
+    },
+    {
+      "timestampSeconds": 456,
+      "text": "A Collab effect is an ability that activates when that Holomam performs a Collab from the back position."
+    },
+    {
+      "timestampSeconds": 461,
+      "text": "Let's take a look at Hakui Koyori who just performed a Collab."
+    },
+    {
+      "timestampSeconds": 461,
+      "text": "Let's take a look at Hakui Koyori who just performed a Collab."
+    },
+    {
+      "timestampSeconds": 461,
+      "text": "Let's take a look at Hakui Koyori who just performed a Collab."
+    },
+    {
+      "timestampSeconds": 465,
+      "text": "She has the Collab effect called Sou Akko."
+    },
+    {
+      "timestampSeconds": 465,
+      "text": "She has the Collab effect called Sou Akko."
+    },
+    {
+      "timestampSeconds": 468,
+      "text": "You can see that Hakui Koyori's Collab effect Sou Akko has two effects."
+    },
+    {
+      "timestampSeconds": 625,
+      "text": "Bloom is the process by which the Holomam's arts and abilities are improved, so let's bloom and make them shine on stage."
+    },
+    {
+      "timestampSeconds": 631,
+      "text": "Debut Holomam can bloom to any first."
+    },
+    {
+      "timestampSeconds": 634,
+      "text": "First Holomam can bloom to any first and or second."
+    },
+    {
+      "timestampSeconds": 639,
+      "text": "So, let's place Azuki card 4 on your center Holomam from your hand."
+    },
+    {
+      "timestampSeconds": 644,
+      "text": "Bloom is a very powerful mechanic, but be careful."
+    },
+    {
+      "timestampSeconds": 649,
+      "text": "You need to follow these rules."
+    },
+    {
+      "timestampSeconds": 652,
+      "text": "No players can bloom during their first turn, whether going first or second."
+    },
+    {
+      "timestampSeconds": 657,
+      "text": "It cannot be used on a Holomam that was placed on the stage during that turn."
+    },
+    {
+      "timestampSeconds": 839,
+      "text": "At first, during the reset phase, you move the collab Holomam to the back position with the resting state."
+    },
+    {
+      "timestampSeconds": 846,
+      "text": "If the center position is empty during the reset phase, you need to move a back Holomam to the center position."
+    },
+    {
+      "timestampSeconds": 853,
+      "text": "Currently, Hakoi Koyori has the resting state and Toki no Sora has the active state in the back position."
+    },
+    {
+      "timestampSeconds": 860,
+      "text": "If there is an active Holomam, they should be prioritized for the center position."
+    },
+    {
+      "timestampSeconds": 865,
+      "text": "OK? So, let's move Toki no Sora free to the center position."
+    },
+    {
+      "timestampSeconds": 871,
+      "text": "Now, the phase is moved to the draw phase."
+    },
+    {
+      "timestampSeconds": 874,
+      "text": "You draw a card."
+    },
+    {
+      "timestampSeconds": 876,
+      "text": "What's next? Yeah, that's right, the cheer phase."
+    },
+    {
+      "timestampSeconds": 1055,
+      "text": "Now, let's move to the main phase."
+    },
+    {
+      "timestampSeconds": 1058,
+      "text": "Place the card 5, second Azuki, onto the center Holomem for first Azuki to bloom it."
+    },
+    {
+      "timestampSeconds": 1065,
+      "text": "Next, perform a collab."
+    },
+    {
+      "timestampSeconds": 1067,
+      "text": "From the main deck, place one card face down to accumulate holo power."
+    },
+    {
+      "timestampSeconds": 1071,
+      "text": "And move the back holomem to Amane Kanata to the collab position."
+    },
+    {
+      "timestampSeconds": 1083,
+      "text": "Everyone, please take a look at the arts of 5 Azuki."
+    },
+    {
+      "timestampSeconds": 1088,
+      "text": "Currently, since three green cheers have been sent to Azuki, we can use the second arts, Destiny Song."
+    },
+    {
+      "timestampSeconds": 1095,
+      "text": "This art not only deals damage, but also has an additional ability."
+    },
+    {
+      "timestampSeconds": 1100,
+      "text": "If the die roll is odd, it adds 50 damage to the base arts damage of 100, making it a total of 150 damage."
+    },
+    {
+      "timestampSeconds": 1115,
+      "text": "Since the center holomember, Tokino Sora, on the opponent's side has 150 HP, if we roll an odd number, we will be able to down her in one hit."
+    },
+    {
+      "timestampSeconds": 1276,
+      "text": "Please separate the main deck into numbered and non-numbered cards, and divide the cheer deck by color."
+    },
+    {
+      "timestampSeconds": 1284,
+      "text": "Lastly, an announcement! The Hololive Official Card Game that you played today has been released on July 11th, 2025."
+    },
+    {
+      "timestampSeconds": 1293,
+      "text": "Information about future products and upcoming events will be updated on the Hololive Official Card Game's ex-account and official website."
+    },
+    {
+      "timestampSeconds": 1301,
+      "text": "So, check it out! Don't miss it! Once you receive PR packs, you can feel free to leave."
+    },
+    {
+      "timestampSeconds": 1307,
+      "text": "Thank you so much for attending the How to Play the Hololive Official Card Game teaching session! Good bye!"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=_-9QjVI7vcg",
+    "streamPublishedAt": "2025-09-26T22:30:06.000Z",
+    "articlePublishedAt": "2026-11-14T10:58:04Z",
+    "articleUpdatedAt": "2026-11-14T10:58:04Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_29vud56w8lm",
+      "slug": "takanashi-kiara-29vud56w8lm",
+      "videoId": "29Vud56W8lM",
+      "title": "Kiaraが「Crash the Party」を改めて紹介　共同制作チームへの信頼を語る",
+      "summaryOneLine": "長時間のSuperchat readingから、Kiaraが直近の活動を振り返りつつCrash the Partyの共同制作相手をどのように受け止めていたかを短く確認できる",
+      "streamType": "other",
+      "publishedAt": "2026-07-26T20:10:29.000Z",
+      "durationSeconds": 7445,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0c5zs6wjtgi",
+      "slug": "takanashi-kiara-0c5zs6wjtgi",
+      "videoId": "0C5zs6WjtGI",
+      "title": "引いた後にも、次の目的を残す　Kiaraの『Arknights: Endfield』更新配信",
+      "summaryOneLine": "新要素への反応だけでなく、一つの結果を次の行動へ接続し、長い更新配信の現在地を保つKiaraの進め方を読める",
+      "streamType": "game",
+      "publishedAt": "2026-07-25T19:17:15.000Z",
+      "durationSeconds": 11190,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0msmz4rk4k4",
+      "slug": "takanashi-kiara-0msmz4rk4k4",
+      "videoId": "0msmZ4rK4k4",
+      "title": "秒差をそろえ、熱を言葉にする　KiaraとEssieが並走した決勝ウォッチアロング",
+      "summaryOneLine": "この配信の中心は、どちらの予想が正しかったかではありません。",
+      "streamType": "event",
+      "publishedAt": "2026-07-19T18:30:15.000Z",
+      "durationSeconds": 13633,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_3dlsggckrok",
+      "slug": "takanashi-kiara-3dlsggckrok",
+      "videoId": "3dlSGGCKrOk",
+      "title": "Analysis of Claims from the Transcript",
+      "summaryOneLine": "The speaker is expressing approval of the player's action, as indicated by phrases like 'That's what I'm talking about.' This shows a positive reaction to the player's performance.",
+      "streamType": "other",
+      "publishedAt": "2026-06-28T02:56:09.000Z",
+      "durationSeconds": 4126,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_9d0onwcnsg8",
+      "slug": "takanashi-kiara-9d0onwcnsg8",
+      "videoId": "9D0onwCNSG8",
+      "title": "Nintendo Directをキアラと見届ける　Fire Emblemへの期待と新作映像への反応",
+      "summaryOneLine": "Nintendo Directを視聴したキアラの期待、9月17日のFire Emblem発売日確認、映像への感想と本人の推測を原文時刻付きで区別して追える。",
+      "streamType": "event",
+      "publishedAt": "2026-06-09T13:31:07.000Z",
+      "durationSeconds": 6494,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_2gwyjothw9i",
+      "slug": "takanashi-kiara-2gwyjothw9i",
+      "videoId": "2gWYJOtHW9I",
+      "title": "Kiara、歯のトラブルもGartic Phoneのネタに　Ollieたちとの描画リレーがカオス化",
+      "summaryOneLine": "約2時間半の配信から、各ゲームモードの違い、歯ネタが繰り返される経緯、終盤の歯の顛末を短時間で把握できる",
+      "streamType": "other",
+      "publishedAt": "2026-06-06T12:29:52.000Z",
+      "durationSeconds": 9453,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

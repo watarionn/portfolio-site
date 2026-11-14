@@ -42,6 +42,10 @@
   @media(max-width:520px){.top{top:max(11px,env(safe-area-inset-top));left:11px}.card{padding:10px 13px;border-radius:13px}h1{font-size:17px}.sub{font-size:9px}.eyebrow{font-size:9px}.back{right:10px;top:max(13px,env(safe-area-inset-top));padding:9px 11px;font-size:10px}#toast{top:84px}}
   @media(max-height:560px) and (pointer:coarse){.pad{grid-template:repeat(3,42px)/repeat(3,42px)}#action{width:62px;height:62px}#dialog{bottom:85px}#prompt{bottom:150px}}
   @media(prefers-reduced-motion:reduce){#toast{transition:none}}
+  .time-button{position:fixed;z-index:4;right:15px;top:75px;border:2px solid #fffdf4;border-radius:12px;padding:9px 12px;background:#fff9e9ee;color:#416d57;font-size:12px;font-weight:850;box-shadow:0 4px 0 #5e907438;cursor:pointer}
+  .time-button:focus-visible{outline:3px solid #3c8266;outline-offset:3px}
+  @media(max-width:520px){.time-button{right:10px;top:62px;padding:8px 10px;font-size:11px}}
+  @media(pointer:coarse) and (max-height:560px){.time-button{top:54px}}
 </style>
 </head>
 <body>
@@ -49,6 +53,7 @@
 <div id="intro" role="status">こもれび町を準備しているよ…</div>
 <header class="top"><div class="card"><div class="eyebrow">こもれび町 ／ 試作品</div><h1>ドットのこもれび町</h1><p class="sub">斜め見下ろしの 2.5D さんぽ</p></div></header>
 <a class="back" href="../komorebi-town/">3D版を見る ↗</a>
+<button id="time-button" class="time-button" type="button" aria-label="町の時間帯を切り替える">☀ 昼</button>
 <div class="legend">矢印キー / WASD で歩く　 ·　E で話す　 ·　クリックで移動</div>
 <div id="prompt" role="status">E / しらべる：近くの人や建物</div>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -59,6 +64,7 @@
   <div class="pad"><button class="up" data-dir="up" aria-label="上へ">▲</button><button class="left" data-dir="left" aria-label="左へ">◀</button><button class="down" data-dir="down" aria-label="下へ">▼</button><button class="right" data-dir="right" aria-label="右へ">▶</button></div>
   <button id="action" type="button" aria-label="近くの人と話す、建物を調べる">しらべる</button>
 </div>
+<script src="./art-layer.js"></script>
 <script>
 'use strict';
 (() => {
@@ -72,6 +78,9 @@
   const prompt=document.getElementById('prompt');
   const toast=document.getElementById('toast');
   const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const art=window.KomorebiArt?.({ctx:context,iso:(x,z)=>iso(x,z),getZoom:()=>zoom,reduceMotion})||null;
+  const timeButton=document.getElementById('time-button');
+  if(art){timeButton.addEventListener('click',()=>{const label=art.nextPhase();timeButton.textContent=label==='昼'?'☀ 昼':label==='夕方'?'☀ 夕方':'☾ 夜';timeButton.setAttribute('aria-label','時間帯：'+label+'。タップで切り替え');});}else{timeButton.hidden=true;}
   let W=innerWidth,H=innerHeight,zoom=1,tw=59,th=29.5,toastUntil=0;
   let cam={x:13,z:14};
   const N=27;
@@ -167,7 +176,8 @@
     rounded(p.x-width/2,labelY-17*s,width,18*s,5*s,'#fff9e8');
     context.fillStyle='#466b56';context.fillText(h.name,p.x,labelY-4*s);
   }
-  function drawPerson(p,main=false){const q=iso(p.x,p.z),s=zoom*(main?1.05:1),jump=main&&!reduceMotion&&route.length?Math.sin(p.walk*13)*2.3*s:0;
+  function drawPerson(p,main=false){const q=iso(p.x,p.z),s=zoom*(main?1.05:1),moving=main?(route.length>0||held.size>0):!reduceMotion,
+      jump=!reduceMotion&&moving?Math.abs(Math.sin((main?p.walk*13:performance.now()/400+p.x)*1.8))*2*s:0;
     const x=Math.round(q.x),y=Math.round(q.y-jump),hair=p.hair||'#765744',shirt=p.shirt||'#f4e4bd';
     context.fillStyle='#557a6077';context.beginPath();context.ellipse(x,y+2*s,12*s,4*s,0,0,Math.PI*2);context.fill();
     blockRect(x-7*s,y-12*s,5*s,13*s,'#655c69');blockRect(x+2*s,y-12*s,5*s,13*s,'#655c69');
@@ -195,16 +205,18 @@
     const radius=11*zoom+Math.sin(performance.now()/210)*2;
     context.strokeStyle='#fffdfa';context.lineWidth=3;context.beginPath();context.ellipse(p.x,p.y,radius,radius*.46,0,0,2*Math.PI);context.stroke();}
   function render(){context.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);
-    context.fillStyle='#8ebdc1';context.fillRect(0,0,W,H);
+    context.fillStyle=art?.sky()||'#8ebdc1';context.fillRect(0,0,W,H);
     for(let z=0;z<N;z++)for(let x=0;x<N;x++)drawTile(x,z);
-    const items=[...trees.map(t=>({sort:t.x+t.z,draw:()=>drawTree(t)})),
-      ...houses.map(h=>({sort:h.x+h.z+.7,draw:()=>drawHouse(h)})),
+    const items=[...trees.map(t=>({sort:t.x+t.z,draw:()=>{drawTree(t);art?.drawTree(t);}})),
+      ...houses.map(h=>({sort:h.x+h.z+.7,draw:()=>{drawHouse(h);art?.drawHouse(h);}})),
       ...people.map(p=>({sort:p.x+p.z,draw:()=>drawPerson(p)})),
       {sort:player.x+player.z+.01,draw:()=>drawPerson(player,true)},
-      {sort:26.5,draw:drawPlaza},{sort:22.5,draw:drawNotice}];
+      {sort:26.5,draw:()=>{drawPlaza();art?.drawFountain(13,13);}},{sort:22.5,draw:drawNotice},
+      {sort:27.2,draw:()=>art?.drawGroundDetails()}];
     items.sort((a,b)=>a.sort-b.sort);
     for(const item of items)item.draw();
     drawMarker();
+    art?.drawAtmosphere(W,H,houses);
   }
   function nearest(){const targets=[...people.map(p=>({...p,distance:Math.hypot(p.x-player.x,p.z-player.z),kind:'person'})),
      ...houses.map(h=>({...h,distance:Math.hypot(h.x-player.x,h.z-player.z)-1.4,kind:'house'}))];
@@ -286,13 +298,19 @@
     if(!moved&&route.length){route=[];targetMarker=null;}
     if(moved){player.walk+=dt;player.facing=Math.atan2(vx,vz);}
   }
-  function frame(now){const dt=Math.min(.05,(now-lastFrame)/1000||0);lastFrame=now;
+  let lastDraw=0;
+  function frame(now){art?.advance(now);const dt=Math.min(.05,(now-lastFrame)/1000||0);lastFrame=now;
     advance(dt);
+    if(!reduceMotion&&!dialog.classList.contains('show')){
+      people[0].x=10+Math.sin(now/2900)*.8;people[0].z=12+Math.cos(now/2900)*.55;
+      people[1].x=16+Math.sin(now/3400)*.5;people[1].z=13+Math.cos(now/3400)*.4;
+    }
     const follow=reduceMotion?1:1-Math.exp(-dt*5.3);
     cam.x+=(player.x-cam.x)*follow;cam.z+=(player.z-cam.z)*follow;
     if(toastUntil&&now>toastUntil){toast.classList.remove('show');toastUntil=0;}
     const near=nearest();prompt.classList.toggle('show',!!near&&near.distance<2.35&&!dialog.classList.contains('show'));
-    render();animationId=requestAnimationFrame(frame);
+    if(!lastDraw||now-lastDraw>=(reduceMotion?45:29)){render();lastDraw=now;}
+    animationId=requestAnimationFrame(frame);
   }
   addEventListener('resize',resize,{passive:true});
   resize();intro.classList.add('hide');

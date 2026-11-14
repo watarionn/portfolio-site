@@ -1,0 +1,558 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_8xjsch2v7os",
+  "slug": "koseki-bijou-8xjsch2v7os",
+  "videoId": "8xjsch2v7Os",
+  "title": "HoloScopeのひなたの最新情報",
+  "originalTitle": "【CRAB GAME COLLAB】🦀🎮 (EN & ID)",
+  "originalUrl": "https://www.youtube.com/watch?v=8xjsch2v7Os",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": "2024-02-27T03:33:28.000Z",
+  "durationSeconds": 5097,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_koseki_bijou",
+    "slug": "koseki-bijou",
+    "displayName": "Koseki Bijou"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "凛夏センパイがどこにいるのかについての疑問が浮上しています。C00000とC00001の両方の声明によると、凛夏センパイの不在が確認されており、その行方が気になる状況となっています。",
+  "summaryOneLine": "凛夏センパイがどこにいるのかについての疑問が浮上しています。C00000とC00001の両方の声明によると、凛夏センパイの不在が確認されており、その行方が気になる状況となっています。",
+  "keyPoints": [
+    "凛夏センパイの行方",
+    "床は愛に関する詩的な表現",
+    "コボに関する情報"
+  ],
+  "articleBodyHtml": "<h2>凛夏センパイの行方</h2>\n<p>凛夏センパイがどこにいるのかについての疑問が浮上しています。C00000とC00001の両方の声明によると、凛夏センパイの不在が確認されており、その行方が気になる状況となっています。</p>\n<p>一方で、C00004の声明ではアニアがいるという情報が提供されており、凛夏センパイの行方と関連する可能性があります。</p>\n<h2>床は愛に関する詩的な表現</h2>\n<p>「床は愛」という表現が登場し、C00002の声明ではその詩的な側面が強調されています。C00003の声明でも、その表現が詩的であると評価されています。</p>\n<h2>コボに関する情報</h2>\n<p>C00005の声明によると、コボは青いという情報が提供されており、その特徴が注目されています。</p>\n<h2>IrisとHakkoの関係</h2>\n<p>C00008とC00009の声明によると、IrisがHakkoのベルズーを観察しているという情報が提供されており、その関係性が注目されています。</p>\n<h2>緊急の状況</h2>\n<p>C00011の声明によると、誰かが死んだという情報が提供されており、状況が緊急である可能性があります。</p>\n<h2>行動に関する指示</h2>\n<p>C00016とC00017の声明によると、「show me the way」と「it&#x27;s over」の指示が提供されており、行動の方向性が示されています。</p>\n<h2>ゲームに関する情報</h2>\n<p>C00048とC00050の声明によると、ゲームの勝敗に関する情報が提供されており、誰もが勝っていないという情報が確認されています。</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=8xjsch2v7Os</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 1170,
+      "text": "okay"
+    },
+    {
+      "timestampSeconds": 1177,
+      "text": "okay this time"
+    },
+    {
+      "timestampSeconds": 1179,
+      "text": "where is she"
+    },
+    {
+      "timestampSeconds": 1181,
+      "text": "where is she"
+    },
+    {
+      "timestampSeconds": 1185,
+      "text": "oh no"
+    },
+    {
+      "timestampSeconds": 1187,
+      "text": "where is she"
+    },
+    {
+      "timestampSeconds": 1189,
+      "text": "I mean what's to love"
+    },
+    {
+      "timestampSeconds": 1191,
+      "text": "floor is love"
+    },
+    {
+      "timestampSeconds": 1195,
+      "text": "oh that's beautiful"
+    },
+    {
+      "timestampSeconds": 1202,
+      "text": "that's kinda poetic too"
+    },
+    {
+      "timestampSeconds": 1204,
+      "text": "okay okay"
+    },
+    {
+      "timestampSeconds": 1226,
+      "text": "oh no"
+    },
+    {
+      "timestampSeconds": 1230,
+      "text": "you have"
+    },
+    {
+      "timestampSeconds": 1496,
+      "text": "Ania"
+    },
+    {
+      "timestampSeconds": 1646,
+      "text": "come on please I don't like this game"
+    },
+    {
+      "timestampSeconds": 1648,
+      "text": "I'm Kobo and I'm blue"
+    },
+    {
+      "timestampSeconds": 1650,
+      "text": "oh no what could I do"
+    },
+    {
+      "timestampSeconds": 1652,
+      "text": "I'm living"
+    },
+    {
+      "timestampSeconds": 1684,
+      "text": "what's happening I'm scared"
+    },
+    {
+      "timestampSeconds": 1691,
+      "text": "when does it end"
+    },
+    {
+      "timestampSeconds": 1693,
+      "text": "eh?"
+    },
+    {
+      "timestampSeconds": 1695,
+      "text": "you gotta go fast"
+    },
+    {
+      "timestampSeconds": 1697,
+      "text": "bye"
+    },
+    {
+      "timestampSeconds": 1699,
+      "text": "thank you"
+    },
+    {
+      "timestampSeconds": 2404,
+      "text": "iris oh it's Hakko's bell zoo"
+    },
+    {
+      "timestampSeconds": 2406,
+      "text": "for once I'm rooting for Hakko's bell zoo"
+    },
+    {
+      "timestampSeconds": 2415,
+      "text": "come here"
+    },
+    {
+      "timestampSeconds": 2418,
+      "text": "how did someone die just now"
+    },
+    {
+      "timestampSeconds": 2424,
+      "text": "maybe"
+    },
+    {
+      "timestampSeconds": 2426,
+      "text": "wait only one person has stick"
+    },
+    {
+      "timestampSeconds": 2428,
+      "text": "wait why only one person has stick now"
+    },
+    {
+      "timestampSeconds": 2430,
+      "text": "don't you come around here often"
+    },
+    {
+      "timestampSeconds": 2756,
+      "text": "show me the way"
+    },
+    {
+      "timestampSeconds": 2768,
+      "text": "it's over it's over"
+    },
+    {
+      "timestampSeconds": 2783,
+      "text": "I'm gonna find a mini player"
+    },
+    {
+      "timestampSeconds": 2785,
+      "text": "oh cause it gonna be"
+    },
+    {
+      "timestampSeconds": 2792,
+      "text": "oh kobo"
+    },
+    {
+      "timestampSeconds": 2806,
+      "text": "that is not"
+    },
+    {
+      "timestampSeconds": 2826,
+      "text": "you murderer I'm sorry but"
+    },
+    {
+      "timestampSeconds": 2828,
+      "text": "I need to"
+    },
+    {
+      "timestampSeconds": 3113,
+      "text": "oh that's so far"
+    },
+    {
+      "timestampSeconds": 3115,
+      "text": "hi"
+    },
+    {
+      "timestampSeconds": 3115,
+      "text": "hi"
+    },
+    {
+      "timestampSeconds": 3125,
+      "text": "pushing me"
+    },
+    {
+      "timestampSeconds": 3125,
+      "text": "pushing me"
+    },
+    {
+      "timestampSeconds": 3125,
+      "text": "pushing me"
+    },
+    {
+      "timestampSeconds": 3131,
+      "text": "punching me"
+    },
+    {
+      "timestampSeconds": 3137,
+      "text": "PENDING ME"
+    },
+    {
+      "timestampSeconds": 3139,
+      "text": "go away"
+    },
+    {
+      "timestampSeconds": 3197,
+      "text": "nerf"
+    },
+    {
+      "timestampSeconds": 3198,
+      "text": "nerf"
+    },
+    {
+      "timestampSeconds": 3198,
+      "text": "nerf"
+    },
+    {
+      "timestampSeconds": 3199,
+      "text": "nerf"
+    },
+    {
+      "timestampSeconds": 3199,
+      "text": "nerf"
+    },
+    {
+      "timestampSeconds": 3199,
+      "text": "nerf"
+    },
+    {
+      "timestampSeconds": 3200,
+      "text": "nerf"
+    },
+    {
+      "timestampSeconds": 3200,
+      "text": "nerf"
+    },
+    {
+      "timestampSeconds": 3201,
+      "text": "nerf cobble"
+    },
+    {
+      "timestampSeconds": 3662,
+      "text": "Woo-hoo."
+    },
+    {
+      "timestampSeconds": 3664,
+      "text": "I've been strong together."
+    },
+    {
+      "timestampSeconds": 3668,
+      "text": "Okay, that's good."
+    },
+    {
+      "timestampSeconds": 3670,
+      "text": "What are you trying to do?"
+    },
+    {
+      "timestampSeconds": 3676,
+      "text": "That's good."
+    },
+    {
+      "timestampSeconds": 3678,
+      "text": "You can still play right now."
+    },
+    {
+      "timestampSeconds": 3680,
+      "text": "Okay."
+    },
+    {
+      "timestampSeconds": 3682,
+      "text": "Together."
+    },
+    {
+      "timestampSeconds": 4167,
+      "text": "No one's killing each other. That's boring."
+    },
+    {
+      "timestampSeconds": 4169,
+      "text": "I can see everything so clearly now."
+    },
+    {
+      "timestampSeconds": 4173,
+      "text": "I can see all the..."
+    },
+    {
+      "timestampSeconds": 4175,
+      "text": "Ugh."
+    },
+    {
+      "timestampSeconds": 4186,
+      "text": "Too many people?"
+    },
+    {
+      "timestampSeconds": 4191,
+      "text": "It was worth it."
+    },
+    {
+      "timestampSeconds": 4193,
+      "text": "It was worth it."
+    },
+    {
+      "timestampSeconds": 4195,
+      "text": "Stay here and hope for the best."
+    },
+    {
+      "timestampSeconds": 4805,
+      "text": "We got a one."
+    },
+    {
+      "timestampSeconds": 4807,
+      "text": "We got a one."
+    },
+    {
+      "timestampSeconds": 4807,
+      "text": "We got a one."
+    },
+    {
+      "timestampSeconds": 4811,
+      "text": "Not everyone won once, right?"
+    },
+    {
+      "timestampSeconds": 4811,
+      "text": "Not everyone won once, right?"
+    },
+    {
+      "timestampSeconds": 4811,
+      "text": "Not everyone won once, right?"
+    },
+    {
+      "timestampSeconds": 4813,
+      "text": "Yeah, I don't think so."
+    },
+    {
+      "timestampSeconds": 4815,
+      "text": "Not everyone, I don't think."
+    },
+    {
+      "timestampSeconds": 4817,
+      "text": "If you won, stand by the door."
+    },
+    {
+      "timestampSeconds": 4819,
+      "text": "Wait, what?"
+    },
+    {
+      "timestampSeconds": 4821,
+      "text": "If you won a game, stand by the door."
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=8xjsch2v7Os",
+    "streamPublishedAt": "2024-02-27T03:33:28.000Z",
+    "articlePublishedAt": "2026-11-13T23:12:32Z",
+    "articleUpdatedAt": "2026-11-13T23:12:32Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_2qoc1b-sqog",
+      "slug": "koseki-bijou-2qoc1b-sqog",
+      "videoId": "2Qoc1B-Sqog",
+      "title": "Toilet 8で異変探し、鏡ひとつにも疑いが止まらない",
+      "summaryOneLine": "異変探しゲームで何を見て、どこで迷ったかを確認済み時刻つきで追える",
+      "streamType": "game",
+      "publishedAt": "2026-08-03T01:33:05.000Z",
+      "durationSeconds": 8979,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-08",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1xv8zkml4wc",
+      "slug": "koseki-bijou-1xv8zkml4wc",
+      "videoId": "1xV8zKmL4wc",
+      "title": "「3歳ならbusinessを開ける」Biboo、3周年でClub 81800をお披露目",
+      "summaryOneLine": "周年配信の冒頭から、3歳という記念日を『開業』へ結びつけたジョークと、Club 81800が数か月の制作を経て用意された企画だったことをまとめて追える",
+      "streamType": "event",
+      "publishedAt": "2026-07-30T03:54:35.000Z",
+      "durationSeconds": 10321,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_fq4nyekt7ie",
+      "slug": "koseki-bijou-fq4nyekt7ie",
+      "videoId": "FQ4NYEkT7iE",
+      "title": "古石ビジューがVRChatで語った、家族との時間と歌への思い",
+      "summaryOneLine": "VRChat雑談を通じた家族との時間、歌への葛藤と成長、「GHOST」に込めた本人の意図を時系列で理解できる。",
+      "streamType": "chatting",
+      "publishedAt": "2026-07-09T00:58:27.000Z",
+      "durationSeconds": 9340,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1z9ldwk4e3a",
+      "slug": "koseki-bijou-1z9ldwk4e3a",
+      "videoId": "1Z9LdWK4e3A",
+      "title": "主人公宣言から「固定PT」結成へ　GRANBLUE FANTASY: RELINK体験版で広がったマルチプレイ",
+      "summaryOneLine": "約2時間半の体験版配信から、戦闘理解、ビルド調整、役割分担、即席パーティーの連携という節目を追える",
+      "streamType": "game",
+      "publishedAt": "2026-06-21T00:59:56.000Z",
+      "durationSeconds": 9161,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_2nyj1bmyd3q",
+      "slug": "koseki-bijou-2nyj1bmyd3q",
+      "videoId": "2NYJ1BMYD3Q",
+      "title": "BijouとKiara、Subnautica 2で海中拠点づくり　探索と雑談が続く協力プレイ",
+      "summaryOneLine": "3時間超の配信から、二人の協力プレイらしい進行を確認済み時刻つきで追える",
+      "streamType": "game",
+      "publishedAt": "2026-06-16T13:00:06.000Z",
+      "durationSeconds": 12818,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_3t8ojathtn0",
+      "slug": "koseki-bijou-3t8ojathtn0",
+      "videoId": "3T8OjATHtn0",
+      "title": "Fortniteの合間にこぼれた近況、Suisei宅の鍋と運転コラボの舞台裏",
+      "summaryOneLine": "2時間だけのFortnite配信で、スタジオ続きの近況、ゲーム内のチームプレー、Suisei宅を訪れた思い出、運転コラボの舞台裏が交互に語られた。",
+      "streamType": "other",
+      "publishedAt": "2026-06-15T00:59:50.000Z",
+      "durationSeconds": 7560,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_koseki_bijou",
+        "slug": "koseki-bijou",
+        "displayName": "Koseki Bijou"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

@@ -1,0 +1,646 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_ewgackne-y4",
+  "slug": "shiori-novella-ewgackne-y4",
+  "videoId": "EwGAcKnE-y4",
+  "title": "クリエイターの活動と視聴者への呼びかけ",
+  "originalTitle": "[DEBUT STREAM] - A New Chapter Begins! #holoAdvent #ShiorinOnAir",
+  "originalUrl": "https://www.youtube.com/watch?v=EwGAcKnE-y4",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": "2023-07-30T03:48:59.000Z",
+  "durationSeconds": 2701,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_shiori_novella",
+    "slug": "shiori-novella",
+    "displayName": "Shiori Novella"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "このプレゼンテーションでは、視聴者にクリエイターのTwitterアカウントをフォローするよう呼びかける内容が含まれています。クリエイターは、視聴者からのフォローやサポートを非常に歓迎しており、その意図を明確に述べています。",
+  "summaryOneLine": "このプレゼンテーションでは、視聴者にクリエイターのTwitterアカウントをフォローするよう呼びかける内容が含まれています。クリエイターは、視聴者からのフォローやサポートを非常に歓迎しており、その意図を明確に述べています。",
+  "keyPoints": [
+    "視聴者への呼びかけとサポートの依頼",
+    "マスコットキャラクターの紹介と役割",
+    "アニメーション技術と新しい要素の紹介"
+  ],
+  "articleBodyHtml": "<h2>視聴者への呼びかけとサポートの依頼</h2>\n<p>このプレゼンテーションでは、視聴者にクリエイターのTwitterアカウントをフォローするよう呼びかける内容が含まれています。クリエイターは、視聴者からのフォローやサポートを非常に歓迎しており、その意図を明確に述べています。</p>\n<p>また、視聴者にクリエイターへの支持を示すようお願いしている部分もあり、その理由として、クリエイターが作品制作に多くの努力を注いでいることを強調しています。</p>\n<h2>マスコットキャラクターの紹介と役割</h2>\n<p>プレゼンテーションでは、マスコットキャラクター「Nyakuza」の存在を紹介し、その理由についても説明しています。このキャラクターは、クリエイターの活動を応援する存在として登場します。</p>\n<p>マスコットキャラクターの役割として、クリエイターの活動に参加し、応援する存在としての説明がなされています。また、今後の説明に備えて、視聴者がマスコットキャラクターを時折見かける可能性があることも述べられています。</p>\n<h2>アニメーション技術と新しい要素の紹介</h2>\n<p>マスコットキャラクターのアニメーション技術についても説明されており、クリエイター自身がそのアニメーションを制作したことを明記しています。また、今後のプレゼンテーションで新たな要素が紹介される予定であることも述べられています。</p>\n<h2>視聴者との交流と今後の活動</h2>\n<p>クリエイターは、視聴者との交流を非常に重視しており、視聴者が自分の活動に参加するよう呼びかけている部分があります。また、今後の活動として、視聴者の名前をクレジットに記載する予定であることも述べられています。</p>\n<p>今後の活動として、視聴者との交流を深めるために、書籍や音楽、ゲームなどについての話題を取り上げる予定であることも明記されています。</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=EwGAcKnE-y4</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 438,
+      "text": "I would be very happy if you could."
+    },
+    {
+      "timestampSeconds": 440,
+      "text": "Now, onto the next slide."
+    },
+    {
+      "timestampSeconds": 442,
+      "text": "A lot of hands went into this debut."
+    },
+    {
+      "timestampSeconds": 445,
+      "text": "And I would appreciate it..."
+    },
+    {
+      "timestampSeconds": 447,
+      "text": "If you can give them the same love..."
+    },
+    {
+      "timestampSeconds": 449,
+      "text": "That I will give to you."
+    },
+    {
+      "timestampSeconds": 452,
+      "text": "We have mascots on here."
+    },
+    {
+      "timestampSeconds": 457,
+      "text": "These mascots are the Nyakuza."
+    },
+    {
+      "timestampSeconds": 459,
+      "text": "There is a reason for that."
+    },
+    {
+      "timestampSeconds": 461,
+      "text": "I will go into that later."
+    },
+    {
+      "timestampSeconds": 462,
+      "text": "But for now, you may occasionally see them."
+    },
+    {
+      "timestampSeconds": 465,
+      "text": "For example..."
+    },
+    {
+      "timestampSeconds": 467,
+      "text": "Right here."
+    },
+    {
+      "timestampSeconds": 468,
+      "text": "They will be here to cheer me on..."
+    },
+    {
+      "timestampSeconds": 471,
+      "text": "In our activities together."
+    },
+    {
+      "timestampSeconds": 473,
+      "text": "I animated them, by the way."
+    },
+    {
+      "timestampSeconds": 476,
+      "text": "I can do some slight tactics like that."
+    },
+    {
+      "timestampSeconds": 479,
+      "text": "Now..."
+    },
+    {
+      "timestampSeconds": 480,
+      "text": "Go away, cats."
+    },
+    {
+      "timestampSeconds": 483,
+      "text": "My logo at the top left..."
+    },
+    {
+      "timestampSeconds": 485,
+      "text": "Was created by Reku."
+    },
+    {
+      "timestampSeconds": 487,
+      "text": "You can follow them on Twitter."
+    },
+    {
+      "timestampSeconds": 489,
+      "text": "The lore art you saw at the beginning..."
+    },
+    {
+      "timestampSeconds": 491,
+      "text": "Was made by Chappy."
+    },
+    {
+      "timestampSeconds": 706,
+      "text": "Otherwise, you're gonna have to feed more cats"
+    },
+    {
+      "timestampSeconds": 709,
+      "text": "Now, I enjoy daydreaming"
+    },
+    {
+      "timestampSeconds": 711,
+      "text": "I am a little bit..."
+    },
+    {
+      "timestampSeconds": 713,
+      "text": "aloof, and I may go quiet sometimes"
+    },
+    {
+      "timestampSeconds": 716,
+      "text": "That is perhaps because I am daydreaming and whatnot"
+    },
+    {
+      "timestampSeconds": 719,
+      "text": "Why is everyone so excited all of a sudden?"
+    },
+    {
+      "timestampSeconds": 723,
+      "text": "I listen to a lot of audiobooks"
+    },
+    {
+      "timestampSeconds": 725,
+      "text": "I suffer from very, very, very severe insomnia"
+    },
+    {
+      "timestampSeconds": 730,
+      "text": "But you will hear my recommendations later"
+    },
+    {
+      "timestampSeconds": 732,
+      "text": "I also enjoy text adventures and visual novels"
+    },
+    {
+      "timestampSeconds": 736,
+      "text": "I am still a maiden at heart"
+    },
+    {
+      "timestampSeconds": 738,
+      "text": "I enjoy the idea of romance"
+    },
+    {
+      "timestampSeconds": 741,
+      "text": "For fiction"
+    },
+    {
+      "timestampSeconds": 744,
+      "text": "Only if I can become a character myself"
+    },
+    {
+      "timestampSeconds": 747,
+      "text": "Which fits quite nicely with my job"
+    },
+    {
+      "timestampSeconds": 749,
+      "text": "Because I can"
+    },
+    {
+      "timestampSeconds": 751,
+      "text": "Hopefully, I don't get hurt in the process"
+    },
+    {
+      "timestampSeconds": 753,
+      "text": "But as an archiver"
+    },
+    {
+      "timestampSeconds": 754,
+      "text": "It is a very dangerous time"
+    },
+    {
+      "timestampSeconds": 755,
+      "text": "A very dangerous type of work"
+    },
+    {
+      "timestampSeconds": 756,
+      "text": "We'll talk about that later"
+    },
+    {
+      "timestampSeconds": 758,
+      "text": "And then I enjoy playing life sims"
+    },
+    {
+      "timestampSeconds": 1097,
+      "text": "If you are willing"
+    },
+    {
+      "timestampSeconds": 1098,
+      "text": "I will have to think about it"
+    },
+    {
+      "timestampSeconds": 1100,
+      "text": "But I..."
+    },
+    {
+      "timestampSeconds": 1101,
+      "text": "Naturally, I used to be part of a book club"
+    },
+    {
+      "timestampSeconds": 1104,
+      "text": "In my youth"
+    },
+    {
+      "timestampSeconds": 1105,
+      "text": "So..."
+    },
+    {
+      "timestampSeconds": 1106,
+      "text": "Not expected"
+    },
+    {
+      "timestampSeconds": 1107,
+      "text": "But if you ever want to get into Sherlock Holmes"
+    },
+    {
+      "timestampSeconds": 1109,
+      "text": "I recommend the short stories"
+    },
+    {
+      "timestampSeconds": 1111,
+      "text": "The Blue Garbuncle is a good Christmas story"
+    },
+    {
+      "timestampSeconds": 1114,
+      "text": "The Hound of the Baskervilles is a novel"
+    },
+    {
+      "timestampSeconds": 1116,
+      "text": "Really good"
+    },
+    {
+      "timestampSeconds": 1117,
+      "text": "It is somewhat like Wittering Heights"
+    },
+    {
+      "timestampSeconds": 1119,
+      "text": "It is a gothic setting"
+    },
+    {
+      "timestampSeconds": 1122,
+      "text": "And then Charles Augustus Milverton"
+    },
+    {
+      "timestampSeconds": 1125,
+      "text": "I believe that's the right case"
+    },
+    {
+      "timestampSeconds": 1126,
+      "text": "That one was good"
+    },
+    {
+      "timestampSeconds": 1127,
+      "text": "Um, I don't want to spoil it"
+    },
+    {
+      "timestampSeconds": 1129,
+      "text": "But, oh gosh"
+    },
+    {
+      "timestampSeconds": 1130,
+      "text": "I loved being in that story"
+    },
+    {
+      "timestampSeconds": 1133,
+      "text": "And then the way Holmes was like"
+    },
+    {
+      "timestampSeconds": 1134,
+      "text": "How dare you do that"
+    },
+    {
+      "timestampSeconds": 1136,
+      "text": "When something happened"
+    },
+    {
+      "timestampSeconds": 1138,
+      "text": "I was like, wow"
+    },
+    {
+      "timestampSeconds": 2174,
+      "text": "Close your eyes really quick"
+    },
+    {
+      "timestampSeconds": 2176,
+      "text": "But what does it matter?"
+    },
+    {
+      "timestampSeconds": 2176,
+      "text": "But what does it matter?"
+    },
+    {
+      "timestampSeconds": 2177,
+      "text": "I have this"
+    },
+    {
+      "timestampSeconds": 2177,
+      "text": "I have this"
+    },
+    {
+      "timestampSeconds": 2179,
+      "text": "Alright everyone"
+    },
+    {
+      "timestampSeconds": 2186,
+      "text": "Let's see"
+    },
+    {
+      "timestampSeconds": 2186,
+      "text": "Let's see"
+    },
+    {
+      "timestampSeconds": 2187,
+      "text": "What could she be doing in there?"
+    },
+    {
+      "timestampSeconds": 2187,
+      "text": "What could she be doing in there?"
+    },
+    {
+      "timestampSeconds": 2190,
+      "text": "I suppose this is the part"
+    },
+    {
+      "timestampSeconds": 2190,
+      "text": "I suppose this is the part"
+    },
+    {
+      "timestampSeconds": 2196,
+      "text": "Where I show you"
+    },
+    {
+      "timestampSeconds": 2196,
+      "text": "Where I show you"
+    },
+    {
+      "timestampSeconds": 2197,
+      "text": "What I have to offer"
+    },
+    {
+      "timestampSeconds": 2197,
+      "text": "What I have to offer"
+    },
+    {
+      "timestampSeconds": 2201,
+      "text": "So first off"
+    },
+    {
+      "timestampSeconds": 2506,
+      "text": "Their name in the credits"
+    },
+    {
+      "timestampSeconds": 2508,
+      "text": "Wednesday I will be talking about books"
+    },
+    {
+      "timestampSeconds": 2511,
+      "text": "Also"
+    },
+    {
+      "timestampSeconds": 2512,
+      "text": "I just simply wish to fangirl"
+    },
+    {
+      "timestampSeconds": 2514,
+      "text": "If you are a big fan of books"
+    },
+    {
+      "timestampSeconds": 2517,
+      "text": "Then please join me"
+    },
+    {
+      "timestampSeconds": 2518,
+      "text": "And the girls will be joining at the end of this pajama party"
+    },
+    {
+      "timestampSeconds": 2522,
+      "text": "Thursday"
+    },
+    {
+      "timestampSeconds": 2523,
+      "text": "Karaoke"
+    },
+    {
+      "timestampSeconds": 2524,
+      "text": "You will see my musical taste"
+    },
+    {
+      "timestampSeconds": 2526,
+      "text": "I hope it is not surprising"
+    },
+    {
+      "timestampSeconds": 2530,
+      "text": "We will be going over Left 4 Dead 2"
+    },
+    {
+      "timestampSeconds": 2532,
+      "text": "On Friday"
+    },
+    {
+      "timestampSeconds": 2534,
+      "text": "And then I will have a recording day"
+    },
+    {
+      "timestampSeconds": 2537,
+      "text": "If you see an offline archiving mission"
+    },
+    {
+      "timestampSeconds": 2539,
+      "text": "It is a rest day"
+    },
+    {
+      "timestampSeconds": 2541,
+      "text": "Also not a rest day"
+    },
+    {
+      "timestampSeconds": 2542,
+      "text": "Simply because"
+    },
+    {
+      "timestampSeconds": 2543,
+      "text": "I am actually recording something"
+    },
+    {
+      "timestampSeconds": 2546,
+      "text": "And then Sunday is a little secret"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=EwGAcKnE-y4",
+    "streamPublishedAt": "2023-07-30T03:48:59.000Z",
+    "articlePublishedAt": "2026-10-31T00:05:24Z",
+    "articleUpdatedAt": "2026-10-31T00:05:24Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_1fnun8pc9pa",
+      "slug": "shiori-novella-1fnun8pc9pa",
+      "videoId": "1fNUN8pC9PA",
+      "title": "飛行機は「空を飛ぶ列車」？Shioriが『Denshattack!』の世界設定に注目",
+      "summaryOneLine": "3時間超の配信から、列車アクションの背後にある災害後の世界設定へShioriの関心が向いた約1分の場面を追える",
+      "streamType": "game",
+      "publishedAt": "2026-07-20T19:55:37.000Z",
+      "durationSeconds": 11484,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1gcsfs7zfko",
+      "slug": "shiori-novella-1gcsfs7zfko",
+      "videoId": "1GcsFS7zfko",
+      "title": "仲間に助けられても、自分で戦いたい　ShioriのDark Souls 2協力プレイ",
+      "summaryOneLine": "攻略順の再話ではなく、協力者の強さを調整してでも自分の挑戦を残し、参加機会を分けるShioriの配信の仕方が分かる",
+      "streamType": "game",
+      "publishedAt": "2026-01-27T02:47:14.000Z",
+      "durationSeconds": 20020,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-01",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-eup_sxh20y",
+      "slug": "shiori-novella-eup-sxh20y",
+      "videoId": "-eUP_SxH20Y",
+      "title": "勝てる編成と残したい仲間のあいだで　ShioriのDigimonパーティ再設計",
+      "summaryOneLine": "編成判断が単なる強さ順ではなく、属性の重複、行動順、回復制限、育成待ち、仲間への愛着を状況ごとに調整する作業だと分かる",
+      "streamType": "game",
+      "publishedAt": "2025-11-20T02:38:07.000Z",
+      "durationSeconds": 18952,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-11",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0l5x0tzyykw",
+      "slug": "shiori-novella-0l5x0tzyykw",
+      "videoId": "0L5X0TZYyKw",
+      "title": "戻れる道を先に作る　Shioriの『Cronos: The New Dawn』資源管理",
+      "summaryOneLine": "恐怖への反応ではなく、戻れる状態を先に作ることで探索の損失を抑える判断の連鎖を読める",
+      "streamType": "game",
+      "publishedAt": "2025-10-02T01:48:43.000Z",
+      "durationSeconds": 16803,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-10",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_273i3ui7ulg",
+      "slug": "shiori-novella-273i3ui7ulg",
+      "videoId": "273I3ui7uLg",
+      "title": "Monster Hunter: WildsでCharge Bladeに挑戦　複雑な操作を実戦で少しずつ確認",
+      "summaryOneLine": "長時間配信の中から、Charge Bladeを初めて本格的に触る場面と、試行錯誤しながら操作感を掴んでいく過程を短く追える",
+      "streamType": "game",
+      "publishedAt": "2025-03-14T04:38:59.000Z",
+      "durationSeconds": 12716,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-03",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1vsev3wqkgq",
+      "slug": "shiori-novella-1vsev3wqkgq",
+      "videoId": "1VsEV3wQKGQ",
+      "title": "注文と厨房が混線する　Shioriたちの「FastFood Simulator」配信",
+      "summaryOneLine": "複数人の会話が交差する配信を、開店時の役割、注文の混線、難易度変更、ドライブスルーとフライドポテトの導入として追いやすく整理できる",
+      "streamType": "game",
+      "publishedAt": "2025-02-11T04:15:00.000Z",
+      "durationSeconds": 7925,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_shiori_novella",
+        "slug": "shiori-novella",
+        "displayName": "Shiori Novella"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-02",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

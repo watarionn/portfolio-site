@@ -41,7 +41,7 @@ class Item {
   add(o){this.children.push(o);}
   updateMatrix(){}
 }
-class Material {constructor(o){Object.assign(this,o);}}
+class Material {constructor(o){Object.assign(this,o);}clone(){return new this.constructor({...this});}}
 class SpriteMaterial extends Material {constructor(o){super(o);this.isSpriteMaterial=true;}}
 class InstancedMesh extends Item {
   constructor(g,m,n){super();this.geometry=g;this.material=m;this.count=n;this.instanceMatrix={needsUpdate:false};this.instanceColor={needsUpdate:false};}

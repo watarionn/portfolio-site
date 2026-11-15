@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#c5e4d8" />
-  <title>こもれび町 | 小さな散歩の試作品</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <title>こもれび町 3D | おさんぽ</title>
   <style>
     :root { color-scheme: light; --ink:#354b43; --milk:#fffcf4; --green:#3e745f; }
     * { box-sizing: border-box; }
@@ -17,7 +18,13 @@
     .eyebrow { font-size:10px; letter-spacing:.27em; font-weight:900; color:#7e9d86; }
     h1 { margin:4px 0 2px; font-size:24px; letter-spacing:.10em; line-height:1.3; font-weight:900; }
     .subtitle { font-size:11px; letter-spacing:.09em; color:#779180; }
-    .top-pill { top:25px; right:26px; padding:10px 17px; border-radius:30px; font-weight:800; font-size:11px; letter-spacing:.10em; background:#fffaf1c9; border:1px solid #ffffffa3; box-shadow:0 6px 20px #517a641c; }
+    .top-pill { top:25px; right:26px; padding:10px 17px; border-radius:30px; font-weight:800; font-size:11px; letter-spacing:.10em; background:#fffaf1e8; border:1px solid #ffffffa3; box-shadow:0 6px 20px #517a641c; }
+    #time-button { pointer-events:auto; cursor:pointer; min-width:90px; }
+    #time-button:focus-visible { outline:3px solid #3e745f; outline-offset:3px; }
+    .mode-links { top:79px; right:26px; display:flex; gap:6px; pointer-events:auto; }
+    .mode-links a { background:#fffaf1e8; border:1px solid #ffffffbb; padding:7px 10px; border-radius:9px; text-decoration:none; font-size:11px; color:#416b56; font-weight:800; }
+    .mode-links a:focus-visible { outline:2px solid #3e745f; }
+    @media (max-width:600px) { .mode-links { top:60px; right:12px; } .mode-links a { padding:5px 8px; font-size:10px; } }
     .controls-hint { left:26px; bottom:25px; display:flex; align-items:center; gap:12px; padding:12px 15px; background:#fffcf4db; border-radius:16px; font-size:12px; font-weight:700; backdrop-filter:blur(8px); box-shadow:0 8px 25px #50745e20; }
     .keys { display:inline-flex; gap:3px; }
     kbd { min-width:24px; padding:5px 5px; line-height:1; border-radius:6px; text-align:center; background:white; border:1px solid #d8e6d9; border-bottom:2px solid #c0d2c5; font-family:inherit; font-size:11px; font-weight:900; }
@@ -49,13 +56,14 @@
   <div id="stage" aria-label="こもれび町の3D探索ゲーム"></div>
   <div id="load-status" role="status">町を準備しているよ…</div>
   <header class="hud title-card">
-    <div class="eyebrow">A LITTLE WALKABLE TOWN</div>
+    <div class="eyebrow">小さな3Dのおさんぽ町</div>
     <h1>こもれび町</h1>
-    <div class="subtitle">今日は、どこを歩こう？</div>
+    <div class="subtitle">家や住民に近づいて調べてみよう</div>
   </header>
-  <div class="hud top-pill">☀️ のんびりおさんぽ</div>
-  <div class="hud controls-hint"><span class="keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>歩く</span><span class="keys"><kbd>E</kbd></span><span>話す</span><span>／ クリックで移動</span></div>
-  <div id="talk-prompt" class="hud"><span class="key">E</span>おはなしする</div>
+  <button id="time-button" class="hud top-pill" type="button" aria-label="時間帯を切り替える">☀ 昼</button>
+  <nav class="hud mode-links" aria-label="表示方式の比較"><a href="../komorebi-town-25d/">2.5D版</a><a href="../komorebi-town-2d/">2D版</a></nav>
+  <div class="hud controls-hint"><span class="keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>歩く</span><span class="keys"><kbd>E</kbd></span><span>調べる</span><span>／ クリックで移動</span></div>
+  <div id="talk-prompt" class="hud"><span class="key">E</span>はなす・しらべる</div>
   <div id="toast" class="toast" aria-live="polite">町を自由に歩いてみよう！</div>
   <section id="dialog" role="dialog" aria-label="住民との会話" aria-modal="false">
     <div id="speaker"></div><div id="dialog-text"></div>
@@ -68,7 +76,7 @@
       <button class="down" data-dir="down" aria-label="下に歩く">▼</button>
       <button class="right" data-dir="right" aria-label="右に歩く">▶</button>
     </div>
-    <button id="touch-talk" aria-label="住民と話す">はなす</button>
+    <button id="touch-talk" aria-label="近くの住民や建物を調べる">しらべる</button>
   </div>
 <script type="module">
   const loading = document.getElementById('load-status');
@@ -90,11 +98,13 @@
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xc5e6db);
   scene.fog = new THREE.Fog(0xc5e6db, 45, 95);
-  const renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  const mobile=matchMedia('(pointer:coarse)').matches;
+  const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const renderer = new THREE.WebGLRenderer({ antialias:!mobile, powerPreference:'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile?1.35:1.8));
   renderer.setSize(innerWidth, innerHeight);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = mobile?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.5;
@@ -112,10 +122,11 @@
     renderer.setSize(innerWidth,innerHeight);
   }
   resize(); window.addEventListener('resize', resize);
-  scene.add(new THREE.HemisphereLight(0xfff7df, 0x71a48b, 2.1));
+  const skylight=new THREE.HemisphereLight(0xfff7df, 0x71a48b, 2.1);
+  scene.add(skylight);
   const sun = new THREE.DirectionalLight(0xffefcf, 3.0);
   sun.position.set(-17,32,15); sun.castShadow=true;
-  sun.shadow.mapSize.set(2048,2048);
+  sun.shadow.mapSize.set(mobile?1024:2048,mobile?1024:2048);
   sun.shadow.camera.left=-37;sun.shadow.camera.right=37;sun.shadow.camera.top=37;sun.shadow.camera.bottom=-37;
   sun.shadow.normalBias=.035;
   scene.add(sun);
@@ -221,14 +232,28 @@
   }
   const flowers=[mat(0xfbf5c0),mat(0xf5b8b5),mat(0xe9d1f3),mat(0xffffff),mat(0xf3c17e)];
   const stem=mat(0x4fa178);
+  // A single instanced batch per petal color replaces hundreds of draw calls.
+  const smallFlowerGeo=new THREE.IcosahedronGeometry(1,0);
+  const flowerBatches=flowers.map(material=>new THREE.InstancedMesh(smallFlowerGeo,material,44));
+  const leafBatch=new THREE.InstancedMesh(smallFlowerGeo,stem,74);
+  const batchCounts=flowers.map(()=>0);
+  let leafCount=0;
+  const dummy=new THREE.Object3D();
   for(let i=0;i<220;i++){
     const x=(rnd()-.5)*48,z=(rnd()-.5)*48;
     if(Math.abs(x)<3.25||Math.abs(z)<3.25)continue;
     if(homes.some(([hx,hz])=>Math.abs(x-hx)<5&&Math.abs(z-hz)<5))continue;
-    const flower=ball(.10+rnd()*.05,flowers[i%5],x,.2,z,scene,0);
-    flower.castShadow=false;
-    if(i%3===0){const leaf=ball(.14,stem,x-.15,.08,z,scene,0);leaf.castShadow=false;}
+    if(Math.hypot(x+8,z-8)<3.3)continue;
+    const ci=i%5;
+    dummy.position.set(x,.2,z);dummy.scale.setScalar(.10+rnd()*.05);dummy.rotation.set(0,0,0);dummy.updateMatrix();
+    if(batchCounts[ci]<44)flowerBatches[ci].setMatrixAt(batchCounts[ci]++,dummy.matrix);
+    if(i%3===0&&leafCount<74){
+      dummy.position.set(x-.15,.08,z);dummy.scale.setScalar(.14);dummy.updateMatrix();
+      leafBatch.setMatrixAt(leafCount++,dummy.matrix);
+    }
   }
+  flowerBatches.forEach((batch,i)=>{batch.count=batchCounts[i];batch.instanceMatrix.needsUpdate=true;batch.castShadow=false;scene.add(batch);});
+  leafBatch.count=leafCount;leafBatch.instanceMatrix.needsUpdate=true;leafBatch.castShadow=false;scene.add(leafBatch);
   // Friendly plaza objects: a simple bench and flower pots.
   const bench=new THREE.Group();bench.position.set(6,0,5.5);bench.rotation.y=-.65;scene.add(bench);
   box(2.8,.2,.83,mat(0xc28b5b),0,.83,0,bench);
@@ -264,6 +289,21 @@
   });
   npcList[0].root.rotation.y=1.6;npcList[1].root.rotation.y=-.6;
 
+  // The original village remains playable if the optional detail module is unavailable.
+  let scenery=null;
+  try {
+    const extension=await import('./scenery.js?v=20261115-v1');
+    scenery=extension.createScenery({THREE,scene,collision,homes,sun,skylight,quality:mobile?'mobile':'full'});
+  } catch (error) { console.warn('3Dの景観演出を読み込めなかったよ',error); }
+  const timeButton=document.getElementById('time-button');
+  if(scenery){
+    timeButton.addEventListener('click',()=>{
+      const mode=scenery.nextMode();
+      timeButton.textContent=mode==='昼'?'☀ 昼':mode==='夕方'?'☼ 夕方':'☾ 夜';
+      timeButton.setAttribute('aria-label','現在は'+mode+'。時間帯を切り替える');
+    });
+  }else timeButton.hidden=true;
+
   const pressed=new Set();
   const touchPressed=new Set();
   let waypoint=null;
@@ -274,11 +314,28 @@
   const mouse=new THREE.Vector2();
   const movePlane=new THREE.Plane(new THREE.Vector3(0,1,0),0);
   function showToast(str){toast.textContent=str;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),3200);}
-  function nearestNPC(){let nearest=null,dist=3.15;for(const npc of npcList){const d=Math.hypot(player.root.position.x-npc.x,player.root.position.z-npc.z);if(d<dist){nearest=npc;dist=d;}}return nearest;}
+  const buildingText=[
+    {name:'図書館',line:'ここには記事や読みものを置く予定だよ。\n気になる本棚を探してみてね。'},
+    {name:'工房',line:'ものづくりの工房だよ。\nWebツールを集める場所になる予定。'},
+    {name:'展示館',line:'絵や制作物をゆっくり見られる建物だよ。'},
+    {name:'あそび場',line:'小さなゲームを並べる場所。\n今日は町の散歩を楽しんでね。'}
+  ];
+  function nearestTarget(){
+    let near=null,score=3.2;
+    for(const npc of npcList){
+      const dist=Math.hypot(player.root.position.x-npc.x,player.root.position.z-npc.z);
+      if(dist<score){score=dist;near={...npc};}
+    }
+    for(let i=0;i<homes.length;i++){
+      const [x,z]=homes[i],distance=Math.hypot(player.root.position.x-x,player.root.position.z-z);
+      if(distance<6.3&&distance-3.2<score){score=distance-3.2;near={...buildingText[i],x,z};}
+    }
+    return near;
+  }
   function interact(){
     if(dialog.classList.contains('visible')){closeDialog();return;}
-    const near=nearestNPC();
-    if(!near){showToast('住民の近くで「はなす」を押してね');return;}
+    const near=nearestTarget();
+    if(!near){showToast('住民か建物に近づいて「しらべる」を押してね');return;}
     waypoint=null;marker.visible=false;
     speaker.textContent=near.name;dialogText.textContent=near.line;
     dialogText.style.whiteSpace='pre-line';dialog.classList.add('visible');prompt.classList.remove('visible');
@@ -350,26 +407,28 @@
     return true;
   }
   const clock=new THREE.Clock();
-  let elapsed=0;
+  let elapsed=0,lastRender=0;
   function animate(){
     requestAnimationFrame(animate);
     const dt=Math.min(clock.getDelta(),.045);elapsed+=dt;
     const moving=updateMovement(dt,elapsed);
     if(!moving){player.body.position.y=THREE.MathUtils.lerp(player.body.position.y,0,dt*9);player.armL.position.z=0;player.armR.position.z=0;}
     for(const n of npcList){n.body.position.y=Math.sin(elapsed*2.1+n.phase)*.035;}
-    for(const s of sway){s.group.rotation.z=Math.sin(elapsed*.85+s.phase)*.023;}
+    for(const s of sway){s.group.rotation.z=reduceMotion?0:Math.sin(elapsed*.85+s.phase)*.023;}
+    if(!reduceMotion)scenery?.update(elapsed);
     if(marker.visible){markerMat.opacity=.53+Math.sin(elapsed*5)*.23;marker.rotation.z=elapsed*.5;}
     const camTarget=new THREE.Vector3(player.root.position.x,1.0,player.root.position.z);
     const desiredPosition=camTarget.clone().add(cameraOffset);
     camera.position.lerp(desiredPosition,1-Math.exp(-dt*3.9));
     camera.lookAt(camTarget);
-    prompt.classList.toggle('visible',!!nearestNPC()&&!dialog.classList.contains('visible'));
-    renderer.render(scene,camera);
+    const nearby=nearestTarget();
+    prompt.classList.toggle('visible',!!nearby&&!dialog.classList.contains('visible'));
+    if(!mobile||!lastRender||elapsed-lastRender>=1/30){renderer.render(scene,camera);lastRender=elapsed;}
   }
   camera.position.copy(player.root.position).add(cameraOffset);camera.lookAt(player.root.position.x,1,player.root.position.z);
   loading.classList.add('hidden');
   animate();
-  setTimeout(()=>showToast('WASD・矢印キー・タップでおさんぽ！'),600);
+  setTimeout(()=>showToast('タップで移動。建物や住民を調べたり、昼夜を切り替えてみてね'),600);
 </script>
 </body>
 </html>

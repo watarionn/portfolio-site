@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#a1c797">
+<meta name="robots" content="noindex,nofollow">
+<title>こもれび町 2D | ドット絵の小さな町</title>
+<style>
+:root{color-scheme:light;--ink:#345647;--paper:#fff9e9;--line:#d9d1af}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden}
+body{font-family:system-ui,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);background:#a1c797;user-select:none;-webkit-user-select:none;touch-action:none}
+#screen{position:fixed;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated;touch-action:none}
+button,a{font:inherit;-webkit-tap-highlight-color:transparent}
+header{position:fixed;left:12px;right:12px;top:max(12px,env(safe-area-inset-top));z-index:3;display:flex;justify-content:space-between;gap:8px;align-items:flex-start;pointer-events:none}
+.panel{background:#fff9e9ee;border:2px solid #fffdf6;border-radius:13px;padding:10px 13px;box-shadow:0 3px 0 #66916b66,0 10px 24px #42624924;pointer-events:auto}
+h1{font-size:17px;line-height:1.2;margin:1px 0 3px;letter-spacing:.04em} .subtitle{font-size:10px;color:#749381;font-weight:800;white-space:nowrap}.eyebrow{font-size:9px;color:#679778;font-weight:900;letter-spacing:.14em}
+.nav{display:flex;gap:5px;align-items:center;max-width:180px;flex-wrap:wrap;justify-content:flex-end}
+.nav a,.nav button{border:0;border-radius:8px;background:#e4eedb;color:#3f6850;text-decoration:none;padding:8px 9px;font-size:11px;font-weight:800;cursor:pointer}
+.nav .current{background:#cce3c9}
+#status{position:fixed;z-index:2;left:50%;bottom:30px;transform:translateX(-50%);padding:9px 14px;border-radius:10px;border:2px solid #fffdf5;background:#fff9e9ee;box-shadow:0 3px 0 #5d8b6699;font-size:11px;font-weight:800;white-space:nowrap;pointer-events:none}
+#toast{position:fixed;z-index:4;left:50%;top:94px;transform:translateX(-50%);max-width:calc(100vw - 28px);padding:9px 15px;background:#fff9e9f5;border:2px solid #fffefa;border-radius:12px;box-shadow:0 4px 0 #5b8d6280;font-size:12px;font-weight:800;opacity:0;transition:opacity .2s;pointer-events:none;text-align:center}
+#toast.show{opacity:1}
+#dialog{position:fixed;z-index:7;left:50%;bottom:24px;transform:translateX(-50%);width:min(460px,calc(100vw - 28px));padding:16px 18px 13px;border:3px solid #fffef6;border-radius:17px;background:#fff9e9;box-shadow:0 5px 0 #5b8464a0,0 16px 45px #2e64464d;display:none}
+#dialog.show{display:block}
+#who{font-size:13px;font-weight:900;color:#648775;margin-bottom:6px}
+#words{font-size:14px;line-height:1.8;font-weight:700;white-space:pre-line}
+#close{display:block;margin:12px 0 0 auto;border:0;border-radius:8px;background:#568869;color:white;padding:8px 17px;font-weight:800;cursor:pointer}
+.touch{position:fixed;z-index:5;bottom:calc(13px + env(safe-area-inset-bottom));left:14px;right:14px;pointer-events:none;display:none}
+.pad{position:relative;display:grid;grid-template:repeat(3,48px)/repeat(3,48px);gap:3px;width:max-content;pointer-events:auto}
+.pad button,#action{border:2px solid #fffdf3;background:#fff9e9de;border-radius:11px;box-shadow:0 3px 0 #62916e66;color:#426d56;font-weight:900;cursor:pointer;touch-action:none}
+.pad button{font-size:20px} .pad button.active,.pad button:active,#action:active{background:#d4edc7}
+.pad .up{grid-area:1/2}.pad .down{grid-area:3/2}.pad .left{grid-area:2/1}.pad .right{grid-area:2/3}
+#action{position:absolute;right:3px;bottom:17px;width:78px;height:78px;border-radius:50%;font-size:14px;pointer-events:auto}
+@media(pointer:coarse){.touch{display:block}#status{bottom:calc(176px + env(safe-area-inset-bottom))}#dialog{bottom:calc(170px + env(safe-area-inset-bottom))}}
+@media(max-width:420px){h1{font-size:15px}.panel{padding:9px 11px}.nav{max-width:151px}.nav a,.nav button{font-size:10px;padding:7px 8px}header{left:9px;right:9px}}
+@media(max-height:620px) and (pointer:coarse){.pad{grid-template:repeat(3,39px)/repeat(3,39px)}#action{width:67px;height:67px}#dialog{bottom:130px}#status{bottom:144px}}
+@media(prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="screen" aria-label="こもれび町の真上視点2Dマップ。タップで移動できるよ"></canvas>
+<header>
+  <div class="panel"><div class="eyebrow">こもれび町／比較用試作品</div><h1>ドットのこもれび町</h1><div class="subtitle">真上視点・軽量2D版</div></div>
+  <nav class="panel nav" aria-label="ほかの版"><span class="current nav-item" style="padding:7px 8px;border-radius:8px;font-size:10px;font-weight:900">2D</span><a href="../komorebi-town-25d/">2.5D</a><a href="../komorebi-town/">3D</a><button id="help" type="button" aria-label="操作説明">？</button></nav>
+</header>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="status" role="status">タップで歩く　・　近づいて調べる</div>
+<section id="dialog" role="dialog" aria-label="住民と建物の説明" aria-modal="false"><div id="who"></div><div id="words"></div><button id="close" type="button">とじる</button></section>
+<div class="touch" aria-label="タッチ用の方向キー">
+  <div class="pad"><button class="up" data-dir="up" aria-label="上へ歩く">▲</button><button class="left" data-dir="left" aria-label="左へ歩く">◀</button><button class="down" data-dir="down" aria-label="下へ歩く">▼</button><button class="right" data-dir="right" aria-label="右へ歩く">▶</button></div>
+  <button id="action" type="button" aria-label="近くの人と話す、建物を調べる">しらべる</button>
+</div>
+<script>
+(() => {
+'use strict';
+const canvas=document.getElementById('screen'),ctx=canvas.getContext('2d',{alpha:false});
+const dialog=document.getElementById('dialog'),toast=document.getElementById('toast'),status=document.getElementById('status');
+const who=document.getElementById('who'),words=document.getElementById('words');
+if(!ctx){status.textContent='このブラウザではCanvasを使用できないよ';return;}
+const SIZE=16,W=30,H=24;
+const buildings=[
+  {x:4,y:3,w:5,h:4,name:'図書館',roof:'#bb7998',wall:'#f1dfbd',message:'ここは図書館。\n読みものや記事を探せる施設にする予定だよ。'},
+  {x:21,y:3,w:5,h:4,name:'工房',roof:'#c89163',wall:'#f0dbb9',message:'ここは工房。\nWebツールを集める建物になる予定だよ。'},
+  {x:4,y:16,w:5,h:3,name:'展示館',roof:'#78a6ac',wall:'#e7e0bd',message:'ここは展示館。\n完成した作品を飾る場所だよ。'},
+  {x:21,y:16,w:5,h:3,name:'あそび場',roof:'#d48b7a',wall:'#f4ddbd',message:'ここはあそび場。\n小さなゲームを置く場所だよ。'}
+];
+const people=[
+  {name:'モモ',x:11.5,y:10.5,shirt:'#d9959f',hair:'#83574d',message:'こんにちは！ ここは2Dのこもれび町。\n画面をタップすると、そこまで歩いていけるよ。'},
+  {name:'ソラ',x:18.5,y:14.5,shirt:'#8bb7ad',hair:'#59646d',message:'2.5D版と歩き心地を比べてみてね。\n軽さを優先して作った町なんだ。'}
+];
+const player={x:14.5,y:17.5,walk:0,face:'down'};
+const grassColors=['#9cca8e','#a2d093','#9cc68a'];
+const rockColors=['#d8c79f','#ddcda6'];
+const trees=[],flowers=[],fences=[],lamps=[];
+const tiles=new Uint8Array(W*H),blocked=new Uint8Array(W*H);
+const at=(x,y)=>x+y*W;
+let seed=22164;function random(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;}
+const isRoad=(x,y)=>x===14||x===15||y===11||y===12||(y===7&&x>=6&&x<=23)||(y===19&&x>=6&&x<=23);
+for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+  const i=at(x,y),edge=x===0||y===0||x===W-1||y===H-1;
+  const plaza=x>=12&&x<=17&&y>=9&&y<=14;
+  tiles[i]=edge?3:plaza?2:isRoad(x,y)?1:0;
+  if(edge)blocked[i]=1;
+}
+for(const h of buildings)for(let y=h.y;y<h.y+h.h;y++)for(let x=h.x;x<h.x+h.w;x++){
+  tiles[at(x,y)]=4;blocked[at(x,y)]=1;
+}
+// The fountain occupies two tiles; all other plaza tiles remain walkable.
+for(const [x,y] of [[14,11],[15,11]])blocked[at(x,y)]=1;
+for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
+  if(tiles[at(x,y)]!==0)continue;
+  if(buildings.some(b=>x>=b.x-1&&x<=b.x+b.w&&y>=b.y-1&&y<=b.y+b.h))continue;
+  if(x>=10&&x<=19&&y>=8&&y<=15)continue;
+  const r=random();
+  if(r<.22){trees.push({x,y,tint:Math.floor(random()*3)});blocked[at(x,y)]=1;}
+  else if(r<.47){flowers.push({x,y,tint:Math.floor(random()*4)});}
+}
+for(const [x,y] of [[12,10],[17,10],[12,14],[17,14]])lamps.push({x,y});
+const sprite=(w,h,draw)=>{const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.imageSmoothingEnabled=false;draw(g);return c;};
+const px=(g,c,x,y,w,h)=>{g.fillStyle=c;g.fillRect(x,y,w,h);};
+const treeSprites=Array.from({length:3},(_,i)=>sprite(23,28,g=>{
+  px(g,'#567e6177',4,24,15,3);px(g,'#735a44',10,15,4,10);
+  const c=['#458562','#59936b','#6c9b6a'][i];px(g,'#3c755b',4,11,16,12);px(g,c,2,8,19,11);px(g,c,5,3,14,12);px(g,'#9bc48a',8,5,5,3);px(g,'#7ab282',6,12,3,2);px(g,'#31694d',15,17,4,3);
+}));
+const flowerSprites=Array.from({length:4},(_,i)=>sprite(16,16,g=>{
+  const colors=['#e5a1b3','#f7e5a4','#d4b5e3','#ffefdb'];
+  px(g,'#51915d',7,9,2,5);px(g,colors[i],5,6,3,3);px(g,colors[(i+1)%4],9,7,3,3);px(g,'#e0b064',8,8,2,2);
+}));
+const houseSprites=buildings.map((h,i)=>sprite(92,95,g=>{
+  // Long front face with individual roof and accent colors, drawn once.
+  px(g,'#64826755',7,77,80,9);px(g,'#c2b293',6,37,80,43);px(g,h.wall,9,38,74,38);
+  for(let x=12;x<82;x+=17){px(g,'#b7aa94',x,38,2,36);}
+  px(g,'#866650',42,52,14,24);px(g,'#5a443f',44,55,10,21);px(g,'#efd5a4',50,64,2,2);
+  for(const x of [16,67]){px(g,'#b68f78',x-2,50,16,17);px(g,'#8dbec0',x,52,12,12);px(g,'#e6f7df',x+5,52,2,12);px(g,'#e6f7df',x,57,12,2);}
+  px(g,'#9c796a',2,31,86,10);px(g,h.roof,0,22,90,14);px(g,h.roof,6,14,78,9);px(g,'#f4e4c2',7,17,74,2);
+  for(let row=0;row<3;row++)for(let col=0;col<9;col++)px(g,'#f4dfc477',8+col*8+(row%2?3:0),25+row*4,5,1);
+  px(g,'#9c796a',4,34,84,3);
+  if(i===0){px(g,'#785b9b',27,9,36,10);px(g,'#f6e9bd',31,11,28,6);px(g,'#966878',33,12,24,4);}
+  if(i===1){px(g,'#aa8573',69,3,12,20);px(g,'#e6c4a4',67,1,16,4);px(g,'#ac7656',4,56,9,17);}
+  if(i===2){px(g,'#f3ddb8',29,7,33,12);px(g,'#5c8d9a',31,9,29,8);px(g,'#c9e4e6',37,10,15,6);}
+  if(i===3){for(let a=0;a<4;a++)px(g,['#f2d9a7','#e5a1a7','#b8b3de','#b1daa8'][a],16+a*17,11,12,9);}
+  px(g,'#cbb38b',5,76,82,4);
+}));
+const avatar=(shirt,hair)=>sprite(16,22,g=>{
+  px(g,'#65816977',2,18,12,3);px(g,'#6c636d',4,16,3,4);px(g,'#6c636d',9,16,3,4);
+  px(g,shirt,3,10,10,7);px(g,'#eec5a1',3,4,10,8);px(g,hair,2,2,12,4);px(g,hair,2,5,2,4);px(g,hair,12,5,2,4);
+  px(g,'#4d4140',6,8,1,1);px(g,'#4d4140',10,8,1,1);px(g,'#e5a3a1',4,10,2,1);
+});
+const npcSprites=people.map(p=>avatar(p.shirt,p.hair));
+const playerSprite=avatar('#edce87','#795849');
+const mapCanvas=sprite(W*SIZE,H*SIZE,g=>{
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+    const type=tiles[at(x,y)],X=x*SIZE,Y=y*SIZE;
+    if(type===0){px(g,grassColors[(x*17+y*11)%3],X,Y,SIZE,SIZE);if((x*7+y*9)%5===0)px(g,'#83b778',X+4,Y+12,3,2);}
+    if(type===1){px(g,rockColors[(x+y)%2],X,Y,SIZE,SIZE);px(g,'#cbb78e',X+2,Y+8,4,1);px(g,'#e9d8b0',X+9,Y+3,5,1);}
+    if(type===2){px(g,'#e7d5aa',X,Y,SIZE,SIZE);px(g,'#d5c197',X+7,Y,1,SIZE);px(g,'#d5c197',X,Y+7,SIZE,1);}
+    if(type===3){px(g,'#678e65',X,Y,SIZE,SIZE);px(g,'#4f7958',X,Y+9,SIZE,7);px(g,'#83b77a',X+3,Y+2,5,4);}
+    if(type===4){px(g,'#c4ba9d',X,Y,SIZE,SIZE);}
+  }
+  // Decorations and static buildings do not repaint while moving.
+  for(const f of flowers)g.drawImage(flowerSprites[f.tint],f.x*SIZE,f.y*SIZE);
+  for(let i=0;i<buildings.length;i++){
+    const h=buildings[i];g.drawImage(houseSprites[i],h.x*SIZE-5,h.y*SIZE-19);
+  }
+  for(const t of trees)g.drawImage(treeSprites[t.tint],t.x*SIZE-3,t.y*SIZE-12);
+  // Plaza fountain, lamps and benches.
+  px(g,'#96aaa1',13*SIZE+2,11*SIZE+2,43,27);px(g,'#b7d6d0',13*SIZE+5,11*SIZE+5,37,20);
+  px(g,'#75b3bd',13*SIZE+8,11*SIZE+8,30,14);px(g,'#e7dec2',14*SIZE+6,11*SIZE+2,9,16);
+  for(const p of lamps){let x=p.x*SIZE,y=p.y*SIZE;px(g,'#626d5a',x+7,y-9,2,23);px(g,'#ead9a0',x+4,y-11,8,7);px(g,'#566955',x+4,y-12,8,2);}
+  for(const [x,y] of [[10,17],[19,10]]){px(g,'#6b6252',x*SIZE+3,y*SIZE+12,11,2);px(g,'#ad845a',x*SIZE+2,y*SIZE+8,12,4);px(g,'#ad845a',x*SIZE+3,y*SIZE+4,11,3);}
+});
+let viewW=0,viewH=0,resolution=2,camX=0,camY=0,route=[],goal=null,lastTick=0,lastDraw=0,lastToast=0,lastStatus=0;
+let elapsed=0;const held=new Set();const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let drawCount=0,drawTime=0;
+function resize(){
+  const cssW=innerWidth,cssH=innerHeight;
+  // Deliberately cap internal pixels: an iPhone retina display is NOT rendered at 3x DPR.
+  resolution=cssW<700?2:1.5;
+  viewW=Math.max(1,Math.round(cssW/resolution));viewH=Math.max(1,Math.round(cssH/resolution));
+  canvas.width=viewW;canvas.height=viewH;canvas.style.width=cssW+'px';canvas.style.height=cssH+'px';
+  ctx.imageSmoothingEnabled=false;
+  camera();lastDraw=0;
+}
+function camera(){
+  const totalW=W*SIZE,totalH=H*SIZE;
+  const desiredX=Math.round(player.x*SIZE-viewW/2),desiredY=Math.round(player.y*SIZE-viewH*.48);
+  camX=viewW>=totalW?Math.round((totalW-viewW)/2):Math.max(0,Math.min(totalW-viewW,desiredX));
+  camY=viewH>=totalH?Math.round((totalH-viewH)/2):Math.max(0,Math.min(totalH-viewH,desiredY));
+}
+function occupied(x,y){return x<0||y<0||x>=W||y>=H||blocked[at(x,y)]!==0;}
+function nearest(){let best=null,dist=Infinity;
+  for(const p of people){const d=Math.hypot(p.x-player.x,p.y-player.y);if(d<dist){dist=d;best={name:p.name,message:p.message,distance:d};}}
+  for(const h of buildings){const dx=Math.max(h.x-player.x,0,player.x-(h.x+h.w)),dy=Math.max(h.y-player.y,0,player.y-(h.y+h.h));const d=Math.hypot(dx,dy);if(d<dist){dist=d;best={name:h.name,message:h.message,distance:d};}}
+  return best;
+}
+function nearWalkable(tx,ty){
+  const gx=Math.max(1,Math.min(W-2,Math.floor(tx))),gy=Math.max(1,Math.min(H-2,Math.floor(ty)));
+  if(!occupied(gx,gy))return {x:gx,y:gy};
+  let best=null,score=Infinity;
+  for(let r=1;r<=5;r++)for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){
+    const x=gx+dx,y=gy+dy;if(occupied(x,y))continue;
+    const d=dx*dx+dy*dy;if(d<score){best={x,y};score=d;}
+  }
+  return best;
+}
+function pathTo(tx,ty){
+  const dest=nearWalkable(tx,ty);if(!dest)return false;
+  const sx=Math.floor(player.x),sy=Math.floor(player.y),start=at(sx,sy),end=at(dest.x,dest.y);
+  const seen=new Uint8Array(W*H),prev=new Int16Array(W*H);prev.fill(-1);
+  const queue=new Int16Array(W*H);let head=0,tail=0;queue[tail++]=start;seen[start]=1;
+  while(head<tail){const i=queue[head++];if(i===end)break;
+    const x=i%W,y=Math.floor(i/W);
+    for(const [dx,dy] of [[0,-1],[1,0],[0,1],[-1,0]]){
+      const nx=x+dx,ny=y+dy;if(occupied(nx,ny))continue;
+      const ni=at(nx,ny);if(seen[ni])continue;seen[ni]=1;prev[ni]=i;queue[tail++]=ni;
+    }
+  }
+  if(!seen[end])return false;
+  const result=[];for(let cur=end;cur!==start;cur=prev[cur]){
+    if(cur<0)return false;result.push({x:cur%W+.5,y:Math.floor(cur/W)+.5});
+  }
+  route=result.reverse();goal={x:dest.x+.5,y:dest.y+.5};return true;
+}
+function toastMessage(message){toast.textContent=message;toast.classList.add('show');lastToast=performance.now()+1700;}
+function interact(){if(dialog.classList.contains('show')){dialog.classList.remove('show');return;}
+  const p=nearest();if(!p||p.distance>1.7){toastMessage('人や建物の近くで「しらべる」を押してね');return;}
+  route=[];goal=null;who.textContent=p.name;words.textContent=p.message;dialog.classList.add('show');
+}
+function update(dt){
+  if(dialog.classList.contains('show'))return false;
+  let vx=Number(held.has('right'))-Number(held.has('left'));
+  let vy=Number(held.has('down'))-Number(held.has('up'));
+  if(vx||vy){route=[];goal=null;const l=Math.hypot(vx,vy);vx/=l;vy/=l;}
+  else if(route.length){
+    const next=route[0],dx=next.x-player.x,dy=next.y-player.y,dist=Math.hypot(dx,dy);
+    if(dist<.11){player.x=next.x;player.y=next.y;route.shift();if(!route.length)goal=null;return true;}
+    vx=dx/dist;vy=dy/dist;
+  }else return false;
+  const speed=3.1,step=Math.min(.22,speed*dt);
+  const nx=player.x+vx*step,ny=player.y+vy*step;
+  let moved=false;
+  if(!occupied(Math.floor(nx),Math.floor(player.y))){player.x=nx;moved=true;}
+  if(!occupied(Math.floor(player.x),Math.floor(ny))){player.y=ny;moved=true;}
+  if(!moved){route=[];goal=null;return false;}
+  player.face=Math.abs(vx)>Math.abs(vy)?(vx>0?'right':'left'):(vy>0?'down':'up');player.walk+=dt;return true;
+}
+function draw(){
+  const start=performance.now();
+  ctx.fillStyle='#9ec88f';ctx.fillRect(0,0,viewW,viewH);
+  // A single drawImage for grass, roads, trees, four buildings and their details.
+  ctx.drawImage(mapCanvas,-camX,-camY);
+  if(goal){ctx.strokeStyle='#f9fff5';ctx.lineWidth=2;ctx.strokeRect(Math.round(goal.x*SIZE-camX-7),Math.round(goal.y*SIZE-camY-7),14,14);}
+  for(let i=0;i<people.length;i++){
+    const p=people[i],x=Math.round(p.x*SIZE-camX-8),y=Math.round(p.y*SIZE-camY-20);
+    if(x>-24&&x<viewW+24&&y>-24&&y<viewH+24)ctx.drawImage(npcSprites[i],x,y);
+  }
+  const stepOffset=(!reduced&&(held.size||route.length))?Math.round(Math.sin(player.walk*15)):0;
+  ctx.drawImage(playerSprite,Math.round(player.x*SIZE-camX-8),Math.round(player.y*SIZE-camY-20+stepOffset));
+  // One small fountain animation, not an all-screen effect.
+  if(!reduced){const x=Math.round(14.5*SIZE-camX),y=Math.round(11.5*SIZE-camY);
+    if(x>0&&x<viewW&&y>0&&y<viewH){ctx.fillStyle=elapsed%1<.5?'#e4f5df':'#c6e5e6';ctx.fillRect(x,y,3,2);}}
+  drawCount++;drawTime+=performance.now()-start;
+}
+function frame(now){
+  requestAnimationFrame(frame);
+  if(document.hidden){lastTick=now;return;}
+  if(!lastTick)lastTick=now;
+  const dt=Math.min(.06,(now-lastTick)/1000);lastTick=now;elapsed+=dt;
+  const moved=update(dt);if(moved)camera();
+  if(lastToast&&now>lastToast){toast.classList.remove('show');lastToast=0;}
+  // 30fps while moving, 8fps idle. The static scene is cached at all times.
+  const refresh=moved||held.size>0||route.length>0;
+  if(lastDraw===0||now-lastDraw>=(refresh?33:125)){draw();lastDraw=now;}
+  if(now-lastStatus>800){
+    const p=nearest();status.textContent=p&&p.distance<1.7?`${p.name}の近く：しらべる`:'タップで移動　・　近づいて調べる';
+    lastStatus=now;
+  }
+}
+function keyDir(key){return ({ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',a:'left',s:'down',d:'right'})[key]||null;}
+addEventListener('keydown',e=>{
+  const key=keyDir(e.key.toLowerCase().startsWith('arrow')?'Arrow'+e.key.slice(5):e.key.toLowerCase());
+  if(key){e.preventDefault();held.add(key);return;}
+  if(e.key==='e'||e.key==='E'||e.key===' '||e.key==='Enter'){e.preventDefault();if(!e.repeat)interact();}
+  if(e.key==='Escape')dialog.classList.remove('show');
+});
+addEventListener('keyup',e=>{const key=keyDir(e.key.toLowerCase().startsWith('arrow')?'Arrow'+e.key.slice(5):e.key.toLowerCase());if(key)held.delete(key);});
+addEventListener('blur',()=>held.clear());
+document.addEventListener('visibilitychange',()=>{held.clear();lastTick=0;lastDraw=0;});
+for(const b of document.querySelectorAll('[data-dir]')){
+  const dir=b.dataset.dir;const release=()=>{held.delete(dir);b.classList.remove('active');};
+  b.addEventListener('pointerdown',e=>{e.preventDefault();if(b.setPointerCapture)b.setPointerCapture(e.pointerId);held.add(dir);route=[];goal=null;b.classList.add('active');});
+  b.addEventListener('pointerup',release);b.addEventListener('pointercancel',release);b.addEventListener('lostpointercapture',release);
+}
+let touched=null;canvas.addEventListener('pointerdown',e=>{if(e.button===0)touched={x:e.clientX,y:e.clientY};});
+canvas.addEventListener('pointerup',e=>{
+  if(!touched)return;
+  const dist=Math.hypot(e.clientX-touched.x,e.clientY-touched.y);touched=null;
+  if(dist>15)return;
+  if(dialog.classList.contains('show')){dialog.classList.remove('show');return;}
+  const worldX=(e.clientX/resolution+camX)/SIZE,worldY=(e.clientY/resolution+camY)/SIZE;
+  if(!pathTo(worldX,worldY))toastMessage('その場所へは行けないみたい');
+});
+canvas.addEventListener('pointercancel',()=>touched=null);
+document.getElementById('action').addEventListener('click',interact);
+document.getElementById('close').addEventListener('click',()=>dialog.classList.remove('show'));
+document.getElementById('help').addEventListener('click',()=>toastMessage('タップ・矢印キー・WASDで歩けるよ。近づいてしらべよう！'));
+addEventListener('resize',resize,{passive:true});
+resize();requestAnimationFrame(frame);
+toastMessage('2D版へようこそ！ タップして歩いてみてね');
+// Narrow diagnostic surface for automated browser regression without affecting game state.
+window.__komorebi2dDiagnostics=()=>({player:{x:player.x,y:player.y},routeLength:route.length,drawCount,drawTime,canvas:{width:canvas.width,height:canvas.height},mapSize:{width:mapCanvas.width,height:mapCanvas.height},resolution});
+})();
+</script>
+</body>
+</html>

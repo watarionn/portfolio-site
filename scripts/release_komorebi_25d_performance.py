@@ -101,7 +101,7 @@ def main() -> None:
     payload = {name: git_bytes("show", "HEAD:" + source) for name, source in SOURCES.items()}
     if not payload["index.html"].startswith(b"<!doctype html>"):
         raise RuntimeError("HTML source gate failed")
-    if b'<script src="./art-layer.js"></script>' not in payload["index.html"]:
+    if b'<script src="./art-layer.js?v=20261115-perf"></script>' not in payload["index.html"]:
         raise RuntimeError("Art layer script linkage missing")
     if b"window.KomorebiArt" not in payload["art-layer.js"]:
         raise RuntimeError("Art layer export gate failed")

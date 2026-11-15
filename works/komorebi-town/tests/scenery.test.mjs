@@ -37,7 +37,7 @@ class V {
   multiplyScalar(){return this;}
 }
 class Item {
-  constructor(...args){this.args=args;this.children=[];this.position=new V;this.rotation=new V;this.scale=new V(1,1,1);this.matrix={};}
+  constructor(...args){this.args=args;this.material=args.length===1?args[0]:args[1];this.children=[];this.position=new V;this.rotation=new V;this.scale=new V(1,1,1);this.matrix={};}
   add(o){this.children.push(o);}
   updateMatrix(){}
 }

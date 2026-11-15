@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#c5e4d8" />
-  <title>こもれび町 | 小さな散歩の試作品</title>
+  <title>こもれび町 3D | 小さな島を散歩する</title>
   <style>
     :root { color-scheme: light; --ink:#354b43; --milk:#fffcf4; --green:#3e745f; }
     * { box-sizing: border-box; }
@@ -17,7 +17,12 @@
     .eyebrow { font-size:10px; letter-spacing:.27em; font-weight:900; color:#7e9d86; }
     h1 { margin:4px 0 2px; font-size:24px; letter-spacing:.10em; line-height:1.3; font-weight:900; }
     .subtitle { font-size:11px; letter-spacing:.09em; color:#779180; }
-    .top-pill { top:25px; right:26px; padding:10px 17px; border-radius:30px; font-weight:800; font-size:11px; letter-spacing:.10em; background:#fffaf1c9; border:1px solid #ffffffa3; box-shadow:0 6px 20px #517a641c; }
+    .top-actions { top:18px; right:20px; display:flex; flex-direction:column; align-items:flex-end; gap:7px; pointer-events:auto; }
+    .top-actions a, .top-actions button { text-decoration:none; border:1px solid rgba(255,255,255,.95); border-radius:999px; color:#426c56; background:#fffaf1e8; padding:9px 14px; font-size:12px; font-weight:800; line-height:1.2; box-shadow:0 5px 19px #416e5725; backdrop-filter:blur(8px); cursor:pointer; }
+    .top-actions button:focus-visible,.top-actions a:focus-visible { outline:3px solid #ffcf71; outline-offset:3px; }
+    .top-links { display:flex; gap:7px; }
+    .top-actions button:active { background:#d3ead2; }
+    .landmark { position:fixed; pointer-events:none; z-index:2; right:20px; bottom:20px; padding:8px 12px; border-radius:13px; background:#fff9ecce; font-weight:800; font-size:11px; border:1px solid #fff; }
     .controls-hint { left:26px; bottom:25px; display:flex; align-items:center; gap:12px; padding:12px 15px; background:#fffcf4db; border-radius:16px; font-size:12px; font-weight:700; backdrop-filter:blur(8px); box-shadow:0 8px 25px #50745e20; }
     .keys { display:inline-flex; gap:3px; }
     kbd { min-width:24px; padding:5px 5px; line-height:1; border-radius:6px; text-align:center; background:white; border:1px solid #d8e6d9; border-bottom:2px solid #c0d2c5; font-family:inherit; font-size:11px; font-weight:900; }
@@ -41,7 +46,8 @@
     .pad .up { grid-area:1/2; } .pad .left { grid-area:2/1; } .pad .down { grid-area:2/2; } .pad .right { grid-area:2/3; }
     #touch-talk { position:absolute; bottom:47px; right:24px; width:78px; height:78px; border-radius:50%; font-size:14px; pointer-events:auto; }
     @media (pointer:coarse) { .touch-ui { display:block; } .controls-hint { display:none; } #talk-prompt { bottom:145px; } #dialog { bottom:165px; } }
-    @media (max-width:600px) { .title-card { left:13px; top:13px; padding:13px 16px; border-radius:16px; } h1 { font-size:18px; } .eyebrow { font-size:8px; } .subtitle { font-size:9px; } .top-pill { right:12px; top:15px; font-size:9px; padding:8px 10px; } #talk-prompt { font-size:11px; } }
+    @media (max-width:600px) { .title-card { left:11px; top:max(11px,env(safe-area-inset-top)); padding:10px 12px; border-radius:14px; max-width:180px; } h1 { font-size:18px; } .eyebrow { font-size:8px; letter-spacing:.10em; } .subtitle { font-size:9px; } .top-actions { right:10px; top:max(11px,env(safe-area-inset-top)); gap:5px; } .top-actions a,.top-actions button { padding:7px 9px; font-size:11px; } #talk-prompt { font-size:11px; } .landmark { display:none; } }
+    @media (max-width:370px) { .title-card { max-width:150px; } h1 { font-size:16px; } .top-links { gap:3px; } .top-actions a,.top-actions button { padding:6px 7px; font-size:10px; } }
     @media (prefers-reduced-motion:reduce) { .toast { transition:none; } }
   </style>
 </head>
@@ -49,13 +55,16 @@
   <div id="stage" aria-label="こもれび町の3D探索ゲーム"></div>
   <div id="load-status" role="status">町を準備しているよ…</div>
   <header class="hud title-card">
-    <div class="eyebrow">A LITTLE WALKABLE TOWN</div>
+    <div class="eyebrow">3D さんぽの試作品</div>
     <h1>こもれび町</h1>
-    <div class="subtitle">今日は、どこを歩こう？</div>
+    <div class="subtitle">木陰と海のある、小さな島</div>
   </header>
-  <div class="hud top-pill">☀️ のんびりおさんぽ</div>
+  <div class="hud top-actions">
+    <button id="time-button" type="button" aria-label="時間帯を切り替える">☀ 昼</button>
+    <div class="top-links"><a href="../komorebi-town-25d/">2.5D</a><a href="../komorebi-town-2d/">2D</a></div>
+  </div>
   <div class="hud controls-hint"><span class="keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>歩く</span><span class="keys"><kbd>E</kbd></span><span>話す</span><span>／ クリックで移動</span></div>
-  <div id="talk-prompt" class="hud"><span class="key">E</span>おはなしする</div>
+  <div id="talk-prompt" class="hud"><span class="key">E</span>近くの人・建物をしらべる</div>
   <div id="toast" class="toast" aria-live="polite">町を自由に歩いてみよう！</div>
   <section id="dialog" role="dialog" aria-label="住民との会話" aria-modal="false">
     <div id="speaker"></div><div id="dialog-text"></div>
@@ -68,7 +77,7 @@
       <button class="down" data-dir="down" aria-label="下に歩く">▼</button>
       <button class="right" data-dir="right" aria-label="右に歩く">▶</button>
     </div>
-    <button id="touch-talk" aria-label="住民と話す">はなす</button>
+    <button id="touch-talk" aria-label="近くの人や建物を調べる">しらべる</button>
   </div>
 <script type="module">
   const loading = document.getElementById('load-status');
@@ -90,11 +99,14 @@
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xc5e6db);
   scene.fog = new THREE.Fog(0xc5e6db, 45, 95);
-  const renderer = new THREE.WebGLRenderer({ antialias:true, powerPreference:'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  const coarse=window.matchMedia('(pointer:coarse)').matches;
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const renderer = new THREE.WebGLRenderer({ antialias:!coarse, powerPreference:'high-performance' });
+  // On mobile, excessive device pixel ratio and shadow map size dominate cost.
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, coarse?1.3:1.7));
   renderer.setSize(innerWidth, innerHeight);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = coarse?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.5;
@@ -113,9 +125,10 @@
   }
   resize(); window.addEventListener('resize', resize);
   scene.add(new THREE.HemisphereLight(0xfff7df, 0x71a48b, 2.1));
-  const sun = new THREE.DirectionalLight(0xffefcf, 3.0);
+  const ambient = scene.children.find(obj=>obj.isHemisphereLight);
+  const sun = new THREE.DirectionalLight(0xffefcf, 2.5);
   sun.position.set(-17,32,15); sun.castShadow=true;
-  sun.shadow.mapSize.set(2048,2048);
+  sun.shadow.mapSize.set(coarse?1024:2048,coarse?1024:2048);
   sun.shadow.camera.left=-37;sun.shadow.camera.right=37;sun.shadow.camera.top=37;sun.shadow.camera.bottom=-37;
   sun.shadow.normalBias=.035;
   scene.add(sun);
@@ -128,7 +141,15 @@
   const cream = mat(0xfff4d7);
   const windowBlue = mat(0xa3d9db,{roughness:.3});
   const trunkGeo = new THREE.CylinderGeometry(.23,.34,2,7);
-  const leafGeo = new THREE.IcosahedronGeometry(1.18,1);
+  const detailShadow = !coarse;
+  const reusableBox = new THREE.BoxGeometry(1,1,1);
+  const reusableStem = new THREE.CylinderGeometry(.042,.055,.49,5);
+  const reusableFlower = new THREE.IcosahedronGeometry(.14,0);
+  const reusablePebble = new THREE.IcosahedronGeometry(1,0);
+  const windowLights = [];
+  const lanterns = [];
+  const cloudParts = [];
+  const ripples = [];
   const collision = [];
   const sway = [];
   const npcList = [];
@@ -139,7 +160,14 @@
     m.position.set(x,y,z); parent.add(m); m.castShadow=true; m.receiveShadow=true;
     return m;
   }
-  function box(w,h,d, material,x,y,z,parent=scene) { return mesh(new THREE.BoxGeometry(w,h,d),material,x,y,z,parent); }
+  function box(w,h,d, material,x,y,z,parent=scene) {
+    const m=mesh(reusableBox,material,x,y,z,parent);
+    m.scale.set(w,h,d);return m;
+  }
+  function trim(w,h,d,color,x,y,z,parent){
+    const m=box(w,h,d,color,x,y,z,parent);
+    m.castShadow=false; m.receiveShadow=false; return m;
+  }
   function ball(radius, material,x,y,z,parent=scene,detail=1) { return mesh(new THREE.IcosahedronGeometry(radius,detail),material,x,y,z,parent); }
   function disk(radius, material,x,z,y=.04,parent=scene) {
     const d = mesh(new THREE.CircleGeometry(radius,40),material,x,y,z,parent);
@@ -147,10 +175,46 @@
   }
   function path(w,d,x,z){ const p=mesh(new THREE.PlaneGeometry(w,d),pathMat,x,.055,z);p.rotation.x=-Math.PI/2;p.castShadow=false; }
 
+  // Procedural, tileable grass and stone texture. These are generated once,
+  // rather than adding hundreds of tiny Mesh objects or downloading assets.
+  function makeSurfaceTexture(base, flecks, count=950){
+    const canvas=document.createElement('canvas');canvas.width=256;canvas.height=256;
+    const g=canvas.getContext('2d');g.fillStyle=base;g.fillRect(0,0,256,256);
+    for(let i=0;i<count;i++){
+      const x=rnd()*256,y=rnd()*256;
+      g.fillStyle=flecks[i%flecks.length];
+      g.fillRect(x,y,1+rnd()*3,1+rnd()*3);
+    }
+    const tex=new THREE.CanvasTexture(canvas);
+    tex.wrapS=tex.wrapT=THREE.RepeatWrapping;tex.repeat.set(9,9);
+    tex.colorSpace=THREE.SRGBColorSpace;
+    tex.anisotropy=coarse?1:4;
+    return tex;
+  }
+  const sandMat=mat(0xe4d3a6);
+  groundMat.map=makeSurfaceTexture('#b8ddb1',['#9acc9a','#e1e9bd','#92b989','#abd5a2'],950);
+  groundMat.color.set(0xffffff);
+  pathMat.map=makeSurfaceTexture('#efdbb7',['#ead0a3','#f8e6c6','#d8c198'],640);
+  pathMat.color.set(0xffffff);
+
   // The little island, its paths, and a soft sea beyond.
   const sea = mesh(new THREE.PlaneGeometry(200,200),mat(0xa8d9d3,{metalness:.03,roughness:.4}),0,-1.12,0);
   sea.rotation.x=-Math.PI/2; sea.castShadow=false;
+  const beach=box(55,.45,55,sandMat,0,-.99,0);beach.castShadow=false;
   const land = box(52,1.4,52,groundMat,0,-.72,0);land.castShadow=false;
+  const coastMat=mat(0xeedfc0);
+  // Shallow sandy bands and fixed stones separate the island from the sea.
+  const pebbles=[];
+  for(let i=0;i<90;i++){
+    const a=i*2.39996,edge=26.5+rnd()*.9;
+    const x=Math.cos(a)*edge*1.08,z=Math.sin(a)*edge*1.08;
+    const size=.13+rnd()*.30;
+    pebbles.push({x,z,size,angle:a});
+  }
+  const pebbleMesh=new THREE.InstancedMesh(reusablePebble,mat(0xc9bd9e),pebbles.length);
+  const transform=new THREE.Object3D();
+  pebbles.forEach((p,i)=>{transform.position.set(p.x,-.64,p.z);transform.rotation.set(.1,p.angle,.15);transform.scale.set(p.size,.13,p.size*.7);transform.updateMatrix();pebbleMesh.setMatrixAt(i,transform.matrix);});
+  pebbleMesh.instanceMatrix.needsUpdate=true;pebbleMesh.castShadow=false;pebbleMesh.receiveShadow=false;scene.add(pebbleMesh);
   path(5,48,0,0); path(48,5,0,0);
   disk(5.9,mat(0xf3e2b8),0,0,.07);
   // A warm cobbled ring that gives the plaza a friendly landmark.
@@ -174,6 +238,9 @@
   const signSurface=mesh(new THREE.PlaneGeometry(1.93,.97),new THREE.MeshBasicMaterial({map:signTexture,transparent:true}),0,1.72,.21,notice);signSurface.castShadow=false;
 
   const treePalette=[mat(0x5aa77b),mat(0x80bb80),mat(0x6bb69a),mat(0x8ab987),mat(0x76a97a)];
+  const highlightLeaf=mat(0xc9dd9f);
+  const branchColor=mat(0x7a5c45);
+  // Small natural details are shared or instanced to keep WebGL draw calls low.
   function addTree(x,z,scale=1,tint=0){
     const group=new THREE.Group();group.position.set(x,0,z);group.scale.setScalar(scale);scene.add(group);
     mesh(trunkGeo,trunkMat,0,1.07,0,group);
@@ -183,34 +250,99 @@
     ball(1.11,leafmat,-.83,-.19,.14,crown);
     ball(1.09,leafmat,.77,-.08,-.05,crown);
     ball(.9,leafmat,.08,.7,-.25,crown);
+    if(!coarse){
+      const tips=ball(.36,highlightLeaf,-.61,.66,.57,crown,0);
+      tips.castShadow=false;
+    }
     sway.push({group:crown,phase:rnd()*6.28});
     collision.push({x,z,r:1.14*scale});
   }
   const roofColors=[0xd78975,0x82b5b7,0xd4a362,0xb191b9];
-  function addHouse(x,z,roofColor,front=1) {
+  const houseNames=['喫茶と本の家','ものづくり工房','小さな展示室','おもちゃと遊びの家'];
+  const houseTalk=[
+    '窓辺には本とお茶の香り。\nこの家では、読みものや物語を集めたいね。',
+    '木の音がする小さな工房。\nここから道具やWebツールを探せるようにする予定。',
+    '絵や作品をゆっくり眺める建物。\n小さな展示会を開けたら楽しそう。',
+    '色とりどりのおもちゃが並ぶ家。\n遊べる作品や実験が集まる場所になるよ。'
+  ];
+  const homes=[[-13,-13,roofColors[0],1],[13,-13,roofColors[1],1],[-13,13,roofColors[2],-1],[13,13,roofColors[3],-1]];
+  const houseTargets=[];
+  const woodWarm=mat(0xb57e56),windowFrames=mat(0xf9ecd3),roofEdge=mat(0xffe7cb);
+  const lanternGlass=new THREE.MeshBasicMaterial({color:0xf6dca0});
+  const litGlass=mat(0x9bcbd0,{roughness:.26,metalness:0,emissive:0x000000});
+  const flowerPot=mat(0xbf8063),potGreen=mat(0x63976b);
+  function labelTexture(text){
+    const canvas=document.createElement('canvas');canvas.width=512;canvas.height=128;
+    const g=canvas.getContext('2d');g.fillStyle='#fff7e7';g.fillRect(0,0,512,128);
+    g.strokeStyle='#cda884';g.lineWidth=10;g.strokeRect(8,8,496,112);
+    g.fillStyle='#5a7564';g.textAlign='center';g.font='bold 46px sans-serif';g.fillText(text,256,83);
+    const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;return tex;
+  }
+  function addHouse(x,z,roofColor,front,index) {
     const house=new THREE.Group();house.position.set(x,0,z);house.rotation.y=front<0?Math.PI:0;scene.add(house);
-    const walls=mat(0xffead5),roof=mat(roofColor),edge=mat(0xf7e8c9);
+    const walls=mat([0xffead5,0xf5e7d4,0xf6e9de,0xffe7da][index]),roof=mat(roofColor);
+    const sideWall=mat([0xe8d0b9,0xddd0bb,0xd9cdd5,0xe7c4b9][index]);
     box(6,3.8,5.4,walls,0,2,0,house);
-    // Two sloping roof pieces, laid along a ridge.
+    // Different foundation, trim, doors and roof colors give each building identity.
+    trim(6.35,.3,5.7,sideWall,0,.18,0,house);
+    for(const px of [-3,3]){
+      trim(.19,3.6,.19,woodWarm,px,1.95,2.73,house);
+      trim(.19,3.6,.19,woodWarm,px,1.95,-2.73,house);
+    }
+    trim(6.35,.22,.24,woodWarm,0,3.7,2.76,house);
     const slope=Math.atan2(2.05,3.4);
     const roofLength=Math.hypot(3.4,2.05)+.23;
-    const roofA=box(6.8,.31,roofLength,roof,0,4.85,1.7,house);roofA.rotation.x=slope;
-    const roofB=box(6.8,.31,roofLength,roof,0,4.85,-1.7,house);roofB.rotation.x=-slope;
-    box(.95,2.22,.13,mat(0xc4875e),0,1.13,2.8,house);
-    ball(.065,mat(0xf2d1a3),.28,1.1,2.91,house);
-    for(const wx of [-1.85,1.85]) {
-      box(1.13,1.1,.12,edge,wx,2.14,2.77,house);
-      box(.91,.91,.14,windowBlue,wx,2.14,2.85,house);
-      box(.105,1,.15,cream,wx,2.14,2.94,house);
-      box(1,.105,.15,cream,wx,2.14,2.94,house);
+    const a=box(6.8,.31,roofLength,roof,0,4.85,1.7,house);a.rotation.x=slope;
+    const b=box(6.8,.31,roofLength,roof,0,4.85,-1.7,house);b.rotation.x=-slope;
+    trim(6.85,.16,.24,roofEdge,0,5.86,0,house);
+    // Roof shingles: narrow, shallow-colored bands across the roof planes.
+    if(!coarse)for(let row=0;row<3;row++)for(const sign of [-1,1]){
+      const tile=trim(6.3,.045,.09,roofEdge,0,4.28+row*.55,sign*(2.66-row*.75),house);
+      tile.rotation.x=sign*slope;
     }
-    box(1.5,.17,1.02,mat(0xbba688),0,.15,3.11,house);
-    const chimney=box(.85,2,.82,mat(0xc9a28b),-1.75,5.15,-.8,house);
-    // Chimney disappears into the roof, no additional model files needed.
+    const door=trim(1.08,2.27,.14,woodWarm,0,1.12,2.82,house);
+    trim(.9,1.89,.16,mat(0x9d6b50),0,1.14,2.93,house);
+    const knob=ball(.08,mat(0xf5d38c),.34,1.09,3.06,house,0);knob.castShadow=false;
+    for(const wx of [-1.85,1.85]){
+      trim(1.32,1.24,.16,woodWarm,wx,2.18,2.81,house);
+      const pane=trim(1.08,.99,.15,litGlass,wx,2.18,2.93,house);
+      windowLights.push(pane.material);
+      trim(.105,1,.19,windowFrames,wx,2.18,3.04,house);
+      trim(1,.105,.19,windowFrames,wx,2.18,3.04,house);
+      trim(1.45,.16,.42,roofEdge,wx,1.48,3.04,house);
+      if(index===0||index===2){
+        trim(1.25,.12,.41,flowerPot,wx,1.42,3.13,house);
+        for(const dx of [-.33,0,.33]){
+          const bloom=ball(.145,mat(index===0?0xd98aa0:0xb59cc9),wx+dx,1.63,3.17,house,0);
+          bloom.castShadow=false;
+        }
+      }
+    }
+    trim(1.8,.18,1.12,mat(0xbba688),0,.15,3.18,house);
+    trim(.83,1.4,.78,mat(0xc49c88),-1.72,5.39,-.81,house);
+    trim(.95,.2,.87,mat(0x876d62),-1.72,6.08,-.81,house);
+    if(index===1){
+      // Workshop awning and wooden crates.
+      const awning=trim(2.65,.12,1.36,mat(0xe7bb82),0,3.65,3.2,house);awning.rotation.x=-.28;
+      trim(.9,.95,.9,woodWarm,2.55,.49,3.4,house);
+    } else if(index===2){
+      // Gallery pennants, an atelier-style façade.
+      for(let i=0;i<4;i++)trim(.26,.7,.08,mat([0x83b1b8,0xe6b98f,0xc19cc1,0xd89a91][i]),-2.05+i*1.3,3.53,2.94,house);
+    } else if(index===3){
+      for(let i=0;i<3;i++){
+        const toy=ball(.27,mat([0xf2b7aa,0xffd48e,0xb4c8d3][i]),1.92+i*.4,.34,3.3,house,0);
+        toy.castShadow=false;
+      }
+    }
+    // A small, readable sign above each door; labels are a texture, not HTML overlays.
+    const labelMat=new THREE.MeshBasicMaterial({map:labelTexture(houseNames[index]),side:THREE.DoubleSide});
+    const label=mesh(new THREE.PlaneGeometry(2.9,.72),labelMat,0,3.3,3.06,house);
+    label.castShadow=false;
+    const doorZ=z+front*2.95;
+    houseTargets.push({x,z:doorZ,name:houseNames[index],line:houseTalk[index],kind:'house'});
     collision.push({x,z,r:4.25});
   }
-  const homes=[[-13,-13,roofColors[0],1],[13,-13,roofColors[1],1],[-13,13,roofColors[2],-1],[13,13,roofColors[3],-1]];
-  for(const h of homes)addHouse(...h);
+  for(let i=0;i<homes.length;i++)addHouse(...homes[i],i);
   // Footpaths to the four front doors.
   for(const x of [-13,13]) { path(2.6,7.0,x,-5.6); path(2.6,7.0,x,5.6); }
 
@@ -221,19 +353,100 @@
   }
   const flowers=[mat(0xfbf5c0),mat(0xf5b8b5),mat(0xe9d1f3),mat(0xffffff),mat(0xf3c17e)];
   const stem=mat(0x4fa178);
-  for(let i=0;i<220;i++){
+  const blossomData=[[],[],[],[],[]],stemData=[];
+  for(let i=0;i<260;i++){
     const x=(rnd()-.5)*48,z=(rnd()-.5)*48;
     if(Math.abs(x)<3.25||Math.abs(z)<3.25)continue;
     if(homes.some(([hx,hz])=>Math.abs(x-hx)<5&&Math.abs(z-hz)<5))continue;
-    const flower=ball(.10+rnd()*.05,flowers[i%5],x,.2,z,scene,0);
-    flower.castShadow=false;
-    if(i%3===0){const leaf=ball(.14,stem,x-.15,.08,z,scene,0);leaf.castShadow=false;}
+    blossomData[i%5].push({x,z,s:.08+rnd()*.07});
+    if(i%2===0)stemData.push({x,z});
   }
+  // One instanced draw per flower color instead of hundreds of draw calls.
+  for(let j=0;j<blossomData.length;j++){
+    const pts=blossomData[j];
+    const cluster=new THREE.InstancedMesh(reusableFlower,flowers[j],pts.length);
+    pts.forEach((p,i)=>{
+      transform.position.set(p.x,.21,p.z);transform.rotation.set(0,0,0);
+      transform.scale.setScalar(p.s/.14);transform.updateMatrix();cluster.setMatrixAt(i,transform.matrix);
+    });
+    cluster.instanceMatrix.needsUpdate=true;cluster.castShadow=false;cluster.receiveShadow=false;scene.add(cluster);
+  }
+  const stems=new THREE.InstancedMesh(reusableStem,stem,stemData.length);
+  stemData.forEach((p,i)=>{transform.position.set(p.x,.12,p.z);transform.rotation.set(0,0,0);transform.scale.setScalar(1);transform.updateMatrix();stems.setMatrixAt(i,transform.matrix);});
+  stems.instanceMatrix.needsUpdate=true;stems.castShadow=false;scene.add(stems);
+
   // Friendly plaza objects: a simple bench and flower pots.
   const bench=new THREE.Group();bench.position.set(6,0,5.5);bench.rotation.y=-.65;scene.add(bench);
   box(2.8,.2,.83,mat(0xc28b5b),0,.83,0,bench);
   box(2.8,.16,.24,mat(0xc28b5b),0,1.43,-.33,bench);
   for(const dx of [-1.05,1.05])box(.18,.81,.18,darkWood,dx,.4,0,bench);
+  // Flowerbeds, lampposts and stepping stones enrich the plaza without
+  // changing its navigable crossroads.
+  const stone=mat(0xc9b596),lampMetal=mat(0x536f62);
+  for(const side of [-1,1]){
+    for(const z of [-8,8]){
+      const bed=new THREE.Group();bed.position.set(side*7.9,0,z);scene.add(bed);
+      const base=box(2.0,.28,1.05,stone,0,.17,0,bed);base.castShadow=false;
+      for(let k=0;k<5;k++){
+        const plant=ball(.27,mat([0x89b978,0x8cc1a1][k%2]),(k-2)*.36,.53,0,bed,0);
+        plant.castShadow=false;
+        const blossom=ball(.115,flowers[(k+side+5)%5],(k-2)*.36,.77,.06,bed,0);blossom.castShadow=false;
+      }
+    }
+  }
+  function addLamp(x,z){
+    const lantern=new THREE.Group();lantern.position.set(x,0,z);scene.add(lantern);
+    trim(.17,2.4,.17,lampMetal,0,1.2,0,lantern);
+    trim(.8,.17,.8,lampMetal,0,2.48,0,lantern);
+    const pane=ball(.28,lanternGlass,0,2.24,0,lantern,0);pane.castShadow=false;
+    const halo=new THREE.Mesh(new THREE.SphereGeometry(.66,8,6),new THREE.MeshBasicMaterial({color:0xffe5ac,transparent:true,opacity:0,depthWrite:false}));
+    halo.position.y=2.23;lantern.add(halo);lanterns.push(halo);
+    lantern.castShadow=false;
+  }
+  [[-6,-6],[6,-6],[-6,6],[6,6]].forEach(([x,z])=>addLamp(x,z));
+  // Shore foam is transparent and mostly static. Subtle movement comes from
+  // rotating a few grouped ripples, not changing every sea vertex.
+  const foamMat=new THREE.MeshBasicMaterial({color:0xf7f5da,transparent:true,opacity:.52,side:THREE.DoubleSide});
+  for(const [x,z] of [[-28,3],[28,-5],[-11,28],[11,-28]]){
+    const foam=new THREE.Mesh(new THREE.RingGeometry(1.25,1.34,36),foamMat);
+    foam.rotation.x=-Math.PI/2;foam.position.set(x,-.99,z);
+    foam.castShadow=false;scene.add(foam);ripples.push(foam);
+  }
+  // Two small clouds, grouped for inexpensive ambient animation.
+  const cloudMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.64});
+  for(const [x,z,phase] of [[-15,-18,0],[20,10,1.3]]){
+    const cloud=new THREE.Group();cloud.position.set(x,13,z);scene.add(cloud);
+    for(const [dx,dy,dz,r] of [[0,0,0,2],[-1.5,-.25,0,1.25],[1.5,-.16,0,1.4]]){
+      const puff=ball(r,cloudMat,dx,dy,dz,cloud,0);puff.castShadow=false;
+    }
+    cloudParts.push({group:cloud,base:x,phase});
+  }
+
+  const timeButton=document.getElementById('time-button');
+  let lightPhase=0;
+  const lightModes=[
+    {name:'☀ 昼',bg:0xc5e6db,sea:0xa8d9d3,sun:2.5,ambient:2.1,exposure:1.5,emissive:0x000000},
+    {name:'◕ 夕方',bg:0xe8b998,sea:0xb3bba9,sun:1.9,ambient:1.5,exposure:1.3,emissive:0x5f3715},
+    {name:'☾ 夜',bg:0x617e9a,sea:0x537b94,sun:.55,ambient:.9,exposure:1.05,emissive:0xf7bc69}
+  ];
+  const seaMaterial=sea.material;
+  function setLightPhase(mode){
+    lightPhase=mode;
+    const v=lightModes[mode];
+    scene.background.setHex(v.bg);scene.fog.color.setHex(v.bg);
+    seaMaterial.color.setHex(v.sea);
+    ambient.intensity=v.ambient;sun.intensity=v.sun;
+    sun.color.setHex(mode===1?0xffbf8b:mode===2?0x91b8ee:0xffefcf);
+    renderer.toneMappingExposure=v.exposure;
+    litGlass.emissive.setHex(v.emissive);
+    litGlass.emissiveIntensity=mode===2?1.8:mode===1?.55:0;
+    lanternGlass.color.setHex(mode===2?0xffd99a:mode===1?0xffebb4:0xcce0d5);
+    for(const halo of lanterns){halo.material.opacity=mode===2?.19:mode===1?.08:0;halo.visible=mode>0;}
+    timeButton.textContent=v.name;
+    timeButton.setAttribute('aria-label','時間帯：'+v.name+'。タップで切り替え');
+  }
+  timeButton.addEventListener('click',()=>setLightPhase((lightPhase+1)%3));
+  setLightPhase(0);
 
   function makePerson(x,z,shirtColor,hairColor,skin=0xf5c8a4,actor=false){
     const root=new THREE.Group();root.position.set(x,0,z);scene.add(root);
@@ -274,11 +487,16 @@
   const mouse=new THREE.Vector2();
   const movePlane=new THREE.Plane(new THREE.Vector3(0,1,0),0);
   function showToast(str){toast.textContent=str;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),3200);}
-  function nearestNPC(){let nearest=null,dist=3.15;for(const npc of npcList){const d=Math.hypot(player.root.position.x-npc.x,player.root.position.z-npc.z);if(d<dist){nearest=npc;dist=d;}}return nearest;}
+  function nearestTarget(){
+    let closest=null,dist=3.1;
+    for(const npc of npcList){const d=Math.hypot(player.root.position.x-npc.x,player.root.position.z-npc.z);if(d<dist){closest=npc;dist=d;}}
+    for(const house of houseTargets){const d=Math.hypot(player.root.position.x-house.x,player.root.position.z-house.z);if(d<dist){closest=house;dist=d;}}
+    return closest;
+  }
   function interact(){
     if(dialog.classList.contains('visible')){closeDialog();return;}
-    const near=nearestNPC();
-    if(!near){showToast('住民の近くで「はなす」を押してね');return;}
+    const near=nearestTarget();
+    if(!near){showToast('人や建物の入り口に近づいてみてね');return;}
     waypoint=null;marker.visible=false;
     speaker.textContent=near.name;dialogText.textContent=near.line;
     dialogText.style.whiteSpace='pre-line';dialog.classList.add('visible');prompt.classList.remove('visible');
@@ -350,26 +568,34 @@
     return true;
   }
   const clock=new THREE.Clock();
-  let elapsed=0;
-  function animate(){
+  const cameraTarget=new THREE.Vector3(),cameraDesired=new THREE.Vector3();
+  const visualInterval=coarse?1000/30:1000/60;
+  let lastVisual=0,elapsed=0;
+  function animate(now){
     requestAnimationFrame(animate);
-    const dt=Math.min(clock.getDelta(),.045);elapsed+=dt;
+    if(document.hidden){clock.getDelta();return;}
+    if(lastVisual&&now-lastVisual<visualInterval)return;
+    const dt=Math.min(clock.getDelta(),.065);lastVisual=now;elapsed+=dt;
     const moving=updateMovement(dt,elapsed);
     if(!moving){player.body.position.y=THREE.MathUtils.lerp(player.body.position.y,0,dt*9);player.armL.position.z=0;player.armR.position.z=0;}
     for(const n of npcList){n.body.position.y=Math.sin(elapsed*2.1+n.phase)*.035;}
-    for(const s of sway){s.group.rotation.z=Math.sin(elapsed*.85+s.phase)*.023;}
+    if(!reducedMotion){
+      for(const s of sway){s.group.rotation.z=Math.sin(elapsed*.85+s.phase)*.023;}
+      for(const cl of cloudParts){cl.group.position.x=cl.base+Math.sin(elapsed*.18+cl.phase)*1.2;}
+      for(const fo of ripples){fo.rotation.z=elapsed*.09;}
+    }
     if(marker.visible){markerMat.opacity=.53+Math.sin(elapsed*5)*.23;marker.rotation.z=elapsed*.5;}
-    const camTarget=new THREE.Vector3(player.root.position.x,1.0,player.root.position.z);
-    const desiredPosition=camTarget.clone().add(cameraOffset);
-    camera.position.lerp(desiredPosition,1-Math.exp(-dt*3.9));
-    camera.lookAt(camTarget);
-    prompt.classList.toggle('visible',!!nearestNPC()&&!dialog.classList.contains('visible'));
+    cameraTarget.set(player.root.position.x,1.0,player.root.position.z);
+    cameraDesired.copy(cameraTarget).add(cameraOffset);
+    camera.position.lerp(cameraDesired,1-Math.exp(-dt*3.9));
+    camera.lookAt(cameraTarget);
+    prompt.classList.toggle('visible',!!nearestTarget()&&!dialog.classList.contains('visible'));
     renderer.render(scene,camera);
   }
   camera.position.copy(player.root.position).add(cameraOffset);camera.lookAt(player.root.position.x,1,player.root.position.z);
   loading.classList.add('hidden');
   animate();
-  setTimeout(()=>showToast('WASD・矢印キー・タップでおさんぽ！'),600);
+  setTimeout(()=>showToast('タップで移動、建物の入り口でも『しらべる』！'),600);
 </script>
 </body>
 </html>

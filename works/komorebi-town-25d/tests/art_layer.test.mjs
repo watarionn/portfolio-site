@@ -8,7 +8,7 @@ import { runInNewContext } from 'node:vm';
 const here = dirname(fileURLToPath(import.meta.url));
 const source = readFileSync(join(here, '../public/art-layer.js'), 'utf8');
 const html = readFileSync(join(here, '../public/index.html'), 'utf8');
-assert.match(html, /<script src="\.\/art-layer\.js"><\/script>/);
+assert.match(html, /<script src="\.\/art-layer\.js\?v=20261115-perf"><\/script>/);
 assert.match(html, /id="time-button"/);
 assert.match(html, /function findPath\(/); // Keep the tap-navigation contract.
 

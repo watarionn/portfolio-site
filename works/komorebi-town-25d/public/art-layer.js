@@ -5,6 +5,33 @@
   window.KomorebiArt = function ({ctx, iso, getZoom, reduceMotion}) {
     const TAU=Math.PI*2;
     let phase=0, tick=0;
+    let atmosphereKey='',dayGradient=null,vignetteGradient=null;
+    let lampGradient=null,lampZoom=-1,windowGradient=null,windowZoom=-1;
+    function lampGlow(s){
+      if(lampGradient&&lampZoom===s)return lampGradient;
+      lampZoom=s;
+      const g=ctx.createRadialGradient(0,0,2,0,0,48*s);
+      g.addColorStop(0,'#ffedabbb');g.addColorStop(.26,'#ffe5a166');g.addColorStop(1,'#ffe9aa00');
+      lampGradient=g;return g;
+    }
+    function windowGlow(s){
+      if(windowGradient&&windowZoom===s)return windowGradient;
+      windowZoom=s;
+      const g=ctx.createRadialGradient(0,0,1,0,0,28*s);
+      g.addColorStop(0,'#fff5c3bd');g.addColorStop(.4,'#ffe2a058');g.addColorStop(1,'#ffe3ad00');
+      windowGradient=g;return g;
+    }
+    function staticAtmosphere(W,H){
+      const key=phase+':'+W+':'+H;
+      if(atmosphereKey===key)return;
+      atmosphereKey=key;dayGradient=null;
+      if(phase===0){
+        const g=ctx.createLinearGradient(0,0,W,H);
+        g.addColorStop(0,'#fff5cf13');g.addColorStop(.65,'#ffffff00');g.addColorStop(1,'#b5d49c0b');dayGradient=g;
+      }
+      const v=ctx.createRadialGradient(W*.5,H*.43,Math.min(W,H)*.22,W*.5,H*.5,Math.max(W,H)*.78);
+      v.addColorStop(0,'#172c2200');v.addColorStop(1,phase===2?'#10192c44':'#35644f1d');vignetteGradient=v;
+    }
     const palettes=[
       {label:'昼', sky:'#8ebdc1', tint:null, lamps:false},
       {label:'夕方', sky:'#d9a98f', tint:'rgba(231,130,84,.22)', lamps:true},
@@ -130,9 +157,8 @@
       polygon([[p.x-6*s,p.y-44*s],[p.x-9*s,p.y-55*s],[p.x+9*s,p.y-55*s],[p.x+6*s,p.y-44*s]],'#617866');
       rect(p.x-5*s,p.y-52*s,10*s,10*s,phase===0?'#f3e8bb':'#ffe2a0');
       rect(p.x-6*s,p.y-53*s,2*s,12*s,'#5f6755');rect(p.x+4*s,p.y-53*s,2*s,12*s,'#5f6755');
-      if(phase){const g=ctx.createRadialGradient(p.x,p.y-47*s,2,p.x,p.y-47*s,48*s);
-        g.addColorStop(0,'#ffedabbb');g.addColorStop(.26,'#ffe5a166');g.addColorStop(1,'#ffe9aa00');
-        ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y-47*s,48*s,0,TAU);ctx.fill();}
+      if(phase){ctx.save();ctx.translate(p.x,p.y-47*s);
+        ctx.fillStyle=lampGlow(s);ctx.beginPath();ctx.arc(0,0,48*s,0,TAU);ctx.fill();ctx.restore();}
     }
     function drawBench(x,z){const p=iso(x,z),s=getZoom();if(p.x<-65||p.x>innerWidth+65||p.y<-65||p.y>innerHeight+60)return;
       oval(p.x,p.y+3*s,24*s,7*s,'#61806b8f');
@@ -165,9 +191,10 @@
       }
     }
     function drawAtmosphere(W,H,houses){
+      staticAtmosphere(W,H);
       if(phase===1||phase===2){ctx.fillStyle=palettes[phase].tint;ctx.fillRect(0,0,W,H);}
-      if(phase===0){ // faint dappled sunlight follows the camera in screen space
-        const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#fff5cf13');g.addColorStop(.65,'#ffffff00');g.addColorStop(1,'#b5d49c0b');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      if(phase===0){ // cached sunlight follows the camera in screen space
+        ctx.fillStyle=dayGradient;ctx.fillRect(0,0,W,H);
       }
       if(phase>0){
         // Warm windows emerge at dusk, glows remain entirely ornamental.
@@ -175,9 +202,9 @@
           if(p.x<-110||p.x>W+110||p.y<-140||p.y>H+70)continue;
           for(const dx of [-25,25]){
             const x=p.x+dx*s,y=p.y-19*s;
-            const g=ctx.createRadialGradient(x,y,1,x,y,28*s);
-            g.addColorStop(0,'#fff5c3bd');g.addColorStop(.4,'#ffe2a058');g.addColorStop(1,'#ffe3ad00');
-            ctx.fillStyle=g;ctx.fillRect(x-28*s,y-28*s,56*s,56*s);
+            ctx.save();ctx.translate(x,y);
+            ctx.fillStyle=windowGlow(s);ctx.fillRect(-28*s,-28*s,56*s,56*s);
+            ctx.restore();
             rect(x-3*s,y-5*s,6*s,8*s,'#ffebb0');
           }
         }
@@ -201,8 +228,7 @@
         }
       }
       // Gentle edge vignette, translucent enough to preserve legibility.
-      const v=ctx.createRadialGradient(W*.5,H*.43,Math.min(W,H)*.22,W*.5,H*.5,Math.max(W,H)*.78);
-      v.addColorStop(0,'#172c2200');v.addColorStop(1,phase===2?'#10192c44':'#35644f1d');ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
+      ctx.fillStyle=vignetteGradient;ctx.fillRect(0,0,W,H);
     }
     return {
       getPhase:()=>phase,

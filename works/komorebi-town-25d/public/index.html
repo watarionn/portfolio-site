@@ -108,7 +108,12 @@
   const blocked=(x,z)=>x<.6||z<.6||x>N-1.6||z>N-1.6||
     houses.some(h=>Math.abs(x-h.x)<1.65&&Math.abs(z-h.z)<1.65)||
     trees.some(t=>Math.hypot(x-t.x,z-t.z)<.56);
-  const cellFree=(x,z)=>Number.isInteger(x)&&Number.isInteger(z)&&!blocked(x,z);
+  // The collision obstacles are static. Cache integer-cell walkability for tap pathfinding.
+  const walkable=new Uint8Array(N*N);
+  for(let z=0;z<N;z++)for(let x=0;x<N;x++)walkable[x+z*N]=blocked(x,z)?0:1;
+  const cellFree=(x,z)=>Number.isInteger(x)&&Number.isInteger(z)&&x>=0&&z>=0&&x<N&&z<N&&walkable[x+z*N]===1;
+  let groundLayer=null,groundWidth=0,groundHeight=0;
+  const groundCenter=(N-1)/2;
   function resize(){
     W=innerWidth;H=innerHeight;
     canvas.width=Math.max(1,Math.round(W*.68));
@@ -117,6 +122,7 @@
     context.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);
     zoom=Math.max(.86,Math.min(1.28,W/520));
     tw=61*zoom;th=30.5*zoom;
+    rebuildGroundLayer();
   }
   function iso(x,z){return {x:W*.5+((x-z)-(cam.x-cam.z))*tw*.5,
     y:H*.48+((x+z)-(cam.x+cam.z))*th*.5};}
@@ -128,21 +134,57 @@
   function blockRect(x,y,w,h,color){context.fillStyle=color;context.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));}
   function diamond(cx,cy,ww,hh,color,stroke){shape([[cx,cy-hh/2],[cx+ww/2,cy],[cx,cy+hh/2],[cx-ww/2,cy]],color,stroke);}
   function rounded(x,y,w,h,r,color){context.fillStyle=color;context.beginPath();context.roundRect(x,y,w,h,r);context.fill();}
-  function drawTile(x,z){const p=iso(x,z);if(p.x<-tw||p.x>W+tw||p.y<-th||p.y>H+th)return;
+  function drawTile(x,z,target=context,project=iso,screenW=W,screenH=H){
+    const p=project(x,z);if(p.x<-tw||p.x>screenW+tw||p.y<-th||p.y>screenH+th)return;
     const grass=((x*13+z*29)%7<3)?'#9dc98d':'#a4ce94';
     const seaEdge=x===0||z===0||x===N-1||z===N-1;
     const plaza=Math.abs(x-13)<=2&&Math.abs(z-13)<=2;
-    let color=seaEdge?'#dce6b5':plaza?'#ead7a7':roads(x,z)?'#ddc99d':grass;
-    diamond(p.x,p.y,tw+1,th+1,color);
-    if(plaza&&(x+z)%3===0)blockRect(p.x-2,p.y-1,4,2,'#d3b98b');
+    const color=seaEdge?'#dce6b5':plaza?'#ead7a7':roads(x,z)?'#ddc99d':grass;
+    // Same rounded diamond and tiny details as the original version, on any 2D context.
+    target.beginPath();target.moveTo(Math.round(p.x),Math.round(p.y-(th+1)/2));
+    target.lineTo(Math.round(p.x+(tw+1)/2),Math.round(p.y));
+    target.lineTo(Math.round(p.x),Math.round(p.y+(th+1)/2));
+    target.lineTo(Math.round(p.x-(tw+1)/2),Math.round(p.y));
+    target.closePath();target.fillStyle=color;target.fill();
+    const smallRect=(x,y,w,h,c)=>{target.fillStyle=c;target.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));};
+    if(plaza&&(x+z)%3===0)smallRect(p.x-2,p.y-1,4,2,'#d3b98b');
     else if(!roads(x,z)&&!seaEdge&&((x*37+z*19)%11===0)){
-      blockRect(p.x-5,p.y-2,3,2,'#74b47e');blockRect(p.x+4,p.y+2,2,3,'#82ba79');
+      smallRect(p.x-5,p.y-2,3,2,'#74b47e');smallRect(p.x+4,p.y+2,2,3,'#82ba79');
     }
     if(!plaza&&!roads(x,z)&&!seaEdge&&((x*17+z*31)%19===0)){
-      blockRect(p.x-1,p.y-5,3,3,'#fff7de');blockRect(p.x-2,p.y-2,5,2,'#e6a9ad');
+      smallRect(p.x-1,p.y-5,3,3,'#fff7de');smallRect(p.x-2,p.y-2,5,2,'#e6a9ad');
     }
   }
+  function rebuildGroundLayer(){
+    // Static grass/roads never change during walking. Draw once into a map-sized
+    // transparent canvas; the live frame only blits the camera's visible area.
+    groundLayer=null;
+    try{
+      const width=(N+2)*tw,height=(N+2)*th;
+      const layer=document.createElement('canvas'),scale=canvas.width/W;
+      layer.width=Math.max(1,Math.round(width*scale));
+      layer.height=Math.max(1,Math.round(height*scale));
+      const tileCtx=layer.getContext('2d',{alpha:true});
+      if(!tileCtx)return;
+      tileCtx.setTransform(layer.width/width,0,0,layer.height/height,0,0);
+      const project=(x,z)=>({x:width*.5+(x-z)*tw*.5,
+        y:height*.48+(x+z-2*groundCenter)*th*.5});
+      for(let z=0;z<N;z++)for(let x=0;x<N;x++)drawTile(x,z,tileCtx,project,width,height);
+      groundWidth=width;groundHeight=height;groundLayer=layer;
+    }catch(error){
+      // Low-memory browsers can still draw tiles directly without the cache.
+      console.warn('地面キャッシュを使わず描画するよ',error);
+      groundLayer=null;
+    }
+  }
+  function drawGround(){
+    if(!groundLayer){for(let z=0;z<N;z++)for(let x=0;x<N;x++)drawTile(x,z);return;}
+    const dx=(W-groundWidth)*.5-(cam.x-cam.z)*tw*.5;
+    const dy=(H-groundHeight)*.48+(2*groundCenter-cam.x-cam.z)*th*.5;
+    context.drawImage(groundLayer,dx,dy,groundWidth,groundHeight);
+  }
   function drawTree(t){const p=iso(t.x,t.z),s=zoom*t.size,cy=p.y-26*s;
+    if(p.x<-65||p.x>W+65||p.y<-100||p.y>H+70)return;
     // Pixel-ish foliage with a visible trunk, no external image assets.
     diamond(p.x,p.y+2,29*s,12*s,'#7aa37c70');
     blockRect(p.x-5*s,p.y-29*s,10*s,29*s,'#805d43');
@@ -155,6 +197,7 @@
     blockRect(p.x+6*s,cy+3*s,10*s,6*s,'#3f8567');
   }
   function drawHouse(h){const p=iso(h.x,h.z),s=zoom,bw=93*s,bh=45*s,wallH=49*s,roofY=p.y-wallH;
+    if(p.x<-150||p.x>W+150||p.y<-190||p.y>H+100)return;
     // Isometric base has two genuinely visible wall planes and two roof planes.
     diamond(p.x,p.y+4*s,bw*1.12,bh*1.16,'#638e7599');
     const left=[p.x-bw/2,p.y,p.x,p.y+bh/2,p.x,p.y+bh/2-wallH,p.x-bw/2,p.y-wallH];
@@ -204,23 +247,41 @@
   function drawMarker(){if(!targetMarker)return;const p=iso(targetMarker.x,targetMarker.z);
     const radius=11*zoom+Math.sin(performance.now()/210)*2;
     context.strokeStyle='#fffdfa';context.lineWidth=3;context.beginPath();context.ellipse(p.x,p.y,radius,radius*.46,0,0,2*Math.PI);context.stroke();}
+  const staticObjects=[...trees.map(t=>({sort:t.x+t.z,kind:'tree',object:t})),
+    ...houses.map(h=>({sort:h.x+h.z+.7,kind:'house',object:h}))];
   function render(){context.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);
     context.fillStyle=art?.sky()||'#8ebdc1';context.fillRect(0,0,W,H);
-    for(let z=0;z<N;z++)for(let x=0;x<N;x++)drawTile(x,z);
-    const items=[...trees.map(t=>({sort:t.x+t.z,draw:()=>{drawTree(t);art?.drawTree(t);}})),
-      ...houses.map(h=>({sort:h.x+h.z+.7,draw:()=>{drawHouse(h);art?.drawHouse(h);}})),
-      ...people.map(p=>({sort:p.x+p.z,draw:()=>drawPerson(p)})),
-      {sort:player.x+player.z+.01,draw:()=>drawPerson(player,true)},
-      {sort:26.5,draw:()=>{drawPlaza();art?.drawFountain(13,13);}},{sort:22.5,draw:drawNotice},
-      {sort:27.2,draw:()=>art?.drawGroundDetails()}];
+    drawGround();
+    const items=[...staticObjects,
+      {sort:people[0].x+people[0].z,kind:'person',object:people[0]},
+      {sort:people[1].x+people[1].z,kind:'person',object:people[1]},
+      {sort:player.x+player.z+.01,kind:'player'},
+      {sort:26.5,kind:'fountain'},
+      {sort:22.5,kind:'notice'},
+      {sort:27.2,kind:'details'}];
     items.sort((a,b)=>a.sort-b.sort);
-    for(const item of items)item.draw();
+    for(const item of items){
+      switch(item.kind){
+        case 'tree': drawTree(item.object);art?.drawTree(item.object);break;
+        case 'house': drawHouse(item.object);art?.drawHouse(item.object);break;
+        case 'person': drawPerson(item.object);break;
+        case 'player': drawPerson(player,true);break;
+        case 'fountain': drawPlaza();art?.drawFountain(13,13);break;
+        case 'notice': drawNotice();break;
+        case 'details': art?.drawGroundDetails();break;
+      }
+    }
     drawMarker();
     art?.drawAtmosphere(W,H,houses);
   }
-  function nearest(){const targets=[...people.map(p=>({...p,distance:Math.hypot(p.x-player.x,p.z-player.z),kind:'person'})),
-     ...houses.map(h=>({...h,distance:Math.hypot(h.x-player.x,h.z-player.z)-1.4,kind:'house'}))];
-    return targets.sort((a,b)=>a.distance-b.distance)[0];}
+  function nearest(){
+    let closest=null,best=Infinity;
+    for(const p of people){const d=Math.hypot(p.x-player.x,p.z-player.z);
+      if(d<best){best=d;closest={...p,distance:d,kind:'person'};}}
+    for(const h of houses){const d=Math.hypot(h.x-player.x,h.z-player.z)-1.4;
+      if(d<best){best=d;closest={...h,distance:d,kind:'house'};}}
+    return closest;
+  }
   function close(){dialog.classList.remove('show');}
   function interact(){if(dialog.classList.contains('show')){close();return;}
     const near=nearest();if(!near||near.distance>2.35){showToast('人や建物に近づいてみてね');return;}
@@ -261,7 +322,10 @@
   addEventListener('keydown',keyDown);
   addEventListener('keyup',e=>held.delete(e.key.toLowerCase().replace('arrow','')));
   addEventListener('blur',()=>held.clear());
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)held.clear();});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)held.clear();
+    else{lastFrame=0;lastDraw=0;}
+  });
   for(const button of document.querySelectorAll('[data-dir]')){
     const dir=button.dataset.dir;
     const end=()=>{held.delete(dir);button.classList.remove('active');};
@@ -298,8 +362,11 @@
     if(!moved&&route.length){route=[];targetMarker=null;}
     if(moved){player.walk+=dt;player.facing=Math.atan2(vx,vz);}
   }
-  let lastDraw=0;
-  function frame(now){art?.advance(now);const dt=Math.min(.05,(now-lastFrame)/1000||0);lastFrame=now;
+  let lastDraw=0,renderCost=0,frameInterval=29;
+  const touchDevice=matchMedia('(pointer:coarse)').matches;
+  function frame(now){
+    if(document.hidden){animationId=requestAnimationFrame(frame);return;}
+    art?.advance(now);const dt=Math.min(.05,(now-lastFrame)/1000||0);lastFrame=now;
     advance(dt);
     if(!reduceMotion&&!dialog.classList.contains('show')){
       people[0].x=10+Math.sin(now/2900)*.8;people[0].z=12+Math.cos(now/2900)*.55;
@@ -309,7 +376,16 @@
     cam.x+=(player.x-cam.x)*follow;cam.z+=(player.z-cam.z)*follow;
     if(toastUntil&&now>toastUntil){toast.classList.remove('show');toastUntil=0;}
     const near=nearest();prompt.classList.toggle('show',!!near&&near.distance<2.35&&!dialog.classList.contains('show'));
-    if(!lastDraw||now-lastDraw>=(reduceMotion?45:29)){render();lastDraw=now;}
+    if(!lastDraw||now-lastDraw>=(reduceMotion?70:frameInterval)){
+      const drawStarted=performance.now();render();lastDraw=now;
+      if(touchDevice&&!reduceMotion){
+        const cost=performance.now()-drawStarted;
+        renderCost=renderCost?renderCost*.91+cost*.09:cost;
+        // Hysteresis prevents switching constantly on borderline devices.
+        if(renderCost>24)frameInterval=50;
+        else if(renderCost<13)frameInterval=29;
+      }
+    }
     animationId=requestAnimationFrame(frame);
   }
   addEventListener('resize',resize,{passive:true});

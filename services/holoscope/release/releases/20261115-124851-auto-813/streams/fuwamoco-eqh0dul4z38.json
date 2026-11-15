@@ -1,0 +1,602 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_eqh0dul4z38",
+  "slug": "fuwamoco-eqh0dul4z38",
+  "videoId": "EQh0DUL4Z38",
+  "title": "HoloScopeのひなたに関する最新情報",
+  "originalTitle": "【FUWAMOCO MORNING】episode 178 🐾 #FWMCMORNING",
+  "originalUrl": "https://www.youtube.com/watch?v=EQh0DUL4Z38",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": "2025-10-27T17:00:27.000Z",
+  "durationSeconds": 3335,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_fuwamoco",
+    "slug": "fuwamoco",
+    "displayName": "FUWAMOCO"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "彼らは特定の曲について繰り返し話しています。",
+  "summaryOneLine": "彼らは特定の曲について繰り返し話しています。",
+  "keyPoints": [
+    "繰り返しの歌についての議論",
+    "練習の瞬間についての思い出",
+    "現在の曲についての質問"
+  ],
+  "articleBodyHtml": "<h2>繰り返しの歌についての議論</h2>\n<p>彼らは特定の曲について繰り返し話しています。</p>\n<p>この曲についての会話は、彼らの関心を示しています。</p>\n<h2>練習の瞬間についての思い出</h2>\n<p>彼らは練習中に「覗き見た」瞬間について語っています。</p>\n<p>この瞬間は彼らにとって非常に印象的だったようです。</p>\n<h2>現在の曲についての質問</h2>\n<p>彼らは現在流れている曲について尋ねています。</p>\n<p>この質問は、彼らが曲に興味を持っていることを示しています。</p>\n<h2>オリジナル曲の作成</h2>\n<p>彼らの一人はオリジナル曲を作成しました。</p>\n<p>このオリジナル曲は、彼らの創造性を示しています。</p>\n<h2>別れの言葉の繰り返し</h2>\n<p>彼らは繰り返し「バイバイ」と言っています。</p>\n<p>この繰り返しは、彼らの感情を示しています。</p>\n<h2>ゲームの強さとスナックの話</h2>\n<p>彼らはゲームの強さについて語り、それが怖いとは思っていないと述べています。</p>\n<p>また、ゲーム中にパズルを楽しんだり、スナックを食べたりしたことも話しています。</p>\n<h2>イベントと未来への期待</h2>\n<p>彼らはイベントに期待しており、特に木曜日のイベントに注目しています。</p>\n<p>また、成長や改善への期待も述べています。</p>\n<h2>VR体験への挑戦と楽しみ</h2>\n<p>彼らはVR体験に挑戦し、特にHomophobia VRを楽しみにしています。</p>\n<p>この挑戦は、彼らの好奇心と冒険心を示しています。</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=EQh0DUL4Z38</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 813,
+      "text": "Oh, yeah"
+    },
+    {
+      "timestampSeconds": 814,
+      "text": "It's not that one, it's on now"
+    },
+    {
+      "timestampSeconds": 815,
+      "text": "It's not that one, it's on now"
+    },
+    {
+      "timestampSeconds": 816,
+      "text": "But..."
+    },
+    {
+      "timestampSeconds": 817,
+      "text": "And I'll never ever forget"
+    },
+    {
+      "timestampSeconds": 818,
+      "text": "The one time we were able to peek in on that one and practicing it"
+    },
+    {
+      "timestampSeconds": 819,
+      "text": "We were like"
+    },
+    {
+      "timestampSeconds": 820,
+      "text": "What song is this?"
+    },
+    {
+      "timestampSeconds": 821,
+      "text": "What?"
+    },
+    {
+      "timestampSeconds": 822,
+      "text": "Congratulona"
+    },
+    {
+      "timestampSeconds": 823,
+      "text": "And then I have an original song now"
+    },
+    {
+      "timestampSeconds": 824,
+      "text": "We can't wait for more too"
+    },
+    {
+      "timestampSeconds": 825,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 826,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 827,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 828,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 829,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 830,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 831,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 838,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 839,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 844,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 845,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 846,
+      "text": "Bye"
+    },
+    {
+      "timestampSeconds": 1218,
+      "text": "What do you think, Moko-chan?"
+    },
+    {
+      "timestampSeconds": 1220,
+      "text": "It was pretty strong, right?"
+    },
+    {
+      "timestampSeconds": 1222,
+      "text": "It was not scary"
+    },
+    {
+      "timestampSeconds": 1222,
+      "text": "It was not scary"
+    },
+    {
+      "timestampSeconds": 1223,
+      "text": "It was like some puzzles and then..."
+    },
+    {
+      "timestampSeconds": 1223,
+      "text": "It was like some puzzles and then..."
+    },
+    {
+      "timestampSeconds": 1225,
+      "text": "Oh, scary!"
+    },
+    {
+      "timestampSeconds": 1225,
+      "text": "Oh, scary!"
+    },
+    {
+      "timestampSeconds": 1226,
+      "text": "Is this supposed to be a scary game, Ruffians?"
+    },
+    {
+      "timestampSeconds": 1226,
+      "text": "Is this supposed to be a scary game, Ruffians?"
+    },
+    {
+      "timestampSeconds": 1228,
+      "text": "Because if it is, obviously I'm good at horror now"
+    },
+    {
+      "timestampSeconds": 1228,
+      "text": "Because if it is, obviously I'm good at horror now"
+    },
+    {
+      "timestampSeconds": 1233,
+      "text": "But we also enjoyed some snacks"
+    },
+    {
+      "timestampSeconds": 1233,
+      "text": "But we also enjoyed some snacks"
+    },
+    {
+      "timestampSeconds": 1233,
+      "text": "But we also enjoyed some snacks"
+    },
+    {
+      "timestampSeconds": 1236,
+      "text": "A lot of snacks"
+    },
+    {
+      "timestampSeconds": 1236,
+      "text": "A lot of snacks"
+    },
+    {
+      "timestampSeconds": 1236,
+      "text": "A lot of snacks"
+    },
+    {
+      "timestampSeconds": 1237,
+      "text": "Yeah!"
+    },
+    {
+      "timestampSeconds": 1237,
+      "text": "Yeah!"
+    },
+    {
+      "timestampSeconds": 1238,
+      "text": "I was in charge of not just backseating"
+    },
+    {
+      "timestampSeconds": 1238,
+      "text": "I was in charge of not just backseating"
+    },
+    {
+      "timestampSeconds": 1240,
+      "text": "Of making sure everybody got the snacks"
+    },
+    {
+      "timestampSeconds": 1243,
+      "text": "Yup!"
+    },
+    {
+      "timestampSeconds": 1568,
+      "text": "Yeah"
+    },
+    {
+      "timestampSeconds": 1569,
+      "text": "When the cheeky chicken is released"
+    },
+    {
+      "timestampSeconds": 1570,
+      "text": "When it comes out on the 29th in Japan"
+    },
+    {
+      "timestampSeconds": 1574,
+      "text": "Then maybe you'll be able to get your paws on it"
+    },
+    {
+      "timestampSeconds": 1575,
+      "text": "Maybe"
+    },
+    {
+      "timestampSeconds": 1579,
+      "text": "And to share it"
+    },
+    {
+      "timestampSeconds": 1580,
+      "text": "There's limits"
+    },
+    {
+      "timestampSeconds": 1581,
+      "text": "To share it with somebody"
+    },
+    {
+      "timestampSeconds": 1972,
+      "text": "What is wrong?"
+    },
+    {
+      "timestampSeconds": 1973,
+      "text": "She keeps on being"
+    },
+    {
+      "timestampSeconds": 1979,
+      "text": "What is wrong right now?"
+    },
+    {
+      "timestampSeconds": 1981,
+      "text": "Collection"
+    },
+    {
+      "timestampSeconds": 1986,
+      "text": "It looks gross"
+    },
+    {
+      "timestampSeconds": 1987,
+      "text": "Enjoy them"
+    },
+    {
+      "timestampSeconds": 1992,
+      "text": "More than just tapping on the big boxes"
+    },
+    {
+      "timestampSeconds": 1994,
+      "text": "And then"
+    },
+    {
+      "timestampSeconds": 1995,
+      "text": "Ooh"
+    },
+    {
+      "timestampSeconds": 1996,
+      "text": "Sounds"
+    },
+    {
+      "timestampSeconds": 1997,
+      "text": "Ooh sounds"
+    },
+    {
+      "timestampSeconds": 1998,
+      "text": "Box sounds"
+    },
+    {
+      "timestampSeconds": 1999,
+      "text": "Yeah"
+    },
+    {
+      "timestampSeconds": 2003,
+      "text": "Does this count as a computer?"
+    },
+    {
+      "timestampSeconds": 2005,
+      "text": "It's a PC-98"
+    },
+    {
+      "timestampSeconds": 2006,
+      "text": "It's a current type of computer but"
+    },
+    {
+      "timestampSeconds": 2007,
+      "text": "It doesn't have a brain though"
+    },
+    {
+      "timestampSeconds": 2009,
+      "text": "No"
+    },
+    {
+      "timestampSeconds": 2010,
+      "text": "Well, unless it's under the screen"
+    },
+    {
+      "timestampSeconds": 2011,
+      "text": "It sort of sits on"
+    },
+    {
+      "timestampSeconds": 2012,
+      "text": "It's under the screen"
+    },
+    {
+      "timestampSeconds": 2013,
+      "text": "It sort of sits on top of the brain"
+    },
+    {
+      "timestampSeconds": 2014,
+      "text": "That's the brain"
+    },
+    {
+      "timestampSeconds": 2015,
+      "text": "You get it?"
+    },
+    {
+      "timestampSeconds": 2812,
+      "text": "Right!"
+    },
+    {
+      "timestampSeconds": 2812,
+      "text": "Yeah, I still feel sad we weren't able to..."
+    },
+    {
+      "timestampSeconds": 2814,
+      "text": "Right!"
+    },
+    {
+      "timestampSeconds": 2815,
+      "text": "So, I can't wait!"
+    },
+    {
+      "timestampSeconds": 2816,
+      "text": "We'll watch little bits here and there of what we could see..."
+    },
+    {
+      "timestampSeconds": 2818,
+      "text": "We could see it before last time"
+    },
+    {
+      "timestampSeconds": 2821,
+      "text": "I can't wait to see just how much she's improved, how much she's shined"
+    },
+    {
+      "timestampSeconds": 2825,
+      "text": "Grown!"
+    },
+    {
+      "timestampSeconds": 2827,
+      "text": "We can't wait!"
+    },
+    {
+      "timestampSeconds": 2828,
+      "text": "Yeah!"
+    },
+    {
+      "timestampSeconds": 2831,
+      "text": "And then on Thursday, there's gonna be a whole event"
+    },
+    {
+      "timestampSeconds": 2835,
+      "text": "We look forward to some more details maybe"
+    },
+    {
+      "timestampSeconds": 2856,
+      "text": "Homophobia VR"
+    },
+    {
+      "timestampSeconds": 2857,
+      "text": "Yeah"
+    },
+    {
+      "timestampSeconds": 2860,
+      "text": "Both of us, we're both playing Moko-chan"
+    },
+    {
+      "timestampSeconds": 2865,
+      "text": "So you can't just be like,"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=EQh0DUL4Z38",
+    "streamPublishedAt": "2025-10-27T17:00:27.000Z",
+    "articlePublishedAt": "2026-10-30T22:34:18Z",
+    "articleUpdatedAt": "2026-10-30T22:34:18Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_v-whh_8na5c0",
+      "slug": "fuwamoco-whh-8na5c0",
+      "videoId": "-WHH_8nA5C0",
+      "title": "塗るだけでは隠れられない　FUWAMOCOが学んだカメレオン式かくれんぼ",
+      "summaryOneLine": "にぎやかな大人数戦を結果だけで追わず、カモフラージュが色、地形、時間、囮の四つを調整する情報戦だと分かる",
+      "streamType": "game",
+      "publishedAt": "2026-06-30T00:00:06.000Z",
+      "durationSeconds": 7949,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_1auotcneqww",
+      "slug": "fuwamoco-1auotcneqww",
+      "videoId": "1AuOtcneQww",
+      "title": "最後まで着替えて、撮って、ありがとうを言う　FUWAMOCOのHoloearth送別配信",
+      "summaryOneLine": "終了告知そのものではなく、FUWAMOCOが『最後だから見る』だけで終わらせず、着替える・撮る・遊ぶ・感謝するという形で思い出を作り直した流れを読める",
+      "streamType": "event",
+      "publishedAt": "2026-06-28T11:17:31.000Z",
+      "durationSeconds": 2841,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_v-kfxs2fjl2o",
+      "slug": "fuwamoco-kfxs2fjl2o",
+      "videoId": "-KfXS2FJl2o",
+      "title": "鍛冶の準備がダンジョン攻略を支える　Fuwawa視点で追うENigmatic Recollection",
+      "summaryOneLine": "パズルや戦闘だけでなく、事前の調達、製作、交易、パーティ編成が共同攻略の成功条件になったことが分かる",
+      "streamType": "game",
+      "publishedAt": "2026-05-27T00:56:24.000Z",
+      "durationSeconds": 7237,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_osmekrfbcxy",
+      "slug": "fuwamoco-osmekrfbcxy",
+      "videoId": "OSMeKRfbCXY",
+      "title": "FUWAMOCOが香りを紹介　双子で違うフレグランスと記憶をたどるクイズ",
+      "summaryOneLine": "FUWAMOCOそれぞれの香りの構成と本人たちの感想、試香、クイズを原文の時刻とともに追い、商品説明と推量を区別できる。",
+      "streamType": "event",
+      "publishedAt": "2026-05-21T10:55:29.000Z",
+      "durationSeconds": 4279,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-05",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0iostcfaq6k",
+      "slug": "fuwamoco-0iostcfaq6k",
+      "videoId": "0IosTcfAq6k",
+      "title": "一人用RPGが声の協力戦になる　FUWAMOCO×Ceciliaの『Chrono Trigger』",
+      "summaryOneLine": "長尺RPG collabの価値を物語要約ではなく、知識と操作を共有可能な手順へ変える三人の連携として読める",
+      "streamType": "game",
+      "publishedAt": "2026-04-27T00:55:22.000Z",
+      "durationSeconds": 15657,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_2e9r_jxip_0",
+      "slug": "fuwamoco-2e9r-jxip-0",
+      "videoId": "2E9r_JxiP_0",
+      "title": "300円のおにぎり屋、具材を増やして売り切れへ　MOCOCOの店舗運営",
+      "summaryOneLine": "長時間の店舗運営から、価格への反応、梅干しなど具材の話、売り切れまでの変化を代表場面で追える",
+      "streamType": "game",
+      "publishedAt": "2026-04-22T00:55:09.000Z",
+      "durationSeconds": 13622,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_fuwamoco",
+        "slug": "fuwamoco",
+        "displayName": "FUWAMOCO"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
  * All scenery is original procedural geometry. No additional remote assets.
  */
 export function createScenery({THREE,scene,collision,homes,sun,skylight,quality='full'}){
-  const mobile=quality==='mobile', TAU=Math.PI*2;
+  const TAU=Math.PI*2;
   const boxGeo=new THREE.BoxGeometry(1,1,1);
   const leafGeo=new THREE.IcosahedronGeometry(1,0);
   const materials=new Map(),lamps=[],windows=[],ripples=[],butterflies=[];
@@ -87,7 +87,7 @@ export function createScenery({THREE,scene,collision,homes,sun,skylight,quality=
     // Each building gets its own identity and a three-dimensional doorway canopy.
     part(g,2.12,.13,1.12,accent,0,2.77,3.2);
     for(const wx of [-1.9,1.9]){
-      const win=part(g,.72,.73,.07,getMat(0xf4dfad,{emissive:0x17120b,emissiveIntensity:0}),
+      const win=part(g,.72,.73,.07,getMat(0xf4dfad,{emissive:0xffbb73,emissiveIntensity:0}),
         wx,2.05,2.96);windows.push(win.material);
       part(g,.10,.8,.10,white,wx,2.05,3.035);
       part(g,.78,.10,.13,white,wx,2.05,3.045);
@@ -216,7 +216,6 @@ export function createScenery({THREE,scene,collision,homes,sun,skylight,quality=
     {name:'夜',background:0x738ca2,fog:0x738ca2,sky:.82,sun:.83,light:0x9bbde6}
   ];
   let mode=0;
-  const ambientWindow=getMat(0xffdcb1,{emissive:0xffc36c,emissiveIntensity:0});
   function setMode(index){
     mode=((index%3)+3)%3;
     const m=modes[mode];

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#a7d8cd">
+<meta name="robots" content="noindex,nofollow">
+<title>こもれび町 プリレンダリング版 | 画像で歩く3Dの町</title>
+<style>
+:root{color-scheme:light;--paper:#fffaf0;--ink:#34584d;--leaf:#56866f;--shadow:#47766135}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden}
+body{font-family:system-ui,-apple-system,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;background:#a7d8cd;color:var(--ink);touch-action:none;user-select:none;-webkit-user-select:none}
+#screen{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+a,button{font:inherit;-webkit-tap-highlight-color:transparent}
+header{position:fixed;z-index:3;left:16px;right:16px;top:max(14px,env(safe-area-inset-top));display:flex;align-items:flex-start;justify-content:space-between;gap:9px;pointer-events:none}
+.panel{pointer-events:auto;border:1.5px solid #fffef5;background:#fffaf0ec;backdrop-filter:blur(10px);border-radius:18px;padding:12px 16px;box-shadow:0 5px 0 #668c7440,0 12px 32px var(--shadow)}
+.eyebrow{font-size:9px;letter-spacing:.14em;font-weight:900;color:#769e86}h1{font-size:20px;line-height:1.2;letter-spacing:.05em;margin:3px 0}.sub{font-size:11px;color:#6a8e79;font-weight:720}
+.nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:5px;max-width:235px}.nav a,.nav button{border:none;border-radius:9px;background:#e7efdf;text-decoration:none;color:#426f55;padding:9px 10px;font-size:11px;font-weight:900;cursor:pointer}.nav .current{background:#c7e0c3}
+.nav button:focus-visible,.nav a:focus-visible,.pad button:focus-visible,#action:focus-visible{outline:3px solid #e5b75e;outline-offset:2px}
+#message{position:fixed;z-index:4;left:50%;top:103px;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 26px);border:2px solid #fffef5;background:#fff9ebee;border-radius:13px;padding:10px 15px;font-size:12px;font-weight:800;text-align:center;box-shadow:0 5px 0 #65876e40;opacity:0;transition:opacity .24s;pointer-events:none}#message.show{opacity:1}
+#nearby{position:fixed;z-index:2;left:50%;bottom:24px;transform:translateX(-50%);padding:9px 14px;border:1.5px solid #fff;background:#fff9ebdf;border-radius:13px;white-space:nowrap;font-size:12px;font-weight:800;box-shadow:0 5px 0 #618a7940;pointer-events:none}
+#talk{position:fixed;z-index:7;left:50%;bottom:80px;transform:translateX(-50%);width:min(460px,calc(100vw - 30px));padding:18px 20px;background:#fffaeb;border-radius:19px;border:3px solid #fffdf5;box-shadow:0 8px 0 #6c9a7880,0 22px 48px #3f775b55;display:none}#talk.show{display:block}
+#speaker{font-size:13px;color:#68917a;font-weight:900;margin-bottom:9px}#words{font-size:14px;font-weight:710;line-height:1.85;white-space:pre-line}#close{display:block;margin:13px 0 0 auto;border:0;border-radius:9px;padding:10px 16px;background:#56876c;color:#fff;font-size:13px;font-weight:900;cursor:pointer}
+#mapPanel{position:fixed;z-index:6;right:15px;top:99px;width:min(290px,calc(100vw - 30px));background:#fffaf0fa;border:2px solid #fff;border-radius:18px;padding:14px;box-shadow:0 10px 40px #47766155;display:none}#mapPanel.show{display:block}#mapPanel h2{font-size:14px;margin:0 0 10px}#mapPanel p{font-size:11px;margin:0 0 9px;color:#658975}#mapPanel button{display:block;width:100%;margin:5px 0;padding:10px 11px;border:1px solid #e3e8d1;background:#edf1df;border-radius:10px;color:var(--ink);font-weight:800;text-align:left;cursor:pointer}
+.touch{position:fixed;z-index:5;inset:auto 0 0;display:none;pointer-events:none;padding-bottom:env(safe-area-inset-bottom)}
+.pad{position:absolute;left:14px;bottom:calc(17px + env(safe-area-inset-bottom));display:grid;grid-template:repeat(3,52px)/repeat(3,52px);gap:3px;pointer-events:auto}
+.pad button,#action{background:#fffaf0e8;border:2px solid #fffdf4;border-radius:13px;box-shadow:0 4px 0 #54826475;color:#416f56;font-size:20px;font-weight:900;cursor:pointer;touch-action:none}.pad button:active,.pad button.active,#action:active{background:#d9ebd1}
+.pad .up{grid-area:1/2}.pad .down{grid-area:3/2}.pad .left{grid-area:2/1}.pad .right{grid-area:2/3}
+#action{position:absolute;bottom:calc(36px + env(safe-area-inset-bottom));right:22px;width:78px;height:78px;border-radius:50%;font-size:14px;pointer-events:auto}
+#loading{position:fixed;z-index:12;inset:0;display:grid;place-items:center;background:#a7d8cd;color:#3c7259;font-weight:900;text-align:center;padding:24px}#loading.hidden{display:none}
+@media(pointer:coarse){.touch{display:block}#nearby{bottom:calc(186px + env(safe-area-inset-bottom))}#talk{bottom:calc(180px + env(safe-area-inset-bottom))}}
+@media(max-width:520px){header{left:10px;right:10px;top:max(10px,env(safe-area-inset-top));gap:5px}.panel{padding:10px 11px;border-radius:14px}h1{font-size:16px}.eyebrow{font-size:8px;letter-spacing:0}.sub{font-size:9px}.nav{max-width:163px;gap:4px}.nav a,.nav button{padding:8px 8px;font-size:10px}#message{top:87px}#mapPanel{top:87px;right:9px}}
+@media(max-height:650px) and (pointer:coarse){.pad{grid-template:repeat(3,41px)/repeat(3,41px)}#action{height:65px;width:65px;bottom:20px}#nearby{bottom:145px}#talk{bottom:132px}}
+@media(prefers-reduced-motion:reduce){#message{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="screen" aria-label="画像を使ったプリレンダリングの町。タップや方向ボタンで歩ける"></canvas>
+<div id="loading" role="status">こもれび町の絵を準備しているよ…</div>
+<header><div class="panel"><div class="eyebrow">こもれび町 ／ 比較用試作品</div><h1>絵本のこもれび町</h1><div class="sub">3Dを画像にした軽量版</div></div><nav class="panel nav" aria-label="ほかの版"><span class="current" style="font-size:10px;font-weight:900;padding:7px">画像版</span><a href="../komorebi-town-2d/">2D</a><a href="../komorebi-town-25d/">2.5D</a><a href="../komorebi-town/">3D</a><button id="mapToggle" type="button" aria-expanded="false" aria-controls="mapPanel">町案内</button></nav></header>
+<div id="message" role="status" aria-live="polite"></div>
+<div id="nearby" role="status">タップで歩く ・ 建物の近くで調べる</div>
+<section id="talk" role="dialog" aria-modal="false" aria-label="町の案内"><div id="speaker"></div><div id="words"></div><button id="close" type="button">とじる</button></section>
+<section id="mapPanel" aria-label="町の施設"><h2>町案内</h2><p>建物を選ぶと、その近くまで歩くよ。</p><button data-place="library">📚 図書館</button><button data-place="workshop">🛠 工房</button><button data-place="gallery">🖼 展示館</button><button data-place="play">🎈 あそび場</button><button data-place="fountain">⛲ 中央広場</button></section>
+<div class="touch" aria-label="タッチ操作"><div class="pad"><button data-dir="up" class="up" aria-label="上へ歩く">▲</button><button data-dir="left" class="left" aria-label="左へ歩く">◀</button><button data-dir="down" class="down" aria-label="下へ歩く">▼</button><button data-dir="right" class="right" aria-label="右へ歩く">▶</button></div><button id="action" type="button">しらべる</button></div>
+<script>
+(() => {
+  'use strict';
+  const canvas=document.getElementById('screen'),ctx=canvas.getContext('2d',{alpha:false});
+  const loading=document.getElementById('loading'),message=document.getElementById('message'),nearby=document.getElementById('nearby');
+  const talk=document.getElementById('talk'),speaker=document.getElementById('speaker'),words=document.getElementById('words');
+  const mapPanel=document.getElementById('mapPanel'),mapToggle=document.getElementById('mapToggle');
+  if(!ctx){loading.textContent='Canvas 2Dに対応したブラウザで開いてね';return;}
+  const ORIGIN_X=868,ORIGIN_Y=102,TW=59,TH=30,MAX=27;
+  const houses=[
+    {id:'library',name:'図書館',x:7,z:7,icon:'📚',line:'ここは図書館。読みものや記事を集める場所になる予定だよ。'},
+    {id:'workshop',name:'工房',x:19,z:7,icon:'🛠',line:'工房ではWebツールを紹介する予定。気になる道具を見つけてね。'},
+    {id:'gallery',name:'展示館',x:7,z:19,icon:'🖼',line:'展示館は作品のギャラリー。作ったものをゆっくり眺められるよ。'},
+    {id:'play',name:'あそび場',x:19,z:19,icon:'🎈',line:'あそび場では小さなゲームや実験を紹介する予定だよ。'}
+  ];
+  const trees=[
+    [2,10,0],[11,5,1],[23,13,2],[16,20,0],[4,19,2],[14,23,1],[8,22,0],[4,5,2],[23,5,1],
+    [3,15,1],[22,21,0],[20,3,2],[2,22,0],[24,17,2],[5,2,1],[10,24,0],[24,9,1],[8,3,0]
+  ].map(([x,z,v])=>({x,z,id:'tree-'+v,kind:'tree'}));
+  const people=[
+    {id:'momo',name:'モモ',x:9.8,z:13.9,line:'こんにちは！ 絵本のこもれび町へようこそ。建物は全部、3Dモデルを画像に焼いたものなんだ。'},
+    {id:'sora',name:'ソラ',x:16.7,z:11.8,line:'この町では3Dをリアルタイム描画していないよ。3D版や2.5D版と歩きやすさを比べてみてね。'}
+  ];
+  const player={x:13,z:16.8,id:'player',walk:0};
+  const assets={};
+  const names=['ground','library','workshop','gallery','play','tree-0','tree-1','tree-2','fountain','player','momo','sora'];
+  const dirsHeld=new Set();const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let W=innerWidth,H=innerHeight,dpr=1,scale=1,camX=0,camY=0,last=0,lastDraw=0,waypoints=[],marker=null;
+  let toastUntil=0,pointerStart=null,frameToken=0;
+  const blockedGrid=new Uint8Array(MAX*MAX);
+  const project=(x,z)=>({x:ORIGIN_X+(x-z)*TW*.5,y:ORIGIN_Y+(x+z)*TH*.5});
+  const unproject=(x,y)=>{const a=(x-ORIGIN_X)/(TW*.5),b=(y-ORIGIN_Y)/(TH*.5);return {x:(a+b)*.5,z:(b-a)*.5};};
+  const key=(x,z)=>x+z*MAX;
+  function isBlocked(x,z){
+    return x<1||z<1||x>=MAX-1||z>=MAX-1||blockedGrid[key(x,z)]===1;
+  }
+  for(let z=0;z<MAX;z++)for(let x=0;x<MAX;x++){
+    if(houses.some(h=>Math.abs(x-h.x)<=2.55&&Math.abs(z-h.z)<=2.28) ||
+       trees.some(t=>Math.hypot(x-t.x,z-t.z)<.75))blockedGrid[key(x,z)]=1;
+  }
+  function resize(){
+    W=innerWidth;H=innerHeight;
+    dpr=Math.min(devicePixelRatio||1,1.35);
+    canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=true;
+    scale=W<600?.92:1.04;
+    // At larger screen sizes the town stays legible without rendering at device-pixel-ratio 3.
+    if(W>1300)scale=1.12;
+    lastDraw=0;
+  }
+  function worldToScreen(x,z){const p=project(x,z);return {x:(p.x-camX)*scale+W*.5,y:(p.y-camY)*scale+H*.49};}
+  function screenToWorld(sx,sy){return unproject(camX+(sx-W*.5)/scale,camY+(sy-H*.49)/scale);}
+  const load=name=>new Promise((resolve,reject)=>{
+    const img=new Image();img.decoding='async';img.onload=()=>{assets[name]=img;resolve();};img.onerror=()=>reject(new Error('画像を読み込めなかった: '+name));img.src='./assets/'+name+'.webp';
+  });
+  function toast(str,duration=2400){message.textContent=str;message.classList.add('show');toastUntil=performance.now()+duration;}
+  function close(){talk.classList.remove('show');}
+  function nearbyTarget(){
+    let best=null,d=3.0;
+    for(const p of people){const r=Math.hypot(player.x-p.x,player.z-p.z);if(r<d){best=p;d=r;}}
+    for(const h of houses){const r=Math.max(0,Math.hypot(player.x-h.x,player.z-h.z)-2.2);if(r<d){best=h;d=r;}}
+    return best;
+  }
+  function interact(){
+    if(talk.classList.contains('show')){close();return;}
+    const t=nearbyTarget();if(!t){toast('住民や建物の近くで「しらべる」を押してね');return;}
+    waypoints=[];marker=null;speaker.textContent=t.name;words.textContent=t.line;talk.classList.add('show');
+  }
+  function pathTo(tx,tz){
+    const sx=Math.round(player.x),sz=Math.round(player.z);
+    const targetX=Math.max(1,Math.min(MAX-2,Math.round(tx))),targetZ=Math.max(1,Math.min(MAX-2,Math.round(tz)));
+    let gx=targetX,gz=targetZ;
+    if(isBlocked(gx,gz)){
+      let best=null,score=Infinity;
+      for(let r=1;r<=5;r++)for(let dx=-r;dx<=r;dx++)for(let dz=-r;dz<=r;dz++){
+        const x=targetX+dx,z=targetZ+dz;if(isBlocked(x,z))continue;
+        const s=dx*dx+dz*dz+Math.hypot(x-sx,z-sz)*.01;
+        if(s<score){best={x,z};score=s;}
+      }
+      if(!best)return false;gx=best.x;gz=best.z;
+    }
+    const queue=[[sx,sz]],visited=new Uint8Array(MAX*MAX),previous=new Int16Array(MAX*MAX);
+    previous.fill(-1);visited[key(sx,sz)]=1;
+    for(let n=0;n<queue.length;n++){
+      const [x,z]=queue[n];if(x===gx&&z===gz)break;
+      for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){
+        const nx=x+dx,nz=z+dz;if(isBlocked(nx,nz)||visited[key(nx,nz)])continue;
+        visited[key(nx,nz)]=1;previous[key(nx,nz)]=key(x,z);queue.push([nx,nz]);
+      }
+    }
+    const end=key(gx,gz);if(!visited[end])return false;
+    const points=[];let cursor=end;
+    while(cursor!==key(sx,sz)){points.push({x:cursor%MAX,z:Math.floor(cursor/MAX)});cursor=previous[cursor];if(cursor<0)return false;}
+    waypoints=points.reverse();marker={x:gx,z:gz};return true;
+  }
+  function update(dt){
+    if(talk.classList.contains('show'))return;
+    const left=Number(dirsHeld.has('left')),right=Number(dirsHeld.has('right'));
+    const up=Number(dirsHeld.has('up')),down=Number(dirsHeld.has('down'));
+    const dx=right-left,dy=down-up;
+    let vx=0,vz=0;
+    if(dx||dy){vx=dx+dy;vz=dy-dx;const m=Math.hypot(vx,vz);vx/=m;vz/=m;waypoints=[];marker=null;}
+    else if(waypoints.length){const next=waypoints[0],rx=next.x-player.x,rz=next.z-player.z,dist=Math.hypot(rx,rz);
+      if(dist<.095){waypoints.shift();if(!waypoints.length)marker=null;return;}
+      vx=rx/dist;vz=rz/dist;
+    }else return;
+    const step=Math.min(5.4*dt,.20);let moved=false;
+    const nx=player.x+vx*step,nz=player.z+vz*step;
+    if(!isBlocked(Math.round(nx),Math.round(player.z))){player.x=nx;moved=true;}
+    if(!isBlocked(Math.round(player.x),Math.round(nz))){player.z=nz;moved=true;}
+    if(!moved){waypoints=[];marker=null;}else player.walk+=dt;
+  }
+  function drawWorld(){
+    ctx.fillStyle='#a7d8cd';ctx.fillRect(0,0,W,H);
+    const img=assets.ground;
+    const sw=W/scale,sh=H/scale;
+    let sx=camX-sw*.5,sy=camY-sh*.49;
+    const lx=Math.max(0,sx),ly=Math.max(0,sy),rx=Math.min(img.width,sx+sw),by=Math.min(img.height,sy+sh);
+    if(rx>lx&&by>ly)ctx.drawImage(img,lx,ly,rx-lx,by-ly,(lx-sx)*scale,(ly-sy)*scale,(rx-lx)*scale,(by-ly)*scale);
+  }
+  function drawSprite(e){
+    const img=assets[e.id];if(!img)return;
+    const p=worldToScreen(e.x,e.z);
+    let bx,by;
+    if(e.id.startsWith('tree-')){bx=img.width*.5;by=194;}
+    else if(e.id==='fountain'){bx=img.width*.5;by=127;}
+    else if(['player','momo','sora'].includes(e.id)){bx=img.width*.5;by=103;}
+    else{bx=img.width*.5;by=img.height-62;}
+    const bob=(e===player && (dirsHeld.size||waypoints.length)&&!reduceMotion)?Math.abs(Math.sin(player.walk*15))*3:0;
+    const xx=p.x-bx*scale,yy=p.y-by*scale-bob*scale;
+    if(xx>W+10||yy>H+10||xx+img.width*scale<-10||yy+img.height*scale<-10)return;
+    ctx.drawImage(img,xx,yy,img.width*scale,img.height*scale);
+  }
+  const entities=[...trees,...houses,{x:13,z:13,id:'fountain'},...people,player];
+  function render(){
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=true;
+    drawWorld();
+    // The baked sprites remain in the correct occlusion order when the player walks behind a house.
+    const sorted=entities.slice().sort((a,b)=>(a.x+a.z)-(b.x+b.z));
+    for(const e of sorted)drawSprite(e);
+    for(const h of houses){const p=worldToScreen(h.x,h.z);if(p.x<-75||p.x>W+75||p.y<-170||p.y>H+120)continue;
+      const text=h.icon+' '+h.name;ctx.font='900 13px system-ui,sans-serif';ctx.textAlign='center';
+      const tw=ctx.measureText(text).width+18;const y=p.y-205*scale;
+      if(y<0||y>H)continue;
+      ctx.fillStyle='#fffae8e8';ctx.beginPath();ctx.roundRect(p.x-tw*.5,y-17,tw,24,8);ctx.fill();
+      ctx.fillStyle='#486b57';ctx.fillText(text,p.x,y);
+    }
+    if(marker){const p=worldToScreen(marker.x,marker.z);ctx.strokeStyle='#fffdf5';ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.ellipse(p.x,p.y,12*scale,6*scale,0,0,Math.PI*2);ctx.stroke();}
+    // Only one animated element: small ripple above baked fountain. No realtime 3D shadows.
+    if(!reduceMotion){const p=worldToScreen(13,13),radius=8+Math.sin(performance.now()*.003)*3;
+      ctx.strokeStyle='#f7fff8aa';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(p.x,p.y-9*scale,radius*scale,radius*.28*scale,0,0,2*Math.PI);ctx.stroke();}
+  }
+  function frame(now){
+    if(document.hidden){last=now;frameToken=requestAnimationFrame(frame);return;}
+    const dt=Math.min(.05,(now-last)/1000||0);last=now;update(dt);
+    const p=project(player.x,player.z),follow=1-Math.exp(-dt*6);
+    camX+=(p.x-camX)*follow;camY+=(p.y-55-camY)*follow;
+    const near=nearbyTarget();nearby.textContent=near?'近くに「'+near.name+'」があるよ ・ しらべる':'タップで歩く ・ 建物の近くで調べる';
+    if(toastUntil&&now>toastUntil){message.classList.remove('show');toastUntil=0;}
+    const moving=dirsHeld.size||waypoints.length||Math.abs(p.x-camX)>1||Math.abs(p.y-55-camY)>1;
+    if(!lastDraw||now-lastDraw>=(moving?33:reduceMotion?180:110)){render();lastDraw=now;}
+    frameToken=requestAnimationFrame(frame);
+  }
+  const keyDir=k=>({ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right'})[k.toLowerCase().startsWith('arrow')?'Arrow'+k.substring(5):k.toLowerCase()];
+  addEventListener('keydown',e=>{const dir=keyDir(e.key);if(dir){e.preventDefault();dirsHeld.add(dir);return;}
+    if(e.key==='e'||e.key==='E'||e.key===' '){e.preventDefault();if(!e.repeat)interact();}if(e.key==='Escape'){close();mapPanel.classList.remove('show');}});
+  addEventListener('keyup',e=>{const dir=keyDir(e.key);if(dir)dirsHeld.delete(dir);});
+  addEventListener('blur',()=>dirsHeld.clear());
+  document.addEventListener('visibilitychange',()=>{dirsHeld.clear();last=0;lastDraw=0;});
+  for(const btn of document.querySelectorAll('[data-dir]')){
+    const dir=btn.dataset.dir,stop=()=>{dirsHeld.delete(dir);btn.classList.remove('active');};
+    btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);dirsHeld.add(dir);btn.classList.add('active');waypoints=[];marker=null;});
+    btn.addEventListener('pointerup',stop);btn.addEventListener('pointercancel',stop);btn.addEventListener('lostpointercapture',stop);
+  }
+  document.getElementById('action').addEventListener('click',interact);
+  document.getElementById('close').addEventListener('click',close);
+  mapToggle.addEventListener('click',()=>{const show=!mapPanel.classList.contains('show');mapPanel.classList.toggle('show',show);mapToggle.setAttribute('aria-expanded',String(show));});
+  for(const btn of mapPanel.querySelectorAll('[data-place]'))btn.addEventListener('click',()=>{
+    const place=houses.find(h=>h.id===btn.dataset.place)||{x:13,z:13,name:'中央広場'};
+    if(pathTo(place.x,place.z))toast(place.name+'へ向かうよ');else toast('そこへは行けないみたい');
+    mapPanel.classList.remove('show');mapToggle.setAttribute('aria-expanded','false');
+  });
+  canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;pointerStart={x:e.clientX,y:e.clientY};});
+  canvas.addEventListener('pointerup',e=>{if(!pointerStart)return;const d=Math.hypot(pointerStart.x-e.clientX,pointerStart.y-e.clientY);pointerStart=null;
+    if(d>14)return;if(talk.classList.contains('show')){close();return;}
+    const v=screenToWorld(e.clientX,e.clientY);if(pathTo(v.x,v.z))toast('そこまで歩くよ');else toast('そこへは行けないみたい');
+  });
+  canvas.addEventListener('pointercancel',()=>pointerStart=null);
+  addEventListener('resize',resize,{passive:true});
+  async function start(){
+    try{await Promise.all(names.map(load));resize();const p=project(player.x,player.z);camX=p.x;camY=p.y-55;
+      loading.classList.add('hidden');frameToken=requestAnimationFrame(frame);toast('タップで移動してみてね');
+    }catch(e){console.error(e);loading.textContent='町の画像を読み込めなかったよ。ネットワークを確認してページを再読み込みしてね。';}
+  }
+  start();
+})();
+</script>
+</body>
+</html>

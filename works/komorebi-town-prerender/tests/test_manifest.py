@@ -11,5 +11,5 @@ for filename,item in manifest['files'].items():
     assert len(data)==item['bytes']
     assert hashlib.sha256(data).hexdigest()==item['sha256']
     assert data[:4]==b'RIFF' and data[8:12]==b'WEBP'
-assert (root/'public/index.html').read_text().startswith('<!doctype html>')
+assert (root/'public/index.html').read_text(encoding='utf-8').startswith('<!doctype html>')
 print('PRERENDER_MANIFEST_PASS',len(manifest['files']),'images')

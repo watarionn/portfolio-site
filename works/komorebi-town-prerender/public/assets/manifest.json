@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "model": "orthographic 3D vertices baked to sprite bitmaps",
+  "dimensions": {
+    "ground": [
+      1736,
+      1050
+    ],
+    "tile": [
+      59.0,
+      30.0
+    ],
+    "origin": [
+      868,
+      102
+    ],
+    "elevationPixelsPerUnit": 32.0,
+    "grid": 27
+  },
+  "files": {
+    "fountain.webp": {
+      "sha256": "7e5bcec9db68fba147e98fba98f0aeb717ce9e1d6774027d2e970e0b16288ee7",
+      "bytes": 2580
+    },
+    "gallery.webp": {
+      "sha256": "81cde927988572caed527d2418a7f45100cd510d1bbac3c1ba47f1df4389eebc",
+      "bytes": 12946
+    },
+    "ground.webp": {
+      "sha256": "25fd33f4ae0b3cc678b4311345f7797522c47102c2dd22206298da20a8ad5db8",
+      "bytes": 31440
+    },
+    "library.webp": {
+      "sha256": "2717751abdceaf139d8c45d656136d5bd1d8a0f307ab4fd0c8b7b6aab6f9626a",
+      "bytes": 12218
+    },
+    "momo.webp": {
+      "sha256": "9dbf0ae244a602c0b8f86c5e69c5d1161e8b56cb413432d1c1ee10173f990404",
+      "bytes": 1956
+    },
+    "play.webp": {
+      "sha256": "2edaed4503739989d3fa177dd249b47b130700f84626ff436c37cd2ef9f52a62",
+      "bytes": 11602
+    },
+    "player.webp": {
+      "sha256": "66ecba87250ebca1c15ad254c40a5bba5862acd8dee1d436506d3671647392c6",
+      "bytes": 1950
+    },
+    "sora.webp": {
+      "sha256": "1945548bdbf318ecfc29df34d8258735c0731457be0c2fdd40b12398c92d196f",
+      "bytes": 1984
+    },
+    "tree-0.webp": {
+      "sha256": "6c802ee2d512ffb6ea7f2eea0c9a5366c72d0753871d2fb58ad082c5e38a6df2",
+      "bytes": 3218
+    },
+    "tree-1.webp": {
+      "sha256": "c4e8bcf7b90af100fcb4096560ce95e3211e994564f016a6c7f96faa77812331",
+      "bytes": 3356
+    },
+    "tree-2.webp": {
+      "sha256": "6d8e271184bfe7af33813d99d51f02ec37ba5745c236c47a8d4e1edeab8f7da4",
+      "bytes": 3472
+    },
+    "workshop.webp": {
+      "sha256": "8c7e2dea916c5ec0f21e55e674a1b28235cbfcad3e35bc391a14184d55f5ef85",
+      "bytes": 12862
+    }
+  }
+}

@@ -287,6 +287,11 @@
       "id": "komorebi-town-2d-preview",
       "sourceRoot": "works/komorebi-town-2d/public",
       "productionRoot": "komorebi-town-2d"
+    },
+    {
+      "id": "komorebi-town-prerender-preview",
+      "sourceRoot": "works/komorebi-town-prerender/public",
+      "productionRoot": "komorebi-town-prerender"
     }
   ],
   "aliases": [

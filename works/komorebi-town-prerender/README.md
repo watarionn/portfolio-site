@@ -20,9 +20,20 @@
 
 古い試作のトップや各ページは削除・変更しない。本番サイト全体のデプロイやGitHub Actionsは使わない。
 
-## 2026-11-16 配信状況とCloudfreeの容量障害
+## 2026-11-16 正式Cloudfreeへの復旧・公開（現行）
 
-**制作・正本：GitHub mainへ統合済み。正式Cloudfreeへの配信：BLOCKED（未完了）。**
+**配信状態：PASS／本番公開済み。**
+
+- 2026-11-16、容量不足の調査後、廃止済み `/public_html` にあった、現行配布先とSHA-256が同一の旧コピー5件（23,576,329 bytes）を削除。旧ファイルの不存在・現行の存在をFTPSで再確認。
+- GitHub main `29ef22bb1717994e3b4cf03819b3623b1396c8e8` の正本14点（画像12枚、manifest、HTML、合計121,891 bytes）を専用公開スクリプトで限定配置。
+- `KOMOREBI_PRERENDER_RELEASE_PASS`（2026-11-16T02:42:07.503064Z）。全14ファイルのFTPSおよびHTTPS正確バイト読戻しPASS。一時作業領域のcleanup PASS。
+- 正式URL：https://cf278796.cloudfree.jp/komorebi-town-prerender/
+- **注意：**公開可能になったことは確認済みだが、サーバーパネルの10GB上限に対して正確に何GB空いているかは未確認。詳細は [Cloudfree容量調査・削除記録](../../docs/CLOUDFREE_CAPACITY_CLEANUP_20261116.md)。
+- iPhone実機の軽さの受入確認は未実施。
+
+## 2026-11-16 以前の容量障害（以下は復旧前の履歴）
+
+**当時：制作・GitHub正本は完了、Cloudfreeへの配信はBLOCKEDだった。現在は上記のとおり復旧済み。**
 
 - 正本PR：#258、Windows UTF-8修正PR：#259。ファイル20点の新規追加とUTF-8明示。
 - Windows実機で `PRERENDER_MANIFEST_PASS 12 images`、限定公開 `PRERENDER_DRY_RUN_PASS` を確認。

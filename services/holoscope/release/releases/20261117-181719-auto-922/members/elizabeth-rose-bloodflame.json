@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_elizabeth_rose_bloodflame",
+  "slug": "elizabeth-rose-bloodflame",
+  "displayName": "Elizabeth Rose Bloodflame",
+  "nameJa": "エリザベス・ローズ・ブラッドフレイム",
+  "channelId": "UCW5uhrG1eCBYditmhL0Ykjw",
+  "officialChannelUrl": "https://www.youtube.com/channel/UCW5uhrG1eCBYditmhL0Ykjw",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0wlpgew0ozw",
+      "slug": "elizabeth-rose-bloodflame-0wlpgew0ozw",
+      "videoId": "0Wlpgew0oZw",
+      "title": "舞台の“その後”を練習記録に　Elizabethが振り返るSerendipity",
+      "summaryOneLine": "セットリストの再話ではなく、出演者が事前準備と客席の反応を次の表現・言語練習へつなぐ振り返り方を読める",
+      "streamType": "chatting",
+      "publishedAt": "2026-07-24T20:00:00.000Z",
+      "durationSeconds": 12238,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_6oond7ng5mo",
+      "slug": "elizabeth-rose-bloodflame-6oond7ng5mo",
+      "videoId": "6oONd7NG5Mo",
+      "title": "Summary of Claims and Confidence Levels",
+      "summaryOneLine": "The following claims have been identified with high confidence based on the provided source quotes and segment IDs:",
+      "streamType": "other",
+      "publishedAt": "2026-06-28T18:03:11.000Z",
+      "durationSeconds": 5569,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_5p6i0geob-a",
+      "slug": "elizabeth-rose-bloodflame-5p6i0geob-a",
+      "videoId": "5p6i0GEob-A",
+      "title": "音楽と感謝の時間",
+      "summaryOneLine": "kikoada（音楽）を好きな方向へ、誰も知らない方向へ、一緒に過ごす限り、その日を楽しみましょう。",
+      "streamType": "other",
+      "publishedAt": "2026-04-16T19:01:15.000Z",
+      "durationSeconds": 9844,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-k79d-oftek",
+      "slug": "elizabeth-rose-bloodflame-k79d-oftek",
+      "videoId": "-k79d-oFtek",
+      "title": "ファンマスコットを一枚の集合絵へ　Elizabethが輪郭と色で揃えるまで",
+      "summaryOneLine": "ファンマスコットのデザインが、参考画像の確認、輪郭、色、モチーフ、白い縁取りという小さな選択で統一されていくことが分かる",
+      "streamType": "event",
+      "publishedAt": "2026-02-10T00:08:19.000Z",
+      "durationSeconds": 13875,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-02",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_4bwfw5fmbu0",
+      "slug": "elizabeth-rose-bloodflame-4bwfw5fmbu0",
+      "videoId": "4bWfw5fMbu0",
+      "title": "Confusion and Chaos on the Road",
+      "summaryOneLine": "The speaker is clearly unsure of the speed limit, expressing confusion and uncertainty about what it is. They mention that they can read, but it seems they are struggling to interpret the information.",
+      "streamType": "other",
+      "publishedAt": "2025-11-13T18:48:52.000Z",
+      "durationSeconds": 9337,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-11",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_fnugcyxlblw",
+      "slug": "elizabeth-rose-bloodflame-fnugcyxlblw",
+      "videoId": "fNugCYXlblw",
+      "title": "Summary of Claims from Transcripts",
+      "summaryOneLine": "Someone finds the robot's colors and patterns appealing.",
+      "streamType": "event",
+      "publishedAt": "2025-11-01T20:32:59.000Z",
+      "durationSeconds": 1861,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_elizabeth_rose_bloodflame",
+        "slug": "elizabeth-rose-bloodflame",
+        "displayName": "Elizabeth Rose Bloodflame"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2025-11",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 23,
+    "soloCount": 23,
+    "collaborationCount": 0,
+    "types": [
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 10
+      },
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 6
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 5
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 2
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [],
+  "streamSearchUrl": "/members/elizabeth-rose-bloodflame/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UCW5uhrG1eCBYditmhL0Ykjw",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

@@ -29,8 +29,8 @@ class SemanticAuditTests(unittest.TestCase):
         self.rss_times = ["Sat, 14 Nov 2026 02:58:50 +0000",
                           "Sat, 14 Nov 2026 03:02:00 +0000"]
         self.records = [
-            {"streams/test.json": b'{"article":"stable","streamId":"test"}'},
-            {"streams/test.json": b'{"article":"stable","streamId":"test"}'},
+            {"streams/test.json": b'{"article":"stable","streamId":"test"}', "articles/index.json": b'{"articles":0}'},
+            {"streams/test.json": b'{"article":"stable","streamId":"test"}', "articles/index.json": b'{"articles":0}'},
         ]
         for idx in range(2):
             for path in audit.FEEDS:
@@ -98,7 +98,7 @@ class SemanticAuditTests(unittest.TestCase):
         self.assertEqual(report["status"],
                          "SEMANTICALLY_EQUIVALENT_NO_DELETE_AUTHORITY")
         self.assertTrue(report["same_meaning_observed"])
-        self.assertEqual(report["unchanged_file_hashes"], 1)
+        self.assertEqual(report["unchanged_file_hashes"], 2)
         self.assertEqual(report["volatile_fields_verified"], 9)
         self.assertFalse(report["source_authenticated"])
         self.assertFalse(report["owner_authenticated"])

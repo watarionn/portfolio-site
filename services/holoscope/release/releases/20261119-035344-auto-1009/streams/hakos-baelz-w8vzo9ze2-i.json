@@ -1,0 +1,1526 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_w8vzo9ze2-i",
+  "slug": "hakos-baelz-w8vzo9ze2-i",
+  "videoId": "W8VzO9ZE2-I",
+  "title": "Claim Analysis Summary",
+  "originalTitle": "≪Duolingo≫ First period: English Class",
+  "originalUrl": "https://www.youtube.com/watch?v=W8VzO9ZE2-I",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": "2023-02-16T04:36:25.000Z",
+  "durationSeconds": 6301,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_hakos_baelz",
+    "slug": "hakos-baelz",
+    "displayName": "Hakos Baelz"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "The provided data includes a list of claims extracted from audio segments, each with a unique claim ID, associated segment IDs, the claim itself, source quotes, and a confidence level. The claims range from general statements to specific details about songs, games, and personal experiences.",
+  "summaryOneLine": "The provided data includes a list of claims extracted from audio segments, each with a unique claim ID, associated segment IDs, the claim itself, source quotes, and a confidence level. The claims range from general statements to specific details about songs, games, and personal experiences.",
+  "keyPoints": [
+    "Overview of Claims",
+    "Yes, good morning",
+    "Good morning, everybody"
+  ],
+  "articleBodyHtml": "<h2>Overview of Claims</h2>\n<p>The provided data includes a list of claims extracted from audio segments, each with a unique claim ID, associated segment IDs, the claim itself, source quotes, and a confidence level. The claims range from general statements to specific details about songs, games, and personal experiences.</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=W8VzO9ZE2-I</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 282,
+      "text": "Yes, good morning"
+    },
+    {
+      "timestampSeconds": 286,
+      "text": "Good morning, everybody"
+    },
+    {
+      "timestampSeconds": 316,
+      "text": "Good morning"
+    },
+    {
+      "timestampSeconds": 328,
+      "text": "Good morning"
+    },
+    {
+      "timestampSeconds": 332,
+      "text": "Man sit down now. Yes, you can sit down now"
+    },
+    {
+      "timestampSeconds": 335,
+      "text": "頭起きてる"
+    },
+    {
+      "timestampSeconds": 346,
+      "text": "頭起きてる"
+    },
+    {
+      "timestampSeconds": 347,
+      "text": "起きてない"
+    },
+    {
+      "timestampSeconds": 349,
+      "text": "起きてない"
+    },
+    {
+      "timestampSeconds": 354,
+      "text": "Hopefully by the end of the show"
+    },
+    {
+      "timestampSeconds": 356,
+      "text": "Hey, shut up"
+    },
+    {
+      "timestampSeconds": 358,
+      "text": "I forgot my homework. Can I borrow yours?"
+    },
+    {
+      "timestampSeconds": 365,
+      "text": "What are you talking about?"
+    },
+    {
+      "timestampSeconds": 367,
+      "text": "I also did half of my homework"
+    },
+    {
+      "timestampSeconds": 369,
+      "text": "I'm scared from 1 to 10"
+    },
+    {
+      "timestampSeconds": 371,
+      "text": "How tired are you? Yes"
+    },
+    {
+      "timestampSeconds": 373,
+      "text": "You like the BGM?"
+    },
+    {
+      "timestampSeconds": 376,
+      "text": "I feel like it gives off"
+    },
+    {
+      "timestampSeconds": 378,
+      "text": "学校 school vibes"
+    },
+    {
+      "timestampSeconds": 380,
+      "text": "Alright"
+    },
+    {
+      "timestampSeconds": 382,
+      "text": "Welcome to"
+    },
+    {
+      "timestampSeconds": 384,
+      "text": "English Duolingo"
+    },
+    {
+      "timestampSeconds": 386,
+      "text": "Where I'll be trying to learn"
+    },
+    {
+      "timestampSeconds": 388,
+      "text": "To further"
+    },
+    {
+      "timestampSeconds": 642,
+      "text": "Very Japanese"
+    },
+    {
+      "timestampSeconds": 644,
+      "text": "Very Japanese"
+    },
+    {
+      "timestampSeconds": 649,
+      "text": "Okay now translate everything"
+    },
+    {
+      "timestampSeconds": 651,
+      "text": "Alright"
+    },
+    {
+      "timestampSeconds": 653,
+      "text": "We're gonna start"
+    },
+    {
+      "timestampSeconds": 655,
+      "text": "Sleepy"
+    },
+    {
+      "timestampSeconds": 657,
+      "text": "Let's choose one"
+    },
+    {
+      "timestampSeconds": 659,
+      "text": "Okay"
+    },
+    {
+      "timestampSeconds": 661,
+      "text": "We can choose one"
+    },
+    {
+      "timestampSeconds": 663,
+      "text": "Is this the first time I'm learning English?"
+    },
+    {
+      "timestampSeconds": 665,
+      "text": "Is this the first time I'm learning English?"
+    },
+    {
+      "timestampSeconds": 667,
+      "text": "Let's see"
+    },
+    {
+      "timestampSeconds": 669,
+      "text": "Level"
+    },
+    {
+      "timestampSeconds": 671,
+      "text": "Try"
+    },
+    {
+      "timestampSeconds": 673,
+      "text": "Okay"
+    },
+    {
+      "timestampSeconds": 675,
+      "text": "Oh I test my English abilities"
+    },
+    {
+      "timestampSeconds": 677,
+      "text": "Which one do we start with first?"
+    },
+    {
+      "timestampSeconds": 681,
+      "text": "Left one"
+    },
+    {
+      "timestampSeconds": 690,
+      "text": "Please choose coffee"
+    },
+    {
+      "timestampSeconds": 692,
+      "text": "Coffee!"
+    },
+    {
+      "timestampSeconds": 696,
+      "text": "Wait"
+    },
+    {
+      "timestampSeconds": 701,
+      "text": "I see"
+    },
+    {
+      "timestampSeconds": 703,
+      "text": "Hold on"
+    },
+    {
+      "timestampSeconds": 705,
+      "text": "Hold on"
+    },
+    {
+      "timestampSeconds": 990,
+      "text": "Is that attention?"
+    },
+    {
+      "timestampSeconds": 993,
+      "text": "I feel like this is..."
+    },
+    {
+      "timestampSeconds": 998,
+      "text": "She got a lot of presents, right?"
+    },
+    {
+      "timestampSeconds": 1001,
+      "text": "I feel like this is a Japanese test instead of an English test."
+    },
+    {
+      "timestampSeconds": 1006,
+      "text": "She got a lot of presents, right?"
+    },
+    {
+      "timestampSeconds": 1010,
+      "text": "彼女。"
+    },
+    {
+      "timestampSeconds": 1037,
+      "text": "彼女はプレゼントをたくさん受け取りましたよね。"
+    },
+    {
+      "timestampSeconds": 1049,
+      "text": "Nice!"
+    },
+    {
+      "timestampSeconds": 1051,
+      "text": "Nice!"
+    },
+    {
+      "timestampSeconds": 1051,
+      "text": "I thought you were learning English."
+    },
+    {
+      "timestampSeconds": 1059,
+      "text": "I never..."
+    },
+    {
+      "timestampSeconds": 1060,
+      "text": "簡単に!"
+    },
+    {
+      "timestampSeconds": 1061,
+      "text": "What's the English word for 簡単に?"
+    },
+    {
+      "timestampSeconds": 1063,
+      "text": "It's easily."
+    },
+    {
+      "timestampSeconds": 1066,
+      "text": "Alright."
+    },
+    {
+      "timestampSeconds": 1067,
+      "text": "I'll call John in a minute."
+    },
+    {
+      "timestampSeconds": 1070,
+      "text": "Who are you calling?"
+    },
+    {
+      "timestampSeconds": 1072,
+      "text": "Who's John?"
+    },
+    {
+      "timestampSeconds": 1073,
+      "text": "We're supposed to be in class."
+    },
+    {
+      "timestampSeconds": 1075,
+      "text": "Phones away."
+    },
+    {
+      "timestampSeconds": 1077,
+      "text": "Huh?"
+    },
+    {
+      "timestampSeconds": 1078,
+      "text": "I'll call John in a minute."
+    },
+    {
+      "timestampSeconds": 1080,
+      "text": "Who's John?"
+    },
+    {
+      "timestampSeconds": 1081,
+      "text": "John Bob?"
+    },
+    {
+      "timestampSeconds": 1332,
+      "text": "電車に。"
+    },
+    {
+      "timestampSeconds": 1334,
+      "text": "の、で。"
+    },
+    {
+      "timestampSeconds": 1335,
+      "text": "I understand, I understand."
+    },
+    {
+      "timestampSeconds": 1339,
+      "text": "発車 is the noun for when a train leaves."
+    },
+    {
+      "timestampSeconds": 1344,
+      "text": "So before the train leaves, please get on the train."
+    },
+    {
+      "timestampSeconds": 1348,
+      "text": "I see, I see, I see."
+    },
+    {
+      "timestampSeconds": 1351,
+      "text": "Came here to see Bae exercise her English,"
+    },
+    {
+      "timestampSeconds": 1354,
+      "text": "but stayed for the train."
+    },
+    {
+      "timestampSeconds": 1354,
+      "text": "All of a sudden, Japanese duolingo is true."
+    },
+    {
+      "timestampSeconds": 1359,
+      "text": "Nice."
+    },
+    {
+      "timestampSeconds": 1360,
+      "text": "Keep going?"
+    },
+    {
+      "timestampSeconds": 1366,
+      "text": "Keep going."
+    },
+    {
+      "timestampSeconds": 1367,
+      "text": "Why is everything in Japanese, though?"
+    },
+    {
+      "timestampSeconds": 1368,
+      "text": "今日は私たちの旅行は9日目です。"
+    },
+    {
+      "timestampSeconds": 1377,
+      "text": "Wait."
+    },
+    {
+      "timestampSeconds": 1379,
+      "text": "今日は私たち、今日、today?"
+    },
+    {
+      "timestampSeconds": 1382,
+      "text": "Today."
+    },
+    {
+      "timestampSeconds": 1382,
+      "text": "私たちの旅行の9日目です。"
+    },
+    {
+      "timestampSeconds": 1386,
+      "text": "Today."
+    },
+    {
+      "timestampSeconds": 1392,
+      "text": "Today is."
+    },
+    {
+      "timestampSeconds": 1394,
+      "text": "Is."
+    },
+    {
+      "timestampSeconds": 1395,
+      "text": "Our."
+    },
+    {
+      "timestampSeconds": 1396,
+      "text": "Our."
+    },
+    {
+      "timestampSeconds": 1396,
+      "text": "9th."
+    },
+    {
+      "timestampSeconds": 1661,
+      "text": "He always gets back late and makes excuses."
+    },
+    {
+      "timestampSeconds": 1674,
+      "text": "Okay, okay, okay."
+    },
+    {
+      "timestampSeconds": 1676,
+      "text": "He always gets back late and makes excuses."
+    },
+    {
+      "timestampSeconds": 1684,
+      "text": "Okay."
+    },
+    {
+      "timestampSeconds": 1686,
+      "text": "Nice."
+    },
+    {
+      "timestampSeconds": 1687,
+      "text": "彼らの子犬はかわいいですが、私はまだ怒っています。"
+    },
+    {
+      "timestampSeconds": 1698,
+      "text": "This sentence doesn't make sense."
+    },
+    {
+      "timestampSeconds": 1701,
+      "text": "彼らの子犬はかわいいですが、私はまだ怒っています。"
+    },
+    {
+      "timestampSeconds": 1706,
+      "text": "何の状況なんですよ?"
+    },
+    {
+      "timestampSeconds": 1709,
+      "text": "何の状況なのか、これは。"
+    },
+    {
+      "timestampSeconds": 1715,
+      "text": "どういう状況?"
+    },
+    {
+      "timestampSeconds": 1717,
+      "text": "I don't understand the situation."
+    },
+    {
+      "timestampSeconds": 1723,
+      "text": "Their puppy is cute, but..."
+    },
+    {
+      "timestampSeconds": 1727,
+      "text": "But I'm still..."
+    },
+    {
+      "timestampSeconds": 1729,
+      "text": "Angry."
+    },
+    {
+      "timestampSeconds": 1730,
+      "text": "What kind of situation is this?"
+    },
+    {
+      "timestampSeconds": 1737,
+      "text": "What does their dog got to do with everything?"
+    },
+    {
+      "timestampSeconds": 1743,
+      "text": "Whatever."
+    },
+    {
+      "timestampSeconds": 1745,
+      "text": "We're halfway through our first class!"
+    },
+    {
+      "timestampSeconds": 1747,
+      "text": "Let's go."
+    },
+    {
+      "timestampSeconds": 1748,
+      "text": "He needs to call his dad before buying a ticket."
+    },
+    {
+      "timestampSeconds": 1752,
+      "text": "Too fast!"
+    },
+    {
+      "timestampSeconds": 1754,
+      "text": "Too fast!"
+    },
+    {
+      "timestampSeconds": 1756,
+      "text": "He needs to call his dad before buying a ticket."
+    },
+    {
+      "timestampSeconds": 2065,
+      "text": "chizu wo konyuu i purchased a map"
+    },
+    {
+      "timestampSeconds": 2071,
+      "text": "yeah!"
+    },
+    {
+      "timestampSeconds": 2073,
+      "text": "watashitachi wa kyou iru ka o"
+    },
+    {
+      "timestampSeconds": 2087,
+      "text": "mirareru kamoshiremasu"
+    },
+    {
+      "timestampSeconds": 2089,
+      "text": "iru ka?"
+    },
+    {
+      "timestampSeconds": 2090,
+      "text": "what's an iru ka?"
+    },
+    {
+      "timestampSeconds": 2094,
+      "text": "we today"
+    },
+    {
+      "timestampSeconds": 2096,
+      "text": "wait no"
+    },
+    {
+      "timestampSeconds": 2098,
+      "text": "we may be able to see"
+    },
+    {
+      "timestampSeconds": 2111,
+      "text": "oh it's a dolphin"
+    },
+    {
+      "timestampSeconds": 2113,
+      "text": "a dolphin"
+    },
+    {
+      "timestampSeconds": 2116,
+      "text": "today"
+    },
+    {
+      "timestampSeconds": 2117,
+      "text": "oh"
+    },
+    {
+      "timestampSeconds": 2123,
+      "text": "kare wa jibun de watashi no tanjoubi kaado wo desai shimashita"
+    },
+    {
+      "timestampSeconds": 2130,
+      "text": "kare wa jibun de watashi no tanjoubi kaado wo desai shimashita"
+    },
+    {
+      "timestampSeconds": 2139,
+      "text": "he by himself designed my birthday card"
+    },
+    {
+      "timestampSeconds": 2156,
+      "text": "that makes sense in english i don't think that makes sense in english"
+    },
+    {
+      "timestampSeconds": 2161,
+      "text": "he by himself no no"
+    },
+    {
+      "timestampSeconds": 2168,
+      "text": "is it just he designed my birthday card by himself"
+    },
+    {
+      "timestampSeconds": 2180,
+      "text": "he designed my birthday card by himself"
+    },
+    {
+      "timestampSeconds": 2183,
+      "text": "that's right"
+    },
+    {
+      "timestampSeconds": 2185,
+      "text": "he designed my birthday card by himself"
+    },
+    {
+      "timestampSeconds": 2187,
+      "text": "hey"
+    },
+    {
+      "timestampSeconds": 2192,
+      "text": "okay"
+    },
+    {
+      "timestampSeconds": 2436,
+      "text": "um she's at the movies again isn't she"
+    },
+    {
+      "timestampSeconds": 2437,
+      "text": "uh"
+    },
+    {
+      "timestampSeconds": 2438,
+      "text": "kanozo wa"
+    },
+    {
+      "timestampSeconds": 2439,
+      "text": "mata"
+    },
+    {
+      "timestampSeconds": 2440,
+      "text": "ega"
+    },
+    {
+      "timestampSeconds": 2441,
+      "text": "kan"
+    },
+    {
+      "timestampSeconds": 2442,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2443,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2444,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2445,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2446,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2447,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2448,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2449,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2450,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2451,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2452,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2453,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2454,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2455,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2456,
+      "text": "no"
+    },
+    {
+      "timestampSeconds": 2457,
+      "text": "no no"
+    },
+    {
+      "timestampSeconds": 2459,
+      "text": "ega"
+    },
+    {
+      "timestampSeconds": 2460,
+      "text": "kan"
+    },
+    {
+      "timestampSeconds": 2746,
+      "text": "I like that book, but..."
+    },
+    {
+      "timestampSeconds": 2747,
+      "text": "I..."
+    },
+    {
+      "timestampSeconds": 2748,
+      "text": "I..."
+    },
+    {
+      "timestampSeconds": 2752,
+      "text": "Book."
+    },
+    {
+      "timestampSeconds": 2759,
+      "text": "Where's the but?"
+    },
+    {
+      "timestampSeconds": 2763,
+      "text": "There's no but."
+    },
+    {
+      "timestampSeconds": 2764,
+      "text": "But?"
+    },
+    {
+      "timestampSeconds": 2765,
+      "text": "Where's the but?"
+    },
+    {
+      "timestampSeconds": 2766,
+      "text": "Where's the but?"
+    },
+    {
+      "timestampSeconds": 2767,
+      "text": "Where's the but?"
+    },
+    {
+      "timestampSeconds": 2768,
+      "text": "I..."
+    },
+    {
+      "timestampSeconds": 2771,
+      "text": "Oh, is it..."
+    },
+    {
+      "timestampSeconds": 2774,
+      "text": "Although..."
+    },
+    {
+      "timestampSeconds": 2775,
+      "text": "I..."
+    },
+    {
+      "timestampSeconds": 2776,
+      "text": "What?"
+    },
+    {
+      "timestampSeconds": 2781,
+      "text": "No but!"
+    },
+    {
+      "timestampSeconds": 2783,
+      "text": "The although was..."
+    },
+    {
+      "timestampSeconds": 2784,
+      "text": "Uh..."
+    },
+    {
+      "timestampSeconds": 2785,
+      "text": "Uh..."
+    },
+    {
+      "timestampSeconds": 2786,
+      "text": "Supposed to be even though..."
+    },
+    {
+      "timestampSeconds": 2787,
+      "text": "Like..."
+    },
+    {
+      "timestampSeconds": 2791,
+      "text": "The..."
+    },
+    {
+      "timestampSeconds": 2792,
+      "text": "Book..."
+    },
+    {
+      "timestampSeconds": 2797,
+      "text": "I..."
+    },
+    {
+      "timestampSeconds": 3042,
+      "text": "Oh, like bar."
+    },
+    {
+      "timestampSeconds": 3044,
+      "text": "Bar."
+    },
+    {
+      "timestampSeconds": 3048,
+      "text": "We."
+    },
+    {
+      "timestampSeconds": 3048,
+      "text": "We."
+    },
+    {
+      "timestampSeconds": 3052,
+      "text": "We are going to go."
+    },
+    {
+      "timestampSeconds": 3053,
+      "text": "We are going to go."
+    },
+    {
+      "timestampSeconds": 3054,
+      "text": "Hmm?"
+    },
+    {
+      "timestampSeconds": 3057,
+      "text": "Plan."
+    },
+    {
+      "timestampSeconds": 3058,
+      "text": "Plan."
+    },
+    {
+      "timestampSeconds": 3059,
+      "text": "To."
+    },
+    {
+      "timestampSeconds": 3060,
+      "text": "To go to the fanciest bar in town."
+    },
+    {
+      "timestampSeconds": 3068,
+      "text": "Amazing."
+    },
+    {
+      "timestampSeconds": 3069,
+      "text": "While I was painting the fence, she was eating candy."
+    },
+    {
+      "timestampSeconds": 3073,
+      "text": "While I was painting the fence, she was eating..."
+    },
+    {
+      "timestampSeconds": 3547,
+      "text": "really is so cool they're right or is it really cool a prince riding a white horse is really cool"
+    },
+    {
+      "timestampSeconds": 3579,
+      "text": "is that better"
+    },
+    {
+      "timestampSeconds": 3581,
+      "text": "what is that ah the prince who rides a white horse is so cool"
+    },
+    {
+      "timestampSeconds": 3594,
+      "text": "oh wait did i finish amazing amazing okay i think we can do one more"
+    },
+    {
+      "timestampSeconds": 3610,
+      "text": "i'll do one more let's do the very last level all right this is the last level okay you did"
+    },
+    {
+      "timestampSeconds": 3630,
+      "text": "what is that you there is that boiled boil final boss okay nice okay i think i'll have pineapple next"
+    },
+    {
+      "timestampSeconds": 3646,
+      "text": "uh pineapple i think i'll have pineapple like pineapple"
+    },
+    {
+      "timestampSeconds": 3656,
+      "text": "pineapple"
+    },
+    {
+      "timestampSeconds": 4007,
+      "text": "you don't charge your soap in the morning you really should"
+    },
+    {
+      "timestampSeconds": 4010,
+      "text": "i charge my phone in the morning"
+    },
+    {
+      "timestampSeconds": 4020,
+      "text": "you don't charge your soap in the morning"
+    },
+    {
+      "timestampSeconds": 4023,
+      "text": "what do you mean we traveled to kenya and saw many salty"
+    },
+    {
+      "timestampSeconds": 4034,
+      "text": "you're a salty animal i'd like to report there's a very salty animal sitting on my"
+    },
+    {
+      "timestampSeconds": 4039,
+      "text": "head right now we love salty animals i myself am a salty"
+    },
+    {
+      "timestampSeconds": 4048,
+      "text": "animal"
+    },
+    {
+      "timestampSeconds": 4055,
+      "text": "carabao"
+    },
+    {
+      "timestampSeconds": 4057,
+      "text": "carabao"
+    },
+    {
+      "timestampSeconds": 4067,
+      "text": "腰? 転んで腰を痛めたので、横になった方がいいです。"
+    },
+    {
+      "timestampSeconds": 4076,
+      "text": "あー、はいはいはいはい。"
+    },
+    {
+      "timestampSeconds": 4078,
+      "text": "彼は、"
+    },
+    {
+      "timestampSeconds": 4084,
+      "text": "He hurt."
+    },
+    {
+      "timestampSeconds": 4087,
+      "text": "He fell down."
+    },
+    {
+      "timestampSeconds": 4093,
+      "text": "Down and hurt his back."
+    },
+    {
+      "timestampSeconds": 4097,
+      "text": "So, he should."
+    },
+    {
+      "timestampSeconds": 4101,
+      "text": "He fell and hurt his back."
+    },
+    {
+      "timestampSeconds": 4108,
+      "text": "Back."
+    },
+    {
+      "timestampSeconds": 4110,
+      "text": "So, he should lie down."
+    },
+    {
+      "timestampSeconds": 4116,
+      "text": "Yes."
+    },
+    {
+      "timestampSeconds": 4117,
+      "text": "Sweet."
+    },
+    {
+      "timestampSeconds": 4120,
+      "text": "She's."
+    },
+    {
+      "timestampSeconds": 4121,
+      "text": "Little brother's really annoying."
+    },
+    {
+      "timestampSeconds": 4133,
+      "text": "All because of the little brother."
+    },
+    {
+      "timestampSeconds": 4300,
+      "text": "But you have a wife?"
+    },
+    {
+      "timestampSeconds": 4302,
+      "text": "Yeah."
+    },
+    {
+      "timestampSeconds": 4304,
+      "text": "Sure."
+    },
+    {
+      "timestampSeconds": 4305,
+      "text": "Bring your boyfriend, too."
+    },
+    {
+      "timestampSeconds": 4306,
+      "text": "Okay."
+    },
+    {
+      "timestampSeconds": 4307,
+      "text": "She sounds very excited, so I'm going to add exclamation marks."
+    },
+    {
+      "timestampSeconds": 4310,
+      "text": "You know, you express emotion through punctuation, right?"
+    },
+    {
+      "timestampSeconds": 4315,
+      "text": "Sure."
+    },
+    {
+      "timestampSeconds": 4317,
+      "text": "What if I."
+    },
+    {
+      "timestampSeconds": 4318,
+      "text": "Bring your boyfriend, too."
+    },
+    {
+      "timestampSeconds": 4333,
+      "text": "Doesn't that fit?"
+    },
+    {
+      "timestampSeconds": 4338,
+      "text": "Wait."
+    },
+    {
+      "timestampSeconds": 4338,
+      "text": "Why do you look so happy that someone else is bringing their boyfriend?"
+    },
+    {
+      "timestampSeconds": 4342,
+      "text": "Hey, you there."
+    },
+    {
+      "timestampSeconds": 4345,
+      "text": "No, right?"
+    },
+    {
+      "timestampSeconds": 4346,
+      "text": "You're not my boyfriend."
+    },
+    {
+      "timestampSeconds": 4348,
+      "text": "You said bring him, bring him."
+    },
+    {
+      "timestampSeconds": 4350,
+      "text": "You can't make that face."
+    },
+    {
+      "timestampSeconds": 4353,
+      "text": "Bruh."
+    },
+    {
+      "timestampSeconds": 4358,
+      "text": "Hey, do you want to go somewhere later?"
+    },
+    {
+      "timestampSeconds": 4362,
+      "text": "Hey."
+    },
+    {
+      "timestampSeconds": 4363,
+      "text": "Hey."
+    },
+    {
+      "timestampSeconds": 4363,
+      "text": "Do you want to go somewhere later?"
+    },
+    {
+      "timestampSeconds": 4369,
+      "text": "Later."
+    },
+    {
+      "timestampSeconds": 4586,
+      "text": "Kippu."
+    },
+    {
+      "timestampSeconds": 4590,
+      "text": "Kippu."
+    },
+    {
+      "timestampSeconds": 4591,
+      "text": "Kippu."
+    },
+    {
+      "timestampSeconds": 4592,
+      "text": "Kippu."
+    },
+    {
+      "timestampSeconds": 4593,
+      "text": "Kippu."
+    },
+    {
+      "timestampSeconds": 4596,
+      "text": "Kippu."
+    },
+    {
+      "timestampSeconds": 4597,
+      "text": "You can..."
+    },
+    {
+      "timestampSeconds": 4598,
+      "text": "Buying tickets online is also easy."
+    },
+    {
+      "timestampSeconds": 4604,
+      "text": "Wait, this is not makes sense."
+    },
+    {
+      "timestampSeconds": 4622,
+      "text": "Buying tickets online..."
+    },
+    {
+      "timestampSeconds": 4971,
+      "text": "Go buy some bread."
+    },
+    {
+      "timestampSeconds": 4980,
+      "text": "Toku."
+    },
+    {
+      "timestampSeconds": 4981,
+      "text": "You don't know their complaints seriously, by the way."
+    },
+    {
+      "timestampSeconds": 4988,
+      "text": "Go buy some bread."
+    },
+    {
+      "timestampSeconds": 4989,
+      "text": "Kano."
+    },
+    {
+      "timestampSeconds": 4990,
+      "text": "The Japanese thing."
+    },
+    {
+      "timestampSeconds": 4993,
+      "text": "It's too difficult."
+    },
+    {
+      "timestampSeconds": 4994,
+      "text": "The Japanese thing."
+    },
+    {
+      "timestampSeconds": 5543,
+      "text": "man wait really hydrogen helium lithium beryllium boron isn't that iron was it what's that the"
+    },
+    {
+      "timestampSeconds": 5553,
+      "text": "hydrogen helium lithium beryllium boron oh i want to know that's great periodic list"
+    },
+    {
+      "timestampSeconds": 5571,
+      "text": "really a periodic table hydrogen helium lithium beryllium boron carbon nitrogen oxygen"
+    },
+    {
+      "timestampSeconds": 5584,
+      "text": "blue"
+    },
+    {
+      "timestampSeconds": 5585,
+      "text": "neon sodium magnesium aluminum silicon phosphorus sulfur chlorine iron okay i can't remember all that"
+    },
+    {
+      "timestampSeconds": 5598,
+      "text": "um thank you so much"
+    },
+    {
+      "timestampSeconds": 5618,
+      "text": "thank you so much chin up you did pretty well for all holy jp members"
+    },
+    {
+      "timestampSeconds": 5623,
+      "text": "chin up you did pretty well for all holy jp members"
+    },
+    {
+      "timestampSeconds": 5624,
+      "text": "Shut up."
+    },
+    {
+      "timestampSeconds": 5625,
+      "text": "Yayoi!"
+    },
+    {
+      "timestampSeconds": 5626,
+      "text": "Thank you so much!"
+    },
+    {
+      "timestampSeconds": 5627,
+      "text": "Queenie's disappointing."
+    },
+    {
+      "timestampSeconds": 5628,
+      "text": "Shut up."
+    },
+    {
+      "timestampSeconds": 5629,
+      "text": "Oh!"
+    },
+    {
+      "timestampSeconds": 5630,
+      "text": "Barista!"
+    },
+    {
+      "timestampSeconds": 5631,
+      "text": "Thank you!"
+    },
+    {
+      "timestampSeconds": 5632,
+      "text": "English is difficult."
+    },
+    {
+      "timestampSeconds": 5633,
+      "text": "Shut up."
+    },
+    {
+      "timestampSeconds": 5634,
+      "text": "Um..."
+    },
+    {
+      "timestampSeconds": 5635,
+      "text": "Jeffstar!"
+    },
+    {
+      "timestampSeconds": 5636,
+      "text": "Congrats on sweet appetite."
+    },
+    {
+      "timestampSeconds": 5637,
+      "text": "Do it song with girl."
+    },
+    {
+      "timestampSeconds": 5638,
+      "text": "I can't wait for the digital release."
+    },
+    {
+      "timestampSeconds": 5639,
+      "text": "I'm hearing it live on the holo27 stage."
+    },
+    {
+      "timestampSeconds": 5863,
+      "text": "I'm so excited."
+    },
+    {
+      "timestampSeconds": 5887,
+      "text": "How expensive was the voice you bought?"
+    },
+    {
+      "timestampSeconds": 5889,
+      "text": "Oh, I didn't purchase a new voice yet, I'm still looking."
+    },
+    {
+      "timestampSeconds": 5893,
+      "text": "I'm still looking."
+    },
+    {
+      "timestampSeconds": 5894,
+      "text": "Yeah, I'm really excited to be able to sing a song with her though, what an honor."
+    },
+    {
+      "timestampSeconds": 5894,
+      "text": "Yeah, I'm really excited to be able to sing a song with her though, what an honor."
+    },
+    {
+      "timestampSeconds": 5902,
+      "text": "Get excited guys!"
+    },
+    {
+      "timestampSeconds": 5903,
+      "text": "I have no idea when it's..."
+    },
+    {
+      "timestampSeconds": 5905,
+      "text": "Releasing, I have no idea, anything, I've been very bad lately, I've been just trying"
+    },
+    {
+      "timestampSeconds": 5909,
+      "text": "to survive, I don't know anything about anything, um, but, um, once I figure it out, I shall"
+    },
+    {
+      "timestampSeconds": 5918,
+      "text": "retweet, and I shall let you guys know."
+    },
+    {
+      "timestampSeconds": 5922,
+      "text": "It's coming out tomorrow!"
+    },
+    {
+      "timestampSeconds": 5928,
+      "text": "Really?"
+    },
+    {
+      "timestampSeconds": 6172,
+      "text": "Because I was supposed to play it today."
+    },
+    {
+      "timestampSeconds": 6179,
+      "text": "I was supposed to play it today, but then I didn't play it today."
+    },
+    {
+      "timestampSeconds": 6182,
+      "text": "Because I had Duolingo."
+    },
+    {
+      "timestampSeconds": 6183,
+      "text": "I might play it tomorrow."
+    },
+    {
+      "timestampSeconds": 6185,
+      "text": "Fourth time's a charm, Delivering Hope game."
+    },
+    {
+      "timestampSeconds": 6197,
+      "text": "For real this time, for real, for real."
+    },
+    {
+      "timestampSeconds": 6200,
+      "text": "For real, for real."
+    },
+    {
+      "timestampSeconds": 6205,
+      "text": "For real, for real, for real."
+    },
+    {
+      "timestampSeconds": 6207,
+      "text": "Yeah."
+    },
+    {
+      "timestampSeconds": 6209,
+      "text": "For real, for real."
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": null,
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=W8VzO9ZE2-I",
+    "streamPublishedAt": "2023-02-16T04:36:25.000Z",
+    "articlePublishedAt": "2026-11-09T02:43:51Z",
+    "articleUpdatedAt": "2026-11-09T02:43:51Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_smkxcszskqm",
+      "slug": "hakos-baelz-smkxcszskqm",
+      "videoId": "smKxCsZSkqM",
+      "title": "Summary of Claims and Confidence Levels",
+      "summaryOneLine": "The speaker is preoccupied with the thought of what they will eat. This is supported by quotes such as 'I'm thinking about it a lot' and 'I don't know what I'm going to eat next', with high confidence.",
+      "streamType": "chatting",
+      "publishedAt": "2026-06-28T01:01:16.000Z",
+      "durationSeconds": 3477,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_r3xpghkhawu",
+      "slug": "hakos-baelz-r3xpghkhawu",
+      "videoId": "R3XpghKHaWU",
+      "title": "スピーカーの感情と今後の活動に関する考察",
+      "summaryOneLine": "スピーカーは、今後の協力活動について不安と希望の両方の感情を抱えている様子が窺える。具体的には、「But hopefully I can.」や「And then there's a very exciting collab that's happening on Sunday.」といった発言から、今後の協力活動に期待を寄せている一方で、その詳細についてはまだ明らかにされていないことがわかる。",
+      "streamType": "other",
+      "publishedAt": "2026-06-08T02:11:28.000Z",
+      "durationSeconds": 6202,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_hp8jp6fdd-i",
+      "slug": "hakos-baelz-hp8jp6fdd-i",
+      "videoId": "Hp8jp6fdd-I",
+      "title": "HoloScopeのひなたが語る物語の魅力とゲームの感動",
+      "summaryOneLine": "ひなたは、この物語が非常に魅力的であり、30分間楽しむことができると言っています。彼女は「Ah」という感嘆の声を上げながら、その体験を語っています。",
+      "streamType": "other",
+      "publishedAt": "2026-03-02T00:50:00.000Z",
+      "durationSeconds": 2388,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-03",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_ctbzb0db5hu",
+      "slug": "hakos-baelz-ctbzb0db5hu",
+      "videoId": "Ctbzb0dB5HU",
+      "title": "Summary of Claims and Confidence Levels",
+      "summaryOneLine": "The speaker is discussing a puzzle involving a bomb and an empty space. They mention that the corner is always free and that the empty space is a key element in solving the puzzle. There are two possible locations for the bomb, and the speaker is considering the implications of each choice. They also mention that one of the two locations must be the bomb, and if one is the bomb, the other is not.",
+      "streamType": "other",
+      "publishedAt": "2026-02-27T04:04:59.000Z",
+      "durationSeconds": 5861,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-02",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_las46qlpbc0",
+      "slug": "hakos-baelz-las46qlpbc0",
+      "videoId": "lAS46QLpBc0",
+      "title": "Summary of Claims from the Transcript",
+      "summaryOneLine": "The speaker mentions having a strict schedule, which helps them manage their time effectively.",
+      "streamType": "other",
+      "publishedAt": "2026-02-19T02:54:46.000Z",
+      "durationSeconds": 5068,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-02",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_mqbu8cbxpii",
+      "slug": "hakos-baelz-mqbu8cbxpii",
+      "videoId": "mQbU8cbxpiI",
+      "title": "Stream Summary: Chocolate Setting, Fridge Space, Valentine's Day, and Upcoming Plans",
+      "summaryOneLine": "During the stream, a discussion arose about how long it takes for chocolate to set, with one person asking, 'how long does it take for chocolate to set.' Another participant suggested putting the chocolate in the fridge, but someone mentioned they don't have space in their fridge. A follow-up comment indicated that they intended to put the chocolate back in the fridge after leaving it open.",
+      "streamType": "other",
+      "publishedAt": "2026-02-14T02:41:47.000Z",
+      "durationSeconds": 5591,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_hakos_baelz",
+        "slug": "hakos-baelz",
+        "displayName": "Hakos Baelz"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-02",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

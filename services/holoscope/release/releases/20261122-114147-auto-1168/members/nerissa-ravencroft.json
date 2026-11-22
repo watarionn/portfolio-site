@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "mem_nerissa_ravencroft",
+  "slug": "nerissa-ravencroft",
+  "displayName": "Nerissa Ravencroft",
+  "nameJa": "ネリッサ・レイヴンクロフト",
+  "channelId": "UC_sFNM0z0MWm9A6WlKPuMMg",
+  "officialChannelUrl": "https://www.youtube.com/channel/UC_sFNM0z0MWm9A6WlKPuMMg",
+  "activityStatus": "active",
+  "summary": null,
+  "beginnerRecommendations": [],
+  "latestStreams": [
+    {
+      "uid": "str_0wxjd02p9ii",
+      "slug": "nerissa-ravencroft-0wxjd02p9ii",
+      "videoId": "0WXjD02P9II",
+      "title": "5時間の巻き戻りを「次の一手」へ　Nerissa RavencroftのWind Waker実況",
+      "summaryOneLine": "作品の筋を再話せず、長時間配信の大きな失敗後に配信者が操作と次行動をどう取り戻すかを読める",
+      "streamType": "game",
+      "publishedAt": "2026-07-20T00:55:13.000Z",
+      "durationSeconds": 19250,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_v-fyftew0lwm",
+      "slug": "nerissa-ravencroft-fyftew0lwm",
+      "videoId": "-FyFTEw0lwM",
+      "title": "「Charが気になる」から宇宙世紀へ　Nerissaの『Gundam The Origin』watchalong",
+      "summaryOneLine": "作品の筋書き要約ではなく、知識がない状態からシリーズへ入るときに、人物への関心、分からない用語への質問、感情の追跡をどう足場にできるかが分かる",
+      "streamType": "other",
+      "publishedAt": "2026-04-11T00:55:34.000Z",
+      "durationSeconds": 27709,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_1p-b4c7twsu",
+      "slug": "nerissa-ravencroft-1p-b4c7twsu",
+      "videoId": "1p-b4c7TwsU",
+      "title": "1回でSSR3人、それでも持ち帰れない　NerissaがStarSaviorで「ガチャを回す喜び」を満喫",
+      "summaryOneLine": "約1時間の案件配信から、Nerissaの大当たりガチャと、自分のアカウントではないことへの惜しさ、ゲームへの興味までをまとめて追える",
+      "streamType": "game",
+      "publishedAt": "2026-04-03T02:55:22.000Z",
+      "durationSeconds": 3935,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-04",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_etz38heocrg",
+      "slug": "nerissa-ravencroft-etz38heocrg",
+      "videoId": "eTZ38hEOCrg",
+      "title": "Speaker's Unique Use of 'Alack' and Interactions with Fuwawa",
+      "summaryOneLine": "The speaker claims to be the only person who uses the word 'alack'. This assertion is supported by multiple statements, including 'because who the fuck says alack', 'me', 'that's who', and 'I'm the only person in the world'. These quotes indicate a strong personal identification with the word 'alack', suggesting that the speaker views its use as a distinctive trait.",
+      "streamType": "other",
+      "publishedAt": "2026-03-29T00:55:10.000Z",
+      "durationSeconds": 4571,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-03",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_dr9_1r1_ima",
+      "slug": "nerissa-ravencroft-dr9-1r1-ima",
+      "videoId": "dR9_1R1_imA",
+      "title": "Summary of Claims from the Transcript",
+      "summaryOneLine": "The transcript mentions Moko-chan and Arisa, with Arisa located in the pink house. This information is derived from the dialogue: 'Across the street, look in the pink house.'",
+      "streamType": "other",
+      "publishedAt": "2026-03-18T02:26:25.000Z",
+      "durationSeconds": 6547,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-03",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    },
+    {
+      "uid": "str_g64bthuip4s",
+      "slug": "nerissa-ravencroft-g64bthuip4s",
+      "videoId": "G64BThUip4s",
+      "title": "Summary of Claims from the Transcript",
+      "summaryOneLine": "The concert is specifically targeted at West Coast baddies, as indicated by the speaker's statement: 'If you're a West Coast baddie, this is the concert for you.' This suggests that the event is tailored to a particular audience segment.",
+      "streamType": "other",
+      "publishedAt": "2026-03-17T00:55:48.000Z",
+      "durationSeconds": 5952,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_nerissa_ravencroft",
+        "slug": "nerissa-ravencroft",
+        "displayName": "Nerissa Ravencroft"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-03",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": []
+    }
+  ],
+  "streamStyle": {
+    "totalStreams": 96,
+    "soloCount": 95,
+    "collaborationCount": 1,
+    "types": [
+      {
+        "value": "other",
+        "label": "その他",
+        "count": 64
+      },
+      {
+        "value": "game",
+        "label": "ゲーム実況",
+        "count": 19
+      },
+      {
+        "value": "chatting",
+        "label": "雑談",
+        "count": 9
+      },
+      {
+        "value": "event",
+        "label": "企画",
+        "count": 4
+      }
+    ]
+  },
+  "topGames": [],
+  "topSeries": [],
+  "learningProfile": {
+    "evaluatedStreams": 0,
+    "cefrDistribution": [],
+    "averageSpeechSpeedWpm": null
+  },
+  "frequentPhrases": [],
+  "collaborations": [
+    {
+      "uid": "mem_ninomae_inanis",
+      "slug": "ninomae-inanis",
+      "displayName": "Ninomae Ina'nis",
+      "streamCount": 1,
+      "label": "共演配信 1件"
+    }
+  ],
+  "streamSearchUrl": "/members/nerissa-ravencroft/streams/",
+  "relatedArticles": [],
+  "officialLinks": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/channel/UC_sFNM0z0MWm9A6WlKPuMMg",
+      "checkedAt": "2026-08-28T05:03:14Z"
+    }
+  ],
+  "createdAt": "2026-08-28T05:03:14Z",
+  "updatedAt": "2026-08-28T05:03:14Z"
+}

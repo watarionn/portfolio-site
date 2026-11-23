@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0.0",
+  "shard": 12,
+  "items": [
+    {
+      "id": 1200,
+      "uid": "str_gj_v8msalm4",
+      "slug": "mori-calliope-gj-v8msalm4",
+      "videoId": "gj_V8MsAlM4",
+      "title": "Summary of Claims and Source Quotes",
+      "summaryOneLine": "The speaker reflects on nostalgic feelings associated with games, noting that even many years ago, they still hold a sense of nostalgia. They also mention a drastically different perception of time compared to humans, stating that a hundred years to them might feel like a second to humans. This suggests a unique, possibly non-linear experience of time.",
+      "streamType": "other",
+      "publishedAt": "2020-09-15T11:52:09.000Z",
+      "durationSeconds": 2853,
+      "thumbnailUrl": null,
+      "videoStatus": "unavailable",
+      "primaryMember": {
+        "uid": "mem_mori_calliope",
+        "slug": "mori-calliope",
+        "displayName": "Mori Calliope"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2020-09",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": []
+    }
+  ]
+}

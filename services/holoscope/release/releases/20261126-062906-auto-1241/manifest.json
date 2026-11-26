@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-26T05:39:12Z",
+  "generatedAt": "2026-11-26T06:30:06Z",
   "counts": {
     "members": 14,
     "streams": 1241,
@@ -51,17 +51,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30874,
-      "sha256": "37fb2c93986c7f85bee8374f5f9a99e52677c2df61b67c203a3b0087154b6104"
+      "sha256": "338f6b7783daffffaccacee3641d43246c1877d7e9c7eca575ae40eea59fa434"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "36756419ae6b9d0156adcdd96d791883ecf8a689973efedbbe21973fd4166a0f"
+      "sha256": "a3a68d2dbc7607c8528c6420d38e21a62b1e1c22f98b77f54a46da4f41a44c0a"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30868,
-      "sha256": "fd52132bdbe607a3dda5d89d319c1aa935f4005c79ac3b62a92de13fe803ec1d"
+      "sha256": "91421e6ecebcfa0d3aa7cfba29ccbfbbeea25bbd0e5ea04bc5ed2675e3b37c0d"
     },
     {
       "path": "games/index.json",
@@ -216,7 +216,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "e7c5168140fab222f6bab0619690858bd047dc67d18bd3058e38df4a40cfb22f"
+      "sha256": "e4ccca3bb07f996f4848484f0808ef87492aba339ac2897317cf551ec8029a55"
     },
     {
       "path": "phrases/index.json",
@@ -265,8 +265,8 @@
     },
     {
       "path": "search/streams/cards/0006.json",
-      "bytes": 100453,
-      "sha256": "cd8756cadb96b2536ff63ee8428bd71cbecdc0a5b9a251c424ec618167469b5b"
+      "bytes": 100451,
+      "sha256": "b2e588405066103e35a6643b169886e2e992be0eca68eeff8203e0d8a8defb44"
     },
     {
       "path": "search/streams/cards/0007.json",
@@ -345,8 +345,8 @@
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 346982,
-      "sha256": "f3995594286135822163d24468826300d21d6a74afee9defce83f4f5b7a083bd"
+      "bytes": 346970,
+      "sha256": "7c8029ae44ede199f8f04093f8f3187b2fedea93e7116702fe36acdd765f2744"
     },
     {
       "path": "search/streams/manifest.json",
@@ -401,22 +401,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "d81b063ec252970865515292f8ceb9511fac16fe864d4e0a766116b6bf202a1c"
+      "sha256": "a0731cac1b60e75f36a91b7ae668def84b8d407e422cbb7e6876c1051552df61"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "3c1d80aa47ff5dc516ea2c9570ad5a59bcf9f601fb965f9d5bdc750ce992d74a"
+      "sha256": "a2ec3ec5659ce144ff248f89ee1a109d45a3451e0b7dbcb4dc15f85cbd56a83d"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "8766a227f52efb669edc32c5641cfac43aa6151653e7f00f063c16346776a496"
+      "sha256": "3c5855de3b151113e802bc5068aa53c4490288c3988a2d9498898ebdee44b92e"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "f0b59e4d727a1a78346f860accd105d63bad59331b8ae347d2954cb7d19409f0"
+      "sha256": "6eb8901f1db056320e0e21b46f9da80cca8a17c093b1d4b639485b43e8b520f4"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -535,8 +535,8 @@
     },
     {
       "path": "streams/cecilia-immergreen-6ybojkanwvg.json",
-      "bytes": 13227,
-      "sha256": "89f66c82da9b7ba19033f1b180f4f354044fd4795bcdf773ebbef11d1801c1fb"
+      "bytes": 14480,
+      "sha256": "02bbaa393d40b1e113a83cecd32a3e72b3ddcc4fa3b46e93124f8fcbd5983ed1"
     },
     {
       "path": "streams/cecilia-immergreen-72peil3truy.json",
@@ -1785,8 +1785,8 @@
     },
     {
       "path": "streams/fuwamoco-gzvc7mqg-ky.json",
-      "bytes": 13914,
-      "sha256": "2d134c2f3d1358cca2187881a5cee4b7a4676258dabb0b493837d83718d3999f"
+      "bytes": 13749,
+      "sha256": "4ed56ad2fd60fd95893dfe25c881171aa0cb9120a4492a3aa48753633ad84ecd"
     },
     {
       "path": "streams/fuwamoco-h27za4dkaow.json",
@@ -4645,8 +4645,8 @@
     },
     {
       "path": "streams/nerissa-ravencroft-4ynthszvgho.json",
-      "bytes": 15058,
-      "sha256": "1ca25669917d10501ceb2b1a4bdca33f5ce144f08f6f56245ca1763cea28054e"
+      "bytes": 18705,
+      "sha256": "a1609f5ec1a4f10bc7c46c2c005528553ac1e8ec90ce9e120aa69a1abc522303"
     },
     {
       "path": "streams/nerissa-ravencroft-56vcub2kb7m.json",
@@ -5185,8 +5185,8 @@
     },
     {
       "path": "streams/ninomae-inanis-5yzz0trvhtu.json",
-      "bytes": 13005,
-      "sha256": "6ab577df5258ba631214744deabf94c091935f6ffcfc8446888dbf3894850e22"
+      "bytes": 14148,
+      "sha256": "a5b86af26c254b5def51ee9cecf15d642386e23f65fa88ae68e6e8f2d5f899fa"
     },
     {
       "path": "streams/ninomae-inanis-5zqhk4cnxpu.json",

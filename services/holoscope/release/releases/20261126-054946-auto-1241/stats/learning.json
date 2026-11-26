@@ -1,42 +1,12 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-26T04:56:12Z",
+  "generatedAt": "2026-11-26T05:50:33Z",
   "note": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
-  "counts": {
-    "streams": 1241,
-    "members": 14,
-    "games": 0,
-    "articles": 0,
-    "phrases": 0,
-    "evaluatedStreams": 0
-  },
-  "streamTypes": [
-    {
-      "value": "chatting",
-      "count": 64,
-      "sharePercent": 5.2
-    },
-    {
-      "value": "event",
-      "count": 108,
-      "sharePercent": 8.7
-    },
-    {
-      "value": "game",
-      "count": 229,
-      "sharePercent": 18.5
-    },
-    {
-      "value": "other",
-      "count": 839,
-      "sharePercent": 67.6
-    },
-    {
-      "value": "song",
-      "count": 1,
-      "sharePercent": 0.1
-    }
-  ],
+  "status": "insufficient_data",
+  "evaluatedStreamCount": 0,
+  "minimumRequired": 5,
+  "averages": null,
+  "cefrDistribution": [],
   "methodology": {
     "scope": "HoloScopeに登録済みの公開データだけを集計しています。YouTube全体やホロライブEN全体を表す統計ではありません。",
     "thresholds": {

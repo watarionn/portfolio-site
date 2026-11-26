@@ -1,42 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-26T06:30:06Z",
-  "counts": {
-    "members": 14,
-    "streams": 1241,
-    "generations": 0,
-    "games": 0,
-    "events": 0,
-    "series": 0,
-    "articles": 0,
-    "phrases": 0,
-    "slang": 0,
-    "learningStreams": 0
-  },
-  "search": {
-    "streamCount": 1241,
-    "perPage": 24,
-    "learningStreamCount": 0,
-    "learningPerPage": 24
-  },
-  "phase6": {
-    "statistics": [
-      "overview",
-      "members",
-      "games",
-      "learning"
-    ],
-    "sitemapFiles": 5,
-    "rssFeeds": 3,
-    "publicChecks": {
-      "status": "PASS",
-      "deploymentBlocked": false,
-      "fatalCount": 0,
-      "errorCount": 0,
-      "warningCount": 0,
-      "infoCount": 0
-    }
-  },
+  "releaseId": "20261126-073707-auto-1241",
+  "verifiedCommitSha": "2f34c884ca64641947fa81be170e58a3617a4fd1",
+  "checksReportSha256": "ed952d08bc49d8af704863633a8e504487d9cca4c978387ac5d91ffda0ea9871",
+  "createdAt": "2026-11-26T07:38:18Z",
   "files": [
     {
       "path": "articles/index.json",
@@ -51,17 +18,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30874,
-      "sha256": "338f6b7783daffffaccacee3641d43246c1877d7e9c7eca575ae40eea59fa434"
+      "sha256": "55b1df90c68b37f39fd3e659362717ae6ec31c469d0dbe9294dac7859916e08e"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "a3a68d2dbc7607c8528c6420d38e21a62b1e1c22f98b77f54a46da4f41a44c0a"
+      "sha256": "6870cc53520fa5f3ee3142992caff5112e55f04e69cb004d301562cda953581e"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30868,
-      "sha256": "91421e6ecebcfa0d3aa7cfba29ccbfbbeea25bbd0e5ea04bc5ed2675e3b37c0d"
+      "sha256": "71c6ab1acfb4d714af84e73e727197549dc1b70d680a812d1fe0f073dd419c1c"
     },
     {
       "path": "games/index.json",
@@ -137,6 +104,11 @@
       "path": "learning/streams/manifest.json",
       "bytes": 711,
       "sha256": "b38c4a4567f69ef1780543dbc00932afabad8644d7caea8446aad14ebe769fe4"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 235452,
+      "sha256": "0178da8f7d1279c9ff5423af19836e093c5d3bbaeaafbca69eb522e04310c576"
     },
     {
       "path": "members/cecilia-immergreen.json",
@@ -216,7 +188,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "e4ccca3bb07f996f4848484f0808ef87492aba339ac2897317cf551ec8029a55"
+      "sha256": "722eae1150f2737f77d323daf55ea2a18869ebca90d12490ef5328f0ee34c4a3"
     },
     {
       "path": "phrases/index.json",
@@ -401,22 +373,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "a0731cac1b60e75f36a91b7ae668def84b8d407e422cbb7e6876c1051552df61"
+      "sha256": "453f927d0c532b00160d9dd1c7f1ea5e64f5b198b7e760c3a9902c4ecea86825"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "a2ec3ec5659ce144ff248f89ee1a109d45a3451e0b7dbcb4dc15f85cbd56a83d"
+      "sha256": "66be6677c9f0bc77059be59768e6d0912ca7b4583936320b773addccc59d7a18"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "3c5855de3b151113e802bc5068aa53c4490288c3988a2d9498898ebdee44b92e"
+      "sha256": "2632c9a339038b461f0b36573a1f6d990f73a8d6871bce25469cdaefc398c565"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "6eb8901f1db056320e0e21b46f9da80cca8a17c093b1d4b639485b43e8b520f4"
+      "sha256": "50adbe9392697f8eae593d03ba76782f1cc6e08db1f92894312ad3f80cfc71d1"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -885,8 +857,8 @@
     },
     {
       "path": "streams/elizabeth-rose-bloodflame-jwgpvbl4yyq.json",
-      "bytes": 13988,
-      "sha256": "f34d779fc1543a705e67a0f45dee3e4df0ea08aba5f1a285397a35c95dca4523"
+      "bytes": 16657,
+      "sha256": "2d962b2da1abc50e2995bb470a11a8c22222d81b22535c1a588e106a9cb0d058"
     },
     {
       "path": "streams/elizabeth-rose-bloodflame-k79d-oftek.json",
@@ -2045,8 +2017,8 @@
     },
     {
       "path": "streams/gigi-murin-59ncr8q-xnc.json",
-      "bytes": 13337,
-      "sha256": "a32dd724cc0782e3637ccbe680e03599621e10ca609f55204a47e94c256580ec"
+      "bytes": 16411,
+      "sha256": "a6095f5a90ccdc8a4d8d546a5c8e4775956a55d4585c0f4b22858c1b5df68490"
     },
     {
       "path": "streams/gigi-murin-5bshkwcfss0.json",
@@ -4650,18 +4622,18 @@
     },
     {
       "path": "streams/nerissa-ravencroft-56vcub2kb7m.json",
-      "bytes": 13883,
-      "sha256": "1469420aa0965619baa19337431fc02b00465506c2e5869a9ada2078be912426"
+      "bytes": 15350,
+      "sha256": "2d601d265071aeaa3b9afe4bddac87a544169f4f85a22f05dd776ddfbab4e62e"
     },
     {
       "path": "streams/nerissa-ravencroft-5bdua7aagnm.json",
-      "bytes": 14472,
-      "sha256": "f15658fa44cbf9914354b9f8016aa26c9a6286971e24993a246378b9b7635b4c"
+      "bytes": 17643,
+      "sha256": "65e799f4d49fd087b734609a115990534d071d8ddff85f1bcac2186e90dfd7cf"
     },
     {
       "path": "streams/nerissa-ravencroft-5eukgkraxj8.json",
-      "bytes": 13144,
-      "sha256": "4de0ba9f9b7860475e351727988a78152c5c888839d0a4b102b3fdcdba71f2c7"
+      "bytes": 14641,
+      "sha256": "1bed6520afa8b207133cf93e4643143d67a66c4850521d89ee1cc925c546f235"
     },
     {
       "path": "streams/nerissa-ravencroft-6cl5ijoybzi.json",
@@ -4990,8 +4962,8 @@
     },
     {
       "path": "streams/nerissa-ravencroft-ryfd9oplymg.json",
-      "bytes": 15700,
-      "sha256": "104c01c8766f4c1f2cbde8aa800cf6f80e9010ae0a37f5a5aea4e55939961893"
+      "bytes": 19584,
+      "sha256": "c5b352ee9f975cc1d94da94065ab5322a063fc086988089d89df0a32336dfe58"
     },
     {
       "path": "streams/nerissa-ravencroft-t4qo14hjprq.json",
@@ -5210,8 +5182,8 @@
     },
     {
       "path": "streams/ninomae-inanis-8-xwkh9v1wq.json",
-      "bytes": 13869,
-      "sha256": "a0144f5816ce26635a3148ff4534411cf518f4dc3217046d4d157269ba96b2ec"
+      "bytes": 16387,
+      "sha256": "469a95dbca3cfab88501c34ae9e185686a0dc30c73abea81bb8f236e3f082f75"
     },
     {
       "path": "streams/ninomae-inanis-8l3ugw6yg4o.json",

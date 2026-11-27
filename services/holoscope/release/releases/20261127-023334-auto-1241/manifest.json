@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-27T01:45:09Z",
+  "generatedAt": "2026-11-27T02:34:13Z",
   "counts": {
     "members": 14,
     "streams": 1241,
@@ -51,17 +51,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30874,
-      "sha256": "cd1ec2d1bb8386e52c2c5aa452bb581c1311977547946389a2c0f5cfd6b515ee"
+      "sha256": "aeda31b881b6d99fa55233c19deaaea68b71e774dc3b62f5d97418adc78c24f0"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "7f95cb93ef91fa4c43d0e5e9f15cb98d9a1393fe3738f2e3d96bfd27619492c6"
+      "sha256": "78ce7b05c4430a8d89f9438748f19bf58a8ef0167640ce99d2b9df5a0337e5bb"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30868,
-      "sha256": "e037d591e8b7612f8eade4c54e6107d25851adff3777b91ae2b7e663887c9721"
+      "sha256": "3303de26aa15acce38f1cc3b6844c1bb91529f8e80e1b2ba5b56e0f84931d36e"
     },
     {
       "path": "games/index.json",
@@ -216,7 +216,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "d122248586607e33e2f55479803504d4712d7002398e68290db7bdcb95d204ab"
+      "sha256": "6f79834a63c1f889f6f6e7405c1ce2614ed38e7d9ccaad062b7859059c183bed"
     },
     {
       "path": "phrases/index.json",
@@ -240,8 +240,8 @@
     },
     {
       "path": "search/streams/cards/0001.json",
-      "bytes": 103004,
-      "sha256": "3ff6e34949f44814787755c87e1c7f71270a6bbd06c00e8cf23b59ae21cd4a16"
+      "bytes": 102971,
+      "sha256": "9ba5abbf73b732cafaf35a253455a62ba6ace7963c3fbcff391e105fd68a1e2f"
     },
     {
       "path": "search/streams/cards/0002.json",
@@ -250,8 +250,8 @@
     },
     {
       "path": "search/streams/cards/0003.json",
-      "bytes": 102138,
-      "sha256": "e0d7dc66f60c5ccdb6607813db1a3cf83b6afb6889f6e032d81f8b545ca0f825"
+      "bytes": 102059,
+      "sha256": "8f3c65199f10ea4f3164aca35c634af10eca8250239ffbb82d7e4efa351bc5d2"
     },
     {
       "path": "search/streams/cards/0004.json",
@@ -285,8 +285,8 @@
     },
     {
       "path": "search/streams/cards/0010.json",
-      "bytes": 101115,
-      "sha256": "cb0629b760cc99a95fc6fb8921be73837de66ed1a22fb49d3c09c28df21827ca"
+      "bytes": 100995,
+      "sha256": "f7739b944033e2eeb5ff334980c6d57ea7c6b8f5627c88a7e577008df5401481"
     },
     {
       "path": "search/streams/cards/0011.json",
@@ -330,23 +330,23 @@
     },
     {
       "path": "search/streams/inverted/0.json",
-      "bytes": 309578,
-      "sha256": "8914f69f03665668d2b16f83bfa6386cc484164ad14faf5060a3fb7035cfac4d"
+      "bytes": 310336,
+      "sha256": "30ce1b6931d5c391613d4da36df9c8fc746c435d577be026bf3cd505b62f06a2"
     },
     {
       "path": "search/streams/inverted/1.json",
-      "bytes": 317908,
-      "sha256": "8eb5e2162e848291b07d2170d21c513c7d4301cef0d612e68c39cbd00b08ca10"
+      "bytes": 318832,
+      "sha256": "3356c786401d1a5c3150cc72de77f4e3c3231c60bdef3991292c6ea298bb372c"
     },
     {
       "path": "search/streams/inverted/2.json",
-      "bytes": 343841,
-      "sha256": "91dd65015b111b7d73bbb4f5c665c8620926f9a978d426dc362e1934c25495b9"
+      "bytes": 344755,
+      "sha256": "6af862dc7d60c5c0684134a80610485822297e9f04522475db1efd879f592851"
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 348244,
-      "sha256": "b5343b2eebf7a4be1ebfcd99b4fcdce64481710e753ecdfa4d44f5f18f0c855b"
+      "bytes": 348499,
+      "sha256": "509e6a700cf950bf3b47ad6d74097da30fc6df23975ba3358a4f1532083f4ce8"
     },
     {
       "path": "search/streams/manifest.json",
@@ -401,22 +401,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "e71243e5dff482e81525273ef96cd46dd008751544d8d42f438acfa683772e58"
+      "sha256": "9d6535c1c8f60b8dcf8cfe33f100c3f9ed84ea8cec122402f9466ea80ddd1a30"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "5a523bca78fd7d4a9f39b227f9d8c30d4eab7a5acab253a83c92cdd307c7cac3"
+      "sha256": "e98138c67727e2c86de8999a17ef332cdd9d047aa5ab384edc92ade02c8a1722"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "0a8c73a3158574b5cca58365a723749fa6202e65b8bdc808cb1844c83ca4c5e0"
+      "sha256": "f5b62d458971a23db61a31243968c00e9b0cbb420c348acd253e319e6d091c4d"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "95fbf3ee29d5c8324062120ab343257edb0338098293e7e574f4dd8691c1f1f1"
+      "sha256": "92ca15a3224b11ab4cf58a4a1682eed0e99aed2b3736fe4a64037305f87c4207"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -695,8 +695,8 @@
     },
     {
       "path": "streams/cecilia-immergreen-hgeqfqgd2bk.json",
-      "bytes": 17009,
-      "sha256": "cbcebb5dea535f74bfcb76004f888b89a0c22eb0b8c6af8696533173812ea308"
+      "bytes": 25722,
+      "sha256": "45237f511197b60a915dba6895f9f9b298d7916ca90091b71d2afdece03f9f29"
     },
     {
       "path": "streams/cecilia-immergreen-hgn3k-x7quk.json",
@@ -2075,8 +2075,8 @@
     },
     {
       "path": "streams/gigi-murin-b-fvvp0birq.json",
-      "bytes": 20619,
-      "sha256": "ba1de41d1871661f57e526bc22c83f92ed3428f751afe0e3418885f7e809fbf9"
+      "bytes": 28287,
+      "sha256": "e50006827a8921c693721c004819bdb201c4204f1d06203be012e46c7d413bab"
     },
     {
       "path": "streams/gigi-murin-b3euu6gucpg.json",
@@ -4100,8 +4100,8 @@
     },
     {
       "path": "streams/mori-calliope-ebafhivo7o0.json",
-      "bytes": 23768,
-      "sha256": "77a48e8613e7bee5b6fe86ab4296a5b0b44e685c09e95f79e7985f595ea8e704"
+      "bytes": 31451,
+      "sha256": "d15e8cf89f3ed781c4d9e36e11720cf503b13587e14884d018e0741ff0aa0a3a"
     },
     {
       "path": "streams/mori-calliope-ednos5qfauw.json",
@@ -6565,8 +6565,8 @@
     },
     {
       "path": "streams/takanashi-kiara-gtwon4th2fo.json",
-      "bytes": 9868,
-      "sha256": "41e8a7b55bc6b2910bdd3c9e331b19dc45ff568f2aa6f2d617820e0a237aaa93"
+      "bytes": 13238,
+      "sha256": "a8352948848af44e3126709c2c447ddf44053b54fb5e522f9cf35c782dc19e0b"
     },
     {
       "path": "streams/takanashi-kiara-gwkdjz8nfta.json",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-27T20:13:22Z",
+  "generatedAt": "2026-11-27T21:21:58Z",
   "counts": {
     "members": 14,
     "streams": 1241,
@@ -51,17 +51,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30676,
-      "sha256": "b01518478b1ecbe0a14e8ff6a00f6f2a7eeea1013aba174eabafe3445bae5c8d"
+      "sha256": "801719b2ccb1e7f5f3ccaacea09d24a248439eb13714a5e947090e8e9bb8f524"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "680516f253d795d63cb2f8c4065ed1cdf61857fdce90a3e034b659e5effbc82e"
+      "sha256": "66979af2f83e9460d761932983ce0601a869bae3824506471beeca717d1ad731"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30670,
-      "sha256": "84dd5f9130b5a8db3eda4d0796baa216e5271c2d8f0eff6ce98b8a86a85382c8"
+      "sha256": "b542d46a4fdc38f862a2b3d2179ed990602c7f64844bcff7f284e8c5df8bdd89"
     },
     {
       "path": "games/index.json",
@@ -216,7 +216,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "455378e88093a1489083d3a4498aefd7f8271ebdbf2c59ac2036c382c92f4c45"
+      "sha256": "a67b7c0beaf9c1e4701c101f7a8fdffd079b7f7cd506ed841460fb7f33aa7cda"
     },
     {
       "path": "phrases/index.json",
@@ -250,8 +250,8 @@
     },
     {
       "path": "search/streams/cards/0003.json",
-      "bytes": 102208,
-      "sha256": "f20c8d2e74c6cfa14c5a0508e03542af2cd7030df8f4a75af92a1f3b25ccdbec"
+      "bytes": 102229,
+      "sha256": "9aa014989099cbd964e1834fce02bb205a885c9d33207f99c1e49151a5ba0f63"
     },
     {
       "path": "search/streams/cards/0004.json",
@@ -265,8 +265,8 @@
     },
     {
       "path": "search/streams/cards/0006.json",
-      "bytes": 100225,
-      "sha256": "aa63ab2bc1397ad25da9714f9d810c7a94a6de1b490f4b1b3669b9066bb69859"
+      "bytes": 100054,
+      "sha256": "54359c9e73a6f5c1f3aeca3e502b286b734f674409cdfe2d9903f63c88a932c8"
     },
     {
       "path": "search/streams/cards/0007.json",
@@ -285,8 +285,8 @@
     },
     {
       "path": "search/streams/cards/0010.json",
-      "bytes": 101119,
-      "sha256": "0c7d8247728da54d3a2df4db5cc78b619598b4adcff6c17a29b840adc928cda4"
+      "bytes": 101176,
+      "sha256": "de41e3b3a238aa5d9937b60cb1cdde20de45cc00ceb5f3e3b8acca76efcc9b53"
     },
     {
       "path": "search/streams/cards/0011.json",
@@ -330,23 +330,23 @@
     },
     {
       "path": "search/streams/inverted/0.json",
-      "bytes": 318925,
-      "sha256": "9a120202e33cb1d74a35d952d484a096b9f866682f4e2e3615a121f3528b4b7c"
+      "bytes": 319748,
+      "sha256": "13f95743de7912584650e81be82911f318930ef9d054fe59818190cf919549ab"
     },
     {
       "path": "search/streams/inverted/1.json",
-      "bytes": 326177,
-      "sha256": "d2de4ce28dd19e44c8729056e87d10cb6ec59a360af26516a20dc702eb2ac9d4"
+      "bytes": 326962,
+      "sha256": "6bba1fb9b2c0ee4341a402b4f16ae914c444cffaa69c228cb24ff562e51c5cb0"
     },
     {
       "path": "search/streams/inverted/2.json",
-      "bytes": 349863,
-      "sha256": "46ae1ecd7e572fabb4a485bb36e2bd6f7cb30600202beffda35e3f272edb92b7"
+      "bytes": 350449,
+      "sha256": "c8268ffc5f156329baff494729197dd2454407d5c55efacc76b06115dbf6d18f"
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 354831,
-      "sha256": "8ecd6dc3329bb21266e903010ac814d30a3a859458cbf5075cfa05a91dc83e55"
+      "bytes": 355208,
+      "sha256": "f8d7ba3a347fdb5186d69116b1e6ed42629296de8a7ceba81c8f297ea33db465"
     },
     {
       "path": "search/streams/manifest.json",
@@ -386,7 +386,7 @@
     {
       "path": "sitemaps/streams.xml",
       "bytes": 179775,
-      "sha256": "a26fed4dd20b2efa548954bfe69d1ef756f925ac2786d5ab8b45cf0090582050"
+      "sha256": "6b5c22d986386d109bdacc87013840d5e7eaf7548511b2a623a1228eb03478cd"
     },
     {
       "path": "sitemaps/topics.xml",
@@ -401,22 +401,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "b7d4df3326ba7daad73f21c3dceaaeddc442fe78a781e80d27cc724ec8c0e713"
+      "sha256": "c71302eb0c6db80c98320632303aee83935ddd3922230dce599e40eaad68dc74"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "9fc8d4e282374bad40c5cee0212032d6c2a9676b9f2e70c1d1c54cf39b70bf3e"
+      "sha256": "1990c8921e3f8f2fde2b7d5294a7fb3b44b7ab81b5150597d9705f51487cc619"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "54ed45de459bee8dae3a4dc61703e2105800c2fd4a976d789eff469867627f97"
+      "sha256": "e451ed3b5765b7a5dad48bf63bf7f3c66163162d78fd2ba5c80a2818eb4b52ef"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "d0cf011f2cdc53fa20de5fe7a2d39c47f31ac40170b9b5b4fa9f9f7190de41a2"
+      "sha256": "8140116dad274be1c3a777be7c64167a43a612b6ed6d5105db648d57f2a0559a"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -1650,8 +1650,8 @@
     },
     {
       "path": "streams/fuwamoco-ftuq6z7puuc.json",
-      "bytes": 19999,
-      "sha256": "294467485704eed1ccb44b23d05bb2b4f54e52154783ce4f071a6f4fb8092670"
+      "bytes": 40628,
+      "sha256": "6e4a604bc74c74caf3d0f0a178e110bde272991e65aa1023df5a187de576d9a2"
     },
     {
       "path": "streams/fuwamoco-fv6daizlbuk.json",
@@ -1660,8 +1660,8 @@
     },
     {
       "path": "streams/fuwamoco-fwmpp6xe0py.json",
-      "bytes": 19933,
-      "sha256": "fdff935330bb25760c2c9d3fa4fc552df49b4400b414df9f01a840a4360fec3a"
+      "bytes": 40839,
+      "sha256": "a83d7d8b1e0d6d391eaa76ea1f501539c767966e4dccf9f35e0d04d5bf06b156"
     },
     {
       "path": "streams/fuwamoco-fxsk6pllvuo.json",
@@ -5340,8 +5340,8 @@
     },
     {
       "path": "streams/ninomae-inanis-fhlbzqfbpfi.json",
-      "bytes": 19990,
-      "sha256": "2ce87a67f25fd2ec1e892034fcae608d3a8b13fd8e7be00d2cd600989f5c61ae"
+      "bytes": 38609,
+      "sha256": "8faa1225893aaa0a35b15fe871d0fa825c81f552f18ea683feafcf5adc61a6fd"
     },
     {
       "path": "streams/ninomae-inanis-fmddzj5y-yw.json",

@@ -1,42 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-26T08:29:20Z",
-  "counts": {
-    "members": 14,
-    "streams": 1241,
-    "generations": 0,
-    "games": 0,
-    "events": 0,
-    "series": 0,
-    "articles": 0,
-    "phrases": 0,
-    "slang": 0,
-    "learningStreams": 0
-  },
-  "search": {
-    "streamCount": 1241,
-    "perPage": 24,
-    "learningStreamCount": 0,
-    "learningPerPage": 24
-  },
-  "phase6": {
-    "statistics": [
-      "overview",
-      "members",
-      "games",
-      "learning"
-    ],
-    "sitemapFiles": 5,
-    "rssFeeds": 3,
-    "publicChecks": {
-      "status": "PASS",
-      "deploymentBlocked": false,
-      "fatalCount": 0,
-      "errorCount": 0,
-      "warningCount": 0,
-      "infoCount": 0
-    }
-  },
+  "releaseId": "20261127-010731-auto-1241",
+  "verifiedCommitSha": "2f34c884ca64641947fa81be170e58a3617a4fd1",
+  "checksReportSha256": "ed952d08bc49d8af704863633a8e504487d9cca4c978387ac5d91ffda0ea9871",
+  "createdAt": "2026-11-27T01:08:09Z",
   "files": [
     {
       "path": "articles/index.json",
@@ -51,17 +18,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30874,
-      "sha256": "909cf15dbf36924867c88fef159e15f065dfef73ef26cddebcb990448bf8481f"
+      "sha256": "63f1b9d41e4745ab3cfdef5db8db41109292638c5be49ad4bc257523592fb9a3"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "518da93f3b48aebcc1b93f013ad161bffccd0890b23a0813c22a255c653a7d28"
+      "sha256": "3c2cc98990ba70c14f1374c6d2640a293d1ac85604bc059c88ef0727e5061130"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30868,
-      "sha256": "f7312fa84c74b2db13db0267959504e9972424c9c27a1811390efec79db1e14a"
+      "sha256": "77553540a0d061b3452dbb6f5960759b525587689ef7e8237f2027bad7ef5b07"
     },
     {
       "path": "games/index.json",
@@ -137,6 +104,11 @@
       "path": "learning/streams/manifest.json",
       "bytes": 711,
       "sha256": "b38c4a4567f69ef1780543dbc00932afabad8644d7caea8446aad14ebe769fe4"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 235453,
+      "sha256": "9265657c73106e611e49c7bf9ee7cc87dde50b097feced6230869d3803939094"
     },
     {
       "path": "members/cecilia-immergreen.json",
@@ -216,7 +188,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "84de8b0979921a0cfbaa47f9b381dda716e7d788514cfdf899a9f670e03e706d"
+      "sha256": "743bead18f3fa505134e76ece22e9a126e321a7230764293a90706323d3f415d"
     },
     {
       "path": "phrases/index.json",
@@ -265,8 +237,8 @@
     },
     {
       "path": "search/streams/cards/0006.json",
-      "bytes": 100451,
-      "sha256": "b2e588405066103e35a6643b169886e2e992be0eca68eeff8203e0d8a8defb44"
+      "bytes": 100388,
+      "sha256": "981f844bfa9bb965e840ef1e6b270ca4ba51c08473c884de59e0250030f36d8a"
     },
     {
       "path": "search/streams/cards/0007.json",
@@ -285,8 +257,8 @@
     },
     {
       "path": "search/streams/cards/0010.json",
-      "bytes": 101424,
-      "sha256": "f72b3903bc7b076c0ea06072ee148672078d0c81aa96abfb2834fbd88041998d"
+      "bytes": 101115,
+      "sha256": "cb0629b760cc99a95fc6fb8921be73837de66ed1a22fb49d3c09c28df21827ca"
     },
     {
       "path": "search/streams/cards/0011.json",
@@ -330,23 +302,23 @@
     },
     {
       "path": "search/streams/inverted/0.json",
-      "bytes": 309031,
-      "sha256": "a1842c153f8acbc4728ff7d7c213c1568f8bfb04a0f8834c799e93a9ab56c5f0"
+      "bytes": 309211,
+      "sha256": "058aefa1773138e3113faef7dd7f57fed7bb6029ae5998e4ea651d79452fee1c"
     },
     {
       "path": "search/streams/inverted/1.json",
-      "bytes": 316951,
-      "sha256": "10a4b6d51085c8cc830de5625f59307878b10cf3b2fe5db8fe3259368f606bb0"
+      "bytes": 317401,
+      "sha256": "91ef807f3d7476750c75807db267dfc807396737d72368e947be6d065bce5de1"
     },
     {
       "path": "search/streams/inverted/2.json",
-      "bytes": 342502,
-      "sha256": "649b17bf056c1c175fe48fff2948f8cf54db4098b9d87d5ef726b286d747ebc4"
+      "bytes": 342886,
+      "sha256": "980b07cb5b6c26519ec129a58654897a726fb74d853ac2f33d20c908136bef40"
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 346970,
-      "sha256": "7c8029ae44ede199f8f04093f8f3187b2fedea93e7116702fe36acdd765f2744"
+      "bytes": 347573,
+      "sha256": "fda3558f8a7ad4f6569f78b9dac8d9f4a0404136c6eaa523bd3956bed7b3aba4"
     },
     {
       "path": "search/streams/manifest.json",
@@ -401,22 +373,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "bf1bc50fa05d5e60498e57b7904ccacc0c699c9f04f7212e840dc1db17155aa0"
+      "sha256": "07fde47918036d4aae56efb52f43c1e584b3ee3d94f9bb9d3d6f5867d871a113"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "9e4307793cba67ce14a46b59d4f5c31ecf23004de0ac6f3c7a55b07b8d0e7b0d"
+      "sha256": "6273586c5ba49a1e9a8d0fb05bf9c44c375d14390506857900e2eb10e696db30"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "abb7c09a7a4b1b629c549f16168147dc9fead64cfa09885459ae1c723b8c3767"
+      "sha256": "0942404c7b639a3d1bb7a98076dc44a2deaeb5c2f05f7ffbba3ce9ef96b58ee8"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "8956bf23a138ab9c9ab9733dcc6dbe6d275e435d4f8eb9880e1058bcb362d5ab"
+      "sha256": "0b67b3cdb3cbade11f808fff945be5eba5d253aad14d57114bfbc9bc82be4553"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -1695,8 +1667,8 @@
     },
     {
       "path": "streams/fuwamoco-gcyxkgycfmk.json",
-      "bytes": 14313,
-      "sha256": "d3918227bec1719f966fcc18e1829e1b8884a834a6545d9dd3c7e59ef30e052d"
+      "bytes": 16388,
+      "sha256": "001b9df1a0387731e805cb5d1bebccdfde15fa224264b0b17063b3a4234a3d5c"
     },
     {
       "path": "streams/fuwamoco-gg4hh81iaja.json",
@@ -4385,8 +4357,8 @@
     },
     {
       "path": "streams/mori-calliope-gz71vccjnbg.json",
-      "bytes": 13888,
-      "sha256": "6390a2f75da38e4b05c61850ddf0040caeaeecdd3af995964b351e9717f2f213"
+      "bytes": 16027,
+      "sha256": "706cd69f149926b9b357183ec0dd511f75efe89135a3253f91a242273c1e56f0"
     },
     {
       "path": "streams/mori-calliope-h6lcl8ka4e4.json",
@@ -5175,8 +5147,8 @@
     },
     {
       "path": "streams/ninomae-inanis-5iskt-0sbn8.json",
-      "bytes": 14393,
-      "sha256": "ae2b086805ebd516581229774bd1adc6646eb675303611df6887283122ddb615"
+      "bytes": 19251,
+      "sha256": "7eb1211952f9a75688c0127803af25ea8efd293617094727f1f95d9083745221"
     },
     {
       "path": "streams/ninomae-inanis-5xnvhzlzi80.json",
@@ -6145,8 +6117,8 @@
     },
     {
       "path": "streams/takanashi-kiara-5gl5bhxak8o.json",
-      "bytes": 13379,
-      "sha256": "b47d8fb7ef895aa708bfd678163c19bd156820b19bc8195208f45959d457cb51"
+      "bytes": 17364,
+      "sha256": "516d4309f5ec4579807bf21296bd0b38adce4cb297b5eb3b9636b33a2938b4de"
     },
     {
       "path": "streams/takanashi-kiara-5lnv7czfjgc.json",
@@ -6575,8 +6547,8 @@
     },
     {
       "path": "streams/takanashi-kiara-h02ky4k1iaw.json",
-      "bytes": 12218,
-      "sha256": "2498b6dd281feac6d541cd68bf49664fc77e9a0a22e0d8ec522ed2b370a06088"
+      "bytes": 15008,
+      "sha256": "8e777512ad3a09f798f667337be10388865edb97c02e6bd3d5586048a03a012d"
     },
     {
       "path": "streams/takanashi-kiara-h1eacnokhwk.json",

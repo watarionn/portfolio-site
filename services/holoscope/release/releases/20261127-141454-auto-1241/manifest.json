@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-27T13:31:52Z",
+  "generatedAt": "2026-11-27T14:15:28Z",
   "counts": {
     "members": 14,
     "streams": 1241,
@@ -51,17 +51,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30874,
-      "sha256": "c97582934450c68ab191aff9f4acde671c13615f4ad70f68216992ebf4bd6276"
+      "sha256": "d3f845a6c34cd3635932d1da1bffc3d74e94ab8a70ff19f005ee6925c3c385f6"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "f8a6830bf48c0e21f4f3363a0edb311b9b1745a0c080f5ea4431b209e70cf04d"
+      "sha256": "69da2d8639bb2fbc106c30f882d5322c786cf71431a9d422d76d11eac8c170d8"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30868,
-      "sha256": "fda7d763376f44c8502e4cfbf5a1231ce4bd2b94cca7591c33d7f22700981504"
+      "sha256": "c13ba55cdec5841b418eca9e9cb768cad658ba6dada6e0c1193cfac2dd046dd6"
     },
     {
       "path": "games/index.json",
@@ -216,7 +216,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "562669f0cc51b273034d112acc29be39a378c7f416de6032179077db489354be"
+      "sha256": "7cd33f4d7c3b83313b3437a54ac872785b27c52ec047f5e3fe075da2994a8185"
     },
     {
       "path": "phrases/index.json",
@@ -245,8 +245,8 @@
     },
     {
       "path": "search/streams/cards/0002.json",
-      "bytes": 102339,
-      "sha256": "1dd6e454e77d67b8059092d3ff57384000efa9c557d0207583d996624680ccd8"
+      "bytes": 102316,
+      "sha256": "1ee210f6ee0874828f637e60b3d07d723b0493035e58b375bdc5db26f6b9fa55"
     },
     {
       "path": "search/streams/cards/0003.json",
@@ -260,13 +260,13 @@
     },
     {
       "path": "search/streams/cards/0005.json",
-      "bytes": 103766,
-      "sha256": "35bbab8bbc419f02ed2c4b578661892c21790564584495f717da3ba38894c650"
+      "bytes": 103599,
+      "sha256": "9b966195c074787cffead8ebb0a128cb71def26a87090e6a20c687a7c2d7b6ab"
     },
     {
       "path": "search/streams/cards/0006.json",
-      "bytes": 100260,
-      "sha256": "a5568460f9305c94c7ed0416f4d00fbd08b66b3ca60a375eacf72f333f4fdc64"
+      "bytes": 100183,
+      "sha256": "c1cbefe1cf60f3f6a194ddbf94943f9db634ae9c72d46962cde9271c6c9530ca"
     },
     {
       "path": "search/streams/cards/0007.json",
@@ -285,8 +285,8 @@
     },
     {
       "path": "search/streams/cards/0010.json",
-      "bytes": 101167,
-      "sha256": "794de86db71d6245b770654b75b5cf11cadfda961e9b46e558f0a67bdd2f0139"
+      "bytes": 101119,
+      "sha256": "0c7d8247728da54d3a2df4db5cc78b619598b4adcff6c17a29b840adc928cda4"
     },
     {
       "path": "search/streams/cards/0011.json",
@@ -330,23 +330,23 @@
     },
     {
       "path": "search/streams/inverted/0.json",
-      "bytes": 313868,
-      "sha256": "4db5f4aea2565062570a576f0f183928834eb70fd41df6d5641df4154809fa7d"
+      "bytes": 314796,
+      "sha256": "48536e61520ce0250ebeb73d2b7e9c963c1d7b9c05196bc07cf2922428452d2e"
     },
     {
       "path": "search/streams/inverted/1.json",
-      "bytes": 321836,
-      "sha256": "e491417e1098fdf9389b77bc0a7eecec68ffbcc5503a2f12185cba2ca929a950"
+      "bytes": 322352,
+      "sha256": "1c8c0ee84fbe70f93a338106d296b8a51c98afd7a6bdff859aaab5672dc744ac"
     },
     {
       "path": "search/streams/inverted/2.json",
-      "bytes": 347150,
-      "sha256": "19fabdb66c1cf2555880100c0067b062da5a2c68a4342f64ca23151716e5a000"
+      "bytes": 348040,
+      "sha256": "43598d91fb787fc25767f08ca4d8efdd2ab1c3932626e38aca7b240af56ca43b"
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 351077,
-      "sha256": "4304014933b55ae4f782aecc4bb53f6d4631e671b1b3940391134e178f704c9a"
+      "bytes": 351786,
+      "sha256": "d464cda38d130d9d3d7f88edbb254473ee0eca5d42b61903258b874492db7ca7"
     },
     {
       "path": "search/streams/manifest.json",
@@ -401,22 +401,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "34e853bddd85f5e37f82ecdaa10ff66f5eb33e75f852a8444569651c27522c5f"
+      "sha256": "d566ec312ee426086717704bb84a151ba6a0d1808dca75f65bac4102320b1230"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "3149987a9c1c54ff4e37da9bc0ec18dac8f317d12e3c454e24f821cc5f6dd30a"
+      "sha256": "90308999384db9769a38f9e34b3a090f01ebb2ff50c39746fa452e7550a8a5da"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "cde0f13458718a332e25d7864a5c3056c3e1a96c5415c7e46dec0c483f9d514e"
+      "sha256": "58b01a660966d7266be6bbc37b2d21febf57a0919fb2b2cbc3226e8a7b4c5bb0"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "af0c7f7695405074c1037823f879255af91e0f4c4765ce65282e3de39e21b67e"
+      "sha256": "c0fd18f09ca024f9243c82e72845437762a41c7b3eba7200c7db88741213a24d"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -770,8 +770,8 @@
     },
     {
       "path": "streams/elizabeth-rose-bloodflame-5cm2don8xhy.json",
-      "bytes": 19138,
-      "sha256": "d93f0a8557721354ab4e0821791bf7cf9e0f97c7e09776788b472824c98aaf83"
+      "bytes": 34972,
+      "sha256": "8eb2041580b744b50f54089fa52a66b0635dc47a15fcf394aaf055981b63f77f"
     },
     {
       "path": "streams/elizabeth-rose-bloodflame-5p6i0geob-a.json",
@@ -1595,8 +1595,8 @@
     },
     {
       "path": "streams/fuwamoco-fgyoegrsb5k.json",
-      "bytes": 20811,
-      "sha256": "d850696e6eb635733baac455e4c9f3fb90aff2a853e3608ac3db38e579cb4b80"
+      "bytes": 39958,
+      "sha256": "9268960e3bde2b7689275c7a31b5f8183958c262a1c957438be6e47278e44795"
     },
     {
       "path": "streams/fuwamoco-fiq8xynina0.json",
@@ -5635,8 +5635,8 @@
     },
     {
       "path": "streams/raora-panthera-acfqfkfkwe4.json",
-      "bytes": 27388,
-      "sha256": "774d3da0cff2e6795c6528936d6d10a8c0ebf59ea123631572ea2b3d4019a880"
+      "bytes": 35650,
+      "sha256": "68388dc765d55e7c0071e18a6a463c8e9f0e10e980baac6a92c88c881dd4ca42"
     },
     {
       "path": "streams/raora-panthera-b0km4pvzwci.json",
@@ -6585,8 +6585,8 @@
     },
     {
       "path": "streams/takanashi-kiara-h9ku0sj9wke.json",
-      "bytes": 21615,
-      "sha256": "72fd169431f9867853a1ab4444114129c759ebbcf9ad95fd646a10ae1158b6c0"
+      "bytes": 37616,
+      "sha256": "9c6272a62983b039cdd5b52d1864213aa16b0beb6e1bce7d7064885d41bcf6bc"
     },
     {
       "path": "streams/takanashi-kiara-h9wsj654iti.json",

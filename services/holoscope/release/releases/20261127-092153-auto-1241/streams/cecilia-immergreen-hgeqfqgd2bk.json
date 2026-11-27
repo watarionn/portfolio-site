@@ -4,7 +4,7 @@
   "uid": "str_hgeqfqgd2bk",
   "slug": "cecilia-immergreen-hgeqfqgd2bk",
   "videoId": "HGEQfQgd2bk",
-  "title": "ピアノ配信で語る音楽の好みとおすすめ曲",
+  "title": "ピアノを弾きながら語る、好きな音楽とリクエストの条件",
   "originalTitle": "【PIANO】LET'S PRESS THE KEYS!!!!!!",
   "originalUrl": "https://www.youtube.com/watch?v=HGEQfQgd2bk",
   "streamType": "other",
@@ -23,14 +23,14 @@
   "games": [],
   "events": [],
   "series": [],
-  "lead": "配信では、ピアノの音響設定を整えながら演奏し、曲の好みや、音楽が集中や気分に与える影響について語ります。最後には「ピアノだけ」「日本由来」という条件を添えて、視聴者におすすめ曲を募りました。",
-  "summaryOneLine": "音響調整や好きな曲の話から、ピアノだけで演奏できる日本由来の曲の募集までをまとめます。",
+  "lead": "マイクやリバーブを調整してピアノを演奏しながら、好きな和音や、練習で繰り返し聴く曲について話した。終盤には、ピアノだけで演奏できる日本由来の曲を視聴者に募っている。",
+  "summaryOneLine": "音響を整えてピアノを弾き、好きな曲や音楽との付き合い方を語る。最後には、ピアノだけで演奏できる日本由来の曲を募った。",
   "keyPoints": [
-    "マイクやリバーブ、ペダルなど演奏環境の調整",
-    "繰り返し聴くことで曲への印象が深まるという実感",
+    "マイクやリバーブを調整しながらピアノを演奏",
+    "好きな和音や、練習で繰り返し聴いた曲への思い",
     "ピアノだけで演奏できる日本由来の曲を視聴者に募集"
   ],
-  "articleBodyHtml": "<h2>配信準備と音響の確認</h2>\n<p>配信の冒頭では、マイクとピアノの位置を調整し、リバーブを加えた音の聞こえ方を確かめています。開始が少し遅れたことや、容器のふたで指を切った出来事にも触れ、視聴者と軽いやりとりを交わしました。</p>\n<h2>音楽の好みとおすすめ曲の条件</h2>\n<p>演奏の合間には、好きな和音や映画音楽、宿題中に聴く曲について話しています。練習やレッスンで何度も聴いた曲が頭に残り、聴き込むうちに好きになっていく感覚も語られました。終盤では、ピアノだけで演奏できる日本由来の曲を条件に、おすすめをコメントで募っています。</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=HGEQfQgd2bk</p>",
+  "articleBodyHtml": "<h2>ピアノの音を確かめながら演奏</h2>\n<p>配信の冒頭では、マイクの位置を説明し、視聴者に音の聞こえ方を尋ねています。ピアノを聴かせるための配置だと話し、少しリバーブを加えた音も確認しました。演奏の合間には、好きな和音や、映画『君の名は。』に触れた曲について言葉を交わしています。</p>\n<p>音楽の話題では、宿題をしながら曲を聴くことや、練習やレッスンで何度も聴いた曲が耳に残り、あとから好きになっていく感覚を語りました。集中しづらい日もあると話しつつ、配信を楽しんでいる様子も伝えています。</p>\n<h2>好きな曲とおすすめの条件</h2>\n<p>終盤では、アニメ曲やゲーム音楽のリクエストについて、ピアノだけで演奏できることが条件だと説明しました。以前募集した際に、ピアノが入っていないロック曲も届いたと冗談交じりに振り返っています。さらに「日本由来の曲」という条件を添え、コメントでおすすめを募りました。</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=HGEQfQgd2bk</p>",
   "highlights": [],
   "timeline": [
     {
@@ -67,11 +67,11 @@
     },
     {
       "timestampSeconds": 329,
-      "text": "英語原文：「Actually, today I have to mute the pops.」｜日本語訳：今日は「父たち」の音をミュートする必要があると話す。｜解説：親しみを込めた呼び名で、音声を一時的に消すと伝える。"
+      "text": "英語原文：「Actually, today I have to mute the pops.」｜日本語訳：今日は「お父さんたち」の音をミュートしないと、と話す。｜解説：続けて「気持ちだけ一緒にいてもらって、音は出さない」と冗談を言う。"
     },
     {
       "timestampSeconds": 334,
-      "text": "英語原文：「They can be there in spirit, but not in sound.」｜日本語訳：姿はそこにいても、音は出ないようにすると冗談を言う。｜解説：ミュートをユーモラスに説明する。"
+      "text": "英語原文：「They can be there in spirit, but not in sound.」｜日本語訳：気持ちの上では一緒にいてもらうけれど、音は出さないと冗談を言う。｜解説：直前に話した「pops」をミュートすることを、ユーモラスに説明する。"
     },
     {
       "timestampSeconds": 337,
@@ -151,11 +151,11 @@
     },
     {
       "timestampSeconds": 680,
-      "text": "英語原文：「Wish.」｜日本語訳：演奏する曲のタイトルを挙げる。｜解説：短い曲名の提示。"
+      "text": "英語原文：「Wish.」｜日本語訳：「Wish」と口にする。｜解説：ピアノ演奏中の短い発話。文字起こしだけでは曲名かどうかを断定しない。"
     },
     {
       "timestampSeconds": 686,
-      "text": "英語原文：「Fun.」｜日本語訳：別の曲名を挙げる。｜解説：演奏候補を示す。"
+      "text": "英語原文：「Fun.」｜日本語訳：「Fun」と口にする。｜解説：演奏の合間の短い発話。文脈以上の意味づけは避ける。"
     },
     {
       "timestampSeconds": 688,
@@ -167,83 +167,83 @@
     },
     {
       "timestampSeconds": 693,
-      "text": "英語原文：「Piano pedal, because mine is still in the...」｜日本語訳：ピアノのペダルについて話し、自分のものがまだ手元にないと説明する。｜解説：機材がそろっていない状況を話す。"
+      "text": "英語原文：「Piano pedal, because mine is still in the...」｜日本語訳：ピアノのペダルの話を始め、自分のものがまだ手元にないと説明する。｜解説：続く発話では、どこにあるのか分からないと話している。"
     },
     {
       "timestampSeconds": 696,
-      "text": "英語原文：「Well, I don't know where it is.」｜日本語訳：どこにあるのか分からないと続ける。｜解説：ペダルの所在を把握できていない。"
+      "text": "英語原文：「Well, I don't know where it is.」｜日本語訳：それがどこにあるのか分からないと続ける。｜解説：ペダルの所在についての発言。"
     },
     {
       "timestampSeconds": 2731,
-      "text": "英語原文：「favorite chord because it's a nice progression I mean it's a nice chord」｜日本語訳：お気に入りの和音について、心地よい進行だと説明する。｜解説：和音やコード進行の好みを語る。"
+      "text": "英語原文：「favorite chord because it's a nice progression I mean it's a nice chord」｜日本語訳：お気に入りの和音について、心地よい進行だから、いや、心地よい和音だからと説明し直す。｜解説：コード進行と和音の好みを語る。"
     },
     {
       "timestampSeconds": 2914,
-      "text": "英語原文：「this one is from your name well that thing I don't know I feel like I ask」｜日本語訳：この曲は映画「君の名は。」のものだと話し、説明を続ける。｜解説：作品とのつながりを示すが、発話は途中で途切れている。"
+      "text": "英語原文：「this one is from your name well that thing I don't know I feel like I ask」｜日本語訳：この曲は『君の名は。』のものだと話し、言葉を探しながら続ける。｜解説：作品名に触れた発話。後半は文字起こしでも文が途切れている。"
     },
     {
       "timestampSeconds": 2914,
-      "text": "英語原文：「this one is from your name well that thing I don't know I feel like I ask」｜日本語訳：宿題をしながら聴くと心地よいと話す。｜解説：音楽を聴く場面と印象を語る。"
+      "text": "英語原文：「this one is from your name well that thing I don't know I feel like I ask」｜日本語訳：この曲は『君の名は。』のものだと話す。｜解説：同じ文字起こし区間に結び付いた行。後半の発話は判然としない。"
     },
     {
       "timestampSeconds": 3251,
-      "text": "英語原文：「this every time in homework while listening to this very pleasing yeah」｜日本語訳：前の発言に続けて、聴き心地のよさに触れる。｜解説：重なった証拠区間のため、前後の発話と合わせて読む。"
+      "text": "英語原文：「this every time in homework while listening to this very pleasing yeah」｜日本語訳：宿題をしながらこれを聴く話をよくしている、と続け、聴き心地がよいと話す。｜解説：前の発話から続く断片で、音楽を聴く場面について触れている。"
     },
     {
       "timestampSeconds": 3251,
-      "text": "英語原文：「this every time in homework while listening to this very pleasing yeah」｜日本語訳：同じ質問をよくしていると振り返る。｜解説：会話の一部が重複して記録されている。"
+      "text": "英語原文：「this every time in homework while listening to this very pleasing yeah」｜日本語訳：宿題をしながら聴くと、とても心地よいと話す。｜解説：同じ文字起こし区間に結び付いた行。"
     },
     {
       "timestampSeconds": 3255,
-      "text": "英語原文：「I'm glad I don't know I'm feeling a little bit today so it's a little bit」｜日本語訳：音楽を聴きながら宿題をする話を続ける。｜解説：前後の発話を補う断片。"
+      "text": "英語原文：「I'm glad I don't know I'm feeling a little bit today so it's a little bit」｜日本語訳：今日は少しそういう気分で、と言いかける。｜解説：文が途中で切れているため、状態を断定せず次の発話につなぐ。"
     },
     {
       "timestampSeconds": 3255,
-      "text": "英語原文：「I'm glad I don't know I'm feeling a little bit today so it's a little bit」｜日本語訳：今日は少し気分が乗らないと話し始める。｜解説：体調や気分を控えめに説明する。"
+      "text": "英語原文：「I'm glad I don't know I'm feeling a little bit today so it's a little bit」｜日本語訳：今日は少し気分がいつもと違う、と話し始める。｜解説：発話は次の区間に続いており、この行だけでは詳しい状態は分からない。"
     },
     {
       "timestampSeconds": 3261,
-      "text": "英語原文：「hard to focus but I'm having fun I hope you're having fun too what's this one」｜日本語訳：気分が少し重い日でもあると続ける。｜解説：発話が途中で切れた断片。"
+      "text": "英語原文：「hard to focus but I'm having fun I hope you're having fun too what's this one」｜日本語訳：集中しにくいけれど、自分は楽しんでいるし、みんなも楽しんでいるといいなと話す。｜解説：続けて次に演奏する曲について尋ねる。"
     },
     {
       "timestampSeconds": 3261,
-      "text": "英語原文：「hard to focus but I'm having fun I hope you're having fun too what's this one」｜日本語訳：集中しにくいが、自分も視聴者も楽しめているといいと話す。｜解説：集中の難しさと配信を楽しむ気持ちを伝える。"
+      "text": "英語原文：「hard to focus but I'm having fun I hope you're having fun too what's this one」｜日本語訳：集中しづらい一方で、自分も楽しんでいるし、視聴者も楽しめていたらうれしいと話す。｜解説：演奏中の気分を伝え、次の曲に移る。"
     },
     {
       "timestampSeconds": 3266,
-      "text": "英語原文：「emotion yeah I have it sometimes I don't know it's like some some days I struggle」｜日本語訳：集中しづらいという話を重ねる。｜解説：同じ発話が重複区間として記録されている。"
+      "text": "英語原文：「emotion yeah I have it sometimes I don't know it's like some some days I struggle」｜日本語訳：そういう感情は時々ある、と応じ、日によっては難しいこともあると話し始める。｜解説：文字起こしでは文のつながりが不明瞭な断片。"
     },
     {
       "timestampSeconds": 3290,
-      "text": "英語原文：「a little bit with focus and then my head is a little bit in the clouds but okay」｜日本語訳：音楽が感情に与える影響に触れる。｜解説：前後の発話が重なり、文脈は断片的。"
+      "text": "英語原文：「a little bit with focus and then my head is a little bit in the clouds but okay」｜日本語訳：集中するのが少し難しく、頭がぼんやりする日もあるけれど大丈夫だと話す。｜解説：集中しづらい日についての補足。"
     },
     {
       "timestampSeconds": 3296,
-      "text": "英語原文：「you play piano all day it's a beautiful thank you very much appreciate it I」｜日本語訳：集中しづらい日があり、ぼんやりすることもあると話す。｜解説：日による集中状態の違いを説明する。"
+      "text": "英語原文：「you play piano all day it's a beautiful thank you very much appreciate it I」｜日本語訳：一日中ピアノを弾くことや演奏への言葉に感謝する。｜解説：視聴者からのコメントに返答しているが、文字起こしは文の途中で切れている。"
     },
     {
       "timestampSeconds": 3302,
-      "text": "英語原文：「appreciate you guys's kind words」｜日本語訳：ピアノを一日中弾くことへのコメントに感謝する。｜解説：視聴者の言葉への返答。"
+      "text": "英語原文：「appreciate you guys's kind words」｜日本語訳：みんなの優しい言葉に感謝していると伝える。｜解説：視聴者のコメントへのお礼。"
     },
     {
       "timestampSeconds": 4651,
-      "text": "英語原文：「type of song that like you hear the first time you're like okay that's nice and then」｜日本語訳：みんなの優しい言葉に感謝する。｜解説：コメントへのお礼を続ける。"
+      "text": "英語原文：「type of song that like you hear the first time you're like okay that's nice and then」｜日本語訳：初めて聴いたときは「いい曲だな」と思うような曲について話し始める。｜解説：このあと、繰り返し聴くことで印象が変わる話へ続く。"
     },
     {
       "timestampSeconds": 4662,
-      "text": "英語原文：「the more you hear it and we heard it a lot because we were doing the dance practice」｜日本語訳：初めて聴いたときは普通に良いと思うタイプの曲について話す。｜解説：聴き始めの印象を説明する。"
+      "text": "英語原文：「the more you hear it and we heard it a lot because we were doing the dance practice」｜日本語訳：ダンス練習をしていたので何度も聴き、聴くほどに印象が深まったと話す。｜解説：曲を繰り返し聴いた背景を説明する。"
     },
     {
       "timestampSeconds": 4666,
-      "text": "英語原文：「and everything and the lessons and it just like gets stuck in your head and then in the middle of」｜日本語訳：ダンス練習やレッスンで何度も聴いたと話す。｜解説：繰り返し聴く機会があった。"
+      "text": "英語原文：「and everything and the lessons and it just like gets stuck in your head and then in the middle of」｜日本語訳：練習やレッスンでも聴くうちに、曲が頭から離れなくなったと話す。｜解説：夜中の話へ続く途中の発話。"
     },
     {
       "timestampSeconds": 4671,
-      "text": "英語原文：「the night you wake up and you go the light goes out i really like it it really grows on you like」｜日本語訳：何度も聴くうちに曲が頭から離れなくなると説明する。｜解説：反復による印象の変化を語る。"
+      "text": "英語原文：「the night you wake up and you go the light goes out i really like it it really grows on you like」｜日本語訳：夜中に目が覚めたときにも思い出すほどで、聴くうちに本当に好きになっていくと話す。｜解説：繰り返し聴いた曲への印象を語る。"
     },
     {
       "timestampSeconds": 4682,
-      "text": "英語原文：「a parasite you can feel the justice seeping into you i don't know if i like that word」｜日本語訳：夜中に目が覚めても思い出すほど耳に残り、聴くほど好きになると話す。｜解説：曲が徐々に好きになる感覚を、印象的な比喩を交えて伝える。"
+      "text": "英語原文：「a parasite you can feel the justice seeping into you i don't know if i like that word」｜日本語訳：寄生するもののように、正義が染み込んでくる感じだと比喩を続け、その言葉選びに迷う。｜解説：比喩の細部は文字起こしが不鮮明なため、語句を補わずに訳した。"
     },
     {
       "timestampSeconds": 4713,
@@ -255,7 +255,7 @@
     },
     {
       "timestampSeconds": 4862,
-      "text": "英語原文：「during my what was it my um uh twitter space the other day it's the this one crazy that eric」｜日本語訳：先日の音声交流の話題を思い出し、エリックさんに触れる。｜解説：固有名詞を含む発話だが、文脈は不鮮明。"
+      "text": "英語原文：「during my what was it my um uh twitter space the other day it's the this one crazy that eric」｜日本語訳：先日のTwitterスペースのことを思い出しながら話す。｜解説：エリックという名前も聞こえるが、文全体の意味は文字起こしから確定できない。"
     },
     {
       "timestampSeconds": 5350,

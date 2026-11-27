@@ -1,42 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-27T08:30:20Z",
-  "counts": {
-    "members": 14,
-    "streams": 1241,
-    "generations": 0,
-    "games": 0,
-    "events": 0,
-    "series": 0,
-    "articles": 0,
-    "phrases": 0,
-    "slang": 0,
-    "learningStreams": 0
-  },
-  "search": {
-    "streamCount": 1241,
-    "perPage": 24,
-    "learningStreamCount": 0,
-    "learningPerPage": 24
-  },
-  "phase6": {
-    "statistics": [
-      "overview",
-      "members",
-      "games",
-      "learning"
-    ],
-    "sitemapFiles": 5,
-    "rssFeeds": 3,
-    "publicChecks": {
-      "status": "PASS",
-      "deploymentBlocked": false,
-      "fatalCount": 0,
-      "errorCount": 0,
-      "warningCount": 0,
-      "infoCount": 0
-    }
-  },
+  "releaseId": "20261127-092153-auto-1241",
+  "verifiedCommitSha": "2f34c884ca64641947fa81be170e58a3617a4fd1",
+  "checksReportSha256": "ed952d08bc49d8af704863633a8e504487d9cca4c978387ac5d91ffda0ea9871",
+  "createdAt": "2026-11-27T09:22:59Z",
   "files": [
     {
       "path": "articles/index.json",
@@ -51,17 +18,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30874,
-      "sha256": "8cb050c3bd57d96dda31d6466e477ddfebd421a6cc408f12dbd41cafbd110f31"
+      "sha256": "0a752c0de7a72b3616c7941491d79bed1c1013106e57832fd551eb0f6ebd3d32"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "d89707cb1e45d937f6c163c06e13b8ce0eb3d028a90dd23e41a18a56ca04baa0"
+      "sha256": "ad78e25aea63d48cf713ed3e7fbc9337f4e1da186166809a5b40a70dc4031f30"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30868,
-      "sha256": "eb4f83dbcb05360df59adc60ca975e9165c8f0619f248dfc9b9fba2163c959e4"
+      "sha256": "f3dd56d84a27dfc80c99afa22fafff51ab0ee6bcc79d116e7f6904720571a80e"
     },
     {
       "path": "games/index.json",
@@ -137,6 +104,11 @@
       "path": "learning/streams/manifest.json",
       "bytes": 711,
       "sha256": "b38c4a4567f69ef1780543dbc00932afabad8644d7caea8446aad14ebe769fe4"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 235454,
+      "sha256": "47f3297c9cd4983292e859cd15693ef95444eb5b960c9e6ac047948377701d0f"
     },
     {
       "path": "members/cecilia-immergreen.json",
@@ -216,7 +188,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "bc37b6069747732add136f7be4252e9f7052fd6b203c8a33bdc736680370163b"
+      "sha256": "657d536360d54c976aade430b236db3fa89e2b47ae9e88bd24a41e9394ff7003"
     },
     {
       "path": "phrases/index.json",
@@ -240,8 +212,8 @@
     },
     {
       "path": "search/streams/cards/0001.json",
-      "bytes": 102889,
-      "sha256": "446fd257b3dadd11fb95a41043f99c9174f9efd1bb6b44203d7eedf0a6368743"
+      "bytes": 102955,
+      "sha256": "0c8f7bd9d8010a431554e5cecb49c1187477af43e6f6f946cdf9f9cd45ad117b"
     },
     {
       "path": "search/streams/cards/0002.json",
@@ -275,8 +247,8 @@
     },
     {
       "path": "search/streams/cards/0008.json",
-      "bytes": 101264,
-      "sha256": "db28f8a660eda4d5ac4569fcce85bc9ec8d4e09993d990850494de5677e4aa53"
+      "bytes": 101306,
+      "sha256": "0abea45f0699f563f1cfb00b7687703914b0bd637c55734d972e1f6224289770"
     },
     {
       "path": "search/streams/cards/0009.json",
@@ -330,23 +302,23 @@
     },
     {
       "path": "search/streams/inverted/0.json",
-      "bytes": 312547,
-      "sha256": "0de9e0eca79a40cb33f1cda885e7465ed0137def7db304bd0df4efe8878c40de"
+      "bytes": 312471,
+      "sha256": "7844a9f5d2cc9fa44acb209e3d3514d99e0cfaaad668c6f9a4bc586affdde5c9"
     },
     {
       "path": "search/streams/inverted/1.json",
-      "bytes": 320026,
-      "sha256": "c7e5820a4c7ba011a76f9b8ea89767aa5ca3108bb18d70033822fcb28084926c"
+      "bytes": 320227,
+      "sha256": "8411aab5f5c9dfaf7cb9901916e8150b1c5dad8ecd71bb90b44d4e63310fc23e"
     },
     {
       "path": "search/streams/inverted/2.json",
-      "bytes": 347142,
-      "sha256": "2b21835def25d8e9bf4a2aad96fdf1ab5a270be024675b4d7798a08fd1998f56"
+      "bytes": 347298,
+      "sha256": "ac39469659d04bf8fbec914b54171ae9e1b13343033c02f1ad8fc28d1c5c4f5f"
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 349905,
-      "sha256": "bc51ad6610b32333a38139b81def254dcf227ea70d94aebc607118f23fe65577"
+      "bytes": 349902,
+      "sha256": "7f95b76483479d9eb63c64f0182a9641b6613da45858d8fe844bcece9a6e75ac"
     },
     {
       "path": "search/streams/manifest.json",
@@ -401,22 +373,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "c75e27384dede63f293d41466a89ebb922e6c1ae430a02f6eb96a9f0cf58cf96"
+      "sha256": "b946c1d2e9335d42e826ae21f3fd9f7edb96f89928ebb538fb9587477b56a862"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "d8e8e21b3381dfc8eb035a36f30af3476c35a08b0b64b3be6038d639f9428252"
+      "sha256": "bb46559db07c238237d344cdb8f9951ea8f917d33f6dec9e66fc475adc23fd32"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "31569eb645934cd8390a1a7eafc2a128e527c400946ee83ee564a2c50c670e90"
+      "sha256": "f422c5b0277e72de5f8409670683e796ed83438535c4bdee0b68465df1a39256"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "470859a9dea5051994f26584d1fc29b52e12b2941f814826f2feb3ce9ca94a25"
+      "sha256": "c1fbe571f5659ffbe3b0a1e04b23ba88e7f7a5fdc0dbb4b1fb0db5e44885f0fe"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -695,8 +667,8 @@
     },
     {
       "path": "streams/cecilia-immergreen-hgeqfqgd2bk.json",
-      "bytes": 25722,
-      "sha256": "45237f511197b60a915dba6895f9f9b298d7916ca90091b71d2afdece03f9f29"
+      "bytes": 27225,
+      "sha256": "2181ff5b7705b90614e611b37bda9219d16ab0bbeb5fbe3c3009f3f8f51461e7"
     },
     {
       "path": "streams/cecilia-immergreen-hgn3k-x7quk.json",
@@ -3500,8 +3472,8 @@
     },
     {
       "path": "streams/mori-calliope-0bubydqgkxm.json",
-      "bytes": 74181,
-      "sha256": "79e51181d894066c77011eb333fc0a52d7d7077fa1ada19df37cba07bb2e4bc6"
+      "bytes": 74974,
+      "sha256": "ba2b27654b39610a4db4adc0e665195a60f4d0b5a0ad6a0e8f7bf687443ca33a"
     },
     {
       "path": "streams/mori-calliope-0eghejywaey.json",

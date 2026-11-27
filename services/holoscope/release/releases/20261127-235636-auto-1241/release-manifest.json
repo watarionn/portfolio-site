@@ -1,42 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-27T22:49:59Z",
-  "counts": {
-    "members": 14,
-    "streams": 1241,
-    "generations": 0,
-    "games": 0,
-    "events": 0,
-    "series": 0,
-    "articles": 0,
-    "phrases": 0,
-    "slang": 0,
-    "learningStreams": 0
-  },
-  "search": {
-    "streamCount": 1241,
-    "perPage": 24,
-    "learningStreamCount": 0,
-    "learningPerPage": 24
-  },
-  "phase6": {
-    "statistics": [
-      "overview",
-      "members",
-      "games",
-      "learning"
-    ],
-    "sitemapFiles": 5,
-    "rssFeeds": 3,
-    "publicChecks": {
-      "status": "PASS",
-      "deploymentBlocked": false,
-      "fatalCount": 0,
-      "errorCount": 0,
-      "warningCount": 0,
-      "infoCount": 0
-    }
-  },
+  "releaseId": "20261127-235636-auto-1241",
+  "verifiedCommitSha": "2f34c884ca64641947fa81be170e58a3617a4fd1",
+  "checksReportSha256": "ed952d08bc49d8af704863633a8e504487d9cca4c978387ac5d91ffda0ea9871",
+  "createdAt": "2026-11-27T23:57:11Z",
   "files": [
     {
       "path": "articles/index.json",
@@ -51,17 +18,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30676,
-      "sha256": "ed4d54747304bf4653a96fc483cd3637f4461558ea04eefb28a639bd4ee771b0"
+      "sha256": "7c0b6cc71d99bd9c880a86c345fb79179f69ccab47b11df4c40a9c29f88a0d44"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "a44ff6bdd3d9e86adf3919614f1372ad753c8929058dffb011224eaa53c72bbc"
+      "sha256": "f7f0f4261e26a102755d04dfd962d4ebf7776a2f5f452b63f2d44c67b8206264"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30670,
-      "sha256": "4f5ed4635a3111f716e28e632130935208f24b51200ffd82018f55e1f1c18b7d"
+      "sha256": "1848d2af518cafe556307bdd7bbf021b57141984da9337be72bf44331950eb22"
     },
     {
       "path": "games/index.json",
@@ -137,6 +104,11 @@
       "path": "learning/streams/manifest.json",
       "bytes": 711,
       "sha256": "b38c4a4567f69ef1780543dbc00932afabad8644d7caea8446aad14ebe769fe4"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 235453,
+      "sha256": "ad31a204e8a91837d561fcd8dc81eb6165206242ae109b93399625e251b9d8c6"
     },
     {
       "path": "members/cecilia-immergreen.json",
@@ -216,7 +188,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "232103b05969b3b3a0c0f3bbab367d6c2f7de1481d5beddeb3601f54ff9e3c22"
+      "sha256": "4b4cd57725161479a2b445e88cfd4616880649d86b6f78e81e1d946367695d0a"
     },
     {
       "path": "phrases/index.json",
@@ -265,13 +237,13 @@
     },
     {
       "path": "search/streams/cards/0006.json",
-      "bytes": 99831,
-      "sha256": "17d3906f3cbb99928654a99bcc57ea94f77f1df9360e0d9270477deb882096c9"
+      "bytes": 99768,
+      "sha256": "4e0e8acc75982c27742328aa3395b40ab1d2d7864bd3d4abcda6abdb2491f772"
     },
     {
       "path": "search/streams/cards/0007.json",
-      "bytes": 100623,
-      "sha256": "a8c7702429c19824f3b30b3b3648fd80f24a99d8b100ce91dc82470790e9da27"
+      "bytes": 100584,
+      "sha256": "5c14936342e3d05626506363b366a5543684bbd7d52e86677d7bbcc9d8b558fd"
     },
     {
       "path": "search/streams/cards/0008.json",
@@ -285,8 +257,8 @@
     },
     {
       "path": "search/streams/cards/0010.json",
-      "bytes": 101176,
-      "sha256": "de41e3b3a238aa5d9937b60cb1cdde20de45cc00ceb5f3e3b8acca76efcc9b53"
+      "bytes": 101110,
+      "sha256": "fd918097ef3e672cdfa04f3f9d7e25d99768df82f57b18d76f7fbff53725cf71"
     },
     {
       "path": "search/streams/cards/0011.json",
@@ -330,23 +302,23 @@
     },
     {
       "path": "search/streams/inverted/0.json",
-      "bytes": 320530,
-      "sha256": "26b1bad8c93bd18e269098cfabfd780a8a33b5b882a3321e4cd37599ac747988"
+      "bytes": 321569,
+      "sha256": "474d884c063ffbba8dd397c30ff44f33ac979c49395f7968766aa71b1f890dc3"
     },
     {
       "path": "search/streams/inverted/1.json",
-      "bytes": 327771,
-      "sha256": "98bba034a6e222ca23ec3f87497159bef4ebdcee71d699399357db5b2a21cc26"
+      "bytes": 329005,
+      "sha256": "ac48846ebdf260f855e3fe4859008ce502b6b5857846702b6100b78e6b2d31ce"
     },
     {
       "path": "search/streams/inverted/2.json",
-      "bytes": 351056,
-      "sha256": "c9c33cacd2318b562a11518ed98cb9951cdb15cecdabbff2b537f0644ed257b4"
+      "bytes": 352101,
+      "sha256": "88e44c1d7011d34764d69393bedbbbd044ef67efb3f8ccb1a80f97a8aa615082"
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 355894,
-      "sha256": "56a58a170df5f6a5d966b154113cdce72ce05ac138063910014f64bb90a84e45"
+      "bytes": 357201,
+      "sha256": "ac9c118009ce277c8e3a64631c56dbc18c2e9c907c29539e249c8c8593f1fb17"
     },
     {
       "path": "search/streams/manifest.json",
@@ -401,22 +373,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "0ff2fb9900b86f97f92b26a9eb6d925b8cb7057449de9217d07a91c644c96d52"
+      "sha256": "3c7d65a9cc84bdda8d3e2d9e1118fadcec3a3da1a70b2317b06298a1f1dc3839"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "acca9e2b93660a471a2336b0ffc9e8219a47707d4c0479cf13bcb771f2cacf2f"
+      "sha256": "fd91fa043a4fc8b4b949b99df2651c0e882350d44a8f4b2389755605ab606714"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "f20aecd24b539584168a3e096ccdb6ff912cc0b5ffcc55b6b27eb5fb8844b58f"
+      "sha256": "c69fa4ee7b6b98b4581b5833ca3ad2928211f62d2ee01e54951b97be8f339606"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "51ca2321e24ed11b2ed944a00ce7dc5800c1c5458be4a6f0360cc114432f13bc"
+      "sha256": "25159c06b43cf16862371f97bc7455f54b5341dbbee9d86a1e07717113cfa914"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -1400,8 +1372,8 @@
     },
     {
       "path": "streams/fuwamoco-cedlvs7ur7k.json",
-      "bytes": 20085,
-      "sha256": "feac1f249730df21c53ac3c9ac89d1ec5e6cf49f8c98fe31b1db53c94f048151"
+      "bytes": 44994,
+      "sha256": "10ab2b3578b3138eebcb1ca8d423f99288877cc05bbcbe2b9a4e5b2a4b84f8ef"
     },
     {
       "path": "streams/fuwamoco-ci-1qv2kpok.json",
@@ -4845,8 +4817,8 @@
     },
     {
       "path": "streams/nerissa-ravencroft-fjil47q-t6e.json",
-      "bytes": 21445,
-      "sha256": "3caa12f1a7151debb32ea416f1196facf0be211035e5774c4124f9df977a34c4"
+      "bytes": 45396,
+      "sha256": "1bda8b21e955e3f7b2d59ee84b8104938c2bd64b8b4c8f02efc12a9020384557"
     },
     {
       "path": "streams/nerissa-ravencroft-fll7e1-rpgo.json",
@@ -6470,8 +6442,8 @@
     },
     {
       "path": "streams/takanashi-kiara-f94aerm9tqc.json",
-      "bytes": 22010,
-      "sha256": "bfd1a479dea7259d2fc7bdf02886753dcf9270795014d84d52ed7387ad52ceeb"
+      "bytes": 42433,
+      "sha256": "a4d05b898feaa8982e80c663cc62bad2718af0c3c9d43c6d2aee97a51a9a81ea"
     },
     {
       "path": "streams/takanashi-kiara-fals0ptttjq.json",
@@ -6620,8 +6592,8 @@
     },
     {
       "path": "streams/takanashi-kiara-su0uscz4ulm.json",
-      "bytes": 24155,
-      "sha256": "29d4f324c754676eb33164ce9fb86423a61e17fcba475a69483413321223db8a"
+      "bytes": 43541,
+      "sha256": "03c86b23ce1af61df2d9974968f89e0a7bb6a4bd91f95116cb2721f4b9a7f377"
     },
     {
       "path": "streams/takanashi-kiara-ww5p3u3k8e.json",

@@ -1,0 +1,534 @@
+{
+  "schemaVersion": "1.0.0",
+  "publicationStatus": "published",
+  "uid": "str_v_-9qjvi7vcg",
+  "slug": "takanashi-kiara-9qjvi7vcg",
+  "videoId": "_-9QjVI7vcg",
+  "title": "ホロカ体験会で学ぶ、ライフ・コラボ・ブルームの基本",
+  "originalTitle": "How To Play Hololive Official Card Game! 【Caravan Learning Video】 #hOCG",
+  "originalUrl": "https://www.youtube.com/watch?v=_-9QjVI7vcg",
+  "streamType": "other",
+  "videoStatus": "public",
+  "publishedAt": "2025-09-26T22:30:06.000Z",
+  "durationSeconds": 1330,
+  "thumbnailUrl": null,
+  "tags": [],
+  "primaryMember": {
+    "uid": "mem_takanashi_kiara",
+    "slug": "takanashi-kiara",
+    "displayName": "Takanashi Kiara"
+  },
+  "participants": [],
+  "generation": null,
+  "games": [],
+  "events": [],
+  "series": [],
+  "lead": "小鳥遊キアラが講師を務めるホロライブオフィシャルカードゲームの体験会。ライフの準備、後列からのコラボ、コラボエフェクト、ブルームの条件を実演し、AZKiのアーツで150ダメージを狙う例も紹介した。",
+  "summaryOneLine": "体験会の実演を通して、ホロカのライフ準備、コラボ、ブルーム、アーツの基本を確認する。",
+  "keyPoints": [
+    "ライフとCHEERデッキの準備",
+    "コラボ・ブルームの条件",
+    "AZKiのアーツとダメージ計算"
+  ],
+  "articleBodyHtml": "<h2>体験会の流れと準備</h2>\n<p>小鳥遊キアラが講師を務めた体験会は、約50分の実演と自由対戦で構成され、参加者にはPRパックが配られると案内された。使用したカードや道具は持ち帰らず、撮影時はほかの参加者を写さないことなど、会場での注意事項も説明された。</p>\n<h2>ライフと後列、コラボ</h2>\n<p>推しホロメンとセンターホロメンを公開したあと、推しホロメンのカード右下に記された枚数分のライフをCHEERデッキから準備する。メインフェーズにはDEBUTやSPOTのホロメンを後列に置き、後列からセンター隣へ移動するコラボも行える。</p>\n<h2>コラボエフェクトとブルーム</h2>\n<p>後列からコラボすると、カードに記されたコラボエフェクトが発動する。ブルームではホロメンのアーツや能力を強化できるが、最初のターンは先攻・後攻を問わず実行できず、そのターンにステージへ置いたホロメンもブルームできない。</p>\n<h2>リセットからアーツの使用まで</h2>\n<p>リセットフェーズにはコラボしたホロメンをレスト状態で後列へ戻し、センターが空なら後列から移動させる。紹介例では、緑のチアーが3枚あるAZKiが2つ目のアーツを使い、サイコロが奇数なら150ダメージを与える。相手のセンターのHPも150のため、一撃でダウンさせられる計算だ。</p>\n<h2>片付けと商品案内</h2>\n<p>最後にメインデッキとチアーデッキを指定どおりに仕分ける。講習会では、カードゲームの発売日を2025年7月11日と案内し、今後の商品やイベントは公式Xと公式サイトで確認するよう呼びかけた。</p>\n<h2>記事情報</h2>\n<p>https://www.youtube.com/watch?v=_-9QjVI7vcg</p>",
+  "highlights": [],
+  "timeline": [
+    {
+      "timestampSeconds": 7,
+      "text": "英語原文：「Hey guys, I'm Takanashi Kiara, and I will be your tutor today!」｜日本語訳：今日は講師を務める小鳥遊キアラです！｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 12,
+      "text": "英語原文：「Thank you very much for participating in today's Whole Life Official Card Game Learning Session!」｜日本語訳：本日のホロライブオフィシャルカードゲーム体験会に参加してくれて、ありがとうございます！｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 17,
+      "text": "英語原文：「Today, I will introduce how to play the Whole Life Official Card Game that is currently released!」｜日本語訳：今日は、現在発売中のホロライブオフィシャルカードゲームの遊び方を紹介します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 23,
+      "text": "英語原文：「This event is going to be about 50 minutes, starting with a demonstration, followed by free playtime.」｜日本語訳：イベントは約50分で、まず実演を行い、そのあと自由に遊ぶ時間を設けます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 29,
+      "text": "英語原文：「At the end of the event, we'll be handing out a PR Pack as a participation gift, so please enjoy the learning session today!」｜日本語訳：最後に参加記念のPRパックをお渡しします。今日の講習を楽しんでください！｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 36,
+      "text": "英語原文：「Before we begin the event, we would like to request your cooperation with the following.」｜日本語訳：始める前に、いくつかお願いがあります。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 42,
+      "text": "英語原文：「Please don't take home any of the cards or items used during this event.」｜日本語訳：イベントで使うカードや道具は持ち帰らないでください。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 48,
+      "text": "英語原文：「You are welcome to take photos of the cards and your gameplay and share them on social media.」｜日本語訳：カードやプレイ中の様子は撮影して、SNSで共有しても大丈夫です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 53,
+      "text": "英語原文：「Just be sure to not include any other participants in your photos. When posting, please use the hashtags.」｜日本語訳：写真にほかの参加者が写らないようにし、投稿には指定のハッシュタグを使ってください。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 60,
+      "text": "英語原文：「Let's keep these in mind and have fun playing!」｜日本語訳：これらを守って、楽しく遊びましょう！｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 209,
+      "text": "英語原文：「Once you have completed this setup, we will declare the start and turn the Holomam cards over.」｜日本語訳：準備ができたら開始を宣言し、ホロメンカードを表にします。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 215,
+      "text": "英語原文：「The call is LIFE START! Let's all say it together with me and flip the cards over, okay?」｜日本語訳：掛け声は「ライフスタート！」。みんなで一緒に言って、カードをめくりましょう。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 226,
+      "text": "英語原文：「Once you have revealed your Oshiholomam and the Center Holomam, the last step is to prepare your life.」｜日本語訳：推しホロメンとセンターホロメンを公開したら、最後にライフを準備します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 234,
+      "text": "英語原文：「Life is prepared from the pile of cards on the left called the CHEER deck.」｜日本語訳：左側にあるカードの束「CHEERデッキ」からライフを用意します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 240,
+      "text": "英語原文：「The CHEER deck contains CHEER cards, which help support the Holomam in their performance.」｜日本語訳：CHEERデッキには、ホロメンのパフォーマンスを支えるCHEERカードが入っています。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 245,
+      "text": "英語原文：「The number of life depends on your Oshiholomam. Please check the bottom right of your Oshiholomam.」｜日本語訳：ライフの枚数は推しホロメンによって違います。カード右下を確認してください。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 251,
+      "text": "英語原文：「For Azuki, the life is 6, and for Toki no Sora, the life is 5.」｜日本語訳：AZKiのライフは6、ときのそらは5です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 255,
+      "text": "英語原文：「So take those number of cards from your CHEER deck and put it face down in the life area.」｜日本語訳：その枚数分をCHEERデッキから取り、ライフ置き場に裏向きで置きます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 324,
+      "text": "英語原文：「We can place more Holomam in the back position.」｜日本語訳：さらにホロメンを後列に置くこともできます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 327,
+      "text": "英語原文：「To do so, take card 2, Amane Kanata, and card 3, Hakui Koyori, from your hand」｜日本語訳：手札から2番の天音かなたと、3番の博衣こよりを取ります。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 333,
+      "text": "英語原文：「and place them in the lower half of the playmat, the back position.」｜日本語訳：プレイマットの下半分にある後列へ置きます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 338,
+      "text": "英語原文：「These two cards have SPOT written in the top left corner, and they are called SPOT Holomam.」｜日本語訳：この2枚は左上にSPOTと書かれているため、SPOTホロメンです。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 345,
+      "text": "英語原文：「During the main phase, you can place DEBUT Holomam or SPOT Holomam in the back position.」｜日本語訳：メインフェーズには、DEBUTホロメンまたはSPOTホロメンを後列に置けます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 350,
+      "text": "英語原文：「There are many other actions you can take during your turn,」｜日本語訳：自分のターンには、ほかにもいろいろな行動ができます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 354,
+      "text": "英語原文：「but in the first player's turn, your options are limited.」｜日本語訳：ただし先攻1ターン目にできることは限られます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 357,
+      "text": "英語原文：「However, there is one more thing you can do this turn that I'd like to introduce, and that is Collab.」｜日本語訳：このターンにできるもう一つの行動、コラボを紹介します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 422,
+      "text": "英語原文：「Now it's the main phase.」｜日本語訳：ここからメインフェーズです。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 424,
+      "text": "英語原文：「Let's place the spot Holomam Hakui Koyori card 2 and the debut Holomam Toki no Sora card 3 into the back position.」｜日本語訳：SPOTの博衣こより2番と、DEBUTのときのそら3番を後列に置きましょう。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 424,
+      "text": "英語原文：「Let's place the spot Holomam Hakui Koyori card 2 and the debut Holomam Toki no Sora card 3 into the back position.」｜日本語訳：SPOTの博衣こより2番と、DEBUTのときのそら3番を後列に置きます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 432,
+      "text": "英語原文：「Once you've placed them on the stage, you can perform a Collab as well.」｜日本語訳：ステージに置いたあと、コラボもできます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 432,
+      "text": "英語原文：「Once you've placed them on the stage, you can perform a Collab as well.」｜日本語訳：ステージに置いたあと、コラボもできます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 432,
+      "text": "英語原文：「Once you've placed them on the stage, you can perform a Collab as well.」｜日本語訳：ステージに置いたあと、コラボもできます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 438,
+      "text": "英語原文：「Place one card face down from the top of your deck as Holopower.」｜日本語訳：メインデッキの一番上から1枚を裏向きで置き、ホロパワーにします。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 438,
+      "text": "英語原文：「Place one card face down from the top of your deck as Holopower.」｜日本語訳：メインデッキの一番上から1枚を裏向きで置き、ホロパワーにします。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 443,
+      "text": "英語原文：「Then move Hakui Koyori card 2 next to the center Holomam to become a Collab Holomam.」｜日本語訳：博衣こより2番をセンターホロメンの隣へ移動し、コラボホロメンにします。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 443,
+      "text": "英語原文：「Then move Hakui Koyori card 2 next to the center Holomam to become a Collab Holomam.」｜日本語訳：博衣こより2番をセンターホロメンの隣へ移動し、コラボホロメンにします。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 443,
+      "text": "英語原文：「Then move Hakui Koyori card 2 next to the center Holomam to become a Collab Holomam.」｜日本語訳：博衣こより2番をセンターホロメンの隣へ移動し、コラボホロメンにします。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 449,
+      "text": "英語原文：「This time, I'll introduce a new mechanic, the Collab effect.」｜日本語訳：ここでは新しい仕組み、コラボエフェクトを紹介します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 449,
+      "text": "英語原文：「This time, I'll introduce a new mechanic, the Collab effect.」｜日本語訳：ここでは新しい仕組み、コラボエフェクトを紹介します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 456,
+      "text": "英語原文：「A Collab effect is an ability that activates when that Holomam performs a Collab from the back position.」｜日本語訳：コラボエフェクトは、ホロメンが後列からコラボしたときに発動する能力です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 456,
+      "text": "英語原文：「A Collab effect is an ability that activates when that Holomam performs a Collab from the back position.」｜日本語訳：コラボエフェクトは、ホロメンが後列からコラボしたときに発動する能力です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 456,
+      "text": "英語原文：「A Collab effect is an ability that activates when that Holomam performs a Collab from the back position.」｜日本語訳：コラボエフェクトは、ホロメンが後列からコラボしたときに発動する能力です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 461,
+      "text": "英語原文：「Let's take a look at Hakui Koyori who just performed a Collab.」｜日本語訳：コラボしたばかりの博衣こよりを見てみましょう。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 461,
+      "text": "英語原文：「Let's take a look at Hakui Koyori who just performed a Collab.」｜日本語訳：コラボしたばかりの博衣こよりを見てみましょう。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 461,
+      "text": "英語原文：「Let's take a look at Hakui Koyori who just performed a Collab.」｜日本語訳：コラボしたばかりの博衣こよりを見てみましょう。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 465,
+      "text": "英語原文：「She has the Collab effect called Sou Akko.」｜日本語訳：彼女のコラボエフェクトは「ソウアッコ」です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 465,
+      "text": "英語原文：「She has the Collab effect called Sou Akko.」｜日本語訳：彼女のコラボエフェクトは「ソウアッコ」です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 468,
+      "text": "英語原文：「You can see that Hakui Koyori's Collab effect Sou Akko has two effects.」｜日本語訳：博衣こよりのコラボエフェクト「ソウアッコ」には、2つの効果があります。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 625,
+      "text": "英語原文：「Bloom is the process by which the Holomam's arts and abilities are improved, so let's bloom and make them shine on stage.」｜日本語訳：ブルームとは、ホロメンのアーツや能力を強化し、ステージ上で輝かせる仕組みです。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 631,
+      "text": "英語原文：「Debut Holomam can bloom to any first.」｜日本語訳：DEBUTホロメンは、ファーストにブルームできます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 634,
+      "text": "英語原文：「First Holomam can bloom to any first and or second.」｜日本語訳：ファーストホロメンは、ファーストまたはセカンドにブルームできます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 639,
+      "text": "英語原文：「So, let's place Azuki card 4 on your center Holomam from your hand.」｜日本語訳：手札からAZKiの4番をセンターホロメンに重ねましょう。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 644,
+      "text": "英語原文：「Bloom is a very powerful mechanic, but be careful.」｜日本語訳：ブルームは強力な仕組みですが、注意点があります。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 649,
+      "text": "英語原文：「You need to follow these rules.」｜日本語訳：次のルールを守る必要があります。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 652,
+      "text": "英語原文：「No players can bloom during their first turn, whether going first or second.」｜日本語訳：先攻・後攻にかかわらず、各プレイヤーは自分の最初のターンにブルームできません。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 657,
+      "text": "英語原文：「It cannot be used on a Holomam that was placed on the stage during that turn.」｜日本語訳：そのターンにステージへ置いたホロメンにはブルームできません。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 839,
+      "text": "英語原文：「At first, during the reset phase, you move the collab Holomam to the back position with the resting state.」｜日本語訳：まずリセットフェーズに、コラボホロメンをレスト状態で後列へ戻します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 846,
+      "text": "英語原文：「If the center position is empty during the reset phase, you need to move a back Holomam to the center position.」｜日本語訳：リセットフェーズにセンターが空いていたら、後列のホロメンをセンターへ移します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 853,
+      "text": "英語原文：「Currently, Hakoi Koyori has the resting state and Toki no Sora has the active state in the back position.」｜日本語訳：現在、博衣こよりはレスト状態で、ときのそらは後列でアクティブ状態です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 860,
+      "text": "英語原文：「If there is an active Holomam, they should be prioritized for the center position.」｜日本語訳：アクティブ状態のホロメンがいる場合は、センターに移す際に優先します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 865,
+      "text": "英語原文：「OK? So, let's move Toki no Sora free to the center position.」｜日本語訳：では、アクティブ状態のときのそらをセンターへ移動します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 871,
+      "text": "英語原文：「Now, the phase is moved to the draw phase.」｜日本語訳：次はドローフェーズです。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 874,
+      "text": "英語原文：「You draw a card.」｜日本語訳：カードを1枚引きます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 876,
+      "text": "英語原文：「What's next? Yeah, that's right, the cheer phase.」｜日本語訳：次は何でしょう？そう、チアーフェーズです。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1055,
+      "text": "英語原文：「Now, let's move to the main phase.」｜日本語訳：続いてメインフェーズに移ります。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1058,
+      "text": "英語原文：「Place the card 5, second Azuki, onto the center Holomem for first Azuki to bloom it.」｜日本語訳：セカンドのAZKi5番をセンターのAZKiに重ね、ブルームさせます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1065,
+      "text": "英語原文：「Next, perform a collab.」｜日本語訳：次にコラボを行います。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1067,
+      "text": "英語原文：「From the main deck, place one card face down to accumulate holo power.」｜日本語訳：メインデッキから1枚を裏向きで置き、ホロパワーを増やします。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1071,
+      "text": "英語原文：「And move the back holomem to Amane Kanata to the collab position.」｜日本語訳：後列の天音かなたをコラボ位置へ移動します。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1083,
+      "text": "英語原文：「Everyone, please take a look at the arts of 5 Azuki.」｜日本語訳：AZKi5番のアーツを見てください。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1088,
+      "text": "英語原文：「Currently, since three green cheers have been sent to Azuki, we can use the second arts, Destiny Song.」｜日本語訳：現在、AZKiには緑のチアーが3枚送られているため、2つ目のアーツ「ディスティニーソング」を使えます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1095,
+      "text": "英語原文：「This art not only deals damage, but also has an additional ability.」｜日本語訳：このアーツはダメージを与えるだけでなく、追加効果もあります。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1100,
+      "text": "英語原文：「If the die roll is odd, it adds 50 damage to the base arts damage of 100, making it a total of 150 damage.」｜日本語訳：サイコロが奇数なら、基本ダメージ100に50を加えて、合計150ダメージです。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1115,
+      "text": "英語原文：「Since the center holomember, Tokino Sora, on the opponent's side has 150 HP, if we roll an odd number, we will be able to down her in one hit.」｜日本語訳：相手のセンター、ときのそらのHPは150です。奇数が出れば一撃でダウンさせられます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1276,
+      "text": "英語原文：「Please separate the main deck into numbered and non-numbered cards, and divide the cheer deck by color.」｜日本語訳：最後に、メインデッキを番号付きと番号なしに分け、チアーデッキは色ごとに分けてください。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1284,
+      "text": "英語原文：「Lastly, an announcement! The Hololive Official Card Game that you played today has been released on July 11th, 2025.」｜日本語訳：お知らせです。今日遊んだホロライブオフィシャルカードゲームは、2025年7月11日に発売されました。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1293,
+      "text": "英語原文：「Information about future products and upcoming events will be updated on the Hololive Official Card Game's ex-account and official website.」｜日本語訳：今後の商品やイベントの情報は、公式Xアカウントと公式サイトで更新されます。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1301,
+      "text": "英語原文：「So, check it out! Don't miss it! Once you receive PR packs, you can feel free to leave.」｜日本語訳：ぜひ確認して、見逃さないでください。PRパックを受け取ったら退場して大丈夫です。｜解説：カードゲームの手順・用語に沿って訳した。"
+    },
+    {
+      "timestampSeconds": 1307,
+      "text": "英語原文：「Thank you so much for attending the How to Play the Hololive Official Card Game teaching session! Good bye!」｜日本語訳：「ホロライブオフィシャルカードゲームの遊び方」講習会に参加してくれて、ありがとうございました。またね！｜解説：カードゲームの手順・用語に沿って訳した。"
+    }
+  ],
+  "result": null,
+  "continuation": null,
+  "learningPoints": [],
+  "conclusion": "体験会では、ライフの準備からコラボ、ブルーム、アーツの使用までを順に実演した。カードごとの効果とフェーズの条件を確認しながら進めることで、基本的な対戦の流れを学べる内容だった。",
+  "learningProfile": null,
+  "articleInfo": {
+    "originalStream": "https://www.youtube.com/watch?v=_-9QjVI7vcg",
+    "streamPublishedAt": "2025-09-26T22:30:06.000Z",
+    "articlePublishedAt": "2026-11-14T10:58:04Z",
+    "articleUpdatedAt": "2026-11-14T10:58:04Z"
+  },
+  "relatedStreams": [
+    {
+      "uid": "str_29vud56w8lm",
+      "slug": "takanashi-kiara-29vud56w8lm",
+      "videoId": "29Vud56W8lM",
+      "title": "Kiaraが「Crash the Party」を改めて紹介　共同制作チームへの信頼を語る",
+      "summaryOneLine": "長時間のSuperchat readingから、Kiaraが直近の活動を振り返りつつCrash the Partyの共同制作相手をどのように受け止めていたかを短く確認できる",
+      "streamType": "other",
+      "publishedAt": "2026-07-26T20:10:29.000Z",
+      "durationSeconds": 7445,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0c5zs6wjtgi",
+      "slug": "takanashi-kiara-0c5zs6wjtgi",
+      "videoId": "0C5zs6WjtGI",
+      "title": "引いた後にも、次の目的を残す　Kiaraの『Arknights: Endfield』更新配信",
+      "summaryOneLine": "新要素への反応だけでなく、一つの結果を次の行動へ接続し、長い更新配信の現在地を保つKiaraの進め方を読める",
+      "streamType": "game",
+      "publishedAt": "2026-07-25T19:17:15.000Z",
+      "durationSeconds": 11190,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_0msmz4rk4k4",
+      "slug": "takanashi-kiara-0msmz4rk4k4",
+      "videoId": "0msmZ4rK4k4",
+      "title": "秒差をそろえ、熱を言葉にする　KiaraとEssieが並走した決勝ウォッチアロング",
+      "summaryOneLine": "この配信の中心は、どちらの予想が正しかったかではありません。",
+      "streamType": "event",
+      "publishedAt": "2026-07-19T18:30:15.000Z",
+      "durationSeconds": 13633,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "marathon",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_dilgbmot7og",
+      "slug": "takanashi-kiara-dilgbmot7og",
+      "videoId": "dIlgbmoT7og",
+      "title": "Football Match Discussion Summary",
+      "summaryOneLine": "The speaker mentions that someone doesn't want to hear them slurping and that they are done. They question why the other person doesn't like them slurping, interpreting it as a form of rejection.",
+      "streamType": "other",
+      "publishedAt": "2026-07-18T20:30:14.000Z",
+      "durationSeconds": 9712,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "long",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_fougvcpf4x8",
+      "slug": "takanashi-kiara-fougvcpf4x8",
+      "videoId": "foUgVcpF4x8",
+      "title": "キアラの誕生日にハロプロ曲を披露　Justiceの3Dゲストとダンスも",
+      "summaryOneLine": "誕生日ライブでハロプロ曲を披露し、ダンスゲストやJusticeの3D出演、当時の記念グッズを紹介。",
+      "streamType": "other",
+      "publishedAt": "2026-07-06T23:20:23.000Z",
+      "durationSeconds": 4199,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-07",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    },
+    {
+      "uid": "str_3dlsggckrok",
+      "slug": "takanashi-kiara-3dlsggckrok",
+      "videoId": "3dlSGGCKrOk",
+      "title": "小鳥遊キアラ、オーストリア対アルジェリアを同時視聴　試合終盤の展開に悔しさ",
+      "summaryOneLine": "小鳥遊キアラがオーストリア対アルジェリアを同時視聴し、試合終盤の展開に反応した。",
+      "streamType": "other",
+      "publishedAt": "2026-06-28T02:56:09.000Z",
+      "durationSeconds": 4126,
+      "thumbnailUrl": null,
+      "videoStatus": "public",
+      "primaryMember": {
+        "uid": "mem_takanashi_kiara",
+        "slug": "takanashi-kiara",
+        "displayName": "Takanashi Kiara"
+      },
+      "participants": [],
+      "generation": null,
+      "games": [],
+      "events": [],
+      "series": [],
+      "collaboration": "solo",
+      "month": "2026-06",
+      "durationBand": "medium",
+      "cefr": null,
+      "tags": [],
+      "reason": "同じメンバー"
+    }
+  ]
+}

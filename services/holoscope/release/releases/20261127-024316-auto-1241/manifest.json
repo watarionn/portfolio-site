@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-27T02:01:23Z",
+  "generatedAt": "2026-11-27T02:43:55Z",
   "counts": {
     "members": 14,
     "streams": 1241,
@@ -51,17 +51,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30874,
-      "sha256": "6ad2853f124a7deac9b727f31db6e2e88695c1bb3ace35aacfdd5a1ba0ead182"
+      "sha256": "1266570b7b2968d8df13bdca61a15878553fd3ac88a4dc206f9363d67ac40abf"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "cda57cfa120fa392828e76d2d446d50af3dad432df98cbaebe08c6486a68081e"
+      "sha256": "1ab4d29993d993d68b94796cb69ff38bf3cb59f93b60754f8e5248cf6233b834"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30868,
-      "sha256": "e909692bf8e7764f15b82e09734c0f4383c1a19a763097a0ebe047b7febadc30"
+      "sha256": "5c3f6b782db4c6c22d04f1680235937c31586445fbc4fd772580af4b683bb490"
     },
     {
       "path": "games/index.json",
@@ -216,7 +216,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "d0f7ccc36c9cd64c31c6547e103576a608bef066d09286d5380a4717aa9f1d0a"
+      "sha256": "0a06fe857afd345b5807c22ae34aeec840c2b7972492aff959a6a61d8113f222"
     },
     {
       "path": "phrases/index.json",
@@ -240,8 +240,8 @@
     },
     {
       "path": "search/streams/cards/0001.json",
-      "bytes": 103004,
-      "sha256": "3ff6e34949f44814787755c87e1c7f71270a6bbd06c00e8cf23b59ae21cd4a16"
+      "bytes": 102971,
+      "sha256": "9ba5abbf73b732cafaf35a253455a62ba6ace7963c3fbcff391e105fd68a1e2f"
     },
     {
       "path": "search/streams/cards/0002.json",
@@ -250,8 +250,8 @@
     },
     {
       "path": "search/streams/cards/0003.json",
-      "bytes": 102138,
-      "sha256": "e0d7dc66f60c5ccdb6607813db1a3cf83b6afb6889f6e032d81f8b545ca0f825"
+      "bytes": 102059,
+      "sha256": "8f3c65199f10ea4f3164aca35c634af10eca8250239ffbb82d7e4efa351bc5d2"
     },
     {
       "path": "search/streams/cards/0004.json",
@@ -260,8 +260,8 @@
     },
     {
       "path": "search/streams/cards/0005.json",
-      "bytes": 103757,
-      "sha256": "ece2cabb9a357974bd33591982daa1ea62ac3411453095737d1daa4c3f477e6a"
+      "bytes": 103667,
+      "sha256": "ecb8c31827bfbd3e1549b25a74b455e00dc2fae1f779016ddfc1ae92e71eaea7"
     },
     {
       "path": "search/streams/cards/0006.json",
@@ -285,8 +285,8 @@
     },
     {
       "path": "search/streams/cards/0010.json",
-      "bytes": 101164,
-      "sha256": "1b15555f07a6174372f2a61debf8267ea220b31683d6fa2a6f8f210ea5e937fe"
+      "bytes": 100995,
+      "sha256": "f7739b944033e2eeb5ff334980c6d57ea7c6b8f5627c88a7e577008df5401481"
     },
     {
       "path": "search/streams/cards/0011.json",
@@ -330,23 +330,23 @@
     },
     {
       "path": "search/streams/inverted/0.json",
-      "bytes": 309864,
-      "sha256": "c8160e2a0254d15834059db5e543e49b6114099e3fb259acdb3297056ddf44e0"
+      "bytes": 310549,
+      "sha256": "a2a84dd5f3730fd79260ae0b00821cb3f27307e8f1b612fbe772be65fea4a001"
     },
     {
       "path": "search/streams/inverted/1.json",
-      "bytes": 318223,
-      "sha256": "06de4b3514f6e4a77d8b0d88077649715131aacd905a3d780808dbb1eb97b4f9"
+      "bytes": 318904,
+      "sha256": "b51f8cfab28ac4675c0bdc63710c1093b20e397a4e64b1182f4a0bde1a5a2b9d"
     },
     {
       "path": "search/streams/inverted/2.json",
-      "bytes": 344000,
-      "sha256": "e7332a46db2b556213d2fab05ca70eac93ce07b5f27ddde9da8dce8dbdd57a17"
+      "bytes": 345049,
+      "sha256": "ea955745193ad722e6574558ee2c9cc3c63424e9221a973a90c75c20e0e17bde"
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 348398,
-      "sha256": "a108c82aa0d8818534e59613086c566b16f3557ecb889e62c3fc83f95ea21c67"
+      "bytes": 348559,
+      "sha256": "9a85c7391bfaa0a91c471cded60ba6d95d8058a78923a916a7aa3c7b37b8deaa"
     },
     {
       "path": "search/streams/manifest.json",
@@ -401,22 +401,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "544342044329a057236d641a5e21b8410063920046a53fcc80b6581b53a23602"
+      "sha256": "3d2562a2ab96b2f8ec772569f184dece6bf49f089be83ce5f24de7b0884b11df"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "d66b9d1ca52c9e1b39b68e894c223c635293142eb109d0cc233ac7db8b79329f"
+      "sha256": "9c5d204558d44710dad9ec4bcdf45296b978f390e672f3f77e4065074753ed38"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "9aa60b577eb9fdc54bbe244fe1017adde402f7b968da3b104912b386b964e476"
+      "sha256": "9f89ac1f16ef73fbcf43a94279cae8455879789acec283d482b2dd2e466418ea"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "bb464759571f83dfcb9bc5505336f1a9a11da96b49039353a007fb7cdef864f0"
+      "sha256": "9096a736804082884aad4d5de7b614545ae063b2c4b1b2da05919f325f762705"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -695,8 +695,8 @@
     },
     {
       "path": "streams/cecilia-immergreen-hgeqfqgd2bk.json",
-      "bytes": 17009,
-      "sha256": "cbcebb5dea535f74bfcb76004f888b89a0c22eb0b8c6af8696533173812ea308"
+      "bytes": 25722,
+      "sha256": "45237f511197b60a915dba6895f9f9b298d7916ca90091b71d2afdece03f9f29"
     },
     {
       "path": "streams/cecilia-immergreen-hgn3k-x7quk.json",
@@ -1825,8 +1825,8 @@
     },
     {
       "path": "streams/fuwamoco-hgdjtiuzltu.json",
-      "bytes": 16016,
-      "sha256": "2f9601271806fa8af970adc884c1b7025e850a70677ad41ff1f2a5d3014365af"
+      "bytes": 24967,
+      "sha256": "89efefa68d73e3384bb083d117e9fae7885745fe2b353cadd467a0b6c452a4f7"
     },
     {
       "path": "streams/fuwamoco-hulkpniqfgk.json",
@@ -2075,8 +2075,8 @@
     },
     {
       "path": "streams/gigi-murin-b-fvvp0birq.json",
-      "bytes": 20619,
-      "sha256": "ba1de41d1871661f57e526bc22c83f92ed3428f751afe0e3418885f7e809fbf9"
+      "bytes": 28287,
+      "sha256": "e50006827a8921c693721c004819bdb201c4204f1d06203be012e46c7d413bab"
     },
     {
       "path": "streams/gigi-murin-b3euu6gucpg.json",
@@ -4100,8 +4100,8 @@
     },
     {
       "path": "streams/mori-calliope-ebafhivo7o0.json",
-      "bytes": 23768,
-      "sha256": "77a48e8613e7bee5b6fe86ab4296a5b0b44e685c09e95f79e7985f595ea8e704"
+      "bytes": 31451,
+      "sha256": "d15e8cf89f3ed781c4d9e36e11720cf503b13587e14884d018e0741ff0aa0a3a"
     },
     {
       "path": "streams/mori-calliope-ednos5qfauw.json",

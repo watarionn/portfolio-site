@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-27T22:08:44Z",
+  "generatedAt": "2026-11-27T23:37:32Z",
   "counts": {
     "members": 14,
     "streams": 1241,
@@ -51,17 +51,17 @@
     {
       "path": "feeds/all.xml",
       "bytes": 30676,
-      "sha256": "b60cbefdc73ff8fb575fb7af4439b6c85fd0dca5787e2326c139eddf9ac0879a"
+      "sha256": "c368ebbf9bb2f86efd4307b96f40af88e1a6ac30d586ced09762190047fba2b0"
     },
     {
       "path": "feeds/articles.xml",
       "bytes": 364,
-      "sha256": "bef895d8cfe57fa5d18695f830ee99a94ea5cb4eee88d21bd0f549f3ec4b03d7"
+      "sha256": "f74d3b1ee9494d25db8899b1dd47d3fac2548b7d37add9245f8a12f4c56a5fd4"
     },
     {
       "path": "feeds/streams.xml",
       "bytes": 30670,
-      "sha256": "9969ce1930bfb18d82f522d39cd5eaa2ce67c16b5ac2f0220d084ddeb66910aa"
+      "sha256": "20d292bd88ccbadd4d187828c610e2d0425e859a34b2b242b6efcc60a4760f07"
     },
     {
       "path": "games/index.json",
@@ -216,7 +216,7 @@
     {
       "path": "operations/status.json",
       "bytes": 787,
-      "sha256": "b018d57f8d599d8dfcdaf0727cdeebfdb85adf02f80408e396c31e1831867b16"
+      "sha256": "4dccd16287b931ddc2e4e133e32a2e2ffa5434e5dc7f615bfc0ee19d5aedd853"
     },
     {
       "path": "phrases/index.json",
@@ -265,13 +265,13 @@
     },
     {
       "path": "search/streams/cards/0006.json",
-      "bytes": 99831,
-      "sha256": "17d3906f3cbb99928654a99bcc57ea94f77f1df9360e0d9270477deb882096c9"
+      "bytes": 99768,
+      "sha256": "4e0e8acc75982c27742328aa3395b40ab1d2d7864bd3d4abcda6abdb2491f772"
     },
     {
       "path": "search/streams/cards/0007.json",
-      "bytes": 100623,
-      "sha256": "a8c7702429c19824f3b30b3b3648fd80f24a99d8b100ce91dc82470790e9da27"
+      "bytes": 100534,
+      "sha256": "d18e4d81034186805cf5dead026cec47dc27f65699d44c7ae623c36aae9380b3"
     },
     {
       "path": "search/streams/cards/0008.json",
@@ -280,8 +280,8 @@
     },
     {
       "path": "search/streams/cards/0009.json",
-      "bytes": 100907,
-      "sha256": "c0b823e97cbfc8d92651564a16fcc8b23823a21b0465a06283e53433969e18ff"
+      "bytes": 100820,
+      "sha256": "9b47210dbacb6e8df8803638d02db06fdcdccf2ef24cc3e400d4c6a2f489a37b"
     },
     {
       "path": "search/streams/cards/0010.json",
@@ -330,23 +330,23 @@
     },
     {
       "path": "search/streams/inverted/0.json",
-      "bytes": 320033,
-      "sha256": "017c6ba9d86a5483e0133e64cffbab4622167dec2d24f58cbff6602050584456"
+      "bytes": 320904,
+      "sha256": "74d91711253a910010cc92f9dfa97c707c640d1b91c6a07b4a90fe032ea0ae3e"
     },
     {
       "path": "search/streams/inverted/1.json",
-      "bytes": 327298,
-      "sha256": "bac5b63a463b85a1e735a2370144c3c325879c606a3ac9af5698c78bf0c98fdd"
+      "bytes": 327966,
+      "sha256": "e9a5f299f1a8c86832e2ff096012108e8d09261ab75c55446bdadbbf58b7ab8b"
     },
     {
       "path": "search/streams/inverted/2.json",
-      "bytes": 350603,
-      "sha256": "8e7ed2028ebf7bb1b10a2684de9b1c918503fd36e361570e091b6bd9fb53229a"
+      "bytes": 351623,
+      "sha256": "33c5bca9ecd928470ec60aa16c285419af1fc7dcae38adfbfa4f81a82c435547"
     },
     {
       "path": "search/streams/inverted/3.json",
-      "bytes": 355568,
-      "sha256": "d764e323a7ba89bed107cea9ba0f7a738d3bab22cb5d59916fbe37ddb4669fc5"
+      "bytes": 356502,
+      "sha256": "87ca45d8f7f052f1009eafa25cd1d9800f236a434de6c67f7063606acecc4078"
     },
     {
       "path": "search/streams/manifest.json",
@@ -401,22 +401,22 @@
     {
       "path": "stats/games.json",
       "bytes": 962,
-      "sha256": "0c5f9619175ce45ec73a03b13f29fb597f5d00ce4f3874daf815681f75cd9bf1"
+      "sha256": "614e54a4aaa9b441f67f6681c86d1913c9949deed65a9ff31b01b15afba2c41a"
     },
     {
       "path": "stats/index.json",
       "bytes": 1542,
-      "sha256": "f32c30c63b0714a5a97f609b96d3cb8d129322550c64b7ac8e0ca47da33e41e3"
+      "sha256": "c47441387726e99822e9e2fd7db7df2ab7234d3784202f31925bcce2e446ad29"
     },
     {
       "path": "stats/learning.json",
       "bytes": 1068,
-      "sha256": "c8e110f71d7783e3d69089a166f4c10ed980e1e6dad378b1566936f09ab4a463"
+      "sha256": "d216fa741b0b35157d9b5fe5ea5f85587d28c1a8b09bbb7e10c31a7e63f6dd72"
     },
     {
       "path": "stats/members.json",
       "bytes": 10568,
-      "sha256": "d1f67f3e146c368ef1ad04e7e8d206df2d6165d21a65bfe5cdedd87fc9187b15"
+      "sha256": "eb680d337b9d4fff55d84f39ed20c3e572c1a644836ecbca38d060d4c4e126d7"
     },
     {
       "path": "streams/cecilia-immergreen-0363xc61mnq.json",
@@ -2485,8 +2485,8 @@
     },
     {
       "path": "streams/hakos-baelz-ipnz11qflyu.json",
-      "bytes": 21376,
-      "sha256": "155e53ff6c282d2909d77d39a11d7f6725c776179547875b996e1f2c3246dc19"
+      "bytes": 46862,
+      "sha256": "40d86505a0ca1c69b9bb89edabffd2136ec62f81aa8136548e118dab167f5de7"
     },
     {
       "path": "streams/hakos-baelz-j-q-owjlt0i.json",
@@ -4845,8 +4845,8 @@
     },
     {
       "path": "streams/nerissa-ravencroft-fjil47q-t6e.json",
-      "bytes": 21445,
-      "sha256": "3caa12f1a7151debb32ea416f1196facf0be211035e5774c4124f9df977a34c4"
+      "bytes": 45396,
+      "sha256": "1bda8b21e955e3f7b2d59ee84b8104938c2bd64b8b4c8f02efc12a9020384557"
     },
     {
       "path": "streams/nerissa-ravencroft-fll7e1-rpgo.json",
@@ -5225,8 +5225,8 @@
     },
     {
       "path": "streams/ninomae-inanis-9vtli-saema.json",
-      "bytes": 23751,
-      "sha256": "a390d24db2ef3d4e60819aee7c50039db7fe518b7d07cbd5be7809070d579e83"
+      "bytes": 49648,
+      "sha256": "2d73cd84ab345bee1d58ba2a815dc449d8ef91855ec39864a409debc64461454"
     },
     {
       "path": "streams/ninomae-inanis-a2wqxjxdur8.json",
@@ -6620,8 +6620,8 @@
     },
     {
       "path": "streams/takanashi-kiara-su0uscz4ulm.json",
-      "bytes": 24155,
-      "sha256": "29d4f324c754676eb33164ce9fb86423a61e17fcba475a69483413321223db8a"
+      "bytes": 43541,
+      "sha256": "03c86b23ce1af61df2d9974968f89e0a7bb6a4bd91f95116cb2721f4b9a7f377"
     },
     {
       "path": "streams/takanashi-kiara-ww5p3u3k8e.json",
